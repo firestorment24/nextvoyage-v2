@@ -85,11 +85,3 @@ const NexVoyageHome = () => {
 export default NexVoyageHome;
 ```
 
-### **What to do now:**
-1.  **In your Vercel/GitHub project:** Open `src/app/page.tsx` (or wherever the main home file is).
-2.  **Paste and Replace:** Replace the template's placeholder content with this code.
-3.  **Deploy:** Push the change to GitHub. Vercel will auto-deploy it to `nexvoyagecollective.com` immediately.
-
-Once this is up, you’ll have a professional, functional landing page that you own, and we can finally stop waiting for Alisson. 
-
-Shall I start drafting the next page, or do you want me to help you debug any styling once you see it live?
