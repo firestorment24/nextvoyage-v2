@@ -1,5 +1,5 @@
 import './globals.css'  
-import Navigation from './Navigation' // No curly braces, and no ".." needed now!
+import Navigation from './Navigation' 
 
 export const metadata = {  
   title: 'NexVoyage Collective',  
