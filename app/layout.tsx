@@ -1,3 +1,4 @@
+/** FIXED LAYOUT - VERIFIED PATHS **/  
 import './globals.css'  
 import { Navigation } from '../components/Navigation'
 
