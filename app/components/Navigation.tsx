@@ -1,57 +1,22 @@
-'use client'; 
+"use client"
 
-import React, { useState } from 'react';  
-import Link from 'next/link';  
-import { Menu, X, Search } from 'lucide-react';  
-import GlobalSearch from './GlobalSearch';
+import { Search } from 'lucide-react'  
+import { useState } from 'react'  
+import { GlobalSearch } from './GlobalSearch'
 
-const Navigation = () => {  
-  const [isMenuOpen, setIsMenuOpen] = useState(false);  
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-
-  const navLinks = [  
-    { name: 'The Home', href: '/' },  
-    { name: 'The 9 Sanctuaries', href: '/#sanctuaries' },  
-    { name: 'Private Concierge', href: '/concierge' },  
-    { name: 'Impact & Safety', href: '/safety' },  
-  ];
+export const Navigation = () => {  
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
 
   return (  
-    <>  
-      <div className="fixed top-8 right-8 z-50 flex items-center space-x-6 mix-blend-difference text-white">  
-        <button   
-          onClick={() => setIsSearchOpen(true)}  
-          className="hover:opacity-70 transition-opacity flex items-center"  
-        >  
-          <Search size={22} strokeWidth={1} />  
-          <span className="hidden md:inline ml-2 text-[10px] uppercase tracking-[0.2em] font-light">Search</span>  
-        </button>
-
-        <button onClick={() => setIsMenuOpen(true)} className="p-1 hover:opacity-70 transition-opacity">  
-          <Menu size={24} strokeWidth={1} />  
-        </button>  
-      </div>
-
-      {isSearchOpen && <GlobalSearch isOpenOverride={isSearchOpen} onClose={() => setIsSearchOpen(false)} />}
-
-      <div className={`fixed inset-0 z-[60] bg-black transition-transform duration-700 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>  
-        <button onClick={() => setIsMenuOpen(false)} className="absolute top-8 right-8 text-white hover:opacity-70 transition-opacity">  
-          <X size={24} strokeWidth={1} />  
-        </button>
-
-        <nav className="flex flex-col items-center justify-center h-full space-y-12">  
-          {navLinks.map((link) => (  
-            <Link key={link.name} href={link.href} onClick={() => setIsMenuOpen(false)} className="text-white text-3xl md:text-5xl font-light tracking-widest hover:italic transition-all duration-300">  
-              {link.name}  
-            </Link>  
-          ))}  
-          <div className="pt-12 text-center">  
-            <p className="text-zinc-500 text-[10px] tracking-[0.4em] uppercase">NexVoyage Collective</p>  
-          </div>  
-        </nav>  
-      </div>  
-    </>  
-  );  
-};
-
-export default Navigation;  
+    <nav className="fixed top-0 w-full p-6 flex justify-between items-center z-50 mix-blend-difference text-white">  
+      <div className="text-xl font-light tracking-widest uppercase">NexVoyage</div>  
+      <button   
+        onClick={() => setIsSearchOpen(true)}  
+        className="hover:opacity-50 transition-opacity"  
+      >  
+        <Search size={20} />  
+      </button>  
+      <GlobalSearch isOpenOverride={isSearchOpen} setIsOpenOverride={setIsSearchOpen} />  
+    </nav>  
+  )  
+}  
