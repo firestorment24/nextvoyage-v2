@@ -1,73 +1,76 @@
 import React from 'react';  
 import Link from 'next/link';
 
-export default function NexVoyageHome() {  
-  const sanctuaries = [  
-    { title: "Floating Sanctuary", desc: "Global superyacht charters and private maritime escapes." },  
-    { title: "Education Sanctuary", desc: "Elite university tours and VIP educational logistics for the next generation." },  
-    { title: "Performance Sanctuary", desc: "High-stakes logistics and privacy for bands, artists, and entertainment tours." },  
-    { title: "Alpine Sanctuary", desc: "Private chalets and 'First Track' mountain corridor access. Partnered with Ski The Globe." },  
-    { title: "Heritage Sanctuary", desc: "The artistry of quiet luxury, centered on properties like Las Ventanas al Paraíso." },  
-    { title: "Stadium Sanctuary", desc: "The ultimate event fixer. Priority access for World Cup and Olympics. (Note: LA28 Prime Inventory like Maybourne BH is already committed—contact us for immediate secondary block strategy.)" },  
-    { title: "Mobile Sanctuary", desc: "Expedition luxury: Dream of the Desert camps and private fjord expeditions in Norway & Iceland." },  
-    { title: "Wellness Sanctuary", desc: "Neural optimization and radical recovery at Blackberry Mountain and Andronis Santorini." },  
-    { title: "Sweet Sanctuary", desc: "Specialized VIP travel, transfers, and hotel blocks for the global confectionery industry circuit." }  
-  ];
+const Sanctuaries = [  
+  { title: "Metropolitan", desc: "Urban high-culture and refined city access." },  
+  { title: "Floating", desc: "Elite yachting and polar expeditions." },  
+  { title: "Island", desc: "Private seclusion in the world's most remote waters." },  
+  { title: "Alpine", desc: "High-altitude retreats and ski-in/out excellence." },  
+  { title: "Stadium", desc: "VIP sports access and stadium-side sanctuaries." },  
+  { title: "Cinematic", desc: "The global film festival circuit, curated." },  
+  { title: "Soulful", desc: "Music, tour hospitality, and soulful resets." },  
+  { title: "Education", desc: "Intellectual summits and high-impact industry events." },  
+  { title: "Mobile", desc: "Heli-access and nomadic off-grid luxury." },  
+];
 
+export default function HomePage() {  
   return (  
-    <div className="min-h-screen bg-stone-50 text-stone-900 font-sans">  
+    <main className="min-h-screen bg-[#F5F5F0] text-[#2D2D2D] selection:bg-[#E0E0D6]">  
       {/* Hero Section */}  
-      <section className="py-20 px-6 text-center bg-stone-900 text-stone-100">  
-        <h1 className="text-5xl md:text-7xl font-light tracking-tighter mb-6">NexVoyage Collective</h1>  
-        <p className="text-xl md:text-2xl font-light italic opacity-80 max-w-2xl mx-auto">  
-          Refined Exploration. Elite Luxury. Your private sanctuary is waiting.  
+      <section className="px-6 pt-32 pb-20 max-w-6xl mx-auto text-center">  
+        <h1 className="text-5xl md:text-7xl font-serif mb-6 tracking-tight">  
+          NexVoyage Collective  
+        </h1>  
+        <p className="text-xl md:text-2xl font-light max-w-2xl mx-auto leading-relaxed text-[#555555]">  
+          Travel for those who expect more from every journey.   
+          Quiet luxury. Uncompromising security. Total discretion.  
         </p>  
       </section>
 
-      {/* The 9 Sanctuaries */}  
-      <section className="py-24 px-6 max-w-6xl mx-auto">  
-        <h2 className="text-3xl font-light tracking-widest uppercase mb-16 text-center border-b pb-4 border-stone-200">The Sanctuary Tiers</h2>  
-        <div className="grid md:grid-cols-3 gap-12">  
-          {sanctuaries.map((s, i) => (  
-            <div key={i} className="space-y-4">  
-              <h3 className="text-xl font-medium tracking-tight border-l-2 border-stone-900 pl-4">{s.title}</h3>  
-              <p className="text-stone-600 leading-relaxed font-light">{s.desc}</p>  
+      {/* The 9 Sanctuaries Grid */}  
+      <section className="px-6 py-20 max-w-6xl mx-auto">  
+        <h2 className="text-sm uppercase tracking-[0.3em] text-[#888888] mb-12 text-center">  
+          The Nine Sanctuaries  
+        </h2>  
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">  
+          {Sanctuaries.map((s, i) => (  
+            <div key={i} className="group cursor-default">  
+              <div className="border-t border-[#D1D1CB] pt-6 transition-colors group-hover:border-[#2D2D2D]">  
+                <h3 className="text-2xl font-serif mb-3">{s.title}</h3>  
+                <p className="text-[#666666] leading-relaxed">{s.desc}</p>  
+              </div>  
             </div>  
           ))}  
         </div>  
       </section>
 
-      {/* Safety & Impact */}  
-      <section className="bg-stone-100 py-20 px-6">  
-        <div className="max-w-4xl mx-auto text-center">  
-          <h2 className="text-2xl font-light mb-8 italic">Our Commitment to Impact & Safety</h2>  
-          <p className="text-stone-700 leading-relaxed font-light">  
-            Beyond the logistics of luxury, we prioritize traveler safety and meaningful global impact in every corridor we operate.  
+      {/* ROI of Rest Lead Magnet */}  
+      <section className="bg-[#EDEDE4] py-24 px-6 text-center">  
+        <div className="max-w-3xl mx-auto">  
+          <h2 className="text-3xl md:text-4xl font-serif mb-6">The ROI of Rest</h2>  
+          <p className="text-lg text-[#555555] mb-10 leading-relaxed">  
+            The true return on a journey isn't found in the itinerary, but in the clarity you bring home.   
+            Download our guide to the highest-impact resets in the collective.  
           </p>  
+          <button className="bg-[#2D2D2D] text-white px-8 py-4 text-sm uppercase tracking-widest hover:bg-[#444444] transition-colors">  
+            Get the Guide  
+          </button>  
         </div>  
       </section>
 
-      {/* Contact CTA */}  
-      <section className="py-24 px-6 text-center">  
-        <h2 className="text-4xl font-light mb-8">Ready for Departure?</h2>  
-        <Link   
-          href="https://cal.com/nexvoyagecollective"   
-          className="inline-block bg-stone-900 text-stone-100 px-12 py-4 tracking-widest uppercase text-sm hover:bg-stone-800 transition-colors"  
-        >  
-          Secure Your Sanctuary  
-        </Link>  
-      </section>
-
-      {/* Footer & Legal */}  
-      <footer className="py-12 px-6 border-t border-stone-200 text-xs text-stone-500 uppercase tracking-widest text-center space-y-4">  
-        <p>© 2026 NexVoyage Collective | NexVoyage Collective Website Team</p>  
-        <div className="flex justify-center space-x-6">  
-          <Link href="/privacy" className="hover:text-stone-900 transition-colors">Privacy Policy</Link>  
-          <Link href="/terms" className="hover:text-stone-900 transition-colors">Terms of Service</Link>  
-          <Link href="/consent" className="hover:text-stone-900 transition-colors">Data Consent</Link>  
+      {/* Footer */}  
+      <footer className="px-6 py-12 max-w-6xl mx-auto border-t border-[#D1D1CB]">  
+        <div className="flex flex-col md:flex-row justify-between items-center text-xs uppercase tracking-widest text-[#888888]">  
+          <div className="mb-6 md:mb-0">  
+            © 2026 NexVoyage Collective  
+          </div>  
+          <div className="flex space-x-8">  
+            <Link href="/privacy" className="hover:text-[#2D2D2D]">Privacy</Link>  
+            <Link href="/terms" className="hover:text-[#2D2D2D]">Terms</Link>  
+            <Link href="/safety" className="hover:text-[#2D2D2D]">Safety</Link>  
+          </div>  
         </div>  
-        <p className="pt-4 opacity-50">Powered by Fora Travel</p>  
       </footer>  
-    </div>  
+    </main>  
   );  
 }  
