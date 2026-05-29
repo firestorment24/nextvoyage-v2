@@ -1,10 +1,4 @@
-Here is the code for your core sections. These are built with **Next.js and Tailwind CSS**, which is the standard for almost every high-end Vercel template. 
 
-You can drop these directly into your `page.tsx` or create a new `components/DiscerningHome.tsx` file.
-
-### **The "Discerning Elite" Component**
-
-```tsx
 import React from 'react';
 
 const NexVoyageHome = () => {
