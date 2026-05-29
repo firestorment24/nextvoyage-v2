@@ -1,13 +1,18 @@
-export default function DataConsent() {  
+import React from 'react';
+
+export default function SafetyPage() {  
   return (  
-    <div className="min-h-screen bg-stone-50 text-stone-900 py-20 px-6 font-sans">  
+    <main className="min-h-screen bg-[#F5F5F0] text-[#2D2D2D] py-32 px-6">  
       <div className="max-w-3xl mx-auto">  
-        <h1 className="text-4xl font-light mb-12 border-b pb-4 border-stone-200">Client & Data Consent</h1>  
-        <div className="prose prose-stone leading-relaxed font-light space-y-6">  
-          {/* Linda's text for  goes here */}  
-          <p>[Loading finalized consent guidelines...]</p>  
+        <h1 className="text-4xl font-serif mb-12 tracking-tight">Client & Data Consent</h1>  
+        <div className="prose prose-stone max-w-none font-light leading-relaxed space-y-8 text-[#555555]">  
+          <p className="italic">Simple, Secure, Consensual.</p>  
+          <section>  
+            <h2 className="text-xl font-serif text-[#2D2D2D]">Explicit Consent for Security Services</h2>  
+            <p>We will never share your location or travel details with third-party security firms without your explicit approval.</p>  
+          </section>  
         </div>  
       </div>  
-    </div>  
+    </main>  
   );  
 }  
