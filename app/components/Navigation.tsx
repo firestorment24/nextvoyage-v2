@@ -8,23 +8,23 @@ export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
 
   return (  
-    <nav className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">  
+    <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-50">  
       <div className="max-w-7xl mx-auto px-6 lg:px-8">  
-        <div className="flex justify-between h-24 items-center">  
+        <div className="flex justify-between h-20 items-center">  
           <div className="flex-shrink-0">  
-            <Link href="/" className="text-2xl font-serif tracking-tight text-black">  
+            <Link href="/" className="text-xl font-serif tracking-tighter text-black">  
               NEXVOYAGE  
             </Link>  
           </div>  
             
-          <div className="hidden md:flex space-x-12 items-center">  
-            <Link href="/sanctuaries" className="text-xs uppercase tracking-[0.2em] text-gray-500 hover:text-black transition-colors">Sanctuaries</Link>  
-            <Link href="/philosophy" className="text-xs uppercase tracking-[0.2em] text-gray-500 hover:text-black transition-colors">Philosophy</Link>  
+          <div className="hidden md:flex space-x-10 items-center">  
+            <Link href="/sanctuaries" className="text-[10px] uppercase tracking-[0.3em] text-gray-400 hover:text-black transition-colors">Sanctuaries</Link>  
+            <Link href="/philosophy" className="text-[10px] uppercase tracking-[0.3em] text-gray-400 hover:text-black transition-colors">Philosophy</Link>  
             <GlobalSearch />  
           </div>
 
           <div className="md:hidden">  
-            <button onClick={() => setIsOpen(!isOpen)} className="text-black text-xs uppercase tracking-widest">  
+            <button onClick={() => setIsOpen(!isOpen)} className="text-black text-[10px] uppercase tracking-widest px-2 py-1 border border-gray-200">  
               {isOpen ? 'Close' : 'Menu'}  
             </button>  
           </div>  
@@ -32,10 +32,10 @@ export function Navigation() {
       </div>
 
       {isOpen && (  
-        <div className="md:hidden bg-white border-b border-gray-100 p-8 space-y-6 flex flex-col h-screen">  
-          <Link href="/sanctuaries" onClick={() => setIsOpen(false)} className="text-lg font-serif">Sanctuaries</Link>  
-          <Link href="/philosophy" onClick={() => setIsOpen(false)} className="text-lg font-serif">Philosophy</Link>  
-          <div className="pt-4">  
+        <div className="md:hidden absolute top-20 left-0 w-full bg-white border-b border-gray-100 p-8 flex flex-col space-y-8 animate-in fade-in slide-in-from-top-4">  
+          <Link href="/sanctuaries" onClick={() => setIsOpen(false)} className="text-2xl font-serif">Sanctuaries</Link>  
+          <Link href="/philosophy" onClick={() => setIsOpen(false)} className="text-2xl font-serif">Philosophy</Link>  
+          <div className="pt-4 border-t border-gray-50">  
             <GlobalSearch />  
           </div>  
         </div>  
