@@ -1,12 +1,9 @@
 import './globals.css'  
-import { Inter } from 'next/font/google'  
 import { Navigation } from '../components/Navigation'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {  
   title: 'NexVoyage Collective | Quiet Luxury Travel',  
-  description: 'Bespoke sanctuaries for high net-worth travelers.',  
+  description: 'Bespoke sanctuaries for high networth travelers.',  
 }
 
 export default function RootLayout({  
@@ -16,9 +13,11 @@ export default function RootLayout({
 }) {  
   return (  
     <html lang="en">  
-      <body className={`${inter.className} bg-black text-white antialiased`}>  
+      <body className="antialiased">  
         <Navigation />  
-        <main>{children}</main>  
+        <main className="pt-20">  
+          {children}  
+        </main>  
       </body>  
     </html>  
   )  
