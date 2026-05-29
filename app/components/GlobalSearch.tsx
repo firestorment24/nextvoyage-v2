@@ -10,10 +10,11 @@ const SANCTUARIES = [
 
 export function GlobalSearch() {  
   const [query, setQuery] = useState('')  
-  const [results, setResults] = useState<string[]>([])
+  const [results, setResults] = useState<string[]>([])  
+  const [isFocused, setIsFocused] = useState(false)
 
   useEffect(() => {  
-    if (query.length > 1) {  
+    if (query.length > 0) {  
       const filtered = SANCTUARIES.filter(s =>   
         s.toLowerCase().includes(query.toLowerCase())  
       )  
@@ -24,18 +25,23 @@ export function GlobalSearch() {
   }, [query])
 
   return (  
-    <div className="relative">  
+    <div className="relative group">  
       <input  
         type="text"  
         placeholder="Find a Sanctuary..."  
         value={query}  
+        onFocus={() => setIsFocused(true)}  
         onChange={(e) => setQuery(e.target.value)}  
-        className="bg-gray-50 border-none px-4 py-2 text-xs uppercase tracking-widest focus:ring-1 focus:ring-black w-48 transition-all"  
+        className="bg-transparent border-b border-gray-200 px-0 py-1 text-[10px] uppercase tracking-widest focus:ring-0 focus:border-black w-40 transition-all placeholder:text-gray-300"  
       />  
-      {results.length > 0 && (  
-        <div className="absolute top-full right-0 w-64 bg-white shadow-xl mt-2 p-4 border border-gray-100 z-50">  
+      {results.length > 0 && isFocused && (  
+        <div className="absolute top-full right-0 w-64 bg-white shadow-2xl mt-4 p-2 border border-gray-50 z-[100]">  
+          <p className="text-[9px] uppercase tracking-widest text-gray-400 p-2 border-b border-gray-50">Matching Sanctuaries</p>  
           {results.map(name => (  
-            <div key={name} className="py-2 text-sm hover:bg-gray-50 cursor-pointer border-b border-gray-50 last:border-none">  
+            <div key={name} className="p-3 text-xs font-serif hover:bg-gray-50 cursor-pointer transition-colors" onClick={() => {  
+              setQuery(name);  
+              setIsFocused(false);  
+            }}>  
               {name}  
             </div>  
           ))}  
