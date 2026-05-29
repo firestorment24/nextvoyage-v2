@@ -1,9 +1,3 @@
-I’ve consolidated all the fragmented copy and pillar descriptions into a clean, single-page website structure for you. 
-
-This code removes all mentions of "Nole Sanctuary," focuses on the "Elite Luxury" brand voice, and includes all **9 NexVoyage Sanctuaries** and the new **Impact & Safety** section.
-
-```html
-<!-- NexVoyage Collective | Official Website Clean Copy -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
