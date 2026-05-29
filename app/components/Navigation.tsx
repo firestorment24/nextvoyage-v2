@@ -1,9 +1,11 @@
 import React, { useState } from 'react';  
 import Link from 'next/link';  
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Search } from 'lucide-react';  
+import GlobalSearch from './GlobalSearch';
 
 const Navigation = () => {  
-  const [isOpen, setIsOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);  
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const navLinks = [  
     { name: 'The Home', href: '/' },  
@@ -14,19 +16,35 @@ const Navigation = () => {
 
   return (  
     <>  
-      {/* Trigger - Floating "Ghost" Button */}  
-      <button   
-        onClick={() => setIsOpen(true)}  
-        className="fixed top-8 right-8 z-50 p-2 mix-blend-difference text-white hover:opacity-70 transition-opacity"  
-        aria-label="Open Menu"  
-      >  
-        <Menu size={24} strokeWidth={1} />  
-      </button>
-
-      {/* Overlay Menu */}  
-      <div className={`fixed inset-0 z-[60] bg-black transition-transform duration-700 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>  
+      {/* Top Right Controls */}  
+      <div className="fixed top-8 right-8 z-50 flex items-center space-x-6 mix-blend-difference text-white">  
+        {/* Search Trigger */}  
         <button   
-          onClick={() => setIsOpen(false)}  
+          onClick={() => setIsSearchOpen(true)}  
+          className="hover:opacity-70 transition-opacity flex items-center"  
+          aria-label="Search"  
+        >  
+          <Search size={22} strokeWidth={1} />  
+          <span className="hidden md:inline ml-2 text-[10px] uppercase tracking-[0.2em] font-light">Search</span>  
+        </button>
+
+        {/* Menu Trigger */}  
+        <button   
+          onClick={() => setIsMenuOpen(true)}  
+          className="p-1 hover:opacity-70 transition-opacity"  
+          aria-label="Open Menu"  
+        >  
+          <Menu size={24} strokeWidth={1} />  
+        </button>  
+      </div>
+
+      {/* Global Search Component - Controls its own logic + Cmd+K */}  
+      {isSearchOpen && <GlobalSearch isOpenOverride={isSearchOpen} onClose={() => setIsSearchOpen(false)} />}
+
+      {/* Slide-over Ghost Menu */}  
+      <div className={`fixed inset-0 z-[60] bg-black transition-transform duration-700 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>  
+        <button   
+          onClick={() => setIsMenuOpen(false)}  
           className="absolute top-8 right-8 text-white hover:opacity-70 transition-opacity"  
         >  
           <X size={24} strokeWidth={1} />  
@@ -37,15 +55,16 @@ const Navigation = () => {
             <Link   
               key={link.name}   
               href={link.href}  
-              onClick={() => setIsOpen(false)}  
+              onClick={() => setIsMenuOpen(false)}  
               className="text-white text-3xl md:text-5xl font-light tracking-widest hover:italic transition-all duration-300"  
             >  
               {link.name}  
             </Link>  
           ))}  
             
-          <div className="pt-12">  
-            <p className="text-zinc-500 text-sm tracking-[0.3em] uppercase">NexVoyage Collective</p>  
+          <div className="pt-12 text-center">  
+            <p className="text-zinc-500 text-[10px] tracking-[0.4em] uppercase">NexVoyage Collective</p>  
+            <p className="text-zinc-700 text-[8px] mt-2 uppercase tracking-[0.2em]">Refined Exploration</p>  
           </div>  
         </nav>  
       </div>  
