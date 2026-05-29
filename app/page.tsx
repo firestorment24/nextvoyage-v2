@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const NexVoyageHome = () => {
@@ -84,4 +83,3 @@ const NexVoyageHome = () => {
 
 export default NexVoyageHome;
 ```
-
