@@ -82,4 +82,3 @@ const NexVoyageHome = () => {
 };
 
 export default NexVoyageHome;
-```
