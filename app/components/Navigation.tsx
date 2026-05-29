@@ -1,37 +1,45 @@
 "use client"
 
-import { Search, Menu } from 'lucide-react'  
-import { useState } from 'react'  
+import React, { useState } from 'react'  
+import Link from 'next/link'  
 import { GlobalSearch } from './GlobalSearch'
 
-export const Navigation = () => {  
-  const [isSearchOpen, setIsSearchOpen] = useState(false)
+export function Navigation() {  
+  const [isOpen, setIsOpen] = useState(false)
 
   return (  
-    <>  
-      <nav className="fixed top-0 left-0 w-full p-8 flex justify-between items-center z-50 mix-blend-difference">  
-        <div className="text-white text-sm font-light tracking-[0.4em] uppercase">  
-          NexVoyage <span className="opacity-50">Collective</span>  
-        </div>  
-          
-        <div className="flex items-center gap-8">  
-          <button   
-            onClick={() => setIsSearchOpen(true)}  
-            className="text-white hover:opacity-50 transition-opacity flex items-center gap-2 group"  
-          >  
-            <span className="text-[10px] tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">CMD+K</span>  
-            <Search size={18} strokeWidth={1.5} />  
-          </button>  
-          <button className="text-white hover:opacity-50 transition-opacity">  
-            <Menu size={20} strokeWidth={1.5} />  
-          </button>  
-        </div>  
-      </nav>
+    <nav className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">  
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">  
+        <div className="flex justify-between h-24 items-center">  
+          <div className="flex-shrink-0">  
+            <Link href="/" className="text-2xl font-serif tracking-tight text-black">  
+              NEXVOYAGE  
+            </Link>  
+          </div>  
+            
+          <div className="hidden md:flex space-x-12 items-center">  
+            <Link href="/sanctuaries" className="text-xs uppercase tracking-[0.2em] text-gray-500 hover:text-black transition-colors">Sanctuaries</Link>  
+            <Link href="/philosophy" className="text-xs uppercase tracking-[0.2em] text-gray-500 hover:text-black transition-colors">Philosophy</Link>  
+            <GlobalSearch />  
+          </div>
 
-      <GlobalSearch   
-        isOpenOverride={isSearchOpen}   
-        setIsOpenOverride={setIsSearchOpen}   
-      />  
-    </>  
+          <div className="md:hidden">  
+            <button onClick={() => setIsOpen(!isOpen)} className="text-black text-xs uppercase tracking-widest">  
+              {isOpen ? 'Close' : 'Menu'}  
+            </button>  
+          </div>  
+        </div>  
+      </div>
+
+      {isOpen && (  
+        <div className="md:hidden bg-white border-b border-gray-100 p-8 space-y-6 flex flex-col h-screen">  
+          <Link href="/sanctuaries" onClick={() => setIsOpen(false)} className="text-lg font-serif">Sanctuaries</Link>  
+          <Link href="/philosophy" onClick={() => setIsOpen(false)} className="text-lg font-serif">Philosophy</Link>  
+          <div className="pt-4">  
+            <GlobalSearch />  
+          </div>  
+        </div>  
+      )}  
+    </nav>  
   )  
 }  
