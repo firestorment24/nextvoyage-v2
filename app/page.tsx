@@ -1,84 +1,132 @@
-import React from 'react';
+I’ve consolidated all the fragmented copy and pillar descriptions into a clean, single-page website structure for you. 
 
-const NexVoyageHome = () => {
-  return (
-    <div className="bg-stone-50 text-stone-900 font-sans leading-relaxed">
-      {/* HERO SECTION */}
-      <section className="relative h-screen flex items-center justify-center bg-stone-200">
-        <div className="text-center px-6">
-          <h1 className="text-5xl md:text-7xl font-light tracking-tight mb-6">
-            The World, Curated.
-          </h1>
-          <p className="text-xl md:text-2xl font-light text-stone-600 mb-10 max-w-2xl mx-auto">
-            Refined journeys for the discerning traveler. Your next discovery is waiting.
-          </p>
-          <a href="https://cal.com/nexvoyagecollective" className="inline-block border border-stone-900 px-10 py-4 hover:bg-stone-900 hover:text-white transition-all uppercase tracking-widest text-sm">
-            Begin Your Journey
-          </a>
+This code removes all mentions of "Nole Sanctuary," focuses on the "Elite Luxury" brand voice, and includes all **9 NexVoyage Sanctuaries** and the new **Impact & Safety** section.
+
+```html
+<!-- NexVoyage Collective | Official Website Clean Copy -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexVoyage Collective | Elite Luxury & Refined Reliability</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F9F7F2; color: #1A1A1A; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        .parchment-bg { background-color: #F4F1EA; }
+    </style>
+</head>
+<body>
+
+    <!-- HERO SECTION -->
+    <header class="h-screen flex flex-col justify-center items-center text-center px-6">
+        <div class="max-w-4xl">
+            <h1 class="text-5xl md:text-7xl mb-6">Elite Luxury. <br><span class="italic text-gray-700">Refined Reliability.</span></h1>
+            <p class="text-xl md:text-2xl font-light mb-10 text-gray-600">White-glove travel management for the high-net-worth traveler who expects more from every journey.</p>
+            <a href="#get-started" class="bg-black text-white px-10 py-4 text-lg hover:bg-gray-800 transition">Get Started</a>
         </div>
-      </section>
+    </header>
 
-      {/* THE COLLECTIVE DIFFERENCE */}
-      <section className="py-24 px-6 max-w-5xl mx-auto text-center">
-        <h2 className="text-sm uppercase tracking-[0.3em] text-stone-400 mb-8">The Collective Difference</h2>
-        <h3 className="text-4xl font-light mb-8">Standards without compromise.</h3>
-        <p className="text-lg text-stone-600 leading-loose">
-          NexVoyage Collective is for those who seek the exceptional. Leveraging Fora’s global elite network, 
-          we provide more than just a booking—we provide an elevated perspective. From off-market villa access 
-          to seamless logistics, we handle the details so you can experience the pinnacle of global travel.
-        </p>
-      </section>
+    <!-- THE COLLECTIVE DIFFERENCE -->
+    <section class="py-24 px-6 bg-white">
+        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+            <div>
+                <h2 class="text-4xl mb-6">The Collective Difference</h2>
+                <p class="text-lg leading-relaxed mb-6">The true ROI of a journey isn’t found in the itinerary, but in the clarity you bring home. At NexVoyage Collective, we call this the <strong>ROI of Reset</strong>.</p>
+                <p class="text-lg leading-relaxed text-gray-600">Our network is built on zero-friction execution—from elite airport transitions to the world’s most secluded corridors—ensuring your focus remains on the experience, not the logistics.</p>
+            </div>
+            <div class="parchment-bg p-8 border border-gray-200">
+                <h3 class="text-2xl mb-4 italic">The Sanctuary Protocol</h3>
+                <ul class="space-y-4">
+                    <li class="flex items-start"><span class="mr-3 mt-1">✦</span> <strong>Elite Reliability:</strong> Seamless logistics end-to-end.</li>
+                    <li class="flex items-start"><span class="mr-3 mt-1">✦</span> <strong>The Discovery Trial:</strong> Curated options for "Best Privacy" or "Best Access."</li>
+                    <li class="flex items-start"><span class="mr-3 mt-1">✦</span> <strong>Bespoke Stewardship:</strong> Community curation, not just bookings.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-      {/* TWO-COLUMN: SAFETY & GIVE BACK */}
-      <section className="py-24 bg-stone-100 px-6">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16">
-          <div>
-            <h3 className="text-2xl font-light mb-4">Peace of mind, redefined.</h3>
-            <p className="text-stone-600">
-              High standards extend to your security. We partner with only the most vetted providers, 
-              ensuring that every leg of your journey meets our rigorous safety protocols. Travel freely, 
-              knowing every detail has been scrutinized.
+    <!-- THE 9 NEXVOYAGE SANCTUARIES -->
+    <section class="py-24 px-6 parchment-bg">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl text-center mb-16">The 9 NexVoyage Sanctuaries</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Pillars -->
+                <div class="p-8 bg-white border border-gray-100">
+                    <h3 class="text-xl font-bold mb-3">Floating</h3>
+                    <p class="text-gray-600">Elite superyacht charters and curated voyages through the South Pacific, Asia, and the Caribbean via the Ritz-Carlton Yacht Collection.</p>
+                </div>
+                <div class="p-8 bg-white border border-gray-100">
+                    <h3 class="text-xl font-bold mb-3">Education</h3>
+                    <p class="text-gray-600">Exclusive university tours and high-level summits for global education leaders, focusing on impact and innovation.</p>
+                </div>
+                <div class="p-8 bg-white border border-gray-100">
+                    <h3 class="text-xl font-bold mb-3">Performance</h3>
+                    <p class="text-gray-600">Sophisticated logistics for high-touch entertainment tours, jazz festivals, and global performance ensembles.</p>
+                </div>
+                <div class="p-8 bg-white border border-gray-100">
+                    <h3 class="text-xl font-bold mb-3">Alpine</h3>
+                    <p class="text-gray-600">Private chalets and "First Track" access in the world's most exclusive mountain corridors, partnered with Ski The Globe.</p>
+                </div>
+                <div class="p-8 bg-white border border-gray-100">
+                    <h3 class="text-xl font-bold mb-3">Heritage</h3>
+                    <p class="text-gray-600">The artistry of quiet luxury, centered on legendary properties like Las Ventanas al Paraíso.</p>
+                </div>
+                <div class="p-8 bg-white border border-gray-100">
+                    <h3 class="text-xl font-bold mb-3">Stadium</h3>
+                    <p class="text-gray-600">The ultimate event fixer for the World Cup, Olympics, and elite sports sanctuaries like Fanatics Fest NYC.</p>
+                </div>
+                <div class="p-8 bg-white border border-gray-100">
+                    <h3 class="text-xl font-bold mb-3">Mobile</h3>
+                    <p class="text-gray-600">Expedition luxury featuring Dream of the Desert mobile camps and private yacht expeditions through the fjords of Norway and Iceland.</p>
+                </div>
+                <div class="p-8 bg-white border border-gray-100">
+                    <h3 class="text-xl font-bold mb-3">Wellness</h3>
+                    <p class="text-gray-600">Neural optimization and radical recovery at premier properties like Blackberry Mountain and Andronis Santorini.</p>
+                </div>
+                <div class="p-8 bg-white border border-gray-100">
+                    <h3 class="text-xl font-bold mb-3">Sweet</h3>
+                    <p class="text-gray-600">Specialized travel for the confectionery circuit, combining VIP transfers, host hotel blocks, and curated 'Sweet' travel guides.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- IMPACT & SAFETY SECTION -->
+    <section class="py-24 px-6 bg-black text-white text-center">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl mb-8">Our Commitment to Impact & Safety</h2>
+            <p class="text-lg text-gray-400 mb-12 leading-relaxed">
+                Your safety is the foundation of every sanctuary. We prioritize high-security logistics and radical privacy protocols for every itinerary.
             </p>
-          </div>
-          <div>
-            <h3 className="text-2xl font-light mb-4">Purposeful exploration.</h3>
-            <p className="text-stone-600">
-              We believe true luxury includes leaving a positive mark. NexVoyage Collective proudly 
-              supports Autism initiatives, ensuring that your journey contributes to a legacy of 
-              inclusion and meaningful impact.
-            </p>
-          </div>
+            <div class="flex flex-col md:flex-row justify-center gap-6">
+                <a href="#" class="text-gray-300 hover:text-white underline underline-offset-4">Terms and Conditions</a>
+                <a href="#" class="text-gray-300 hover:text-white underline underline-offset-4">Client & Data Consent Guidelines</a>
+            </div>
         </div>
-      </section>
+    </section>
 
-      {/* LEAD MAGNET */}
-      <section className="py-24 px-6 text-center bg-white border-y border-stone-200">
-        <h3 className="text-3xl font-light mb-4">The 2026 Private Frontier.</h3>
-        <p className="text-stone-500 mb-8 max-w-xl mx-auto italic text-lg">
-          5 emerging destinations for the discerning traveler.
-        </p>
-        <p className="text-stone-600 mb-10 max-w-2xl mx-auto">
-          Stay ahead of the curve. From the sophisticated solitude of Ninh Van Bay to the raw elegance 
-          of Baja California East, discover the destinations setting the new standard for luxury.
-        </p>
-        <div className="flex justify-center">
-          <input type="email" placeholder="Email Address" className="border-b border-stone-300 py-2 px-4 focus:outline-none focus:border-stone-900 w-64 mr-4" />
-          <button className="bg-stone-900 text-white px-8 py-3 text-sm tracking-widest uppercase hover:bg-stone-800">
-            Get the Guide
-          </button>
+    <!-- CONTACT / GET STARTED -->
+    <section id="get-started" class="py-24 px-6 bg-white">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl mb-6">Start the Conversation</h2>
+            <p class="text-xl text-gray-600 mb-12">Experience the NexVoyage Trial. Share your dates for your next trip, and we’ll provide two curated options: <em>Best Privacy</em> and <em>Best Access</em>.</p>
+            
+            <div class="flex flex-col md:flex-row justify-center gap-4">
+                <a href="mailto:daryl.clark@fora.travel" class="bg-black text-white px-8 py-4 hover:bg-gray-800">Send a Message</a>
+                <a href="https://cal.com/nexvoyagecollective" target="_blank" class="border border-black px-8 py-4 hover:bg-black hover:text-white transition">Book a Discovery Call</a>
+            </div>
+            
+            <p class="mt-16 italic text-gray-500">"Your private sanctuary is waiting."</p>
         </div>
-      </section>
+    </section>
 
-      {/* FINAL CTA */}
-      <section className="py-32 text-center">
-        <h2 className="text-4xl font-light mb-6">Elevate your expectations.</h2>
-        <p className="mb-10 text-stone-600">Let’s design a journey that meets your standard.</p>
-        <a href="https://cal.com/nexvoyagecollective" className="bg-stone-900 text-white px-12 py-5 text-sm tracking-widest uppercase hover:bg-stone-800">
-          Book a Consultation
-        </a>
-      </section>
-    </div>
-  );
-};
+    <!-- FOOTER -->
+    <footer class="py-12 border-t border-gray-200 text-center">
+        <p class="text-sm text-gray-400 uppercase tracking-widest">&copy; 2026 NexVoyage Collective. All Rights Reserved.</p>
+    </footer>
 
-export default NexVoyageHome;
+</body>
+</html>
