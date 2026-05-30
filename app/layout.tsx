@@ -1,6 +1,6 @@
 import './globals.css';  
-import Navigation from '../components/Navigation';   
-import Footer from '../components/Footer';
+import Navigation from './components/Navigation';  
+import Footer from './components/Footer';
 
 export const metadata = {  
   title: 'NexVoyage Collective | Quiet Luxury Travel',  
@@ -12,7 +12,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">  
       <body className="antialiased bg-white text-neutral-900">  
         <Navigation />  
-        <main className="min-h-screen">{children}</main>  
+        <div className="pt-24 min-h-screen">  
+          {children}  
+        </div>  
         <Footer />  
       </body>  
     </html>  
