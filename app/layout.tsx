@@ -1,14 +1,14 @@
 import type { Metadata } from 'next'  
 import { Inter } from 'next/font/google'  
 import './globals.css'  
-import Navigation from './components/Navigation'  
-import Footer from './components/Footer'
+import Navigation from './Navigation'  
+import Footer from './Footer'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {  
-  title: 'NexVoyage Collective | Quiet Luxury Travel',  
-  description: 'Private sanctuaries and curated experiences for the modern nomad.',  
+  title: 'NexVoyage Collective',  
+  description: 'Quiet Luxury Travel Sanctuaries.',  
 }
 
 export default function RootLayout({  
@@ -19,15 +19,10 @@ export default function RootLayout({
   return (  
     <html lang="en" className="scroll-smooth">  
       <body className={`${inter.className} bg-white antialiased`}>  
-        {/* Global Navigation - appears on all pages */}  
-        <Navigation />
-
-        {/* Main Content Area */}  
+        <Navigation />  
         <main className="min-h-screen">  
           {children}  
-        </main>
-
-        {/* Global Footer - appears on all pages */}  
+        </main>  
         <Footer />  
       </body>  
     </html>  
