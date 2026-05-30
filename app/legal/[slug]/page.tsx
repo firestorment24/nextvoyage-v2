@@ -1,44 +1,36 @@
-import { notFound } from 'next/navigation';  
-import Link from 'next/link';
+'use client';
 
-const LEGAL_DOCS: Record<string, { title: string; content: string[] }> = {  
-  'privacy': {  
+import { useParams } from 'next/navigation';
+
+const LEGAL_CONTENT: Record<string, any> = {  
+  'privacy-policy': {  
     title: 'Privacy Policy',  
-    content: ["At NexVoyage Collective, your privacy is our cornerstone.", "We collect data only to facilitate bespoke travel.", "We do not sell information to third parties."]  
+    content: 'At NexVoyage Collective, we manage the lives and travels of the world’s most discerning individuals. Your data is treated with the same level of security as your physical transit. We never sell, trade, or compromise your personal information.'  
   },  
   'terms': {  
     title: 'Terms & Conditions',  
-    content: ["Our services include bespoke itinerary design and booking management.", "All payments are subject to the schedule provided at booking.", "Cancellations are governed by partner-specific policies."]  
+    content: 'NexVoyage Collective acts as a Guardian Layer for your travel. By using our services, you agree to our refined exploration standards. We prioritize elite access and zero-friction logistics above all else.'  
   },  
   'safety': {  
-    title: 'Impact & Safety',  
-    content: ["Safety is proactive. We use vetted partners and expert guidance.", "Our commitment to impact supports local boutique hotels and guides."]  
-  },  
-  'consent': {  
-    title: 'Data Consent',  
-    content: ["Explicit consent is required for all security coordination.", "You may withdraw data processing consent at any time."]  
+    title: 'Impact & Safety Commitment',  
+    content: 'Our commitment to safety is absolute. We vet every partner, from private aviation to ground transit, ensuring a secure environment for our clients and their families.'  
   }  
 };
 
-export default function LegalPage({ params }: { params: { slug: string } }) {  
-  const doc = LEGAL_DOCS[params.slug];  
-  if (!doc) notFound();
+export default function LegalPage() {  
+  const params = useParams();  
+  const slug = params?.slug as string;  
+  const doc = LEGAL_CONTENT[slug] || LEGAL_CONTENT['privacy-policy'];
 
   return (  
-    <main className="max-w-2xl mx-auto px-6 py-24">  
-      <h1 className="text-3xl font-light mb-12 tracking-tight">{doc.title}</h1>  
-      <div className="space-y-6 text-neutral-600 leading-relaxed font-light">  
-        {doc.content.map((p, i) => <p key={i}>{p}</p>)}  
+    <div className="min-h-screen bg-slate-50 pt-32 pb-20 px-6">  
+      <div className="max-w-3xl mx-auto bg-white p-12 shadow-sm border border-slate-100">  
+        <h1 className="text-3xl font-light tracking-tight mb-8 text-slate-900">{doc.title}</h1>  
+        <div className="prose prose-slate font-light leading-relaxed text-slate-600">  
+          <p>{doc.content}</p>  
+          <p className="mt-8 text-sm italic">Last updated: May 2026</p>  
+        </div>  
       </div>  
-      <footer className="mt-20 pt-10 border-t border-neutral-100">  
-        <Link href="/" className="text-xs uppercase tracking-widest text-neutral-400 hover:text-black">  
-          ← Return to Collective  
-        </Link>  
-      </footer>  
-    </main>  
+    </div>  
   );  
-}
-
-export async function generateStaticParams() {  
-  return Object.keys(LEGAL_DOCS).map((slug) => ({ slug }));  
 }  
