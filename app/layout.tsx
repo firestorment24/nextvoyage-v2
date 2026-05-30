@@ -1,7 +1,7 @@
-import './globals.css'    
-import { Navigation } from './Navigation' 
+import './globals.css'  
+import Navigation from './Navigation'
 
-export const metadata = {    
+export const metadata = {  
   title: 'NexVoyage Collective',  
   description: 'Bespoke travel for high net worth individuals',  
 }
@@ -13,7 +13,7 @@ export default function RootLayout({
 }) {  
   return (  
     <html lang="en">  
-      <body className="bg-black text-white">  
+      <body className="bg-black text-white antialiased">  
         <Navigation />  
         <main>{children}</main>  
       </body>  
