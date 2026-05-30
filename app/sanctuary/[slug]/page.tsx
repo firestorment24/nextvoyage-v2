@@ -44,7 +44,7 @@ const SANCTUARIES: Record<string, any> = {
     title: 'Fortress',  
     tagline: 'Uncompromising Security.',  
     description: 'Vetted properties with advanced security protocols. For those who require safety without sacrificing style.',  
-    image: 'https://https://cdn.marblism.com/iHm6gUDie0O.webp',  
+    image: 'https://cdn.marblism.com/iHm6gUDie0O.webp',  
   },  
   safari: {  
     title: 'Safari',  
