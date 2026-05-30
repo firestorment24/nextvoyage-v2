@@ -1,27 +1,15 @@
-import './globals.css'  
-import Navigation from './Navigation'  
-import Footer from './Footer'
+import Link from 'next/link'
 
-export const metadata = {  
-  title: 'NexVoyage Collective',  
-  description: 'Curating the Unreachable',  
-}
-
-export default function RootLayout({  
-  children,  
-}: {  
-  children: React.ReactNode  
-}) {  
+export default function Footer() {  
   return (  
-    <html lang="en">  
-      <body className="bg-black text-white antialiased font-sans">  
-        <Navigation />  
-        <main className="min-h-screen pt-20">  
-          {children}  
-        </main>  
-        <Footer />  
-      </body>  
-    </html>  
+    <footer className="py-10 px-6 border-t border-white/10 bg-black text-white/50 text-xs tracking-widest uppercase">  
+      <div className="max-row flex flex-col md:flex-row justify-between items-center gap-6">  
+        <div className="flex gap-8">  
+          <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>  
+          <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>  
+        </div>  
+        <div>© 2026 NEXVOYAGE COLLECTIVE</div>  
+      </div>  
+    </footer>  
   )  
 }  
- 
