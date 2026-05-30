@@ -1,26 +1,26 @@
 import './globals.css';  
-import Navigation from '../components/Navigation'; // Adjusted for the components folder  
-import Link from 'next/link';
+import Navigation from './Navigation'; // Corrected path  
+import Footer from './Footer'; // Assuming Footer is also in the app folder  
+import { Inter } from 'next/font/google';
+
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {  
-  title: 'NexVoyage Collective | Quiet Luxury',  
-  description: 'The Guardian Layer for the 0.1%.',  
+  title: 'NexVoyage Collective | Quiet Luxury Travel',  
+  description: 'The Metropolitan & Floating Sanctuary Engine.',  
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {  
+export default function RootLayout({  
+  children,  
+}: {  
+  children: React.ReactNode;  
+}) {  
   return (  
     <html lang="en">  
-      <body className="bg-white text-black antialiased">  
+      <body className={`${inter.className} bg-white text-slate-900`}>  
         <Navigation />  
-        <div className="pt-16">{children}</div>  
-        <footer className="py-20 border-t border-gray-50 text-center">  
-          <div className="flex justify-center space-x-8 text-[9px] tracking-[0.3em] uppercase text-gray-300 mb-6">  
-            <Link href="/legal/privacy">Privacy</Link>  
-            <Link href="/legal/terms">Terms</Link>  
-            <Link href="/legal/impact">Impact</Link>  
-          </div>  
-          <p className="text-[9px] tracking-[0.5em] text-gray-200">© 2026 NEXVOYAGE COLLECTIVE</p>  
-        </footer>  
+        <main>{children}</main>  
+        <Footer />  
       </body>  
     </html>  
   );  
