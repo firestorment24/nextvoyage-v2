@@ -1,3 +1,8 @@
+'use client';
+
+import { useParams } from 'next/navigation';  
+import Link from 'next/link';
+
 const SANCTUARIES: Record<string, any> = {  
   metropolitan: {  
     title: 'Metropolitan',  
@@ -53,4 +58,43 @@ const SANCTUARIES: Record<string, any> = {
     description: 'Remote dunes and architectural wonders in the sands. The ultimate silence of the desert.',  
     image: 'https://cdn.marblism.com/oasis-placeholder.webp',  
   },  
-};  
+};
+
+export default function SanctuaryPage() {  
+  const params = useParams();  
+  const slug = params?.slug as string;  
+  const sanctuary = SANCTUARIES[slug] || SANCTUARIES.metropolitan;
+
+  return (  
+    <div className="min-h-screen bg-white">  
+      {/* Hero Section */}  
+      <section className="relative h-[70vh] flex items-center justify-center overflow-hidden">  
+        <img   
+          src={sanctuary.image}   
+          alt={sanctuary.title}   
+          className="absolute inset-0 w-full h-full object-cover"  
+        />  
+        <div className="absolute inset-0 bg-black/40" />  
+        <div className="relative text-center text-white px-6">  
+          <h1 className="text-5xl md:text-7xl font-light tracking-tighter mb-4 uppercase">{sanctuary.title}</h1>  
+          <p className="text-xl md:text-2xl font-extralight tracking-widest uppercase">{sanctuary.tagline}</p>  
+        </div>  
+      </section>
+
+      {/* Content Section */}  
+      <section className="max-w-4xl mx-auto py-24 px-6 text-center">  
+        <h2 className="text-sm uppercase tracking-[0.3em] text-slate-400 mb-8">The Experience</h2>  
+        <p className="text-2xl md:text-3xl font-light leading-relaxed text-slate-800 mb-12">  
+          {sanctuary.description}  
+        </p>  
+        <div className="h-px w-24 bg-slate-200 mx-auto mb-12" />  
+        <a   
+          href="mailto:daryl.clark@fora.travel"  
+          className="inline-block bg-slate-900 text-white px-12 py-4 text-sm uppercase tracking-widest hover:bg-slate-800 transition"  
+        >  
+          Inquire for Access  
+        </a>  
+      </section>  
+    </div>  
+  );  
+}  
