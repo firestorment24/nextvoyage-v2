@@ -1,38 +1,64 @@
-import Link from 'next/link';
+import Link from 'next/link'
 
 export default function Footer() {  
+  const currentYear = new Date().getFullYear()
+
   return (  
-    <footer className="bg-slate-50 border-t border-slate-200 pt-16 pb-8 mt-20">  
-      <div className="max-w-7xl mx-auto px-6">  
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">  
-          <div>  
-            <h3 className="text-sm font-semibold tracking-widest uppercase mb-6">NexVoyage Collective</h3>  
-            <p className="text-slate-500 leading-relaxed max-w-xs">  
-              The Guardian Layer for the world's most discerning travelers. Ensuring the ROI of Reset through elite access and zero-friction logistics.  
+    <footer className="bg-white border-t border-slate-100 mt-20">  
+      <div className="max-w-7xl mx-auto px-6 py-12">  
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">  
+            
+          {/* Brand Section */}  
+          <div className="space-y-4">  
+            <h2 className="text-xl font-serif tracking-tight text-slate-900">  
+              NexVoyage Collective  
+            </h2>  
+            <p className="text-sm text-slate-500 leading-relaxed max-w-xs">  
+              The Guardian Layer for the modern explorer. Curating sanctuaries   
+              for the high-net-worth traveler since 2026.  
             </p>  
+          </div>
+
+          {/* Quick Links */}  
+          <div className="flex flex-col space-y-3">  
+            <h3 className="text-xs font-semibold uppercase tracking-widest text-slate-400">  
+              Experience  
+            </h3>  
+            <Link href="/" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">  
+              The Sanctuaries  
+            </Link>  
+            <Link href="/sanctuary/metropolitan-penthouse" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">  
+              Urban Retreats  
+            </Link>  
+            <Link href="/sanctuary/floating-sanctuary" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">  
+              Maritime Solitude  
+            </Link>  
+          </div>
+
+          {/* Legal Section */}  
+          <div className="flex flex-col space-y-3">  
+            <h3 className="text-xs font-semibold uppercase tracking-widest text-slate-400">  
+              Compliance  
+            </h3>  
+            <Link href="/legal/privacy-policy" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">  
+              Privacy Policy  
+            </Link>  
+            <Link href="/legal/terms-and-conditions" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">  
+              Terms & Conditions  
+            </Link>  
           </div>  
-          <div>  
-            <h3 className="text-sm font-semibold tracking-widest uppercase mb-6">Sanctuaries</h3>  
-            <ul className="space-y-4 text-slate-600">  
-              <li><Link href="/sanctuary/metropolitan" className="hover:text-black transition">Metropolitan</Link></li>  
-              <li><Link href="/sanctuary/floating" className="hover:text-black transition">Floating</Link></li>  
-              <li><Link href="/sanctuary/alpine" className="hover:text-black transition">Alpine</Link></li>  
-            </ul>  
-          </div>  
-          <div>  
-            <h3 className="text-sm font-semibold tracking-widest uppercase mb-6">Legal & Security</h3>  
-            <ul className="space-y-4 text-slate-600">  
-              <li><Link href="/legal/privacy-policy" className="hover:text-black transition">Privacy Policy</Link></li>  
-              <li><Link href="/legal/terms" className="hover:text-black transition">Terms & Conditions</Link></li>  
-              <li><Link href="/legal/safety" className="hover:text-black transition">Impact & Safety</Link></li>  
-            </ul>  
-          </div>  
-        </div>  
-        <div className="border-t border-slate-200 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-slate-400 uppercase tracking-widest">  
-          <p>© 2026 NexVoyage Collective. All Rights Reserved.</p>  
-          <p className="mt-4 md:mt-0">Veterans & First Responders: 50% Off Booking Fees</p>  
+        </div>
+
+        {/* Bottom Bar */}  
+        <div className="mt-12 pt-8 border-t border-slate-50 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">  
+          <p className="text-xs text-slate-400">  
+            &copy; {currentYear} NexVoyage Collective. All rights reserved.  
+          </p>  
+          <p className="text-xs text-slate-300 italic">  
+            Designed for the ROI of Reset.  
+          </p>  
         </div>  
       </div>  
     </footer>  
-  );  
+  )  
 }  
