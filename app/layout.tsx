@@ -1,17 +1,27 @@
-import Link from 'next/link'
+import './globals.css'  
+import { Inter } from 'next/font/google'  
+import { Navigation } from './Navigation'  
+import Footer from './Footer'
 
-export default function Footer() {  
+const inter = Inter({ subsets: ['latin'] })
+
+export const metadata = {  
+  title: 'NexVoyage Collective | Luxury Travel Redefined',  
+  description: 'Bespoke travel experiences for the high net worth traveler.',  
+}
+
+export default function RootLayout({  
+  children,  
+}: {  
+  children: React.ReactNode  
+}) {  
   return (  
-    <footer className="py-10 px-6 border-t border-white/10 bg-black text-white/50 text-xs tracking-widest uppercase">  
-      <div className="max-row flex flex-col md:flex-row justify-between items-center gap-6">  
-        <div className="flex gap-8">  
-          <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>  
-          <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>  
-        </div>  
-        <div>© 2026 NEXVOYAGE COLLECTIVE</div>  
-      </div>  
-    </footer>  
+    <html lang="en">  
+      <body className={inter.className}>  
+        <Navigation />  
+        <main>{children}</main>  
+        <Footer />  
+      </body>  
+    </html>  
   )  
 }  
- 
- 
