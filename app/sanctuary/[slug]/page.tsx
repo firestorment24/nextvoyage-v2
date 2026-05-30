@@ -20,7 +20,7 @@ const SANCTUARIES: Record<string, any> = {
     title: 'Island',  
     tagline: 'Boundless Horizon.',  
     description: 'Private atoll access where the only schedule is the tide. Absolute privacy, secured by the Guardian Layer.',  
-    image: 'https://cdn.marblism.com/island-sanctuary-v1.webp',  
+    image: 'https://cdn.marblism.com/vaBnm6isJ-C.webp',  
   },  
   alpine: {  
     title: 'Alpine',  
