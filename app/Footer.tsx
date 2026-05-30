@@ -1,37 +1,39 @@
-import Link from 'next/link'
+import { notFound } from 'next/navigation'
 
-export default function Footer() {  
+const LEGAL_DOCS: Record<string, { title: string; date: string; content: string }> = {  
+  'privacy-policy': {  
+    title: 'Privacy Policy',  
+    date: 'May 30, 2026',  
+    content: `At NexVoyage Collective, your privacy is a cornerstone of our service. We recognize that privacy is not just a legal requirement—it is a fundamental expectation of our high-net-worth clientele. 
+
+    We collect only what is necessary to craft your experience. Your personal details are never sold, only utilized to facilitate your bookings and provide seamless sanctuary access. We use industry-standard encryption to ensure your digital footprint remains private.`  
+  },  
+  'terms-and-conditions': {  
+    title: 'Terms & Conditions',  
+    date: 'May 30, 2026',  
+    content: `NexVoyage Collective provides bespoke travel planning and concierge services, including itinerary design and safety recommendations through our Sanctuary Tiers. 
+
+    By accessing the platform, you agree to our standards of excellence. All bookings are subject to availability and the specific terms of our sanctuary partners. Your safety is a priority, but travel inherently involves risk. NexVoyage Collective is not liable for personal injury or property damage resulting from third-party acts.`  
+  }  
+}
+
+export function generateStaticParams() {  
+  return Object.keys(LEGAL_DOCS).map((slug) => ({ slug }))  
+}
+
+export default function LegalPage({ params }: { params: { slug: string } }) {  
+  const doc = LEGAL_DOCS[params.slug]  
+  if (!doc) notFound()
+
   return (  
-    <footer className="bg-[#0A0A0A] text-white/70 py-16 px-6 border-t border-white/5">  
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 text-left">  
-        <div className="col-span-1 md:col-span-2">  
-          <h3 className="text-white font-light text-2xl tracking-widest mb-6">NEXVOYAGE</h3>  
-          <p className="max-w-sm font-light leading-relaxed">  
-            Crafting digital sanctuaries for the modern explorer. Part of the NexVoyage Collective.  
-          </p>  
+    <div className="min-h-screen bg-[#0A0A0A] text-white/90 pt-32 pb-20 px-6">  
+      <article className="max-w-3xl mx-auto text-left">  
+        <h1 className="text-4xl md:text-5xl font-light tracking-tighter mb-4">{doc.title}</h1>  
+        <p className="text-xs tracking-[0.2em] text-white/40 mb-12 uppercase font-light">Last Updated: {doc.date}</p>  
+        <div className="prose prose-invert max-w-none">  
+          <p className="whitespace-pre-line font-light leading-relaxed text-white/70">{doc.content}</p>  
         </div>  
-          
-        <div>  
-          <h4 className="text-white text-sm uppercase tracking-widest mb-6">Concierge</h4>  
-          <ul className="space-y-4 text-sm font-light">  
-            <li><Link href="/concierge" className="hover:text-white transition-colors">Start Your Journey</Link></li>  
-            <li><Link href="/#sanctuaries" className="hover:text-white transition-colors">The Pillars</Link></li>  
-          </ul>  
-        </div>
-
-        <div>  
-          <h4 className="text-white text-sm uppercase tracking-widest mb-6">Legal</h4>  
-          <ul className="space-y-4 text-sm font-light">  
-            <li><Link href="/legal/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>  
-            <li><Link href="/legal/terms" className="hover:text-white transition-colors">Terms & Conditions</Link></li>  
-          </ul>  
-        </div>  
-      </div>
-
-      <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-light tracking-widest">  
-        <p>© {new Date().getFullYear()} NEXVOYAGE COLLECTIVE. ALL RIGHTS RESERVED.</p>  
-        <p>DESIGNED FOR THE 1%</p>  
-      </div>  
-    </footer>  
+      </article>  
+    </div>  
   )  
 }  
