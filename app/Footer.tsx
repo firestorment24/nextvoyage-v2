@@ -2,13 +2,21 @@ import Link from 'next/link'
 
 export default function Footer() {  
   return (  
-    <footer className="py-10 px-6 border-t border-white/10 bg-black text-white/50 text-xs tracking-widest uppercase">  
-      <div className="max-row flex flex-col md:flex-row justify-between items-center gap-6">  
-        <div className="flex gap-8">  
-          <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>  
-          <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>  
+    <footer className="border-t border-gray-100 bg-white py-12 mt-20">  
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">  
+        <div className="flex flex-col md:flex-row justify-between items-center gap-8">  
+          <div className="text-sm text-gray-500">  
+            © {new Date().getFullYear()} NexVoyage Collective. All rights reserved.  
+          </div>  
+          <div className="flex space-x-6 text-sm font-medium text-gray-600">  
+            <Link href="/privacy" className="hover:text-black transition-colors">  
+              Privacy Policy  
+            </Link>  
+            <Link href="/terms" className="hover:text-black transition-colors">  
+              Terms of Service  
+            </Link>  
+          </div>  
         </div>  
-        <div>© 2026 NEXVOYAGE COLLECTIVE</div>  
       </div>  
     </footer>  
   )  
