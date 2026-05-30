@@ -1,5 +1,5 @@
-import { notFound } from 'next/navigation';  
-import Navigation from '../../Navigation'; // Adjusted for your move to the app folder  
+"use client";  
+import Navigation from '../../Navigation'; /
 import Link from 'next/link';
 
 const SANCTUARIES = {  
