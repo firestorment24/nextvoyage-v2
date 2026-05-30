@@ -32,31 +32,31 @@ const SANCTUARIES: Record<string, any> = {
     title: 'Stadium',  
     tagline: 'The Best Seat in the House.',  
     description: 'Ultra-prime hospitality suites for the LA 2028 Olympics and global sports. Access that others can’t buy.',  
-    image: 'https://cdn.marblism.com/stadium-placeholder.webp',  
+    image: 'https://cdn.marblism.com/gvkky4c_9V3.webp',  
   },  
   cinematic: {  
     title: 'Cinematic',  
     tagline: 'Beyond the Screen.',  
     description: 'Immersive travel inspired by the world’s most iconic film locations, delivered with white-glove precision.',  
-    image: 'https://cdn.marblism.com/cinematic-placeholder.webp',  
+    image: 'https://cdn.marblism.com/58zTxqqgFIU.webp',  
   },  
   fortress: {  
     title: 'Fortress',  
     tagline: 'Uncompromising Security.',  
     description: 'Vetted properties with advanced security protocols. For those who require safety without sacrificing style.',  
-    image: 'https://cdn.marblism.com/fortress-placeholder.webp',  
+    image: 'https://https://cdn.marblism.com/iHm6gUDie0O.webp',  
   },  
   safari: {  
     title: 'Safari',  
     tagline: 'The Primal Reset.',  
     description: 'Conservation-focused luxury in the heart of the wild. Connect with the rhythm of the earth.',  
-    image: 'https://cdn.marblism.com/safari-placeholder.webp',  
+    image: 'https://cdn.marblism.com/QhVF0bg6Rq3.webp',  
   },  
   oasis: {  
     title: 'Oasis',  
     tagline: 'Desert Serenity.',  
     description: 'Remote dunes and architectural wonders in the sands. The ultimate silence of the desert.',  
-    image: 'https://cdn.marblism.com/oasis-placeholder.webp',  
+    image: 'https://cdn.marblism.com/t_wt6F-rdlV.webp',  
   },  
 };
 
