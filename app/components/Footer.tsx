@@ -25,7 +25,7 @@ export default function Footer() {
             {/* These slugs must match the LEGAL_DOCS keys below */}  
             <li><Link href="/legal/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link></li>  
             <li><Link href="/legal/terms-and-conditions" className="hover:text-white transition-colors">Terms & Conditions</Link></li>  
-          </ul>  
+          </ul>   
         </div>  
       </div>  
       <div className="max-w-7xl mx-auto mt-20 pt-8 border-t border-neutral-800 flex justify-between items-center text-[10px] tracking-widest uppercase font-light">  
