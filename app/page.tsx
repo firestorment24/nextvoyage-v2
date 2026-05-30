@@ -1,76 +1,56 @@
-"use client";  
-import Navigation from './Navigation';  
 import Link from 'next/link';
 
 const SANCTUARIES = [  
-  { slug: 'metropolitan', title: 'Metropolitan', location: 'URBAN CENTERS' },  
-  { slug: 'floating', title: 'Floating', location: 'OPEN WATERS' },  
-  { slug: 'island', title: 'Island', location: 'REMOTE ARCHIPELAGOS' },  
-  { slug: 'alpine', title: 'Alpine', location: 'HIGH ALTITUDES' },  
-  { slug: 'stadium', title: 'Stadium', location: 'ELITE ARENAS' },  
-  { slug: 'cinematic', title: 'Cinematic', location: 'MASTERPIECE SETS' },  
-  { slug: 'fortress', title: 'Fortress', location: 'HISTORIC STRONGHOLDS' },  
-  { slug: 'safari', title: 'Safari', location: 'WILD SAVANNAS' },  
-  { slug: 'oasis', title: 'Oasis', location: 'ARID HIDDEN GEMS' },  
+{ name: 'Metropolitan', category: 'Urban Centers', slug: 'metropolitan' },  
+{ name: 'Floating', category: 'Open Waters', slug: 'floating' },  
+{ name: 'Island', category: 'Remote Archipelagos', slug: 'island' },  
+{ name: 'Alpine', category: 'High Altitudes', slug: 'alpine' },  
+{ name: 'Stadium', category: 'Elite Arenas', slug: 'stadium' },  
+{ name: 'Cinematic', category: 'Masterpiece Sets', slug: 'cinematic' },  
+{ name: 'Fortress', category: 'Historic Strongholds', slug: 'fortress' },  
+{ name: 'Safari', category: 'Wild Savannas', slug: 'safari' },  
+{ name: 'Oasis', category: 'Arid Hidden Gems', slug: 'oasis' },  
 ];
 
-export default function HomePage() {  
-  return (  
-    <main className="min-h-screen bg-black text-white selection:bg-white selection:text-black">  
-      <Navigation />
+export default function Home() {  
+return (  
+  <div className="bg-white">  
+    {/* Hero Section */}  
+    <section className="h-[80vh] flex flex-col justify-center items-center text-center px-6">  
+      <h1 className="text-[12vw] leading-[0.8] font-bold tracking-tighter uppercase mb-8">  
+        NexVoyage<br />Collective  
+      </h1>  
+      <p className="text-sm uppercase tracking-[0.5em] text-neutral-400">  
+        Curating the Unreachable  
+      </p>  
+    </section>
 
-      {/* Hero Section */}  
-      <section className="h-screen flex flex-col items-center justify-center px-6 text-center">  
-        <h1 className="text-7xl md:text-9xl font-light tracking-tighter mb-8 animate-fade-in">  
-          NEXTVOYAGE<br />COLLECTIVE  
-        </h1>  
-        <p className="text-sm md:text-base tracking-[0.3em] text-white/40 uppercase">  
-          Curating the Unreachable  
-        </p>  
-      </section>
+    {/* Philosophy */}  
+    <section className="max-w-xl mx-auto px-6 py-32 text-center">  
+      <h2 className="text-xs uppercase tracking-widest text-neutral-400 mb-8">The Philosophy</h2>  
+      <p className="text-2xl font-light leading-snug">  
+        We do not just book travel. We engineer sanctuaries. For those who have seen everything, we find the things that haven't been seen.  
+      </p>  
+    </section>
 
-      {/* Philosophy Section */}  
-      <section className="max-w-4xl mx-auto px-6 py-32 text-center border-t border-white/10">  
-        <h2 className="text-xs tracking-[0.4em] text-white/30 uppercase mb-12">The Philosophy</h2>  
-        <p className="text-2xl md:text-4xl font-light leading-tight text-white/80">  
-          We do not just book travel. We engineer sanctuaries. For those who have seen everything, we find the things that haven't been seen.  
-        </p>  
-      </section>
-
-      {/* 9-Sanctuary Grid */}  
-      <section className="px-4 py-24 border-t border-white/10">  
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/10">  
-          {SANCTUARIES.map((item) => (  
-            <Link   
-              key={item.slug}   
-              href={`/sanctuary/${item.slug}`}  
-              className="group relative aspect-square bg-black flex flex-col items-center justify-center p-12 transition-all duration-700 hover:bg-neutral-900"  
-            >  
-              <span className="text-[10px] tracking-[0.5em] text-white/30 uppercase mb-4 transition-transform duration-500 group-hover:-translate-y-2">  
-                {item.location}  
-              </span>  
-              <h3 className="text-3xl md:text-4xl font-light tracking-tighter transition-all duration-500 group-hover:tracking-widest">  
-                {item.title.toUpperCase()}  
-              </h3>  
-              <div className="absolute bottom-12 opacity-0 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-[-10px]">  
-                <span className="text-[10px] tracking-widest uppercase border-b border-white/20 pb-1">  
-                  Explore Sanctuary  
-                </span>  
-              </div>  
-            </Link>  
-          ))}  
-        </div>  
-      </section>
-
-      {/* Footer */}  
-      <footer className="py-24 px-6 border-t border-white/10 flex flex-col items-center">  
-        <div className="flex gap-12 text-[10px] tracking-[0.3em] text-white/30 uppercase mb-12">  
-          <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>  
-          <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>  
-          <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>  
-        </div>  
-        <p className="text-[10px] tracking-widest text-white/20">© 2026 NEXTVOYAGE COLLECTIVE</p>  
-      </footer>  
-    </main>  
-  );  
+    {/* The 9-Sanctuary Grid */}  
+    <section className="grid grid-cols-1 md:grid-cols-3">  
+      {SANCTUARIES.map((s) => (  
+        <Link   
+          key={s.slug}   
+          href={`/sanctuary/${s.slug}`}  
+          className="group relative aspect-square border-[0.5px] border-neutral-100 flex flex-col justify-end p-8 overflow-hidden hover:bg-neutral-50 transition-colors"  
+        >  
+          <div className="relative z-10">  
+            <p className="text-[10px] uppercase tracking-widest text-neutral-400 mb-1">{s.category}</p>  
+            <h3 className="text-xl font-medium uppercase tracking-tighter">{s.name}</h3>  
+          </div>  
+          <span className="absolute top-8 right-8 text-[10px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">  
+            Explore Sanctuary  
+          </span>  
+        </Link>  
+      ))}  
+    </section>  
+  </div>  
+);  
 }  
