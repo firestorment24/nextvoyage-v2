@@ -1,37 +1,26 @@
-"use client"
-
+"use client";  
 import React, { useState } from 'react'  
 import Link from 'next/link'  
 import { GlobalSearch } from './GlobalSearch'
 
-export function Navigation() {  
+export default function Navigation() {  
   const [isOpen, setIsOpen] = useState(false)
 
   return (  
-    <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-50">  
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">  
-        <div className="flex justify-between h-20 items-center">  
-          <Link href="/" className="text-xl font-serif tracking-tighter">NEXVOYAGE</Link>  
-            
-          <div className="hidden md:flex space-x-10 items-center">  
-            <Link href="/sanctuaries" className="text-[10px] uppercase tracking-[0.3em] text-gray-400 hover:text-black transition-colors">Sanctuaries</Link>  
-            <Link href="/philosophy" className="text-[10px] uppercase tracking-[0.3em] text-gray-400 hover:text-black transition-colors">Philosophy</Link>  
-            <GlobalSearch />  
-          </div>
+    <nav className="fixed top-0 w-full z-50 bg-black/50 backdrop-blur-md border-b border-white/10">  
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">  
+        <Link href="/" className="text-xl font-light tracking-widest hover:opacity-70 transition-opacity">  
+          NEXVOYAGE  
+        </Link>
 
-          <button onClick={() => setIsOpen(!isOpen)} className="md:hidden text-[10px] uppercase tracking-widest">  
-            {isOpen ? 'Close' : 'Menu'}  
-          </button>  
-        </div>  
-      </div>
-
-      {isOpen && (  
-        <div className="md:hidden bg-white border-b border-gray-100 p-8 flex flex-col space-y-6">  
-          <Link href="/sanctuaries" onClick={() => setIsOpen(false)} className="text-xl font-serif">Sanctuaries</Link>  
-          <Link href="/philosophy" onClick={() => setIsOpen(false)} className="text-xl font-serif">Philosophy</Link>  
+        <div className="flex items-center gap-8">  
+          <div className="hidden md:flex items-center gap-8 text-sm uppercase tracking-widest font-light">  
+            <Link href="/sanctuaries" className="hover:text-white/60 transition-colors">Sanctuaries</Link>  
+            <Link href="/philosophy" className="hover:text-white/60 transition-colors">Philosophy</Link>  
+          </div>  
           <GlobalSearch />  
         </div>  
-      )}  
+      </div>  
     </nav>  
   )  
 }  
