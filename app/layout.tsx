@@ -1,28 +1,18 @@
-import type { Metadata } from 'next'  
-import { Inter } from 'next/font/google'  
 import './globals.css'  
 import Navigation from './Navigation'  
 import Footer from './Footer'
 
-const inter = Inter({ subsets: ['latin'] })
-
-export const metadata: Metadata = {  
-  title: 'NexVoyage Collective',  
-  description: 'Quiet Luxury Travel Sanctuaries.',  
+export const metadata = {  
+  title: 'NexVoyage Collective | Curating the Unreachable',  
+  description: 'Bespoke travel sanctuaries for high-net-worth travelers.',  
 }
 
-export default function RootLayout({  
-  children,  
-}: {  
-  children: React.ReactNode  
-}) {  
+export default function RootLayout({ children }: { children: React.ReactNode }) {  
   return (  
     <html lang="en" className="scroll-smooth">  
-      <body className={`${inter.className} bg-white antialiased`}>  
+      <body className="bg-[#0A0A0A] antialiased text-white selection:bg-white selection:text-black">  
         <Navigation />  
-        <main className="min-h-screen">  
-          {children}  
-        </main>  
+        <main>{children}</main>  
         <Footer />  
       </body>  
     </html>  
