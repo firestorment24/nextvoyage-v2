@@ -1,14 +1,14 @@
 import { notFound } from 'next/navigation'
 
 const LEGAL_DOCS: Record<string, { title: string; date: string; content: string }> = {  
-  'privacy': {  
+  'privacy-policy': {  
     title: 'Privacy Policy',  
     date: 'May 30, 2026',  
     content: `At NexVoyage Collective, your privacy is a cornerstone of our service. We recognize that privacy is not just a legal requirement—it is a fundamental expectation of our high-net-worth clientele. 
 
     We collect only what is necessary to craft your experience. Your personal details are never sold, only utilized to facilitate your bookings and provide seamless sanctuary access. We use industry-standard encryption to ensure your digital footprint remains private.`  
   },  
-  'terms': {  
+  'terms-and-conditions': {  
     title: 'Terms & Conditions',  
     date: 'May 30, 2026',  
     content: `NexVoyage Collective provides bespoke travel planning and concierge services, including itinerary design and safety recommendations through our Sanctuary Tiers. 
