@@ -1,6 +1,5 @@
 import './globals.css'  
-import Navigation from './Navigation' 
-
+ import { Navigation } from './Navigation' 
 export const metadata = {  
 title: 'NexVoyage Collective',  
 description: 'The website engine for NexVoyage Collective',  
