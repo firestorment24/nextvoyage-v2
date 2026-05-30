@@ -1,6 +1,6 @@
 "use client";  
-import Navigation from '../../Navigation'; /
-import Link from 'next/link';
+import { Navigation } from '../../Navigation';  
+import Link from 'next/link';  
 
 const SANCTUARIES = {  
   metropolitan: {  
