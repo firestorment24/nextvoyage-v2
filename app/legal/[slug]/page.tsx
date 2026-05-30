@@ -4,35 +4,19 @@ import Link from 'next/link';
 const LEGAL_DOCS: Record<string, { title: string; content: string[] }> = {  
   'privacy': {  
     title: 'Privacy Policy',  
-    content: [  
-      "At NexVoyage Collective, your privacy is a cornerstone of our service. We recognize that privacy is a fundamental expectation of our high-net-worth clientele.",  
-      "1. Information We Collect: Personal Identifiers (Passports, IDs), Payment Information, Travel Preferences, and Safety Data.",  
-      "2. Data Sharing: We do not sell or rent your information. We share data only with vetted partners (Hotels, Security) with your explicit consent."  
-    ]  
+    content: ["At NexVoyage Collective, your privacy is our cornerstone.", "We collect data only to facilitate bespoke travel.", "We do not sell information to third parties."]  
   },  
   'terms': {  
     title: 'Terms & Conditions',  
-    content: [  
-      "NexVoyage Collective provides bespoke travel planning and concierge services.",  
-      "1. Scope: Includes itinerary design, booking management, and safety recommendations through our Sanctuary Tiers.",  
-      "2. Payments: All fees must be paid in full according to the provided schedule. Service fees are non-refundable."  
-    ]  
+    content: ["Our services include bespoke itinerary design and booking management.", "All payments are subject to the schedule provided at booking.", "Cancellations are governed by partner-specific policies."]  
   },  
   'safety': {  
-    title: 'Impact & Safety Commitment',  
-    content: [  
-      "Your safety is our highest priority. We take a proactive approach via Expert Guidance and Vetted Partners.",  
-      "Our Sanctuary Tiers offer enhanced security protocols designed for discretion and peace of mind.",  
-      "We prioritize local economies by supporting boutique hotels and regional guides."  
-    ]  
+    title: 'Impact & Safety',  
+    content: ["Safety is proactive. We use vetted partners and expert guidance.", "Our commitment to impact supports local boutique hotels and guides."]  
   },  
   'consent': {  
-    title: 'Client & Data Consent',  
-    content: [  
-      "Transparency in Data Collection: We collect information to provide a seamless and secure experience.",  
-      "Explicit Consent for Security: We never share your location with third-party security firms without your direct approval.",  
-      "You have the right to opt-out of data sharing at any time."  
-    ]  
+    title: 'Data Consent',  
+    content: ["Explicit consent is required for all security coordination.", "You may withdraw data processing consent at any time."]  
   }  
 };
 
@@ -41,17 +25,17 @@ export default function LegalPage({ params }: { params: { slug: string } }) {
   if (!doc) notFound();
 
   return (  
-    <div className="max-w-2xl mx-auto px-6 py-40">  
-      <h1 className="text-4xl font-light mb-12 tracking-tight">{doc.title}</h1>  
-      <div className="space-y-8 text-neutral-600 leading-relaxed font-light">  
+    <main className="max-w-2xl mx-auto px-6 py-24">  
+      <h1 className="text-3xl font-light mb-12 tracking-tight">{doc.title}</h1>  
+      <div className="space-y-6 text-neutral-600 leading-relaxed font-light">  
         {doc.content.map((p, i) => <p key={i}>{p}</p>)}  
       </div>  
-      <div className="mt-20 pt-10 border-t border-neutral-100">  
+      <footer className="mt-20 pt-10 border-t border-neutral-100">  
         <Link href="/" className="text-xs uppercase tracking-widest text-neutral-400 hover:text-black">  
-          ← Back to Collective  
+          ← Return to Collective  
         </Link>  
-      </div>  
-    </div>  
+      </footer>  
+    </main>  
   );  
 }
 
