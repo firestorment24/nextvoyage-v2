@@ -1,20 +1,23 @@
-import './globals.css'  
-import Navigation from './Navigation'  
-import Footer from './Footer'
+import './globals.css';  
+import { Inter } from 'next/font/google';  
+import Navigation from './Navigation';  
+import Footer from './Footer';
+
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {  
   title: 'NexVoyage Collective | Curating the Unreachable',  
-  description: 'Bespoke travel sanctuaries and elite concierge services for high-net-worth travelers.',  
-}
+  description: 'Sanctuaries for the global elite.',  
+};
 
 export default function RootLayout({  
   children,  
 }: {  
-  children: React.ReactNode  
+  children: React.ReactNode;  
 }) {  
   return (  
-    <html lang="en" className="scroll-smooth">  
-      <body className="antialiased font-serif selection:bg-stone-100 text-stone-900 bg-white">  
+    <html lang="en">  
+      <body className={inter.className}>  
         <Navigation />  
         <main className="min-h-screen">  
           {children}  
@@ -22,5 +25,5 @@ export default function RootLayout({
         <Footer />  
       </body>  
     </html>  
-  )  
+  );  
 }  
