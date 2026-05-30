@@ -1,5 +1,5 @@
 "use client";  
-import Navigation from '../../Navigation'; // Fix: removed curly braces  
+import Navigation from '../../Navigation';  
 import Link from 'next/link';
 
 const SANCTUARIES = {  
