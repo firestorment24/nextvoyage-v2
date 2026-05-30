@@ -1,14 +1,9 @@
 import './globals.css';  
-import Navigation from './Navigation'; // Corrected path  
-import Footer from './Footer'; // Assuming Footer is also in the app folder  
+import Navigation from './Navigation';  
+import Footer from './Footer';   
 import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'] });
-
-export const metadata = {  
-  title: 'NexVoyage Collective | Quiet Luxury Travel',  
-  description: 'The Metropolitan & Floating Sanctuary Engine.',  
-};
 
 export default function RootLayout({  
   children,  
