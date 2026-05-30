@@ -1,26 +1,34 @@
 "use client";  
-import React, { useState } from 'react'  
-import Link from 'next/link'  
-import { GlobalSearch } from './GlobalSearch'
+import { useState } from 'react';  
+import Link from 'next/link';  
+import GlobalSearch from './GlobalSearch';
 
 export default function Navigation() {  
-  const [isOpen, setIsOpen] = useState(false)
+const [isSearchOpen, setIsSearchOpen] = useState(false);
 
-  return (  
-    <nav className="fixed top-0 w-full z-50 bg-black/50 backdrop-blur-md border-b border-white/10">  
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">  
-        <Link href="/" className="text-xl font-light tracking-widest hover:opacity-70 transition-opacity">  
-          NEXVOYAGE  
-        </Link>
-
-        <div className="flex items-center gap-8">  
-          <div className="hidden md:flex items-center gap-8 text-sm uppercase tracking-widest font-light">  
-            <Link href="/sanctuaries" className="hover:text-white/60 transition-colors">Sanctuaries</Link>  
-            <Link href="/philosophy" className="hover:text-white/60 transition-colors">Philosophy</Link>  
-          </div>  
-          <GlobalSearch />  
-        </div>  
+return (  
+  <>  
+    <nav className="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-8 py-6">  
+      <Link href="/" className="text-xl font-light tracking-[0.3em] hover:opacity-60 transition-opacity">  
+        NV/C  
+      </Link>  
+        
+      <div className="flex items-center gap-8">  
+        <button   
+          onClick={() => setIsSearchOpen(true)}  
+          className="text-[10px] tracking-[0.2em] text-white/40 hover:text-white uppercase transition-colors flex items-center gap-2"  
+        >  
+          <span>Search</span>  
+          <span className="opacity-30">[⌘K]</span>  
+        </button>  
+          
+        <Link href="/contact" className="text-[10px] tracking-[0.2em] text-white/40 hover:text-white uppercase transition-colors">  
+          Contact  
+        </Link>  
       </div>  
-    </nav>  
-  )  
+    </nav>
+
+    <GlobalSearch isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />  
+  </>  
+);  
 }  
