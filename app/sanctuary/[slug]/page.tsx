@@ -20,13 +20,13 @@ const SANCTUARIES: Record<string, any> = {
     title: 'Island',  
     tagline: 'Boundless Horizon.',  
     description: 'Private atoll access where the only schedule is the tide. Absolute privacy, secured by the Guardian Layer.',  
-    image: 'https://cdn.marblism.com/island-placeholder.webp',  
+    image: 'https://cdn.marblism.com/island-sanctuary-v1.webp',  
   },  
   alpine: {  
     title: 'Alpine',  
     tagline: 'Peak Clarity.',  
     description: 'Remote heli-access lodges and snow-capped retreats. High-altitude restoration for high-stakes lives.',  
-    image: 'https://cdn.marblism.com/alpine-placeholder.webp',  
+    image: 'https://cdn.marblism.com/mRxfQ0N2_io.webp',  
   },  
   stadium: {  
     title: 'Stadium',  
