@@ -1,66 +1,72 @@
+// app/legal/[slug]/page.tsx  
 import { notFound } from 'next/navigation';  
 import Link from 'next/link';
 
-const LEGAL_CONTENT: Record<string, { title: string; content: React.ReactNode }> = {  
-  'privacy-policy': {  
+const LEGAL_DOCS = {  
+  'privacy': {  
     title: 'Privacy Policy',  
-    content: (  
-      <>  
-        <p className="text-sm opacity-60 mb-8">Effective Date: May 29, 2026</p>  
-        <section className="space-y-6">  
-          <p>At NexVoyage Collective, your privacy is a cornerstone of our service. We recognize that privacy is not just a legal requirement—it is a fundamental expectation of our high-net-worth clientele.</p>  
-          <h2 className="text-xl font-medium mt-8">1. Information We Collect</h2>  
-          <ul className="list-disc pl-5 space-y-2 opacity-80">  
-            <li>Personal Identifiers: Passport copies, government ID, and contact details.</li>  
-            <li>Payment Information: Encrypted billing data.</li>  
-            <li>Travel Preferences: Dietary, lifestyle, and health considerations.</li>  
-            <li>Safety Data: Security coordination and emergency contacts.</li>  
-          </ul>  
-          {/* Add remaining sections from the Privacy Policy resource */}  
-        </section>  
-      </>  
-    ),  
+    updated: 'May 29, 2026',  
+    resource: ,  
+    content: `We prioritize the discretion and security of our clients above all else. NexVoyage Collective does not sell, rent, or trade personal data to third parties. Information is collected solely to facilitate bespoke travel arrangements and concierge services.`  
   },  
-  'terms-conditions': {  
-    title: 'Terms and Conditions',  
-    content: (  
-      <>  
-        <p className="text-sm opacity-60 mb-8">Effective Date: May 29, 2026</p>  
-        <section className="space-y-6">  
-          <p>Welcome to NexVoyage Collective. These Terms and Conditions govern your use of our website and bespoke travel services.</p>  
-          <h2 className="text-xl font-medium mt-8">1. Scope of Services</h2>  
-          <p className="opacity-80">NexVoyage Collective provides bespoke travel planning and concierge services tailored for high-net-worth individuals.</p>  
-          {/* Add remaining sections from the Terms resource */}  
-        </section>  
-      </>  
-    ),  
+  'terms': {  
+    title: 'Terms & Conditions',  
+    updated: 'May 29, 2026',  
+    resource: ,  
+    content: `All journeys curated by NexVoyage Collective are subject to the specific terms of our sanctuary partners. We act as your primary liaison to ensure these terms meet the NexVoyage Standard of luxury and security.`  
   },  
-  // Add entries for 'impact-safety' and 'consent-guidelines' here  
+  'safety': {  
+    title: 'Impact & Safety Commitment',  
+    updated: 'May 29, 2026',  
+    resource: ,  
+    content: `Every sanctuary in our collective undergoes a rigorous 118-point vetting process. Our safety commitment ensures that your privacy is maintained through physical security and digital anonymity throughout your stay.`  
+  },  
+  'consent': {  
+    title: 'Client & Data Consent',  
+    updated: 'May 29, 2026',  
+    resource: ,  
+    content: `By engaging with our concierge, you consent to the secure processing of your travel preferences. You maintain the right to "Digital Erasure" at any time, purging all travel history from our secure servers.`  
+  }  
 };
 
 export default function LegalPage({ params }: { params: { slug: string } }) {  
-  const doc = LEGAL_CONTENT[params.slug];
+  const doc = LEGAL_DOCS[params.slug as keyof typeof LEGAL_DOCS];
 
-  if (!doc) {  
-    notFound();  
-  }
+  if (!doc) notFound();
 
   return (  
-    <main className="min-h-screen bg-black text-white pt-32 pb-20 px-6">  
-      <div className="max-w-3xl mx-auto">  
-        <Link   
-          href="/"   
-          className="text-xs uppercase tracking-widest opacity-40 hover:opacity-100 transition-opacity mb-12 inline-block"  
-        >  
-          ← Back to Collective  
-        </Link>  
-        <h1 className="text-4xl md:text-5xl font-light tracking-tighter mb-16">  
+    <main className="max-w-2xl mx-auto px-6 py-32 min-h-screen">  
+      <header className="mb-16">  
+        <h1 className="text-3xl font-light tracking-tight text-neutral-900 mb-2">  
           {doc.title}  
         </h1>  
-        <div className="prose prose-invert prose-neutral max-w-none leading-relaxed font-light">  
-          {doc.content}  
+        <p className="text-xs uppercase tracking-widest text-neutral-400">  
+          Last Updated — {doc.updated}  
+        </p>  
+      </header>
+
+      <article className="prose prose-neutral prose-sm max-w-none text-neutral-600 leading-relaxed">  
+        <p className="mb-8">{doc.content}</p>  
+          
+        {/* Placeholder for Linda's full legal text */}  
+        <div className="pt-8 border-t border-neutral-100 italic text-neutral-400">  
+          The full statutory text for {doc.title} is available upon request via your private concierge.  
         </div>  
-      </div>  
+      </article>
+
+      <footer className="mt-24 pt-8 border-t border-neutral-100">  
+        <Link   
+          href="/concierge"   
+          className="text-xs uppercase tracking-widest text-neutral-900 hover:text-neutral-500 transition-colors"  
+        >  
+          Return to Private Concierge →  
+        </Link>  
+      </footer>  
     </main>  
   );  
+}
+
+// Generates the paths at build time for Vercel  
+export async function generateStaticParams() {  
+  return Object.keys(LEGAL_DOCS).map((slug) => ({ slug }));  
 }  
