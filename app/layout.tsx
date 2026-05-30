@@ -7,12 +7,16 @@ export const metadata = {
   description: 'Bespoke travel sanctuaries for high-net-worth travelers.',  
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {  
+export default function RootLayout({  
+  children,  
+}: {  
+  children: React.ReactNode  
+}) {  
   return (  
-    <html lang="en" className="scroll-smooth">  
-      <body className="bg-[#0A0A0A] antialiased text-white selection:bg-white selection:text-black">  
+    <html lang="en">  
+      <body className="antialiased font-serif selection:bg-stone-100">  
         <Navigation />  
-        <main>{children}</main>  
+        <main className="min-h-screen">{children}</main>  
         <Footer />  
       </body>  
     </html>  
