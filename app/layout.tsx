@@ -1,13 +1,14 @@
-import './globals.css'  
 import type { Metadata } from 'next'  
 import { Inter } from 'next/font/google'  
-import Footer from './Footer' // 1. Add this import at the top
+import './globals.css'  
+import Navigation from './components/Navigation'  
+import Footer from './components/Footer'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {  
-  title: 'NexVoyage Collective | Quiet Luxury',  
-  description: 'The Guardian Layer for High Networth Travelers',  
+  title: 'NexVoyage Collective | Quiet Luxury Travel',  
+  description: 'Private sanctuaries and curated experiences for the modern nomad.',  
 }
 
 export default function RootLayout({  
@@ -16,13 +17,18 @@ export default function RootLayout({
   children: React.ReactNode  
 }) {  
   return (  
-    <html lang="en">  
-      <body className={inter.className}>  
-        <main min-h-screen>  
+    <html lang="en" className="scroll-smooth">  
+      <body className={`${inter.className} bg-white antialiased`}>  
+        {/* Global Navigation - appears on all pages */}  
+        <Navigation />
+
+        {/* Main Content Area */}  
+        <main className="min-h-screen">  
           {children}  
-        </main>  
-          
-        <Footer /> {/* 2. Add this right here before the closing body tag */}  
+        </main>
+
+        {/* Global Footer - appears on all pages */}  
+        <Footer />  
       </body>  
     </html>  
   )  
