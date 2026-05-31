@@ -1,47 +1,88 @@
-"use client";
+// app/reserve/page.js  
+import React from 'react';
 
-const sanctuaries = [  
-  { name: "The Forest Floor Pavilion", loc: "Kyoto, Japan", img: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874" },  
-  { name: "Over-Water Obsidian", loc: "Noonu Atoll, Maldives", img: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688" },  
-  { name: "The Glacial Monolith", loc: "Svartisen, Norway", img: "https://images.unsplash.com/photo-1516939884455-1445c8652f83" },  
-  { name: "Desert Fortress", loc: "AlUla, Saudi Arabia", img: "https://images.unsplash.com/photo-1523306262731-aeff1374b401" }  
-];
-
-export default function Reserve() {  
+export default function ReservePage() {  
   return (  
-    <main className="bg-black text-white pt-40 pb-20 selection:bg-white/20">  
-      <div className="container mx-auto px-6">  
-        <header className="max-w-3xl mb-32">  
-          <p className="font-sans text-[10px] uppercase tracking-[0.5em] text-neutral-500 mb-8">The Collection</p>  
-          <h1 className="font-serif text-5xl md:text-7xl leading-tight mb-8">The Reserve</h1>  
-          <p className="font-serif text-xl text-neutral-400 italic leading-relaxed">  
-            Sanctuaries curated not for their amenities, but for their ability to deliver a absolute reset.  
+    <main className="min-h-screen bg-[#0A0A0A] text-[#E5E5E5] flex flex-col items-center justify-center px-6 py-20">  
+      <div className="max-w-2xl w-full">  
+        {/* Header Section */}  
+        <div className="text-center mb-16">  
+          <h1 className="text-4xl md:text-5xl font-serif text-[#C5A059] mb-4 uppercase tracking-widest">  
+            Access Protocol  
+          </h1>  
+          <p className="text-sm font-sans tracking-widest text-zinc-500 uppercase">  
+            Inquiry by Vetting Only  
           </p>  
-        </header>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-32">  
-          {sanctuaries.map((item, i) => (  
-            <div key={i} className={`group cursor-pointer ${i % 2 !== 0 ? 'md:mt-40' : ''}`}>  
-              <div className="relative aspect-[4/5] overflow-hidden mb-8 border border-white/5">  
-                <img   
-                  src={`${item.img}?auto=format&fit=crop&q=80&w=1200`}  
-                  className="object-cover w-full h-full grayscale opacity-60 transition-all duration-1000 group-hover:grayscale-0 group-hover:scale-105 group-hover:opacity-100"  
-                />  
-                <div className="absolute top-6 left-6 font-sans text-[9px] uppercase tracking-[0.3em] bg-black/50 px-4 py-2 backdrop-blur-sm">  
-                  Available for Inquiry  
-                </div>  
-              </div>  
-              <div className="flex justify-between items-end">  
-                <div>  
-                  <p className="font-sans text-[10px] uppercase tracking-[0.4em] text-neutral-500 mb-2">{item.loc}</p>  
-                  <h2 className="font-serif text-3xl group-hover:italic transition-all">{item.name}</h2>  
-                </div>  
-                <button className="font-sans text-[10px] uppercase tracking-[0.4em] text-neutral-600 group-hover:text-white transition-all underline underline-offset-8">  
-                  View Dossier  
-                </button>  
-              </div>  
+        {/* The Application Form */}  
+        <form className="space-y-12">  
+          {/* Identity Section */}  
+          <div className="space-y-6">  
+            <div>  
+              <label className="block text-[10px] uppercase tracking-[0.2em] text-[#C5A059] mb-2 font-semibold">  
+                Identity & Affiliation  
+              </label>  
+              <input   
+                type="text"   
+                placeholder="Name / Principal Organization"  
+                className="w-full bg-transparent border-b border-zinc-800 py-4 focus:outline-none focus:border-[#C5A059] transition-colors font-serif text-xl"  
+              />  
             </div>  
-          ))}  
+          </div>
+
+          {/* Biological Objectives */}  
+          <div className="space-y-6">  
+            <label className="block text-[10px] uppercase tracking-[0.2em] text-[#C5A059] mb-2 font-semibold">  
+              Primary Biological Objective  
+            </label>  
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">  
+              {['Neural Decoupling', 'Mitochondrial Recovery', 'Circadian Alignment', 'Strategic Stillness'].map((objective) => (  
+                <div key={objective} className="flex items-center space-x-3">  
+                  <input type="checkbox" className="accent-[#C5A059] bg-transparent border-zinc-800" />  
+                  <span className="text-sm font-sans text-zinc-400">{objective}</span>  
+                </div>  
+              ))}  
+            </div>  
+          </div>
+
+          {/* ROI of Reset */}  
+          <div>  
+            <label className="block text-[10px] uppercase tracking-[0.2em] text-[#C5A059] mb-2 font-semibold">  
+              Required Yield (ROI of Reset)  
+            </label>  
+            <textarea   
+              rows="4"  
+              placeholder="Define the specific cognitive or physiological output required from this sanctuary."  
+              className="w-full bg-transparent border border-zinc-800 p-4 focus:outline-none focus:border-[#C5A059] transition-colors font-sans text-sm leading-relaxed text-zinc-300"  
+            />  
+          </div>
+
+          {/* High Stakes Context */}  
+          <div>  
+            <label className="block text-[10px] uppercase tracking-[0.2em] text-[#C5A059] mb-2 font-semibold">  
+              Environmental Context (High-Stakes Exposure)  
+            </label>  
+            <textarea   
+              rows="3"  
+              placeholder="Context regarding current cognitive load or operational intensity."  
+              className="w-full bg-transparent border border-zinc-800 p-4 focus:outline-none focus:border-[#C5A059] transition-colors font-sans text-sm leading-relaxed text-zinc-300"  
+            />  
+          </div>
+
+          {/* Submit Button */}  
+          <div className="pt-8">  
+            <button className="w-full border border-[#C5A059] text-[#C5A059] py-5 uppercase tracking-[0.3em] text-xs font-bold hover:bg-[#C5A059] hover:text-[#0A0A0A] transition-all duration-500">  
+              Submit for Vetting  
+            </button>  
+          </div>  
+        </form>
+
+        {/* Footer Note */}  
+        <div className="mt-20 text-center">  
+          <p className="text-[9px] uppercase tracking-[0.2em] text-zinc-600">  
+            A response will be issued within 24 hours of successful vetting.  
+          </p>  
         </div>  
       </div>  
     </main>  
