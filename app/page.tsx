@@ -1,40 +1,40 @@
-// app/page.js  
 import Link from 'next/link'
 
-export default function Home() {  
+export default function HomePage() {  
   return (  
-    <div className="max-w-7xl mx-auto px-6">  
-      {/* Hero Section */}  
-      <section className="min-h-[80vh] flex flex-col justify-center border-b border-zinc-100">  
-        <div className="max-w-3xl">  
-          <h1 className="text-7xl md:text-8xl font-light tracking-tighter leading-[1.1] mb-12">  
-            NEXVOYAGE COLLECTIVE <br />  
-            <span className="italic text-zinc-400">The ROI of Reset</span>  
-          </h1>  
-          <p className="text-xl md:text-2xl font-light text-zinc-600 leading-relaxed mb-12">  
-            Travel is an investment in clarity. We curate the sanctuaries that deliver the return.  
-          </p>  
-          <Link   
-            href="/reserve"   
-            className="inline-block text-[10px] tracking-[0.4em] uppercase border border-black px-12 py-5 hover:bg-black hover:text-white transition-all"  
-          >  
-            Inquire for Access  
+    <main className="relative min-h-screen flex flex-col items-center justify-center px-6 text-center overflow-hidden">  
+      {/* Background "Architecture" Line */}  
+      <div className="absolute inset-0 flex justify-center pointer-events-none">  
+        <div className="w-[1px] h-full bg-zinc-100" />  
+      </div>
+
+      <div className="relative z-10 max-w-4xl">  
+        <span className="text-[10px] uppercase tracking-[0.5em] text-zinc-400 mb-8 block animate-in fade-in slide-in-from-bottom-4 duration-1000">  
+          NexVoyage Collective  
+        </span>  
+          
+        <h1 className="text-5xl md:text-8xl font-serif leading-tight mb-12 tracking-tight animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">  
+          The ROI of <span className="italic">Reset.</span>  
+        </h1>  
+          
+        <p className="text-zinc-500 max-w-md mx-auto mb-16 font-light leading-relaxed animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-500">  
+          Bespoke spatial studies and travel sequences designed for those who have seen everything, but seek silence.  
+        </p>
+
+        <div className="flex flex-col md:flex-row items-center justify-center gap-8 animate-in fade-in slide-in-from-bottom-16 duration-1000 delay-700">  
+          <Link href="/archive" className="btn-primary">  
+            Enter The Archive  
+          </Link>  
+          <Link href="/reserve" className="text-[10px] uppercase tracking-[0.3em] text-zinc-400 hover:text-black transition-colors border-b border-transparent hover:border-black pb-1">  
+            Request Access  
           </Link>  
         </div>  
-      </section>
+      </div>
 
-      {/* Philosophy Teaser */}  
-      <section className="py-32 grid md:grid-cols-2 gap-24 items-center">  
-        <div>  
-          <h2 className="text-[10px] tracking-[0.3em] uppercase text-zinc-400 mb-8">Our Philosophy</h2>  
-          <h3 className="text-4xl font-light leading-tight">  
-            Quiet luxury isn't about what is added. It's about what remains after the noise is removed.  
-          </h3>  
-        </div>  
-        <div className="aspect-[4/5] bg-zinc-50 border border-zinc-100 flex items-center justify-center">  
-          <span className="text-[10px] tracking-widest text-zinc-300 uppercase italic">The Aesthetic of Absence</span>  
-        </div>  
-      </section>  
-    </div>  
+      {/* Editorial Footer Note */}  
+      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 text-[9px] uppercase tracking-[0.2em] text-zinc-300">  
+        Volume 01 — Edition 2026  
+      </div>  
+    </main>  
   )  
 }  
