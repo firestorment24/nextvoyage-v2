@@ -1,86 +1,100 @@
-'use client'
+import React from 'react';
 
-import React from 'react'
+const Navigation = () => (  
+<nav className="fixed top-0 w-full z-50 px-8 py-6 flex justify-between items-center bg-gradient-to-b from-black to-transparent font-sans">  
+  <div className="text-amber-200/80 tracking-[0.3em] uppercase text-sm font-bold">  
+    <a href="/">NexVoyage</a>  
+  </div>  
+  <div className="flex gap-8 text-stone-400 uppercase tracking-widest text-[10px]">  
+    <a href="/sanctuaries" className="hover:text-amber-100 transition-colors">Sanctuaries</a>  
+    <a href="/reserve" className="hover:text-amber-100 transition-colors font-bold text-amber-200/60 font-sans">Reserve</a>  
+  </div>  
+</nav>  
+);
 
-export default function RCYachtPage() {  
+const Footer = () => (  
+<footer className="bg-stone-950 py-20 px-8 border-t border-stone-900 font-sans">  
+  <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12 text-stone-500">  
+    <div className="space-y-4">  
+      <h4 className="text-amber-200/50 uppercase tracking-[0.2em] text-xs font-semibold">NexVoyage Collective</h4>  
+      <p className="text-stone-600 text-sm max-w-xs italic leading-relaxed font-serif">  
+        Curated isolation for the high-net-worth traveler.  
+      </p>  
+    </div>  
+    <div className="text-[10px] uppercase tracking-[0.3em] space-y-1 text-stone-700">  
+      <p>© 2026 NexVoyage</p>  
+      <p>By Appointment Only</p>  
+    </div>  
+  </div>  
+</footer>  
+);
+
+export default function RCYacht() {  
 return (  
-  <div className="min-h-screen bg-black text-zinc-100 font-light selection:bg-[#B5A642]">  
-    {/* Fixed Navigation Overlay */}  
-    <nav className="fixed w-full p-8 flex justify-between items-center z-50 mix-blend-difference">  
-      <div className="text-[10px] tracking-[0.4em] uppercase font-medium">NexVoyage / RC Yacht</div>  
-      <a href="/reserve" className="text-[10px] tracking-[0.4em] uppercase border border-white/20 px-6 py-2 hover:bg-white hover:text-black transition-all">  
-        Reserve  
-      </a>  
-    </nav>
-
+  <div className="bg-black text-stone-200 min-h-screen font-serif selection:bg-amber-200/20">  
+    <Navigation />  
+      
     {/* Hero Section */}  
-    <section className="h-screen relative overflow-hidden">  
+    <section className="relative h-screen flex items-center justify-center overflow-hidden">  
       <img   
         src="https://cdn.marblism.com/bezdT4Fs3Bm.webp"   
-        alt="RC Yacht Collection"   
-        className="w-full h-full object-cover opacity-70"  
+        alt="Ritz-Carlton Yacht Collection"   
+        className="absolute inset-0 w-full h-full object-cover opacity-50 scale-105"  
       />  
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />  
-      <div className="absolute bottom-20 left-10 max-w-4xl">  
-        <span className="text-[#B5A642] text-[10px] tracking-[0.6em] uppercase block mb-4">Global Itineraries</span>  
-        <h1 className="text-6xl md:text-[10rem] font-extralight tracking-tighter italic leading-[0.8]">  
-          RC Yacht <br/> Collection  
+      <div className="relative z-10 text-center px-4 space-y-6">  
+        <h1 className="text-5xl md:text-8xl tracking-[0.4em] text-amber-100/90 mb-4 uppercase drop-shadow-2xl">  
+          RC Yacht Collection  
         </h1>  
+        <p className="text-sm md:text-lg tracking-[0.5em] uppercase text-stone-400 font-sans border-t border-b border-stone-800/50 py-4 inline-block px-8">  
+          A Sanctuary at Sea | Charter Only  
+        </p>  
       </div>  
     </section>
 
-    {/* Content Section 01: The Sovereign Sea */}  
-    <section className="py-40 px-10 grid grid-cols-1 md:grid-cols-12 gap-20 items-center">  
-      <div className="md:col-span-5 md:col-start-2">  
-        <h2 className="text-[10px] uppercase tracking-[0.5em] text-[#B5A642] mb-10">01 / The Sovereign Sea</h2>  
-        <p className="text-2xl md:text-3xl font-extralight leading-tight mb-8">  
-          A bespoke yachting experience where the world’s most iconic ports are merely a backdrop to your own private enclave.  
+    {/* Narrative */}  
+    <section className="py-32 px-6 max-w-4xl mx-auto text-center">  
+      <h2 className="text-4xl mb-12 text-amber-100 italic font-light tracking-tight">Curated Isolation</h2>  
+      <div className="space-y-8">  
+        <p className="text-xl leading-relaxed text-stone-400 font-light">  
+          Redefining the yachting experience with a focus on absolute privacy. The Evrima and Ilma class yachts are designed to access the world’s most secluded moorings—where the heavy liners cannot follow.  
         </p>  
-        <p className="text-zinc-400 text-sm leading-relaxed max-w-md font-light">  
-          The Ritz-Carlton Yacht Collection combines the legendary service of the brand with the freedom of the yachting lifestyle. With nearly as many staff as guests, the level of personalization is unparalleled in the luxury cruise sector.  
+        <div className="w-12 h-px bg-amber-200/20 mx-auto"></div>  
+        <p className="text-lg leading-relaxed text-stone-500 italic">  
+          "A 1:1 guest-to-staff ratio ensures that every desire is met before it is even felt."  
         </p>  
-      </div>  
-      <div className="md:col-span-5 aspect-[4/5] bg-zinc-900 overflow-hidden relative">  
-          <div className="absolute inset-0 flex items-center justify-center text-[10px] tracking-widest opacity-20 uppercase">  
-              [ Deck & Suite Gallery ]  
-          </div>  
       </div>  
     </section>
 
-    {/* Content Section 02: Elite Access */}  
-    <section className="py-40 px-10 border-t border-zinc-900">  
-      <div className="max-w-6xl mx-auto text-center space-y-16">  
-        <h2 className="text-[10px] uppercase tracking-[0.5em] text-[#B5A642]">02 / The Protocol</h2>  
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-16 text-left">  
-          <div className="space-y-4">  
-              <h3 className="text-lg font-light tracking-wide italic">All-Suite Living</h3>  
-              <p className="text-xs text-zinc-500 leading-relaxed uppercase tracking-widest">Every room is a private terrace suite, ensuring the horizon is always within reach.</p>  
-          </div>  
-          <div className="space-y-4">  
-              <h3 className="text-lg font-light tracking-wide italic">Shore Collection</h3>  
-              <p className="text-xs text-zinc-500 leading-relaxed uppercase tracking-widest">Curated, small-group excursions designed for those who have seen it all.</p>  
-          </div>  
-          <div className="space-y-4">  
-              <h3 className="text-lg font-light tracking-wide italic">The Marina</h3>  
-              <p className="text-xs text-zinc-500 leading-relaxed uppercase tracking-widest">Direct access to the ocean from the back of the yacht for private swimming and watersports.</p>  
-          </div>  
+    {/* Grid */}  
+    <section className="py-24 grid grid-cols-1 md:grid-cols-2 gap-px bg-stone-900 border-t border-b border-stone-900">  
+      {[  
+        { title: "The Suites", desc: "Every suite features a private oceanfront terrace. Up to 1,000 sq ft of minimalist luxury at sea." },  
+        { title: "The Concierge", desc: "A dedicated Personal Concierge to curate your shore excursions—from private vineyard tours to hidden beach setups." },  
+        { title: "The Dining", desc: "Michelin-inspired culinary experiences served in-suite or at five world-class venues onboard." },  
+        { title: "The Reset", desc: "Dual-hull stabilization technology and specialized acoustic dampening for weightless, uninterrupted sleep." }  
+      ].map((item, i) => (  
+        <div key={i} className="p-16 bg-black flex flex-col justify-center min-h-[350px] group hover:bg-stone-950 transition-all duration-700">  
+          <h3 className="text-amber-200/60 text-xs mb-6 tracking-[0.3em] uppercase font-bold group-hover:text-amber-100 transition-colors font-sans">{item.title}</h3>  
+          <p className="text-stone-500 font-sans leading-relaxed text-sm group-hover:text-stone-300 transition-colors">{item.desc}</p>  
         </div>  
+      ))}  
+    </section>
+
+    {/* CTA */}  
+    <section className="py-40 text-center bg-black">  
+      <div className="max-w-xl mx-auto space-y-12">  
+        <p className="text-stone-500 uppercase tracking-[0.4em] text-[10px] font-sans">The Ocean Awaits</p>  
+        <a   
+          href="/reserve"   
+          className="group relative inline-block px-16 py-5 border border-amber-200/20 text-amber-100/80 hover:text-white transition-all overflow-hidden uppercase tracking-[0.3em] text-xs font-bold font-sans"  
+        >  
+          <span className="relative z-10">Secure Your Charter</span>  
+          <div className="absolute inset-0 bg-amber-200/5 -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>  
+        </a>  
       </div>  
     </section>
 
-    {/* CTA Section */}  
-    <section className="py-60 px-10 text-center bg-zinc-100 text-black">  
-      <h2 className="text-4xl md:text-6xl font-extralight tracking-tighter mb-10">Chart Your Course</h2>  
-      <p className="text-[10px] uppercase tracking-[0.5em] mb-12 opacity-60">Reserved for the NexVoyage Collective</p>  
-      <a href="/reserve" className="inline-block border border-black px-12 py-5 text-[10px] uppercase tracking-[0.4em] hover:bg-black hover:text-white transition-all">  
-        Inquire Now  
-      </a>  
-    </section>
-
-    <footer className="p-10 text-[9px] uppercase tracking-[0.4em] opacity-30 flex justify-between">  
-      <div>NexVoyage Collective // Global</div>  
-      <div>EST. 2026</div>  
-    </footer>  
+    <Footer />  
   </div>  
-)  
+);  
 }  
