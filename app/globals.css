@@ -1,26 +1,58 @@
-@import "tailwindcss";
+@tailwind base;  
+@tailwind components;  
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+:root {  
+  --foreground-rgb: 0, 0, 0;  
+  --background-start-rgb: 255, 255, 255;  
+  --background-end-rgb: 255, 255, 255;  
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {  
+  /* Map the fonts from layout.tsx to Tailwind utility classes */  
+  .font-serif {  
+    font-family: var(--font-cormorant), serif;  
+  }  
+    
+  .font-sans {  
+    font-family: var(--font-inter), sans-serif;  
   }
+
+  body {  
+    @apply antialiased text-black bg-white selection:bg-black selection:text-white;  
+    font-feature-settings: "ss01", "ss02", "cv01", "cv11";  
+  }
+
+  html {  
+    scroll-behavior: smooth;  
+  }  
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {  
+  /* Minimalist button style used across the site */  
+  .btn-primary {  
+    @apply bg-black text-white px-8 py-4 text-[10px] uppercase tracking-[0.3em] hover:bg-zinc-800 transition-colors duration-300;  
+  }
+
+  /* Thin borders for that high-end structural look */  
+  .border-luxury {  
+    @apply border-zinc-100;  
+  }  
 }
+
+/* Custom scrollbar to keep it minimal */  
+::-webkit-scrollbar {  
+  width: 4px;  
+}
+
+::-webkit-scrollbar-track {  
+  background: transparent;  
+}
+
+::-webkit-scrollbar-thumb {  
+  background: #e4e4e7; /* zinc-200 */  
+}
+
+::-webkit-scrollbar-thumb:hover {  
+  background: #27272a; /* zinc-800 */  
+}  
