@@ -10,8 +10,8 @@ export const metadata = {
   description: 'Bespoke travel sanctuaries and elite concierge services for high-net-worth travelers.',  
 }
 
-// Internal component - No "export default" here!  
-function GlobalNavbar() {  
+// 1. This is just a regular function (NO 'export default')  
+function Navbar() {  
   return (  
     <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-sm border-b border-zinc-100">  
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">  
@@ -19,14 +19,14 @@ function GlobalNavbar() {
           NEXVOYAGE COLLECTIVE  
         </Link>  
           
-        <div className="flex gap-12 text-[10px] tracking-[0.3em] font-medium text-zinc-500">  
-          <Link href="/archive" className="hover:text-black transition-colors uppercase">  
+        <div className="flex gap-12 text-[10px] tracking-[0.3em] font-medium text-zinc-500 uppercase">  
+          <Link href="/archive" className="hover:text-black transition-colors">  
             The Archive  
           </Link>  
-          <Link href="/perspective" className="hover:text-black transition-colors uppercase">  
+          <Link href="/perspective" className="hover:text-black transition-colors">  
             The Perspective  
           </Link>  
-          <Link href="/reserve" className="hover:text-black transition-colors uppercase">  
+          <Link href="/reserve" className="hover:text-black transition-colors">  
             The Reserve  
           </Link>  
         </div>  
@@ -35,7 +35,7 @@ function GlobalNavbar() {
   )  
 }
 
-// This is the ONLY export default in the file  
+// 2. This is the ONLY 'export default' in the file  
 export default function RootLayout({  
   children,  
 }: {  
@@ -44,7 +44,7 @@ export default function RootLayout({
   return (  
     <html lang="en">  
       <body className={inter.className}>  
-        <GlobalNavbar />  
+        <Navbar />  
         <main className="pt-20">  
           {children}  
         </main>  
