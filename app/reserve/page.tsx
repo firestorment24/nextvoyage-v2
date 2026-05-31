@@ -56,10 +56,10 @@ return (
         <div className="border-b border-white/10 pb-4">  
           <label className="block text-[9px] uppercase tracking-[0.3em] text-white/40 mb-4">The Brief</label>  
           <textarea   
-            rows="4"   
-            placeholder="Describe the nature of your reset or inquiry..."   
-            className="bg-transparent w-full outline-none text-sm font-light tracking-wide placeholder:text-white/20 resize-none"  
-          />  
+  rows={4}   
+  placeholder="Describe the nature of your reset or inquiry..."   
+  className="bg-transparent w-full outline-none text-sm font-light tracking-wide placeholder:text-white/20 resize-none"  
+/>  
         </div>
 
         <div className="pt-8">  
