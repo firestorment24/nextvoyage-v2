@@ -1,30 +1,20 @@
+import React from 'react';
+
 export default function Footer() {  
   return (  
-    <footer className="bg-black py-24 border-t border-white/5 relative overflow-hidden">  
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.02] bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]" />  
-      <div className="container mx-auto px-6 relative z-10">  
-        <div className="grid md:grid-cols-4 gap-16 mb-24">  
-          <div className="col-span-2">  
-            <h4 className="font-serif text-2xl italic mb-8">NexVoyage Collective</h4>  
-            <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-neutral-500 max-w-xs leading-loose">  
-              Curating the unreachable. Private travel sanctuaries for the discerning global elite.  
-            </p>  
-          </div>  
-          <div>  
-            <p className="font-sans text-[10px] uppercase tracking-[0.5em] text-white mb-6 underline">Inquiry</p>  
-            <p className="font-sans text-[11px] text-neutral-400">concierge@nexvoyage.com</p>  
-          </div>  
-          <div>  
-            <p className="font-sans text-[10px] uppercase tracking-[0.5em] text-white mb-6 underline">Legal</p>  
-            <a href="/legal" className="block font-sans text-[11px] text-neutral-400 hover:text-white mb-2 transition-all">Vetting Standard</a>  
-            <a href="/legal" className="block font-sans text-[11px] text-neutral-400 hover:text-white transition-all">Privacy</a>  
-          </div>  
+    <footer className="bg-stone-950 py-20 px-8 border-t border-stone-900">  
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">  
+        <div className="space-y-4">  
+          <h4 className="text-amber-200/50 uppercase tracking-widest text-xs">NexVoyage Collective</h4>  
+          <p className="text-stone-600 text-sm max-w-xs font-serif italic">  
+            Curated isolation for the high-net-worth traveler.  
+          </p>  
         </div>  
-        <div className="flex justify-between items-end pt-12 border-t border-white/5">  
-          <p className="font-sans text-[9px] uppercase tracking-[0.5em] text-neutral-700">© 2026 Collective Intelligence</p>  
-          <div className="h-[1px] w-24 bg-white/10" />  
+        <div className="text-stone-500 text-[10px] uppercase tracking-widest space-y-2">  
+          <p>© 2026 NexVoyage</p>  
+          <p>By Appointment Only</p>  
         </div>  
       </div>  
     </footer>  
   );  
-}  
+} 
