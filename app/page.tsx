@@ -1,6 +1,7 @@
+'use client'; // This fixes the styled-jsx build error
+
 import React from 'react';
 
-// Self-contained Navigation for the Home Page  
 const Navigation = () => (  
 <nav className="fixed top-0 w-full z-50 px-12 py-8 flex justify-between items-center font-sans">  
   <div className="text-amber-100/90 tracking-[0.5em] uppercase text-xs font-bold">  
@@ -18,9 +19,7 @@ return (
   <main className="bg-black text-stone-200 min-h-screen font-serif overflow-hidden">  
     <Navigation />
 
-    {/* Cinematic Hero */}  
     <section className="relative h-screen w-full flex items-center justify-center">  
-      {/* Background Image with Deep Vignette */}  
       <div className="absolute inset-0 z-0">  
         <img   
           src="https://cdn.marblism.com/WuyrXpnAwo9.webp"   
@@ -31,7 +30,6 @@ return (
         <div className="absolute inset-0 bg-black/20"></div>  
       </div>
 
-      {/* Central Hook */}  
       <div className="relative z-10 text-center px-6 max-w-5xl">  
         <h2 className="text-amber-100/40 uppercase tracking-[0.6em] text-[10px] mb-12 font-sans animate-fade-in">  
           By Appointment Only  
@@ -57,7 +55,6 @@ return (
         </div>  
       </div>
 
-      {/* Decorative Bottom Left Detail */}  
       <div className="absolute bottom-12 left-12 hidden md:block">  
         <div className="flex items-center gap-4">  
           <div className="w-12 h-px bg-amber-200/20"></div>  
@@ -76,19 +73,21 @@ return (
       .animate-slow-zoom {  
         animation: slow-zoom 20s ease-out forwards;  
       }  
-      .animate-fade-in {  
-        animation: fadeIn 2s ease-out;  
-      }  
-      .animate-fade-in-up {  
-        animation: fadeInUp 2.5s ease-out;  
-      }  
       @keyframes fadeIn {  
         from { opacity: 0; }  
         to { opacity: 1; }  
       }  
+      .animate-fade-in {  
+        animation: fadeIn 2s ease-out;  
+      }  
       @keyframes fadeInUp {  
         from { opacity: 0; transform: translateY(20px); }  
         to { opacity: 1; transform: translateY(0); }  
+      }  
+      .animate-fade-in-up {  
+        animation: fadeInUp 2.5s ease-out forwards;  
+        animation-delay: 0.5s;  
+        opacity: 0;  
       }  
     `}</style>  
   </main>  
