@@ -1,58 +1,81 @@
-"use client";
+import React from 'react';
 
-import Link from 'next/link';
-
-const SANCTUARIES = [  
-  { slug: 'metropolitan', name: 'Metropolitan', description: 'Urban elite retreats.' },  
-  { slug: 'floating', name: 'Floating', description: 'Yachts & private islands.' },  
-  { slug: 'island', name: 'Island', description: 'Remote coastal escapes.' },  
-  { slug: 'alpine', name: 'Alpine', description: 'High-altitude seclusion.' },  
-  { slug: 'stadium', name: 'Stadium', description: 'The ultimate VIP access.' },  
-  { slug: 'cinematic', name: 'Cinematic', description: 'Screen-worthy vistas.' },  
-  { slug: 'fortress', name: 'Fortress', description: 'Maximum security & privacy.' },  
-  { slug: 'safari', name: 'Safari', description: 'Wild luxury redefined.' },  
-  { slug: 'oasis', name: 'Oasis', description: 'Desert tranquility.' },  
-];
-
-export default function Home() {  
+const HomePage = () => {  
   return (  
-    <main className="min-h-screen bg-white">  
+    <div className="bg-white text-[#1a1a1a] font-sans selection:bg-gray-100">  
+      {/* Navigation */}  
+      <nav className="flex justify-between items-center px-8 py-10 uppercase tracking-[0.2em] text-[10px] border-b border-gray-50">  
+        <div className="font-bold">NexVoyage Collective</div>  
+        <div className="space-x-8">  
+          <a href="/archive" className="hover:text-gray-400 transition-colors">The Archive</a>  
+          <a href="/perspective" className="hover:text-gray-400 transition-colors">The Perspective</a>  
+          <a href="/reserve" className="hover:text-gray-400 transition-colors border border-black px-4 py-2">The Reserve</a>  
+        </div>  
+      </nav>
+
       {/* Hero Section */}  
-      <section className="h-[70vh] flex flex-col items-center justify-center text-center px-6">  
-        <h1 className="text-5xl md:text-7xl font-extralight tracking-[0.2em] uppercase mb-6">  
-          NexVoyage Collective  
+      <section className="h-[80vh] flex flex-col justify-center items-center text-center px-4">  
+        <h2 className="text-[10px] uppercase tracking-[0.4em] mb-6 text-gray-400">NexVoyage Collective</h2>  
+        <h1 className="text-5xl md:text-7xl font-serif italic mb-8 max-w-4xl leading-tight">  
+          The ROI of Reset  
         </h1>  
-        <p className="text-sm md:text-base text-gray-400 tracking-widest uppercase">  
-          Bespoke Sanctuaries for the Refined Traveler  
+        <p className="text-sm md:text-base max-w-md leading-relaxed tracking-wide text-gray-500">  
+          Travel is an investment in clarity. We curate the sanctuaries that deliver the return.  
         </p>  
       </section>
 
-      {/* Philosophy */}  
-      <section className="max-w-4xl mx-auto py-20 px-6 text-center border-y border-gray-50">  
-        <h2 className="text-[10px] uppercase tracking-[0.4em] text-gray-400 mb-8">Our Philosophy</h2>  
-        <p className="text-2xl font-light leading-relaxed">  
-          We do not just book travel. We engineer "Quiet Luxury"—seamless, secure, and soulful escapes designed for those who value privacy above all else.  
-        </p>  
+      {/* Philosophy Section */}  
+      <section className="py-32 px-8 bg-[#fafafa]">  
+        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-20 items-center">  
+          <div>  
+            <h3 className="text-xs uppercase tracking-[0.3em] mb-12 text-gray-400">The Philosophy</h3>  
+            <h2 className="text-4xl font-serif leading-snug mb-8">  
+              In an era of constant connectivity, silence is the ultimate luxury.  
+            </h2>  
+          </div>  
+          <div className="text-sm leading-[2] text-gray-600 space-y-6">  
+            <p>  
+              At NexVoyage Collective, we view travel not as an escape, but as a high-performance investment in one's mental and physical well-being.  
+            </p>  
+            <p>  
+              Our vetting standard ensures that every sanctuary in <strong>The Archive</strong> meets the rigorous demands of the global elite. We don't just book rooms; we secure assets for your perspective.  
+            </p>  
+          </div>  
+        </div>  
       </section>
 
-      {/* 9 Sanctuary Grid */}  
-      <section className="max-w-6xl mx-auto py-20 px-6">  
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">  
-          {SANCTUARIES.map((item) => (  
-            <Link key={item.slug} href={`/sanctuary/${item.slug}`} className="group block text-center">  
-              <div className="aspect-[4/5] bg-gray-50 mb-6 overflow-hidden relative">  
-                {/* Background "Image" Placeholder */}  
-                <div className="absolute inset-0 bg-gray-100 group-hover:scale-105 transition-transform duration-700" />  
-                <div className="absolute inset-0 flex items-center justify-center">  
-                   <span className="text-[10px] uppercase tracking-widest text-gray-300">Sanctuary: {item.name}</span>  
-                </div>  
+      {/* Sanctuaries Preview */}  
+      <section className="py-32 px-8">  
+        <div className="text-center mb-20">  
+          <h3 className="text-[10px] uppercase tracking-[0.4em] text-gray-400">The Vetting Standard</h3>  
+        </div>  
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-7xl mx-auto">  
+          {['Metropolitan', 'Coastal', 'Alpine'].map((type) => (  
+            <div key={type} className="group relative aspect-[3/4] bg-gray-100 overflow-hidden cursor-pointer">  
+              <div className="absolute inset-0 flex items-center justify-center">  
+                <span className="text-xs uppercase tracking-[0.2em] group-hover:tracking-[0.4em] transition-all duration-500">  
+                  {type}  
+                </span>  
               </div>  
-              <h3 className="text-sm uppercase tracking-widest mb-2">{item.name}</h3>  
-              <p className="text-xs text-gray-400 font-light">{item.description}</p>  
-            </Link>  
+              {/* Image placeholder - would be your high-res sanctuary shots */}  
+              <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500" />  
+            </div>  
           ))}  
         </div>  
-      </section>  
-    </main>  
+      </section>
+
+      {/* Footer */}  
+      <footer className="py-20 px-8 border-t border-gray-100 text-center">  
+        <div className="text-[10px] uppercase tracking-[0.2em] text-gray-400">  
+          © 2026 NexVoyage Collective. All Rights Reserved.  
+        </div>  
+        <div className="mt-6 space-x-6 text-[9px] uppercase tracking-widest">  
+          <a href="/legal" className="hover:underline">Privacy</a>  
+          <a href="/legal" className="hover:underline">Terms</a>  
+        </div>  
+      </footer>  
+    </div>  
   );  
-}  
+};
+
+export default HomePage;  
