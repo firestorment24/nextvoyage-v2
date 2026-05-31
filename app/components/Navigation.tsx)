@@ -1,27 +1,32 @@
-"use client";
-
-import Link from 'next/link';  
-import { useState } from 'react';
+"use client";  
+import Link from "next/link";  
+import { usePathname } from "next/navigation";
 
 export default function Navigation() {  
+  const pathname = usePathname();  
+  const links = [  
+    { name: "The Reserve", href: "/reserve" },  
+    { name: "The Perspective", href: "/perspective" },  
+    { name: "The Archive", href: "/archive" },  
+  ];
+
   return (  
-    <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-50 px-6 py-4 flex justify-between items-center">  
-      <Link href="/" className="text-sm tracking-[0.4em] uppercase font-light">  
-        NexVoyage  
-      </Link>  
-        
-      <div className="flex space-x-8 items-center">  
-        <div className="hidden md:flex space-x-6 text-[10px] uppercase tracking-widest text-gray-400">  
-          <Link href="/sanctuary/metropolitan" className="hover:text-black transition-colors">Sanctuaries</Link>  
-          <Link href="/legal/impact" className="hover:text-black transition-colors">Philosophy</Link>  
+    <nav className="fixed top-0 w-full z-50 bg-black/50 backdrop-blur-md border-b border-white/5">  
+      <div className="container mx-auto px-6 h-20 flex items-center justify-between">  
+        <Link href="/" className="font-serif text-xl tracking-[0.3em] uppercase hover:italic transition-all">  
+          NexVoyage  
+        </Link>  
+        <div className="flex gap-12">  
+          {links.map((link) => (  
+            <Link   
+              key={link.href}   
+              href={link.href}  
+              className={`font-sans text-[10px] uppercase tracking-[0.4em] transition-all hover:text-white ${pathname === link.href ? 'text-white underline underline-offset-8' : 'text-neutral-500'}`}  
+            >  
+              {link.name}  
+            </Link>  
+          ))}  
         </div>  
-          
-        {/* Global Search Button */}  
-        <button className="text-gray-400 hover:text-black transition-colors">  
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">  
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />  
-          </svg>  
-        </button>  
       </div>  
     </nav>  
   );  
