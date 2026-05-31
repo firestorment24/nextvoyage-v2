@@ -1,90 +1,84 @@
-// app/reserve/page.js  
-import React from 'react';
+'use client'
+
+import React from 'react'
 
 export default function ReservePage() {  
   return (  
-    <main className="min-h-screen bg-[#0A0A0A] text-[#E5E5E5] flex flex-col items-center justify-center px-6 py-20">  
-      <div className="max-w-2xl w-full">  
-        {/* Header Section */}  
-        <div className="text-center mb-16">  
-          <h1 className="text-4xl md:text-5xl font-serif text-[#C5A059] mb-4 uppercase tracking-widest">  
-            Access Protocol  
-          </h1>  
-          <p className="text-sm font-sans tracking-widest text-zinc-500 uppercase">  
-            Inquiry by Vetting Only  
+    <div className="min-h-screen bg-black text-zinc-400 font-light selection:bg-zinc-800 selection:text-white">  
+      {/* Navigation */}  
+      <nav className="p-8 flex justify-between items-center border-b border-zinc-900">  
+        <div className="text-zinc-100 tracking-widest uppercase text-sm">NexVoyage / Collective</div>  
+        <div className="text-[10px] tracking-widest uppercase opacity-50">Private Access Protocol</div>  
+      </nav>
+
+      <main className="max-w-2xl mx-auto py-24 px-6">  
+        <header className="mb-16">  
+          <h1 className="text-zinc-100 text-3xl font-light tracking-tight mb-4">The Reserve</h1>  
+          <p className="text-sm leading-relaxed max-w-md">  
+            Membership is restricted to individuals requiring specific biological recalibration.   
+            Access is granted based on physiological alignment and destination capacity.  
           </p>  
-        </div>
+        </header>
 
-        {/* The Application Form */}  
-        <form className="space-y-12">  
-          {/* Identity Section */}  
-          <div className="space-y-6">  
-            <div>  
-              <label className="block text-[10px] uppercase tracking-[0.2em] text-[#C5A059] mb-2 font-semibold">  
-                Identity & Affiliation  
-              </label>  
-              <input   
-                type="text"   
-                placeholder="Name / Principal Organization"  
-                className="w-full bg-transparent border-b border-zinc-800 py-4 focus:outline-none focus:border-[#C5A059] transition-colors font-serif text-xl"  
-              />  
-            </div>  
-          </div>
-
-          {/* Biological Objectives */}  
-          <div className="space-y-6">  
-            <label className="block text-[10px] uppercase tracking-[0.2em] text-[#C5A059] mb-2 font-semibold">  
-              Primary Biological Objective  
+        <form className="space-y-12" onSubmit={(e) => e.preventDefault()}>  
+          {/* Objective Section */}  
+          <section className="space-y-6">  
+            <label className="block text-[10px] uppercase tracking-[0.2em] text-zinc-500">  
+              01. Primary Objective  
             </label>  
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">  
-              {['Neural Decoupling', 'Mitochondrial Recovery', 'Circadian Alignment', 'Strategic Stillness'].map((objective) => (  
-                <div key={objective} className="flex items-center space-x-3">  
-                  <input type="checkbox" className="accent-[#C5A059] bg-transparent border-zinc-800" />  
-                  <span className="text-sm font-sans text-zinc-400">{objective}</span>  
-                </div>  
+            <div className="grid grid-cols-1 gap-4 text-xs">  
+              {['Neural Decoupling', 'Circadian Synchronization', 'Parasympathetic Dominance'].map((obj) => (  
+                <button   
+                  key={obj}  
+                  type="button"  
+                  className="border border-zinc-800 p-4 text-left hover:border-zinc-100 transition-colors duration-500 uppercase tracking-widest"  
+                >  
+                  {obj}  
+                </button>  
               ))}  
             </div>  
-          </div>
+          </section>
 
-          {/* ROI of Reset */}  
-          <div>  
-            <label className="block text-[10px] uppercase tracking-[0.2em] text-[#C5A059] mb-2 font-semibold">  
-              Required Yield (ROI of Reset)  
+          {/* Biological Intent */}  
+          <section className="space-y-6">  
+            <label className="block text-[10px] uppercase tracking-[0.2em] text-zinc-500">  
+              02. Biological Intent  
             </label>  
             <textarea   
-              rows="4"  
-              placeholder="Define the specific cognitive or physiological output required from this sanctuary."  
-              className="w-full bg-transparent border border-zinc-800 p-4 focus:outline-none focus:border-[#C5A059] transition-colors font-sans text-sm leading-relaxed text-zinc-300"  
+              rows={4}   
+              placeholder="Define the specific cognitive or physiological output required..."  
+              className="w-full bg-transparent border border-zinc-800 p-4 focus:outline-none focus:border-zinc-100 transition-colors duration-500 text-sm placeholder:opacity-30"  
             />  
-          </div>
+          </section>
 
-          {/* High Stakes Context */}  
-          <div>  
-            <label className="block text-[10px] uppercase tracking-[0.2em] text-[#C5A059] mb-2 font-semibold">  
-              Environmental Context (High-Stakes Exposure)  
+          {/* Identification */}  
+          <section className="space-y-6">  
+            <label className="block text-[10px] uppercase tracking-[0.2em] text-zinc-500">  
+              03. Identification  
             </label>  
-            <textarea   
-              rows="3"  
-              placeholder="Context regarding current cognitive load or operational intensity."  
-              className="w-full bg-transparent border border-zinc-800 p-4 focus:outline-none focus:border-[#C5A059] transition-colors font-sans text-sm leading-relaxed text-zinc-300"  
+            <input   
+              type="email"   
+              placeholder="Encrypted Email Address"  
+              className="w-full bg-transparent border-b border-zinc-800 py-4 focus:outline-none focus:border-zinc-100 transition-colors duration-500 text-sm"  
             />  
-          </div>
+          </section>
 
-          {/* Submit Button */}  
-          <div className="pt-8">  
-            <button className="w-full border border-[#C5A059] text-[#C5A059] py-5 uppercase tracking-[0.3em] text-xs font-bold hover:bg-[#C5A059] hover:text-[#0A0A0A] transition-all duration-500">  
-              Submit for Vetting  
-            </button>  
-          </div>  
+          <button   
+            type="submit"  
+            className="w-full py-6 mt-12 bg-zinc-100 text-black text-[10px] uppercase tracking-[0.3em] hover:bg-white transition-colors"  
+          >  
+            Request Calibration  
+          </button>  
         </form>
 
-        {/* Footer Note */}  
-        <div className="mt-20 text-center">  
-          <p className="text-[9px] uppercase tracking-[0.2em] text-zinc-600">  
-            A response will be issued within 24 hours of successful vetting.  
-          </p>  
-        </div>  
-      </div>  
-    </main>  
-  );  
+        <footer className="mt-32 pt-8 border-t border-zinc-900 flex justify-between text-[10px] uppercase tracking-widest opacity-40">  
+          <div>Status: Verification Pending</div>  
+          <div>EST. 2026</div>  
+        </footer>  
+      </main>
+
+      {/* Decorative Brass Accent */}  
+      <div className="fixed bottom-0 right-0 w-1 h-32 bg-gradient-to-t from-[#B5A642] to-transparent opacity-20" />  
+    </div>  
+  )  
 }  
