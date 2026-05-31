@@ -1,3 +1,4 @@
+// app/layout.tsx  
 import './globals.css'  
 import { Inter } from 'next/font/google'  
 import Link from 'next/link'
@@ -9,8 +10,8 @@ export const metadata = {
   description: 'Bespoke travel sanctuaries and elite concierge services for high-net-worth travelers.',  
 }
 
-// We define the Navbar here, but NOT as an "export default"  
-function Navbar() {  
+// Internal component - No "export default" here!  
+function GlobalNavbar() {  
   return (  
     <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-sm border-b border-zinc-100">  
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">  
@@ -34,6 +35,7 @@ function Navbar() {
   )  
 }
 
+// This is the ONLY export default in the file  
 export default function RootLayout({  
   children,  
 }: {  
@@ -42,7 +44,7 @@ export default function RootLayout({
   return (  
     <html lang="en">  
       <body className={inter.className}>  
-        <Navbar />  
+        <GlobalNavbar />  
         <main className="pt-20">  
           {children}  
         </main>  
