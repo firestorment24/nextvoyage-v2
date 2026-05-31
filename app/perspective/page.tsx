@@ -1,84 +1,85 @@
-import React from 'react';
+// app/perspective/page.tsx
 
-const PerspectivePage = () => {  
-  const articles = [  
-    {  
-      category: 'Editorial',  
-      title: 'The Silent ROI: Why Disconnection is the Ultimate Asset',  
-      excerpt: 'In a world of constant noise, the ability to truly vanish has become the rarest luxury. We explore the cognitive benefits of the deep reset.',  
-      date: 'May 2026'  
-    },  
-    {  
-      category: 'Sanctuary Study',  
-      title: 'Architecture of Calm: The Minimalist Alpinist',  
-      excerpt: 'How geometric precision and high-altitude isolation create the perfect environment for strategic clarity.',  
-      date: 'April 2026'  
-    },  
-    {  
-      category: 'Intellectual Travel',  
-      title: 'The Curated Horizon',  
-      excerpt: 'A study on why the visual environment of a destination dictates the quality of the insights you return with.',  
-      date: 'March 2026'  
-    }  
-  ];
+const articles = [  
+  {  
+    id: 1,  
+    category: "Editorial",  
+    date: "May 2026",  
+    title: "The Silent ROI: Why Disconnection is the Ultimate Asset",  
+    excerpt: "In an era of hyper-connectivity, the rarest luxury isn't access—it's absence. We explore the cognitive dividends of total digital silence.",  
+    readTime: "8 min read"  
+  },  
+  {  
+    id: 2,  
+    category: "Sanctuary Study",  
+    date: "April 2026",  
+    title: "Architecture of Calm: The Minimalist Alpinist",  
+    excerpt: "How high-altitude design is shifting away from rustic kitsch toward brutalist serenity and glass-walled isolation.",  
+    readTime: "6 min read"  
+  },  
+  {  
+    id: 3,  
+    category: "Intellectual Travel",  
+    date: "March 2026",  
+    title: "The Curated Horizon",  
+    excerpt: "A deep dive into the psychology of the 'Reset.' Why the environment you choose dictates the quality of your next major decision.",  
+    readTime: "5 min read"  
+  }  
+]
 
+export default function PerspectivePage() {  
   return (  
-    <div className="bg-white text-[#1a1a1a] font-sans min-h-screen">  
-      {/* Navigation */}  
-      <nav className="flex justify-between items-center px-8 py-10 uppercase tracking-[0.2em] text-[10px] border-b border-gray-50">  
-        <div className="font-bold"><a href="/">NexVoyage Collective</a></div>  
-        <div className="space-x-8">  
-          <a href="/archive" className="hover:text-gray-400 transition-colors">The Archive</a>  
-          <a href="/perspective" className="text-gray-400">The Perspective</a>  
-          <a href="/reserve" className="hover:text-gray-400 transition-colors border border-black px-4 py-2">The Reserve</a>  
-        </div>  
-      </nav>
-
+    <div className="max-w-7xl mx-auto px-6 py-24">  
       {/* Header */}  
-      <header className="py-24 px-8 max-w-4xl mx-auto text-center border-b border-gray-50">  
-        <h1 className="text-4xl md:text-6xl font-serif italic mb-6">The Perspective</h1>  
-        <p className="text-[10px] uppercase tracking-[0.4em] text-gray-400">Intellectual Insights & Observations</p>  
+      <header className="mb-32">  
+        <h1 className="text-6xl font-light tracking-tight mb-6">The Perspective</h1>  
+        <p className="text-zinc-500 text-sm tracking-[0.2em] uppercase">Intellectual Insights & Observations</p>  
       </header>
 
-      {/* Featured Article (Hero Layout) */}  
-      <section className="py-24 px-8 max-w-5xl mx-auto border-b border-gray-50">  
-        <div className="text-center group cursor-pointer">  
-          <span className="text-[9px] uppercase tracking-[0.3em] text-gray-400 mb-6 block">{articles[0].category}</span>  
-          <h2 className="text-3xl md:text-5xl font-serif leading-tight mb-8 group-hover:italic transition-all duration-500">  
-            {articles[0].title}  
-          </h2>  
-          <p className="text-sm text-gray-500 max-w-xl mx-auto leading-relaxed mb-8">  
-            {articles[0].excerpt}  
-          </p>  
-          <span className="text-[10px] uppercase tracking-widest border-b border-black pb-1">Read Perspective</span>  
-        </div>  
-      </section>
-
-      {/* Secondary Articles Grid */}  
-      <section className="py-24 px-8 max-w-6xl mx-auto">  
-        <div className="grid md:grid-cols-2 gap-20">  
-          {articles.slice(1).map((post) => (  
-            <div key={post.title} className="group cursor-pointer">  
-              <div className="aspect-video bg-[#fafafa] mb-10 overflow-hidden" />  
-              <span className="text-[9px] uppercase tracking-[0.3em] text-gray-400 mb-4 block">{post.category}</span>  
-              <h3 className="text-2xl font-serif mb-4 group-hover:italic transition-all duration-500">{post.title}</h3>  
-              <p className="text-sm text-gray-500 leading-relaxed font-light mb-6">  
-                {post.excerpt}  
-              </p>  
-              <div className="text-[9px] uppercase tracking-widest text-gray-400">{post.date}</div>  
+      {/* Featured Article */}  
+      <section className="mb-32 group cursor-pointer">  
+        <div className="grid md:grid-cols-2 gap-12 items-center">  
+          <div className="aspect-[4/3] bg-zinc-50 border border-zinc-100 overflow-hidden relative">  
+             {/* Placeholder for a high-end black and white image */}  
+             <div className="absolute inset-0 flex items-center justify-center text-[10px] tracking-widest text-zinc-300 uppercase">Featured Visual</div>  
+          </div>  
+          <div>  
+            <div className="flex gap-4 text-[10px] tracking-widest text-zinc-400 uppercase mb-6">  
+              <span>{articles[0].category}</span>  
+              <span>—</span>  
+              <span>{articles[0].date}</span>  
             </div>  
-          ))}  
+            <h2 className="text-4xl font-light leading-tight mb-6 group-hover:text-zinc-600 transition-colors">  
+              {articles[0].title}  
+            </h2>  
+            <p className="text-zinc-600 font-light leading-relaxed mb-8 text-lg">  
+              {articles[0].excerpt}  
+            </p>  
+            <span className="text-[10px] tracking-widest uppercase border-b border-black pb-2">Read Article</span>  
+          </div>  
         </div>  
       </section>
 
-      {/* Footer */}  
-      <footer className="py-20 px-8 border-t border-gray-100 text-center">  
-        <div className="text-[10px] uppercase tracking-[0.2em] text-gray-400">  
-          © 2026 NexVoyage Collective. All Rights Reserved.  
-        </div>  
-      </footer>  
+      {/* Grid for other articles */}  
+      <div className="grid md:grid-cols-2 gap-24">  
+        {articles.slice(1).map((article) => (  
+          <article key={article.id} className="group cursor-pointer">  
+            <div className="aspect-[16/9] bg-zinc-50 border border-zinc-100 mb-8 flex items-center justify-center">  
+               <div className="text-[10px] tracking-widest text-zinc-300 uppercase">Study {article.id}</div>  
+            </div>  
+            <div className="flex gap-4 text-[10px] tracking-widest text-zinc-400 uppercase mb-4">  
+              <span>{article.category}</span>  
+              <span>—</span>  
+              <span>{article.date}</span>  
+            </div>  
+            <h3 className="text-2xl font-light mb-4 group-hover:text-zinc-600 transition-colors">{article.title}</h3>  
+            <p className="text-zinc-500 font-light leading-relaxed mb-6 line-clamp-2 italic text-sm">  
+              "{article.excerpt}"  
+            </p>  
+            <span className="text-[10px] tracking-widest uppercase text-zinc-400 group-hover:text-black transition-colors">{article.readTime}</span>  
+          </article>  
+        ))}  
+      </div>  
     </div>  
-  );  
-};
-
-export default PerspectivePage;  
+  )  
+}  
