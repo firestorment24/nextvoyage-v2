@@ -1,45 +1,45 @@
 import React from 'react'
 
 export default function ArchivePage() {  
-  const pastResets = [  
-    { title: "The Aman Kyoto Session", date: "Fall 2025", category: "Quietude" },  
-    { title: "Patagonian Frontier", date: "Winter 2024", category: "Vastness" },  
-    { title: "Cycladic Architecture Study", date: "Summer 2024", category: "Form" },  
-    { title: "The Atacama Void", date: "Spring 2024", category: "Stillness" },  
+  const records = [  
+    { title: "The Aman Kyoto Session", location: "Japan", year: "2025", img: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=2070" },  
+    { title: "Atacama Void Study", location: "Chile", year: "2024", img: "https://images.unsplash.com/photo-1444491741275-3747c53c99b4?q=80&w=2070" },  
+    { title: "The Cycladic Architecture", location: "Greece", year: "2024", img: "https://images.unsplash.com/photo-1516483642777-94182987087b?q=80&w=2070" }  
   ]
 
   return (  
-    <main className="min-h-screen pt-32 pb-20 px-6 max-w-7xl mx-auto">  
-      <header className="mb-20">  
-        <h1 className="text-4xl md:text-5xl font-serif mb-4 tracking-tight">The Archive</h1>  
-        <p className="text-zinc-500 max-w-md font-light italic">A chronological record of executed resets and spatial studies.</p>  
-      </header>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">  
-        {pastResets.map((item, i) => (  
-          <div key={i} className="group cursor-pointer">  
-            {/* Image Container with Zoom Effect */}  
-            <div className="aspect-[4/5] bg-zinc-100 mb-6 overflow-hidden relative">  
-              <div className="absolute inset-0 bg-zinc-200 group-hover:scale-110 transition-transform duration-[1500ms] ease-out" />  
-              {/* This overlay creates a subtle darkening on hover */}  
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500" />  
-            </div>
-
-            {/* Category Reveal */}  
-            <div className="overflow-hidden h-5 mb-2">  
-              <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-400 group-hover:-translate-y-full transition-transform duration-500">  
-                {item.category} — {item.date}  
-              </p>  
-              <p className="text-[10px] uppercase tracking-[0.2em] text-black translate-y-0 transition-transform duration-500">  
-                View Details  
-              </p>  
-            </div>
-
-            <h3 className="text-xl font-serif group-hover:italic transition-all duration-500">  
-              {item.title}  
-            </h3>  
+    <main className="min-h-screen bg-[#0a0a0a] text-white pt-40 pb-32 px-6">  
+      <div className="max-w-7xl mx-auto">  
+        <header className="mb-32 flex flex-col md:flex-row md:items-end justify-between border-b border-zinc-900 pb-20">  
+          <div>  
+            <span className="text-[10px] uppercase tracking-[0.6em] text-zinc-500 mb-6 block">The Archive</span>  
+            <h1 className="text-5xl md:text-7xl font-serif tracking-tighter">Past <span className="italic">Resets.</span></h1>  
           </div>  
-        ))}  
+          <p className="text-zinc-500 max-w-sm mt-8 md:mt-0 font-light italic leading-relaxed">  
+            A chronological record of spatial studies and executed sequences. Access is limited to active members.  
+          </p>  
+        </header>
+
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-y-32 gap-x-12">  
+          {records.map((record, i) => (  
+            <div key={i} className={`md:col-span-6 ${i % 2 !== 0 ? 'md:mt-32' : ''} group cursor-pointer`}>  
+              <div className="aspect-[16/9] mb-8 overflow-hidden bg-zinc-900">  
+                <img   
+                  src={record.img}   
+                  className="w-full h-full object-cover opacity-70 grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-[1200ms] ease-out"   
+                  alt={record.title}  
+                />  
+              </div>  
+              <div className="flex justify-between items-start">  
+                <div>  
+                  <h3 className="text-2xl font-serif group-hover:italic transition-all duration-500 mb-2">{record.title}</h3>  
+                  <p className="text-[10px] uppercase tracking-[0.3em] text-zinc-500">{record.location} — {record.year}</p>  
+                </div>  
+                <span className="text-[10px] text-zinc-700 font-medium">Record ID: 00{i + 1}</span>  
+              </div>  
+            </div>  
+          ))}  
+        </div>  
       </div>  
     </main>  
   )  
