@@ -1,100 +1,84 @@
-'use client';
+"use client";
 
-import { useParams } from 'next/navigation';  
-import Link from 'next/link';
+import React from "react";  
+import { useParams } from "next/navigation";
 
-const SANCTUARIES: Record<string, any> = {  
-  metropolitan: {  
-    title: 'Metropolitan',  
-    tagline: 'The Silent Pulse.',  
-    description: 'A curated refuge in the world’s most vibrant capitals. High-floor serenity and soundproofed luxury for the urban executive.',  
-    image: 'https://cdn.marblism.com/vEIkjdyc8FE.webp',  
+const SANCTUARY_DATA: Record<string, any> = {  
+  "kyoto-forest": {  
+    name: "The Forest Floor Pavilion",  
+    loc: "Kyoto, Japan",  
+    img: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874",  
+    philosophy: "Silence is the ultimate investment. Trade digital noise for the rhythm of the bamboo forest.",  
+    roi: "94% Sensory Recovery"  
   },  
-  floating: {  
-    title: 'Floating',  
-    tagline: 'The Sea, Reimagined.',  
-    description: 'Exclusive access to the Ritz-Carlton Yacht Collection and private charters. Your mobile fortress on the water.',  
-    image: 'https://cdn.marblism.com/QM7q12mlDPO.webp',  
-  },  
-  island: {  
-    title: 'Island',  
-    tagline: 'Boundless Horizon.',  
-    description: 'Private atoll access where the only schedule is the tide. Absolute privacy, secured by the Guardian Layer.',  
-    image: 'https://cdn.marblism.com/vaBnm6isJ-C.webp',  
-  },  
-  alpine: {  
-    title: 'Alpine',  
-    tagline: 'Peak Clarity.',  
-    description: 'Remote heli-access lodges and snow-capped retreats. High-altitude restoration for high-stakes lives.',  
-    image: 'https://cdn.marblism.com/mRxfQ0N2_io.webp',  
-  },  
-  stadium: {  
-    title: 'Stadium',  
-    tagline: 'The Best Seat in the House.',  
-    description: 'Ultra-prime hospitality suites for the LA 2028 Olympics and global sports. Access that others can’t buy.',  
-    image: 'https://cdn.marblism.com/gvkky4c_9V3.webp',  
-  },  
-  cinematic: {  
-    title: 'Cinematic',  
-    tagline: 'Beyond the Screen.',  
-    description: 'Immersive travel inspired by the world’s most iconic film locations, delivered with white-glove precision.',  
-    image: 'https://cdn.marblism.com/58zTxqqgFIU.webp',  
-  },  
-  fortress: {  
-    title: 'Fortress',  
-    tagline: 'Uncompromising Security.',  
-    description: 'Vetted properties with advanced security protocols. For those who require safety without sacrificing style.',  
-    image: 'https://cdn.marblism.com/iHm6gUDie0O.webp',  
-  },  
-  safari: {  
-    title: 'Safari',  
-    tagline: 'The Primal Reset.',  
-    description: 'Conservation-focused luxury in the heart of the wild. Connect with the rhythm of the earth.',  
-    image: 'https://cdn.marblism.com/QhVF0bg6Rq3.webp',  
-  },  
-  oasis: {  
-    title: 'Oasis',  
-    tagline: 'Desert Serenity.',  
-    description: 'Remote dunes and architectural wonders in the sands. The ultimate silence of the desert.',  
-    image: 'https://cdn.marblism.com/t_wt6F-rdlV.webp',  
-  },  
+  "maldives-obsidian": {  
+    name: "Over-Water Obsidian",  
+    loc: "Noonu Atoll, Maldives",  
+    img: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688",  
+    philosophy: "Absolute isolation atop a volcanic shelf. Where the horizon is the only boundary.",  
+    roi: "100% Privacy Saturation"  
+  }  
 };
 
-export default function SanctuaryPage() {  
+export default function SanctuaryProfile() {  
   const params = useParams();  
-  const slug = params?.slug as string;  
-  const sanctuary = SANCTUARIES[slug] || SANCTUARIES.metropolitan;
+  const slug = params.slug as string;  
+  const data = SANCTUARY_DATA[slug] || SANCTUARY_DATA["kyoto-forest"];
 
   return (  
-    <div className="min-h-screen bg-white">  
-      {/* Hero Section */}  
-      <section className="relative h-[70vh] flex items-center justify-center overflow-hidden">  
-        <img   
-          src={sanctuary.image}   
-          alt={sanctuary.title}   
-          className="absolute inset-0 w-full h-full object-cover"  
-        />  
-        <div className="absolute inset-0 bg-black/40" />  
-        <div className="relative text-center text-white px-6">  
-          <h1 className="text-5xl md:text-7xl font-light tracking-tighter mb-4 uppercase">{sanctuary.title}</h1>  
-          <p className="text-xl md:text-2xl font-extralight tracking-widest uppercase">{sanctuary.tagline}</p>  
+    <main className="bg-black text-white min-h-screen selection:bg-white/20">  
+      <section className="relative h-screen flex flex-col justify-end p-6 md:p-12 overflow-hidden">  
+        <div className="absolute inset-0 z-0">  
+          <img   
+            src={`${data.img}?auto=format&fit=crop&q=80&w=2400`}   
+            className="w-full h-full object-cover grayscale opacity-50 transition-all duration-3000"  
+          />  
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />  
+        </div>
+
+        <div className="relative z-10 container mx-auto">  
+          {/* Changed 'Dossier' to 'Profile' */}  
+          <p className="font-sans text-[10px] uppercase tracking-[0.8em] text-neutral-400 mb-6">Private Profile // {slug}</p>  
+          <h1 className="font-serif text-6xl md:text-9xl mb-12 leading-none">{data.name}</h1>  
+          <div className="grid md:grid-cols-3 gap-12 border-t border-white/20 pt-12 items-start">  
+            <div>  
+              <p className="font-sans text-[10px] uppercase tracking-[0.4em] text-neutral-500 mb-2">Location</p>  
+              <p className="font-serif text-2xl italic">{data.loc}</p>  
+            </div>  
+            <div>  
+              <p className="font-sans text-[10px] uppercase tracking-[0.4em] text-neutral-500 mb-2">ROI Metric</p>  
+              <p className="font-serif text-2xl italic">{data.roi}</p>  
+            </div>  
+            <div className="text-right">  
+              <button className="bg-white text-black px-12 py-5 font-sans text-[10px] uppercase tracking-[0.6em] hover:bg-neutral-200 transition-all">  
+                Request Access  
+              </button>  
+            </div>  
+          </div>  
         </div>  
       </section>
 
-      {/* Content Section */}  
-      <section className="max-w-4xl mx-auto py-24 px-6 text-center">  
-        <h2 className="text-sm uppercase tracking-[0.3em] text-slate-400 mb-8">The Experience</h2>  
-        <p className="text-2xl md:text-3xl font-light leading-relaxed text-slate-800 mb-12">  
-          {sanctuary.description}  
-        </p>  
-        <div className="h-px w-24 bg-slate-200 mx-auto mb-12" />  
-        <a   
-          href="mailto:daryl.clark@fora.travel"  
-          className="inline-block bg-slate-900 text-white px-12 py-4 text-sm uppercase tracking-widest hover:bg-slate-800 transition"  
-        >  
-          Inquire for Access  
-        </a>  
+      <section className="py-40 bg-neutral-950">  
+        <div className="container mx-auto px-6 max-w-4xl">  
+          <div className="grid md:grid-cols-12 gap-16">  
+            <div className="md:col-span-4">  
+              <p className="font-sans text-[11px] uppercase tracking-[0.4em] text-neutral-500 leading-loose">  
+                Vetted for the NexVoyage Standard. A deep dive into the architecture of your next reset.  
+              </p>  
+            </div>  
+            <div className="md:col-span-8">  
+              <h2 className="font-serif text-4xl md:text-5xl mb-12 leading-relaxed">  
+                {data.philosophy}  
+              </h2>  
+              <div className="h-[1px] w-24 bg-white/20 mb-12" />  
+              <p className="font-sans text-neutral-400 leading-relaxed uppercase text-[12px] tracking-[0.2em]">  
+                {/* Relatable body copy */}  
+                Exploring {data.name} is the first step toward reclaiming clarity. We invite you to look closer at the details of this sanctuary and imagine the impact of absolute stillness.  
+              </p>  
+            </div>  
+          </div>  
+        </div>  
       </section>  
-    </div>  
+    </main>  
   );  
 }  
