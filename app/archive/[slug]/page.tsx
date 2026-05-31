@@ -1,7 +1,15 @@
 import React from 'react';
 
-// Data for the sanctuaries  
-const sanctuaryData = {  
+// Define the shape of our sanctuary data  
+interface Sanctuary {  
+  title: string;  
+  vibe: string;  
+  philosophy: string;  
+  standard: string;  
+  tier: string;  
+}
+
+const sanctuaryData: Record<string, Sanctuary> = {  
   metropolitan: {  
     title: 'Metropolitan',  
     vibe: 'Urban Edge',  
@@ -67,15 +75,26 @@ const sanctuaryData = {
   }  
 };
 
-export default function SanctuaryPage({ params }) {  
-  const sanctuary = sanctuaryData[params.slug];
+interface PageProps {  
+  params: Promise<{ slug: string }>;  
+}
 
-  if (!sanctuary) return <div className="p-20 text-center uppercase tracking-widest">Guide Not Found</div>;
+export default async function SanctuaryPage({ params }: PageProps) {  
+  const resolvedParams = await params;  
+  const sanctuary = sanctuaryData[resolvedParams.slug];
+
+  if (!sanctuary) {  
+    return (  
+      <div className="p-20 text-center uppercase tracking-widest min-h-screen flex items-center justify-center font-sans">  
+        Guide Not Found  
+      </div>  
+    );  
+  }
 
   return (  
     <div className="bg-white text-[#1a1a1a] font-sans min-h-screen">  
       {/* Navigation */}  
-      <nav className="flex justify-between items-center px-8 py-10 uppercase tracking-[0.2em] text-[10px] border-b border-gray-50">  
+      <nav className="flex justify-between items-center px-8 py-10 uppercase tracking-[0.2em] text-[10px] border-b border-gray-50 font-sans">  
         <div className="font-bold"><a href="/">NexVoyage Collective</a></div>  
         <div className="space-x-8">  
           <a href="/archive" className="hover:text-gray-400">The Archive</a>  
