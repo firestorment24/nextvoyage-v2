@@ -1,68 +1,44 @@
-import React from 'react'
+"use client";
 
-export default function PerspectivePage() {  
-  const articles = [  
-    {  
-      volume: "01",  
-      title: "The Silent ROI",  
-      subtitle: "Why the best investment is a week of absolute nothing.",  
-      excerpt: "In an economy of hyper-connectivity, the ultimate leverage is the ability to disconnect. We explore the architectural psychology of silence and why top-tier performers are trading luxury density for 'The Void.'",  
-      author: "D. Clark"  
-    },  
-    {  
-      volume: "02",  
-      title: "Architecture of Calm",  
-      subtitle: "The tactile reality of seclusion.",  
-      excerpt: "Design is not just what you see, but what you feel against your skin. From the rough-hewn stone of Kyoto to the smooth basalt of Iceland, we catalog the surfaces of the world’s most secluded retreats.",  
-      author: "D. Clark"  
-    }  
-  ]
-
+export default function Perspective() {  
   return (  
-    <main className="min-h-screen pt-40 pb-32 px-6">  
-      <div className="max-w-4xl mx-auto">  
-        <header className="mb-32 text-center">  
-          <span className="text-[10px] uppercase tracking-[0.4em] text-zinc-400 block mb-6">The Journal</span>  
-          <h1 className="text-6xl md:text-8xl font-serif tracking-tighter">Perspective.</h1>  
+    <main className="bg-black text-white pt-40 pb-20">  
+      <div className="container mx-auto px-6">  
+        <header className="text-center mb-40">  
+          <p className="font-sans text-[10px] uppercase tracking-[0.8em] text-neutral-500 mb-8">Journal</p>  
+          <h1 className="font-serif text-6xl md:text-9xl mb-12">The Perspective</h1>  
+          <div className="h-[1px] w-32 bg-white/20 mx-auto" />  
         </header>
 
-        <div className="space-y-40">  
-          {articles.map((article, i) => (  
-            <article key={i} className="group cursor-pointer">  
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">  
-                {/* Editorial Sidebar */}  
-                <div className="md:col-span-3 border-t border-zinc-100 pt-6">  
-                  <span className="text-[10px] uppercase tracking-[0.3em] font-medium block mb-2">Volume {article.volume}</span>  
-                  <span className="text-xs italic text-zinc-400">By {article.author}</span>  
-                </div>
+        <article className="grid md:grid-cols-12 gap-16 items-center mb-60">  
+          <div className="md:col-span-5">  
+            <p className="font-sans text-[10px] uppercase tracking-[0.5em] text-neutral-500 mb-8 underline">Theory 01</p>  
+            <h2 className="font-serif text-4xl md:text-6xl leading-tight mb-12">The Silent ROI of <br /><span className="italic">Absolute Stillness.</span></h2>  
+            <p className="font-sans text-neutral-400 leading-loose text-sm mb-12 uppercase tracking-widest">  
+              In an age of hyper-connectivity, the greatest competitive advantage is the ability to disconnect. We examine why the global elite are trading performance metrics for silence.  
+            </p>  
+            <button className="font-serif text-xl italic hover:text-neutral-500 transition-all">Read the Essay →</button>  
+          </div>  
+          <div className="md:col-span-7 aspect-video bg-neutral-900 border border-white/5 overflow-hidden">  
+            <img   
+              src="https://images.unsplash.com/photo-1495908333425-29a1e0918c5f?auto=format&fit=crop&q=80&w=1500"   
+              className="object-cover w-full h-full grayscale opacity-50"  
+            />  
+          </div>  
+        </article>
 
-                {/* Article Content */}  
-                <div className="md:col-span-9">  
-                  <h2 className="text-4xl md:text-5xl font-serif mb-6 group-hover:italic transition-all duration-700">  
-                    {article.title}  
-                  </h2>  
-                  <p className="text-xl text-zinc-500 font-serif italic mb-8 leading-relaxed">  
-                    {article.subtitle}  
-                  </p>  
-                  <p className="text-zinc-700 font-light leading-relaxed max-w-2xl mb-10">  
-                    {article.excerpt}  
-                  </p>  
-                  <button className="text-[10px] uppercase tracking-[0.3em] border-b border-black pb-1 hover:text-zinc-400 hover:border-zinc-400 transition-all">  
-                    Read Narrative  
-                  </button>  
-                </div>  
+        <section className="border-t border-white/5 pt-32 grid md:grid-cols-3 gap-24">  
+          {[1, 2, 3].map((i) => (  
+            <div key={i} className="group cursor-pointer">  
+              <div className="aspect-square bg-neutral-950 mb-8 overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">  
+                <img src={`https://images.unsplash.com/photo-1518005020251-582c7897655d?auto=format&fit=crop&q=80&w=800&sig=${i}`} className="object-cover h-full w-full" />  
               </div>  
-            </article>  
+              <p className="font-sans text-[9px] uppercase tracking-[0.3em] text-neutral-600 mb-4">Perspective / {i < 10 ? `0${i}` : i}</p>  
+              <h3 className="font-serif text-2xl group-hover:italic transition-all">Architecture of Isolation: Why remote builds define the new luxury.</h3>  
+            </div>  
           ))}  
-        </div>  
-      </div>
-
-      {/* Decorative Editorial Element */}  
-      <div className="mt-40 border-t border-zinc-100 pt-20 flex justify-between items-center max-w-4xl mx-auto opacity-30">  
-        <span className="text-[10px] uppercase tracking-widest font-serif">NexVoyage</span>  
-        <div className="w-12 h-[1px] bg-black" />  
-        <span className="text-[10px] uppercase tracking-widest font-serif">2026 Archive</span>  
+        </section>  
       </div>  
     </main>  
-  )  
+  );  
 }  
