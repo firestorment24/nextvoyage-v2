@@ -1,40 +1,36 @@
 import React from 'react';
 
-// --- NO EXTERNAL IMPORTS ---  
-// This section replaces the missing Navigation component  
-const Navigation = () => (  
-  <nav className="fixed top-0 w-full z-50 px-8 py-6 flex justify-between items-center bg-gradient-to-b from-black to-transparent">  
-    <div className="text-amber-200/80 tracking-[0.3em] uppercase text-sm font-bold underline decoration-amber-200/20 underline-offset-8 font-sans">  
-      <a href="/">NexVoyage</a>  
-    </div>  
-    <div className="flex gap-8 text-stone-400 uppercase tracking-widest text-[10px] font-sans">  
-      <a href="/sanctuaries" className="hover:text-amber-100 transition-colors">Sanctuaries</a>  
-      <a href="/reserve" className="hover:text-amber-100 transition-colors font-bold text-amber-200/60">Reserve</a>  
-    </div>  
-  </nav>  
-);
-
-// This section replaces the missing Footer component  
-const Footer = () => (  
-  <footer className="bg-stone-950 py-20 px-8 border-t border-stone-900 font-sans">  
-    <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12 text-stone-500">  
-      <div className="space-y-4">  
-        <h4 className="text-amber-200/50 uppercase tracking-[0.2em] text-xs font-semibold">NexVoyage Collective</h4>  
-        <p className="text-stone-600 text-sm max-w-xs italic leading-relaxed font-serif">  
-          Curated isolation for the high-net-worth traveler.  
-        </p>  
+export default function TCITrifecta() {  
+  // Inline components to guarantee the build passes  
+  const Navigation = () => (  
+    <nav className="fixed top-0 w-full z-50 px-8 py-6 flex justify-between items-center bg-gradient-to-b from-black to-transparent">  
+      <div className="text-amber-200/80 tracking-[0.3em] uppercase text-sm font-bold font-sans">  
+        <a href="/">NexVoyage</a>  
       </div>  
-      <div className="text-[10px] uppercase tracking-[0.3em] space-y-4 text-stone-700">  
-        <div className="space-y-1">  
+      <div className="flex gap-8 text-stone-400 uppercase tracking-widest text-[10px] font-sans">  
+        <a href="/sanctuaries" className="hover:text-amber-100 transition-colors">Sanctuaries</a>  
+        <a href="/reserve" className="hover:text-amber-100 transition-colors font-bold text-amber-200/60">Reserve</a>  
+      </div>  
+    </nav>  
+  );
+
+  const Footer = () => (  
+    <footer className="bg-stone-950 py-20 px-8 border-t border-stone-900 font-sans">  
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12 text-stone-500">  
+        <div className="space-y-4">  
+          <h4 className="text-amber-200/50 uppercase tracking-[0.2em] text-xs font-semibold font-sans">NexVoyage Collective</h4>  
+          <p className="text-stone-600 text-sm max-w-xs italic leading-relaxed font-serif">  
+            Curated isolation for the high-net-worth traveler.  
+          </p>  
+        </div>  
+        <div className="text-[10px] uppercase tracking-[0.3em] space-y-1 text-stone-700 font-sans">  
           <p>© 2026 NexVoyage</p>  
           <p>By Appointment Only</p>  
         </div>  
       </div>  
-    </div>  
-  </footer>  
-);
+    </footer>  
+  );
 
-export default function TCITrifecta() {  
   return (  
     <div className="bg-black text-stone-200 min-h-screen font-serif selection:bg-amber-200/20">  
       <Navigation />  
@@ -44,7 +40,7 @@ export default function TCITrifecta() {
         <img   
           src="https://cdn.marblism.com/cUyJDkxI7Ky.webp"   
           alt="TCI Trifecta"   
-          className="absolute inset-0 w-full h-full object-cover opacity-50 scale-105"  
+          className="absolute inset-0 w-full h-full object-cover opacity-40 scale-105"  
         />  
         <div className="relative z-10 text-center px-4 space-y-6">  
           <h1 className="text-5xl md:text-8xl tracking-[0.4em] text-amber-100/90 mb-4 uppercase">  
@@ -60,7 +56,7 @@ export default function TCITrifecta() {
       <section className="py-32 px-6 max-w-4xl mx-auto text-center">  
         <h2 className="text-4xl mb-12 text-amber-100 italic font-light">The Sound of Gravity</h2>  
         <p className="text-xl leading-relaxed text-stone-400 font-light mb-8">  
-          Located on the most secluded stretch of Grace Bay, the Trifecta is a masterclass in architectural silence.  
+          Located on the most secluded stretch of Grace Bay, the Trifecta is a masterclass in architectural silence. Three private pavilions, designed to disappear into the horizon.  
         </p>  
         <div className="w-12 h-px bg-amber-200/20 mx-auto"></div>  
       </section>
