@@ -1,71 +1,137 @@
-import Link from 'next/link'
+"use client";
 
-export default function HomePage() {  
+import React from "react";  
+import { motion } from "framer-motion";  
+import Image from "next/image";
+
+const fadeInUp = {  
+  initial: { opacity: 0, y: 20 },  
+  whileInView: { opacity: 1, y: 0 },  
+  viewport: { once: true },  
+  transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }  
+};
+
+export default function Homepage() {  
   return (  
-    <main className="relative min-h-screen bg-[#0a0a0a] text-white selection:bg-white selection:text-black">  
-      {/* Cinematic Hero Image (The Metropolitan Sanctuary Vibe) */}  
-      <div className="absolute inset-0 z-0 h-[85vh] md:h-screen">  
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-[#0a0a0a] z-10" />  
-        <img   
-          src="https://images.unsplash.com/photo-1542640244-7e672d6cef21?q=80&w=2070&auto=format&fit=crop"   
-          alt="Quiet Luxury Architecture"  
-          className="w-full h-full object-cover grayscale opacity-50 contrast-125"  
-        />  
-      </div>
-
-      <section className="relative z-20 pt-[30vh] px-6 max-w-7xl mx-auto flex flex-col items-start">  
-        <div className="overflow-hidden">  
-          <span className="text-[10px] uppercase tracking-[0.8em] text-zinc-500 mb-8 block animate-in fade-in slide-in-from-bottom-full duration-1000">  
-            NexVoyage Collective  
-          </span>  
-        </div>  
+    <main className="bg-black text-white selection:bg-white/20">  
+      {/* Cinematic Hero */}  
+      <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">  
+        {/* Grain Overlay for Texture */}  
+        <div className="absolute inset-0 z-10 pointer-events-none opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]" />  
           
-        <h1 className="text-6xl md:text-[9rem] font-serif leading-[0.85] tracking-tighter mb-12 animate-in fade-in slide-in-from-bottom-20 duration-1000 delay-300">  
-          Curating the <br />  
-          <span className="italic pl-12 md:pl-40 text-zinc-400">Unreachable.</span>  
-        </h1>
+        <div className="container mx-auto px-6 z-20 text-center">  
+          <motion.p   
+            initial={{ opacity: 0, letterSpacing: "0.2em" }}  
+            animate={{ opacity: 1, letterSpacing: "0.5em" }}  
+            transition={{ duration: 2 }}  
+            className="uppercase text-[10px] mb-8 text-neutral-500 font-sans tracking-[0.5em]"  
+          >  
+            NexVoyage Collective  
+          </motion.p>  
+            
+          <motion.h1   
+            initial={{ opacity: 0, filter: "blur(10px)" }}  
+            animate={{ opacity: 1, filter: "blur(0px)" }}  
+            transition={{ duration: 1.5, delay: 0.5 }}  
+            className="font-serif text-5xl md:text-8xl leading-tight mb-8"  
+          >  
+            Curating the <br />  
+            <span className="italic">Unreachable.</span>  
+          </motion.h1>  
+            
+          <motion.div   
+            initial={{ opacity: 0 }}  
+            animate={{ opacity: 1 }}  
+            transition={{ delay: 1.5 }}  
+            className="flex justify-center"  
+          >  
+            <div className="h-20 w-[1px] bg-gradient-to-b from-white/0 via-white/50 to-white/0" />  
+          </motion.div>  
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-end w-full">  
-          <div className="md:col-span-5 md:col-start-7">  
-            <p className="text-zinc-400 text-lg md:text-xl font-light leading-relaxed mb-12 animate-in fade-in duration-1000 delay-700">  
-              In an age of hyper-accessibility, we specialize in the opposite.   
-              Bespoke travel sequences for those who seek the luxury of silence and architectural calm.  
-            </p>  
-              
-            <div className="flex items-center gap-10 animate-in fade-in duration-1000 delay-1000">  
-              <Link href="/archive" className="group flex items-center gap-4 text-[10px] uppercase tracking-[0.4em] font-medium border border-white/20 px-8 py-5 hover:bg-white hover:text-black transition-all duration-500">  
-                Enter The Archive  
-                <span className="w-10 h-[1px] bg-white group-hover:bg-black transition-all" />  
-              </Link>  
+        {/* Hero Background Image - Suggesting a high-end minimalist villa or desert landscape */}  
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center opacity-40 grayscale" />  
+      </section>
+
+      {/* Narrative Section: The Silent ROI */}  
+      <section className="py-32 bg-neutral-950 border-y border-white/5">  
+        <div className="container mx-auto px-6 max-w-4xl">  
+          <motion.div {...fadeInUp}>  
+            <h2 className="font-serif text-3xl md:text-5xl mb-12 text-center leading-relaxed">  
+              In an era of loud luxury, we prioritize the <span className="italic">whisper</span>.  
+            </h2>  
+            <div className="grid md:grid-cols-2 gap-16 items-start">  
+              <p className="font-sans text-neutral-400 leading-relaxed text-sm uppercase tracking-widest">  
+                Our philosophy is built on the ROI of Reset. We don't just find rooms; we curate sanctuaries where time slows down and privacy is the ultimate currency.  
+              </p>  
+              <p className="font-serif text-xl text-neutral-300 italic">  
+                “True wealth is the ability to disappear without being missed, and return without being exhausted.”  
+              </p>  
             </div>  
+          </motion.div>  
+        </div>  
+      </section>
+
+      {/* The Sanctuaries: Asymmetrical Grid */}  
+      <section className="py-32 bg-black">  
+        <div className="container mx-auto px-6">  
+          <div className="flex justify-between items-end mb-24 border-b border-white/10 pb-8">  
+            <h3 className="font-serif text-4xl italic">The Sanctuaries</h3>  
+            <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-neutral-500">Edition 2026/01</p>  
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8">  
+            {/* Sanctuary 1 */}  
+            <motion.div   
+              className="md:col-span-7 group cursor-pointer"  
+              {...fadeInUp}  
+            >  
+              <div className="relative aspect-[16/9] overflow-hidden mb-6 bg-neutral-900">  
+                <img   
+                  src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&q=80&w=1500"   
+                  alt="Zen Spa Sanctuary"  
+                  className="object-cover w-full h-full grayscale transition-transform duration-1000 group-hover:scale-105 group-hover:grayscale-0"  
+                />  
+              </div>  
+              <p className="font-sans text-[10px] uppercase tracking-widest text-neutral-500 mb-2">Aman / Kyoto</p>  
+              <h4 className="font-serif text-2xl group-hover:italic transition-all">The Forest Floor Pavilion</h4>  
+            </motion.div>
+
+            {/* Sanctuary 2 */}  
+            <motion.div   
+              className="md:col-span-4 md:col-start-9 md:pt-24 group cursor-pointer"  
+              {...fadeInUp}  
+            >  
+              <div className="relative aspect-[4/5] overflow-hidden mb-6 bg-neutral-900">  
+                <img   
+                  src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&q=80&w=1000"   
+                  alt="Minimalist Architecture"  
+                  className="object-cover w-full h-full grayscale transition-transform duration-1000 group-hover:scale-105 group-hover:grayscale-0"  
+                />  
+              </div>  
+              <p className="font-sans text-[10px] uppercase tracking-widest text-neutral-500 mb-2">Soneva / Jani</p>  
+              <h4 className="font-serif text-2xl group-hover:italic transition-all">Over-Water Obsidian</h4>  
+            </motion.div>  
           </div>  
         </div>  
       </section>
 
-      {/* Narrative Section - The ROI of Reset */}  
-      <section className="relative z-20 py-60 px-6 max-w-5xl mx-auto">  
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-24 items-center">  
-          <div className="aspect-[4/5] bg-zinc-900 overflow-hidden group">  
-             <img   
-              src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=2070&auto=format&fit=crop"   
-              className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-[3000ms]"  
-              alt="The Reset"  
-            />  
-          </div>  
-          <div>  
-            <h2 className="text-4xl md:text-5xl font-serif mb-8 leading-tight">The ROI of <span className="italic">Reset.</span></h2>  
-            <p className="text-zinc-500 leading-relaxed font-light mb-10 italic border-l border-zinc-800 pl-8">  
-              "The most profitable investment an executive can make is a week of absolute nothing."  
-            </p>  
-            <p className="text-zinc-400 leading-relaxed font-light mb-8">  
-              We provide the framework for the recovery of perspective. Silence, heat, water, and shade.  
-            </p>  
-            <Link href="/perspective" className="text-[9px] uppercase tracking-[0.5em] border-b border-zinc-700 pb-2 hover:text-white transition-colors">  
-              The Perspective Journal →  
-            </Link>  
-          </div>  
-        </div>  
+      {/* Bottom CTA: The Vetting Standard */}  
+      <section className="py-40 bg-white text-black text-center">  
+        <motion.div   
+          initial={{ opacity: 0 }}  
+          whileInView={{ opacity: 1 }}  
+          className="container mx-auto px-6"  
+        >  
+          <h2 className="font-serif text-5xl md:text-7xl mb-12">Entry is not <br /> <span className="italic">guaranteed.</span></h2>  
+          <p className="max-w-xl mx-auto font-sans text-xs uppercase tracking-[0.4em] mb-12 text-neutral-500 leading-loose">  
+            Membership is restricted to high-net-worth individuals who align with our vetting standard of discretion and intent.  
+          </p>  
+          <button className="border border-black px-12 py-4 font-sans text-[10px] uppercase tracking-[0.5em] hover:bg-black hover:text-white transition-all">  
+            Begin the Vetting  
+          </button>  
+        </motion.div>  
       </section>  
     </main>  
-  )  
+  );  
 }  
