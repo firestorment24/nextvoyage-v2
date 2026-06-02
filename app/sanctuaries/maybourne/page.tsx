@@ -20,7 +20,14 @@ const Footer = () => (
   </footer>  
 );
 
-const OverlaidSection = ({ image, title, subtitle, alignment = 'left' }) => (  
+interface SectionProps {  
+  image: string;  
+  title: string;  
+  subtitle: string;  
+  alignment?: 'left' | 'right';  
+}
+
+const OverlaidSection = ({ image, title, subtitle, alignment = 'left' }: SectionProps) => (  
   <section style={{ position: 'relative', height: '100vh', width: '100%', overflow: 'hidden' }}>  
     <img src={image} style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt={title} />  
     <div style={{   
@@ -31,7 +38,7 @@ const OverlaidSection = ({ image, title, subtitle, alignment = 'left' }) => (
       flexDirection: 'column',   
       justifyContent: 'center',   
       padding: '10%',  
-      textAlign: alignment as any  
+      textAlign: alignment  
     }}>  
       <h2 style={{ color: '#C5A059', fontSize: '3rem', fontWeight: '300', marginBottom: '1rem', letterSpacing: '0.3rem', textTransform: 'uppercase' }}>{title}</h2>  
       <p style={{ color: '#E5E5E5', fontSize: '1.2rem', maxWidth: '600px', lineHeight: '1.6', fontWeight: '300', alignSelf: alignment === 'right' ? 'flex-end' : 'flex-start' }}>{subtitle}</p>  
@@ -53,7 +60,7 @@ export default function MaybournePage() {
 
       {/* Detail Section 1 */}  
       <OverlaidSection   
-        image="https://cdn.marblism.com/WuyrXpnAwo9.webp" // Reusing the obsidian hero for a dark detail vibe  
+        image="https://cdn.marblism.com/WuyrXpnAwo9.webp"  
         title="Neural Decoupling"  
         subtitle="Step into a sanctuary designed to strip away the noise of the digital world. Architectural silence, perfected."  
         alignment="right"  
