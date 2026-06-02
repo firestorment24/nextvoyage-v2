@@ -1,77 +1,76 @@
+'use client';
+
 import React from 'react';
 
-export default function TCITrifecta() {  
-  // Inline components to guarantee the build passes  
-  const Navigation = () => (  
-    <nav className="fixed top-0 w-full z-50 px-8 py-6 flex justify-between items-center bg-gradient-to-b from-black to-transparent">  
-      <div className="text-amber-200/80 tracking-[0.3em] uppercase text-sm font-bold font-sans">  
-        <a href="/">NexVoyage</a>  
-      </div>  
-      <div className="flex gap-8 text-stone-400 uppercase tracking-widest text-[10px] font-sans">  
-        <a href="/sanctuaries" className="hover:text-amber-100 transition-colors">Sanctuaries</a>  
-        <a href="/reserve" className="hover:text-amber-100 transition-colors font-bold text-amber-200/60">Reserve</a>  
-      </div>  
-    </nav>  
-  );
+interface SectionProps {  
+  image: string;  
+  title: string;  
+  subtitle?: string;  
+}
 
-  const Footer = () => (  
-    <footer className="bg-stone-950 py-20 px-8 border-t border-stone-900 font-sans">  
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12 text-stone-500">  
-        <div className="space-y-4">  
-          <h4 className="text-amber-200/50 uppercase tracking-[0.2em] text-xs font-semibold font-sans">NexVoyage Collective</h4>  
-          <p className="text-stone-600 text-sm max-w-xs italic leading-relaxed font-serif">  
-            Curated isolation for the high-net-worth traveler.  
-          </p>  
-        </div>  
-        <div className="text-[10px] uppercase tracking-[0.3em] space-y-1 text-stone-700 font-sans">  
-          <p>© 2026 NexVoyage</p>  
-          <p>By Appointment Only</p>  
-        </div>  
-      </div>  
-    </footer>  
-  );
+const OverlaidSection: React.FC<SectionProps> = ({ image, title, subtitle }) => (  
+  <section className="relative h-screen w-full overflow-hidden border-b border-[#3d3d3d]">  
+    <img   
+      src={image}   
+      alt={title}   
+      className="absolute inset-0 h-full w-full object-cover brightness-[0.45]"  
+    />  
+    <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">  
+      <h2 className="text-4xl md:text-6xl font-light tracking-[0.2em] text-[#d4af37] mb-4 uppercase leading-tight">  
+        {title}  
+      </h2>  
+      {subtitle && (  
+        <p className="text-sm md:text-lg tracking-widest text-gray-400 uppercase max-w-xl">  
+          {subtitle}  
+        </p>  
+      )}  
+    </div>  
+  </section>  
+);
 
+const Navigation = () => (  
+  <nav className="fixed top-0 w-full z-50 flex justify-between items-center px-10 py-6 bg-black/30 backdrop-blur-md">  
+    <div className="text-[#d4af37] font-bold tracking-tighter text-xl underline decoration-1 underline-offset-4">NV</div>  
+    <div className="flex gap-8 text-[10px] tracking-[0.3em] uppercase text-white/80">  
+      <a href="/sanctuaries" className="hover:text-white transition-colors">Sanctuaries</a>  
+      <a href="/" className="hover:text-white transition-colors">Main</a>  
+    </div>  
+  </nav>  
+);
+
+const Footer = () => (  
+  <footer className="bg-black py-24 text-center">  
+    <div className="h-[1px] w-24 bg-[#d4af37] mx-auto mb-10 opacity-30"></div>  
+    <p className="text-[10px] tracking-[0.5em] uppercase text-gray-600">  
+      Turks & Caicos | The Trifecta Experience  
+    </p>  
+  </footer>  
+);
+
+export default function TCITrifectaPage() {  
   return (  
-    <div className="bg-black text-stone-200 min-h-screen font-serif selection:bg-amber-200/20">  
+    <main className="bg-black min-h-screen text-white font-sans">  
       <Navigation />  
         
-      {/* Hero */}  
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">  
-        <img   
-          src="https://cdn.marblism.com/cUyJDkxI7Ky.webp"   
-          alt="TCI Trifecta"   
-          className="absolute inset-0 w-full h-full object-cover opacity-40 scale-105"  
-        />  
-        <div className="relative z-10 text-center px-4 space-y-6">  
-          <h1 className="text-5xl md:text-8xl tracking-[0.4em] text-amber-100/90 mb-4 uppercase">  
-            TCI Trifecta  
-          </h1>  
-          <p className="text-sm md:text-lg tracking-[0.5em] uppercase text-stone-400 font-sans border-t border-b border-stone-800/50 py-4 inline-block px-8">  
-            Grace Bay | Absolute Isolation  
-          </p>  
-        </div>  
-      </section>
+      <OverlaidSection   
+        image="https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&q=80"   
+        title="TCI Trifecta"  
+        subtitle="Three Islands. Three Rhythms. One Soul."  
+      />
 
-      {/* Content */}  
-      <section className="py-32 px-6 max-w-4xl mx-auto text-center">  
-        <h2 className="text-4xl mb-12 text-amber-100 italic font-light">The Sound of Gravity</h2>  
-        <p className="text-xl leading-relaxed text-stone-400 font-light mb-8">  
-          Located on the most secluded stretch of Grace Bay, the Trifecta is a masterclass in architectural silence. Three private pavilions, designed to disappear into the horizon.  
-        </p>  
-        <div className="w-12 h-px bg-amber-200/20 mx-auto"></div>  
-      </section>
+      <OverlaidSection   
+        image="https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&q=80"   
+        title="Providenciales Ivory"  
+        subtitle="The silence of white sands at dusk."  
+      />
 
-      {/* CTA */}  
-      <section className="py-40 text-center bg-black">  
-        <a   
-          href="/reserve"   
-          className="inline-block px-16 py-5 border border-amber-200/20 text-amber-100/80 hover:bg-amber-200/5 transition-all uppercase tracking-[0.3em] text-xs font-bold font-sans"  
-        >  
-          Secure Your Sanctuary  
-        </a>  
-      </section>
+      <OverlaidSection   
+        image="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80"   
+        title="Parrot Cay Solitude"  
+        subtitle="The ultimate expression of the Brass & Shadow aesthetic."  
+      />
 
       <Footer />  
-    </div>  
+    </main>  
   );  
 }  
