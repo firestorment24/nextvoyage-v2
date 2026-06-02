@@ -1,86 +1,78 @@
-'use client'
+'use client';
 
-import React from 'react'
+import React from 'react';
+
+// --- Inline Components for a Clean Build ---
+
+const Navigation = () => (  
+  <nav style={{ position: 'fixed', top: 0, width: '100%', zIndex: 100, padding: '2rem', display: 'flex', justifyContent: 'space-between', mixBlendMode: 'difference' }}>  
+    <a href="/" style={{ color: '#E5E5E5', textDecoration: 'none', fontSize: '0.8rem', letterSpacing: '0.2rem', fontWeight: '300' }}>NV | COLLECTIVE</a>  
+    <div style={{ display: 'flex', gap: '2rem' }}>  
+      <a href="/sanctuaries" style={{ color: '#E5E5E5', textDecoration: 'none', fontSize: '0.7rem', letterSpacing: '0.1rem' }}>SANCTUARIES</a>  
+      <a href="/reserve" style={{ color: '#E5E5E5', textDecoration: 'none', fontSize: '0.7rem', letterSpacing: '0.1rem' }}>RESERVE</a>  
+    </div>  
+  </nav>  
+);
+
+const Footer = () => (  
+  <footer style={{ padding: '4rem 2rem', backgroundColor: '#0A0A0A', borderTop: '1px solid #1A1A1A', textAlign: 'center' }}>  
+    <p style={{ color: '#404040', fontSize: '0.7rem', letterSpacing: '0.2rem' }}>© 2026 NEXVOYAGE COLLECTIVE</p>  
+  </footer>  
+);
+
+const OverlaidSection = ({ image, title, subtitle, alignment = 'left' }) => (  
+  <section style={{ position: 'relative', height: '100vh', width: '100%', overflow: 'hidden' }}>  
+    <img src={image} style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt={title} />  
+    <div style={{   
+      position: 'absolute',   
+      top: 0, left: 0, width: '100%', height: '100%',   
+      backgroundColor: 'rgba(0,0,0,0.4)',  
+      display: 'flex',   
+      flexDirection: 'column',   
+      justifyContent: 'center',   
+      padding: '10%',  
+      textAlign: alignment as any  
+    }}>  
+      <h2 style={{ color: '#C5A059', fontSize: '3rem', fontWeight: '300', marginBottom: '1rem', letterSpacing: '0.3rem', textTransform: 'uppercase' }}>{title}</h2>  
+      <p style={{ color: '#E5E5E5', fontSize: '1.2rem', maxWidth: '600px', lineHeight: '1.6', fontWeight: '300', alignSelf: alignment === 'right' ? 'flex-end' : 'flex-start' }}>{subtitle}</p>  
+    </div>  
+  </section>  
+);
 
 export default function MaybournePage() {  
   return (  
-    <div className="min-h-screen bg-black text-zinc-100 font-light selection:bg-[#B5A642]">  
-      {/* Fixed Navigation Overlay */}  
-      <nav className="fixed w-full p-8 flex justify-between items-center z-50 mix-blend-difference">  
-        <div className="text-[10px] tracking-[0.4em] uppercase font-medium">NexVoyage / Maybourne</div>  
-        <a href="/reserve" className="text-[10px] tracking-[0.4em] uppercase border border-white/20 px-6 py-2 hover:bg-white hover:text-black transition-all">  
-          Reserve  
-        </a>  
-      </nav>
-
+    <main style={{ backgroundColor: '#0A0A0A', color: '#E5E5E5', fontFamily: 'serif' }}>  
+      <Navigation />  
+        
       {/* Hero Section */}  
-      <section className="h-screen relative overflow-hidden">  
-        <img   
-          src="https://cdn.marblism.com/QaCq5-bi5FE.webp"   
-          alt="The Maybourne Riviera"   
-          className="w-full h-full object-cover opacity-80"  
-        />  
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />  
-        <div className="absolute bottom-20 left-10 max-w-4xl">  
-          <span className="text-[#B5A642] text-[10px] tracking-[0.6em] uppercase block mb-4">Roquebrune-Cap-Martin, France</span>  
-          <h1 className="text-6xl md:text-[10rem] font-extralight tracking-tighter italic leading-[0.8]">  
-            Maybourne <br/> Riviera  
-          </h1>  
-        </div>  
-      </section>
+      <OverlaidSection   
+        image="https://cdn.marblism.com/QaCq5-bi5FE.webp"  
+        title="The Maybourne Riviera"  
+        subtitle="A masterpiece of modern architecture suspended between the Mediterranean sky and the azure sea. Where silence meets the horizon."  
+      />
 
-      {/* Content Section 01: The Vantage */}  
-      <section className="py-40 px-10 grid grid-cols-1 md:grid-cols-12 gap-20 items-center">  
-        <div className="md:col-span-5 md:col-start-2">  
-          <h2 className="text-[10px] uppercase tracking-[0.5em] text-[#B5A642] mb-10">01 / The Vantage</h2>  
-          <p className="text-2xl md:text-3xl font-extralight leading-tight mb-8">  
-            Suspended 1,000 feet above the Mediterranean, the Maybourne isn't just a hotel—it's a gravity-defying statement of intent.  
-          </p>  
-          <p className="text-zinc-400 text-sm leading-relaxed max-w-md font-light">  
-            Every room offers an unobstructed horizon. Here, the French Riviera is stripped of its noise, leaving only the sound of the sea and the absolute privacy required by the Collective's elite members.  
-          </p>  
-        </div>  
-        <div className="md:col-span-5 aspect-square bg-zinc-900 overflow-hidden">  
-            <div className="w-full h-full flex items-center justify-center text-[10px] tracking-widest opacity-20 uppercase">  
-                [ Interior Gallery ]  
-            </div>  
-        </div>  
-      </section>
-
-      {/* Content Section 02: The Experience */}  
-      <section className="py-40 px-10 border-t border-zinc-900">  
-        <div className="max-w-6xl mx-auto text-center space-y-16">  
-          <h2 className="text-[10px] uppercase tracking-[0.5em] text-[#B5A642]">02 / The Protocol</h2>  
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 text-left">  
-            <div className="space-y-4">  
-                <h3 className="text-lg font-light tracking-wide italic">Arrival</h3>  
-                <p className="text-xs text-zinc-500 leading-relaxed uppercase tracking-widest">Private heliport access from Nice or Monaco for seamless transition.</p>  
-            </div>  
-            <div className="space-y-4">  
-                <h3 className="text-lg font-light tracking-wide italic">Gastronomy</h3>  
-                <p className="text-xs text-zinc-500 leading-relaxed uppercase tracking-widest">Mauro Colagreco's Ceto, where the menu is dictated by the depth of the ocean.</p>  
-            </div>  
-            <div className="space-y-4">  
-                <h3 className="text-lg font-light tracking-wide italic">Discretion</h3>  
-                <p className="text-xs text-zinc-500 leading-relaxed uppercase tracking-widest">Enclave-style layout ensuring zero cross-traffic with other guests.</p>  
-            </div>  
-          </div>  
-        </div>  
-      </section>
+      {/* Detail Section 1 */}  
+      <OverlaidSection   
+        image="https://cdn.marblism.com/WuyrXpnAwo9.webp" // Reusing the obsidian hero for a dark detail vibe  
+        title="Neural Decoupling"  
+        subtitle="Step into a sanctuary designed to strip away the noise of the digital world. Architectural silence, perfected."  
+        alignment="right"  
+      />
 
       {/* CTA Section */}  
-      <section className="py-60 px-10 text-center bg-zinc-100 text-black">  
-        <h2 className="text-4xl md:text-6xl font-extralight tracking-tighter mb-10">Secure the Horizon</h2>  
-        <p className="text-[10px] uppercase tracking-[0.5em] mb-12 opacity-60">Availability is restricted to the NexVoyage Collective</p>  
-        <a href="/reserve" className="inline-block border border-black px-12 py-5 text-[10px] uppercase tracking-[0.4em] hover:bg-black hover:text-white transition-all">  
-          Inquire Now  
-        </a>  
+      <section style={{ padding: '10rem 2rem', textAlign: 'center' }}>  
+        <h3 style={{ color: '#C5A059', fontSize: '1.5rem', marginBottom: '3rem', fontWeight: '300', letterSpacing: '0.2rem' }}>CLAIM YOUR SPACE</h3>  
+        <a href="/reserve" style={{   
+          padding: '1.5rem 4rem',   
+          border: '1px solid #C5A059',   
+          color: '#C5A059',   
+          textDecoration: 'none',   
+          fontSize: '0.8rem',   
+          letterSpacing: '0.3rem'   
+        }}>START THE RESERVE PROCESS</a>  
       </section>
 
-      <footer className="p-10 text-[9px] uppercase tracking-[0.4em] opacity-30 flex justify-between">  
-        <div>NexVoyage Collective // France</div>  
-        <div>EST. 2026</div>  
-      </footer>  
-    </div>  
-  )  
+      <Footer />  
+    </main>  
+  );  
 }  
