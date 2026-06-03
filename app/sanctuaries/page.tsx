@@ -1,6 +1,6 @@
 import Navigation from '../components/Navigation';  
 import Footer from '../components/Footer';  
-// DIRECT PATH: Up two levels to the project root  
+// TRY THIS: If 'sanctuaries' (plural) failed, it's likely 'sanctuary' (singular)  
 import { SANCTUARIES_DATA } from '../../data/sanctuaries';   
 import Link from 'next/link';
 
