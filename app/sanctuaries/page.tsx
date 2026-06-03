@@ -1,73 +1,131 @@
-'use client';
+"use client"
 
-import React from 'react';  
-import Link from 'next/link';
+import React from 'react'  
+import Navigation from '../components/Navigation'  
+import Footer from '../components/Footer'
 
 const SANCTUARIES = [  
-  { id: 'metropolitan', name: 'Metropolitan', tag: 'The Urban Citadel', img: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?q=80&w=2670&auto=format&fit=crop' },  
-  { id: 'floating', name: 'Floating', tag: 'The Aquatic Drift', img: 'https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?q=80&w=2670&auto=format&fit=crop' },  
-  { id: 'island', name: 'Island', tag: 'The Private Atoll', img: 'https://images.unsplash.com/photo-1506929113675-b9299d39bb6b?q=80&w=2670&auto=format&fit=crop' },  
-  { id: 'alpine', name: 'Alpine', tag: 'The Peak Silence', img: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2670&auto=format&fit=crop' },  
-  { id: 'stadium', name: 'Stadium', tag: 'The High Stakes', img: 'https://images.unsplash.com/photo-1577223625816-7546f13df25d?q=80&w=2670&auto=format&fit=crop' },  
-  { id: 'cinematic', name: 'Cinematic', tag: 'The Still Frame', img: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=2670&auto=format&fit=crop' },  
-  { id: 'fortress', name: 'Fortress', tag: 'The Secure Hold', img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=2670&auto=format&fit=crop' },  
-  { id: 'safari', name: 'Safari', tag: 'The Primal Dusk', img: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?q=80&w=2670&auto=format&fit=crop' },  
-  { id: 'oasis', name: 'Oasis', tag: 'The Desert Reset', img: 'https://images.unsplash.com/photo-1509316785289-025f54846b5e?q=80&w=2670&auto=format&fit=crop' },  
-];
+  {  
+    id: 'metropolitan',  
+    name: 'The Metropolitan',  
+    tag: 'Urban Absolute',  
+    image: 'https://images.unsplash.com/photo-1449153001391-42ca4914742d?q=80&w=2070&auto=format&fit=crop',  
+    description: 'A vertical fortress in the heart of the grid.',  
+    gridSpan: 'md:col-span-2 md:row-span-2'  
+  },  
+  {  
+    id: 'fortress',  
+    name: 'The Fortress',  
+    tag: 'Isolated Luxury',  
+    image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070&auto=format&fit=crop',  
+    description: 'Impenetrable peace carved into coastal stone.',  
+    gridSpan: 'md:col-span-1 md:row-span-1'  
+  },  
+  {  
+    id: 'stadium',  
+    name: 'The Stadium',  
+    tag: 'The Grand Stage',  
+    image: 'https://images.unsplash.com/photo-1504450758481-7338eba7524a?q=80&w=2069&auto=format&fit=crop',  
+    description: 'Epic scale for private high-performance living.',  
+    gridSpan: 'md:col-span-1 md:row-span-1'  
+  },  
+  {  
+    id: 'alpine',  
+    name: 'The Alpine',  
+    tag: 'Peak Isolation',  
+    image: 'https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?q=80&w=2070&auto=format&fit=crop',  
+    description: 'High-altitude sanctuary above the clouds.',  
+    gridSpan: 'md:col-span-1 md:row-span-2'  
+  },  
+  {  
+    id: 'cinematic',  
+    name: 'The Cinematic',  
+    tag: 'The Director’s Cut',  
+    image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=2059&auto=format&fit=crop',  
+    description: 'Architecture that moves like a silent film.',  
+    gridSpan: 'md:col-span-2 md:row-span-1'  
+  },  
+  {  
+    id: 'safari',  
+    name: 'The Safari',  
+    tag: 'Wild Elegance',  
+    image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?q=80&w=2068&auto=format&fit=crop',  
+    description: 'Primitive roots, absolute refinement.',  
+    gridSpan: 'md:col-span-1 md:row-span-1'  
+  },  
+  {  
+    id: 'oasis',  
+    name: 'The Oasis',  
+    tag: 'Liquid Gold',  
+    image: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=2073&auto=format&fit=crop',  
+    description: 'Mirage-tier luxury in the deep desert.',  
+    gridSpan: 'md:col-span-1 md:row-span-1'  
+  },  
+  {  
+    id: 'floating',  
+    name: 'The Floating',  
+    tag: 'Buoyant Solitude',  
+    image: 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?q=80&w=2070&auto=format&fit=crop',  
+    description: 'Drifting elegance on crystal waters.',  
+    gridSpan: 'md:col-span-2 md:row-span-1'  
+  },  
+  {  
+    id: 'island',  
+    name: 'The Island',  
+    tag: 'Sovereign Soil',  
+    image: 'https://images.unsplash.com/photo-1505881502353-a1986add3734?q=80&w=2070&auto=format&fit=crop',  
+    description: 'A private kingdom surrounded by blue.',  
+    gridSpan: 'md:col-span-1 md:row-span-1'  
+  }  
+]
 
 export default function SanctuaryIndex() {  
   return (  
-    <div className="bg-[#0D0D0D] text-[#D4AF37] min-h-screen font-serif">  
-      {/* Navigation */}  
-      <nav className="fixed top-0 w-full z-50 p-8 flex justify-between items-center border-b border-[#D4AF37]/10 bg-[#0D0D0D]/80 backdrop-blur-md">  
-        <Link href="/" className="text-xl tracking-widest uppercase">NexVoyage</Link>  
-        <div className="flex gap-12 text-sm tracking-widest uppercase">  
-          <Link href="/" className="hover:opacity-50 transition-opacity">Home</Link>  
-          <Link href="/sanctuaries" className="opacity-100 border-b border-[#D4AF37]">The Collection</Link>  
-          <Link href="/reserve" className="hover:opacity-50 transition-opacity">Reserve</Link>  
-        </div>  
-      </nav>
-
-      <main className="pt-40 px-8 pb-20 max-w-[1600px] mx-auto">  
-        <header className="mb-20">  
-          <h1 className="text-7xl md:text-9xl font-light mb-4 tracking-tighter">The Sanctuaries</h1>  
-          <p className="text-xl md:text-2xl text-[#D4AF37]/60 max-w-2xl leading-relaxed">  
-            Nine distinct architectures of stillness. Each designed as a sanctuary for the modern titan.  
+    <div className="min-h-screen bg-[#0A0A0A] text-white selection:bg-[#C5A059] selection:text-black">  
+      <Navigation />  
+        
+      <main className="pt-32 pb-20 px-6 max-w-7xl mx-auto">  
+        <header className="mb-16 border-l border-[#C5A059] pl-8">  
+          <h1 className="text-6xl md:text-8xl font-serif mb-4 tracking-tighter">  
+            THE <span className="text-[#C5A059]">COLLECTION</span>  
+          </h1>  
+          <p className="text-[#888] text-lg uppercase tracking-widest max-w-xl">  
+            A curated portfolio of architectural silence for the global elite. Nine sanctuaries. Infinite peace.  
           </p>  
         </header>
 
         {/* Magazine Grid */}  
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-24">  
-          {SANCTUARIES.map((item, idx) => (  
-            <Link key={item.id} href={`/sanctuaries/${item.id}`} className="group block">  
-              <div className={`overflow-hidden mb-6 aspect-[3/4] relative ${idx % 2 === 1 ? 'md:mt-24' : 'mt-0'}`}>  
-                <img   
-                  src={item.img}   
-                  alt={item.name}   
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"  
-                />  
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />  
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-[300px]">  
+          {SANCTUARIES.map((item) => (  
+            <a   
+              key={item.id}  
+              href={`/sanctuaries/${item.id}`}  
+              className={`group relative overflow-hidden bg-[#111] border border-white/5 ${item.gridSpan}`}  
+            >  
+              {/* Image Overlay */}  
+              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-all duration-700 z-10" />  
+                
+              <img   
+                src={item.image}   
+                alt={item.name}  
+                className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 scale-110 group-hover:scale-100 transition-all duration-1000"  
+              />
+
+              {/* Text Overlay */}  
+              <div className="absolute bottom-0 left-0 p-8 z-20 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">  
+                <div className="h-px w-12 bg-[#C5A059] mb-4 group-hover:w-full transition-all duration-700" />  
+                <p className="text-[#C5A059] text-xs uppercase tracking-[0.3em] mb-2">{item.tag}</p>  
+                <h3 className="text-3xl font-serif mb-2">{item.name}</h3>  
+                <p className="text-white/60 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100 italic">  
+                  {item.description}  
+                </p>  
               </div>  
-              <div className="flex justify-between items-end border-b border-[#D4AF37]/20 pb-4">  
-                <div>  
-                  <span className="block text-[10px] uppercase tracking-[0.3em] mb-2 opacity-50">0{idx + 1} — {item.tag}</span>  
-                  <h3 className="text-3xl font-light tracking-tight group-hover:translate-x-2 transition-transform duration-500">{item.name}</h3>  
-                </div>  
-                <div className="text-sm tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-500">Explore</div>  
-              </div>  
-            </Link>  
+            </a>  
           ))}  
         </div>  
       </main>
 
-      <footer className="p-20 border-t border-[#D4AF37]/10 flex flex-col items-center gap-8">  
-          <span className="text-sm tracking-[0.5em] uppercase opacity-40">NexVoyage Collective</span>  
-          <div className="flex gap-8 text-xs tracking-widest uppercase opacity-60">  
-            <span>© 2026</span>  
-            <Link href="/legal">Legal</Link>  
-            <Link href="/privacy">Privacy</Link>  
-          </div>  
-      </footer>  
+      <Footer />  
     </div>  
-  );  
+  )  
 }  
