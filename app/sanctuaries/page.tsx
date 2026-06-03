@@ -1,6 +1,6 @@
-import Navigation from '../components/Navigation';  
-import Footer from '../components/Footer';  
-import { SANCTUARIES_DATA } from '../data/sanctuaries'; // Ensure this path matches your data file  
+import Navigation from '@/components/Navigation';  
+import Footer from '@/components/Footer';  
+import { SANCTUARIES_DATA } from '@/data/sanctuaries';   
 import Link from 'next/link';
 
 export default function SanctuariesIndex() {  
@@ -11,7 +11,7 @@ export default function SanctuariesIndex() {
       <section className="pt-32 pb-20 px-6 max-w-7xl mx-auto">  
         <header className="mb-16 border-l border-white/20 pl-8">  
           <h1 className="text-5xl md:text-7xl mb-4 tracking-tighter">The Sanctuaries</h1>  
-          <p className="text-gray-400 max-w-xl text-lg uppercase tracking-widest text-sm">  
+          <p className="text-gray-400 max-w-xl text-lg uppercase tracking-widest">  
             A Global Collection of Private Travel Assets  
           </p>  
         </header>
