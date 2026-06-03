@@ -21,10 +21,9 @@ export default function SanctuariesPage() {
     <main className="bg-[#121212] text-[#E5E5E5] min-h-screen font-serif selection:bg-[#B5A48B]/30">  
       <Navigation />
 
-      {/* Hero: Minimal & Massive */}  
       <header className="pt-48 pb-32 px-6 max-w-[1600px] mx-auto text-center md:text-left">  
         <div className="overflow-hidden">  
-          <h1 className="text-6xl md:text-[10rem] font-light leading-[0.8] tracking-tighter mb-8 animate-reveal">  
+          <h1 className="text-6xl md:text-[10rem] font-light leading-[0.8] tracking-tighter mb-8 translate-y-0 opacity-100">  
             SANC<span className="text-[#B5A48B]">TU</span>ARIES  
           </h1>  
         </div>  
@@ -38,11 +37,9 @@ export default function SanctuariesPage() {
         </div>  
       </header>
 
-      {/* Editorial Flow */}  
       <section className="max-w-[1600px] mx-auto px-6 pb-64">  
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-32 items-start">  
           {sanctuaries.map((item, index) => {  
-            // Define aspect ratios based on editorial size  
             const aspectClass = item.size === 'portrait' ? 'aspect-[3/4]' : item.size === 'landscape' ? 'aspect-[4/3]' : 'aspect-square';  
               
             return (  
@@ -51,7 +48,6 @@ export default function SanctuariesPage() {
                 href={`/sanctuaries/${item.id}`}  
                 className={`group relative block ${item.offset} transition-transform duration-700 hover:-translate-y-2`}  
               >  
-                {/* Image Wrapper */}  
                 <div className={`relative w-full overflow-hidden mb-6 ${aspectClass} bg-[#1A1A1A]`}>  
                   <Image  
                     src={`${item.img}?auto=format&fit=crop&q=90&w=1200`}  
@@ -59,11 +55,9 @@ export default function SanctuariesPage() {
                     fill  
                     className="object-cover transition-transform duration-[2s] ease-out group-hover:scale-110 grayscale-[30%] group-hover:grayscale-0"  
                   />  
-                  {/* Subtle Grain/Overlay */}  
                   <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500" />  
                 </div>
 
-                {/* Typography: Float below image */}  
                 <div className="flex justify-between items-start pt-4 border-t border-[#B5A48B]/10">  
                   <div>  
                     <h3 className="text-3xl font-light tracking-tight mb-1">{item.title}</h3>  
@@ -81,17 +75,7 @@ export default function SanctuariesPage() {
         </div>  
       </section>
 
-      <Footer />
-
-      <style jsx>{`  
-        @keyframes reveal {  
-          from { transform: translateY(100%); }  
-          to { transform: translateY(0); }  
-        }  
-        .animate-reveal {  
-          animation: reveal 1.5s cubic-bezier(0.77, 0, 0.175, 1);  
-        }  
-      `}</style>  
+      <Footer />  
     </main>  
   );  
 }  
