@@ -1,19 +1,17 @@
-import React from 'react'  
-import { Typography, Row, Col } from 'antd'  
-const { Title, Paragraph } = Typography
+import React from 'react'
 
 export default function StadiumSanctuary() {  
   return (  
-    <div className="bg-black text-white min-h-screen">  
+    <div className="bg-black text-white min-h-screen font-sans">  
       {/* Header Section: Tucked Serif Header (Maybourne Pattern) */}  
       <section className="pt-24 px-12 relative overflow-hidden">  
         <div className="absolute top-24 left-12 z-10">  
-          <Title className="!text-white !font-serif !text-7xl !mb-0 !italic">  
+          <h1 className="text-white font-serif text-7xl mb-0 italic leading-none">  
             The Stadium  
-          </Title>  
-          <Title className="!text-white !font-serif !text-7xl !mt-[-10px] !ml-20">  
+          </h1>  
+          <h1 className="text-white font-serif text-7xl mt-[-10px] ml-20 leading-none">  
             Sanctuary  
-          </Title>  
+          </h1>  
         </div>  
           
         {/* High-Contrast Hero Visual */}  
@@ -27,40 +25,36 @@ export default function StadiumSanctuary() {
       </section>
 
       {/* Content Grid: Asymmetrical Magazine Layout */}  
-      <section className="px-12 py-32">  
-        <Row gutter={[80, 80]} align="top">  
-          <Col span={10}>  
-            <div className="sticky top-24">  
-              <Paragraph className="!text-gray-400 !text-lg !uppercase !tracking-widest !mb-8">  
-                The Pulse of Performance  
-              </Paragraph>  
-              <Paragraph className="!text-white !text-2xl !font-light !leading-relaxed">  
-                An immersive suite designed for the elite athlete and the high-stakes spectator.   
-                Absolute privacy meeting the roar of the crowd.  
-              </Paragraph>  
-            </div>  
-          </Col>  
+      <section className="px-12 py-32 max-w-7xl mx-auto">  
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-20 items-start">  
+          <div className="md:col-span-5 sticky top-24">  
+            <p className="text-gray-400 text-sm uppercase tracking-[0.3em] mb-8">  
+              The Pulse of Performance  
+            </p>  
+            <p className="text-white text-2xl font-light leading-relaxed">  
+              An immersive suite designed for the elite athlete and the high-stakes spectator.   
+              Absolute privacy meeting the roar of the crowd.  
+            </p>  
+          </div>  
             
-          <Col span={14}>  
-            <div className="space-y-32">  
-              {/* Secondary Details Image */}  
-              <div className="bg-[#1a1a1a] p-12 aspect-[4/5] flex items-center justify-center">  
-                 <span className="text-gray-600 italic">Additional "Brass & Shadow" assets loading...</span>  
-              </div>  
-                
-              <div className="pl-24">  
-                <Title level={3} className="!text-white !font-serif !italic !mb-8">  
-                  Redefining the Box  
-                </Title>  
-                <Paragraph className="!text-gray-300 !text-lg">  
-                  Every surface is textured to absorb the chaos of the exterior while reflecting the   
-                  intensity of the performance within. Brass accents catch the floodlights, casting   
-                  shadows that define the space as a fortress of focus.  
-                </Paragraph>  
-              </div>  
+          <div className="md:col-span-7 flex flex-col gap-32">  
+            {/* Placeholder for secondary assets */}  
+            <div className="bg-zinc-900 aspect-[4/5] w-full flex items-center justify-center border border-zinc-800">  
+               <span className="text-zinc-600 italic">Visual asset loading...</span>  
             </div>  
-          </Col>  
-        </Row>  
+              
+            <div className="pl-0 md:pl-24">  
+              <h3 className="text-white font-serif text-4xl italic mb-8">  
+                Redefining the Box  
+              </h3>  
+              <p className="text-gray-300 text-lg leading-relaxed">  
+                Every surface is textured to absorb the chaos of the exterior while reflecting the   
+                intensity of the performance within. Brass accents catch the floodlights, casting   
+                shadows that define the space as a fortress of focus.  
+              </p>  
+            </div>  
+          </div>  
+        </div>  
       </section>  
     </div>  
   )  
