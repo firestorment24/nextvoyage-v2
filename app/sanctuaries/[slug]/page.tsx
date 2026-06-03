@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';  
-import Navigation from '../../../components/Navigation';  
-import Footer from '../../../components/Footer';  
-import { SANCTUARIES_DATA } from '../../../data/sanctuaries';
+import Navigation from '@/components/Navigation';  
+import Footer from '@/components/Footer';  
+import { SANCTUARIES_DATA } from '@/data/sanctuaries';
 
 interface PageProps {  
   params: { slug: string };  
@@ -22,7 +22,6 @@ export default function SanctuaryDetail({ params }: PageProps) {
     <main className="bg-[#0a0a0a] text-white min-h-screen">  
       <Navigation />
 
-      {/* Hero Section */}  
       <section className="relative h-screen flex items-end pb-24 px-6 md:px-12">  
         <div className="absolute inset-0 z-0">  
           <img   
@@ -46,7 +45,6 @@ export default function SanctuaryDetail({ params }: PageProps) {
         </div>  
       </section>
 
-      {/* Travel Asset Stats (The Pivot) */}  
       <section className="py-24 px-6 max-w-7xl mx-auto border-t border-white/10">  
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">  
           <div>  
@@ -64,14 +62,10 @@ export default function SanctuaryDetail({ params }: PageProps) {
         </div>  
       </section>
 
-      {/* Main Content */}  
-      <section className="py-24 px-6 max-w-4xl mx-auto">  
-        <div className="prose prose-invert prose-lg">  
-          <p className="text-2xl leading-relaxed text-gray-300 mb-12">  
-            {sanctuary.description}  
-          </p>  
-          {/* Add more sections as needed from your data object */}  
-        </div>  
+      <section className="py-24 px-6 max-w-4xl mx-auto prose prose-invert prose-lg">  
+        <p className="text-2xl leading-relaxed text-gray-300 mb-12">  
+          {sanctuary.description}  
+        </p>  
       </section>
 
       <Footer />  
