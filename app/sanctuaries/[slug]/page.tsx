@@ -3,7 +3,10 @@
 import React from 'react'  
 import Image from 'next/image'  
 import Link from 'next/link'  
-import { useParams, notFound } from 'next/navigation'  
+import { useParams, notFound } from 'next/navigation'
+
+// Check your file structure: if Navigation/Footer are in /app, use '../../'  
+// If they are in /app/components, use '../../components/'  
 import Navigation from '../../Navigation'  
 import Footer from '../../Footer'
 
@@ -25,7 +28,7 @@ const SANCTUARY_DATA: Record<string, any> = {
   nautical: {  
     name: "The Nautical",  
     tagline: "Liquid Freedom",  
-    location: "Cyclades / Amalfi / Amalfi Coast",  
+    location: "Cyclades / Amalfi Coast",  
     heroImage: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&q=80&w=2000",  
     philosophy: "A sanctuary that moves with the tides. The Nautical is for those who find peace in perpetual motion, offering a sovereign territory on the open sea with the amenities of a five-star estate.",  
     metrics: [  
@@ -131,7 +134,7 @@ const SANCTUARY_DATA: Record<string, any> = {
 export default function SanctuaryDetailPage() {  
   const params = useParams()  
   const slug = params.slug as string  
-  const data = SANCTUARIES_DATA[slug]
+  const data = SANCTUARY_DATA[slug]
 
   if (!data) return notFound()
 
@@ -212,7 +215,6 @@ export default function SanctuaryDetailPage() {
         </div>  
       </section>
 
-      {/* FOOTER */}  
       <Footer />
 
       <style jsx global>{`  
