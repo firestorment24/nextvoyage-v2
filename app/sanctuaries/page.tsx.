@@ -1,100 +1,96 @@
-'use client';
+import React from 'react'
 
-import React from 'react';
+const SANCTUARIES = [  
+  { id: 'metropolitan', name: 'Metropolitan', tag: 'Urban Soul', img: 'https://cdn.marblism.com/amTUIb4CrsZ.webp' },  
+  { id: 'floating', name: 'Floating', tag: 'Moving Horizon', img: 'https://cdn.marblism.com/vaBnm6isJ-C.webp' },  
+  { id: 'island', name: 'Island', tag: 'Private Tide', img: 'https://cdn.marblism.com/vEIkjdyc8FE.webp' },  
+  { id: 'alpine', name: 'Alpine', tag: 'Glacial Stillness', img: 'https://cdn.marblism.com/toFNfe5Nnov.webp' },  
+  { id: 'stadium', name: 'Stadium', tag: 'Pulse of Performance', img: 'https://cdn.marblism.com/Vx_LJO1XIwc.webp' },  
+  { id: 'cinematic', name: 'Cinematic', tag: 'The Art of the Frame', img: 'https://cdn.marblism.com/QS08Ye5-snV.webp' },  
+  { id: 'fortress', name: 'Fortress', tag: 'Discretion & Detail', img: 'https://cdn.marblism.com/hvsJKd2n3Vn.webp' },  
+  { id: 'safari', name: 'Safari', tag: 'Raw Elegance', img: 'https://cdn.marblism.com/q4D43M9hfum.webp' },  
+  { id: 'oasis', name: 'Oasis', tag: 'A Primal Reset', img: 'https://cdn.marblism.com/_nMQUkOxAAt.webp' },  
+]
 
-const Navigation = () => (  
-  <nav className="fixed top-0 w-full z-50 px-12 py-8 flex justify-between items-center bg-gradient-to-b from-black to-transparent font-sans">  
-    <div className="text-amber-100/90 tracking-[0.5em] uppercase text-xs font-bold">  
-      <a href="/">NexVoyage Collective</a>  
-    </div>  
-    <div className="flex gap-12 text-stone-500 uppercase tracking-[0.3em] text-[10px]">  
-      <a href="/sanctuaries" className="text-amber-100 transition-colors">Sanctuaries</a>  
-      <a href="/reserve" className="hover:text-amber-100 transition-colors">Reserve</a>  
-    </div>  
-  </nav>  
-);
-
-const Footer = () => (  
-  <footer className="bg-black py-20 px-12 border-t border-stone-900 font-sans">  
-    <div className="max-w-6xl mx-auto flex justify-between items-center text-[10px] text-stone-600 uppercase tracking-[0.4em]">  
-      <p>© 2026 NexVoyage</p>  
-      <p>By Appointment Only</p>  
-    </div>  
-  </footer>  
-);
-
-const sanctuaries = [  
-  {  
-    title: "The Maybourne Riviera",  
-    location: "Roquebrune-Cap-Martin, France",  
-    image: "https://cdn.marblism.com/QaCq5-bi5FE.webp",  
-    link: "/sanctuaries/maybourne",  
-    tagline: "Architectural Cliffside Living"  
-  },  
-  {  
-    title: "RC Yacht Collection",  
-    location: "Global Charter",  
-    image: "https://cdn.marblism.com/bezdT4Fs3Bm.webp",  
-    link: "/sanctuaries/rc-yacht",  
-    tagline: "Absolute Isolation at Sea"  
-  },  
-  {  
-    title: "TCI Trifecta",  
-    location: "Grace Bay, Turks & Caicos",  
-    image: "https://cdn.marblism.com/cUyJDkxI7Ky.webp",  
-    link: "/sanctuaries/tci-trifecta",  
-    tagline: "The Sound of Gravity"  
-  }  
-];
-
-export default function SanctuariesIndex() {  
+export default function SanctuaryIndex() {  
   return (  
-    <main className="bg-black text-stone-200 min-h-screen font-serif selection:bg-amber-200/20">  
-      <Navigation />
+    <div className="min-h-screen bg-[#0a0a0a] text-[#d4af37] font-serif selection:bg-[#d4af37] selection:text-black">  
+      {/* Global Header */}  
+      <nav className="fixed top-0 w-full z-50 p-8 flex justify-between items-center bg-[#0a0a0a]/80 backdrop-blur-md border-b border-[#2a2a2a]">  
+        <div className="flex flex-col">  
+          <span className="text-lg tracking-[0.3em] uppercase font-light">NexVoyage</span>  
+          <span className="text-[10px] tracking-[0.5em] uppercase text-gray-500 -mt-1">Collective</span>  
+        </div>  
+        <div className="hidden md:flex gap-12 text-[10px] tracking-[0.2em] uppercase font-sans">  
+          <a href="/" className="hover:text-white transition-colors">Home</a>  
+          <a href="/sanctuaries" className="text-white border-b border-[#d4af37]">The Collection</a>  
+          <a href="/reserve" className="hover:text-white transition-colors">Reserve</a>  
+        </div>  
+      </nav>
 
-      {/* Header Section */}  
-      <section className="pt-40 pb-20 px-12 max-w-7xl mx-auto">  
-        <h2 className="text-amber-100/40 uppercase tracking-[0.5em] text-[10px] mb-6 font-sans">  
-          The 2026 Collection  
-        </h2>  
-        <h1 className="text-5xl md:text-7xl font-light italic text-stone-100 tracking-tight">  
-          Curated <span className="text-stone-500 font-serif not-italic">Sanctuaries</span>  
-        </h1>  
-      </section>
+      <main className="max-w-[1600px] mx-auto px-6 pt-40 pb-20">  
+        <header className="mb-24 max-w-4xl">  
+          <h1 className="text-7xl md:text-9xl font-light leading-none mb-8">  
+            The <span className="italic block text-gray-100">Collection</span>  
+          </h1>  
+          <p className="font-sans text-gray-500 tracking-[0.1em] uppercase text-sm leading-relaxed max-w-xl">  
+            A curated portfolio of nine global sanctuaries. Each is a masterpiece of architectural discretion, designed for the world’s most discerning travelers.  
+          </p>  
+        </header>
 
-      {/* Gallery Grid */}  
-      <section className="px-6 pb-40 grid grid-cols-1 md:grid-cols-3 gap-6">  
-        {sanctuaries.map((s, i) => (  
-          <a key={i} href={s.link} className="group block relative aspect-[3/4] overflow-hidden bg-stone-900">  
-            {/* Background Image */}  
-            <img   
-              src={s.image}   
-              alt={s.title}   
-              className="absolute inset-0 w-full h-full object-cover opacity-60 grayscale-[40%] group-hover:scale-105 group-hover:grayscale-0 transition-all duration-1000"  
-            />  
-              
-            {/* Vignette Overlays */}  
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>  
-              
-            {/* Content Overlay */}  
-            <div className="absolute inset-0 p-12 flex flex-col justify-end transform translate-y-4 group-hover:translate-y-0 transition-transform duration-700">  
-              <span className="text-amber-200/50 text-[10px] uppercase tracking-[0.4em] font-sans mb-2">  
-                {s.location}  
-              </span>  
-              <h3 className="text-3xl text-stone-100 mb-4 font-light tracking-tight group-hover:text-amber-100 transition-colors">  
-                {s.title}  
-              </h3>  
-              <p className="text-stone-400 text-sm italic font-serif opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100">  
-                {s.tagline}  
-              </p>  
-                
-              <div className="mt-8 w-0 group-hover:w-full h-px bg-amber-200/20 transition-all duration-1000"></div>  
-            </div>  
-          </a>  
-        ))}  
-      </section>
+        {/* Magazine Grid */}  
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-24 gap-x-12">  
+          {SANCTUARIES.map((item, index) => (  
+            <a   
+              key={item.id}   
+              href={`/sanctuaries/${item.id}`}  
+              className={`group block relative ${index % 2 !== 0 ? 'lg:mt-32' : ''}`}  
+            >  
+              <div className="aspect-[4/5] overflow-hidden border border-[#2a2a2a] relative">  
+                <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-700 z-10" />  
+                <img   
+                  src={item.img}   
+                  alt={item.name}   
+                  className="w-full h-full object-cover grayscale transition-transform duration-1000 group-hover:scale-105 group-hover:grayscale-0"  
+                />  
+              </div>  
+              <div className="mt-8 flex justify-between items-start">  
+                <div>  
+                  <h2 className="text-3xl font-light text-gray-200 group-hover:text-[#d4af37] transition-colors">  
+                    {item.name}  
+                  </h2>  
+                  <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-gray-600 mt-2">  
+                    {item.tag}  
+                  </p>  
+                </div>  
+                <span className="text-[10px] font-sans text-gray-700">0{index + 1}</span>  
+              </div>  
+            </a>  
+          ))}  
+        </div>  
+      </main>
 
-      <Footer />  
-    </main>  
-  );  
+      <footer className="p-20 border-t border-[#2a2a2a] mt-40">  
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-[10px] tracking-[0.2em] uppercase font-sans text-gray-600">  
+          <div>  
+            <p className="text-gray-400 mb-4">Contact</p>  
+            <p>daryl.clark@fora.travel</p>  
+          </div>  
+          <div>  
+            <p className="text-gray-400 mb-4">Legal</p>  
+            <p className="mb-2">Terms of Service</p>  
+            <p>Privacy Policy</p>  
+          </div>  
+          <div>  
+            <p className="text-gray-400 mb-4">Philosophy</p>  
+            <p>The ROI of Reset</p>  
+          </div>  
+          <div className="lg:text-right">  
+            <p>© 2026 NexVoyage Collective</p>  
+            <p className="mt-2 italic">Curating the Unreachable</p>  
+          </div>  
+        </div>  
+      </footer>  
+    </div>  
+  )  
 }  
