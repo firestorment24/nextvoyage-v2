@@ -10,7 +10,7 @@ export type Sanctuary = {
   propertyCount: number;  
 };
 
-export const SANCTUARIES_DATA: Sanctuary[] = [  
+ export const sanctuaries = SANCTUARIES_DATA;  
   {  
     slug: "the-metropolitan",  
     name: "The Metropolitan",  
