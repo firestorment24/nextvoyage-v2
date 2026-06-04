@@ -23,6 +23,17 @@ export const PROPERTIES_DATA: Property[] = [
     highlight: "The original Aman. Unmatched privacy on the Andaman coast.",  
     amenities: ["Private Pavilion", "Holistic Wellness Center", "Black Tiled Pool"]  
   },  
+  {  
+    id: "north-island-seychelles",  
+    sanctuarySlug: "the-island",  
+    name: "North Island",  
+    location: "Seychelles",  
+    image: "https://images.unsplash.com/photo-1506929199175-fb092972955d?auto=format&fit=crop&q=80&w=800",  
+    priceLevel: "$$$$$",  
+    exclusiveOffer: "Private Island Helicopter Transfer + Scuba Certification",  
+    highlight: "The world's most exclusive eco-retreat. Only 11 villas exist.",  
+    amenities: ["Dedicated Guest Experience Host", "Island Buggy", "Private Chef"]  
+  },  
   // THE FLOATING  
   {  
     id: "evrima-yacht",  
@@ -34,6 +45,17 @@ export const PROPERTIES_DATA: Property[] = [
     exclusiveOffer: "$500 Onboard Credit + Suite Upgrade",  
     highlight: "A superyacht experience with the service of the Ritz-Carlton.",  
     amenities: ["All-Suite Terrace", "Michelin-Inspired Dining", "Personal Concierge"]  
+  },  
+  {  
+    id: "four-seasons-explorer",  
+    sanctuarySlug: "the-floating",  
+    name: "Four Seasons Explorer",  
+    location: "Palau / Maldives",  
+    image: "https://images.unsplash.com/photo-1599946347341-6cdcd3a44bb4?auto=format&fit=crop&q=80&w=800",  
+    priceLevel: "$$$$$",  
+    exclusiveOffer: "Unlimited Diving + Seaplane Transfers Included",  
+    highlight: "A luxury catamaran cruising the most remote reefs on Earth.",  
+    amenities: ["Marine Biologist Onboard", "Sandbank BBQ", "Spa Therapist"]  
   },  
   // THE METROPOLITAN  
   {  
@@ -47,6 +69,17 @@ export const PROPERTIES_DATA: Property[] = [
     highlight: "A serene sanctuary in the Crown Building, high above Manhattan.",  
     amenities: ["Garden Terrace", "Subterranean Jazz Club", "Double-Height Atriums"]  
   },  
+  {  
+    id: "peninsula-paris",  
+    sanctuarySlug: "the-metropolitan",  
+    name: "The Peninsula Paris",  
+    location: "Paris, France",  
+    image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&q=80&w=800",  
+    priceLevel: "$$$$$",  
+    exclusiveOffer: "Rooftop Dinner for Two + Chauffeur in Vintage Rolls-Royce",  
+    highlight: "Haussmann-style grandeur steps from the Arc de Triomphe.",  
+    amenities: ["L'Oiseau Blanc Dining", "Subterranean Pool", "Bespoke Concierge"]  
+  },  
   // THE FORTRESS  
   {  
     id: "amangiri-utah",  
@@ -58,6 +91,17 @@ export const PROPERTIES_DATA: Property[] = [
     exclusiveOffer: "Private Guided Hike + Stargazing Experience",  
     highlight: "Blends into the rock. The ultimate desert isolation.",  
     amenities: ["Floating Hot Tub", "Navajo-Inspired Spa", "Via Ferrata Access"]  
+  },  
+  {  
+    id: "kasbah-tamadot",  
+    sanctuarySlug: "the-fortress",  
+    name: "Kasbah Tamadot",  
+    location: "Atlas Mountains, Morocco",  
+    image: "https://images.unsplash.com/photo-1539020140153-e479b8c22e70?auto=format&fit=crop&q=80&w=800",  
+    priceLevel: "$$$$$",  
+    exclusiveOffer: "Mule Trek + Traditional Berber Cooking Class",  
+    highlight: "Richard Branson’s mountain retreat with 360-degree peak views.",  
+    amenities: ["Infinity Pool", "Luxury Berber Tents", "Hammam"]  
   },  
   // THE SAFARI  
   {  
@@ -71,6 +115,17 @@ export const PROPERTIES_DATA: Property[] = [
     highlight: "The pioneer of luxury safari. A canvas of wild elegance.",  
     amenities: ["Private Plunge Pools", "Game Drives", "Riverside Dining"]  
   },  
+  {  
+    id: "angama-mara",  
+    sanctuarySlug: "the-safari",  
+    name: "Angama Mara",  
+    location: "Maasai Mara, Kenya",  
+    image: "https://images.unsplash.com/photo-1523805009345-7448845a9e53?auto=format&fit=crop&q=80&w=800",  
+    priceLevel: "$$$$$",  
+    exclusiveOffer: "Maasai-led Walking Safari + Sundowners on the Oloololo Escarpment",  
+    highlight: "Suspended mid-air where 'Out of Africa' was filmed.",  
+    amenities: ["Fitness Center", "Craft Studio", "Hot Air Balloon Access"]  
+  },  
   // THE ALPINE  
   {  
     id: "badrutts-palace",  
@@ -82,6 +137,17 @@ export const PROPERTIES_DATA: Property[] = [
     exclusiveOffer: "Daily Ski Pass + Rolls-Royce Station Transfers",  
     highlight: "The crown jewel of the Alps. Where heritage meets the snow.",  
     amenities: ["Indoor Infinity Pool", "Private Butler", "Nightclub Access"]  
+  },  
+  {  
+    id: "cheval-blanc-courchevel",  
+    sanctuarySlug: "the-alpine",  
+    name: "Cheval Blanc",  
+    location: "Courchevel 1850, France",  
+    image: "https://images.unsplash.com/photo-1548777123-e216912df7d8?auto=format&fit=crop&q=80&w=800",  
+    priceLevel: "$$$$$",  
+    exclusiveOffer: "Guerlain Spa Treatment + Private Ski Concierge",  
+    highlight: "The Maison of high-altitude luxury by LVMH.",  
+    amenities: ["3-Michelin Star Dining", "Kids' Club", "Art Collection"]  
   },  
   // THE OASIS  
   {  
@@ -95,6 +161,17 @@ export const PROPERTIES_DATA: Property[] = [
     highlight: "A lush palm oasis nestled deep within the rolling dunes.",  
     amenities: ["Bedouin-Style Suites", "Private Infinity Pools", "Gazelle Sightings"]  
   },  
+  {  
+    id: "qasr-al-sarab",  
+    sanctuarySlug: "the-oasis",  
+    name: "Qasr Al Sarab",  
+    location: "Empty Quarter, Abu Dhabi",  
+    image: "https://images.unsplash.com/photo-1528126383447-68ec387f9411?auto=format&fit=crop&q=80&w=800",  
+    priceLevel: "$$$$$",  
+    exclusiveOffer: "Royal Pavilion Upgrade + Night Desert Trek",  
+    highlight: "A palace appearing like a mirage in the Liwa Desert.",  
+    amenities: ["Library", "Tennis Courts", "Dune Bashing"]  
+  },  
   // THE CINEMATIC  
   {  
     id: "hotel-du-cap",  
@@ -107,6 +184,17 @@ export const PROPERTIES_DATA: Property[] = [
     highlight: "The playground of legends. Pure French Riviera glamour.",  
     amenities: ["Iconic Saltwater Pool", "Private Pontoon", "Dior Spa"]  
   },  
+  {  
+    id: "villa-d-este",  
+    sanctuarySlug: "the-cinematic",  
+    name: "Villa d'Este",  
+    location: "Lake Como, Italy",  
+    image: "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&q=80&w=800",  
+    priceLevel: "$$$$$",  
+    exclusiveOffer: "Private Floatplane Tour + Floating Pool Access",  
+    highlight: "Renaissance luxury. A living movie set on the water's edge.",  
+    amenities: ["Floating Pool", "Formal Gardens", "Vintage Speedboat Rental"]  
+  },  
   // THE STADIUM  
   {  
     id: "hotel-de-paris",  
@@ -118,5 +206,16 @@ export const PROPERTIES_DATA: Property[] = [
     exclusiveOffer: "Grand Prix Balcony Access + Casino Privé Entry",  
     highlight: "Front row at the Casino Square and the world's most famous race track.",  
     amenities: ["Michelin 3-Star Dining", "Diamond Suites", "Underground Wine Cellar"]  
+  },  
+  {  
+    id: "park-hyatt-tokyo",  
+    sanctuarySlug: "the-stadium",  
+    name: "Park Hyatt Tokyo",  
+    location: "Shinjuku, Tokyo",  
+    image: "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&q=80&w=800",  
+    priceLevel: "$$$$$",  
+    exclusiveOffer: "Sunset Jazz & Cocktails + Private Tokyo Tour",  
+    highlight: "The sky-high setting for 'Lost in Translation'. Elite city views.",  
+    amenities: ["Peak Lounge", "Sky Pool", "New York Grill"]  
   }  
 ];  
