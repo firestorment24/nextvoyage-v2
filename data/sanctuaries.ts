@@ -2,55 +2,26 @@ export const SANCTUARIES_DATA = [
   {  
     slug: 'the-metropolitan',  
     name: 'The Metropolitan',  
-    location: 'Tokyo, Japan',  
+    location: 'Global Hubs',  
     tagline: 'Absolute silence above the neon pulse.',  
-  },  
-  {  
-    slug: 'the-nautical',  
-    name: 'The Nautical',  
-    location: 'Amalfi Coast, Italy',  
-    tagline: 'A glass-bottomed fortress over the Tyrrhenian.',  
-  },  
-  {  
-    slug: 'the-fortress',  
-    name: 'The Fortress',  
-    location: 'Scottish Highlands',  
-    tagline: 'Granite walls and ancient mist.',  
-  },  
-  {  
-    slug: 'the-alpine',  
-    name: 'The Alpine',  
-    location: 'Zermatt, Switzerland',  
-    tagline: 'Unreachable peak-side minimalism.',  
-  },  
-  {  
-    slug: 'the-safari',  
-    name: 'The Safari',  
-    location: 'Serengeti, Tanzania',  
-    tagline: 'Luxury hidden in the tall grass.',  
-  },  
-  {  
-    slug: 'the-oasis',  
-    name: 'The Oasis',  
-    location: 'Rub’ al Khali, UAE',  
-    tagline: 'A mirrored mirage in the Empty Quarter.',  
-  },  
-  {  
-    slug: 'the-stadium',  
-    name: 'The Stadium',  
-    location: 'London, UK',  
-    tagline: 'The ultimate urban arena suite.',  
-  },  
-  {  
-    slug: 'the-cinematic',  
-    name: 'The Cinematic',  
-    location: 'Hollywood Hills, USA',  
-    tagline: 'Privacy through a wide-angle lens.',  
+    categoryDescription: 'High-altitude seclusion in the world’s most vibrant capitals. This collection focuses on penthouses and sky-villas where the city remains a distant, silent view. Perfect for the business traveler who requires a fortress in the sky.',  
+    featuredProperties: [] // We will populate this with deals later  
   },  
   {  
     slug: 'the-island',  
     name: 'The Island',  
-    location: 'Exumas, Bahamas',  
+    location: 'Private Archipelagos',  
     tagline: 'Sovereign sand and turquoise borders.',  
+    categoryDescription: 'Total geographic isolation. These properties represent the pinnacle of land-and-sea privacy, where the only neighbors are the reef and the horizon. Curated for those who need to vanish completely.',  
+    featuredProperties: []  
+  },  
+  {  
+    slug: 'the-fortress',  
+    name: 'The Fortress',  
+    location: 'Rugged Terrains',  
+    tagline: 'Granite walls and ancient mist.',  
+    categoryDescription: 'Built into the very earth itself. From the Scottish Highlands to the mountains of Bhutan, these sanctuaries offer physical security and mental clarity in the world’s most dramatic landscapes.',  
+    featuredProperties: []  
   }  
+  // ... we can add the rest as we go  
 ];  
