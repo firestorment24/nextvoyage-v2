@@ -1,18 +1,16 @@
 import Hero from './components/Hero'  
-import { sanctuaries } from './data/sanctuaries'  
+import { sanctuaries } from '@/data/sanctuaries'  
 import Link from 'next/link'  
 import Image from 'next/image'
 
 export default function Home() {  
   return (  
     <main className="min-h-screen bg-white">  
-      {/* 1. Hero Section */}  
       <Hero   
         title="The Art of Escape"  
         subtitle="Curated sanctuaries for the high-net-worth traveler."  
       />
 
-      {/* 2. Sanctuary Grid Section */}  
       <section className="max-w-7xl mx-auto px-4 py-24">  
         <div className="text-center mb-16">  
           <h2 className="text-3xl md:text-4xl font-light tracking-tight text-slate-900">  
@@ -56,7 +54,6 @@ export default function Home() {
         </div>  
       </section>
 
-      {/* 3. Global Philosophy / USP Section */}  
       <section className="bg-slate-50 py-24">  
         <div className="max-w-4xl mx-auto px-4 text-center">  
           <span className="text-xs uppercase tracking-[0.3em] text-slate-400">NexVoyage Collective</span>  
