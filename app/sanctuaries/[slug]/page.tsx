@@ -4,15 +4,15 @@ import { useParams, notFound } from 'next/navigation';
 import Navigation from '../../Navigation';  
 import Footer from '../../Footer';  
 import { SANCTUARIES_DATA } from '../../../data/sanctuaries';  
-import { PROPERTIES_DATA } from '../../../data/properties'; // New import  
+import { PROPERTIES_DATA } from '../../../data/properties';  
 import Link from 'next/link';
 
 export default function SanctuaryDetailPage() {  
   const params = useParams();  
   const slug = params?.slug as string;
 
-  const sanctuary = SANCTUARIES_DATA.find((s) => s.slug === slug);  
-    
+  const sanctuary = SANCTUARIES_DATA.find((s) => s.slug === slug);
+
   // Filter properties belonging to this sanctuary  
   const featuredProperties = PROPERTIES_DATA.filter((p) => p.sanctuarySlug === slug);
 
@@ -76,9 +76,12 @@ export default function SanctuaryDetailPage() {
             <div className="pt-6 border-t border-gray-200">  
               <p className="text-xs text-gray-400 uppercase mb-4 tracking-tighter">Current Access</p>  
               <p className="text-lg font-medium mb-6">{sanctuary.propertyCount} Properties in Collection</p>  
-              <button className="w-full bg-black text-white py-4 text-xs uppercase tracking-widest font-bold hover:bg-gray-800 transition-colors">  
-                Apply for Access  
-              </button>  
+                
+              <Link href="/reserve">  
+                <button className="w-full bg-black text-white py-4 text-xs uppercase tracking-widest font-bold hover:bg-gray-800 transition-colors">  
+                  Apply for Access  
+                </button>  
+              </Link>  
             </div>  
           </div>  
         </div>  
@@ -114,9 +117,12 @@ export default function SanctuaryDetailPage() {
                       <p className="text-xs font-bold uppercase tracking-tighter text-gray-900 mb-1">NexVoyage Member Offer</p>  
                       <p className="text-sm text-gray-700 italic">{property.exclusiveOffer}</p>  
                     </div>  
-                    <button className="text-xs uppercase tracking-widest font-bold border-b border-black pb-1 hover:text-gray-500 hover:border-gray-500 transition-colors">  
-                      View Deal Details  
-                    </button>  
+                      
+                    <Link href="/reserve">  
+                      <button className="text-xs uppercase tracking-widest font-bold border-b border-black pb-1 hover:text-gray-500 hover:border-gray-500 transition-colors">  
+                        Inquire for Dates  
+                      </button>  
+                    </Link>  
                   </div>  
                 </div>  
               ))}  
