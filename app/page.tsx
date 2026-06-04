@@ -1,95 +1,70 @@
-'use client'; // This fixes the styled-jsx build error
-
-import React from 'react';
-
-const Navigation = () => (  
-<nav className="fixed top-0 w-full z-50 px-12 py-8 flex justify-between items-center font-sans">  
-  <div className="text-amber-100/90 tracking-[0.5em] uppercase text-xs font-bold">  
-    NexVoyage Collective  
-  </div>  
-  <div className="flex gap-12 text-stone-500 uppercase tracking-[0.3em] text-[10px]">  
-    <a href="/sanctuaries" className="hover:text-amber-100 transition-colors">Sanctuaries</a>  
-    <a href="/reserve" className="hover:text-amber-100 transition-colors">Reserve</a>  
-  </div>  
-</nav>  
-);
+import Hero from './components/Hero'  
+import { sanctuaries } from './data/sanctuaries'  
+import Link from 'next/link'  
+import Image from 'next/image'
 
 export default function Home() {  
-return (  
-  <main className="bg-black text-stone-200 min-h-screen font-serif overflow-hidden">  
-    <Navigation />
+  return (  
+    <main className="min-h-screen bg-white">  
+      {/* 1. Hero Section */}  
+      <Hero   
+        title="The Art of Escape"  
+        subtitle="Curated sanctuaries for the high-net-worth traveler."  
+      />
 
-    <section className="relative h-screen w-full flex items-center justify-center">  
-      <div className="absolute inset-0 z-0">  
-        <img   
-          src="https://cdn.marblism.com/WuyrXpnAwo9.webp"   
-          alt="NexVoyage Twilight Sanctuary"   
-          className="w-full h-full object-cover opacity-60 scale-105 animate-slow-zoom"  
-        />  
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/80"></div>  
-        <div className="absolute inset-0 bg-black/20"></div>  
-      </div>
+      {/* 2. Sanctuary Grid Section */}  
+      <section className="max-w-7xl mx-auto px-4 py-24">  
+        <div className="text-center mb-16">  
+          <h2 className="text-3xl md:text-4xl font-light tracking-tight text-slate-900">  
+            Explore Our Sanctuaries  
+          </h2>  
+          <p className="mt-4 text-slate-500 max-w-2xl mx-auto">  
+            From the depths of the Serengeti to the peaks of the Alps, discover   
+            the world's most exclusive travel yields.  
+          </p>  
+        </div>
 
-      <div className="relative z-10 text-center px-6 max-w-5xl">  
-        <h2 className="text-amber-100/40 uppercase tracking-[0.6em] text-[10px] mb-12 font-sans animate-fade-in">  
-          By Appointment Only  
-        </h2>  
-        <h1 className="text-4xl md:text-7xl lg:text-8xl tracking-tighter text-stone-100 font-light leading-tight mb-16 italic">  
-          Restoration of Privacy through <br/>  
-          <span className="text-amber-100/90">Architectural Silence.</span>  
-        </h1>  
-          
-        <div className="flex flex-col md:flex-row items-center justify-center gap-8 animate-fade-in-up">  
-          <a   
-            href="/sanctuaries"   
-            className="group relative px-12 py-4 border border-stone-800 text-stone-400 hover:text-amber-100 hover:border-amber-200/30 transition-all duration-500 uppercase tracking-[0.3em] text-[10px] font-sans"  
-          >  
-            Explore the Sanctuaries  
-          </a>  
-          <a   
-            href="/reserve"   
-            className="text-amber-200/60 hover:text-amber-100 transition-colors uppercase tracking-[0.3em] text-[10px] font-sans border-b border-amber-200/10 pb-1"  
-          >  
-            Inquire  
-          </a>  
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">  
+          {sanctuaries.map((sanctuary) => (  
+            <Link   
+              key={sanctuary.id}   
+              href={`/sanctuaries/${sanctuary.slug}`}  
+              className="group relative block overflow-hidden rounded-lg bg-slate-100 aspect-[4/5]"  
+            >  
+              <Image  
+                src={sanctuary.heroImage}  
+                alt={sanctuary.name}  
+                fill  
+                className="object-cover transition-transform duration-700 group-hover:scale-105"  
+              />  
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />  
+                
+              <div className="absolute bottom-0 p-8 text-white">  
+                <p className="text-xs uppercase tracking-[0.2em] mb-2 opacity-80">  
+                  {sanctuary.atmosphere[0]}  
+                </p>  
+                <h3 className="text-2xl font-light mb-4">{sanctuary.name}</h3>  
+                <p className="text-sm line-clamp-2 opacity-90 font-light leading-relaxed">  
+                  {sanctuary.categoryDescription}  
+                </p>  
+                <div className="mt-6 inline-flex items-center text-xs uppercase tracking-widest border-b border-white/40 pb-1 group-hover:border-white transition-colors">  
+                  Explore Sanctuary  
+                </div>  
+              </div>  
+            </Link>  
+          ))}  
         </div>  
-      </div>
+      </section>
 
-      <div className="absolute bottom-12 left-12 hidden md:block">  
-        <div className="flex items-center gap-4">  
-          <div className="w-12 h-px bg-amber-200/20"></div>  
-          <span className="text-[9px] uppercase tracking-[0.5em] text-stone-600 font-sans">  
-            Global Collection 2026  
-          </span>  
+      {/* 3. Global Philosophy / USP Section */}  
+      <section className="bg-slate-50 py-24">  
+        <div className="max-w-4xl mx-auto px-4 text-center">  
+          <span className="text-xs uppercase tracking-[0.3em] text-slate-400">NexVoyage Collective</span>  
+          <h2 className="mt-6 text-2xl md:text-3xl font-light text-slate-800 leading-relaxed">  
+            "Travel is no longer about the destination, but the yield of the experience. We curate the quiet luxury that defines modern exploration."  
+          </h2>  
         </div>  
-      </div>  
-    </section>
-
-    <style jsx global>{`  
-      @keyframes slow-zoom {  
-        from { transform: scale(1.0); }  
-        to { transform: scale(1.1); }  
-      }  
-      .animate-slow-zoom {  
-        animation: slow-zoom 20s ease-out forwards;  
-      }  
-      @keyframes fadeIn {  
-        from { opacity: 0; }  
-        to { opacity: 1; }  
-      }  
-      .animate-fade-in {  
-        animation: fadeIn 2s ease-out;  
-      }  
-      @keyframes fadeInUp {  
-        from { opacity: 0; transform: translateY(20px); }  
-        to { opacity: 1; transform: translateY(0); }  
-      }  
-      .animate-fade-in-up {  
-        animation: fadeInUp 2.5s ease-out forwards;  
-        animation-delay: 0.5s;  
-        opacity: 0;  
-      }  
-    `}</style>  
-  </main>  
-);  
+      </section>  
+    </main>  
+  )  
 }  
