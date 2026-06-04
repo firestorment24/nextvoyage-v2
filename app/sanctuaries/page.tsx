@@ -1,7 +1,9 @@
 import Navigation from '../Navigation';  
 import Footer from '../Footer';  
-import { SANCTUARIES_DATA } from '../data/sanctuaries'; // Pointing to app/data/sanctuaries  
+import { SANCTUARIES_DATA } from '../../data/sanctuaries'; // Added one more dot to go to the project root  
 import Link from 'next/link';
+
+// ... the rest of the code stays the same  
 
 export default function SanctuariesPage() {  
   return (  
