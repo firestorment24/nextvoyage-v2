@@ -1,9 +1,13 @@
-// app/sanctuaries/page.tsx  
+import Navigation from '../Navigation'; // One level up from /sanctuaries/ to /app/  
+import Footer from '../Footer';         // One level up  
+// I'm leaving the data out for one more second to make sure the components link up first.
+
 export default function SanctuariesPage() {  
   return (  
-    <main style={{ padding: '100px', textAlign: 'center', fontFamily: 'serif' }}>  
-      <h1>The Sanctuaries</h1>  
-      <p>Pathing Debug Mode: If you see this, the file is in the right place.</p>  
+    <main className="p-20">  
+      <Navigation />  
+      <h1 className="text-4xl font-serif">Components Found</h1>  
+      <Footer />  
     </main>  
   );  
 }  
