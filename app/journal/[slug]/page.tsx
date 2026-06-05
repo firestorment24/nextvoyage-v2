@@ -4,79 +4,80 @@ import { useParams } from 'next/navigation'
 import Navigation from '../../Navigation'  
 import Footer from '../../components/Footer'
 
-// Mock post data (ideally this moves to a lib/posts.ts later)  
-const posts = {  
-  'art-of-the-unreachable': {  
-    title: "The Art of the Unreachable",  
-    category: "Philosophy",  
-    date: "June 2026",  
-    content: [  
-      { type: 'text', value: "True luxury is no longer about ownership; it is about access to the inaccessible. In a world where everything is available at a click, the only thing of value is that which cannot be searched for." },  
-      { type: 'pullquote', value: "Access is the new currency, but silence is the ultimate luxury." },  
-      { type: 'text', value: "We find that our clients are moving away from the 'known' destinations. They are looking for the white space on the map—the places where the signal drops and the service begins." }  
-    ],  
-    nextSlug: 'tempo-and-territory'  
+const sanctuaries = {  
+'amangiri-utah': {  
+  name: "Amangiri",  
+  location: "Canyon Point, Utah",  
+  coords: "37.0165° N, 111.8545° W",  
+  vibe: "Raw minimalism. Total silence. The desert as a cathedral.",  
+  logistics: {  
+    privacy: "Ultra-High (Gated Estate)",  
+    connectivity: "Fiber (Business Grade)",  
+    access: "Private Charter to Page (PGA)",  
+    reset: "Restorative"  
   },  
-  // ... other posts  
+  image: "https://images.unsplash.com/photo-1509023464722-18d996393ca8?auto=format&fit=crop&q=80&w=2070"  
+}  
 }
 
-export default function ArticlePage() {  
-  const { slug } = useParams()  
-  const post = posts[slug as keyof typeof posts]
+export default function SanctuaryPage() {  
+const { slug } = useParams()  
+const data = sanctuaries[slug as keyof typeof sanctuaries]
 
-  if (!post) return <div>Post not found.</div>
+if (!data) return <div className="p-20">Sanctuary not found.</div>
 
-  return (  
-    <main className="min-h-screen bg-white text-[#1a1a1a] font-light">  
-      <Navigation />  
-        
-      {/* Article Header */}  
-      <header className="pt-40 pb-20 px-6 max-w-screen-md mx-auto text-center">  
-        <span className="text-[10px] uppercase tracking-[0.4em] text-neutral-400 mb-6 block">  
-          {post.category} — {post.date}  
+return (  
+  <main className="min-h-screen bg-white text-[#1a1a1a]">  
+    <Navigation />  
+      
+    {/* Hero Section */}  
+    <section className="relative h-[80vh] w-full overflow-hidden">  
+      <img   
+        src={data.image}   
+        className="w-full h-full object-cover grayscale-[20%] brightness-75"  
+        alt={data.name}  
+      />  
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />  
+      <div className="absolute bottom-12 left-12 text-white">  
+        <span className="text-[10px] uppercase tracking-[0.5em] opacity-70 mb-4 block">  
+          {data.coords}  
         </span>  
-        <h1 className="text-4xl md:text-6xl font-normal tracking-tight leading-tight mb-12">  
-          {post.title}  
+        <h1 className="text-5xl md:text-7xl font-light tracking-tighter italic">  
+          {data.name}  
         </h1>  
-        <div className="w-px h-24 bg-neutral-200 mx-auto" />  
-      </header>
+        <p className="text-lg opacity-80 mt-2">{data.location}</p>  
+      </div>  
+    </section>
 
-      {/* Article Content */}  
-      <article className="max-w-screen-sm mx-auto px-6 pb-32">  
-        {post.content.map((block, i) => {  
-          if (block.type === 'pullquote') {  
-            return (  
-              <blockquote key={i} className="my-20 -mx-4 md:-mx-20 text-2xl md:text-3xl italic font-serif text-neutral-800 text-center leading-relaxed">  
-                "{block.value}"  
-              </blockquote>  
-            )  
-          }  
-          return (  
-            <p key={i} className="text-lg md:text-xl leading-relaxed text-neutral-700 mb-8">  
-              {block.value}  
-            </p>  
-          )  
-        })}  
-      </article>
+    {/* The Brief */}  
+    <section className="max-w-screen-xl mx-auto px-6 py-24 grid grid-cols-1 md:grid-cols-12 gap-16">  
+      <div className="md:col-span-7">  
+        <span className="text-[10px] uppercase tracking-[0.3em] text-neutral-400 mb-8 block">The Perspective</span>  
+        <p className="text-2xl md:text-3xl leading-relaxed font-light text-neutral-800">  
+          {data.vibe}  
+        </p>  
+      </div>
 
-      {/* Next Article Preview */}  
-      {post.nextSlug && (  
-        <section className="border-t border-neutral-100 py-32 px-6 bg-[#fafafa]">  
-          <div className="max-w-screen-md mx-auto text-center">  
-            <span className="text-[10px] uppercase tracking-[0.3em] text-neutral-400 mb-4 block">Next Perspective</span>  
-            <a href={`/journal/${post.nextSlug}`} className="group">  
-              <h2 className="text-3xl md:text-4xl hover:text-neutral-500 transition-colors">  
-                {posts[post.nextSlug as keyof typeof posts]?.title}  
-              </h2>  
-              <div className="mt-8 inline-block text-xs uppercase tracking-widest border-b border-black pb-1 group-hover:border-neutral-400 transition-all">  
-                Read Entry →  
-              </div>  
-            </a>  
-          </div>  
-        </section>  
-      )}
+      <div className="md:col-span-4 md:col-start-9 bg-[#fafafa] p-10">  
+        <span className="text-[10px] uppercase tracking-[0.3em] text-neutral-400 mb-8 block">The Logistics</span>  
+        <div className="space-y-8">  
+          {Object.entries(data.logistics).map(([key, val]) => (  
+            <div key={key} className="border-b border-neutral-200 pb-4">  
+              <span className="text-[9px] uppercase tracking-widest text-neutral-400 block mb-1">{key}</span>  
+              <span className="text-sm font-normal uppercase tracking-wider">{val}</span>  
+            </div>  
+          ))}  
+        </div>  
+        <a   
+          href="/concierge"   
+          className="mt-12 block w-full text-center bg-black text-white py-4 text-xs uppercase tracking-widest hover:bg-neutral-800 transition-colors"  
+        >  
+          Request Secure Access  
+        </a>  
+      </div>  
+    </section>
 
-      <Footer />  
-    </main>  
-  )  
+    <Footer />  
+  </main>  
+)  
 }  
