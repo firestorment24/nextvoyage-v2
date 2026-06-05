@@ -4,7 +4,7 @@ interface HeroProps {
   title: string  
   subtitle: string  
 }
-
+ 
 export default function Hero({ title, subtitle }: HeroProps) {  
   return (  
     <div className="relative h-[60vh] flex items-center justify-center overflow-hidden bg-black text-white">  
