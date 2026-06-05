@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 export default function Home() {  
-  return (  
+  return (   
     <main className="min-h-screen">  
       <Hero title="The Art of Escape" subtitle="Curated sanctuaries." />  
       <section className="max-w-7xl mx-auto px-4 py-24">  
