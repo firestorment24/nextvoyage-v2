@@ -10,7 +10,7 @@ export interface Property {
 }
 
 export const properties: Property[] = [  
-  {   
+  {  
     id: '1',  
     slug: 'aman-new-york',  
     sanctuarySlug: 'the-metropolitan',  
