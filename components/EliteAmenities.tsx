@@ -44,11 +44,11 @@ export const EliteAmenities = () => {
     <section className="py-16 border-y border-zinc-100 bg-white">  
       <div className="max-w-6xl mx-auto px-6">  
         <div className="mb-12">  
-          <h3 className="text-xs uppercase tracking-[0.3em] text-zinc-400 mb-2">The Collective Perks</h3>  
+          <h3 className="text-xs uppercase tracking-[0.3em] text-zinc-400 mb-2 font-medium">The Collective Perks</h3>  
           <h2 className="text-3xl font-light text-zinc-900 italic">Elite Amenities</h2>  
         </div>  
           
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">  
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-left">  
           {amenities.map((item, idx) => (  
             <div key={idx} className="group">  
               <div className="text-zinc-900 mb-4 transition-transform duration-500 group-hover:-translate-y-1">  
