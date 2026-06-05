@@ -1,69 +1,41 @@
-'use client'
-
-import { useState } from 'react'  
-import Navigation from '../Navigation'  
-import Footer from '../components/Footer'  
 import Link from 'next/link'  
-// Import the data we just moved to the lib folder  
-import { SANCTUARIES_DATA } from '../lib/data'
+import { Navigation } from '@/components/Navigation'  
+import { Footer } from '@/components/Footer'  
+import { SANCTUARIES_DATA } from '@/lib/data'
 
-export default function SanctuariesIndex() {  
-  const [filter, setFilter] = useState('All')  
-  const tags = ['All', 'Access', 'Seclusion', 'Restoration', 'Privacy']
-
-  const filteredSanctuaries = SANCTUARIES_DATA.filter(  
-    s => filter === 'All' || s.tag === filter  
-  )
-
+export default function SanctuariesPage() {  
   return (  
-    <main className="min-h-screen bg-[#fafafa] text-[#1a1a1a] font-light">  
+    <main className="min-h-screen bg-[#F9F8F6] text-[#2C2C2C] font-light">  
       <Navigation />  
         
-      <header className="pt-40 pb-20 px-6 max-w-screen-xl mx-auto">  
-        <h1 className="text-5xl md:text-7xl font-light tracking-tighter mb-12 italic">The Collection</h1>  
-          
-        <div className="flex flex-wrap gap-8 border-b border-neutral-200 pb-8">  
-          {tags.map(tag => (  
-            <button   
-              key={tag}  
-              onClick={() => setFilter(tag)}  
-              className={`text-[10px] uppercase tracking-[0.3em] transition-all ${  
-                filter === tag ? 'text-black font-medium' : 'text-neutral-400 hover:text-neutral-600'  
-              }`}  
-            >  
-              {tag}  
-            </button>  
-          ))}  
-        </div>  
-      </header>
+      <section className="pt-32 pb-20 px-6 max-w-7xl mx-auto">  
+        <header className="mb-16 border-b border-black/10 pb-8">  
+          <h1 className="text-4xl md:text-5xl font-serif mb-4 tracking-tight">The Collection</h1>  
+          <p className="text-lg opacity-70 max-w-2xl italic">  
+            A curated atlas of sanctuary archetypes, designed for the discerning global traveler.  
+          </p>  
+        </header>
 
-      <section className="max-w-screen-xl mx-auto px-6 pb-40">  
-        <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">  
-          {filteredSanctuaries.map((s) => (  
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">  
+          {SANCTUARIES_DATA.map((sanctuary) => (  
             <Link   
-              key={s.id}   
-              href={`/sanctuaries/${s.id}`}  
-              className="group block relative overflow-hidden bg-neutral-200 break-inside-avoid"  
+              key={sanctuary.slug}   
+              href={`/sanctuaries/${sanctuary.slug}`}  
+              className="group block"  
             >  
-              <img   
-                src={s.image}   
-                alt={s.name}  
-                className="w-full grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"  
-              />  
-                
-              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8 text-white">  
-                <span className="text-[9px] uppercase tracking-[0.4em] mb-2 opacity-70">{s.tag}</span>  
-                <h3 className="text-2xl font-light italic mb-4">{s.name}</h3>  
-                <p className="text-sm font-light leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity delay-100 duration-500">  
-                  {s.roi}  
-                </p>  
-              </div>
-
-              <div className="absolute top-6 left-6 group-hover:opacity-0 transition-opacity">  
-                 <span className="text-[10px] uppercase tracking-[0.3em] text-white mix-blend-difference">  
-                   {s.name}  
-                 </span>  
+              <div className="aspect-[4/5] bg-neutral-200 mb-6 overflow-hidden relative">  
+                {/* Placeholder for cinematic imagery */}  
+                <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500" />  
               </div>  
+              <h2 className="text-2xl font-serif mb-2 group-hover:italic transition-all duration-300">  
+                {sanctuary.title}  
+              </h2>  
+              <p className="text-sm uppercase tracking-widest opacity-50 mb-3">  
+                {sanctuary.category}  
+              </p>  
+              <p className="text-sm leading-relaxed opacity-70 line-clamp-2">  
+                {sanctuary.description}  
+              </p>  
             </Link>  
           ))}  
         </div>  
