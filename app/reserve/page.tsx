@@ -1,125 +1,97 @@
 'use client';
 
-import { useState } from 'react';  
-import Link from 'next/link';
+import React, { Suspense } from 'react';  
+import Link from 'next/link';  
+import { useSearchParams } from 'next/navigation';
+
+const IconArrowLeft = () => (  
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>  
+);
+
+function ReserveForm() {  
+const searchParams = useSearchParams();  
+const propertyName = searchParams.get('property') || 'Bespoke Collection';
+
+return (  
+  <div className="max-w-2xl mx-auto py-24 px-8">  
+    <div className="space-y-2 mb-16">  
+      <h1 className="text-4xl font-extralight tracking-tight lowercase italic">Inquiry Manifest</h1>  
+      <p className="text-xs uppercase tracking-[0.3em] text-stone-400">Property: {propertyName}</p>  
+    </div>
+
+    <form className="space-y-12">  
+      {/* The Manifest Sections */}  
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">  
+        <div className="space-y-2 border-b border-stone-200 pb-2">  
+          <label className="text-[10px] uppercase tracking-widest text-stone-400">Full Name</label>  
+          <input   
+            type="text"   
+            placeholder="Daryl Clark"  
+            className="w-full bg-transparent text-lg font-light outline-none placeholder:text-stone-300"  
+          />  
+        </div>  
+        <div className="space-y-2 border-b border-stone-200 pb-2">  
+          <label className="text-[10px] uppercase tracking-widest text-stone-400">Email Address</label>  
+          <input   
+            type="email"   
+            placeholder="daryl@nexvoyage.com"  
+            className="w-full bg-transparent text-lg font-light outline-none placeholder:text-stone-300"  
+          />  
+        </div>  
+      </div>
+
+      <div className="space-y-2 border-b border-stone-200 pb-2">  
+        <label className="text-[10px] uppercase tracking-widest text-stone-400">Travel Window</label>  
+        <input   
+          type="text"   
+          placeholder="Early Autumn 2026"  
+          className="w-full bg-transparent text-lg font-light outline-none placeholder:text-stone-300"  
+        />  
+      </div>
+
+      <div className="space-y-2 border-b border-stone-200 pb-2">  
+        <label className="text-[10px] uppercase tracking-widest text-stone-400">Party Size & Preferences</label>  
+        <textarea   
+          rows={4}  
+          placeholder="Two adults. Prefer high-floor suites with sunset views. Interested in private wellness sessions."  
+          className="w-full bg-transparent text-lg font-light outline-none placeholder:text-stone-300 resize-none"  
+        />  
+      </div>
+
+      <div className="pt-8">  
+        <button   
+          type="submit"  
+          className="w-full bg-[#1a1a1a] text-white py-6 uppercase text-xs tracking-[0.4em] hover:bg-stone-800 transition-all duration-500"  
+        >  
+          Submit to The Ledger  
+        </button>  
+        <p className="text-[9px] text-center mt-6 text-stone-400 uppercase tracking-widest leading-loose">  
+          By submitting, you initiate a private consultation.<br/>Our team will review the manifest and contact you within 4 hours.  
+        </p>  
+      </div>  
+    </form>  
+  </div>  
+);  
+}
 
 export default function ReservePage() {  
-  const [submitted, setSubmitted] = useState(false);
+return (  
+  <main className="min-h-screen bg-[#faf9f6] text-[#1a1a1a]">  
+    <nav className="p-8 flex justify-between items-center">  
+      <Link href="/" className="flex items-center gap-2 hover:opacity-70 transition-opacity">  
+        <IconArrowLeft />  
+        <span className="text-xs uppercase tracking-widest font-light">Exit</span>  
+      </Link>  
+      <div className="text-xl tracking-[0.2em] font-extralight uppercase">NexVoyage</div>  
+    </nav>
 
-  const handleSubmit = (e: React.FormEvent) => {  
-    e.preventDefault();  
-    // In a real app, you'd send this to your backend or CRM  
-    setSubmitted(true);  
-  };
+    <Suspense fallback={<div className="flex justify-center py-24 text-xs uppercase tracking-widest text-stone-400">Initializing Manifest...</div>}>  
+      <ReserveForm />  
+    </Suspense>
 
-  if (submitted) {  
-    return (  
-      <main className="min-h-screen bg-white flex flex-col items-center justify-center px-6 text-center">  
-        <span className="text-[10px] tracking-[0.5em] uppercase text-neutral-400 mb-8">  
-          Received  
-        </span>  
-        <h1 className="text-4xl font-light tracking-tighter text-neutral-900 mb-6">  
-          Your inquiry is being reviewed.  
-        </h1>  
-        <p className="text-neutral-500 max-w-md mx-auto mb-12 font-light leading-relaxed">  
-          A dedicated specialist from the NexVoyage Collective will contact you via your preferred secure channel within 12 hours.  
-        </p>  
-        <Link   
-          href="/sanctuaries"  
-          className="text-[10px] tracking-[0.3em] uppercase font-bold text-neutral-900 border-b border-neutral-900 pb-1"  
-        >  
-          Return to Sanctuaries  
-        </Link>  
-      </main>  
-    );  
-  }
-
-  return (  
-    <main className="min-h-screen bg-white pt-32 pb-24 px-6">  
-      <div className="max-w-3xl mx-auto">  
-        <header className="mb-20">  
-          <span className="text-[10px] tracking-[0.5em] uppercase text-neutral-400 mb-6 block">  
-            The Reserve  
-          </span>  
-          <h1 className="text-5xl font-light tracking-tighter text-neutral-900 mb-6">  
-            Private Inquiry  
-          </h1>  
-          <p className="text-xl text-neutral-500 font-light leading-relaxed">  
-            Your journey begins with a conversation. Tell us about the vision for your next sanctuary.  
-          </p>  
-        </header>
-
-        <form onSubmit={handleSubmit} className="space-y-16">  
-          {/* Section: Identity */}  
-          <div className="space-y-12">  
-            <div className="group">  
-              <label className="block text-[10px] tracking-[0.2em] uppercase font-bold text-neutral-400 mb-2 group-focus-within:text-neutral-900 transition-colors">  
-                Full Name  
-              </label>  
-              <input   
-                required  
-                type="text"   
-                placeholder="Ex. Alexander Sterling"  
-                className="w-full bg-transparent border-b border-neutral-200 py-4 text-xl font-light focus:outline-none focus:border-neutral-900 transition-colors placeholder:text-neutral-200"  
-              />  
-            </div>
-
-            <div className="group">  
-              <label className="block text-[10px] tracking-[0.2em] uppercase font-bold text-neutral-400 mb-2 group-focus-within:text-neutral-900 transition-colors">  
-                Communication  
-              </label>  
-              <input   
-                required  
-                type="email"   
-                placeholder="email@example.com"  
-                className="w-full bg-transparent border-b border-neutral-200 py-4 text-xl font-light focus:outline-none focus:border-neutral-900 transition-colors placeholder:text-neutral-200"  
-              />  
-            </div>  
-          </div>
-
-          {/* Section: The Brief */}  
-          <div className="space-y-12">  
-            <div className="group">  
-              <label className="block text-[10px] tracking-[0.2em] uppercase font-bold text-neutral-400 mb-2 group-focus-within:text-neutral-900 transition-colors">  
-                Requested Sanctuary  
-              </label>  
-              <select className="w-full bg-transparent border-b border-neutral-200 py-4 text-xl font-light focus:outline-none focus:border-neutral-900 transition-colors appearance-none">  
-                <option value="">Select a destination (optional)</option>  
-                <option value="metropolitan">The Metropolitan</option>  
-                <option value="coastal">The Coastal</option>  
-                <option value="island">The Island</option>  
-                <option value="alpine">The Alpine</option>  
-                <option value="safari">The Safari</option>  
-                <option value="oasis">The Oasis</option>  
-                {/* ... other sanctuaries ... */}  
-              </select>  
-            </div>
-
-            <div className="group">  
-              <label className="block text-[10px] tracking-[0.2em] uppercase font-bold text-neutral-400 mb-2 group-focus-within:text-neutral-900 transition-colors">  
-                The Brief  
-              </label>  
-              <textarea   
-                rows={4}  
-                placeholder="Share any specific requirements or desired dates..."  
-                className="w-full bg-transparent border-b border-neutral-200 py-4 text-xl font-light focus:outline-none focus:border-neutral-900 transition-colors placeholder:text-neutral-200 resize-none"  
-              />  
-            </div>  
-          </div>
-
-          <div className="pt-8">  
-            <button   
-              type="submit"  
-              className="w-full md:w-auto px-12 py-5 bg-neutral-900 text-white text-[10px] tracking-[0.4em] uppercase hover:bg-neutral-800 transition-all duration-300"  
-            >  
-              Submit Inquiry  
-            </button>  
-            <p className="mt-6 text-[10px] text-neutral-400 italic">  
-              Strict confidentiality is maintained for all inquiries.  
-            </p>  
-          </div>  
-        </form>  
-      </div>  
-    </main>  
-  );  
+    <footer className="py-12 text-center">  
+      <p className="text-[10px] uppercase tracking-[0.4em] text-stone-300">NexVoyage Collective &copy; 2026</p>  
+    </footer>  
+  </main>  
+);  
 }  
