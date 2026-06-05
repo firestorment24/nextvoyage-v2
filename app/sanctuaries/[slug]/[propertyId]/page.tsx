@@ -1,12 +1,15 @@
 import React from 'react';  
 import Link from 'next/link';  
-import { PROPERTIES_DATA } from '@/data/properties';  
-import Navigation from '@/components/Navigation';  
-import Footer from '@/components/Footer';  
-import { EliteAmenities } from '@/components/EliteAmenities';
+// Corrected to use the lowercase 'properties' export and relative path  
+import { properties } from '../../../data/properties';  
+// Corrected to relative paths for components  
+import Navigation from '../../../components/Navigation';  
+import Footer from '../../../components/Footer';  
+import { EliteAmenities } from '../../../components/EliteAmenities';
 
 export default function PropertyPage({ params }: { params: { slug: string; propertyId: string } }) {  
-  const property = PROPERTIES_DATA.find(p => p.id === params.propertyId);
+  // Matching against the lowercase export  
+  const property = properties.find(p => p.id === params.propertyId);
 
   if (!property) return <div className="p-20 text-center font-light text-zinc-400 uppercase tracking-widest">Property Not Found</div>;
 
@@ -22,7 +25,7 @@ export default function PropertyPage({ params }: { params: { slug: string; prope
           className="w-full h-full object-cover"  
         />  
         <div className="absolute inset-0 bg-black/20" />  
-        <div className="absolute bottom-12 left-6 md:left-12 text-white">  
+        <div className="absolute bottom-12 left-6 md:left-12 text-white text-left">  
           <p className="text-xs uppercase tracking-[0.4em] mb-3 opacity-80">{property.location}</p>  
           <h1 className="text-5xl md:text-7xl font-light tracking-tight">{property.name}</h1>  
         </div>  
@@ -38,7 +41,7 @@ export default function PropertyPage({ params }: { params: { slug: string; prope
         </p>  
       </section>
 
-      {/* NEW: Elite Amenities Section */}  
+      {/* Elite Amenities Section */}  
       <EliteAmenities />
 
       {/* Inquiry CTA */}  
