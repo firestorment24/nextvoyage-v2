@@ -1,75 +1,130 @@
 'use client'
 
-import Navigation from '../Navigation'  
-import Footer from '../Footer'
+import { useState } from 'react'  
+import { Navigation } from '../components/Navigation'  
+import { Footer } from '../components/Footer'
 
 export default function ConciergePage() {  
-return (  
-<main className="min-h-screen bg-black text-white font-sans selection:bg-white/20">  
-  <Navigation />  
-    
-  <section className="pt-40 pb-20 px-6 max-w-4xl mx-auto">  
-    {/* The Gatekeeper Intro */}  
-    <div className="mb-24 space-y-8">  
-      <span className="text-[10px] tracking-[0.8em] uppercase text-white/30 block mb-4">  
-        Private Inquiry  
-      </span>  
-      <h1 className="text-4xl md:text-6xl font-serif leading-tight tracking-tighter">  
-        True luxury is the luxury of being understood without saying a word.  
-      </h1>  
-      <p className="text-lg text-white/50 font-light max-w-2xl leading-relaxed">  
-        Our concierge service is a closed-loop system designed for absolute discretion. We don't just book travel; we architect moments of profound stillness.  
-      </p>  
-    </div>
+  const [step, setStep] = useState<'intro' | 'discovery' | 'contact' | 'complete'>('intro')  
+  const [selections, setSelections] = useState({  
+    priority: '',  
+    tempo: '',  
+    travelers: '',  
+    contact: ''  
+  })
 
-    {/* The Inquiry Flow */}  
-    <form className="space-y-16">  
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">  
-        <div className="space-y-4">  
-          <label className="text-[10px] uppercase tracking-widest text-white/40">Identity</label>  
-          <input   
-            type="text"   
-            placeholder="Full Legal Name"   
-            className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-white transition-colors placeholder:text-white/10"  
-          />  
-        </div>  
-        <div className="space-y-4">  
-          <label className="text-[10px] uppercase tracking-widest text-white/40">Access</label>  
-          <input   
-            type="email"   
-            placeholder="Preferred Private Email"   
-            className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-white transition-colors placeholder:text-white/10"  
-          />  
+  const nextStep = () => {  
+    if (step === 'intro') setStep('discovery')  
+    else if (step === 'discovery') setStep('contact')  
+    else if (step === 'contact') setStep('complete')  
+  }
+
+  return (  
+    <main className="min-h-screen bg-[#fafafa] text-[#1a1a1a] font-light selection:bg-black selection:text-white">  
+      <Navigation />  
+        
+      <div className="max-w-screen-xl mx-auto px-6 pt-32 pb-20">  
+        <div className="max-w-2xl">  
+          {/* Step 1: The Gatekeeper Intro */}  
+          {step === 'intro' && (  
+            <div className="animate-in fade-in duration-1000 slide-in-from-bottom-4">  
+              <h1 className="text-4xl md:text-5xl leading-tight mb-8 tracking-tight font-normal">  
+                Access is the new luxury. <br />  
+                <span className="text-neutral-400">But privacy is the ultimate requirement.</span>  
+              </h1>  
+              <p className="text-lg text-neutral-600 mb-12 leading-relaxed">  
+                The NexVoyage Concierge is a closed-loop system for high-net-worth travelers who require seamless logistics without the noise.  
+              </p>  
+              <button   
+                onClick={nextStep}  
+                className="group flex items-center gap-4 text-sm uppercase tracking-widest border-b border-black pb-2 hover:text-neutral-500 transition-colors"  
+              >  
+                Begin Discovery  
+                <span className="group-hover:translate-x-1 transition-transform">→</span>  
+              </button>  
+            </div>  
+          )}
+
+          {/* Step 2: The Discovery Selections */}  
+          {step === 'discovery' && (  
+            <div className="animate-in fade-in duration-700">  
+              <div className="mb-12">  
+                <span className="text-[10px] uppercase tracking-[0.3em] text-neutral-400 mb-2 block">Priority</span>  
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">  
+                  {['Total Seclusion', 'Unrivaled Access'].map((opt) => (  
+                    <button   
+                      key={opt}  
+                      onClick={() => setSelections({...selections, priority: opt})}  
+                      className={`p-8 text-left border transition-all ${selections.priority === opt ? 'border-black bg-white shadow-sm' : 'border-neutral-200 hover:border-neutral-400'}`}  
+                    >  
+                      <span className="text-lg">{opt}</span>  
+                    </button>  
+                  ))}  
+                </div>  
+              </div>
+
+              <div className="mb-12">  
+                <span className="text-[10px] uppercase tracking-[0.3em] text-neutral-400 mb-2 block">Tempo</span>  
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">  
+                  {['Static & Restorative', 'Dynamic & Exploratory'].map((opt) => (  
+                    <button   
+                      key={opt}  
+                      onClick={() => setSelections({...selections, tempo: opt})}  
+                      className={`p-8 text-left border transition-all ${selections.tempo === opt ? 'border-black bg-white shadow-sm' : 'border-neutral-200 hover:border-neutral-400'}`}  
+                    >  
+                      <span className="text-lg">{opt}</span>  
+                    </button>  
+                  ))}  
+                </div>  
+              </div>
+
+              <button   
+                onClick={nextStep}  
+                disabled={!selections.priority || !selections.tempo}  
+                className="text-sm uppercase tracking-widest border-b border-black pb-2 disabled:opacity-30"  
+              >  
+                Continue  
+              </button>  
+            </div>  
+          )}
+
+          {/* Step 3: Minimal Contact */}  
+          {step === 'contact' && (  
+            <div className="animate-in fade-in duration-700">  
+              <h2 className="text-3xl mb-8 tracking-tight">How should we reach you?</h2>  
+              <input   
+                type="text"   
+                placeholder="Email or WhatsApp"  
+                className="w-full bg-transparent border-b border-neutral-300 py-4 text-xl outline-none focus:border-black transition-colors mb-12"  
+                onChange={(e) => setSelections({...selections, contact: e.target.value})}  
+              />  
+              <button   
+                onClick={nextStep}  
+                disabled={!selections.contact}  
+                className="text-sm uppercase tracking-widest border-b border-black pb-2 disabled:opacity-30"  
+              >  
+                Send Request  
+              </button>  
+            </div>  
+          )}
+
+          {/* Step 4: Completion */}  
+          {step === 'complete' && (  
+            <div className="animate-in fade-in zoom-in-95 duration-1000">  
+              <h2 className="text-4xl mb-6 tracking-tight italic text-neutral-800 font-serif">Understood.</h2>  
+              <p className="text-lg text-neutral-500 leading-relaxed mb-8">  
+                Your profile is being reviewed. We prioritize timing and discretion; expect a response within the hour.  
+              </p>  
+              <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-neutral-400">  
+                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />  
+                Secured Connection — NexVoyage Collective  
+              </div>  
+            </div>  
+          )}  
         </div>  
       </div>
 
-      <div className="space-y-4">  
-        <label className="text-[10px] uppercase tracking-widest text-white/40">Intention</label>  
-        <textarea   
-          rows={2}  
-          placeholder="What is the primary intention of this voyage?"   
-          className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-white transition-colors placeholder:text-white/10 resize-none"  
-        />  
-      </div>
-
-      <div className="flex flex-col md:flex-row items-center justify-between pt-8 gap-8">  
-        {/* Secure Badge */}  
-        <div className="flex items-center gap-3 text-white/20">  
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">  
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>  
-            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>  
-          </svg>  
-          <span className="text-[9px] tracking-widest uppercase">End-to-End Encrypted Inquiry</span>  
-        </div>
-
-        <button className="px-12 py-4 bg-white text-black text-xs uppercase tracking-[0.3em] hover:bg-white/90 transition-all font-medium">  
-          Initiate Contact  
-        </button>  
-      </div>  
-    </form>  
-  </section>
-
-  <Footer />  
-</main>  
-)  
+      <Footer />  
+    </main>  
+  )  
 }  
