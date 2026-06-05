@@ -13,7 +13,7 @@ export default function PropertyBuckets({ sanctuaryId }: PropertyBucketsProps) {
     { name: 'Off-Market Access', count: 2, description: 'Exclusive quiet-luxury listings.' }  
   ]
 
-  return (  
+  return (   
     <div className="grid grid-cols-1 md:grid-cols-3 gap-12 py-12 border-t border-black/5">  
       {buckets.map((bucket, index) => (  
         <div key={index} className="flex flex-col group">  
