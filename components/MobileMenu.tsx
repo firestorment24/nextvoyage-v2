@@ -1,8 +1,7 @@
 'use client'
 
 import { useState } from 'react'  
-import Link from 'next/link'  
-import { X, Menu } from 'lucide-react'
+import Link from 'next/link'
 
 const navLinks = [  
   { name: 'The Home', href: '/' },  
@@ -23,33 +22,40 @@ export default function MobileMenu() {
       <button   
         onClick={toggleMenu}  
         className="p-2 text-white focus:outline-none"  
-        aria-label="Toggle Menu"  
+        aria-label="Open Menu"  
       >  
-        <Menu size={24} strokeWidth={1.5} />  
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">  
+          <line x1="3" y1="12" x2="21" y2="12"></line>  
+          <line x1="3" y1="6" x2="21" y2="6"></line>  
+          <line x1="3" y1="18" x2="21" y2="18"></line>  
+        </svg>  
       </button>
 
       {/* Full-Screen Overlay */}  
       <div className={`  
-        fixed inset-0 z-50 bg-black/95 backdrop-blur-md transition-all duration-500 ease-in-out  
+        fixed inset-0 z-50 bg-black/98 backdrop-blur-xl transition-all duration-700 ease-in-out  
         ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}  
       `}>  
         {/* Close Button */}  
-        <div className="flex justify-end p-6">  
-          <button onClick={toggleMenu} className="text-white/70 hover:text-white">  
-            <X size={32} strokeWidth={1} />  
+        <div className="flex justify-end p-8">  
+          <button onClick={toggleMenu} className="text-white/50 hover:text-white transition-colors">  
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">  
+              <line x1="18" y1="6" x2="6" y2="18"></line>  
+              <line x1="6" y1="6" x2="18" y2="18"></line>  
+            </svg>  
           </button>  
         </div>
 
         {/* Navigation Links */}  
-        <nav className="flex flex-col items-center justify-center h-full -mt-20">  
-          <p className="text-xs uppercase tracking-[0.5em] text-white/30 mb-12">Navigation</p>  
-          <ul className="space-y-8 text-center">  
+        <nav className="flex flex-col items-center justify-center h-[70vh]">  
+          <p className="text-[10px] uppercase tracking-[0.6em] text-white/20 mb-16">Navigation</p>  
+          <ul className="space-y-10 text-center">  
             {navLinks.map((link) => (  
               <li key={link.name}>  
                 <Link   
                   href={link.href}   
                   onClick={toggleMenu}  
-                  className="text-3xl font-serif text-white hover:text-white/60 transition-colors duration-300"  
+                  className="text-4xl font-serif text-white hover:text-white/40 transition-all duration-500 block"  
                 >  
                   {link.name}  
                 </Link>  
@@ -58,8 +64,8 @@ export default function MobileMenu() {
           </ul>  
             
           {/* Branding Footer */}  
-          <div className="absolute bottom-12 text-center">  
-            <span className="text-[10px] tracking-[0.8em] uppercase text-white/20">  
+          <div className="mt-auto pb-12 text-center">  
+            <span className="text-[9px] tracking-[1em] uppercase text-white/10">  
               NexVoyage Collective  
             </span>  
           </div>  
