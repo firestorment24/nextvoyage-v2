@@ -20,8 +20,8 @@ export async function generateStaticParams() {
 }
 
 export default function SanctuaryPage({ params }: { params: { slug: string } }) {  
-  const sanctuary = sanctuaries.find((s) => s.slug === params.slug);  
-    
+  const sanctuary = sanctuaries.find((s) => s.slug === params.slug);
+
   if (!sanctuary) {  
     notFound();  
   }
@@ -44,7 +44,7 @@ export default function SanctuaryPage({ params }: { params: { slug: string } }) 
       <section className="relative h-[70vh] w-full overflow-hidden">  
         <Image  
           src={sanctuary.heroImage}  
-          alt={sanctuary.title}  
+          alt={sanctuary.name}  
           fill  
           className="object-cover"  
           priority  
@@ -53,7 +53,7 @@ export default function SanctuaryPage({ params }: { params: { slug: string } }) 
         <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center px-4">  
           <span className="text-xs uppercase tracking-[0.5em] mb-4 opacity-80">Collection</span>  
           <h1 className="text-6xl md:text-8xl font-extralight tracking-tighter lowercase italic">  
-            {sanctuary.title}  
+            {sanctuary.name}  
           </h1>  
         </div>  
       </section>
@@ -86,7 +86,7 @@ export default function SanctuaryPage({ params }: { params: { slug: string } }) 
         <div className="lg:col-span-8">  
           <div className="flex justify-between items-end mb-12">  
             <h2 className="text-3xl font-extralight tracking-tight text-stone-800">  
-              The {sanctuary.title} Ledger  
+              The {sanctuary.name} Ledger  
             </h2>  
             <span className="text-[10px] uppercase tracking-widest text-stone-400">  
               {sanctuaryProperties.length} Properties Curated  
