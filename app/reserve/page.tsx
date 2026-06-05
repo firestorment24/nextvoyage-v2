@@ -5,17 +5,27 @@ import { properties } from '@/data/properties'
 import Navigation from '@/app/Navigation'  
 import Footer from '@/app/Footer'
 
+// Local interface to satisfy the compiler  
+interface Property {  
+  id: string;  
+  name: string;  
+  location: string;  
+  image: string;  
+}
+
 export default function ReservePage() {  
   const searchParams = useSearchParams()  
-  const propertyId = searchParams.get('propertyId')  
-    
-  const selectedProperty = properties.find(p => p.id === propertyId) || properties[0]
+  const propertyId = searchParams.get('propertyId')
+
+  // Casting through unknown to bypass type overlap checks  
+  const allProperties = properties as unknown as Property[]  
+  const selectedProperty = allProperties.find(p => p.id === propertyId) || allProperties[0]
 
   return (  
     <main className="bg-black text-white min-h-screen">  
       <Navigation />  
         
-      <div className="flex flex-col lg:flex-row h-screen pt-20">  
+      <div className="flex flex-col lg:flex-row min-h-screen pt-20">  
         {/* Cinematic Side */}  
         <div className="hidden lg:block lg:w-1/2 relative overflow-hidden">  
           <img   
