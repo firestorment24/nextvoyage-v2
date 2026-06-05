@@ -1,97 +1,155 @@
 'use client';
 
-import React, { Suspense } from 'react';  
-import Link from 'next/link';  
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';  
+import { useState, useEffect, Suspense } from 'react';  
+import Navigation from '../Navigation';  
+import Footer from '../Footer';  
+import { properties } from '../../data/properties';
 
-const IconArrowLeft = () => (  
-<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>  
-);
+interface Property {  
+  id: string;  
+  name: string;  
+  location: string;  
+}
 
-function ReserveForm() {  
-const searchParams = useSearchParams();  
-const propertyName = searchParams.get('property') || 'Bespoke Collection';
+function ReserveFormContent() {  
+  const searchParams = useSearchParams();  
+  const propertyId = searchParams.get('property');  
+    
+  // Cast properties through unknown to bypass strict type check if needed  
+  const propertyList = (properties as unknown as Property[]);  
+  const selectedProperty = propertyList.find(p => p.id === propertyId);
 
-return (  
-  <div className="max-w-2xl mx-auto py-24 px-8">  
-    <div className="space-y-2 mb-16">  
-      <h1 className="text-4xl font-extralight tracking-tight lowercase italic">Inquiry Manifest</h1>  
-      <p className="text-xs uppercase tracking-[0.3em] text-stone-400">Property: {propertyName}</p>  
-    </div>
+  const [formData, setFormData] = useState({  
+    name: '',  
+    email: '',  
+    property: propertyId || '',  
+    dates: '',  
+    cohort: '',  
+    brief: ''  
+  });
 
-    <form className="space-y-12">  
-      {/* The Manifest Sections */}  
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">  
-        <div className="space-y-2 border-b border-stone-200 pb-2">  
-          <label className="text-[10px] uppercase tracking-widest text-stone-400">Full Name</label>  
-          <input   
-            type="text"   
-            placeholder="Daryl Clark"  
-            className="w-full bg-transparent text-lg font-light outline-none placeholder:text-stone-300"  
-          />  
-        </div>  
-        <div className="space-y-2 border-b border-stone-200 pb-2">  
-          <label className="text-[10px] uppercase tracking-widest text-stone-400">Email Address</label>  
-          <input   
-            type="email"   
-            placeholder="daryl@nexvoyage.com"  
-            className="w-full bg-transparent text-lg font-light outline-none placeholder:text-stone-300"  
-          />  
-        </div>  
-      </div>
+  const [submitted, setSubmitted] = useState(false);
 
-      <div className="space-y-2 border-b border-stone-200 pb-2">  
-        <label className="text-[10px] uppercase tracking-widest text-stone-400">Travel Window</label>  
-        <input   
-          type="text"   
-          placeholder="Early Autumn 2026"  
-          className="w-full bg-transparent text-lg font-light outline-none placeholder:text-stone-300"  
-        />  
-      </div>
+  const handleSubmit = (e: React.FormEvent) => {  
+    e.preventDefault();  
+    // Simulate submission  
+    setSubmitted(true);  
+  };
 
-      <div className="space-y-2 border-b border-stone-200 pb-2">  
-        <label className="text-[10px] uppercase tracking-widest text-stone-400">Party Size & Preferences</label>  
-        <textarea   
-          rows={4}  
-          placeholder="Two adults. Prefer high-floor suites with sunset views. Interested in private wellness sessions."  
-          className="w-full bg-transparent text-lg font-light outline-none placeholder:text-stone-300 resize-none"  
-        />  
-      </div>
+  if (submitted) {  
+    return (  
+      <div className="min-h-[60vh] flex flex-col items-center justify-center text-center px-6">  
+        <h1 className="text-4xl font-light mb-4">Inquiry Received</h1>  
+        <p className="text-white/50 max-w-md mx-auto leading-relaxed italic">  
+          Your briefing has been logged. An advisor will contact you shortly to finalize the mission details.  
+        </p>  
+        <a href="/" className="mt-12 text-xs uppercase tracking-widest border-b border-white/20 pb-1 hover:border-white transition-colors">  
+          Return to HQ  
+        </a>  
+      </div>  
+    );  
+  }
 
-      <div className="pt-8">  
+  return (  
+    <div className="max-w-2xl mx-auto px-6 py-24">  
+      <header className="mb-16">  
+        <h1 className="text-xs uppercase tracking-[0.4em] text-white/40 mb-4">Request Access</h1>  
+        <h2 className="text-4xl font-light tracking-tight">  
+          {selectedProperty ? `Reserve ${selectedProperty.name}` : 'The Collective Reserve'}  
+        </h2>  
+      </header>
+
+      <form onSubmit={handleSubmit} className="space-y-12">  
+        {/* Identity Section */}  
+        <div className="space-y-8">  
+          <h3 className="text-[10px] uppercase tracking-[0.3em] text-white/30 border-b border-white/10 pb-2">01. Identity</h3>  
+          <div className="grid grid-cols-1 gap-8">  
+            <div className="group">  
+              <label className="block text-[10px] uppercase tracking-widest text-white/40 mb-2 group-focus-within:text-white transition-colors">Full Name</label>  
+              <input   
+                required  
+                type="text"  
+                placeholder="Daryl Clark"  
+                className="w-full bg-transparent border-b border-white/10 py-4 outline-none focus:border-white transition-all font-light text-lg"  
+                onChange={(e) => setFormData({...formData, name: e.target.value})}  
+              />  
+            </div>  
+            <div className="group">  
+              <label className="block text-[10px] uppercase tracking-widest text-white/40 mb-2 group-focus-within:text-white transition-colors">Communication</label>  
+              <input   
+                required  
+                type="email"  
+                placeholder="daryl.clark@fora.travel"  
+                className="w-full bg-transparent border-b border-white/10 py-4 outline-none focus:border-white transition-all font-light text-lg"  
+                onChange={(e) => setFormData({...formData, email: e.target.value})}  
+              />  
+            </div>  
+          </div>  
+        </div>
+
+        {/* Mission Details */}  
+        <div className="space-y-8">  
+          <h3 className="text-[10px] uppercase tracking-[0.3em] text-white/30 border-b border-white/10 pb-2">02. Mission</h3>  
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">  
+            <div className="group">  
+              <label className="block text-[10px] uppercase tracking-widest text-white/40 mb-2">Target Property</label>  
+              <select   
+                value={formData.property}  
+                className="w-full bg-transparent border-b border-white/10 py-4 outline-none focus:border-white transition-all font-light text-lg appearance-none"  
+                onChange={(e) => setFormData({...formData, property: e.target.value})}  
+              >  
+                <option value="" className="bg-black">Select Sanctuary</option>  
+                {propertyList.map(p => (  
+                  <option key={p.id} value={p.id} className="bg-black">{p.name} — {p.location}</option>  
+                ))}  
+              </select>  
+            </div>  
+            <div className="group">  
+              <label className="block text-[10px] uppercase tracking-widest text-white/40 mb-2">Cohort Size</label>  
+              <input   
+                type="text"  
+                placeholder="2 Adults, 1 Child"  
+                className="w-full bg-transparent border-b border-white/10 py-4 outline-none focus:border-white transition-all font-light text-lg"  
+                onChange={(e) => setFormData({...formData, cohort: e.target.value})}  
+              />  
+            </div>  
+          </div>  
+        </div>
+
+        {/* The Brief */}  
+        <div className="space-y-8">  
+          <h3 className="text-[10px] uppercase tracking-[0.3em] text-white/30 border-b border-white/10 pb-2">03. The Brief</h3>  
+          <div className="group">  
+            <label className="block text-[10px] uppercase tracking-widest text-white/40 mb-2 group-focus-within:text-white transition-colors">Objectives & Requirements</label>  
+            <textarea   
+              rows={4}  
+              placeholder="Private terrace, wellness focus, specific arrival window..."  
+              className="w-full bg-transparent border-b border-white/10 py-4 outline-none focus:border-white transition-all font-light text-lg resize-none"  
+              onChange={(e) => setFormData({...formData, brief: e.target.value})}  
+            />  
+          </div>  
+        </div>
+
         <button   
           type="submit"  
-          className="w-full bg-[#1a1a1a] text-white py-6 uppercase text-xs tracking-[0.4em] hover:bg-stone-800 transition-all duration-500"  
+          className="w-full py-6 border border-white text-white uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-black transition-all duration-500 mt-8"  
         >  
-          Submit to The Ledger  
+          Submit Briefing  
         </button>  
-        <p className="text-[9px] text-center mt-6 text-stone-400 uppercase tracking-widest leading-loose">  
-          By submitting, you initiate a private consultation.<br/>Our team will review the manifest and contact you within 4 hours.  
-        </p>  
-      </div>  
-    </form>  
-  </div>  
-);  
+      </form>  
+    </div>  
+  );  
 }
 
 export default function ReservePage() {  
-return (  
-  <main className="min-h-screen bg-[#faf9f6] text-[#1a1a1a]">  
-    <nav className="p-8 flex justify-between items-center">  
-      <Link href="/" className="flex items-center gap-2 hover:opacity-70 transition-opacity">  
-        <IconArrowLeft />  
-        <span className="text-xs uppercase tracking-widest font-light">Exit</span>  
-      </Link>  
-      <div className="text-xl tracking-[0.2em] font-extralight uppercase">NexVoyage</div>  
-    </nav>
-
-    <Suspense fallback={<div className="flex justify-center py-24 text-xs uppercase tracking-widest text-stone-400">Initializing Manifest...</div>}>  
-      <ReserveForm />  
-    </Suspense>
-
-    <footer className="py-12 text-center">  
-      <p className="text-[10px] uppercase tracking-[0.4em] text-stone-300">NexVoyage Collective &copy; 2026</p>  
-    </footer>  
-  </main>  
-);  
+  return (  
+    <main className="min-h-screen bg-black text-white">  
+      <Navigation />  
+      <Suspense fallback={<div className="h-screen bg-black" />}>  
+        <ReserveFormContent />  
+      </Suspense>  
+      <Footer />  
+    </main>  
+  );  
 }  
