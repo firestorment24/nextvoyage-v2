@@ -166,4 +166,4 @@ export const SANCTUARIES_DATA: Sanctuary[] = [
 // DOUBLE-LOCK EXPORT  
 // This ensures that 'import { sanctuaries }' and 'import { SANCTUARIES_DATA }'  
 // both work, preventing "Export not found" build errors.  
-export const sanctuaries = SANCTUARIES_DATA;
+export const sanctuaries = SANCTUARIES_DATA;  
