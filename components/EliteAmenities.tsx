@@ -10,7 +10,7 @@ const amenities = [
       </svg>  
     )  
   },  
-  {  
+  {   
     title: "$100 Resort Credit",  
     description: "To be utilized for dining, spa, or resort activities.",  
     icon: (  
