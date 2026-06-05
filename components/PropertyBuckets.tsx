@@ -17,7 +17,7 @@ export default function PropertyBuckets({ buckets }: PropertyBucketsProps) {
           <div>  
             <h2 className="text-4xl font-light tracking-tight text-neutral-900 mb-4">  
               Property Buckets  
-            </h2>  
+            </h2>   
             <p className="text-neutral-500 max-w-md">  
               Curated categories of exclusive residences within this sanctuary.  
             </p>  
