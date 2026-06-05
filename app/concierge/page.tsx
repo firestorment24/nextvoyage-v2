@@ -1,8 +1,10 @@
 'use client'
 
 import { useState } from 'react'  
-import { Navigation } from '../components/Navigation'  
-import { Footer } from '../components/Footer'
+// Adjusted path: Navigation is in root /app, Footer is in /app/components  
+// Also switched to default imports to resolve the build errors  
+import Navigation from '../Navigation'  
+import Footer from '../components/Footer'
 
 export default function ConciergePage() {  
   const [step, setStep] = useState<'intro' | 'discovery' | 'contact' | 'complete'>('intro')  
