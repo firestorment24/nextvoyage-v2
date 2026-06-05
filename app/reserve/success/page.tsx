@@ -1,49 +1,59 @@
-import React from 'react';  
-import Link from 'next/link';
+"use client"
 
-const IconCheck = () => (  
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>  
-);
+import Link from 'next/link'  
+import Navigation from '@/app/Navigation'  
+import Footer from '@/app/Footer'
 
 export default function SuccessPage() {  
   return (  
-    <main className="min-h-screen bg-[#faf9f6] text-[#1a1a1a] font-light flex flex-col">  
-      {/* Minimal Nav */}  
-      <nav className="p-8 flex justify-center items-center">  
-        <div className="text-xl tracking-[0.2em] font-extralight uppercase">NexVoyage</div>  
-      </nav>
+    <main className="bg-black text-white min-h-screen flex flex-col">  
+      <Navigation />  
+        
+      <div className="flex-grow flex flex-col items-center justify-center px-8 text-center">  
+        <div className="max-w-2xl space-y-8">  
+          {/* Minimalist Success Icon */}  
+          <div className="flex justify-center mb-12">  
+            <div className="w-16 h-16 border border-white/20 rounded-full flex items-center justify-center animate-pulse">  
+              <svg   
+                width="24"   
+                height="24"   
+                viewBox="0 0 24 24"   
+                fill="none"   
+                stroke="currentColor"   
+                strokeWidth="1"   
+                strokeLinecap="round"   
+                strokeLinejoin="round"  
+              >  
+                <path d="M20 6L9 17l-5-5" />  
+              </svg>  
+            </div>  
+          </div>
 
-      {/* Content */}  
-      <div className="flex-1 flex flex-col items-center justify-center px-8 text-center space-y-12">  
-        <div className="w-16 h-16 border border-stone-200 rounded-full flex items-center justify-center text-stone-400">  
-          <IconCheck />  
-        </div>
-
-        <div className="space-y-6 max-w-md">  
-          <h1 className="text-4xl font-extralight tracking-tight lowercase italic">  
-            Manifest Received  
+          <h1 className="text-5xl md:text-7xl font-light tracking-[0.2em] uppercase leading-tight">  
+            Voyage <br /> Initiated  
           </h1>  
-          <p className="text-stone-500 leading-relaxed font-light">  
-            Your inquiry has been logged in The Ledger. A member of the Collective will review your requirements and reach out via your provided coordinates within 4 hours.  
-          </p>  
-        </div>
+            
+          <div className="space-y-4 pt-8">  
+            <p className="text-gray-400 text-lg font-light tracking-wide">  
+              Your inquiry has been received.  
+            </p>  
+            <p className="text-gray-500 text-sm tracking-[0.1em] uppercase">  
+              Our concierge team will reach out within 24 hours.  
+            </p>  
+          </div>
 
-        <div className="pt-12">  
-          <Link   
-            href="/"  
-            className="text-[10px] uppercase tracking-[0.5em] text-stone-400 hover:text-[#1a1a1a] transition-colors duration-500 pb-1 border-b border-stone-200"  
-          >  
-            Return to Index  
-          </Link>  
+          <div className="pt-16">  
+            <Link   
+              href="/"  
+              className="inline-block border border-white/20 px-12 py-4 text-[10px] uppercase tracking-[0.3em] hover:bg-white hover:text-black transition-all duration-500"  
+            >  
+              Return to Sanctuary  
+            </Link>  
+          </div>  
         </div>  
       </div>
 
-      {/* Footer */}  
-      <footer className="p-8 text-center">  
-        <p className="text-[9px] uppercase tracking-widest text-stone-300">  
-          Transaction ID: NV-{Math.floor(Math.random() * 1000000)}  
-        </p>  
-      </footer>  
+      <Footer />  
     </main>  
-  );  
+  )  
 }  
