@@ -8,7 +8,7 @@ export default function SanctuariesPage() {
       <div className="grid gap-4">  
         {sanctuaries.map((s) => (  
           <Link key={s.id} href={`/sanctuaries/${s.slug}`} className="text-blue-600 hover:underline">  
-            {s.name}  
+            {s.name}   
           </Link>  
         ))}  
       </div>  
