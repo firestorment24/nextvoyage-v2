@@ -1,40 +1,60 @@
-import React from 'react'  
-import Link from 'next/link'
+'use client';
+
+import Link from 'next/link';  
+import { Bucket } from '@/data/sanctuaries';
 
 interface PropertyBucketsProps {  
-  sanctuaryId: string  
+  buckets: Bucket[];  
 }
 
-export default function PropertyBuckets({ sanctuaryId }: PropertyBucketsProps) {  
-  // Mock data for the collections within a sanctuary  
-  const buckets = [  
-    { name: 'The Private Estates', count: 3, description: 'Highest level of confidentiality.' },  
-    { name: 'Architectural Icons', count: 5, description: 'Historically significant structures.' },  
-    { name: 'Off-Market Access', count: 2, description: 'Exclusive quiet-luxury listings.' }  
-  ]
+export default function PropertyBuckets({ buckets }: PropertyBucketsProps) {  
+  if (!buckets || buckets.length === 0) return null;
 
-  return (   
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-12 py-12 border-t border-black/5">  
-      {buckets.map((bucket, index) => (  
-        <div key={index} className="flex flex-col group">  
-          <p className="text-[10px] uppercase tracking-[0.3em] mb-4 opacity-40">  
-            Bucket {index + 1}  
-          </p>  
-          <h3 className="text-2xl font-light mb-2">{bucket.name}</h3>  
-          <p className="text-sm opacity-60 mb-8 leading-relaxed italic">  
-            "{bucket.description}"  
-          </p>  
-          <div className="mt-auto flex items-center justify-between">  
-            <span className="text-[10px] font-mono opacity-50">{bucket.count} PROPERTIES AVAILABLE</span>  
-            <Link   
-              href="/reserve"   
-              className="text-[10px] uppercase tracking-widest border-b border-black pb-1 group-hover:opacity-50 transition-opacity"  
-            >  
-              Inquire  
-            </Link>  
+  return (  
+    <section className="py-24 bg-white">  
+      <div className="max-w-7xl mx-auto px-6">  
+        <div className="flex justify-between items-end mb-16">  
+          <div>  
+            <h2 className="text-4xl font-light tracking-tight text-neutral-900 mb-4">  
+              Property Buckets  
+            </h2>  
+            <p className="text-neutral-500 max-w-md">  
+              Curated categories of exclusive residences within this sanctuary.  
+            </p>  
           </div>  
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">  
+          {buckets.map((bucket, index) => (  
+            <Link   
+              key={index}  
+              href="/reserve"  
+              className="group block border border-neutral-100 p-8 hover:border-neutral-900 transition-colors duration-500"  
+            >  
+              <div className="flex justify-between items-start mb-12">  
+                <span className="text-xs font-medium tracking-widest uppercase text-neutral-400">  
+                  {String(index + 1).padStart(2, '0')}  
+                </span>  
+                <span className="text-sm font-light text-neutral-500 italic">  
+                  {bucket.count} Properties  
+                </span>  
+              </div>  
+                
+              <h3 className="text-2xl font-light mb-4 group-hover:translate-x-2 transition-transform duration-500">  
+                {bucket.name}  
+              </h3>  
+                
+              <p className="text-neutral-500 text-sm leading-relaxed mb-8">  
+                {bucket.description}  
+              </p>  
+                
+              <div className="pt-4 border-t border-neutral-50 text-[10px] tracking-[0.2em] uppercase font-bold text-neutral-900 opacity-0 group-hover:opacity-100 transition-opacity duration-500">  
+                Inquire &rarr;  
+              </div>  
+            </Link>  
+          ))}  
         </div>  
-      ))}  
-    </div>  
-  )  
+      </div>  
+    </section>  
+  );  
 }  
