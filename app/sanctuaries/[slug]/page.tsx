@@ -8,7 +8,7 @@ export default function SanctuaryPage({ params }: { params: { slug: string } }) 
   const sanctuary = sanctuaries.find((s) => s.slug === params.slug)  
   if (!sanctuary) notFound()
 
-  return (  
+  return (   
     <main className="min-h-screen">  
       <section className="relative h-[60vh] w-full">  
         <Image src={sanctuary.heroImage} alt={sanctuary.name} fill priority className="object-cover" />  
