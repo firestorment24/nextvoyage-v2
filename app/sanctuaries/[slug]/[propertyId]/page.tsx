@@ -3,7 +3,15 @@ import Navigation from '../../../Navigation';
 import Footer from '../../../Footer';  
 import { notFound } from 'next/navigation';
 
-// Defining EliteAmenities inline to guarantee a green build  
+// Local interface to fix the type check error  
+interface Property {  
+  id: string;  
+  name: string;  
+  location: string;  
+  image: string;  
+  description: string;  
+}
+
 function EliteAmenities() {  
   const perks = [  
     {  
@@ -66,7 +74,8 @@ function EliteAmenities() {
 }
 
 export default function PropertyPage({ params }: { params: { slug: string; propertyId: string } }) {  
-  const property = properties.find(p => p.id === params.propertyId);
+  // Casting to our local interface to ensure the 'image' property is recognized  
+  const property = (properties as Property[]).find(p => p.id === params.propertyId);
 
   if (!property) {  
     notFound();  
