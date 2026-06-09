@@ -1,132 +1,88 @@
-'use client'
-
-import { useState } from 'react'  
-// Adjusted path: Navigation is in root /app, Footer is in /app/components  
-// Also switched to default imports to resolve the build errors  
 import Navigation from '../Navigation'  
 import Footer from '../components/Footer'
 
 export default function ConciergePage() {  
-  const [step, setStep] = useState<'intro' | 'discovery' | 'contact' | 'complete'>('intro')  
-  const [selections, setSelections] = useState({  
-    priority: '',  
-    tempo: '',  
-    travelers: '',  
-    contact: ''  
-  })
+return (  
+  <main className="min-h-screen bg-[#0A0A0A] text-white font-light selection:bg-white/20">  
+    <Navigation />
 
-  const nextStep = () => {  
-    if (step === 'intro') setStep('discovery')  
-    else if (step === 'discovery') setStep('contact')  
-    else if (step === 'contact') setStep('complete')  
-  }
+    <section className="pt-40 pb-32 px-6 max-w-4xl mx-auto">  
+      {/* Header - Editorial Style */}  
+      <header className="mb-20">  
+        <p className="text-[10px] uppercase tracking-[0.5em] mb-6 opacity-40">Direct Access</p>  
+        <h1 className="text-5xl md:text-7xl font-serif tracking-tighter mb-8 leading-none">  
+          Initiate <span className="italic">Discovery</span>  
+        </h1>  
+        <p className="text-xl opacity-60 font-serif leading-relaxed">  
+          Our concierge service is a high-touch, human-centric engine. To begin, share the coordinates of your next objective.  
+        </p>  
+      </header>
 
-  return (  
-    <main className="min-h-screen bg-[#fafafa] text-[#1a1a1a] font-light selection:bg-black selection:text-white">  
-      <Navigation />  
-        
-      <div className="max-w-screen-xl mx-auto px-6 pt-32 pb-20">  
-        <div className="max-w-2xl">  
-          {/* Step 1: The Gatekeeper Intro */}  
-          {step === 'intro' && (  
-            <div className="animate-in fade-in duration-1000 slide-in-from-bottom-4">  
-              <h1 className="text-4xl md:text-5xl leading-tight mb-8 tracking-tight font-normal">  
-                Access is the new luxury. <br />  
-                <span className="text-neutral-400">But privacy is the ultimate requirement.</span>  
-              </h1>  
-              <p className="text-lg text-neutral-600 mb-12 leading-relaxed">  
-                The NexVoyage Concierge is a closed-loop system for high-net-worth travelers who require seamless logistics without the noise.  
-              </p>  
+      {/* The Inquiry Flow - Minimalist Form */}  
+      <form className="space-y-20">  
+        {/* Step 1: The Objective */}  
+        <div className="group">  
+          <label className="block text-[10px] uppercase tracking-[0.3em] opacity-30 mb-8 group-focus-within:opacity-100 transition-opacity">  
+            01 / Primary Objective  
+          </label>  
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">  
+            {['Private Sanctuary', 'Strategic Travel', 'Corporate Retreat', 'Relocation'].map((option) => (  
               <button   
-                onClick={nextStep}  
-                className="group flex items-center gap-4 text-sm uppercase tracking-widest border-b border-black pb-2 hover:text-neutral-500 transition-colors"  
+                key={option}  
+                type="button"  
+                className="text-left px-8 py-6 border border-white/10 hover:border-white/40 transition-all text-sm tracking-widest hover:bg-white/5"  
               >  
-                Begin Discovery  
-                <span className="group-hover:translate-x-1 transition-transform">→</span>  
+                {option}  
               </button>  
-            </div>  
-          )}
+            ))}  
+          </div>  
+        </div>
 
-          {/* Step 2: The Discovery Selections */}  
-          {step === 'discovery' && (  
-            <div className="animate-in fade-in duration-700">  
-              <div className="mb-12">  
-                <span className="text-[10px] uppercase tracking-[0.3em] text-neutral-400 mb-2 block">Priority</span>  
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">  
-                  {['Total Seclusion', 'Unrivaled Access'].map((opt) => (  
-                    <button   
-                      key={opt}  
-                      onClick={() => setSelections({...selections, priority: opt})}  
-                      className={`p-8 text-left border transition-all ${selections.priority === opt ? 'border-black bg-white shadow-sm' : 'border-neutral-200 hover:border-neutral-400'}`}  
-                    >  
-                      <span className="text-lg">{opt}</span>  
-                    </button>  
-                  ))}  
-                </div>  
-              </div>
+        {/* Step 2: The Context */}  
+        <div className="group">  
+          <label className="block text-[10px] uppercase tracking-[0.3em] opacity-30 mb-8 group-focus-within:opacity-100 transition-opacity">  
+            02 / Narrative & Requirements  
+          </label>  
+          <textarea   
+            placeholder="Tell us about the atmosphere, the logistics, or the specific sanctuary archetype you're targeting..."  
+            className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-white transition-colors text-lg font-serif italic placeholder:opacity-20 min-h-[150px] resize-none"  
+          />  
+        </div>
 
-              <div className="mb-12">  
-                <span className="text-[10px] uppercase tracking-[0.3em] text-neutral-400 mb-2 block">Tempo</span>  
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">  
-                  {['Static & Restorative', 'Dynamic & Exploratory'].map((opt) => (  
-                    <button   
-                      key={opt}  
-                      onClick={() => setSelections({...selections, tempo: opt})}  
-                      className={`p-8 text-left border transition-all ${selections.tempo === opt ? 'border-black bg-white shadow-sm' : 'border-neutral-200 hover:border-neutral-400'}`}  
-                    >  
-                      <span className="text-lg">{opt}</span>  
-                    </button>  
-                  ))}  
-                </div>  
-              </div>
-
-              <button   
-                onClick={nextStep}  
-                disabled={!selections.priority || !selections.tempo}  
-                className="text-sm uppercase tracking-widest border-b border-black pb-2 disabled:opacity-30"  
-              >  
-                Continue  
-              </button>  
-            </div>  
-          )}
-
-          {/* Step 3: Minimal Contact */}  
-          {step === 'contact' && (  
-            <div className="animate-in fade-in duration-700">  
-              <h2 className="text-3xl mb-8 tracking-tight">How should we reach you?</h2>  
-              <input   
-                type="text"   
-                placeholder="Email or WhatsApp"  
-                className="w-full bg-transparent border-b border-neutral-300 py-4 text-xl outline-none focus:border-black transition-colors mb-12"  
-                onChange={(e) => setSelections({...selections, contact: e.target.value})}  
-              />  
-              <button   
-                onClick={nextStep}  
-                disabled={!selections.contact}  
-                className="text-sm uppercase tracking-widest border-b border-black pb-2 disabled:opacity-30"  
-              >  
-                Send Request  
-              </button>  
-            </div>  
-          )}
-
-          {/* Step 4: Completion */}  
-          {step === 'complete' && (  
-            <div className="animate-in fade-in zoom-in-95 duration-1000">  
-              <h2 className="text-4xl mb-6 tracking-tight italic text-neutral-800 font-serif">Understood.</h2>  
-              <p className="text-lg text-neutral-500 leading-relaxed mb-8">  
-                Your profile is being reviewed. We prioritize timing and discretion; expect a response within the hour.  
-              </p>  
-              <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-neutral-400">  
-                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />  
-                Secured Connection — NexVoyage Collective  
-              </div>  
-            </div>  
-          )}  
+        {/* Step 3: Identity */}  
+        <div className="group grid grid-cols-1 md:grid-cols-2 gap-12">  
+          <div className="space-y-8">  
+            <label className="block text-[10px] uppercase tracking-[0.3em] opacity-30 group-focus-within:opacity-100 transition-opacity">  
+              03 / Contact Identity  
+            </label>  
+            <input   
+              type="text"   
+              placeholder="Full Name"  
+              className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-white transition-colors text-sm uppercase tracking-widest placeholder:opacity-20"  
+            />  
+            <input   
+              type="email"   
+              placeholder="Private Email Address"  
+              className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-white transition-colors text-sm uppercase tracking-widest placeholder:opacity-20"  
+            />  
+          </div>  
+            
+          <div className="flex flex-col justify-end">  
+            <button   
+              type="submit"   
+              className="w-full py-6 bg-white text-black text-[10px] uppercase tracking-[0.5em] hover:bg-neutral-200 transition-all font-bold"  
+            >  
+              Request Consultation  
+            </button>  
+            <p className="mt-4 text-[9px] opacity-30 uppercase tracking-widest text-center">  
+              All inquiries are strictly confidential.  
+            </p>  
+          </div>  
         </div>  
-      </div>
+      </form>  
+    </section>
 
-      <Footer />  
-    </main>  
-  )  
+    <Footer />  
+  </main>  
+)  
 }  
