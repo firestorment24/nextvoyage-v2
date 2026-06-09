@@ -1,18 +1,26 @@
-import { sanctuaries } from '../../../data/sanctuaries'  
+import { sanctuaries as rawSanctuaries } from '../../../data/sanctuaries'  
 import { properties as rawProperties } from '../../../data/properties'  
 import Link from 'next/link'  
 import Image from 'next/image'
 
-// Explicit interface to tell TypeScript about our sanctuaryId mapping  
+// Synchronized interfaces to match the data files  
+interface Sanctuary {  
+  id: string;  
+  name: string;  
+  heroImage: string;      // Fixed from 'image'  
+  categoryDescription: string; // Fixed from 'description'  
+}
+
 interface Property {  
   id: string;  
   name: string;  
   location: string;  
   image: string;  
-  sanctuaryId: string; // This is the field causing the error  
+  sanctuaryId: string;  
 }
 
-// Cast the data so TypeScript recognizes the fields  
+// Cast both datasets to ensure type safety  
+const sanctuaries = (rawSanctuaries as unknown) as Sanctuary[]  
 const properties = (rawProperties as unknown) as Property[]
 
 export async function generateStaticParams() {  
@@ -44,7 +52,7 @@ export default async function SanctuaryPage({ params }: { params: Promise<{ id: 
       {/* Hero Section */}  
       <section className="relative h-[80vh] w-full">  
         <Image  
-          src={sanctuary.image}  
+          src={sanctuary.heroImage}  
           alt={sanctuary.name}  
           fill  
           className="object-cover"  
@@ -63,7 +71,7 @@ export default async function SanctuaryPage({ params }: { params: Promise<{ id: 
       <section className="max-w-4xl mx-auto py-24 px-6 text-center">  
         <p className="text-xs uppercase tracking-[0.4em] text-gray-400 mb-10">The Experience</p>  
         <h2 className="text-3xl md:text-5xl font-extralight text-gray-900 leading-tight">  
-          {sanctuary.description}  
+          {sanctuary.categoryDescription}  
         </h2>  
       </section>
 
