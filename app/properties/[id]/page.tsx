@@ -8,7 +8,7 @@ import Link from "next/link";
 interface Props {  
   params: { id: string };  
 }
-
+ 
 export async function generateStaticParams() {  
   return properties.map((prop) => ({  
     id: prop.id,  
