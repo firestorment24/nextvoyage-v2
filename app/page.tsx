@@ -1,23 +1,23 @@
 import Link from 'next/link'  
 import { SANCTUARIES_DATA } from './lib/data'
 
-export default function Home() {  
-  // Arrow Icon Component to avoid lucide-react dependency  
-  const ArrowRight = () => (  
-    <svg   
-      width="20"   
-      height="20"   
-      viewBox="0 0 24 24"   
-      fill="none"   
-      stroke="currentColor"   
-      strokeWidth="1.5"   
-      strokeLinecap="round"   
-      strokeLinejoin="round"  
-    >  
-      <path d="M5 12h14M12 5l7 7-7 7"/>  
-    </svg>  
-  )
+// Move outside for a cleaner component structure  
+const ArrowRight = () => (  
+  <svg   
+    width="20"   
+    height="20"   
+    viewBox="0 0 24 24"   
+    fill="none"   
+    stroke="currentColor"   
+    strokeWidth="1.5"   
+    strokeLinecap="round"   
+    strokeLinejoin="round"  
+  >  
+    <path d="M5 12h14M12 5l7 7-7 7"/>  
+  </svg>  
+)
 
+export default function Home() {  
   return (  
     <main className="bg-black text-white selection:bg-white selection:text-black">  
       {/* Hero Section: Cinematic Portal */}  
@@ -26,7 +26,8 @@ export default function Home() {
           <img   
             src="https://cdn.marblism.com/iw-pB1fOg0k.webp"   
             alt="Cinematic Sanctuary"   
-            className="w-full h-full object-cover opacity-60 scale-105 animate-subtle-zoom"  
+            className="w-full h-full object-cover opacity-60 scale-105"  
+            style={{ animation: 'subtle-zoom 20s infinite alternate ease-in-out' }}  
           />  
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black" />  
         </div>
@@ -56,7 +57,7 @@ export default function Home() {
         </div>
 
         <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce opacity-30">  
-          <span className="text-[10px] tracking-[0.3em] uppercase vertical-text">Scroll</span>  
+          <span className="text-[10px] tracking-[0.3em] uppercase" style={{ writingMode: 'vertical-rl' }}>Scroll</span>  
         </div>  
       </section>
 
@@ -96,7 +97,7 @@ export default function Home() {
         </div>  
       </section>
 
-      {/* 02 / The Journal (New Editorial Section) */}  
+      {/* 02 / The Journal (Editorial Section) */}  
       <section className="py-32 px-8 border-t border-white/10 bg-[#0a0a0a]">  
         <div className="max-w-7xl mx-auto">  
           <div className="mb-20">  
@@ -127,17 +128,12 @@ export default function Home() {
         </div>  
       </section>
 
-      <style jsx global>{`  
+      <style dangerouslySetInnerHTML={{ __html: `  
         @keyframes subtle-zoom {  
           0% { transform: scale(1); }  
           100% { transform: scale(1.1); }  
         }  
-        .animate-subtle-zoom {  
-          animation: subtle-zoom 20s infinite alternate ease-in-out;  
-        }  
-        .vertical-text {  
-          writing-mode: vertical-rl;  
-          text-orientation: mixed;  
-        }  
-      `}</style>  
+      `}} />  
     </main>  
+  )  
+}  
