@@ -1,5 +1,5 @@
 import Link from 'next/link'  
-import Navigation from '../Navigation' // Changed from { Navigation }  
+import Navigation from '../Navigation'  
 import Footer from '../components/Footer'  
 import { SANCTUARIES_DATA } from '../lib/data'
 
@@ -28,30 +28,31 @@ return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">  
         {SANCTUARIES_DATA.map((sanctuary) => (  
           <Link   
-            key={sanctuary.slug}   
-            href={`/sanctuaries/${sanctuary.slug}`}  
+            key={sanctuary.id}   
+            href={`/sanctuaries/${sanctuary.id}`}  
             className="group block relative overflow-hidden"  
           >  
             <div className="aspect-[3/4] bg-neutral-900 overflow-hidden relative border border-white/5">  
-              {/* Image Placeholder with Maimon-style hover zoom */}  
+              {/* Image Overlay */}  
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10 opacity-60 group-hover:opacity-40 transition-opacity duration-700" />  
               <div className="absolute inset-0 transform scale-105 group-hover:scale-100 transition-transform duration-1000 bg-neutral-800" />  
                 
-              {/* Category Tag */}  
+              {/* Tag (Category) */}  
               <div className="absolute top-6 left-6 z-20">  
                 <span className="text-[10px] uppercase tracking-[0.2em] px-3 py-1 border border-white/20 bg-black/40 backdrop-blur-sm">  
-                  {sanctuary.category}  
+                  {sanctuary.tag}  
                 </span>  
               </div>
 
               {/* Info Overlay */}  
               <div className="absolute bottom-8 left-8 right-8 z-20">  
+                <p className="text-[10px] uppercase tracking-[0.2em] opacity-40 mb-2">{sanctuary.location}</p>  
                 <h2 className="text-3xl font-serif mb-2 transform group-hover:translate-x-2 transition-transform duration-500">  
-                  {sanctuary.title}  
+                  {sanctuary.name}  
                 </h2>  
                 <div className="h-px w-0 group-hover:w-full bg-white/30 transition-all duration-700 mb-4" />  
                 <p className="text-sm opacity-60 line-clamp-2 font-light tracking-wide leading-relaxed">  
-                  {sanctuary.description}  
+                  {sanctuary.vibe}  
                 </p>  
               </div>  
             </div>  
