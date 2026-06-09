@@ -1,9 +1,20 @@
 import { sanctuaries } from '../../../data/sanctuaries'  
-import { properties } from '../../../data/properties'  
+import { properties as rawProperties } from '../../../data/properties'  
 import Link from 'next/link'  
 import Image from 'next/image'
 
-// Generate static params for the dynamic [id] route  
+// Explicit interface to tell TypeScript about our sanctuaryId mapping  
+interface Property {  
+  id: string;  
+  name: string;  
+  location: string;  
+  image: string;  
+  sanctuaryId: string; // This is the field causing the error  
+}
+
+// Cast the data so TypeScript recognizes the fields  
+const properties = (rawProperties as unknown) as Property[]
+
 export async function generateStaticParams() {  
   return sanctuaries.map((s) => ({  
     id: s.id,  
