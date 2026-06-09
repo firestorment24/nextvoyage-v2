@@ -1,14 +1,14 @@
-import { properties } from "@/data/properties";  
+import { properties } from "../../../data/properties";  
 import { notFound } from "next/navigation";  
-import Navigation from "@/components/Navigation";  
-import Footer from "@/components/Footer";  
-import EliteAmenities from "@/components/EliteAmenities";  
+import Navigation from "../../../components/Navigation";  
+import Footer from "../../../components/Footer";  
+import { EliteAmenities } from "../../../components/EliteAmenities";  
 import Link from "next/link";
 
 interface Props {  
   params: { id: string };  
 }
- 
+
 export async function generateStaticParams() {  
   return properties.map((prop) => ({  
     id: prop.id,  
@@ -28,11 +28,13 @@ export default function PropertyDetailPage({ params }: Props) {
 
       {/* Hero Section */}  
       <section className="relative h-[80vh] w-full overflow-hidden">  
-        <img  
-          src={property.image}  
-          alt={property.name}  
-          className="absolute inset-0 h-full w-full object-cover"  
-        />  
+        {property.image && (  
+          <img  
+            src={property.image}  
+            alt={property.name}  
+            className="absolute inset-0 h-full w-full object-cover"  
+          />  
+        )}  
         <div className="absolute inset-0 bg-black/30" />  
         <div className="absolute inset-0 flex items-center justify-center text-center px-4">  
           <div className="max-w-4xl">  
