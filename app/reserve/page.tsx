@@ -1,100 +1,122 @@
-"use client"
+'use client';
 
-import { Suspense } from 'react'  
-import { useSearchParams } from 'next/navigation'  
-import { properties } from '@/data/properties'  
-import Navigation from '@/app/Navigation'  
-import Footer from '@/app/Footer'
+import React, { Suspense } from 'react';  
+import { useSearchParams } from 'next/navigation';  
+import { properties } from '../../data/properties';
 
-// Local interface to satisfy the compiler  
-interface Property {  
-  id: string;  
-  name: string;  
-  location: string;  
-  image: string;  
-}
-
-function ReserveContent() {  
-  const searchParams = useSearchParams()  
-  const propertyId = searchParams.get('propertyId')
-
-  // Casting through unknown to bypass type overlap checks  
-  const allProperties = properties as unknown as Property[]  
-  const selectedProperty = allProperties.find(p => p.id === propertyId) || allProperties[0]
+function ReserveFormContent() {  
+  const searchParams = useSearchParams();  
+  const propertyId = searchParams.get('property');  
+    
+  // Find the selected property  
+  const selectedProperty = properties.find(p => p.id === propertyId);
 
   return (  
-    <div className="flex flex-col lg:flex-row min-h-screen pt-20">  
-      {/* Cinematic Side */}  
-      <div className="hidden lg:block lg:w-1/2 relative overflow-hidden">  
-        <img   
-          src={selectedProperty.image}   
-          alt={selectedProperty.name}  
-          className="object-cover w-full h-full opacity-70 transition-transform duration-700 hover:scale-105"  
-        />  
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />  
-        <div className="absolute bottom-12 left-12">  
-          <h2 className="text-4xl font-light tracking-widest uppercase">{selectedProperty.name}</h2>  
-          <p className="text-sm tracking-widest opacity-60 mt-2">{selectedProperty.location}</p>  
-        </div>  
-      </div>
+    <main className="min-h-screen bg-neutral-50 pt-32 pb-24 px-6">  
+      <div className="max-w-3xl mx-auto">  
+        {/* Selection Header */}  
+        <div className="mb-16 text-center">  
+          <h1 className="text-4xl md:text-5xl font-serif text-neutral-900 mb-4 italic">The Travel Manifest</h1>  
+          <p className="text-neutral-500 tracking-[0.2em] uppercase text-xs">Secure Your Place in the Collection</p>  
+        </div>
 
-      {/* Form Side */}  
-      <div className="w-full lg:w-1/2 flex flex-col justify-center px-8 lg:px-24 py-12">  
-        <div className="max-w-md w-full mx-auto">  
-          <h1 className="text-3xl font-light tracking-tighter mb-2">Request Your Sanctuary</h1>  
-          <p className="text-gray-400 text-sm mb-12">Leave your details and our concierge will finalize your voyage.</p>  
-            
-          <form className="space-y-8">  
-            <div className="group border-b border-gray-800 focus-within:border-white transition-colors py-2">  
-              <label className="block text-[10px] uppercase tracking-widest text-gray-500">Full Name</label>  
+        {/* Selected Property Preview */}  
+        {selectedProperty && (  
+          <div className="bg-white border border-neutral-100 p-6 rounded-sm mb-12 flex items-center gap-6 shadow-sm">  
+            <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-sm">  
+              <img   
+                src={(selectedProperty as any).image}   
+                alt={selectedProperty.name}   
+                className="h-full w-full object-cover grayscale hover:grayscale-0 transition-all duration-700"  
+              />  
+            </div>  
+            <div>  
+              <h3 className="text-sm uppercase tracking-widest text-neutral-400 mb-1">Selected Sanctuary</h3>  
+              <p className="text-xl font-serif text-neutral-900">{selectedProperty.name}</p>  
+              <p className="text-sm text-neutral-500 italic">{selectedProperty.location}</p>  
+            </div>  
+          </div>  
+        )}
+
+        {/* The Form */}  
+        <form className="space-y-12 bg-white p-8 md:p-12 border border-neutral-100 shadow-xl rounded-sm">  
+          {/* Section 1: Identity */}  
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">  
+            <div className="space-y-2">  
+              <label className="text-[10px] uppercase tracking-[0.2em] text-neutral-400 block ml-1">Full Name</label>  
               <input   
                 type="text"   
-                className="bg-transparent w-full outline-none py-1 font-light"   
-                placeholder="Elias Thorne"  
+                placeholder="Daryl Clark"  
+                className="w-full bg-transparent border-b border-neutral-200 py-3 px-1 focus:outline-none focus:border-neutral-900 transition-colors text-neutral-800 placeholder:text-neutral-300"  
               />  
-            </div>
-
-            <div className="group border-b border-gray-800 focus-within:border-white transition-colors py-2">  
-              <label className="block text-[10px] uppercase tracking-widest text-gray-500">Email Address</label>  
+            </div>  
+            <div className="space-y-2">  
+              <label className="text-[10px] uppercase tracking-[0.2em] text-neutral-400 block ml-1">Private Email</label>  
               <input   
                 type="email"   
-                className="bg-transparent w-full outline-none py-1 font-light"   
-                placeholder="elias@voyage.com"  
+                placeholder="daryl@nexvoyage.com"  
+                className="w-full bg-transparent border-b border-neutral-200 py-3 px-1 focus:outline-none focus:border-neutral-900 transition-colors text-neutral-800 placeholder:text-neutral-300"  
               />  
-            </div>
+            </div>  
+          </div>
 
-            <div className="grid grid-cols-2 gap-8">  
-              <div className="group border-b border-gray-800 focus-within:border-white transition-colors py-2">  
-                <label className="block text-[10px] uppercase tracking-widest text-gray-500">Check In</label>  
-                <input type="date" className="bg-transparent w-full outline-none py-1 font-light invert" />  
-              </div>  
-              <div className="group border-b border-gray-800 focus-within:border-white transition-colors py-2">  
-                <label className="block text-[10px] uppercase tracking-widest text-gray-500">Check Out</label>  
-                <input type="date" className="bg-transparent w-full outline-none py-1 font-light invert" />  
-              </div>  
-            </div>
+          {/* Section 2: Logistics */}  
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">  
+            <div className="space-y-2">  
+              <label className="text-[10px] uppercase tracking-[0.2em] text-neutral-400 block ml-1">Travel Window</label>  
+              <input   
+                type="text"   
+                placeholder="August 2026"  
+                className="w-full bg-transparent border-b border-neutral-200 py-3 px-1 focus:outline-none focus:border-neutral-900 transition-colors text-neutral-800 placeholder:text-neutral-300"  
+              />  
+            </div>  
+            <div className="space-y-2">  
+              <label className="text-[10px] uppercase tracking-[0.2em] text-neutral-400 block ml-1">The Cohort</label>  
+              <select className="w-full bg-transparent border-b border-neutral-200 py-3 px-1 focus:outline-none focus:border-neutral-900 transition-colors text-neutral-800 appearance-none">  
+                <option>Solo Traveler</option>  
+                <option>Couples Voyage</option>  
+                <option>Family Retreat</option>  
+                <option>Private Party (6+)</option>  
+              </select>  
+            </div>  
+          </div>
 
+          {/* Section 3: The Brief */}  
+          <div className="space-y-2">  
+            <label className="text-[10px] uppercase tracking-[0.2em] text-neutral-400 block ml-1">The Brief</label>  
+            <textarea   
+              rows={4}  
+              placeholder="Tell us about the occasion or any specific requirements for your stay..."  
+              className="w-full bg-transparent border-b border-neutral-200 py-3 px-1 focus:outline-none focus:border-neutral-900 transition-colors text-neutral-800 placeholder:text-neutral-300 resize-none"  
+            />  
+          </div>
+
+          {/* Submit */}  
+          <div className="pt-8 text-center">  
             <button   
               type="submit"  
-              className="w-full bg-white text-black py-4 uppercase tracking-[0.2em] text-xs font-bold hover:bg-gray-200 transition-colors"  
+              className="bg-neutral-900 text-white px-16 py-4 rounded-full text-xs uppercase tracking-[0.3em] hover:bg-neutral-800 transition-all shadow-lg hover:shadow-2xl hover:-translate-y-1 duration-300"  
             >  
-              Inquire Now  
+              Initiate Inquiry  
             </button>  
-          </form>  
-        </div>  
+            <p className="mt-6 text-[10px] text-neutral-400 italic">  
+              A private curator will respond to your manifest within 12 hours.  
+            </p>  
+          </div>  
+        </form>  
       </div>  
-    </div>  
-  )  
+    </main>  
+  );  
 }
 
 export default function ReservePage() {  
   return (  
-    <main className="bg-black text-white min-h-screen">  
-      <Navigation />  
-      <Suspense fallback={<div className="h-screen bg-black" />}>  
-        <ReserveContent />  
-      </Suspense>  
-      <Footer />  
-    </main>  
-  )  
+    <Suspense fallback={  
+      <div className="min-h-screen flex items-center justify-center bg-white">  
+        <div className="animate-pulse text-neutral-300 font-serif text-2xl italic">Loading Manifest...</div>  
+      </div>  
+    }>  
+      <ReserveFormContent />  
+    </Suspense>  
+  );  
 }  
