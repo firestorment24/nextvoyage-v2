@@ -1,10 +1,10 @@
 import { notFound } from 'next/navigation'  
 import Image from 'next/image'  
 import Link from 'next/link'  
-import { sanctuaries } from '@/data/sanctuaries'  
-import { properties } from '@/data/properties'  
-import Navigation from '@/components/Navigation'  
-import Footer from '@/components/Footer'
+import { sanctuaries } from '../../../data/sanctuaries'  
+import { properties } from '../../../data/properties'  
+import Navigation from '../../../components/Navigation'  
+import Footer from '../../../components/Footer'
 
 // Local interface to handle the dynamic property casting  
 interface Property {  
@@ -52,7 +52,7 @@ export default function SanctuaryDetailPage({ params }: { params: { id: string }
         </div>  
       </section>
 
-      {/* The Brief / Description */}  
+      {/* The Brief */}  
       <section className="max-w-4xl mx-auto px-6 py-20 text-center">  
         <h2 className="text-sm uppercase tracking-[0.3em] mb-8 text-[#8c8c8c]">  
           The Brief  
@@ -62,7 +62,7 @@ export default function SanctuaryDetailPage({ params }: { params: { id: string }
         </p>  
       </section>
 
-      {/* Dynamic Properties Grid: "The Collection" */}  
+      {/* The Collection */}  
       <section className="max-w-7xl mx-auto px-6 py-12">  
         <div className="flex justify-between items-end mb-12">  
           <div>  
@@ -79,7 +79,7 @@ export default function SanctuaryDetailPage({ params }: { params: { id: string }
             <Link   
               key={property.id}   
               href={`/properties/${property.id}`}  
-              className="group block overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow duration-500"  
+              className="group block overflow-hidden bg-white shadow-sm hover:shadow-md transition-all duration-500"  
             >  
               <div className="relative aspect-[4/5] overflow-hidden">  
                 <Image  
@@ -106,7 +106,7 @@ export default function SanctuaryDetailPage({ params }: { params: { id: string }
         </div>  
       </section>
 
-      {/* Action / Reserve */}  
+      {/* Begin Your Manifest */}  
       <section className="bg-[#1a1a1a] text-white py-24 text-center">  
         <div className="max-w-2xl mx-auto px-6">  
           <h2 className="text-3xl md:text-4xl font-serif mb-8">  
