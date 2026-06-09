@@ -1,7 +1,5 @@
 import { properties } from "../../../data/properties";  
 import { notFound } from "next/navigation";  
-import Navigation from "../../../components/Navigation";  
-import Footer from "../../../components/Footer";  
 import { EliteAmenities } from "../../../components/EliteAmenities";  
 import Link from "next/link";
 
@@ -23,9 +21,7 @@ export default function PropertyDetailPage({ params }: Props) {
   }
 
   return (  
-    <main className="min-h-screen bg-[#fafafa] text-[#1a1a1a]">  
-      <Navigation />
-
+    <main className="min-h-screen bg-[#fafafa] text-[#1a1a1a] pt-20">  
       {/* Hero Section */}  
       <section className="relative h-[80vh] w-full overflow-hidden">  
         {property.image && (  
@@ -117,9 +113,7 @@ export default function PropertyDetailPage({ params }: Props) {
             ))}  
           </div>  
         </section>  
-      )}
-
-      <Footer />  
+      )}  
     </main>  
   );  
 }  
