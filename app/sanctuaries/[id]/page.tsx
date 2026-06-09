@@ -1,121 +1,127 @@
-'use client';
+import { notFound } from 'next/navigation'  
+import Image from 'next/image'  
+import Link from 'next/link'  
+import { sanctuaries } from '@/data/sanctuaries'  
+import { properties } from '@/data/properties'  
+import Navigation from '@/components/Navigation'  
+import Footer from '@/components/Footer'
 
-import React from 'react';  
-import { useParams } from 'next/navigation';  
-import Navigation from '../../Navigation';  
-import Footer from '../../Footer';  
-// Switching to relative path to avoid alias resolution issues  
-import { SANCTUARIES_DATA } from '../../../data/sanctuaries';
-
-export default function SanctuaryDetailPage() {  
-const params = useParams();  
-const id = params?.id as string;  
-const sanctuary = SANCTUARIES_DATA.find((s: any) => s.id === id);
-
-if (!sanctuary) {  
-return (  
-  <div className="bg-black text-white min-h-screen flex items-center justify-center">  
-    <p className="tracking-widest uppercase opacity-50">Sanctuary Dossier Not Found</p>  
-  </div>  
-);  
+// Local interface to handle the dynamic property casting  
+interface Property {  
+  id: string;  
+  name: string;  
+  location: string;  
+  image: string;  
+  sanctuaryId: string;  
+  priceLevel: string;  
 }
 
-return (  
-<main className="bg-black text-white min-h-screen selection:bg-white selection:text-black">  
-<Navigation />
+export default function SanctuaryDetailPage({ params }: { params: { id: string } }) {  
+  const sanctuary = sanctuaries.find((s) => s.id === params.id)
 
-{/* Dossier Header */}  
-<section className="pt-40 pb-20 px-6 md:px-12">  
-  <div className="max-w-screen-2xl mx-auto flex flex-col md:flex-row justify-between items-end gap-8">  
-    <div className="max-w-3xl">  
-      <p className="text-xs uppercase tracking-[0.4em] mb-6 text-white/40">  
-        Intelligence / {sanctuary.location}  
-      </p>  
-      <h1 className="text-6xl md:text-9xl font-light tracking-tighter leading-none mb-8">  
-        {sanctuary.name}  
-      </h1>  
-      <p className="text-xl md:text-2xl font-light text-white/60 leading-relaxed italic">  
-        "{sanctuary.tagline}"  
-      </p>  
-    </div>  
-    <div className="hidden md:block pb-4 text-right">  
-      <div className="w-32 h-[1px] bg-white/20 mb-4 ml-auto"></div>  
-      <p className="text-[10px] uppercase tracking-[0.2em] text-white/40">Reference: NV-{sanctuary.id.toUpperCase()}</p>  
-    </div>  
-  </div>  
-</section>
+  if (!sanctuary) {  
+    notFound()  
+  }
 
-{/* Cinematic Hero */}  
-<section className="px-6 md:px-12 mb-32">  
-  <div className="max-w-screen-2xl mx-auto aspect-[21/9] overflow-hidden relative group rounded-sm">  
-    <img   
-      src={sanctuary.heroImage || "https://images.unsplash.com/photo-1445013544686-81424bc3399e?q=80&w=2073&auto=format&fit=crop"}   
-      alt={sanctuary.name}  
-      className="w-full h-full object-cover grayscale brightness-[0.6] group-hover:scale-105 group-hover:grayscale-0 transition-all duration-[3000ms] ease-out"  
-    />  
-    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>  
-    <div className="absolute bottom-8 left-8 flex items-center gap-4">  
-       <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>  
-       <span className="text-[10px] uppercase tracking-[0.4em] text-white/80">Active Sanctuary Portfolio</span>  
-    </div>  
-  </div>  
-</section>
+  // Filter properties belonging to this specific sanctuary  
+  const relatedProperties = (properties as unknown as Property[]).filter(  
+    (p) => p.sanctuaryId === sanctuary.id  
+  )
 
-{/* Intelligence / Overview Grid */}  
-<section className="px-6 md:px-12 py-32 border-t border-white/5">  
-  <div className="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-24">  
-    <div className="md:col-span-4 space-y-12">  
-      <div className="group">  
-        <h4 className="text-[10px] uppercase tracking-[0.3em] text-white/30 mb-4 group-hover:text-white transition-colors">Atmosphere</h4>  
-        <p className="text-lg font-light leading-relaxed text-white/70">{sanctuary.atmosphere}</p>  
-      </div>  
-      <div>  
-        <h4 className="text-[10px] uppercase tracking-[0.3em] text-white/30 mb-6">Curated Highlights</h4>  
-        <ul className="space-y-4">  
-          {sanctuary.highlights?.map((item: string, i: number) => (  
-            <li key={i} className="text-sm font-light text-white/50 flex items-start gap-4">  
-              <span className="text-[10px] text-white/20 mt-1">0{i+1}</span>  
-              <span className="leading-tight">{item}</span>  
-            </li>  
+  return (  
+    <main className="min-h-screen bg-[#faf9f6] text-[#1a1a1a] font-light">  
+      <Navigation />
+
+      {/* Hero Section */}  
+      <section className="relative h-[70vh] w-full">  
+        <Image  
+          src={sanctuary.heroImage}  
+          alt={sanctuary.name}  
+          fill  
+          className="object-cover"  
+          priority  
+        />  
+        <div className="absolute inset-0 bg-black/30" />  
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center px-4">  
+          <h1 className="text-5xl md:text-7xl font-serif mb-4 tracking-tight">  
+            {sanctuary.name}  
+          </h1>  
+          <p className="text-xl md:text-2xl max-w-2xl font-light italic opacity-90">  
+            {sanctuary.atmosphere}  
+          </p>  
+        </div>  
+      </section>
+
+      {/* The Brief / Description */}  
+      <section className="max-w-4xl mx-auto px-6 py-20 text-center">  
+        <h2 className="text-sm uppercase tracking-[0.3em] mb-8 text-[#8c8c8c]">  
+          The Brief  
+        </h2>  
+        <p className="text-2xl md:text-3xl leading-relaxed font-serif text-[#2c2c2c]">  
+          {sanctuary.categoryDescription}  
+        </p>  
+      </section>
+
+      {/* Dynamic Properties Grid: "The Collection" */}  
+      <section className="max-w-7xl mx-auto px-6 py-12">  
+        <div className="flex justify-between items-end mb-12">  
+          <div>  
+            <h3 className="text-sm uppercase tracking-[0.3em] text-[#8c8c8c] mb-2">  
+              The Collection  
+            </h3>  
+            <h2 className="text-4xl font-serif">Refined Dwellings</h2>  
+          </div>  
+          <p className="text-[#8c8c8c] italic">{relatedProperties.length} Sanctuaries Found</p>  
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">  
+          {relatedProperties.map((property) => (  
+            <Link   
+              key={property.id}   
+              href={`/properties/${property.id}`}  
+              className="group block overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow duration-500"  
+            >  
+              <div className="relative aspect-[4/5] overflow-hidden">  
+                <Image  
+                  src={property.image}  
+                  alt={property.name}  
+                  fill  
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"  
+                />  
+              </div>  
+              <div className="p-8">  
+                <p className="text-[10px] uppercase tracking-[0.2em] text-[#8c8c8c] mb-2">  
+                  {property.location}  
+                </p>  
+                <h4 className="text-xl font-serif mb-4 group-hover:text-[#c5a059] transition-colors">  
+                  {property.name}  
+                </h4>  
+                <div className="flex justify-between items-center pt-4 border-t border-[#f0f0f0]">  
+                  <span className="text-xs tracking-widest text-[#8c8c8c]">EXPLORE</span>  
+                  <span className="text-xs font-medium">{property.priceLevel}</span>  
+                </div>  
+              </div>  
+            </Link>  
           ))}  
-        </ul>  
-      </div>  
-    </div>  
-      
-    <div className="md:col-span-8">  
-      <h4 className="text-[10px] uppercase tracking-[0.3em] text-white/30 mb-8">Executive Summary</h4>  
-      <p className="text-3xl md:text-5xl font-light leading-[1.1] mb-12 tracking-tight">  
-        {sanctuary.categoryDescription}  
-      </p>  
-      <div className="pt-12 border-t border-white/5 flex flex-wrap gap-16">  
-         <div>  
-            <p className="text-[10px] uppercase tracking-widest text-white/30 mb-3">Portfolio Size</p>  
-            <p className="text-3xl font-light">{sanctuary.propertyCount} Properties</p>  
-         </div>  
-         <div>  
-            <p className="text-[10px] uppercase tracking-widest text-white/30 mb-3">Service Level</p>  
-            <p className="text-3xl font-light italic">Invisible</p>  
-         </div>  
-      </div>  
-    </div>  
-  </div>  
-</section>
+        </div>  
+      </section>
 
-{/* Private Booking CTA */}  
-<section className="py-40 bg-zinc-950/20 text-center border-y border-white/5">  
-   <div className="max-w-2xl mx-auto px-6">  
-      <p className="text-[10px] uppercase tracking-[0.6em] text-white/30 mb-12">Initiation Sequence</p>  
-      <h2 className="text-4xl md:text-6xl font-light tracking-tighter mb-12 leading-none">  
-        Request Access to {sanctuary.name}  
-      </h2>  
-      <button className="group relative px-16 py-6 overflow-hidden border border-white/10 rounded-full transition-all hover:border-white/40">  
-        <span className="relative z-10 text-[10px] uppercase tracking-[0.5em] group-hover:italic transition-all">Begin Consultation</span>  
-        <div className="absolute inset-0 bg-white scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-700 opacity-[0.03]"></div>  
-      </button>  
-   </div>  
-</section>
+      {/* Action / Reserve */}  
+      <section className="bg-[#1a1a1a] text-white py-24 text-center">  
+        <div className="max-w-2xl mx-auto px-6">  
+          <h2 className="text-3xl md:text-4xl font-serif mb-8">  
+            Begin Your Manifest  
+          </h2>  
+          <Link  
+            href="/reserve"  
+            className="inline-block border border-white/30 px-12 py-5 text-sm uppercase tracking-[0.4em] hover:bg-white hover:text-black transition-all duration-500"  
+          >  
+            Request Private Access  
+          </Link>  
+        </div>  
+      </section>
 
-<Footer />  
-</main>  
-);  
+      <Footer />  
+    </main>  
+  )  
 }  
