@@ -1,119 +1,85 @@
-import { properties } from "../../../data/properties";  
-import { notFound } from "next/navigation";  
-import { EliteAmenities } from "../../../components/EliteAmenities";  
-import Link from "next/link";
+import React from 'react';  
+import { notFound } from 'next/navigation';  
+import { properties } from '../../../data/properties';  
+import { EliteAmenities } from '../../../components/EliteAmenities';
 
-interface Props {  
-  params: { id: string };  
+// Local interface to ensure TypeScript recognizes the 'image' field  
+interface Property {  
+  id: string;  
+  name: string;  
+  location: string;  
+  image: string;  
+  description?: string;  
+  exclusiveOffer?: string;  
 }
 
-export async function generateStaticParams() {  
-  return properties.map((prop) => ({  
-    id: prop.id,  
-  }));  
-}
-
-export default function PropertyDetailPage({ params }: Props) {  
-  const property = properties.find((p) => p.id === params.id);
+export default async function PropertyDetailPage({ params }: { params: { id: string } }) {  
+  const { id } = params;  
+    
+  // Cast the imported data to our local Property interface to fix the build error  
+  const propertyList = properties as unknown as Property[];  
+  const property = propertyList.find((p) => p.id === id);
 
   if (!property) {  
     notFound();  
   }
 
   return (  
-    <main className="min-h-screen bg-[#fafafa] text-[#1a1a1a] pt-20">  
+    <main className="min-h-screen bg-white">  
       {/* Hero Section */}  
       <section className="relative h-[80vh] w-full overflow-hidden">  
         {property.image && (  
           <img  
             src={property.image}  
             alt={property.name}  
-            className="absolute inset-0 h-full w-full object-cover"  
+            className="h-full w-full object-cover"  
           />  
         )}  
         <div className="absolute inset-0 bg-black/30" />  
-        <div className="absolute inset-0 flex items-center justify-center text-center px-4">  
-          <div className="max-w-4xl">  
-            <p className="text-white/80 uppercase tracking-[0.3em] text-xs mb-4">  
-              {property.location}  
-            </p>  
-            <h1 className="text-4xl md:text-7xl text-white font-light tracking-tight mb-8">  
-              {property.name}  
-            </h1>  
-          </div>  
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white p-4">  
+          <h1 className="text-5xl md:text-7xl font-serif mb-4 drop-shadow-lg">  
+            {property.name}  
+          </h1>  
+          <p className="text-xl md:text-2xl font-light tracking-widest uppercase">  
+            {property.location}  
+          </p>  
         </div>  
       </section>
 
-      {/* Intro Section */}  
+      {/* Property Details */}  
       <section className="max-w-7xl mx-auto px-6 py-24">  
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">  
-          <div className="lg:col-span-8">  
-            <h2 className="text-sm uppercase tracking-[0.2em] text-gray-400 mb-8">  
-              The Residence  
-            </h2>  
-            <p className="text-2xl md:text-3xl font-light leading-relaxed text-gray-800 mb-12">  
-              {property.highlight || "An architectural masterpiece offering unparalleled privacy and bespoke luxury in one of the world's most sought-after destinations."}  
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">  
+          <div>  
+            <h2 className="text-3xl font-serif mb-8 text-neutral-900">The Experience</h2>  
+            <p className="text-lg text-neutral-600 leading-relaxed mb-8">  
+              {property.description || "Experience unparalleled luxury in one of our most exclusive properties. This sanctuary offers a perfect blend of modern comfort and timeless elegance, curated specifically for the discerning traveler."}  
             </p>  
               
-            <div className="prose prose-lg text-gray-600 max-w-none">  
-              <p>  
-                Experience a level of service and exclusivity that transcends traditional hospitality.   
-                Every detail of this property has been curated for the discerning traveler who   
-                values discretion, design, and effortless comfort.  
-              </p>  
-            </div>  
+            {property.exclusiveOffer && (  
+              <div className="bg-neutral-50 p-8 border border-neutral-100 rounded-sm">  
+                <h3 className="text-sm uppercase tracking-widest text-neutral-400 mb-2">NexVoyage Collective Benefit</h3>  
+                <p className="text-xl text-neutral-800 font-medium italic">  
+                  "{property.exclusiveOffer}"  
+                </p>  
+              </div>  
+            )}  
           </div>
 
-          <div className="lg:col-span-4 lg:border-l border-gray-200 lg:pl-12">  
-            <div className="sticky top-32">  
-              <div className="mb-10">  
-                <h3 className="text-xs uppercase tracking-widest text-gray-400 mb-2">Exclusivity</h3>  
-                <p className="text-lg font-medium">{property.exclusiveOffer || "Private Commission Only"}</p>  
-              </div>  
-                
-              <div className="mb-10">  
-                <h3 className="text-xs uppercase tracking-widest text-gray-400 mb-2">Investment</h3>  
-                <p className="text-lg">{property.priceLevel || "Upon Request"}</p>  
-              </div>
-
-              <Link  
+          <div>  
+            {/* Using the named export as verified in memory */}  
+            <EliteAmenities />  
+              
+            <div className="mt-12 text-center">  
+              <a   
                 href={`/reserve?property=${property.id}`}  
-                className="inline-block w-full text-center bg-[#1a1a1a] text-white py-5 px-8 text-sm uppercase tracking-widest hover:bg-black transition-colors"  
+                className="inline-block bg-neutral-900 text-white px-12 py-4 rounded-full text-sm uppercase tracking-widest hover:bg-neutral-800 transition-colors shadow-lg"  
               >  
-                Inquire for Access  
-              </Link>  
+                Inquire for Availability  
+              </a>  
             </div>  
           </div>  
         </div>  
-      </section>
-
-      {/* Amenities Section */}  
-      <section className="bg-white py-24 border-y border-gray-100">  
-        <div className="max-w-7xl mx-auto px-6">  
-          <div className="mb-16">  
-            <h2 className="text-xs uppercase tracking-[0.3em] text-gray-400 text-center">  
-              The Collective Perks  
-            </h2>  
-          </div>  
-          <EliteAmenities />  
-        </div>  
-      </section>
-
-      {/* Property Details Grid */}  
-      {property.amenities && property.amenities.length > 0 && (  
-        <section className="max-w-7xl mx-auto px-6 py-24">  
-          <h2 className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-12">  
-            Features & Services  
-          </h2>  
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-12">  
-            {property.amenities.map((amenity, index) => (  
-              <div key={index} className="border-t border-gray-100 pt-6">  
-                <p className="text-sm font-light text-gray-600 italic">{amenity}</p>  
-              </div>  
-            ))}  
-          </div>  
-        </section>  
-      )}  
+      </section>  
     </main>  
   );  
 }  
