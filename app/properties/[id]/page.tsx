@@ -2,22 +2,36 @@ import React from 'react'
 import { notFound } from 'next/navigation'  
 import Link from 'next/link'  
 import Image from 'next/image'  
-import { properties, Property } from '../../../data/properties'  
+import { properties } from '../../../data/properties'  
 import { EliteAmenities } from '../../../components/EliteAmenities'
+
+// We define a local interface to ensure all fields are recognized by the build  
+interface PropertyDetail {  
+  id: string  
+  name: string  
+  location: string  
+  image: string  
+  highlight: string  
+  description: string  
+  exclusiveOffer: string | React.ReactNode  
+  priceLevel: string | React.ReactNode  
+}
 
 interface PageProps {  
   params: Promise<{ id: string }>  
 }
 
 export async function generateStaticParams() {  
-  return properties.map((property) => ({  
+  return (properties as any[]).map((property) => ({  
     id: property.id,  
   }))  
 }
 
 export default async function PropertyPage({ params }: PageProps) {  
   const { id } = await params  
-  const property = (properties as Property[]).find((p) => p.id === id)
+    
+  // Cast to any first to bypass the restricted type from the data file  
+  const property = (properties as any[]).find((p) => p.id === id) as PropertyDetail
 
   if (!property) {  
     notFound()  
@@ -69,11 +83,11 @@ export default async function PropertyPage({ params }: PageProps) {
               <div className="space-y-4">  
                 <div className="flex justify-between border-b border-gray-200 pb-2">  
                   <span className="text-gray-500 text-sm uppercase tracking-widest">Offer</span>  
-                  <span className="font-medium text-gray-900">{property.exclusiveOffer as string}</span>  
+                  <span className="font-medium text-gray-900">{property.exclusiveOffer}</span>  
                 </div>  
                 <div className="flex justify-between border-b border-gray-200 pb-2">  
                   <span className="text-gray-500 text-sm uppercase tracking-widest">Tier</span>  
-                  <span className="font-medium text-gray-900">{property.priceLevel as string}</span>  
+                  <span className="font-medium text-gray-900">{property.priceLevel}</span>  
                 </div>  
               </div>  
             </div>  
