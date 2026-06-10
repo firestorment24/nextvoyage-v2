@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'  
 import Image from 'next/image'  
 import { properties, Property } from '../../../data/properties'  
-import { EliteAmenities } from '../../components/EliteAmenities'
+import { EliteAmenities } from '../../../components/EliteAmenities'
 
 interface PageProps {  
   params: Promise<{ id: string }>  
