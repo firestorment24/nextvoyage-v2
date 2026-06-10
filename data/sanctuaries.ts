@@ -1,45 +1,53 @@
 export interface Bucket {  
-  id: string  
-  name: string  
-  description: string  
-  count: number // <-- This must be here for the build to pass  
-  imageUrl?: string  
+  id: string;  
+  name: string;  
+  description: string;  
+  count: number; // The missing piece  
 }
 
 export interface Sanctuary {  
-  id: string  
-  slug: string  
-  name: string  
-  loc: string  
-  tag: string  
-  img: string  
-  heroImage: string  
-  philosophy: string  
-  roi: string  
-  atmosphere: string  
-  highlights: string[]  
-  buckets: Bucket[]  
+  id: string;  
+  name: string;  
+  loc: string;  
+  tag: string;  
+  img: string;  
+  heroImage: string;  
+  philosophy: string;  
+  roi: string;  
+  atmosphere: string;  
+  highlights: string[];  
+  buckets: Bucket[];  
 }
 
 export const SANCTUARY_DATA: Record<string, Sanctuary> = {  
-  stadium: {  
-    id: 'stadium',  
-    slug: 'stadium',  
+  // Example entry showing the new count field  
+  'the-stadium': {  
+    id: 'the-stadium',  
     name: 'The Stadium',  
     loc: 'Urban Core',  
-    tag: 'Athletic Luxury',  
-    img: 'https://cdn.marblism.com/DO6EekfUdUH.webp',  
-    heroImage: 'https://cdn.marblism.com/DO6EekfUdUH.webp',  
-    philosophy: 'Performance-driven reset for the high-achiever.',  
-    roi: 'Physical peak performance',  
-    atmosphere: 'High-energy, precision, recovery-focused',  
-    highlights: ['Olympic recovery suite', 'Private athletic coaching', 'Bio-hacking lab'],  
+    tag: 'Metropolitan Trio',  
+    img: '/assets/brass-shadow-stadium.jpg',  
+    heroImage: '/assets/brass-shadow-stadium-hero.jpg',  
+    philosophy: 'High-octane luxury in the heart of the city.',  
+    roi: '8.2% Annualized',  
+    atmosphere: 'Brass & Shadow',  
+    highlights: ['Private Skybox', 'Helipad Access', '24/7 Concierge'],  
     buckets: [  
-      { id: 'recovery', name: 'Recovery Suites', count: 12, description: 'Elite physical restoration' },  
-      { id: 'performance', name: 'Performance Labs', count: 8, description: 'Precision training grounds' }  
+      {  
+        id: 'sky-villas',  
+        name: 'Sky Villas',  
+        description: 'Penthouses with 360-degree urban views.',  
+        count: 12  
+      },  
+      {  
+        id: 'executive-suites',  
+        name: 'Executive Suites',  
+        description: 'Sleek units for the modern nomad.',  
+        count: 24  
+      }  
     ]  
   },  
-  // ... apply similar count fields to all other sanctuaries  
-}
+  // ... apply 'count' to all other sanctuaries (The Fortress, The Cinematic, etc.)  
+};
 
-export const sanctuaries = Object.values(SANCTUARY_DATA) 
+export const sanctuaries = Object.values(SANCTUARY_DATA);  
