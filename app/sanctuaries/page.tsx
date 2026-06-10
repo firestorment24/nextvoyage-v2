@@ -15,7 +15,7 @@ export default function SanctuaryIndex() {
             choose your sanctuary.  
           </p>  
         </header>
-
+ 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">  
           {SANCTUARY_DATA.map((sanctuary, index) => (  
             <Link   
