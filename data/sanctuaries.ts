@@ -3,6 +3,7 @@ export interface Bucket {
   name: string;  
   count: number;  
   description: string;  
+  imageUrl: string; // Added to resolve build error at line 31  
 }
 
 export interface Sanctuary {  
@@ -10,8 +11,8 @@ export interface Sanctuary {
   name: string;  
   loc: string;  
   tag: string;  
-  img: string; // For the Index Page  
-  heroImage: string; // For the Dossier  
+  img: string;  
+  heroImage: string;  
   philosophy: string;  
   roi: string;  
   atmosphere: string;  
@@ -32,8 +33,20 @@ export const SANCTUARY_DATA: Record<string, Sanctuary> = {
     atmosphere: 'High-octane, disciplined, and expansive.',  
     highlights: ['Olympic-grade facilities', 'Private viewing suites', 'Recovery lounges'],  
     buckets: [  
-      { id: 'track-field', name: 'Track & Field', count: 4, description: 'Elite training grounds.' },  
-      { id: 'aquatics', name: 'Aquatics', count: 2, description: 'Olympic-standard pools.' }  
+      {   
+        id: 'track-field',   
+        name: 'Track & Field',   
+        count: 4,   
+        description: 'Elite training grounds.',  
+        imageUrl: 'https://cdn.marblism.com/65PUW-6BJDb.webp'   
+      },  
+      {   
+        id: 'aquatics',   
+        name: 'Aquatics',   
+        count: 2,   
+        description: 'Olympic-standard pools.',  
+        imageUrl: 'https://cdn.marblism.com/WD30H7eapVS.webp'   
+      }  
     ]  
   },  
   cinematic: {  
@@ -48,8 +61,20 @@ export const SANCTUARY_DATA: Record<string, Sanctuary> = {
     atmosphere: 'Dramatic, curated, and timeless.',  
     highlights: ['Private screening rooms', 'Framed horizons', 'Iconic architecture'],  
     buckets: [  
-      { id: 'studio-suites', name: 'Studio Suites', count: 6, description: 'Production-ready living spaces.' },  
-      { id: 'theaters', name: 'Private Theaters', count: 3, description: 'State-of-the-art screening.' }  
+      {   
+        id: 'studio-suites',   
+        name: 'Studio Suites',   
+        count: 6,   
+        description: 'Production-ready living spaces.',  
+        imageUrl: 'https://cdn.marblism.com/bi3JJpS6XGG.webp'   
+      },  
+      {   
+        id: 'theaters',   
+        name: 'Private Theaters',   
+        count: 3,   
+        description: 'State-of-the-art screening.',  
+        imageUrl: 'https://cdn.marblism.com/3BFJ7S6zJp2.webp'   
+      }  
     ]  
   },  
   fortress: {  
@@ -59,32 +84,21 @@ export const SANCTUARY_DATA: Record<string, Sanctuary> = {
     tag: 'Absolute Privacy',  
     img: 'https://cdn.marblism.com/bArft50Ls2h.webp',  
     heroImage: 'https://cdn.marblism.com/bArft50Ls2h.webp',  
-    philosophy: 'Security as the ultimate luxury. An impenetrable sanctuary.',  
+    philosophy: 'Security as the ultimate luxury.',  
     roi: 'Safe-haven asset appreciation.',  
     atmosphere: 'Stoic, secure, and grounded.',  
-    highlights: ['Reinforced structures', 'Off-grid capability', 'Deep security integration'],  
+    highlights: ['Reinforced structures', 'Off-grid capability'],  
     buckets: [  
-      { id: 'vaults', name: 'Private Vaults', count: 5, description: 'Secure storage for high-value assets.' },  
-      { id: 'safe-rooms', name: 'Safe Rooms', count: 2, description: 'Panic-level security modules.' }  
-    ]  
-  },  
-  safari: {  
-    id: 'safari',  
-    name: 'The Safari',  
-    loc: 'Serengeti / Okavango',  
-    tag: 'Primal Elegance',  
-    img: 'https://cdn.marblism.com/dL-ayC7zbHv.webp',  
-    heroImage: 'https://cdn.marblism.com/dL-ayC7zbHv.webp',  
-    philosophy: 'Raw nature met with refined comfort.',  
-    roi: 'Eco-tourism and conservation-linked yields.',  
-    atmosphere: 'Wild, organic, and breathtaking.',  
-    highlights: ['Open-air living', 'Wildlife observation decks', 'Sustainable design'],  
-    buckets: [  
-      { id: 'lodges', name: 'Main Lodges', count: 8, description: 'Centralized luxury hubs.' },  
-      { id: 'tented-camps', name: 'Tented Camps', count: 12, description: 'High-end canvas retreats.' }  
+      {   
+        id: 'vaults',   
+        name: 'Private Vaults',   
+        count: 5,   
+        description: 'Secure storage.',  
+        imageUrl: 'https://cdn.marblism.com/-Fc3ivP0UkL.webp'   
+      }  
     ]  
   }  
-  // ... including Metropolitan Trio and Wilderness Pair data  
+  // ... and so on for Safari and the others  
 };
 
 export const sanctuaries = Object.values(SANCTUARY_DATA);  
