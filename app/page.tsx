@@ -13,7 +13,7 @@ export default function Home() {
         ctaText="Explore Sanctuaries"  
         ctaHref="/sanctuaries" // Fixed link to plural route  
       />
-
+ 
       {/* Sanctuary Grid */}  
       <section className="py-24 px-6 md:px-12 lg:px-24">  
         <div className="max-w-7xl mx-auto">  
