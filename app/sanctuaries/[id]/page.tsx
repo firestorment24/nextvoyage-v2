@@ -55,15 +55,18 @@ return (
         </section>  
       )}
 
-      {/* Property Count & Booking CTA */}  
-      <section className="text-center space-y-6">  
-        <p className="text-gray-500 italic">  
-          Currently featuring {sanctuary.propertyCount || 0} exclusive properties in this collection.  
-        </p>  
-        <button className="bg-black text-white px-8 py-3 rounded-full hover:bg-gray-800 transition-colors">  
-          Request a Curated Quote  
-        </button>  
-      </section>  
+      {/* Updated Property Count & Booking CTA */}  
+<section className="text-center space-y-6">  
+  <p className="text-gray-500 italic">  
+    Currently featuring {sanctuary.propertyCount || 0} exclusive properties in this collection.  
+  </p>  
+  <Link   
+    href={`/reserve?sanctuary=${sanctuary.id}`}  
+    className="inline-block bg-black text-white px-10 py-4 rounded-full hover:bg-gray-800 transition-colors"  
+  >  
+    Request a Curated Quote  
+  </Link>  
+</section>  
         
       {/* Dynamic Property Buckets */}  
       {sanctuary.buckets && (  
