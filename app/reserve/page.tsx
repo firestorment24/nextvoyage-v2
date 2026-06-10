@@ -1,9 +1,7 @@
 // app/reserve/page.tsx  
 'use client'
 
-import React, { useState } from 'react'  
-import Navigation from '@/components/Navigation'  
-import Footer from '@/components/Footer'
+import React, { useState } from 'react'
 
 export default function ReservePage() {  
   const [step, setStep] = useState(1)  
@@ -42,7 +40,7 @@ export default function ReservePage() {
           </div>  
           <div>  
             <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">Preferred Contact Method</label>  
-            <div className="flex gap-4">  
+            <div className="flex flex-wrap gap-4">  
               {['Email', 'WhatsApp', 'Text', 'Call'].map((m) => (  
                 <button   
                   key={m}  
@@ -76,7 +74,7 @@ export default function ReservePage() {
         <div className="space-y-8 animate-in fade-in duration-700">  
           <div>  
             <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">Timeline</label>  
-            <div className="flex gap-4">  
+            <div className="flex flex-wrap gap-4">  
               {['Firm Dates', 'Flexible for the right experience'].map((t) => (  
                 <button   
                   key={t}  
@@ -168,8 +166,6 @@ export default function ReservePage() {
 
   return (  
     <div className="min-h-screen bg-white font-sans text-black selection:bg-black selection:text-white">  
-      <Navigation />  
-        
       <main className="max-w-xl mx-auto pt-32 pb-20 px-6">  
         <header className="mb-20">  
           <h1 className="text-3xl font-light tracking-tight mb-4">Application for Curation</h1>  
@@ -208,9 +204,7 @@ export default function ReservePage() {
             </button>  
           )}  
         </footer>  
-      </main>
-
-      <Footer />  
+      </main>  
     </div>  
   )  
 }  
