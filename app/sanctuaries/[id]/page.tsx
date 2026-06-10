@@ -1,116 +1,69 @@
-// app/sanctuaries/[id]/page.tsx  
-'use client'
-
-import { useParams } from 'next/navigation'  
-import Link from 'next/link'  
+import { notFound } from 'next/navigation'  
+import Image from 'next/image'  
 import { SANCTUARY_DATA } from '@/data/sanctuaries'
-export default function SanctuaryDetail() {  
-  const params = useParams()  
-  const id = params.id as string
 
+interface PageProps {  
+  params: Promise<{ id: string }>  
+}
+
+export default async function SanctuaryPage({ params }: PageProps) {  
+  const { id } = await params  
   const sanctuary = SANCTUARY_DATA[id]
 
   if (!sanctuary) {  
-    return (  
-      <div className="min-h-screen flex items-center justify-center bg-white">  
-        <div className="text-center">  
-          <h1 className="text-2xl font-light mb-4">Sanctuary not found</h1>  
-          <Link href="/sanctuaries" className="text-gold hover:underline">  
-            Return to Collection  
-          </Link>  
-        </div>  
-      </div>  
-    )  
+    notFound()  
   }
 
   return (  
-    <main className="min-h-screen bg-white">  
+    <main className="min-h-screen bg-[#0a0a0a] text-white">  
       {/* Hero Section */}  
-      <div className="relative h-[60vh] w-full overflow-hidden">  
-        <img  
-          src={sanctuary.img || sanctuary.heroImage}  
+      <section className="relative h-[80vh] w-full overflow-hidden">  
+        <Image  
+          src={sanctuary.heroImage}  
           alt={sanctuary.name}  
-          className="w-full h-full object-cover"  
+          fill  
+          className="object-cover opacity-60"  
+          priority  
         />  
-        <div className="absolute inset-0 bg-black/30" />  
-        <div className="absolute inset-0 flex items-center justify-center text-center px-4">  
-          <div className="max-w-4xl">  
-            <p className="text-white/80 uppercase tracking-[0.3em] text-sm mb-4">  
-              {sanctuary.loc}  
-            </p>  
-            <h1 className="text-4xl md:text-6xl text-white font-light mb-6 tracking-tight">  
-              {sanctuary.name}  
-            </h1>  
-            <p className="text-xl text-white/90 font-light italic">  
-              {sanctuary.tag}  
-            </p>  
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />  
+          
+        <div className="absolute bottom-20 left-6 md:left-20 max-w-4xl">  
+          <div className="flex items-center gap-4 mb-6">  
+            <span className="text-xs tracking-[0.3em] uppercase text-zinc-400">{sanctuary.tag}</span>  
+            <div className="h-[1px] w-12 bg-zinc-600" />  
+            <span className="text-xs tracking-[0.3em] uppercase text-zinc-400">{sanctuary.loc}</span>  
           </div>  
+          <h1 className="text-6xl md:text-9xl font-light tracking-tighter mb-8 leading-none">  
+            {sanctuary.name}  
+          </h1>  
         </div>  
-      </div>
+      </section>
 
-      {/* Philosophy Section */}  
-      <div className="max-w-7xl mx-auto px-6 py-24">  
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">  
+      {/* Content Grid */}  
+      <section className="px-6 md:px-20 py-24 max-w-7xl mx-auto">  
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-20">  
           <div>  
-            <span className="text-gold uppercase tracking-[0.2em] text-xs font-medium mb-4 block">  
-              The Philosophy  
-            </span>  
-            <h2 className="text-3xl font-light mb-8 text-charcoal">  
-              A New Standard of Travel  
-            </h2>  
-            <p className="text-gray-500 font-light leading-relaxed text-lg">  
-              {sanctuary.philosophy}  
+            <h2 className="text-sm uppercase tracking-[0.2em] text-zinc-500 mb-8 font-medium">The Philosophy</h2>  
+            <p className="text-2xl md:text-3xl font-light leading-snug text-zinc-200 italic">  
+              "{sanctuary.philosophy}"  
             </p>  
           </div>  
-          <div className="bg-stone-50 p-12 rounded-sm border border-stone-100">  
-            <span className="text-gold uppercase tracking-[0.2em] text-xs font-medium mb-4 block">  
-              Why it Matters  
-            </span>  
-            <h3 className="text-2xl font-light mb-6">Investment in Self</h3>  
-            <p className="text-gray-600 font-light italic mb-8">  
-              "{sanctuary.roi}"  
-            </p>  
-            <Link  
-              href={`/reserve?sanctuary=${sanctuary.id}`}  
-              className="inline-block bg-charcoal text-white px-10 py-4 text-sm tracking-[0.2em] uppercase hover:bg-gold transition-colors duration-300"  
-            >  
-              Apply for Curation  
-            </Link>  
-          </div>  
-        </div>  
-      </div>
-
-      {/* Atmosphere & Highlights */}  
-      <div className="bg-stone-50 py-24">  
-        <div className="max-w-7xl mx-auto px-6">  
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">  
-            <div className="lg:col-span-1">  
-              <h3 className="text-2xl font-light mb-6 text-charcoal">The Atmosphere</h3>  
-              <p className="text-gray-500 font-light leading-relaxed">  
-                {sanctuary.atmosphere}  
-              </p>  
+            
+          <div className="bg-zinc-900/50 border border-zinc-800 p-12 backdrop-blur-sm">  
+            <h2 className="text-sm uppercase tracking-[0.2em] text-zinc-500 mb-8 font-medium">Cognitive Yield</h2>  
+            <div className="text-3xl md:text-4xl font-light mb-6 tracking-tight">  
+              {sanctuary.roi}  
             </div>  
-            <div className="lg:col-span-2">  
-              <h3 className="text-2xl font-light mb-8 text-center lg:text-left text-charcoal">  
-                Curated Highlights  
-              </h3>  
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">  
-                {sanctuary.highlights.map((highlight, index) => (  
-                  <div  
-                    key={index}  
-                    className="flex items-start space-x-4 bg-white p-6 rounded-sm border border-stone-200"  
-                  >  
-                    <div className="w-1.5 h-1.5 bg-gold rounded-full mt-2 shrink-0" />  
-                    <p className="text-gray-600 font-light text-sm">  
-                      {highlight}  
-                    </p>  
-                  </div>  
-                ))}  
-              </div>  
+            <div className="flex flex-wrap gap-3">  
+              {sanctuary.highlights.map((item) => (  
+                <span key={item} className="px-4 py-2 bg-white/5 border border-white/10 text-[10px] uppercase tracking-widest text-zinc-400">  
+                  {item}  
+                </span>  
+              ))}  
             </div>  
           </div>  
         </div>  
-      </div>  
+      </section>  
     </main>  
   )  
 }  
