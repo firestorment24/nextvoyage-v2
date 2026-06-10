@@ -1,113 +1,60 @@
-'use client';
-
 import React from 'react';  
-import Link from 'next/link';  
-import Navigation from '../Navigation';  
-import Footer from '../Footer';
+import Navigation from '../components/Navigation';  
+import Footer from '../components/Footer';  
+import { SANCTUARY_DATA } from '../data/sanctuaries';  
+import Link from 'next/link';
 
-const SANCTUARIES = [  
-{  
-  id: 'alpine',  
-  name: 'The Alpine',  
-  location: 'Courchevel • Aspen • Dolomites',  
-  vibe: 'High-altitude restoration and quiet luxury.',  
-  image: 'https://images.unsplash.com/photo-1502784444187-359ac186c5bb?auto=format&fit=crop&q=80&w=1000',  
-},  
-{  
-  id: 'metropolitan',  
-  name: 'The Metropolitan',  
-  location: 'Tokyo • London • New York',  
-  vibe: 'Calculated efficiency in the heart of the world.',  
-  image: 'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&q=80&w=1000',  
-},  
-{  
-  id: 'nautical',  
-  name: 'The Nautical',  
-  location: 'Amalfi • St. Barths • Mykonos',  
-  vibe: 'Sun-drenched seclusion and maritime mastery.',  
-  image: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&q=80&w=1000',  
-},  
-{  
-  id: 'safari',  
-  name: 'The Safari',  
-  location: 'Serengeti • Kruger • Okavango',  
-  vibe: 'Ancient rhythms and untamed elegance.',  
-  image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&q=80&w=1000',  
-},  
-{  
-  id: 'oasis',  
-  name: 'The Oasis',  
-  location: 'Marrakech • AlUla • Dubai',  
-  vibe: 'A testament to resilience and refined desert living.',  
-  image: 'https://images.unsplash.com/photo-1509233725247-49e657c54213?auto=format&fit=crop&q=80&w=1000',  
-},  
-{  
-  id: 'fortress',  
-  name: 'The Fortress',  
-  location: 'Patagonia • Bhutan • Iceland',  
-  vibe: 'Absolute privacy at the edges of the earth.',  
-  image: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=1000',  
-},  
-];
+export default function SanctuaryIndex() {  
+  return (  
+    <div className="bg-[#F9F8F6] min-h-screen font-serif text-slate-900">  
+      <Navigation />  
+        
+      <main className="max-w-7xl mx-auto px-6 py-24">  
+        <header className="mb-20">  
+          <h1 className="text-5xl md:text-7xl font-light tracking-tight mb-6">The Collection</h1>  
+          <p className="text-xl text-slate-600 max-w-2xl font-light leading-relaxed">  
+            A curated atlas of destination archetypes. From the silence of the Alps to the pulse of the metropolis,   
+            choose your sanctuary.  
+          </p>  
+        </header>
 
-export default function SanctuariesPage() {  
-return (  
-  <main className="min-h-screen bg-white text-black flex flex-col">  
-    <Navigation />
-
-    {/* Hero Section */}  
-    <header className="px-6 py-24 max-w-7xl mx-auto w-full text-center border-b border-neutral-100">  
-      <span className="text-[10px] uppercase tracking-[0.3em] text-neutral-400 mb-6 block">The Portfolio</span>  
-      <h1 className="text-5xl md:text-7xl font-serif mb-8 tracking-tight">Sanctuaries</h1>  
-      <p className="text-neutral-500 max-w-xl mx-auto text-lg leading-relaxed font-light">  
-        Our collection is organized by archetype. <br />  
-        Select your environment; we will handle the rest.  
-      </p>  
-    </header>
-
-    {/* Grid Section */}  
-    <section className="px-6 py-20 max-w-7xl mx-auto w-full">  
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">  
-        {SANCTUARIES.map((item) => (  
-          <Link key={item.id} href={`/sanctuaries/${item.id}`} className="group block">  
-            <div className="relative aspect-[4/5] overflow-hidden bg-neutral-100 mb-6">  
-              <img  
-                src={item.image}  
-                alt={item.name}  
-                className="object-cover w-full h-full grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-in-out"  
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">  
+          {SANCTUARY_DATA.map((sanctuary, index) => (  
+            <Link   
+              href={`/sanctuaries/${sanctuary.id}`}   
+              key={sanctuary.id}  
+              className={`group relative overflow-hidden bg-white shadow-sm transition-all duration-700 hover:shadow-2xl   
+                ${index % 3 === 0 ? 'md:col-span-8 aspect-[16/9]' : 'md:col-span-4 aspect-[4/5]'}   
+                ${index % 4 === 0 ? 'md:mt-12' : ''}`}  
+            >  
+              <img   
+                src={sanctuary.img}   
+                alt={sanctuary.name}  
+                className="w-full h-full object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all duration-1000 scale-100 group-hover:scale-105"  
               />  
-              <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />  
-            </div>  
-              
-            <div className="space-y-2">  
-              <div className="flex justify-between items-baseline border-b border-neutral-100 pb-2">  
-                <h2 className="text-2xl font-serif tracking-tight">{item.name}</h2>  
-                <span className="text-[10px] uppercase tracking-widest text-neutral-400">View Sanctuary</span>  
+                
+              {/* Overlay Content */}  
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />  
+                
+              <div className="absolute bottom-0 left-0 p-8 w-full text-white">  
+                <p className="text-xs uppercase tracking-[0.2em] mb-2 opacity-80">{sanctuary.loc}</p>  
+                <h2 className="text-3xl font-light mb-4">{sanctuary.name}</h2>  
+                  
+                <div className="h-0 group-hover:h-20 overflow-hidden transition-all duration-500 ease-out">  
+                  <p className="text-sm italic font-light leading-relaxed mb-4 border-l border-white/30 pl-4">  
+                    "Return on Ideas: {sanctuary.roi}"  
+                  </p>  
+                  <span className="text-xs font-medium uppercase tracking-widest border-b border-white/50 pb-1">  
+                    Explore Sanctuary  
+                  </span>  
+                </div>  
               </div>  
-              <p className="text-[11px] uppercase tracking-widest text-neutral-400 pt-1">  
-                {item.location}  
-              </p>  
-              <p className="text-neutral-500 text-sm font-light pt-2 line-clamp-2 italic">  
-                "{item.vibe}"  
-              </p>  
-            </div>  
-          </Link>  
-        ))}  
-      </div>  
-    </section>
+            </Link>  
+          ))}  
+        </div>  
+      </main>
 
-    {/* CTA Section */}  
-    <section className="bg-neutral-50 py-24 px-6 text-center">  
-      <h3 className="text-2xl font-serif mb-6 italic text-neutral-400 italic">Seeking something more specific?</h3>  
-      <Link   
-        href="/concierge"   
-        className="inline-block border border-black px-10 py-4 text-xs uppercase tracking-widest hover:bg-black hover:text-white transition-all"  
-      >  
-        Open a Bespoke Inquiry  
-      </Link>  
-    </section>
-
-    <Footer />  
-  </main>  
-);  
+      <Footer />  
+    </div>  
+  );  
 }  
