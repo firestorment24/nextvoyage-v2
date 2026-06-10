@@ -1,122 +1,216 @@
-'use client';
+// app/reserve/page.tsx  
+'use client'
 
-import React, { Suspense } from 'react';  
-import { useSearchParams } from 'next/navigation';  
-import { properties } from '../../data/properties';
-
-function ReserveFormContent() {  
-  const searchParams = useSearchParams();  
-  const propertyId = searchParams.get('property');  
-    
-  // Find the selected property  
-  const selectedProperty = properties.find(p => p.id === propertyId);
-
-  return (  
-    <main className="min-h-screen bg-neutral-50 pt-32 pb-24 px-6">  
-      <div className="max-w-3xl mx-auto">  
-        {/* Selection Header */}  
-        <div className="mb-16 text-center">  
-          <h1 className="text-4xl md:text-5xl font-serif text-neutral-900 mb-4 italic">The Travel Manifest</h1>  
-          <p className="text-neutral-500 tracking-[0.2em] uppercase text-xs">Secure Your Place in the Collection</p>  
-        </div>
-
-        {/* Selected Property Preview */}  
-        {selectedProperty && (  
-          <div className="bg-white border border-neutral-100 p-6 rounded-sm mb-12 flex items-center gap-6 shadow-sm">  
-            <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-sm">  
-              <img   
-                src={(selectedProperty as any).image}   
-                alt={selectedProperty.name}   
-                className="h-full w-full object-cover grayscale hover:grayscale-0 transition-all duration-700"  
-              />  
-            </div>  
-            <div>  
-              <h3 className="text-sm uppercase tracking-widest text-neutral-400 mb-1">Selected Sanctuary</h3>  
-              <p className="text-xl font-serif text-neutral-900">{selectedProperty.name}</p>  
-              <p className="text-sm text-neutral-500 italic">{selectedProperty.location}</p>  
-            </div>  
-          </div>  
-        )}
-
-        {/* The Form */}  
-        <form className="space-y-12 bg-white p-8 md:p-12 border border-neutral-100 shadow-xl rounded-sm">  
-          {/* Section 1: Identity */}  
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">  
-            <div className="space-y-2">  
-              <label className="text-[10px] uppercase tracking-[0.2em] text-neutral-400 block ml-1">Full Name</label>  
-              <input   
-                type="text"   
-                placeholder="Daryl Clark"  
-                className="w-full bg-transparent border-b border-neutral-200 py-3 px-1 focus:outline-none focus:border-neutral-900 transition-colors text-neutral-800 placeholder:text-neutral-300"  
-              />  
-            </div>  
-            <div className="space-y-2">  
-              <label className="text-[10px] uppercase tracking-[0.2em] text-neutral-400 block ml-1">Private Email</label>  
-              <input   
-                type="email"   
-                placeholder="daryl@nexvoyage.com"  
-                className="w-full bg-transparent border-b border-neutral-200 py-3 px-1 focus:outline-none focus:border-neutral-900 transition-colors text-neutral-800 placeholder:text-neutral-300"  
-              />  
-            </div>  
-          </div>
-
-          {/* Section 2: Logistics */}  
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">  
-            <div className="space-y-2">  
-              <label className="text-[10px] uppercase tracking-[0.2em] text-neutral-400 block ml-1">Travel Window</label>  
-              <input   
-                type="text"   
-                placeholder="August 2026"  
-                className="w-full bg-transparent border-b border-neutral-200 py-3 px-1 focus:outline-none focus:border-neutral-900 transition-colors text-neutral-800 placeholder:text-neutral-300"  
-              />  
-            </div>  
-            <div className="space-y-2">  
-              <label className="text-[10px] uppercase tracking-[0.2em] text-neutral-400 block ml-1">The Cohort</label>  
-              <select className="w-full bg-transparent border-b border-neutral-200 py-3 px-1 focus:outline-none focus:border-neutral-900 transition-colors text-neutral-800 appearance-none">  
-                <option>Solo Traveler</option>  
-                <option>Couples Voyage</option>  
-                <option>Family Retreat</option>  
-                <option>Private Party (6+)</option>  
-              </select>  
-            </div>  
-          </div>
-
-          {/* Section 3: The Brief */}  
-          <div className="space-y-2">  
-            <label className="text-[10px] uppercase tracking-[0.2em] text-neutral-400 block ml-1">The Brief</label>  
-            <textarea   
-              rows={4}  
-              placeholder="Tell us about the occasion or any specific requirements for your stay..."  
-              className="w-full bg-transparent border-b border-neutral-200 py-3 px-1 focus:outline-none focus:border-neutral-900 transition-colors text-neutral-800 placeholder:text-neutral-300 resize-none"  
-            />  
-          </div>
-
-          {/* Submit */}  
-          <div className="pt-8 text-center">  
-            <button   
-              type="submit"  
-              className="bg-neutral-900 text-white px-16 py-4 rounded-full text-xs uppercase tracking-[0.3em] hover:bg-neutral-800 transition-all shadow-lg hover:shadow-2xl hover:-translate-y-1 duration-300"  
-            >  
-              Initiate Inquiry  
-            </button>  
-            <p className="mt-6 text-[10px] text-neutral-400 italic">  
-              A private curator will respond to your manifest within 12 hours.  
-            </p>  
-          </div>  
-        </form>  
-      </div>  
-    </main>  
-  );  
-}
+import React, { useState } from 'react'  
+import Navigation from '@/components/Navigation'  
+import Footer from '@/components/Footer'
 
 export default function ReservePage() {  
+  const [step, setStep] = useState(1)  
+  const [formData, setFormData] = useState({  
+    name: '',  
+    contactMethod: 'Email',  
+    contactDetail: '',  
+    vibe: '',  
+    timeline: 'Flexible',  
+    dates: '',  
+    adults: 2,  
+    children: 0,  
+    investment: '',  
+    pastExperience: '',  
+    nonNegotiable: '',  
+    loyalty: '',  
+    referral: ''  
+  })
+
+  const nextStep = () => setStep((s) => s + 1)  
+  const prevStep = () => setStep((s) => s - 1)
+
+  const steps = [  
+    {  
+      title: "The Essentials",  
+      fields: (  
+        <div className="space-y-8 animate-in fade-in duration-700">  
+          <div>  
+            <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">Name</label>  
+            <input   
+              type="text"   
+              className="w-full bg-transparent border-b border-gray-200 py-2 focus:outline-none focus:border-black transition-colors"  
+              placeholder="Your full name"  
+              onChange={(e) => setFormData({...formData, name: e.target.value})}  
+            />  
+          </div>  
+          <div>  
+            <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">Preferred Contact Method</label>  
+            <div className="flex gap-4">  
+              {['Email', 'WhatsApp', 'Text', 'Call'].map((m) => (  
+                <button   
+                  key={m}  
+                  onClick={() => setFormData({...formData, contactMethod: m})}  
+                  className={`px-4 py-2 border ${formData.contactMethod === m ? 'bg-black text-white border-black' : 'border-gray-200 text-gray-400'} text-sm transition-all`}  
+                >  
+                  {m}  
+                </button>  
+              ))}  
+            </div>  
+          </div>  
+          <div>  
+            <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">The Vibe (Your Goal)</label>  
+            <select   
+              className="w-full bg-transparent border-b border-gray-200 py-2 focus:outline-none"  
+              onChange={(e) => setFormData({...formData, vibe: e.target.value})}  
+            >  
+              <option value="">Select a journey type...</option>  
+              <option value="Executive Reset">Executive Reset</option>  
+              <option value="Family Sanctuary">Family Sanctuary</option>  
+              <option value="Cultural Immersion">Cultural Immersion</option>  
+              <option value="Milestone Celebration">Milestone Celebration</option>  
+            </select>  
+          </div>  
+        </div>  
+      )  
+    },  
+    {  
+      title: "The Logistics",  
+      fields: (  
+        <div className="space-y-8 animate-in fade-in duration-700">  
+          <div>  
+            <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">Timeline</label>  
+            <div className="flex gap-4">  
+              {['Firm Dates', 'Flexible for the right experience'].map((t) => (  
+                <button   
+                  key={t}  
+                  onClick={() => setFormData({...formData, timeline: t})}  
+                  className={`px-4 py-2 border ${formData.timeline === t ? 'bg-black text-white border-black' : 'border-gray-200 text-gray-400'} text-sm transition-all`}  
+                >  
+                  {t}  
+                </button>  
+              ))}  
+            </div>  
+          </div>  
+          <div className="grid grid-cols-2 gap-8">  
+            <div>  
+              <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">Adults</label>  
+              <input type="number" className="w-full bg-transparent border-b border-gray-200 py-2" defaultValue={2} onChange={(e) => setFormData({...formData, adults: parseInt(e.target.value)})} />  
+            </div>  
+            <div>  
+              <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">Children</label>  
+              <input type="number" className="w-full bg-transparent border-b border-gray-200 py-2" defaultValue={0} onChange={(e) => setFormData({...formData, children: parseInt(e.target.value)})} />  
+            </div>  
+          </div>  
+          <div>  
+            <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">Target Investment</label>  
+            <input   
+              type="text"   
+              placeholder="Tell us about your target investment for this experience"  
+              className="w-full bg-transparent border-b border-gray-200 py-2 focus:outline-none"  
+              onChange={(e) => setFormData({...formData, investment: e.target.value})}  
+            />  
+          </div>  
+        </div>  
+      )  
+    },  
+    {  
+      title: "The NexVoyage Touch",  
+      fields: (  
+        <div className="space-y-8 animate-in fade-in duration-700">  
+          <div>  
+            <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">Past Favorites</label>  
+            <textarea   
+              placeholder="What was your best travel experience to date and why?"  
+              className="w-full bg-transparent border-b border-gray-200 py-2 focus:outline-none min-h-[80px]"  
+              onChange={(e) => setFormData({...formData, pastExperience: e.target.value})}  
+            />  
+          </div>  
+          <div>  
+            <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">Non-Negotiables</label>  
+            <input   
+              type="text"   
+              placeholder="e.g., 24/7 butler, private chef, fast-track airport security"  
+              className="w-full bg-transparent border-b border-gray-200 py-2 focus:outline-none"  
+              onChange={(e) => setFormData({...formData, nonNegotiable: e.target.value})}  
+            />  
+          </div>  
+          <div>  
+            <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">Loyalty Ties</label>  
+            <input   
+              type="text"   
+              placeholder="Marriott Stars, Ritz-Carlton, etc."  
+              className="w-full bg-transparent border-b border-gray-200 py-2 focus:outline-none"  
+              onChange={(e) => setFormData({...formData, loyalty: e.target.value})}  
+            />  
+          </div>  
+        </div>  
+      )  
+    },  
+    {  
+      title: "The Connection",  
+      fields: (  
+        <div className="space-y-8 animate-in fade-in duration-700">  
+          <div>  
+            <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">Referral Source</label>  
+            <input   
+              type="text"   
+              placeholder="Who sent you our way?"  
+              className="w-full bg-transparent border-b border-gray-200 py-2 focus:outline-none"  
+              onChange={(e) => setFormData({...formData, referral: e.target.value})}  
+            />  
+          </div>  
+          <div className="pt-8">  
+            <p className="text-sm text-gray-400 leading-relaxed italic">  
+              "Your application will be reviewed by our curation team. We prioritize connections within our elite network to ensure the highest level of service."  
+            </p>  
+          </div>  
+        </div>  
+      )  
+    }  
+  ]
+
   return (  
-    <Suspense fallback={  
-      <div className="min-h-screen flex items-center justify-center bg-white">  
-        <div className="animate-pulse text-neutral-300 font-serif text-2xl italic">Loading Manifest...</div>  
-      </div>  
-    }>  
-      <ReserveFormContent />  
-    </Suspense>  
-  );  
+    <div className="min-h-screen bg-white font-sans text-black selection:bg-black selection:text-white">  
+      <Navigation />  
+        
+      <main className="max-w-xl mx-auto pt-32 pb-20 px-6">  
+        <header className="mb-20">  
+          <h1 className="text-3xl font-light tracking-tight mb-4">Application for Curation</h1>  
+          <div className="flex gap-1">  
+            {steps.map((_, i) => (  
+              <div key={i} className={`h-1 w-8 transition-colors ${i + 1 <= step ? 'bg-black' : 'bg-gray-100'}`} />  
+            ))}  
+          </div>  
+        </header>
+
+        <section className="min-h-[400px]">  
+          <h2 className="text-xl mb-12 font-medium">{steps[step-1].title}</h2>  
+          {steps[step-1].fields}  
+        </section>
+
+        <footer className="mt-20 flex justify-between items-center border-t border-gray-100 pt-10">  
+          {step > 1 ? (  
+            <button onClick={prevStep} className="text-sm uppercase tracking-widest text-gray-400 hover:text-black transition-colors">Back</button>  
+          ) : (  
+            <div />  
+          )}  
+            
+          {step < steps.length ? (  
+            <button   
+              onClick={nextStep}   
+              className="bg-black text-white px-8 py-3 text-sm uppercase tracking-widest hover:bg-gray-900 transition-all"  
+            >  
+              Continue  
+            </button>  
+          ) : (  
+            <button   
+              className="bg-black text-white px-8 py-3 text-sm uppercase tracking-widest hover:bg-gray-900 transition-all"  
+              onClick={() => alert('Lead Submitted to Daryl')}  
+            >  
+              Submit Application  
+            </button>  
+          )}  
+        </footer>  
+      </main>
+
+      <Footer />  
+    </div>  
+  )  
 }  
