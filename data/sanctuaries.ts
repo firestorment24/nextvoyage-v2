@@ -1,90 +1,49 @@
-export interface Bucket {  
-  id: string;  
-  name: string;  
-  count: number;  
-  description: string;  
-}
-
-export interface Sanctuary {  
-  id: string;  
-  name: string;  
-  loc: string;  
-  tag: string;  
-  img: string; // For the Index Page  
-  heroImage: string; // For the Dossier  
-  philosophy: string;  
-  roi: string;  
-  atmosphere: string;  
-  highlights: string[];  
-  buckets: Bucket[];  
-}
-
-export const SANCTUARY_DATA: Record<string, Sanctuary> = {  
-  stadium: {  
-    id: 'stadium',  
-    name: 'The Stadium',  
-    loc: 'Global / Multi-Site',  
-    tag: 'Athletic Grandeur',  
-    img: 'https://cdn.marblism.com/DO6EekfUdUH.webp',  
-    heroImage: 'https://cdn.marblism.com/DO6EekfUdUH.webp',  
-    philosophy: 'Performance-driven luxury designed for the elite athlete and spectator alike.',  
-    roi: 'High-yield event-based revenue streams.',  
-    atmosphere: 'High-octane, disciplined, and expansive.',  
-    highlights: ['Olympic-grade facilities', 'Private viewing suites', 'Recovery lounges'],  
-    buckets: [  
-      { id: 'track-field', name: 'Track & Field', count: 4, description: 'Elite training grounds.' },  
-      { id: 'aquatics', name: 'Aquatics', count: 2, description: 'Olympic-standard pools.' }  
-    ]  
-  },  
-  cinematic: {  
-    id: 'cinematic',  
-    name: 'The Cinematic',  
-    loc: 'Hollywood Hills / Global',  
-    tag: 'Visual Storytelling',  
-    img: 'https://cdn.marblism.com/2SNlSLcCStk.webp',  
-    heroImage: 'https://cdn.marblism.com/2SNlSLcCStk.webp',  
-    philosophy: 'Living within a frame. Every angle is a masterpiece.',  
-    roi: 'Premium media production and location hosting.',  
-    atmosphere: 'Dramatic, curated, and timeless.',  
-    highlights: ['Private screening rooms', 'Framed horizons', 'Iconic architecture'],  
-    buckets: [  
-      { id: 'studio-suites', name: 'Studio Suites', count: 6, description: 'Production-ready living spaces.' },  
-      { id: 'theaters', name: 'Private Theaters', count: 3, description: 'State-of-the-art screening.' }  
-    ]  
-  },  
-  fortress: {  
-    id: 'fortress',  
-    name: 'The Fortress',  
-    loc: 'Remote Highlands',  
-    tag: 'Absolute Privacy',  
-    img: 'https://cdn.marblism.com/bArft50Ls2h.webp',  
-    heroImage: 'https://cdn.marblism.com/bArft50Ls2h.webp',  
-    philosophy: 'Security as the ultimate luxury. An impenetrable sanctuary.',  
-    roi: 'Safe-haven asset appreciation.',  
-    atmosphere: 'Stoic, secure, and grounded.',  
-    highlights: ['Reinforced structures', 'Off-grid capability', 'Deep security integration'],  
-    buckets: [  
-      { id: 'vaults', name: 'Private Vaults', count: 5, description: 'Secure storage for high-value assets.' },  
-      { id: 'safe-rooms', name: 'Safe Rooms', count: 2, description: 'Panic-level security modules.' }  
-    ]  
-  },  
-  safari: {  
-    id: 'safari',  
-    name: 'The Safari',  
-    loc: 'Serengeti / Okavango',  
-    tag: 'Primal Elegance',  
-    img: 'https://cdn.marblism.com/dL-ayC7zbHv.webp',  
-    heroImage: 'https://cdn.marblism.com/dL-ayC7zbHv.webp',  
-    philosophy: 'Raw nature met with refined comfort.',  
-    roi: 'Eco-tourism and conservation-linked yields.',  
-    atmosphere: 'Wild, organic, and breathtaking.',  
-    highlights: ['Open-air living', 'Wildlife observation decks', 'Sustainable design'],  
-    buckets: [  
-      { id: 'lodges', name: 'Main Lodges', count: 8, description: 'Centralized luxury hubs.' },  
-      { id: 'tented-camps', name: 'Tented Camps', count: 12, description: 'High-end canvas retreats.' }  
-    ]  
-  }  
-  // ... including Metropolitan Trio and Wilderness Pair data  
-};
-
-export const sanctuaries = Object.values(SANCTUARY_DATA);  
+13:08:22.897 Running build in Washington, D.C., USA (East) – iad1
+13:08:22.897 Build machine configuration: 4 cores, 8 GB
+13:08:23.097 Cloning github.com/firestorment24/nextvoyage-v2 (Branch: main, Commit: 85db928)
+13:08:23.833 Cloning completed: 736.000ms
+13:08:25.532 Restored build cache from previous deployment (GzzTgfMwFqJgCwvWRHdp7xoupnWy)
+13:08:25.747 Running "vercel build"
+13:08:25.761 Vercel CLI 54.10.2
+13:08:25.957 Installing dependencies...
+13:08:28.549 
+13:08:28.549 up to date in 2s
+13:08:28.550 
+13:08:28.550 169 packages are looking for funding
+13:08:28.550   run `npm fund` for details
+13:08:28.577 Detected Next.js version: 16.2.4
+13:08:28.582 Running "npm run build"
+13:08:28.673 
+13:08:28.673 > nextjs@0.1.0 build
+13:08:28.674 > next build
+13:08:28.674 
+13:08:29.298   Applying modifyConfig from Vercel
+13:08:29.311 ▲ Next.js 16.2.4 (Turbopack)
+13:08:29.311 
+13:08:29.347   Creating an optimized production build ...
+13:08:34.639 ✓ Compiled successfully in 5.0s
+13:08:34.640   Running TypeScript ...
+13:08:34.775 
+13:08:34.776   We detected TypeScript in your project and reconfigured your tsconfig.json file for you.
+13:08:34.776   The following suggested values were added to your tsconfig.json. These values can be changed to fit your project's needs:
+13:08:34.776 
+13:08:34.776   	- include was updated to add '.next/dev/types/**/*.ts'
+13:08:34.776 
+13:08:34.776   The following mandatory changes were made to your tsconfig.json:
+13:08:34.776 
+13:08:34.776   	- jsx was set to react-jsx (next.js uses the React automatic runtime)
+13:08:34.776 
+13:08:37.521 Failed to type check.
+13:08:37.521 
+13:08:37.521 ./components/PropertyBuckets.tsx:31:27
+13:08:37.521 Type error: Property 'imageUrl' does not exist on type 'Bucket'.
+13:08:37.521 
+13:08:37.521   29 |           >  
+13:08:37.521   30 |             <img   
+13:08:37.521 > 31 |               src={bucket.imageUrl}   
+13:08:37.521      |                           ^
+13:08:37.521   32 |               alt={bucket.name}   
+13:08:37.522   33 |               className="absolute inset-0 w-full h-full object-cover opacity-50 group-hove...
+13:08:37.522   34 |             />  
+13:08:37.550 Next.js build worker exited with code: 1 and signal: null
+13:08:37.587 Error: Command "npm run build" exited with 1
