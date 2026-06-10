@@ -1,37 +1,57 @@
+import React from 'react'  
+import Link from 'next/link'  
 import { notFound } from 'next/navigation'
 
-const LEGAL_DOCS: Record<string, { title: string; date: string; content: string }> = {  
-  'privacy-policy': {  
-    title: 'Privacy Policy',  
-    date: 'May 30, 2026',  
-    content: `At NexVoyage Collective, your privacy is a cornerstone of our service. We recognize that privacy is not just a legal requirement—it is a fundamental expectation of our high-net-worth clientele. 
-
-    We collect only what is necessary to craft your experience. Your personal details are never sold, only utilized to facilitate your bookings and provide seamless sanctuary access. We use industry-standard encryption to ensure your digital footprint remains private.`  
+const LEGAL_DOCS = {  
+  'privacy': {  
+    title: 'Privacy Architecture & Data Sovereignty',  
+    date: 'June 10, 2026',  
+    content: `Privacy is not a policy at NexVoyage Collective; it is our primary architecture. We recognize that for our clientele, data is a vulnerability if not handled with absolute discretion...`  
   },  
-  'terms-and-conditions': {  
-    title: 'Terms & Conditions',  
-    date: 'May 30, 2026',  
-    content: `NexVoyage Collective provides bespoke travel planning and concierge services, including itinerary design and safety recommendations through our Sanctuary Tiers. 
-
-    By accessing the platform, you agree to our standards of excellence. All bookings are subject to availability and the specific terms of our sanctuary partners. Your safety is a priority, but travel inherently involves risk. NexVoyage Collective is not liable for personal injury or property damage resulting from third-party acts.`  
+  'terms': {  
+    title: 'Terms of Engagement & The Sanctuary Agreement',  
+    date: 'June 10, 2026',  
+    content: `Engagement with NexVoyage Collective constitutes a formal acceptance of these Terms of Engagement. We operate as an elite travel architect and concierge...`  
+  },  
+  'vetting': {  
+    title: 'Vetting Standard: The Sanctuary Protocol',  
+    date: 'June 10, 2026',  
+    content: `At NexVoyage Collective, we maintain a closed ecosystem. Our commitment to total discretion and security necessitates a rigorous vetting process...`  
+  },  
+  'security': {  
+    title: 'The NexVoyage Standard: Impact & Security Architecture',  
+    date: 'June 10, 2026',  
+    content: `Our "Brass & Shadow" philosophy dictates a quiet, authoritative approach to both security and stewardship...`  
   }  
 }
 
-export function generateStaticParams() {  
-  return Object.keys(LEGAL_DOCS).map((slug) => ({ slug }))  
-}
+export default function LegalDocumentPage({ params }: { params: { slug: string } }) {  
+  const doc = LEGAL_DOCS[params.slug as keyof typeof LEGAL_DOCS]
 
-export default function LegalPage({ params }: { params: { slug: string } }) {  
-  const doc = LEGAL_DOCS[params.slug]  
-  if (!doc) notFound()
+  if (!doc) return notFound()
 
   return (  
-    <div className="min-h-screen bg-[#0A0A0A] text-white/90 pt-32 pb-20 px-6">  
-      <article className="max-w-3xl mx-auto text-left">  
-        <h1 className="text-4xl md:text-5xl font-light tracking-tighter mb-4">{doc.title}</h1>  
-        <p className="text-xs tracking-[0.2em] text-white/40 mb-12 uppercase font-light">Last Updated: {doc.date}</p>  
-        <div className="prose prose-invert max-w-none">  
-          <p className="whitespace-pre-line font-light leading-relaxed text-white/70">{doc.content}</p>  
+    <div className="min-h-screen bg-[#d4d4d4] text-[#0a0a0a] font-serif selection:bg-[#0a0a0a] selection:text-[#d4d4d4]">  
+      <nav className="p-8 flex justify-between items-center border-b border-[#0a0a0a]/10">  
+        <Link href="/legal" className="text-xs uppercase tracking-[0.2em] hover:opacity-50 transition-opacity">  
+          ← Protocols Index  
+        </Link>  
+        <span className="text-[10px] uppercase tracking-[0.4em] opacity-40">NexVoyage Internal Standard</span>  
+      </nav>
+
+      <article className="max-w-3xl mx-auto px-8 py-32">  
+        <header className="mb-20 space-y-8">  
+          <div className="text-xs tracking-[0.3em] uppercase opacity-50">Effective {doc.date}</div>  
+          <h1 className="text-5xl md:text-7xl font-light leading-tight">{doc.title}</h1>  
+        </header>
+
+        <div className="prose prose-neutral prose-lg font-sans leading-relaxed text-[#1a1a1a] opacity-80">  
+          {/* Note: In a real app, you'd use a markdown renderer here for the content provided by Linda */}  
+          <p className="whitespace-pre-line">{doc.content}</p>  
+        </div>
+
+        <div className="mt-32 pt-12 border-t border-[#0a0a0a]/10 italic opacity-40 text-sm">  
+          Discreet. Authoritative. Absolute.  
         </div>  
       </article>  
     </div>  
