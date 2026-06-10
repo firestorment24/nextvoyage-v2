@@ -1,85 +1,111 @@
-import React from 'react';  
-import { notFound } from 'next/navigation';  
-import { properties } from '../../../data/properties';  
-import { EliteAmenities } from '../../../components/EliteAmenities';
+import { properties as rawProperties } from '../../../data/properties'  
+import { notFound } from 'next/navigation'  
+import Link from 'next/link'  
+import Image from 'next/image'  
+import { EliteAmenities } from '../../../components/EliteAmenities'
 
-// Local interface to ensure TypeScript recognizes the 'image' field  
+// Define the Property interface to match your data structure  
 interface Property {  
   id: string;  
   name: string;  
   location: string;  
   image: string;  
-  description?: string;  
-  exclusiveOffer?: string;  
+  priceLevel: string;  
+  exclusiveOffer: string;  
+  highlight: string;  
+  description: string;  
+  amenities: string[];  
 }
 
-export default async function PropertyDetailPage({ params }: { params: { id: string } }) {  
-  const { id } = params;  
-    
-  // Cast the imported data to our local Property interface to fix the build error  
-  const propertyList = properties as unknown as Property[];  
-  const property = propertyList.find((p) => p.id === id);
+// Cast the raw data to our typed interface  
+const properties = (rawProperties as unknown) as Property[]
+
+export async function generateStaticParams() {  
+  return properties.map((p) => ({  
+    id: p.id,  
+  }))  
+}
+
+export default async function PropertyPage({ params }: { params: Promise<{ id: string }> }) {  
+  const { id } = await params  
+  const property = properties.find((p) => p.id === id)
 
   if (!property) {  
-    notFound();  
+    notFound()  
   }
 
   return (  
     <main className="min-h-screen bg-white">  
       {/* Hero Section */}  
-      <section className="relative h-[80vh] w-full overflow-hidden">  
-        {property.image && (  
-          <img  
-            src={property.image}  
-            alt={property.name}  
-            className="h-full w-full object-cover"  
-          />  
-        )}  
-        <div className="absolute inset-0 bg-black/30" />  
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white p-4">  
-          <h1 className="text-5xl md:text-7xl font-serif mb-4 drop-shadow-lg">  
-            {property.name}  
-          </h1>  
-          <p className="text-xl md:text-2xl font-light tracking-widest uppercase">  
-            {property.location}  
+      <section className="relative h-[70vh] w-full overflow-hidden">  
+        <Image  
+          src={property.image}  
+          alt={property.name}  
+          fill  
+          className="object-cover"  
+          priority  
+        />  
+        <div className="absolute inset-0 bg-black/10" />  
+      </section>
+
+      {/* Property Intro */}  
+      <section className="max-w-7xl mx-auto px-6 py-24 grid grid-cols-1 lg:grid-cols-12 gap-16">  
+        <div className="lg:col-span-8">  
+          <div className="space-y-4 mb-12">  
+            <p className="text-xs uppercase tracking-[0.4em] text-gold">{property.location}</p>  
+            <h1 className="text-4xl md:text-6xl font-light tracking-tight text-gray-900">  
+              {property.name}  
+            </h1>  
+          </div>  
+            
+          <div className="prose prose-lg text-gray-600 font-light leading-relaxed max-w-2xl">  
+            <p className="text-xl text-gray-900 mb-8 italic">"{property.highlight}"</p>  
+            <p>{property.description}</p>  
+          </div>  
+        </div>
+
+        {/* Exclusivity Ledger */}  
+        <div className="lg:col-span-4 bg-gray-50 p-10 h-fit border border-gray-100">  
+          <p className="text-[10px] uppercase tracking-[0.3em] text-gray-400 mb-8 border-b border-gray-200 pb-4">  
+            Membership Benefits  
           </p>  
+            
+          <div className="space-y-8 mb-12">  
+            <div>  
+              <p className="text-[10px] uppercase tracking-widest text-gray-500 mb-1">Exclusive For You</p>  
+              <p className="text-lg font-light text-gray-900">{property.exclusiveOffer}</p>  
+            </div>  
+            <div>  
+              <p className="text-[10px] uppercase tracking-widest text-gray-500 mb-1">Est. Investment</p>  
+              <p className="text-lg font-light text-gray-900">{property.priceLevel}</p>  
+            </div>  
+          </div>
+
+          <Link   
+            href={`/reserve?property=${encodeURIComponent(property.name)}`}  
+            className="block w-full text-center py-4 bg-black text-white text-[10px] uppercase tracking-[0.4em] hover:bg-gray-800 transition-colors"  
+          >  
+            Inquire Privately  
+          </Link>  
         </div>  
       </section>
 
-      {/* Property Details */}  
-      <section className="max-w-7xl mx-auto px-6 py-24">  
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">  
-          <div>  
-            <h2 className="text-3xl font-serif mb-8 text-neutral-900">The Experience</h2>  
-            <p className="text-lg text-neutral-600 leading-relaxed mb-8">  
-              {property.description || "Experience unparalleled luxury in one of our most exclusive properties. This sanctuary offers a perfect blend of modern comfort and timeless elegance, curated specifically for the discerning traveler."}  
-            </p>  
-              
-            {property.exclusiveOffer && (  
-              <div className="bg-neutral-50 p-8 border border-neutral-100 rounded-sm">  
-                <h3 className="text-sm uppercase tracking-widest text-neutral-400 mb-2">NexVoyage Collective Benefit</h3>  
-                <p className="text-xl text-neutral-800 font-medium italic">  
-                  "{property.exclusiveOffer}"  
-                </p>  
-              </div>  
-            )}  
-          </div>
+      {/* Amenities Section */}  
+      <section className="border-t border-gray-100">  
+        <EliteAmenities amenities={property.amenities} />  
+      </section>
 
-          <div>  
-            {/* Using the named export as verified in memory */}  
-            <EliteAmenities />  
-              
-            <div className="mt-12 text-center">  
-              <a   
-                href={`/reserve?property=${property.id}`}  
-                className="inline-block bg-neutral-900 text-white px-12 py-4 rounded-full text-sm uppercase tracking-widest hover:bg-neutral-800 transition-colors shadow-lg"  
-              >  
-                Inquire for Availability  
-              </a>  
-            </div>  
-          </div>  
+      {/* Visual Break */}  
+      <section className="py-24 max-w-7xl mx-auto px-6">  
+        <div className="relative aspect-video w-full overflow-hidden">  
+          <Image  
+            src={property.image} // Reusing image or a secondary one if available  
+            alt="Interior detail"  
+            fill  
+            className="object-cover"  
+          />  
         </div>  
       </section>  
     </main>  
-  );  
+  )  
 }  
