@@ -4,14 +4,12 @@ import { useState, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'  
 import Link from 'next/link'
 
-// Simple list for pre-filling/validation  
 const SANCTUARIES = [  
   { id: 'brass-shadow', name: 'Brass & Shadow' },  
   { id: 'azure-heights', name: 'Azure Heights' },  
   { id: 'velvet-pines', name: 'Velvet Pines' },  
 ]
 
-// We move the form logic into a sub-component so we can wrap it in Suspense  
 function ReserveFormContent() {  
   const searchParams = useSearchParams()  
   const sanctuaryId = searchParams.get('id')
@@ -31,21 +29,46 @@ function ReserveFormContent() {
     narrative: '',  
   })
 
-  const [submitted, setSubmitted] = useState(false)
+  const [submitted, setSubmitted] = useState(false)  
+  const [loading, setLoading] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {  
+  const handleSubmit = async (e: React.FormEvent) => {  
     e.preventDefault()  
-    console.log('Inquiry Submitted:', { ...formData, selectedSanctuary })  
-    setSubmitted(true)  
+    setLoading(true)
+
+    try {  
+      const response = await fetch('/api/send', {  
+        method: 'POST',  
+        headers: {  
+          'Content-Type': 'application/json',  
+        },  
+        body: JSON.stringify({  
+          ...formData,  
+          sanctuary: selectedSanctuary,  
+        }),  
+      })
+
+      if (response.ok) {  
+        setSubmitted(true)  
+      } else {  
+        const errorData = await response.json()  
+        alert(`Error sending inquiry: ${errorData.error || 'Unknown error'}`)  
+      }  
+    } catch (err) {  
+      console.error('Submission error:', err)  
+      alert('Failed to send inquiry. Please check your connection.')  
+    } finally {  
+      setLoading(false)  
+    }  
   }
 
   if (submitted) {  
     return (  
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-6 text-center">  
-        <h1 className="text-3xl font-light mb-4">Voyage Initiated</h1>  
+        <h1 className="text-3xl font-light mb-4 text-[#1A1A1A]">Voyage Initiated</h1>  
         <p className="text-gray-500 max-w-md mx-auto mb-8">  
-          Thank you, {formData.name}. Our concierge team is reviewing your inquiry for {selectedSanctuary}.   
-          We will be in touch within 24 hours to begin curating your journey.  
+          Thank you, {formData.name}. Our concierge team has received your inquiry for {selectedSanctuary}.   
+          Check your inbox for a confirmation.  
         </p>  
         <Link href="/" className="text-xs uppercase tracking-widest border-b border-black pb-1">  
           Return to Collection  
@@ -56,12 +79,12 @@ function ReserveFormContent() {
 
   return (  
     <form onSubmit={handleSubmit} className="space-y-12">  
-      {/* Section: The Destination */}  
+      {/* 01. The Sanctuary */}  
       <section>  
-        <h2 className="text-xs uppercase tracking-widest text-gray-400 mb-6">01. The Sanctuary</h2>  
+        <h2 className="text-xs uppercase tracking-widest text-gray-400 mb-6 font-medium">01. The Sanctuary</h2>  
         <div className="border-b border-gray-200 pb-2">  
           <select   
-            className="w-full bg-transparent text-xl font-light focus:outline-none appearance-none cursor-pointer"  
+            className="w-full bg-transparent text-xl font-light focus:outline-none appearance-none cursor-pointer text-[#1A1A1A]"  
             value={selectedSanctuary}  
             onChange={(e) => setSelectedSanctuary(e.target.value)}  
           >  
@@ -73,9 +96,9 @@ function ReserveFormContent() {
         </div>  
       </section>
 
-      {/* Section: The Details */}  
+      {/* 02. The Journey */}  
       <section>  
-        <h2 className="text-xs uppercase tracking-widest text-gray-400 mb-6">02. The Journey</h2>  
+        <h2 className="text-xs uppercase tracking-widest text-gray-400 mb-6 font-medium">02. The Journey</h2>  
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">  
           <div className="border-b border-gray-200 pb-2">  
             <label className="block text-[10px] uppercase tracking-tighter text-gray-400 mb-1">Desired Timing</label>  
@@ -125,9 +148,9 @@ function ReserveFormContent() {
         </div>  
       </section>
 
-      {/* Section: The Narrative */}  
+      {/* 03. The Narrative */}  
       <section>  
-        <h2 className="text-xs uppercase tracking-widest text-gray-400 mb-6">03. The Narrative</h2>  
+        <h2 className="text-xs uppercase tracking-widest text-gray-400 mb-6 font-medium">03. The Narrative</h2>  
         <div className="border-b border-gray-200 pb-4">  
           <textarea   
             placeholder="Share any specific requirements or dreams for this voyage..."  
@@ -137,9 +160,9 @@ function ReserveFormContent() {
         </div>  
       </section>
 
-      {/* Section: Contact */}  
+      {/* 04. Contact Information */}  
       <section>  
-        <h2 className="text-xs uppercase tracking-widest text-gray-400 mb-6">04. Contact Information</h2>  
+        <h2 className="text-xs uppercase tracking-widest text-gray-400 mb-6 font-medium">04. Contact Information</h2>  
         <div className="space-y-8">  
           <div className="border-b border-gray-200 pb-2">  
             <input   
@@ -165,9 +188,10 @@ function ReserveFormContent() {
       <div className="pt-8">  
         <button   
           type="submit"  
-          className="w-full md:w-auto px-12 py-4 bg-black text-white text-xs uppercase tracking-[0.3em] hover:bg-gray-900 transition-colors"  
+          disabled={loading}  
+          className="w-full md:w-auto px-12 py-4 bg-black text-white text-xs uppercase tracking-[0.3em] hover:bg-gray-900 transition-colors disabled:opacity-50"  
         >  
-          Begin the Conversation  
+          {loading ? 'Sending...' : 'Begin the Conversation'}  
         </button>  
         <p className="mt-4 text-[10px] text-gray-400 text-center md:text-left">  
           By submitting, you agree to our private travel consultation terms.  
@@ -195,8 +219,7 @@ export default function ReservePage() {
           </p>  
         </header>
 
-        {/* Suspense wrapper fixes the Vercel build error */}  
-        <Suspense fallback={<div className="text-gray-400 uppercase tracking-widest text-xs">Loading Inquiry...</div>}>  
+        <Suspense fallback={<div className="text-gray-400 uppercase tracking-widest text-xs italic">Preparing Inquiry Form...</div>}>  
           <ReserveFormContent />  
         </Suspense>  
       </main>  
