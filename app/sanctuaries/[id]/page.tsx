@@ -9,11 +9,20 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {  
-  return SANCTUARY_DATA.map((s) => ({ id: s.id }));  
+  // Supports both array and object-based SANCTUARY_DATA  
+  const data = Array.isArray(SANCTUARY_DATA)   
+    ? SANCTUARY_DATA   
+    : Object.values(SANCTUARY_DATA);  
+      
+  return data.map((s) => ({ id: s.id }));  
 }
 
 export default function SanctuaryPage({ params }: PageProps) {  
-  const sanctuary = SANCTUARY_DATA.find((s) => s.id === params.id);
+  const data = Array.isArray(SANCTUARY_DATA)   
+    ? SANCTUARY_DATA   
+    : Object.values(SANCTUARY_DATA);
+
+  const sanctuary = data.find((s) => s.id === params.id);
 
   if (!sanctuary) return notFound();
 
@@ -31,13 +40,14 @@ export default function SanctuaryPage({ params }: PageProps) {
           <div className="space-y-6">  
             <span className="text-white/40 text-xs tracking-[0.4em] uppercase">The Collection</span>  
             <h2 className="text-4xl font-serif text-white leading-tight">  
-              {sanctuary.categoryDescription}  
+              {/* Changed categoryDescription -> philosophy */}  
+              {sanctuary.philosophy}  
             </h2>  
           </div>  
           <div className="space-y-8 text-white/60 font-light leading-relaxed text-lg">  
             <p>{sanctuary.atmosphere}</p>  
             <div className="pt-8 border-t border-white/10 grid grid-cols-2 gap-8">  
-              {sanctuary.highlights.map((h, i) => (  
+              {sanctuary.highlights.map((h: string, i: number) => (  
                 <div key={i} className="space-y-2">  
                   <div className="text-white text-sm tracking-widest uppercase">0{i+1}</div>  
                   <div className="text-xs tracking-wider">{h}</div>  
