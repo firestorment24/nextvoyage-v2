@@ -8,7 +8,7 @@ export interface Sanctuary {
   features: string[];  
 }
 
-export const sanctuaries: Sanctuary[] = [  
+export const SANCTUARY_DATA: Sanctuary[] = [  
   {  
     id: 'modern-villa',  
     name: 'The Glass Pavilion',  
