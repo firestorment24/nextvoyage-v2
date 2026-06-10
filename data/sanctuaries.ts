@@ -1,6 +1,7 @@
 export interface Bucket {  
   id: string;  
   name: string;  
+  count: number; // This fixes the PropertyBuckets.tsx error  
   description: string;  
   imageUrl: string;  
 }
@@ -31,7 +32,15 @@ export const SANCTUARY_DATA: Record<string, Sanctuary> = {
     roi: '3.5x Cognitive Focus Improvement',  
     atmosphere: 'Controlled Kinetic',  
     highlights: ['Discreet Entry', 'Acoustic Isolation', '24/7 Concierge'],  
-    buckets: [{ id: 'penthouse', name: 'Penthouses', description: 'Sky-high seclusion.', imageUrl: '/img/penthouse.jpg' }]  
+    buckets: [  
+      {   
+        id: 'penthouse',   
+        name: 'Penthouses',   
+        count: 12,   
+        description: 'Sky-high seclusion.',   
+        imageUrl: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80'   
+      }  
+    ]  
   },  
   fortress: {  
     id: 'fortress',  
@@ -44,7 +53,15 @@ export const SANCTUARY_DATA: Record<string, Sanctuary> = {
     roi: '34% Cortisol Suppression',  
     atmosphere: 'Absolute Stillness',  
     highlights: ['EMP Shielding', 'Off-grid Redundancy', 'Ballistic Glass'],  
-    buckets: [{ id: 'bunker', name: 'Secure Estates', description: 'Tactical luxury.', imageUrl: '/img/bunker.jpg' }]  
+    buckets: [  
+      {   
+        id: 'bunker',   
+        name: 'Secure Estates',   
+        count: 8,   
+        description: 'Tactical luxury.',   
+        imageUrl: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80'   
+      }  
+    ]  
   },  
   stadium: {  
     id: 'stadium',  
@@ -57,10 +74,17 @@ export const SANCTUARY_DATA: Record<string, Sanctuary> = {
     roi: 'Endless Cultural Capital',  
     atmosphere: 'Electric',  
     highlights: ['VVIP Access', 'Player-Level Views', 'Private Event Hosting'],  
-    buckets: [{ id: 'box', name: 'Arena Suites', description: 'Live the game.', imageUrl: '/img/stadium-suite.jpg' }]  
-  },  
-  // ... adding island, alpine, cinematic, safari, oasis, and floating similarly  
+    buckets: [  
+      {   
+        id: 'box',   
+        name: 'Arena Suites',   
+        count: 14,   
+        description: 'Live the game.',   
+        imageUrl: 'https://images.unsplash.com/photo-1504450758481-7338eba7524a?auto=format&fit=crop&q=80'   
+      }  
+    ]  
+  }  
+  // ... adding island, alpine, cinematic, safari, oasis, and floating similarly with counts  
 };
 
-// Exporting as array for the index page .map()  
 export const sanctuaries = Object.values(SANCTUARY_DATA);  
