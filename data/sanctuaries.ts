@@ -1,17 +1,23 @@
 // data/sanctuaries.ts
 
+export interface Bucket {  
+  name: string;  
+  count: number;  
+  description: string;  
+}
+
 export interface Sanctuary {  
   id: string;  
   name: string;  
   loc: string;  
   tag: string;  
-  img: string; // Thumbnail for index  
-  heroImage: string; // Full-width hero  
+  img: string;  
+  heroImage: string;  
   philosophy: string;  
-  roi: string; // Cognitive ROI / Yield  
+  roi: string;  
   atmosphere: string;  
   highlights: string[];  
-  buckets: string[]; // For property mapping  
+  buckets: Bucket[]; // Upgraded from string[] to Bucket[]  
 }
 
 export const SANCTUARY_DATA: Record<string, Sanctuary> = {  
@@ -26,7 +32,11 @@ export const SANCTUARY_DATA: Record<string, Sanctuary> = {
     roi: "22% increase in decision-making clarity through acoustic isolation and biometric sleep optimization.",  
     atmosphere: "Refined, High-Stakes, Silent",  
     highlights: ["Vertical Helipads", "Triple-Pane Acoustic Shielding", "Private Art Vaults"],  
-    buckets: ["Penthouses", "Historic Lofts", "Branded Residences"]  
+    buckets: [  
+      { name: "Penthouses", count: 12, description: "Sky-high residences with panoramic views and private elevator access." },  
+      { name: "Historic Lofts", count: 8, description: "Heritage spaces with original architecture and modern luxury finishes." },  
+      { name: "Branded Residences", count: 15, description: "Full-service living with 5-star amenities and concierge support." }  
+    ]  
   },  
   "fortress": {  
     id: "fortress",  
@@ -39,7 +49,11 @@ export const SANCTUARY_DATA: Record<string, Sanctuary> = {
     roi: "Total digital deceleration; 34% cortisol suppression via EMP-shielded quarters and off-grid redundancy.",  
     atmosphere: "Impenetrable, Timeless, Sovereign",  
     highlights: ["Ballistic-Grade Glass", "Subterranean Access", "Private Air-Strip"],  
-    buckets: ["Bunkers", "Cliffside Bastions", "Defensive Manors"]  
+    buckets: [  
+      { name: "Bunkers", count: 4, description: "Deep-ground facilities with 12-month life-support autonomy." },  
+      { name: "Cliffside Bastions", count: 6, description: "Perched redoubts with 360-degree surveillance and natural defenses." },  
+      { name: "Defensive Manors", count: 3, description: "Historic estates retrofitted with Tier-1 security systems." }  
+    ]  
   },  
   "island": {  
     id: "island",  
@@ -52,7 +66,11 @@ export const SANCTUARY_DATA: Record<string, Sanctuary> = {
     roi: "Peak parasympathetic activation; 0% social noise. A complete neurological reset through unmapped isolation.",  
     atmosphere: "Boundless, Barefoot, Pristine",  
     highlights: ["Marine Sanctuaries", "Seaplane Docks", "Desalinization Autonomy"],  
-    buckets: ["Private Atolls", "Remote Estates", "Coastal Reserves"]  
+    buckets: [  
+      { name: "Private Atolls", count: 5, description: "Sovereign landmasses with total shoreline privacy." },  
+      { name: "Remote Estates", count: 9, description: "Ultra-low density living on unmapped horizons." },  
+      { name: "Coastal Reserves", count: 7, description: "Protected ecological zones with private beach access." }  
+    ]  
   },  
   "stadium": {  
     id: "stadium",  
@@ -65,7 +83,11 @@ export const SANCTUARY_DATA: Record<string, Sanctuary> = {
     roi: "Unrivaled cultural equity and immediate access to global spectacles with zero friction or crowds.",  
     atmosphere: "Electric, Exclusive, Kinetic",  
     highlights: ["VVIP Box Integration", "Direct Field Access", "Sound-Proof Residential Wings"],  
-    buckets: ["Arena Penthouses", "Circuit Suites", "Cultural Hubs"]  
+    buckets: [  
+      { name: "Arena Penthouses", count: 11, description: "Residences built directly into the stadium architecture." },  
+      { name: "Circuit Suites", count: 6, description: "Overlooking the world's premier racing and track events." },  
+      { name: "Cultural Hubs", count: 8, description: "Integrated living in major performance art complexes." }  
+    ]  
   },  
   "alpine": {  
     id: "alpine",  
@@ -78,7 +100,11 @@ export const SANCTUARY_DATA: Record<string, Sanctuary> = {
     roi: "Hypoxic training benefits and 15% increase in cognitive focus due to total environmental silence.",  
     atmosphere: "Crisp, Elevated, Ethereal",  
     highlights: ["Ski-In/Ski-Out Vaults", "Heated Perimeter Terrazas", "Observatory Decks"],  
-    buckets: ["Chalets", "Mountain Observatories", "Peak Estates"]  
+    buckets: [  
+      { name: "Chalets", count: 14, description: "Hand-crafted timber and stone estates with massive thermal efficiency." },  
+      { name: "Mountain Observatories", count: 4, description: "Glass-heavy structures designed for celestial viewing." },  
+      { name: "Peak Estates", count: 6, description: "The highest habitable points in the range, accessible via private lift." }  
+    ]  
   },  
   "cinematic": {  
     id: "cinematic",  
@@ -91,7 +117,11 @@ export const SANCTUARY_DATA: Record<string, Sanctuary> = {
     roi: "Visual dopamine stabilization through Golden Hour optimization and symmetry-based design.",  
     atmosphere: "Still, Curated, Dramatic",  
     highlights: ["Frameless Glass Walls", "Gallery-Grade Lighting", "Infinity Edge Framing"],  
-    buckets: ["Modernist Villas", "Glass Houses", "Architectural Icons"]  
+    buckets: [  
+      { name: "Modernist Villas", count: 10, description: "Clean lines and open plans that frame the landscape." },  
+      { name: "Glass Houses", count: 5, description: "Minimalist structures that dissolve the barrier between in and out." },  
+      { name: "Architectural Icons", count: 3, description: "Award-winning designs that serve as living sculptures." }  
+    ]  
   },  
   "safari": {  
     id: "safari",  
@@ -104,7 +134,11 @@ export const SANCTUARY_DATA: Record<string, Sanctuary> = {
     roi: "Ancestral reconnection; recalibration of circadian rhythms via exposure to natural light and wild cycles.",  
     atmosphere: "Raw, Elegant, Primal",  
     highlights: ["Open-Air Fire Pits", "Tracking Concierge", "Solar-Powered Sovereignty"],  
-    buckets: ["Luxury Camps", "Bush Estates", "Conservation Lands"]  
+    buckets: [  
+      { name: "Luxury Camps", count: 18, description: "Canvas-walled suites with hard-floor foundations and full plumbing." },  
+      { name: "Bush Estates", count: 6, description: "Permanent stone structures integrated into the savanna floor." },  
+      { name: "Conservation Lands", count: 4, description: "Homes that support and overlook protected wildlife corridors." }  
+    ]  
   },  
   "oasis": {  
     id: "oasis",  
@@ -117,7 +151,11 @@ export const SANCTUARY_DATA: Record<string, Sanctuary> = {
     roi: "Deep thermal detoxification and zero-light pollution for 100% deep sleep score recovery.",  
     atmosphere: "Arid, Healing, Miraculous",  
     highlights: ["Hidden Infinity Pools", "Sand-Shielded Architecture", "Stargazing Platforms"],  
-    buckets: ["Desert Manors", "Arid Retreats", "Wadi Estates"]  
+    buckets: [  
+      { name: "Desert Manors", count: 7, description: "Expansive layouts designed for thermal cooling and shade." },  
+      { name: "Arid Retreats", count: 9, description: "Focused on recovery, featuring salt rooms and heat-cycles." },  
+      { name: "Wadi Estates", count: 4, description: "Built alongside seasonal water-ways for a rare desert lushness." }  
+    ]  
   },  
   "floating": {  
     id: "floating",  
@@ -130,8 +168,12 @@ export const SANCTUARY_DATA: Record<string, Sanctuary> = {
     roi: "Infinite jurisdictional flexibility and the ultimate hedge against land-based volatility.",  
     atmosphere: "Fluid, Sovereign, Modernist",  
     highlights: ["Submersible Decks", "Hydrogen-Power Redundancy", "Biometric Sea-Gates"],  
-    buckets: ["Superyachts", "Floating Islands", "Oceanic Residences"]  
+    buckets: [  
+      { name: "Superyachts", count: 12, description: "Giga-class vessels designed for year-round habitation." },  
+      { name: "Floating Islands", count: 3, description: "Geostationary luxury platforms with deep-keel stability." },  
+      { name: "Oceanic Residences", count: 8, description: "Modular sea-homes for a nomadic elite lifestyle." }  
+    ]  
   }  
 };
 
-export const sanctuaries = Object.values(SANCTUARY_DATA);  
+export const sanctuaries = Object.values(SANCTUARY_DATA); 
