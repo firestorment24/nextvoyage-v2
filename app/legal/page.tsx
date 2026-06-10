@@ -1,53 +1,74 @@
-import React from 'react';
+import React from 'react'  
+import Link from 'next/link'
 
-const LegalPage = () => {  
+export default function LegalIndex() {  
+  const protocols = [  
+    {  
+      id: '01',  
+      title: 'Privacy Architecture & Data Sovereignty',  
+      slug: 'privacy',  
+      description: 'Our protocols for the protection of your digital and physical footprint.'  
+    },  
+    {  
+      id: '02',  
+      title: 'Terms of Engagement',  
+      slug: 'terms',  
+      description: 'The governing agreement for service execution and liability architecture.'  
+    },  
+    {  
+      id: '03',  
+      title: 'The Sanctuary Protocol',  
+      slug: 'vetting',  
+      description: 'Our criteria for membership and the vetting of high-net-worth travelers.'  
+    },  
+    {  
+      id: '04',  
+      title: 'The NexVoyage Standard',  
+      slug: 'security',  
+      description: 'Our dual commitment to absolute security and cultural stewardship.'  
+    }  
+  ]
+
   return (  
-    <div className="bg-white text-[#1a1a1a] font-sans min-h-screen">  
-      {/* Navigation */}  
-      <nav className="flex justify-between items-center px-8 py-10 uppercase tracking-[0.2em] text-[10px] border-b border-gray-50">  
-        <div className="font-bold"><a href="/">NexVoyage Collective</a></div>  
-        <div className="space-x-8">  
-          <a href="/archive" className="hover:text-gray-400">The Archive</a>  
-          <a href="/perspective" className="hover:text-gray-400">The Perspective</a>  
-          <a href="/reserve" className="hover:text-gray-400 border border-black px-4 py-2">The Reserve</a>  
-        </div>  
+    <div className="min-h-screen bg-[#0a0a0a] text-[#d4d4d4] font-serif">  
+      <nav className="p-8 border-b border-[#1a1a1a]">  
+        <Link href="/" className="text-sm uppercase tracking-[0.3em] opacity-40 hover:opacity-100 transition-opacity">  
+          ← Back to Collective  
+        </Link>  
       </nav>
 
-      <section className="py-24 px-8 max-w-3xl mx-auto">  
-        <h1 className="text-4xl font-serif italic mb-16 text-center">Legal Notice</h1>  
-          
-        <div className="space-y-16 text-sm leading-relaxed text-gray-600">  
-          <div>  
-            <h2 className="text-[10px] uppercase tracking-[0.3em] text-black mb-6">01. Privacy & Data</h2>  
-            <p>  
-              Your privacy is our primary asset. NexVoyage Collective operates on a principle of absolute discretion. We do not track user behavior for advertising purposes, nor do we sell data to third parties. All inquiries through The Reserve are encrypted and handled with the highest level of confidentiality.  
-            </p>  
-          </div>
+      <main className="max-w-4xl mx-auto px-8 py-24">  
+        <header className="mb-24">  
+          <h1 className="text-6xl font-light tracking-tight mb-6">The Protocols</h1>  
+          <p className="text-xl opacity-50 italic">Legal Framework & Architecture of the Collective.</p>  
+          <div className="h-[1px] w-24 bg-[#d4d4d4] mt-12 opacity-20"></div>  
+        </header>
 
-          <div>  
-            <h2 className="text-[10px] uppercase tracking-[0.3em] text-black mb-6">02. The Vetting Standard</h2>  
-            <p>  
-              NexVoyage Collective acts as a curation and inquiry service. While we apply a rigorous vetting standard to all sanctuaries in The Archive, final bookings and travel arrangements are subject to the specific terms and conditions of the host properties and service providers.  
-            </p>  
-          </div>
-
-          <div>  
-            <h2 className="text-[10px] uppercase tracking-[0.3em] text-black mb-6">03. Intellectual Property</h2>  
-            <p>  
-              All content under The Perspective and all curated guides within The Archive are the intellectual property of NexVoyage Collective. Reproduction or unauthorized use of our "ROI of Reset" philosophy or vetting metrics is strictly prohibited.  
-            </p>  
-          </div>  
+        <div className="grid gap-16">  
+          {protocols.map((protocol) => (  
+            <Link   
+              key={protocol.id}   
+              href={`/legal/${protocol.slug}`}  
+              className="group block border-b border-[#1a1a1a] pb-12 hover:border-[#d4d4d4] transition-colors"  
+            >  
+              <div className="flex justify-between items-start">  
+                <div className="space-y-4">  
+                  <span className="text-xs font-sans tracking-[0.3em] uppercase opacity-30">Protocol {protocol.id}</span>  
+                  <h2 className="text-3xl font-light group-hover:translate-x-2 transition-transform duration-500">  
+                    {protocol.title}  
+                  </h2>  
+                  <p className="text-lg opacity-50 font-sans max-w-xl">{protocol.description}</p>  
+                </div>  
+                <span className="text-2xl font-light opacity-0 group-hover:opacity-100 transition-opacity">→</span>  
+              </div>  
+            </Link>  
+          ))}  
         </div>  
-      </section>
+      </main>
 
-      {/* Footer */}  
-      <footer className="py-20 px-8 border-t border-gray-100 text-center">  
-        <div className="text-[10px] uppercase tracking-[0.2em] text-gray-400">  
-          © 2026 NexVoyage Collective. All Rights Reserved.  
-        </div>  
+      <footer className="p-24 text-center opacity-20 text-xs tracking-widest uppercase">  
+        NexVoyage Collective — Discretion by Design  
       </footer>  
     </div>  
-  );  
-};
-
-export default LegalPage;  
+  )  
+}  
