@@ -2,71 +2,20 @@
 @tailwind components;  
 @tailwind utilities;
 
-:root {  
-  --foreground-rgb: 0, 0, 0;  
-  --background-rgb: 255, 255, 255;  
+h1, h2, h3, h4 {  
+  font-family: var(--font-serif);  
 }
 
-@layer base {  
-  /* Map the fonts */  
-  .font-serif {  
-    font-family: var(--font-cormorant), serif;  
-  }
-
-  .font-sans {  
-    font-family: var(--font-inter), sans-serif;  
-  }
-
-  /* Standard CSS for body to avoid Tailwind lookup errors during build */  
-  body {  
-    background-color: rgb(var(--background-rgb));  
-    color: rgb(var(--foreground-rgb));  
-    -webkit-font-smoothing: antialiased;  
-    -moz-osx-font-smoothing: grayscale;  
-  }
-
-  /* Selection style */  
-  ::selection {  
-    background-color: black;  
-    color: white;  
-  }  
+.font-serif {  
+  font-family: var(--font-serif);  
 }
 
-@layer components {  
-  /* High-end minimalist button */  
-  .btn-primary {  
-    background-color: black;  
-    color: white;  
-    padding: 1rem 2rem;  
-    font-size: 10px;  
-    text-transform: uppercase;  
-    letter-spacing: 0.3em;  
-    transition: background-color 0.3s ease;  
-  }
-
-  .btn-primary:hover {  
-    background-color: #27272a; /* zinc-800 */  
-  }  
+/* Custom button style for that 'inviting' feel */  
+.btn-primary {  
+  @apply bg-[#1A1A1A] text-[#F9F7F2] px-8 py-3 rounded-none transition-all duration-300 hover:bg-[#8C7355] tracking-widest uppercase text-xs font-medium;  
 }
 
-/* Smooth scrolling */  
-html {  
-  scroll-behavior: smooth;  
-}
-
-/* Custom minimal scrollbar */  
-::-webkit-scrollbar {  
-  width: 4px;  
-}
-
-::-webkit-scrollbar-track {  
-  background: transparent;  
-}
-
-::-webkit-scrollbar-thumb {  
-  background: #e4e4e7; /* zinc-200 */  
-}
-
-::-webkit-scrollbar-thumb:hover {  
-  background: #27272a; /* zinc-800 */  
+/* Elegant card hover */  
+.sanctuary-card {  
+  @apply overflow-hidden transition-all duration-700 bg-white/50 backdrop-blur-sm border border-black/5;  
 }  
