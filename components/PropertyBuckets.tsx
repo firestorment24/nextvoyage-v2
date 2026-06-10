@@ -6,7 +6,7 @@ import { Bucket } from '@/data/sanctuaries'
 interface PropertyBucketsProps {  
   buckets: Bucket[]  
 }
-
+ 
 export default function PropertyBuckets({ buckets }: PropertyBucketsProps) {  
   if (!buckets || buckets.length === 0) return null
 
