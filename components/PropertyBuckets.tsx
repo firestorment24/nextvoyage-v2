@@ -1,32 +1,54 @@
 import React from 'react';  
-import Link from 'next/link';  
-import { Bucket } from '@/data/sanctuaries';
+import Link from 'next/link';
+
+// Defining interfaces locally to fix the import errors  
+interface Property {  
+name: string;  
+id?: string;  
+link?: string;  
+}
+
+interface Bucket {  
+title: string;  
+properties: Property[];  
+}
 
 interface PropertyBucketsProps {  
-  buckets: Bucket[];  
+buckets: Bucket[];  
 }
 
 const PropertyBuckets: React.FC<PropertyBucketsProps> = ({ buckets }) => {  
-  return (  
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-12">  
-       {buckets.map((bucket) => (    
-  <div key={bucket.name} className="border-t border-zinc-800 pt-6">    
-    <div className="flex justify-between items-baseline mb-4">    
-      <h3 className="text-xl font-light uppercase tracking-widest">{bucket.name}</h3>    
-      <span className="text-zinc-500 tabular-nums">{bucket.count} Properties</span>           </div>  
-          <p className="text-zinc-400 font-light mb-6 leading-relaxed">  
-            {bucket.description}  
-          </p>  
-          <Link   
-            href="/reserve"   
-            className="text-xs uppercase tracking-[0.2em] text-white hover:text-zinc-400 transition-colors"  
-          >  
-            Explore Collection →  
-          </Link>  
+if (!buckets || buckets.length === 0) return null;
+
+return (  
+  <section className="space-y-12">  
+    {buckets.map((bucket, index) => (  
+      <div key={index} className="space-y-6">  
+        <h3 className="text-2xl font-serif text-gray-900 border-b pb-2">  
+          {bucket.title}  
+        </h3>  
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">  
+          {bucket.properties.map((property, pIndex) => (  
+            <div   
+              key={pIndex}   
+              className="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors group"  
+            >  
+              <p className="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">  
+                {property.name}  
+              </p>  
+              <Link   
+                href={property.link || '#'}   
+                className="text-xs text-gray-500 uppercase tracking-widest mt-1 inline-block"  
+              >  
+                View Details →  
+              </Link>  
+            </div>  
+          ))}  
         </div>  
-      ))}  
-    </div>  
-  );  
+      </div>  
+    ))}  
+  </section>  
+);  
 };
 
-export default PropertyBuckets; 
+export default PropertyBuckets;  
