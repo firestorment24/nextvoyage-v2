@@ -1,36 +1,33 @@
-'use client'
-
-import Link from 'next/link'  
-import { Bucket } from '@/data/sanctuaries'
+import React from 'react';  
+import Link from 'next/link';  
+import { Bucket } from '@/data/sanctuaries';
 
 interface PropertyBucketsProps {  
-  buckets: Bucket[]  
+  buckets: Bucket[];  
 }
- 
-export default function PropertyBuckets({ buckets }: PropertyBucketsProps) {  
-  if (!buckets || buckets.length === 0) return null
 
+const PropertyBuckets: React.FC<PropertyBucketsProps> = ({ buckets }) => {  
   return (  
-    <section className="py-24 bg-black text-white px-6 md:px-12 lg:px-24">  
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">  
-        {buckets.map((bucket) => (  
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-12">  
+      {buckets.map((bucket) => (  
+        <div key={bucket.id} className="border-t border-zinc-800 pt-6">  
+          <div className="flex justify-between items-baseline mb-4">  
+            <h3 className="text-xl font-light uppercase tracking-widest">{bucket.name}</h3>  
+            <span className="text-zinc-500 tabular-nums">{bucket.count} Properties</span>  
+          </div>  
+          <p className="text-zinc-400 font-light mb-6 leading-relaxed">  
+            {bucket.description}  
+          </p>  
           <Link   
-            key={bucket.id}   
             href="/reserve"   
-            className="group block border border-neutral-800 p-8 hover:border-neutral-500 transition-all duration-500 bg-neutral-900/20"  
+            className="text-xs uppercase tracking-[0.2em] text-white hover:text-zinc-400 transition-colors"  
           >  
-            <div className="flex justify-between items-start mb-6">  
-              <span className="text-2xl font-light tracking-tighter">{bucket.name}</span>  
-              <span className="text-[10px] uppercase tracking-widest opacity-40 italic">  
-                {bucket.count} Properties  
-              </span>  
-            </div>  
-            <p className="text-sm text-neutral-400 opacity-60 group-hover:opacity-100 transition-opacity duration-500 leading-relaxed font-light">  
-              {bucket.description}  
-            </p>  
+            Explore Collection →  
           </Link>  
-        ))}  
-      </div>  
-    </section>  
-  )  
-}  
+        </div>  
+      ))}  
+    </div>  
+  );  
+};
+
+export default PropertyBuckets; 
