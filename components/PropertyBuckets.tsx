@@ -8,52 +8,45 @@ interface PropertyBucketsProps {
 }
 
 export default function PropertyBuckets({ buckets }: PropertyBucketsProps) {  
-  if (!buckets || buckets.length === 0) return null;
-
   return (  
-    <section className="py-24 bg-white">  
-      <div className="max-w-7xl mx-auto px-6">  
-        <div className="flex justify-between items-end mb-16">  
-          <div>  
-            <h2 className="text-4xl font-light tracking-tight text-neutral-900 mb-4">  
-              Property Buckets  
-            </h2>   
-            <p className="text-neutral-500 max-w-md">  
-              Curated categories of exclusive residences within this sanctuary.  
-            </p>  
-          </div>  
-        </div>
+    <section className="px-12 py-24 bg-neutral-950">  
+      <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">  
+        <div>  
+          <h3 className="text-[10px] uppercase tracking-[0.5em] opacity-30 mb-4">Property Buckets</h3>  
+          <h2 className="text-4xl font-light tracking-tighter">Curated Categories</h2>  
+        </div>  
+        <p className="max-w-md text-neutral-500 text-sm leading-relaxed italic">  
+          Each sanctuary is divided into specific residential collections, vetted for exclusivity and architectural significance.  
+        </p>  
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">  
-          {buckets.map((bucket, index) => (  
-            <Link   
-              key={index}  
-              href="/reserve"  
-              className="group block border border-neutral-100 p-8 hover:border-neutral-900 transition-colors duration-500"  
-            >  
-              <div className="flex justify-between items-start mb-12">  
-                <span className="text-xs font-medium tracking-widest uppercase text-neutral-400">  
-                  {String(index + 1).padStart(2, '0')}  
-                </span>  
-                <span className="text-sm font-light text-neutral-500 italic">  
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">  
+        {buckets.map((bucket) => (  
+          <Link   
+            key={bucket.id}   
+            href="/reserve"   
+            className="group relative aspect-[4/5] overflow-hidden bg-black"  
+          >  
+            <img   
+              src={bucket.imageUrl}   
+              alt={bucket.name}   
+              className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-70 group-hover:scale-105 transition-all duration-700"  
+            />  
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />  
+              
+            <div className="absolute bottom-0 left-0 p-8 w-full">  
+              <div className="flex justify-between items-end border-b border-white/10 pb-4 mb-4">  
+                <span className="text-2xl font-light tracking-tighter">{bucket.name}</span>  
+                <span className="text-[10px] uppercase tracking-widest opacity-40 italic">  
                   {bucket.count} Properties  
                 </span>  
               </div>  
-                
-              <h3 className="text-2xl font-light mb-4 group-hover:translate-x-2 transition-transform duration-500">  
-                {bucket.name}  
-              </h3>  
-                
-              <p className="text-neutral-500 text-sm leading-relaxed mb-8">  
+              <p className="text-sm text-neutral-400 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 line-clamp-2">  
                 {bucket.description}  
               </p>  
-                
-              <div className="pt-4 border-t border-neutral-50 text-[10px] tracking-[0.2em] uppercase font-bold text-neutral-900 opacity-0 group-hover:opacity-100 transition-opacity duration-500">  
-                Inquire &rarr;  
-              </div>  
-            </Link>  
-          ))}  
-        </div>  
+            </div>  
+          </Link>  
+        ))}  
       </div>  
     </section>  
   );  
