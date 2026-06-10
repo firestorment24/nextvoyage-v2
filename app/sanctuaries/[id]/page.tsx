@@ -13,7 +13,7 @@ export default function SanctuaryDetail() {
 
   if (!sanctuary) {  
     return (  
-      <div className="min-h-screen flex items-center justify-center">  
+      <div className="min-h-screen flex items-center justify-center bg-white">  
         <div className="text-center">  
           <h1 className="text-2xl font-light mb-4">Sanctuary not found</h1>  
           <Link href="/sanctuaries" className="text-gold hover:underline">  
@@ -29,7 +29,7 @@ export default function SanctuaryDetail() {
       {/* Hero Section */}  
       <div className="relative h-[60vh] w-full overflow-hidden">  
         <img  
-          src={sanctuary.heroImage || sanctuary.img}  
+          src={sanctuary.img || sanctuary.heroImage}  
           alt={sanctuary.name}  
           className="w-full h-full object-cover"  
         />  
@@ -86,13 +86,13 @@ export default function SanctuaryDetail() {
         <div className="max-w-7xl mx-auto px-6">  
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">  
             <div className="lg:col-span-1">  
-              <h3 className="text-2xl font-light mb-6">The Atmosphere</h3>  
+              <h3 className="text-2xl font-light mb-6 text-charcoal">The Atmosphere</h3>  
               <p className="text-gray-500 font-light leading-relaxed">  
                 {sanctuary.atmosphere}  
               </p>  
             </div>  
             <div className="lg:col-span-2">  
-              <h3 className="text-2xl font-light mb-8 text-center lg:text-left">  
+              <h3 className="text-2xl font-light mb-8 text-center lg:text-left text-charcoal">  
                 Curated Highlights  
               </h3>  
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">  
