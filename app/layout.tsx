@@ -1,10 +1,10 @@
-import { Cormorant_Garamond, Inter } from 'next/font/google'  
+import { Playfair_Display, Inter } from 'next/font/google'  
 import './globals.css'
 
-const cormorant = Cormorant_Garamond({   
+const playfair = Playfair_Display({   
   subsets: ['latin'],  
   variable: '--font-serif',  
-  weight: ['300', '400', '500', '600']  
+  weight: ['400', '500', '600', '700']  
 })
 
 const inter = Inter({   
@@ -18,8 +18,8 @@ export default function RootLayout({
   children: React.ReactNode  
 }) {  
   return (  
-    <html lang="en" className={`${cormorant.variable} ${inter.variable}`}>  
-      <body className="font-sans bg-[#F9F7F2] text-[#1A1A1A] antialiased">  
+    <html lang="en" className={`${playfair.variable} ${inter.variable}`}>  
+      <body className="font-sans bg-[#FCFAF7] text-[#1C1C1C] antialiased">  
         {children}  
       </body>  
     </html>  
