@@ -1,50 +1,28 @@
-import type { Metadata } from "next";  
-import { Inter, Cormorant_Garamond } from "next/font/google";  
-import "./globals.css";  
-import Navigation from "./Navigation";  
-import Footer from "./Footer";  
-import Cursor from "./components/Cursor";
+import { Inter } from 'next/font/google'  
+import { Navigation } from './Navigation' // Fixed named import  
+import './globals.css'
 
-// Load premium editorial fonts  
-const inter = Inter({   
-subsets: ["latin"],   
-variable: "--font-inter"   
-});
+const inter = Inter({ subsets: ['latin'] })
 
-const cormorant = Cormorant_Garamond({   
-subsets: ["latin"],   
-weight: ["300", "400", "500", "600"],  
-style: ["normal", "italic"],  
-variable: "--font-cormorant"   
-});
-
-export const metadata: Metadata = {  
-title: "NexVoyage Collective | The ROI of Reset",  
-description: "Bespoke travel sequences and spatial studies for the discerning traveler.",  
-};
+export const metadata = {  
+  title: 'NexVoyage Collective | Curating the Unreachable',  
+  description: 'Private travel architecture for high-net-worth individuals.',  
+}
 
 export default function RootLayout({  
-children,  
-}: Readonly<{  
-children: React.ReactNode;  
-}>) {  
-return (  
-  <html lang="en" className="scroll-smooth">  
-    <body className={`${inter.variable} ${cormorant.variable} antialiased font-sans bg-white text-black min-h-screen flex flex-col`}>  
-      {/* Interactive Luxury Layer */}  
-      <Cursor />
-
-      {/* Global Navigation */}  
-      <Navigation />
-
-      {/* Main Content Area */}  
-      <main className="flex-grow">  
-        {children}  
-      </main>
-
-      {/* Global Footer */}  
-      <Footer />  
-    </body>  
-  </html>  
-);  
+  children,  
+}: {  
+  children: React.ReactNode  
+}) {  
+  return (  
+    <html lang="en">  
+      <body className={`${inter.className} bg-black text-white antialiased`}>  
+        <Navigation />  
+        <main>{children}</main>  
+        <footer className="p-8 text-center text-xs text-zinc-500 uppercase tracking-widest">  
+          © 2026 NexVoyage Collective. All inquiries strictly confidential.  
+        </footer>  
+      </body>  
+    </html>  
+  )  
 }  
