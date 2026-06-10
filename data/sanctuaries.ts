@@ -23,4 +23,7 @@ export const SANCTUARY_DATA = [
     philosophy: 'Primal connection.',  
     roi: 'Perspective shift and sensory awakening.'  
   }  
-]; 
+];
+
+// This line fixes the error in [id]/page.tsx  
+export const sanctuaries = SANCTUARY_DATA;  
