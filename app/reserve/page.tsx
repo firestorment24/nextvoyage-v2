@@ -1,96 +1,199 @@
 'use client'
 
-import React, { useState, Suspense } from 'react'  
+import { useState, useEffect } from 'react'  
 import { useSearchParams } from 'next/navigation'  
-import { SANCTUARY_DATA } from '@/data/sanctuaries'
+import Link from 'next/link'
 
-function ReserveForm() {  
-const searchParams = useSearchParams()  
-const preSelectedId = searchParams.get('sanctuary')
-
-const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle')
-
-const handleSubmit = async (e: React.FormEvent) => {  
-  e.preventDefault()  
-  setStatus('submitting')  
-    
-  // Simulate a lead capture - in the future, this can trigger an email via Resend or SendGrid  
-  await new Promise(resolve => setTimeout(resolve, 1500))  
-  setStatus('success')  
-}
-
-if (status === 'success') {  
-  return (  
-    <div className="min-h-[60vh] flex flex-col items-center justify-center text-center space-y-4 px-6">  
-      <h1 className="text-4xl font-serif text-gray-900">Thank You.</h1>  
-      <p className="text-lg text-gray-600 max-w-md">  
-        An advisor from the NexVoyage Collective will reach out within 24 hours to begin curating your journey.  
-      </p>  
-    </div>  
-  )  
-}
-
-return (  
-  <div className="max-w-2xl mx-auto px-6 py-20">  
-    <header className="text-center mb-16 space-y-4">  
-      <h1 className="text-4xl font-serif text-gray-900">Inquiry & Reservation</h1>  
-      <p className="text-gray-500 uppercase tracking-widest text-sm">  
-        Bespoke travel, curated for you.  
-      </p>  
-    </header>
-
-    <form onSubmit={handleSubmit} className="space-y-8">  
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">  
-        <div className="space-y-2">  
-          <label className="text-xs uppercase tracking-widest text-gray-400">Full Name</label>  
-          <input required type="text" className="w-full border-b border-gray-200 py-2 focus:border-black outline-none transition-colors" placeholder="John Doe" />  
-        </div>  
-        <div className="space-y-2">  
-          <label className="text-xs uppercase tracking-widest text-gray-400">Email Address</label>  
-          <input required type="email" className="w-full border-b border-gray-200 py-2 focus:border-black outline-none transition-colors" placeholder="john@example.com" />  
-        </div>  
-      </div>
-
-      <div className="space-y-2">  
-        <label className="text-xs uppercase tracking-widest text-gray-400">Sanctuary of Interest</label>  
-        <select   
-          defaultValue={preSelectedId || ""}  
-          className="w-full border-b border-gray-200 py-2 focus:border-black outline-none bg-transparent transition-colors"  
-        >  
-          <option value="" disabled>Select a collection...</option>  
-          {SANCTUARY_DATA.map(s => (  
-            <option key={s.id} value={s.id}>{s.name} — {s.loc}</option>  
-          ))}  
-          <option value="custom">Other / General Inquiry</option>  
-        </select>  
-      </div>
-
-      <div className="space-y-2">  
-        <label className="text-xs uppercase tracking-widest text-gray-400">Tell us about your trip</label>  
-        <textarea   
-          rows={4}   
-          className="w-full border border-gray-100 p-4 focus:border-black outline-none transition-colors bg-gray-50 rounded"   
-          placeholder="Preferred dates, number of guests, or specific requirements..."  
-        />  
-      </div>
-
-      <button   
-        disabled={status === 'submitting'}  
-        className="w-full bg-black text-white py-4 rounded-full hover:bg-gray-800 transition-all font-medium disabled:bg-gray-400"  
-      >  
-        {status === 'submitting' ? 'Sending Inquiry...' : 'Submit Request'}  
-      </button>  
-    </form>  
-  </div>  
-)  
-}
+// Simple list for pre-filling/validation if needed  
+const SANCTUARIES = [  
+  { id: 'brass-shadow', name: 'Brass & Shadow' },  
+  { id: 'azure-heights', name: 'Azure Heights' },  
+  { id: 'velvet-pines', name: 'Velvet Pines' },  
+  // ... other sanctuaries  
+]
 
 export default function ReservePage() {  
-return (  
-  <main className="min-h-screen bg-white">  
-    <Suspense fallback={<div className="p-20 text-center">Loading...</div>}>  
-      <ReserveForm />  
-    </Suspense>  
-  </main>  
-)  
+  const searchParams = useSearchParams()  
+  const sanctuaryId = searchParams.get('id')  
+    
+  const [selectedSanctuary, setSelectedSanctuary] = useState(  
+    SANCTUARIES.find(s => s.id === sanctuaryId)?.name || 'General Inquiry'  
+  )
+
+  const [formData, setFormData] = useState({  
+    name: '',  
+    email: '',  
+    phone: '',  
+    guests: '2',  
+    dates: '',  
+    occasion: '',  
+    interests: '',  
+    narrative: '',  
+  })
+
+  const [submitted, setSubmitted] = useState(false)
+
+  const handleSubmit = (e: React.FormEvent) => {  
+    e.preventDefault()  
+    // Here you would integrate with your CRM or email service  
+    console.log('Inquiry Submitted:', { ...formData, selectedSanctuary })  
+    setSubmitted(true)  
+  }
+
+  if (submitted) {  
+    return (  
+      <div className="min-h-screen bg-white flex flex-col items-center justify-center p-6 text-center">  
+        <h1 className="text-3xl font-light mb-4">Voyage Initiated</h1>  
+        <p className="text-gray-500 max-w-md mx-auto mb-8">  
+          Thank you, {formData.name}. Our concierge team is reviewing your inquiry for {selectedSanctuary}.   
+          We will be in touch within 24 hours to begin curating your journey.  
+        </p>  
+        <Link href="/" className="text-xs uppercase tracking-widest border-b border-black pb-1">  
+          Return to Collection  
+        </Link>  
+      </div>  
+    )  
+  }
+
+  return (  
+    <div className="min-h-screen bg-[#FAFAFA] text-[#1A1A1A] font-sans pb-20">  
+      {/* Simple Nav */}  
+      <nav className="p-8 flex justify-between items-center">  
+        <Link href="/" className="text-lg tracking-[0.2em] font-light uppercase">  
+          NexVoyage  
+        </Link>  
+      </nav>
+
+      <main className="max-w-2xl mx-auto px-6 mt-12">  
+        <header className="mb-12">  
+          <h1 className="text-4xl font-light mb-4 tracking-tight">Travel Inquiry</h1>  
+          <p className="text-gray-500 font-light">  
+            Tell us about the journey you’re envisioning. We specialize in curating   
+            extraordinary experiences for the discerning traveler.  
+          </p>  
+        </header>
+
+        <form onSubmit={handleSubmit} className="space-y-12">  
+            
+          {/* Section: The Destination */}  
+          <section>  
+            <h2 className="text-xs uppercase tracking-widest text-gray-400 mb-6">01. The Sanctuary</h2>  
+            <div className="border-b border-gray-200 pb-2">  
+              <select   
+                className="w-full bg-transparent text-xl font-light focus:outline-none appearance-none cursor-pointer"  
+                value={selectedSanctuary}  
+                onChange={(e) => setSelectedSanctuary(e.target.value)}  
+              >  
+                <option value="General Inquiry">General Inquiry</option>  
+                {SANCTUARIES.map(s => (  
+                  <option key={s.id} value={s.name}>{s.name}</option>  
+                ))}  
+              </select>  
+            </div>  
+          </section>
+
+          {/* Section: The Details */}  
+          <section>  
+            <h2 className="text-xs uppercase tracking-widest text-gray-400 mb-6">02. The Journey</h2>  
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">  
+              <div className="border-b border-gray-200 pb-2">  
+                <label className="block text-[10px] uppercase tracking-tighter text-gray-400 mb-1">Desired Timing</label>  
+                <input   
+                  type="text"   
+                  placeholder="e.g. Late September 2026"  
+                  className="w-full bg-transparent text-lg font-light focus:outline-none"  
+                  onChange={(e) => setFormData({...formData, dates: e.target.value})}  
+                  required  
+                />  
+              </div>  
+              <div className="border-b border-gray-200 pb-2">  
+                <label className="block text-[10px] uppercase tracking-tighter text-gray-400 mb-1">Guest Count</label>  
+                <input   
+                  type="number"   
+                  placeholder="2"  
+                  className="w-full bg-transparent text-lg font-light focus:outline-none"  
+                  onChange={(e) => setFormData({...formData, guests: e.target.value})}  
+                />  
+              </div>  
+            </div>  
+              
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">  
+              <div className="border-b border-gray-200 pb-2">  
+                <label className="block text-[10px] uppercase tracking-tighter text-gray-400 mb-1">Occasion</label>  
+                <select   
+                  className="w-full bg-transparent text-lg font-light focus:outline-none appearance-none"  
+                  onChange={(e) => setFormData({...formData, occasion: e.target.value})}  
+                >  
+                  <option value="">Select an occasion...</option>  
+                  <option value="Leisure">Leisure</option>  
+                  <option value="Anniversary">Anniversary</option>  
+                  <option value="Honeymoon">Honeymoon</option>  
+                  <option value="Wellness">Wellness Retreat</option>  
+                  <option value="Celebration">Special Celebration</option>  
+                </select>  
+              </div>  
+              <div className="border-b border-gray-200 pb-2">  
+                <label className="block text-[10px] uppercase tracking-tighter text-gray-400 mb-1">Interests</label>  
+                <input   
+                  type="text"   
+                  placeholder="e.g. Culinary, Yachting, Art"  
+                  className="w-full bg-transparent text-lg font-light focus:outline-none"  
+                  onChange={(e) => setFormData({...formData, interests: e.target.value})}  
+                />  
+              </div>  
+            </div>  
+          </section>
+
+          {/* Section: The Narrative */}  
+          <section>  
+            <h2 className="text-xs uppercase tracking-widest text-gray-400 mb-6">03. The Narrative</h2>  
+            <div className="border-b border-gray-200 pb-4">  
+              <textarea   
+                placeholder="Share any specific requirements or dreams for this voyage..."  
+                className="w-full bg-transparent text-lg font-light focus:outline-none min-h-[100px] resize-none"  
+                onChange={(e) => setFormData({...formData, narrative: e.target.value})}  
+              />  
+            </div>  
+          </section>
+
+          {/* Section: Contact */}  
+          <section>  
+            <h2 className="text-xs uppercase tracking-widest text-gray-400 mb-6">04. Contact Information</h2>  
+            <div className="space-y-8">  
+              <div className="border-b border-gray-200 pb-2">  
+                <input   
+                  type="text"   
+                  placeholder="Full Name"  
+                  className="w-full bg-transparent text-lg font-light focus:outline-none"  
+                  onChange={(e) => setFormData({...formData, name: e.target.value})}  
+                  required  
+                />  
+              </div>  
+              <div className="border-b border-gray-200 pb-2">  
+                <input   
+                  type="email"   
+                  placeholder="Email Address"  
+                  className="w-full bg-transparent text-lg font-light focus:outline-none"  
+                  onChange={(e) => setFormData({...formData, email: e.target.value})}  
+                  required  
+                />  
+              </div>  
+            </div>  
+          </section>
+
+          <div className="pt-8">  
+            <button   
+              type="submit"  
+              className="w-full md:w-auto px-12 py-4 bg-black text-white text-xs uppercase tracking-[0.3em] hover:bg-gray-900 transition-colors"  
+            >  
+              Begin the Conversation  
+            </button>  
+            <p className="mt-4 text-[10px] text-gray-400 text-center md:text-left">  
+              By submitting, you agree to our private travel consultation terms.  
+            </p>  
+          </div>  
+        </form>  
+      </main>  
+    </div>  
+  )  
 }  
