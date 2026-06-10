@@ -3,7 +3,7 @@
 export interface Property {  
   id: string;  
   name: string;  
-  sanctuaryId: string; // Links to IDs in data/sanctuaries.ts (e.g., 'alpine', 'safari')  
+  sanctuaryId: string;  
   location: string;  
   image: string;  
   tagline: string;  
@@ -62,4 +62,7 @@ export const PROPERTY_DATA: Property[] = [
     startingPrice: '$4,100',  
     amenities: ['Canyon Pavilions', 'Floatation Therapy', 'Private Aviation Access']  
   }  
-];  
+];
+
+// Compatibility export to fix the build errors  
+export const properties = PROPERTY_DATA; 
