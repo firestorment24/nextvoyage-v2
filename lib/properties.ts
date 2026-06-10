@@ -1,91 +1,65 @@
-export interface Property {  
-  id: string  
-  sanctuarySlug: string  
-  name: string  
-  location: string  
-  image: string  
-  priceLevel: string  
-  exclusiveOffer: string  
-  highlight: string  
-  amenities: string[]  
-}
-
-export const PROPERTIES_DATA: Property[] = [  
+export const properties = [  
   {  
-    id: 'london-sanctuary',  
-    sanctuarySlug: 'the-metropolitan',  
+    id: 'metropolitan-london',  
     name: 'The London Sanctuary',  
     location: 'Mayfair, London',  
-    image: 'https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&q=80&w=2000',  
-    priceLevel: '$$$$$',  
-    exclusiveOffer: 'Subterranean Spa Access + Private Butler',  
-    highlight: 'A redoubt in the heart of Mayfair, optimized for executive recovery.',  
-    amenities: ['Bulletproof Glass', 'Private Chauffeur', '24/7 Security'],  
+    category: 'Metropolitan Trio',  
+    description: 'A subterranean brutalist retreat beneath the pulse of Mayfair.',  
+    image: 'https://cdn.marblism.com/placeholder-london.webp', // Update with specific ID if available  
+    dossier: '72543b27-0ab2-4c94-b47c-41c396794078'  
   },  
   {  
-    id: 'tokyo-sanctuary',  
-    sanctuarySlug: 'the-metropolitan',  
+    id: 'metropolitan-tokyo',  
     name: 'The Tokyo Sanctuary',  
     location: 'Otemachi, Tokyo',  
-    image: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&q=80&w=2000',  
-    priceLevel: '$$$$$',  
-    exclusiveOffer: 'Zen Garden Meditation + Private Chef',  
-    highlight: 'Minimalist granite and shadow high above the Imperial Palace.',  
-    amenities: ['Sleep Optimization Suite', 'Discrete Entry', 'Tea Ceremony Room'],  
+    category: 'Metropolitan Trio',  
+    description: 'Zen-minimalism meets high-altitude privacy in the heart of the city.',  
+    image: 'https://cdn.marblism.com/placeholder-tokyo.webp',  
+    dossier: '377bdfa2-fad8-468b-9d64-4dde9197d82d'  
   },  
   {  
-    id: 'nyc-sanctuary',  
-    sanctuarySlug: 'the-metropolitan',  
+    id: 'metropolitan-new-york',  
     name: 'The New York Sanctuary',  
-    location: 'Fifth Avenue, NYC',  
-    image: 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&q=80&w=2000',  
-    priceLevel: '$$$$$',  
-    exclusiveOffer: 'Helipad Transfer + Rooftop Lounge Access',  
-    highlight: 'Total anonymity in the Crown Building, high above Manhattan.',  
-    amenities: ['Garden Terrace', 'Jazz Club Access', 'Double-Height Atriums'],  
+    location: 'Manhattan, New York',  
+    category: 'Metropolitan Trio',  
+    description: 'An iron-and-glass aerie overlooking the concrete jungle.',  
+    image: 'https://cdn.marblism.com/placeholder-ny.webp',  
+    dossier: '49035f16-0183-4e67-9b39-858c933cce73'  
   },  
   {  
-    id: 'alpine-sanctuary',  
-    sanctuarySlug: 'the-alpine',  
+    id: 'wilderness-alpine',  
     name: 'The Alpine Sanctuary',  
-    location: 'Courchevel, French Alps',  
-    image: 'https://cdn.marblism.com/rTkVlumUYJA.webp',  
-    priceLevel: '$$$$$',  
-    exclusiveOffer: 'Private Ski-In/Ski-Out + Night Vision Patrols',  
-    highlight: 'A glass-encased fortress nestled in the high-altitude silence.',  
-    amenities: ['Thermal Wellness Circuit', 'Oxygen-Enriched Suites', 'Snow-Track Security'],  
+    location: 'Swiss Alps',  
+    category: 'Wilderness Pair',  
+    description: 'A fortress of warmth carved into the granite of the Eiger.',  
+    image: 'https://cdn.marblism.com/placeholder-alpine.webp',  
+    dossier: 'b1f2c89a-988e-4288-961c-29c044ef5650'  
   },  
   {  
-    id: 'safari-sanctuary',  
-    sanctuarySlug: 'the-safari',  
+    id: 'wilderness-safari',  
     name: 'The Safari Sanctuary',  
     location: 'Serengeti, Tanzania',  
-    image: 'https://cdn.marblism.com/kO_s8woNZ9T.webp',  
-    priceLevel: '$$$$$',  
-    exclusiveOffer: 'Biometric Ranger Escort + Private Bush Flight',  
-    highlight: 'Elevated luxury in the wild, protected by elite wildlife units.',  
-    amenities: ['Eco-Conscious Fortress', 'Star-Gazing Deck', 'Silent Electric Rovers'],  
+    category: 'Wilderness Pair',  
+    description: 'Sustainable luxury at the edge of the world’s greatest migration.',  
+    image: 'https://cdn.marblism.com/placeholder-safari.webp',  
+    dossier: '7e4ae280-1c4c-4278-9575-033bae9a2aa4'  
   },  
   {  
-    id: 'floating-sanctuary',  
-    sanctuarySlug: 'the-floating',  
+    id: 'aquatic-floating',  
     name: 'The Floating Sanctuary',  
-    location: 'International Waters',  
+    location: 'Maldivian Archipelagos',  
+    category: 'Aquatic Duo',  
+    description: 'A nomadic architectural marvel drifting on sapphire waters.',  
     image: 'https://cdn.marblism.com/iPblXvucCCw.webp',  
-    priceLevel: '$$$$$',  
-    exclusiveOffer: 'Radar-Stealth Hull + Deep-Sea Exploration',  
-    highlight: 'A mobile sovereignty platform featuring a Submerged Salon.',  
-    amenities: ['Maritime Autonomy', 'Helipad', 'Anti-Drone Defense'],  
+    dossier: 'b98bb731-7d42-4415-ba20-dd279ef2780d'  
   },  
   {  
-    id: 'island-sanctuary',  
-    sanctuarySlug: 'the-island',  
+    id: 'aquatic-island',  
     name: 'The Island Sanctuary',  
-    location: 'Private Atoll, South Pacific',  
+    location: 'Private Atoll, Seychelles',  
+    category: 'Aquatic Duo',  
+    description: 'Total seclusion on a limestone bastion reclaimed by nature.',  
     image: 'https://cdn.marblism.com/82ZuEcFFlGb.webp',  
-    priceLevel: '$$$$$',  
-    exclusiveOffer: 'Reef Vault Access + No-Fly Zone Security',  
-    highlight: 'Total isolation within an acoustic sensor perimeter.',  
-    amenities: ['Tidal Infinity Pool', 'Solar Autonomy', 'Underwater Escape Tunnel'],  
-  },  
-]  
+    dossier: 'dae1eb6d-6fbf-4194-bb4c-ece6e02d1b7c'  
+  }  
+];  
