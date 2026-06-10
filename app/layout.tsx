@@ -1,13 +1,16 @@
-import { Inter } from 'next/font/google'  
-import Navigation from './Navigation'  
+import { Cormorant_Garamond, Inter } from 'next/font/google'  
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const cormorant = Cormorant_Garamond({   
+  subsets: ['latin'],  
+  variable: '--font-serif',  
+  weight: ['300', '400', '500', '600']  
+})
 
-export const metadata = {  
-  title: 'NexVoyage Collective | Luxury Sanctuary Group',  
-  description: 'Bespoke travel and security-focused property management for high-net-worth individuals.',  
-}
+const inter = Inter({   
+  subsets: ['latin'],  
+  variable: '--font-sans'  
+})
 
 export default function RootLayout({  
   children,  
@@ -15,10 +18,9 @@ export default function RootLayout({
   children: React.ReactNode  
 }) {  
   return (  
-    <html lang="en">  
-      <body className={`${inter.className} bg-black text-white antialiased`}>  
-        <Navigation />  
-        <main>{children}</main>  
+    <html lang="en" className={`${cormorant.variable} ${inter.variable}`}>  
+      <body className="font-sans bg-[#F9F7F2] text-[#1A1A1A] antialiased">  
+        {children}  
       </body>  
     </html>  
   )  
