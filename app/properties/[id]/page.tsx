@@ -1,111 +1,115 @@
-import { properties as rawProperties } from '../../../data/properties'  
+import React from 'react'  
 import { notFound } from 'next/navigation'  
 import Link from 'next/link'  
 import Image from 'next/image'  
+import { properties, Property } from '../../../data/properties'  
+import { Navigation } from '../../../components/Navigation'  
+import { Footer } from '../../../components/Footer'  
 import { EliteAmenities } from '../../../components/EliteAmenities'
 
-// Define the Property interface to match your data structure  
-interface Property {  
-  id: string;  
-  name: string;  
-  location: string;  
-  image: string;  
-  priceLevel: string;  
-  exclusiveOffer: string;  
-  highlight: string;  
-  description: string;  
-  amenities: string[];  
+interface PageProps {  
+  params: Promise<{ id: string }>  
 }
 
-// Cast the raw data to our typed interface  
-const properties = (rawProperties as unknown) as Property[]
-
 export async function generateStaticParams() {  
-  return properties.map((p) => ({  
-    id: p.id,  
+  return properties.map((property) => ({  
+    id: property.id,  
   }))  
 }
 
-export default async function PropertyPage({ params }: { params: Promise<{ id: string }> }) {  
+export default async function PropertyPage({ params }: PageProps) {  
   const { id } = await params  
-  const property = properties.find((p) => p.id === id)
+  const property = (properties as Property[]).find((p) => p.id === id)
 
   if (!property) {  
     notFound()  
   }
 
   return (  
-    <main className="min-h-screen bg-white">  
+    <main className="min-h-screen bg-white text-gray-900 font-sans selection:bg-gold-50">  
+      <Navigation />
+
       {/* Hero Section */}  
-      <section className="relative h-[70vh] w-full overflow-hidden">  
+      <section className="relative h-[80vh] w-full overflow-hidden">  
         <Image  
           src={property.image}  
           alt={property.name}  
           fill  
-          className="object-cover"  
           priority  
+          className="object-cover"  
+          sizes="100vw"  
         />  
         <div className="absolute inset-0 bg-black/10" />  
       </section>
 
-      {/* Property Intro */}  
-      <section className="max-w-7xl mx-auto px-6 py-24 grid grid-cols-1 lg:grid-cols-12 gap-16">  
-        <div className="lg:col-span-8">  
-          <div className="space-y-4 mb-12">  
-            <p className="text-xs uppercase tracking-[0.4em] text-gold">{property.location}</p>  
-            <h1 className="text-4xl md:text-6xl font-light tracking-tight text-gray-900">  
-              {property.name}  
-            </h1>  
-          </div>  
-            
-          <div className="prose prose-lg text-gray-600 font-light leading-relaxed max-w-2xl">  
-            <p className="text-xl text-gray-900 mb-8 italic">"{property.highlight}"</p>  
+      {/* Intro Section */}  
+      <section className="max-w-screen-xl mx-auto px-6 py-24 md:py-32">  
+        <div className="max-w-3xl">  
+          <p className="text-sm uppercase tracking-[0.3em] text-gray-500 mb-6">  
+            {property.location}  
+          </p>  
+          <h1 className="text-5xl md:text-7xl font-light tracking-tight mb-8">  
+            {property.name}  
+          </h1>  
+          <p className="text-xl md:text-2xl text-gray-600 leading-relaxed font-light mb-12">  
+            {property.highlight}  
+          </p>  
+          <div className="prose prose-lg prose-gray font-light leading-relaxed">  
             <p>{property.description}</p>  
           </div>  
-        </div>
-
-        {/* Exclusivity Ledger */}  
-        <div className="lg:col-span-4 bg-gray-50 p-10 h-fit border border-gray-100">  
-          <p className="text-[10px] uppercase tracking-[0.3em] text-gray-400 mb-8 border-b border-gray-200 pb-4">  
-            Membership Benefits  
-          </p>  
-            
-          <div className="space-y-8 mb-12">  
-            <div>  
-              <p className="text-[10px] uppercase tracking-widest text-gray-500 mb-1">Exclusive For You</p>  
-              <p className="text-lg font-light text-gray-900">{property.exclusiveOffer}</p>  
-            </div>  
-            <div>  
-              <p className="text-[10px] uppercase tracking-widest text-gray-500 mb-1">Est. Investment</p>  
-              <p className="text-lg font-light text-gray-900">{property.priceLevel}</p>  
-            </div>  
-          </div>
-
-          <Link   
-            href={`/reserve?property=${encodeURIComponent(property.name)}`}  
-            className="block w-full text-center py-4 bg-black text-white text-[10px] uppercase tracking-[0.4em] hover:bg-gray-800 transition-colors"  
-          >  
-            Inquire Privately  
-          </Link>  
         </div>  
       </section>
 
-      {/* Amenities Section */}  
+      {/* Exclusivity Ledger */}  
+      <section className="bg-gray-50 py-20">  
+        <div className="max-w-screen-xl mx-auto px-6">  
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">  
+            <div>  
+              <h2 className="text-2xl font-light tracking-tight mb-4">Off-Market Exclusivity</h2>  
+              <p className="text-gray-600 font-light mb-8">  
+                Through the NexVoyage Collective, this property includes curated benefits   
+                secured via our direct relationship with the estate management.  
+              </p>  
+              <div className="space-y-4">  
+                <div className="flex justify-between border-b border-gray-200 pb-2">  
+                  <span className="text-gray-500 text-sm uppercase tracking-widest">Offer</span>  
+                  <span className="font-medium text-gray-900">{property.exclusiveOffer as string}</span>  
+                </div>  
+                <div className="flex justify-between border-b border-gray-200 pb-2">  
+                  <span className="text-gray-500 text-sm uppercase tracking-widest">Tier</span>  
+                  <span className="font-medium text-gray-900">{property.priceLevel as string}</span>  
+                </div>  
+              </div>  
+            </div>  
+            <div className="flex flex-col items-center md:items-end justify-center">  
+              <Link  
+                href={`/reserve?property=${encodeURIComponent(property.name)}`}  
+                className="inline-block bg-gray-900 text-white px-12 py-5 text-sm uppercase tracking-[0.2em] hover:bg-gray-800 transition-colors duration-300"  
+              >  
+                Inquire for Availability  
+              </Link>  
+            </div>  
+          </div>  
+        </div>  
+      </section>
+
+      {/* Amenities Section - Fixed: Removed illegal 'amenities' prop */}  
       <section className="border-t border-gray-100">  
-        <EliteAmenities amenities={property.amenities} />  
+        <EliteAmenities />  
       </section>
 
       {/* Visual Break */}  
-      <section className="py-24 max-w-7xl mx-auto px-6">  
-        <div className="relative aspect-video w-full overflow-hidden">  
-          <Image  
-            src={property.image} // Reusing image or a secondary one if available  
-            alt="Interior detail"  
-            fill  
-            className="object-cover"  
-          />  
-        </div>  
-      </section>  
+      <section className="h-[60vh] relative">  
+        <Image  
+          src={property.image}  
+          alt="Details"  
+          fill  
+          className="object-cover grayscale hover:grayscale-0 transition-all duration-1000"  
+          sizes="100vw"  
+        />  
+      </section>
+
+      <Footer />  
     </main>  
   )  
 }  
