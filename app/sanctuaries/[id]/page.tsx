@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'  
 import { SANCTUARY_DATA } from '../../../data/sanctuaries'
 
-// This generates the static paths for Vercel/Next.js  
 export async function generateStaticParams() {  
   return SANCTUARY_DATA.map((sanctuary) => ({  
     id: sanctuary.id.toString(),  
@@ -41,11 +40,11 @@ export default async function SanctuaryDetailPage({ params }: { params: { id: st
           <div className="space-y-10">  
             <div className="space-y-2">  
               <span className="text-[10px] uppercase tracking-widest text-gray-400">The Location</span>  
-              <p className="text-lg font-light italic">{sanctuary.location}</p>  
+              <p className="text-lg font-light italic">{sanctuary.loc}</p>  
             </div>  
               
             <h2 className="text-3xl font-light leading-snug">  
-              {sanctuary.tagline}  
+              {sanctuary.tag}  
             </h2>  
               
             <p className="text-gray-500 font-light leading-relaxed text-lg">  
@@ -62,7 +61,7 @@ export default async function SanctuaryDetailPage({ params }: { params: { id: st
             <div>  
               <span className="text-[10px] uppercase tracking-widest text-gray-400 block mb-6">Notable Features</span>  
               <ul className="space-y-4">  
-                {sanctuary.highlights.map((item, i) => (  
+                {sanctuary.highlights && sanctuary.highlights.map((item, i) => (  
                   <li key={i} className="text-sm font-light flex items-start gap-3">  
                     <span className="h-1 w-1 bg-black mt-2 rounded-full flex-shrink-0" />  
                     {item}  
@@ -90,7 +89,7 @@ export default async function SanctuaryDetailPage({ params }: { params: { id: st
           </p>  
           <div className="pt-10">  
             <span className="text-[10px] uppercase tracking-widest text-gray-400 block mb-2">Available Properties</span>  
-            <span className="text-2xl font-light">{sanctuary.propertyCount} Exclusive Estates</span>  
+            <span className="text-2xl font-light">{sanctuary.propertyCount || 'Exclusive'} Estates</span>  
           </div>  
         </section>  
       </main>  
