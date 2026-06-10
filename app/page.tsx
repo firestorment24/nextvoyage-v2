@@ -30,14 +30,16 @@ export default function Home() {
                 />  
               </div>  
               <div className="space-y-1">  
+                {/* Changed 'location' to 'loc' */}  
                 <p className="text-xs uppercase tracking-widest text-gray-500">  
-                  {sanctuary.location}  
+                  {sanctuary.loc}  
                 </p>  
                 <h2 className="text-xl font-medium text-gray-900 group-hover:text-blue-600 transition-colors">  
                   {sanctuary.name}  
                 </h2>  
+                {/* Changed 'tagline' to 'tag' */}  
                 <p className="text-sm text-gray-600 italic">  
-                  {sanctuary.tagline}  
+                  {sanctuary.tag}  
                 </p>  
               </div>  
             </Link>  
