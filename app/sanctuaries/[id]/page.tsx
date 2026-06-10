@@ -1,76 +1,75 @@
-import React from 'react';  
-import { notFound } from 'next/navigation';  
-import Hero from '@/components/Hero';  
-import PropertyBuckets from '@/components/PropertyBuckets';  
-// Import the Sanctuary type so TypeScript knows the structure  
-import { SANCTUARY_DATA, Sanctuary } from '@/data/sanctuaries';
+import Image from 'next/image'  
+import { notFound } from 'next/navigation'  
+import Hero from '@/components/Hero'  
+import PropertyBuckets from '@/components/PropertyBuckets'  
+import { SANCTUARY_DATA } from '@/data/sanctuaries'
 
-interface PageProps {  
-  params: { id: string };  
+// Defining the interface locally to fix the "missing export" error  
+interface Sanctuary {  
+id: string;  
+name: string;  
+heroImage: string;  
+loc: string; // Matches 'loc' in data  
+tag: string; // Matches 'tag' in data  
+atmosphere?: string;  
+highlights?: string[];  
+propertyCount?: number;  
+buckets?: any;  
 }
 
-export async function generateStaticParams() {  
-  // Explicitly type the data as a Sanctuary array  
-  const data: Sanctuary[] = Array.isArray(SANCTUARY_DATA)   
-    ? SANCTUARY_DATA   
-    : Object.values(SANCTUARY_DATA);  
-      
-  return data.map((s: Sanctuary) => ({ id: s.id }));  
+export default function SanctuaryPage({ params }: { params: { id: string } }) {  
+const sanctuary = (SANCTUARY_DATA as Sanctuary[]).find((s) => s.id === params.id)
+
+if (!sanctuary) {  
+  notFound()  
 }
 
-export default function SanctuaryPage({ params }: PageProps) {  
-  const data: Sanctuary[] = Array.isArray(SANCTUARY_DATA)   
-    ? SANCTUARY_DATA   
-    : Object.values(SANCTUARY_DATA);
+return (  
+  <main className="min-h-screen bg-white">  
+    <Hero   
+      title={sanctuary.name}  
+      subtitle={sanctuary.loc}  
+      heroImage={sanctuary.heroImage}  
+    />
 
-  const sanctuary = data.find((s: Sanctuary) => s.id === params.id);
+    <div className="max-w-4xl mx-auto px-6 py-16 space-y-12">  
+      {/* Intro Section */}  
+      <section className="text-center space-y-4">  
+        <h2 className="text-3xl font-serif text-gray-900">{sanctuary.tag}</h2>  
+        {sanctuary.atmosphere && (  
+          <p className="text-lg text-gray-600 leading-relaxed">  
+            {sanctuary.atmosphere}  
+          </p>  
+        )}  
+      </section>
 
-  if (!sanctuary) return notFound();
-
-  return (  
-    <main className="min-h-screen bg-[#0a0a0a]">  
-      <Hero   
-        title={sanctuary.name}    
-        subtitle={sanctuary.tag}    
-        heroImage={sanctuary.heroImage}    
-      />
-
-      <div className="max-w-7xl mx-auto px-6 py-24 space-y-32">    
-        {/* Overview Section */}  
-        <section className="grid md:grid-cols-2 gap-16 items-start">  
-          <div className="space-y-6">  
-            <span className="text-white/40 text-xs tracking-[0.4em] uppercase">The Collection</span>  
-            <h2 className="text-4xl font-serif text-white leading-tight">  
-              {sanctuary.philosophy}  
-            </h2>  
-          </div>  
-          <div className="space-y-8 text-white/60 font-light leading-relaxed text-lg">  
-            <p>{sanctuary.atmosphere}</p>  
-            <div className="pt-8 border-t border-white/10 grid grid-cols-2 gap-8">  
-              {sanctuary.highlights.map((h: string, i: number) => (  
-                <div key={i} className="space-y-2">  
-                  <div className="text-white text-sm tracking-widest uppercase">0{i+1}</div>  
-                  <div className="text-xs tracking-wider">{h}</div>  
-                </div>  
-              ))}  
+      {/* Highlights */}  
+      {sanctuary.highlights && (  
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-b py-12">  
+          {sanctuary.highlights.map((highlight, index) => (  
+            <div key={index} className="flex items-start space-x-3">  
+              <span className="text-blue-500 mt-1">✦</span>  
+              <p className="text-gray-700">{highlight}</p>  
             </div>  
-          </div>  
-        </section>
-
-        {/* Property Grid */}  
-        <PropertyBuckets buckets={sanctuary.buckets} />
-
-        {/* Final CTA */}  
-        <section className="py-32 border-t border-white/5 text-center">  
-          <h3 className="text-3xl font-serif text-white mb-12 italic">Begin your journey.</h3>  
-          <a   
-            href="/concierge"   
-            className="inline-block border border-white/20 px-12 py-4 text-white text-[10px] tracking-[0.4em] uppercase hover:bg-white hover:text-black transition-all"  
-          >  
-            Consult a Specialist  
-          </a>  
+          ))}  
         </section>  
-      </div>  
-    </main>  
-  );  
+      )}
+
+      {/* Property Count & Booking CTA */}  
+      <section className="text-center space-y-6">  
+        <p className="text-gray-500 italic">  
+          Currently featuring {sanctuary.propertyCount || 0} exclusive properties in this collection.  
+        </p>  
+        <button className="bg-black text-white px-8 py-3 rounded-full hover:bg-gray-800 transition-colors">  
+          Request a Curated Quote  
+        </button>  
+      </section>  
+        
+      {/* Dynamic Property Buckets */}  
+      {sanctuary.buckets && (  
+        <PropertyBuckets buckets={sanctuary.buckets} />  
+      )}  
+    </div>  
+  </main>  
+)  
 }  
