@@ -3,9 +3,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'  
 import Image from 'next/image'  
 import { properties, Property } from '../../../data/properties'  
-import { Navigation } from '../../../components/Navigation'  
-import { Footer } from '../../../components/Footer'  
-import { EliteAmenities } from '../../../components/EliteAmenities'
+import { EliteAmenities } from '../../components/EliteAmenities'
 
 interface PageProps {  
   params: Promise<{ id: string }>  
@@ -26,9 +24,7 @@ export default async function PropertyPage({ params }: PageProps) {
   }
 
   return (  
-    <main className="min-h-screen bg-white text-gray-900 font-sans selection:bg-gold-50">  
-      <Navigation />
-
+    <main className="min-h-screen bg-white text-gray-900 font-sans selection:bg-gold-50 pt-20">  
       {/* Hero Section */}  
       <section className="relative h-[80vh] w-full overflow-hidden">  
         <Image  
@@ -93,7 +89,7 @@ export default async function PropertyPage({ params }: PageProps) {
         </div>  
       </section>
 
-      {/* Amenities Section - Fixed: Removed illegal 'amenities' prop */}  
+      {/* Amenities Section */}  
       <section className="border-t border-gray-100">  
         <EliteAmenities />  
       </section>
@@ -107,9 +103,7 @@ export default async function PropertyPage({ params }: PageProps) {
           className="object-cover grayscale hover:grayscale-0 transition-all duration-1000"  
           sizes="100vw"  
         />  
-      </section>
-
-      <Footer />  
+      </section>  
     </main>  
   )  
 }  
