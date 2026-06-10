@@ -1,95 +1,99 @@
 // app/sanctuaries/[id]/page.tsx  
-import { SANCTUARY_DATA } from '../../../data/sanctuaries'  
-import { PROPERTY_DATA } from '../../../data/properties'  
+import React from 'react'  
 import Link from 'next/link'  
-import Image from 'next/image'  
-import Navigation from '../../Navigation'  
-import Footer from '../../Footer'
+import { notFound } from 'next/navigation'  
+import { SANCTUARY_DATA } from '../../../data/sanctuaries'
 
-export default function SanctuaryDetailPage({ params }: { params: { id: string } }) {  
-  const sanctuary = SANCTUARY_DATA.find(s => s.id === params.id)  
-    
-  if (!sanctuary) return <div>Sanctuary not found</div>
+// This generates the static paths for Vercel/Next.js  
+export async function generateStaticParams() {  
+  return SANCTUARY_DATA.map((sanctuary) => ({  
+    id: sanctuary.id.toString(),  
+  }))  
+}
 
-  // Filter properties that belong to this sanctuary archetype  
-  const filteredProperties = PROPERTY_DATA.filter(p => p.sanctuaryId === sanctuary.id)
+export default async function SanctuaryDetailPage({ params }: { params: { id: string } }) {  
+  const { id } = await params  
+  const sanctuary = SANCTUARY_DATA.find((s) => s.id.toString() === id)
+
+  if (!sanctuary) {  
+    notFound()  
+  }
 
   return (  
-    <main className="min-h-screen bg-[#0A0A0A] text-white">  
-      <Navigation />  
-        
-      {/* Hero Section */}  
-      <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">  
-        <Image   
-          src={sanctuary.heroImage}   
-          alt={sanctuary.name}  
-          fill  
-          className="object-cover opacity-60"  
-          priority  
-        />  
-        <div className="relative z-10 text-center max-w-4xl px-6">  
-          <span className="uppercase tracking-[0.3em] text-sm mb-4 block text-gray-400">The Sanctuary</span>  
-          <h1 className="text-6xl md:text-8xl font-light mb-6">{sanctuary.name}</h1>  
-          <p className="text-xl md:text-2xl font-light text-gray-300 italic">"{sanctuary.tagline}"</p>  
-        </div>  
-      </section>
-
-      {/* Narrative Section */}  
-      <section className="py-24 px-6 max-w-5xl mx-auto">  
-        <div className="grid md:grid-cols-2 gap-16 items-start">  
-          <div>  
-            <h2 className="text-3xl font-light mb-8 italic">The Atmosphere</h2>  
-            <p className="text-gray-400 leading-relaxed text-lg">{sanctuary.atmosphere}</p>  
+    <div className="min-h-screen bg-white text-black selection:bg-black selection:text-white">  
+      <main>  
+        {/* Hero Section */}  
+        <section className="relative h-[80vh] w-full bg-gray-50 overflow-hidden">  
+          <img   
+            src={sanctuary.heroImage || sanctuary.img}   
+            alt={sanctuary.name}  
+            className="w-full h-full object-cover animate-in fade-in zoom-in-105 duration-1000"  
+          />  
+          <div className="absolute inset-0 bg-black/10" />  
+          <div className="absolute bottom-20 left-10 lg:left-20 text-white space-y-4">  
+            <p className="text-xs uppercase tracking-[0.4em] font-light">Sanctuary Archetype</p>  
+            <h1 className="text-5xl lg:text-7xl font-light tracking-tight">{sanctuary.name}</h1>  
           </div>  
-          <div className="bg-[#111] p-12 border border-white/5">  
-            <h3 className="text-sm uppercase tracking-widest mb-6 text-gray-500">Key Distinctions</h3>  
-            <ul className="space-y-4">  
-              {sanctuary.highlights.map((h, i) => (  
-                <li key={i} className="flex items-center gap-4 text-gray-300">  
-                  <span className="h-[1px] w-4 bg-gray-600"></span>  
-                  {h}  
-                </li>  
-              ))}  
-            </ul>  
-          </div>  
-        </div>  
-      </section>
+        </section>
 
-      {/* The Property Collection - This is the dynamic engine */}  
-      <section className="py-24 px-6 bg-white text-black">  
-        <div className="max-w-7xl mx-auto">  
-          <div className="mb-16">  
-            <h2 className="text-4xl font-light mb-4">The Collection</h2>  
-            <p className="text-gray-500 italic">Hand-selected sanctuaries within {sanctuary.name}.</p>  
+        {/* Core Details */}  
+        <section className="max-w-5xl mx-auto px-10 lg:px-20 py-24 lg:py-32 grid lg:grid-cols-2 gap-20 items-start">  
+          <div className="space-y-10">  
+            <div className="space-y-2">  
+              <span className="text-[10px] uppercase tracking-widest text-gray-400">The Location</span>  
+              <p className="text-lg font-light italic">{sanctuary.location}</p>  
+            </div>  
+              
+            <h2 className="text-3xl font-light leading-snug">  
+              {sanctuary.tagline}  
+            </h2>  
+              
+            <p className="text-gray-500 font-light leading-relaxed text-lg">  
+              {sanctuary.categoryDescription}  
+            </p>  
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">  
-            {filteredProperties.map((property) => (  
-              <Link key={property.id} href={`/properties/${property.id}`} className="group">  
-                <div className="relative aspect-[4/5] overflow-hidden mb-6">  
-                  <Image   
-                    src={property.image}  
-                    alt={property.name}  
-                    fill  
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"  
-                  />  
-                </div>  
-                <h3 className="text-2xl font-light mb-2">{property.name}</h3>  
-                <p className="text-gray-500 text-sm uppercase tracking-wider mb-4">{property.location}</p>  
-                <p className="text-gray-600 italic line-clamp-2">{property.tagline}</p>  
-              </Link>  
-            ))}  
-          </div>  
-            
-          {filteredProperties.length === 0 && (  
-            <div className="text-center py-20 border border-dashed border-gray-200">  
-              <p className="text-gray-400 italic">The collection for this sanctuary is currently being curated.</p>  
-            </div>  
-          )}  
-        </div>  
-      </section>
+          <div className="bg-gray-50 p-12 lg:p-16 space-y-12">  
+            <div>  
+              <span className="text-[10px] uppercase tracking-widest text-gray-400 block mb-6">Atmosphere</span>  
+              <p className="text-sm font-light leading-relaxed">{sanctuary.atmosphere}</p>  
+            </div>
 
-      <Footer />  
-    </main>  
+            <div>  
+              <span className="text-[10px] uppercase tracking-widest text-gray-400 block mb-6">Notable Features</span>  
+              <ul className="space-y-4">  
+                {sanctuary.highlights.map((item, i) => (  
+                  <li key={i} className="text-sm font-light flex items-start gap-3">  
+                    <span className="h-1 w-1 bg-black mt-2 rounded-full flex-shrink-0" />  
+                    {item}  
+                  </li>  
+                ))}  
+              </ul>  
+            </div>
+
+            <div className="pt-8">  
+              <Link   
+                href={`/reserve?interest=${encodeURIComponent(sanctuary.name)}`}  
+                className="inline-block bg-black text-white px-10 py-4 text-xs uppercase tracking-widest hover:bg-gray-800 transition-all w-full text-center"  
+              >  
+                Apply for Curation  
+              </Link>  
+            </div>  
+          </div>  
+        </section>
+
+        {/* Narrative Section */}  
+        <section className="border-t border-gray-100 py-32 px-10 lg:px-20 text-center max-w-3xl mx-auto space-y-12">  
+          <div className="inline-block w-px h-20 bg-gray-200" />  
+          <p className="text-2xl font-light italic text-gray-600 leading-relaxed">  
+            "We do not simply book rooms; we curate environments that facilitate high-performance recovery and total sensory immersion."  
+          </p>  
+          <div className="pt-10">  
+            <span className="text-[10px] uppercase tracking-widest text-gray-400 block mb-2">Available Properties</span>  
+            <span className="text-2xl font-light">{sanctuary.propertyCount} Exclusive Estates</span>  
+          </div>  
+        </section>  
+      </main>  
+    </div>  
   )  
 }  
