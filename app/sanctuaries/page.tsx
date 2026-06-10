@@ -1,13 +1,11 @@
 import React from 'react';  
-import Navigation from '../../components/Navigation';  
-import Footer from '../../components/Footer';  
 import { SANCTUARY_DATA } from '../../data/sanctuaries';  
 import Link from 'next/link';
 
 export default function SanctuaryIndex() {  
   return (  
     <div className="bg-[#F9F8F6] min-h-screen font-serif text-slate-900">  
-      <Navigation />  
+      {/* Navigation is handled by layout.tsx */}  
         
       <main className="max-w-7xl mx-auto px-6 py-24">  
         <header className="mb-20 text-center md:text-left">  
@@ -33,7 +31,6 @@ export default function SanctuaryIndex() {
                 className="w-full h-full object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all duration-1000 scale-100 group-hover:scale-105"  
               />  
                 
-              {/* Overlay Content */}  
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />  
                 
               <div className="absolute bottom-0 left-0 p-8 w-full text-white">  
@@ -54,7 +51,7 @@ export default function SanctuaryIndex() {
         </div>  
       </main>
 
-      <Footer />  
+      {/* Footer is handled by layout.tsx */}  
     </div>  
   );  
 }  
