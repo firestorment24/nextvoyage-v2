@@ -5,11 +5,13 @@ const nextConfig = {
       {  
         protocol: 'https',  
         hostname: 'images.unsplash.com',  
-        port: '',  
-        pathname: '/**',  
+      },  
+      {  
+        protocol: 'https',  
+        hostname: 'cdn.marblism.com',  
       },  
     ],  
   },  
-};
+}
 
-export default nextConfig;  
+export default nextConfig  
