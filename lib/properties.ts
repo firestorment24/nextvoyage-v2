@@ -1,11 +1,11 @@
-export const properties = [  
+export const PROPERTIES_DATA = [  
   {  
     id: 'metropolitan-london',  
     name: 'The London Sanctuary',  
     location: 'Mayfair, London',  
     category: 'Metropolitan Trio',  
     description: 'A subterranean brutalist retreat beneath the pulse of Mayfair.',  
-    image: 'https://cdn.marblism.com/placeholder-london.webp', // Update with specific ID if available  
+    image: 'https://cdn.marblism.com/7XPJ_Wrqy1E.webp',  
     dossier: '72543b27-0ab2-4c94-b47c-41c396794078'  
   },  
   {  
@@ -14,7 +14,7 @@ export const properties = [
     location: 'Otemachi, Tokyo',  
     category: 'Metropolitan Trio',  
     description: 'Zen-minimalism meets high-altitude privacy in the heart of the city.',  
-    image: 'https://cdn.marblism.com/placeholder-tokyo.webp',  
+    image: 'https://cdn.marblism.com/5d5H4zSTeRK.webp',  
     dossier: '377bdfa2-fad8-468b-9d64-4dde9197d82d'  
   },  
   {  
@@ -23,7 +23,7 @@ export const properties = [
     location: 'Manhattan, New York',  
     category: 'Metropolitan Trio',  
     description: 'An iron-and-glass aerie overlooking the concrete jungle.',  
-    image: 'https://cdn.marblism.com/placeholder-ny.webp',  
+    image: 'https://cdn.marblism.com/SzeA4F9ym0S.webp',  
     dossier: '49035f16-0183-4e67-9b39-858c933cce73'  
   },  
   {  
@@ -32,7 +32,7 @@ export const properties = [
     location: 'Swiss Alps',  
     category: 'Wilderness Pair',  
     description: 'A fortress of warmth carved into the granite of the Eiger.',  
-    image: 'https://cdn.marblism.com/placeholder-alpine.webp',  
+    image: 'https://cdn.marblism.com/zyzocnNwQnc.webp',  
     dossier: 'b1f2c89a-988e-4288-961c-29c044ef5650'  
   },  
   {  
@@ -41,7 +41,7 @@ export const properties = [
     location: 'Serengeti, Tanzania',  
     category: 'Wilderness Pair',  
     description: 'Sustainable luxury at the edge of the world’s greatest migration.',  
-    image: 'https://cdn.marblism.com/placeholder-safari.webp',  
+    image: 'https://cdn.marblism.com/SlxzaVH_cUt.webp',  
     dossier: '7e4ae280-1c4c-4278-9575-033bae9a2aa4'  
   },  
   {  
