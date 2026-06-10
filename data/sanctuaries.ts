@@ -8,93 +8,80 @@ export interface Bucket {
 
 export interface Sanctuary {  
   id: string;  
-  slug: string;  
   name: string;  
-  tagline: string;  
-  heroImage: string; // For detail page  
-  img: string;       // For index page  
-  loc: string;       // For index page (The "Location" field)  
-  tag: string;       // For index page  
-  roi: string;       // For index page  
+  loc: string;  
+  tag: string;  
+  img: string;  
+  heroImage: string; // compatibility  
+  philosophy: string;  
+  roi: string;  
   atmosphere: string;  
   highlights: string[];  
-  buckets?: Bucket[];  
+  buckets: Bucket[];  
 }
 
 export const SANCTUARY_DATA: Sanctuary[] = [  
   {  
     id: 'alpine',  
-    slug: 'alpine-sanctuaries',  
     name: 'The Alpine',  
-    tagline: 'High-altitude serenity above the clouds.',  
-    heroImage: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b',  
-    img: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b',  
-    loc: 'French Alps / Aspen / Dolomites',  
-    tag: 'Alpine Sanctuary',  
-    roi: 'Peak Performance & Recovery',  
-    atmosphere: 'Crisp mountain air meets the warmth of a roaring hearth. These sanctuaries are defined by timber, stone, and the silence of falling snow.',  
-    highlights: ['Ski-in / Ski-out', 'Private Heli-pads', 'Glacier Spas'],  
+    loc: 'High Altitude • Europe',  
+    tag: 'Clarity through elevation.',  
+    img: '/images/sanctuaries/alpine.jpg',  
+    heroImage: '/images/sanctuaries/alpine.jpg',  
+    philosophy: 'The Alpine sanctuary is designed for those who seek cognitive rest. Above the tree line, the air is thinner, the light is sharper, and the distractions of the lowlands vanish.',  
+    roi: 'Deep cognitive rest and physical recalibration through high-altitude exposure.',  
+    atmosphere: 'Crisp, silent, and structurally minimalist. Floor-to-ceiling glass meeting raw stone.',  
+    highlights: [  
+      'Private glacial access',  
+      'Altitude-optimized wellness suites',  
+      'Stellar observation decks'  
+    ],  
     buckets: [  
-      { name: 'Mountain Chalets', count: 12, description: 'Timber-framed escapes.' },  
-      { name: 'Peak Penthouses', count: 5, description: 'Panoramic views.' }  
+      { name: 'Chateaus', count: 4, description: 'Exclusive mountain retreats.' },  
+      { name: 'Observatories', count: 2, description: 'High-altitude glass sanctuaries.' }  
     ]  
   },  
   {  
     id: 'safari',  
-    slug: 'safari-sanctuaries',  
     name: 'The Safari',  
-    tagline: 'Wild elegance in the heart of the savannah.',  
-    heroImage: 'https://images.unsplash.com/photo-1516426122078-c23e76319801',  
-    img: 'https://images.unsplash.com/photo-1516426122078-c23e76319801',  
-    loc: 'Kruger / Serengeti / Okavango',  
-    tag: 'Safari Sanctuary',  
-    roi: 'Wild Connection',  
-    atmosphere: 'The raw beauty of the plains paired with uncompromising luxury. Wake up to the rhythm of the wild.',  
-    highlights: ['Private Game Drives', 'Bush Dining', 'Star-beds'],  
+    loc: 'Savannah • Africa',  
+    tag: 'Primal connection.',  
+    img: '/images/sanctuaries/safari.jpg',  
+    heroImage: '/images/sanctuaries/safari.jpg',  
+    philosophy: 'A return to the source. The Safari sanctuary prioritizes the rhythm of the natural world, offering a sensory awakening that only the wild can provide.',  
+    roi: 'Perspective shift and sensory awakening through immersion in the apex ecosystem.',  
+    atmosphere: 'Earth-toned luxury, open-air living, and the constant, grounding hum of the bush.',  
+    highlights: [  
+      'Apex predator tracking',  
+      'Solar-powered luxury outposts',  
+      'Conservation-first curation'  
+    ],  
     buckets: [  
-      { name: 'Canvas Villas', count: 8, description: 'Luxury under canvas.' },  
-      { name: 'River Lodges', count: 4, description: 'Water-side seclusion.' }  
+      { name: 'Lodges', count: 6, description: 'Apex luxury in the heart of the wild.' },  
+      { name: 'Mobile Camps', count: 3, description: 'Tracing the great migration.' }  
     ]  
   },  
   {  
     id: 'metropolitan',  
-    slug: 'metropolitan-sanctuaries',  
     name: 'The Metropolitan',  
-    tagline: 'Quiet luxury in the world’s loudest cities.',  
-    heroImage: 'https://images.unsplash.com/photo-1541336032412-2048a678540d',  
-    img: 'https://images.unsplash.com/photo-1541336032412-2048a678540d',  
-    loc: 'New York / London / Tokyo',  
-    tag: 'Urban Sanctuary',  
-    roi: 'Executive Equilibrium',  
-    atmosphere: 'Rising above the skyline, these sanctuaries offer a soundproofed, minimalist retreat from the urban rush.',  
-    highlights: ['Rooftop Gardens', 'Private Jazz Clubs', '24/7 Butler Service'],  
-  },  
-  {  
-    id: 'island',  
-    slug: 'island-sanctuaries',  
-    name: 'The Island',  
-    tagline: 'Infinite horizons and private shores.',  
-    heroImage: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e',  
-    img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e',  
-    loc: 'Maldives / Phuket / Bora Bora',  
-    tag: 'Island Sanctuary',  
-    roi: 'Total Disconnection',  
-    atmosphere: 'Turquoise waters meet white sands. These sanctuaries are accessible only by boat or sea-plane.',  
-    highlights: ['Overwater Villas', 'Private Reefs', 'Yacht Charters'],  
-  },  
-  {  
-    id: 'desert',  
-    slug: 'desert-sanctuaries',  
-    name: 'The Desert',  
-    tagline: 'Stark beauty and ancient stillness.',  
-    heroImage: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e',  
-    img: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e',  
-    loc: 'Utah / Wadi Rum / AlUla',  
-    tag: 'Arid Sanctuary',  
-    roi: 'Ancestral Stillness',  
-    atmosphere: 'Minimalist architecture that blends into the dunes. Experience the profound silence of the arid landscape.',  
-    highlights: ['Canyon Pavilions', 'Stargazing Decks', 'Ancient Wellness Rituals'],  
+    loc: 'Urban Core • Global',  
+    tag: 'The pulse of the now.',  
+    img: '/images/sanctuaries/metro.jpg',  
+    heroImage: '/images/sanctuaries/metro.jpg',  
+    philosophy: 'The Metropolitan is for the strategist who needs to be at the center of the world without being of it. A silent fortress in the world’s most energetic cities.',  
+    roi: 'Immediate access to culture and strategic connectivity without compromising privacy.',  
+    atmosphere: 'Polished, high-tech, and impenetrable. A sanctuary of glass and steel.',  
+    highlights: [  
+      'Helipad access',  
+      'Secure boardroom suites',  
+      'Michelin-starred private dining'  
+    ],  
+    buckets: [  
+      { name: 'Penthouses', count: 8, description: 'Sky-high private estates.' },  
+      { name: 'Townhouses', count: 4, description: 'Discreet urban fortresses.' }  
+    ]  
   }  
+  // ... adding more as we go  
 ];
 
-export const sanctuaries = SANCTUARY_DATA;  
+export const sanctuaries = SANCTUARY_DATA; // legacy compatibility  
