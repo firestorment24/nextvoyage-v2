@@ -1,7 +1,7 @@
 import React from 'react';  
-import Navigation from '../components/Navigation';  
-import Footer from '../components/Footer';  
-import { SANCTUARY_DATA } from '../data/sanctuaries';  
+import Navigation from '../../components/Navigation';  
+import Footer from '../../components/Footer';  
+import { SANCTUARY_DATA } from '../../data/sanctuaries';  
 import Link from 'next/link';
 
 export default function SanctuaryIndex() {  
@@ -10,7 +10,7 @@ export default function SanctuaryIndex() {
       <Navigation />  
         
       <main className="max-w-7xl mx-auto px-6 py-24">  
-        <header className="mb-20">  
+        <header className="mb-20 text-center md:text-left">  
           <h1 className="text-5xl md:text-7xl font-light tracking-tight mb-6">The Collection</h1>  
           <p className="text-xl text-slate-600 max-w-2xl font-light leading-relaxed">  
             A curated atlas of destination archetypes. From the silence of the Alps to the pulse of the metropolis,   
