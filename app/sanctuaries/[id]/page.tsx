@@ -2,27 +2,28 @@ import React from 'react';
 import { notFound } from 'next/navigation';  
 import Hero from '@/components/Hero';  
 import PropertyBuckets from '@/components/PropertyBuckets';  
-import { SANCTUARY_DATA } from '@/data/sanctuaries';
+// Import the Sanctuary type so TypeScript knows the structure  
+import { SANCTUARY_DATA, Sanctuary } from '@/data/sanctuaries';
 
 interface PageProps {  
   params: { id: string };  
 }
 
 export async function generateStaticParams() {  
-  // Supports both array and object-based SANCTUARY_DATA  
-  const data = Array.isArray(SANCTUARY_DATA)   
+  // Explicitly type the data as a Sanctuary array  
+  const data: Sanctuary[] = Array.isArray(SANCTUARY_DATA)   
     ? SANCTUARY_DATA   
     : Object.values(SANCTUARY_DATA);  
       
-  return data.map((s) => ({ id: s.id }));  
+  return data.map((s: Sanctuary) => ({ id: s.id }));  
 }
 
 export default function SanctuaryPage({ params }: PageProps) {  
-  const data = Array.isArray(SANCTUARY_DATA)   
+  const data: Sanctuary[] = Array.isArray(SANCTUARY_DATA)   
     ? SANCTUARY_DATA   
     : Object.values(SANCTUARY_DATA);
 
-  const sanctuary = data.find((s) => s.id === params.id);
+  const sanctuary = data.find((s: Sanctuary) => s.id === params.id);
 
   if (!sanctuary) return notFound();
 
@@ -40,7 +41,6 @@ export default function SanctuaryPage({ params }: PageProps) {
           <div className="space-y-6">  
             <span className="text-white/40 text-xs tracking-[0.4em] uppercase">The Collection</span>  
             <h2 className="text-4xl font-serif text-white leading-tight">  
-              {/* Changed categoryDescription -> philosophy */}  
               {sanctuary.philosophy}  
             </h2>  
           </div>  
