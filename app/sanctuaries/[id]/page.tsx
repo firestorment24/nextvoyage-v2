@@ -4,7 +4,6 @@
 import { useParams } from 'next/navigation'  
 import Link from 'next/link'  
 import { SANCTUARY_DATA } from '@/data/sanctuaries'
-
 export default function SanctuaryDetail() {  
   const params = useParams()  
   const id = params.id as string
