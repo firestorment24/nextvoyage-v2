@@ -1,21 +1,16 @@
-@tailwind base;  
-@tailwind components;  
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {  
+  --font-serif: var(--font-serif);  
+  --font-sans: var(--font-sans);  
+}
+
+html, body {  
+  background-color: #FCFAF7;  
+  color: #1C1C1C;  
+}
 
 h1, h2, h3, h4 {  
   font-family: var(--font-serif);  
-}
-
-.font-serif {  
-  font-family: var(--font-serif);  
-}
-
-/* Custom button style for that 'inviting' feel */  
-.btn-primary {  
-  @apply bg-[#1A1A1A] text-[#F9F7F2] px-8 py-3 rounded-none transition-all duration-300 hover:bg-[#8C7355] tracking-widest uppercase text-xs font-medium;  
-}
-
-/* Elegant card hover */  
-.sanctuary-card {  
-  @apply overflow-hidden transition-all duration-700 bg-white/50 backdrop-blur-sm border border-black/5;  
+  font-weight: 500;  
 }  
