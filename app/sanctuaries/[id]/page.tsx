@@ -8,7 +8,7 @@ export default function SanctuaryDetail() {
   const params = useParams()  
   const id = params.id as string
 
-  const sanctuary = sanctuaries.find((s) => s.id === id)
+  const sanctuary = SANCTUARY_DATA[id]
 
   if (!sanctuary) {  
     return (  
