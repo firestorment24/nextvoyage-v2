@@ -11,7 +11,7 @@ export interface Sanctuary {
   description: string;  
   propertyCount: number;  
 }
-
+ 
 export const SANCTUARIES_DATA: Sanctuary[] = [  
   {  
     id: 'metropolitan',  
