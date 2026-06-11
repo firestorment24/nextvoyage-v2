@@ -1,12 +1,6 @@
-export interface Bucket {  
-  id: string;  
-  name: string;  
-  imageUrl: string;  
-}
-
 export interface Sanctuary {  
   id: string;  
-  slug: string; // This is the key fix  
+  slug: string;  
   name: string;  
   loc: string;  
   tag: string;  
@@ -17,12 +11,13 @@ export interface Sanctuary {
   atmosphere: string;  
   highlights: string[];  
   buckets: Bucket[];  
+  propertyCount: number; // The missing piece  
 }
 
 export const SANCTUARY_DATA: Sanctuary[] = [  
   {  
     id: 'the-stadium',  
-    slug: 'the-stadium', // Added slug  
+    slug: 'the-stadium',  
     name: 'The Stadium',  
     loc: 'Global Tier-1 Cities',  
     tag: 'The Ultra-Box View',  
@@ -32,10 +27,8 @@ export const SANCTUARY_DATA: Sanctuary[] = [
     roi: 'Zero-friction attendance at peak global events.',  
     atmosphere: 'Electric, curated, secure.',  
     highlights: ['Private Entrance', 'Climate Controlled Suites', 'Direct Tunnel Access'],  
-    buckets: []  
+    buckets: [],  
+    propertyCount: 2 // We have 18 total, roughly 2 per archetype  
   },  
-  // ... Repeat for other sanctuaries, ensuring slug matches id  
-];
-
-export const SANCTUARIES_DATA = SANCTUARY_DATA;  
-export const sanctuaries = SANCTUARY_DATA; 
+  // ... apply to the others  
+];  
