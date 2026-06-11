@@ -1,107 +1,175 @@
-// lib/data/sanctuaries.ts
+export interface Bucket {  
+  id: string;  
+  name: string;  
+  image: string;  
+  description: string;  
+}
 
 export interface Sanctuary {  
   id: string;  
+  slug: string;  
   name: string;  
   tag: string;  
   location: string;  
+  tagline: string;  
+  heroImage: string;  
+  image: string;  
+  description: string;  
+  propertyCount: number;  
   philosophy: string;  
   roi: string;  
   atmosphere: string;  
   highlights: string[];  
+  buckets?: Bucket[];  
 }
 
-export const SANCTUARY_DATA: Record<string, Sanctuary> = {  
-  'metropolitan': {  
-    id: 'metropolitan',  
-    name: 'The Metropolitan Trio',  
-    tag: 'Urban Dominance',  
-    location: 'London / NYC / Tokyo',  
-    philosophy: "Absolute command of the world's primary hubs. Not just an address, but a strategic foothold.",  
-    roi: 'High-liquidity prime assets with consistent 12-15% occupancy premiums.',  
-    atmosphere: 'Glass, steel, and shadow. High-floor silence amidst urban chaos.',  
-    highlights: ['Private rooftop helipads', '24/7 discrete security detail', 'Subterranean private entrances'],  
+export const SANCTUARY_DATA: Sanctuary[] = [  
+  {  
+    id: "1",  
+    slug: "metropolitan",  
+    name: "The Metropolitan",  
+    tag: "Urban Sovereignty",  
+    location: "Global Tier-1 Hubs",  
+    tagline: "The Pulse of the Machine.",  
+    heroImage: "/images/sanctuaries/metropolitan-hero.jpg",  
+    image: "/images/sanctuaries/metropolitan.jpg",  
+    description: "High-floor fortresses in the world's most critical zip codes.",  
+    propertyCount: 14,  
+    philosophy: "Dominance through proximity and silence.",  
+    roi: "Maximum liquidity in the world's most stable markets.",  
+    atmosphere: "Steel, glass, and velvet.",  
+    highlights: ["Private helipad access", "24/7 specialist security", "Soundproofed boardrooms"],  
   },  
-  'fortress': {  
-    id: 'fortress',  
-    name: 'The Fortress',  
-    tag: 'Absolute Privacy',  
-    location: 'Swiss Alps',  
-    philosophy: 'Architecture as a shield. Designed for those who require the world to disappear.',  
-    roi: 'Generational wealth preservation; rare land-use permits included.',  
-    atmosphere: 'Raw stone, thermal waters, and total acoustic isolation.',  
-    highlights: ['EMP-shielded comms room', 'Self-sustaining geothermal power', 'Classified location mapping'],  
+  {  
+    id: "2",  
+    slug: "alpine",  
+    name: "The Alpine",  
+    tag: "High-Altitude Refuge",  
+    location: "Swiss & French Alps",  
+    tagline: "The Peak of Discretion.",  
+    heroImage: "/images/sanctuaries/alpine-hero.jpg",  
+    image: "/images/sanctuaries/alpine.jpg",  
+    description: "Chalets built into the rock, where the air is thin and the privacy is absolute.",  
+    propertyCount: 8,  
+    philosophy: "Perspective from the summit.",  
+    roi: "Generational assets in land-locked luxury zones.",  
+    atmosphere: "Firelight and granite.",  
+    highlights: ["Ski-in/Ski-out fortresses", "Oxygen-enriched suites", "Deep-cellar storage"],  
   },  
-  'stadium': {  
-    id: 'stadium',  
-    name: 'The Stadium',  
-    tag: 'Elite Access',  
-    location: 'Global Circuits',  
-    philosophy: 'The convergence of sport and sovereignty. Front-row command of the world’s arenas.',  
-    roi: 'High-yield event-driven revenue; exclusive multi-year licensing rights.',  
-    atmosphere: 'Vibrant, electric, but entirely insulated from the crowd.',  
-    highlights: ['Direct-to-box private lifts', 'Acoustic glass dampening', 'Michelin-grade in-suite dining'],  
+  {  
+    id: "3",  
+    slug: "island",  
+    name: "The Island",  
+    tag: "Maritime Autonomy",  
+    location: "Remote Archipelagos",  
+    tagline: "Sovereignty Surrounded by Blue.",  
+    heroImage: "/images/sanctuaries/island-hero.jpg",  
+    image: "/images/sanctuaries/island.jpg",  
+    description: "Self-sustaining island estates with restricted airspace and private docks.",  
+    propertyCount: 6,  
+    philosophy: "Total perimeter control.",  
+    roi: "Uncorrelated assets with rising scarcity value.",  
+    atmosphere: "Salt, teak, and infinity.",  
+    highlights: ["Desalination plants", "Submarine docks", "Signal-jamming capability"],  
   },  
-  'alpine': {  
-    id: 'alpine',  
-    name: 'The Alpine Estate',  
-    tag: 'High-Altitude Refinement',  
-    location: 'Courchevel',  
-    philosophy: 'Elevation as a metric of success. Peak luxury at the edge of the habitable world.',  
-    roi: 'Scarcity-driven appreciation; limited high-altitude inventory.',  
-    atmosphere: 'Oak, cashmere, and firelight against a backdrop of ice.',  
-    highlights: ['Ski-in/Ski-out private bay', 'Cryotherapy recovery suite', 'Altitude-adjusted oxygen control'],  
+  {  
+    id: "4",  
+    slug: "fortress",  
+    name: "The Fortress",  
+    tag: "Absolute Security",  
+    location: "Undisclosed",  
+    tagline: "Where the World Cannot Follow.",  
+    heroImage: "/images/sanctuaries/fortress-hero.jpg",  
+    image: "/images/sanctuaries/fortress.jpg",  
+    description: "Former bunkers and high-security compounds reimagined as ultra-luxury living.",  
+    propertyCount: 4,  
+    philosophy: "Safety as the ultimate luxury.",  
+    roi: "Insurance for the uninsurable.",  
+    atmosphere: "Brass, shadow, and heavy doors.",  
+    highlights: ["EMP shielding", "Biometric airlocks", "Off-grid power"],  
   },  
-  'cinematic': {  
-    id: 'cinematic',  
-    name: 'The Cinematic Archive',  
-    tag: 'Visual Legacy',  
-    location: 'Amalfi Coast',  
-    philosophy: 'Life lived as an editorial. A celebration of aesthetics, history, and light.',  
-    roi: 'Brand-value amplification; prime location for high-end production.',  
-    atmosphere: 'Terraced gardens, lemon groves, and boundless azure horizons.',  
-    highlights: ['Private cliffside funicular', 'Restored 17th-century frescoes', 'Amphibious arrival dock'],  
+  {  
+    id: "5",  
+    slug: "stadium",  
+    name: "The Stadium",  
+    tag: "Spectator Supremacy",  
+    location: "Sporting Capitals",  
+    tagline: "The Arena is Yours.",  
+    heroImage: "/images/sanctuaries/stadium-hero.jpg",  
+    image: "/images/sanctuaries/stadium.jpg",  
+    description: "Residential suites directly overlooking the world's most iconic pitches and tracks.",  
+    propertyCount: 5,  
+    philosophy: "The best seat is a permanent one.",  
+    roi: "High-yield event-driven appreciation.",  
+    atmosphere: "Thunderous and exclusive.",  
+    highlights: ["Pitch-side balconies", "Private player tunnels", "Acoustic engineering"],  
   },  
-  'safari': {  
-    id: 'safari',  
-    name: 'The Safari Outpost',  
-    tag: 'Raw Elegance',  
-    location: 'Serengeti',  
-    philosophy: 'The ultimate contrast. Primal nature met with industrial-strength luxury.',  
-    roi: 'Conservation-backed security; exclusive territorial land rights.',  
-    atmosphere: 'Canvas, leather, and the heavy silence of the plains.',  
-    highlights: ['Anti-poaching security mesh', 'Off-grid solar redundancy', 'Starlight navigation deck'],  
+  {  
+    id: "6",  
+    slug: "cinematic",  
+    name: "The Cinematic",  
+    tag: "Cultural Legacy",  
+    location: "Historic Estates",  
+    tagline: "Life, Scripted.",  
+    heroImage: "/images/sanctuaries/cinematic-hero.jpg",  
+    image: "/images/sanctuaries/cinematic.jpg",  
+    description: "Properties with historical significance and architectural drama.",  
+    propertyCount: 7,  
+    philosophy: "Living within the narrative.",  
+    roi: "Provenance-based value multipliers.",  
+    atmosphere: "Grand, storied, and dramatic.",  
+    highlights: ["Private screening rooms", "Art-gallery grade HVAC", "Library vaults"],  
   },  
-  'oasis': {  
-    id: 'oasis',  
-    name: 'The Desert Oasis',  
-    tag: 'Silent Luxury',  
-    location: 'Marrakech',  
-    philosophy: 'The geometry of solitude. Finding abundance in the heart of the void.',  
-    roi: 'Strategic mid-east foothold; high privacy-to-sq-ft ratio.',  
-    atmosphere: 'Tadelakt, running water, and deep, cool shadows.',  
-    highlights: ['Internal courtyard microclimates', 'Subterranean spa systems', 'Traditional mosaic craftsmanship'],  
+  {  
+    id: "7",  
+    slug: "safari",  
+    name: "The Safari",  
+    tag: "Primal Luxury",  
+    location: "Sub-Saharan Reserves",  
+    tagline: "The Wild, Refined.",  
+    heroImage: "/images/sanctuaries/safari-hero.jpg",  
+    image: "/images/sanctuaries/safari.jpg",  
+    description: "Tented camps and lodges where the only neighbors are the Big Five.",  
+    propertyCount: 9,  
+    philosophy: "Connection to the origin.",  
+    roi: "Conservation-backed land equity.",  
+    atmosphere: "Canvas, leather, and dusk.",  
+    highlights: ["Night-vision optics provided", "Private ranger teams", "Star-bed decks"],  
   },  
-  'floating': {  
-    id: 'floating',  
-    name: 'The Floating Sanctuary',  
-    tag: 'Nautical Sovereignty',  
-    location: 'Mediterranean',  
-    philosophy: 'Freedom from geography. A moveable feast of privacy and power.',  
-    roi: 'Global mobility; high charter-yield capability during peak seasons.',  
-    atmosphere: 'Polished teak, salt air, and total maritime silence.',  
-    highlights: ['Stabilized landing pads', 'Deep-sea exploration tender', 'Encrypted satellite arrays'],  
+  {  
+    id: "8",  
+    slug: "vineyard",  
+    name: "The Vineyard",  
+    tag: "Terroir Estates",  
+    location: "Bordeaux & Napa",  
+    tagline: "The Chemistry of Time.",  
+    heroImage: "/images/sanctuaries/vineyard-hero.jpg",  
+    image: "/images/sanctuaries/vineyard.jpg",  
+    description: "Producing estates where the wine is as elite as the architecture.",  
+    propertyCount: 11,  
+    philosophy: "The luxury of the slow burn.",  
+    roi: "Agricultural yield + prime real estate.",  
+    atmosphere: "Oak, earth, and sunset.",  
+    highlights: ["Master sommelier on-call", "Temperature-controlled cellars", "Harvest participation"],  
   },  
-  'island': {  
-    id: 'island',  
-    name: 'The Island Keep',  
-    tag: 'Isolated Majesty',  
-    location: 'Seychelles',  
-    philosophy: 'The perimeter is the ocean. Complete autonomy over your own ecosystem.',  
-    roi: 'The ultimate trophy asset; zero-density development potential.',  
-    atmosphere: 'White sand, granite, and absolute territorial control.',  
-    highlights: ['Inland private airstrip', 'Custom desalination systems', 'Coral reef monitoring center'],  
-  },  
-};
+  {  
+    id: "9",  
+    slug: "desert",  
+    name: "The Desert",  
+    tag: "Solar Solitude",  
+    location: "Middle Eastern Dunes",  
+    tagline: "Silence in the Sands.",  
+    heroImage: "/images/sanctuaries/desert-hero.jpg",  
+    image: "/images/sanctuaries/desert.jpg",  
+    description: "Mirage-like estates offering total silence and astronomical clarity.",  
+    propertyCount: 3,  
+    philosophy: "The power of nothingness.",  
+    roi: "Emerging luxury frontier assets.",  
+    atmosphere: "Copper, heat, and stars.",  
+    highlights: ["Stargazing observatories", "Underground cooling pools", "Sand-shielded tech"],  
+  }  
+];
 
-export const SANCTUARIES_LIST = Object.values(SANCTUARY_DATA);  
+// Compatibility exports  
+export const SANCTUARIES_DATA = SANCTUARY_DATA;  
+export const sanctuaries = SANCTUARY_DATA;
