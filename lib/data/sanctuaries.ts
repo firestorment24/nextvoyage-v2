@@ -49,4 +49,5 @@ export const SANCTUARY_DATA: Sanctuary[] = [
   // Add The Cinematic and The Safari here...  
 ];
 
-export const sanctuaries = SANCTUARY_DATA; // Backwards compatibility  
+ export const SANCTUARIES_DATA = SANCTUARY_DATA;  
+export const sanctuaries = SANCTUARY_DATA;  
