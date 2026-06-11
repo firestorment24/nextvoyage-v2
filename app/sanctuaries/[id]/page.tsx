@@ -12,7 +12,7 @@ export function generateStaticParams() {
     id: id,  
   }))  
 }
-
+ 
 export default function SanctuaryPage({ params }: { params: { id: string } }) {  
   const { id } = params  
   const sanctuary = SANCTUARY_DATA[id]
