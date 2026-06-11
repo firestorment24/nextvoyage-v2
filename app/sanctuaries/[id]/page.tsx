@@ -1,11 +1,11 @@
 import { notFound } from 'next/navigation'  
 import Link from 'next/link'  
-import { SANCTUARY_DATA } from '@/data/sanctuaries'  
-import Navigation from '@/components/Navigation'
+import { SANCTUARY_DATA } from '../../../data/sanctuaries'  
+import { Navigation } from '../../Navigation'
 
 /**  
  * Generates the static paths for all sanctuaries at build time.  
- * Derives IDs directly from the SANCTUARY_DATA object.  
+ * Derives IDs from the keys of the SANCTUARY_DATA record.  
  */  
 export function generateStaticParams() {  
   return Object.keys(SANCTUARY_DATA).map((id) => ({  
