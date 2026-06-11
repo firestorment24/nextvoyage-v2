@@ -1,16 +1,17 @@
-import React from 'react';  
-import Navigation from '../components/Navigation';  
-import Footer from '../components/Footer';
+import React from 'react';
 
 export default function InvitationPage() {  
   return (  
     <main className="bg-[#0a0a0a] text-[#d4af37] min-h-screen font-serif selection:bg-[#d4af37] selection:text-black">  
-      <Navigation current="Invitation // The Initial Dialogue" />  
+      {/*   
+          Navigation and Footer are handled by the root layout.   
+          The content below will be injected into the layout's {children} slot.  
+      */}  
         
       <section className="max-w-4xl mx-auto px-6 pt-32 pb-20">  
         <div className="text-center mb-16">  
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-widest mb-6">  
-            THE BEGINNING OF A COLLABORATION  
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-widest mb-6 uppercase">  
+            The Beginning of a Collaboration  
           </h1>  
           <p className="text-lg md:text-xl text-[#a0a0a0] max-w-2xl mx-auto leading-relaxed italic">  
             This is not an inquiry; it is the opening of a conversation. Tell us where your imagination is leading you.  
@@ -20,7 +21,7 @@ export default function InvitationPage() {
         <form className="space-y-12 max-w-2xl mx-auto border-t border-[#d4af37]/20 pt-12">  
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">  
             <div className="flex flex-col border-b border-[#d4af37]/30 py-2">  
-              <label className="text-[10px] uppercase tracking-[0.3em] mb-2 text-[#d4af37]/60">Full Name</label>  
+              <label className="text-[10px] uppercase tracking-[0.3em] mb-2 text-[#d4af37]/60 font-sans">Full Name</label>  
               <input   
                 type="text"   
                 placeholder="Identity"  
@@ -28,7 +29,7 @@ export default function InvitationPage() {
               />  
             </div>  
             <div className="flex flex-col border-b border-[#d4af37]/30 py-2">  
-              <label className="text-[10px] uppercase tracking-[0.3em] mb-2 text-[#d4af37]/60">Email Address</label>  
+              <label className="text-[10px] uppercase tracking-[0.3em] mb-2 text-[#d4af37]/60 font-sans">Email Address</label>  
               <input   
                 type="email"   
                 placeholder="Communication Channel"  
@@ -39,7 +40,7 @@ export default function InvitationPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">  
             <div className="flex flex-col border-b border-[#d4af37]/30 py-2">  
-              <label className="text-[10px] uppercase tracking-[0.3em] mb-2 text-[#d4af37]/60">Preferred Dates</label>  
+              <label className="text-[10px] uppercase tracking-[0.3em] mb-2 text-[#d4af37]/60 font-sans">Preferred Dates</label>  
               <input   
                 type="text"   
                 placeholder="The Timing"  
@@ -47,7 +48,7 @@ export default function InvitationPage() {
               />  
             </div>  
             <div className="flex flex-col border-b border-[#d4af37]/30 py-2">  
-              <label className="text-[10px] uppercase tracking-[0.3em] mb-2 text-[#d4af37]/60">Departure City</label>  
+              <label className="text-[10px] uppercase tracking-[0.3em] mb-2 text-[#d4af37]/60 font-sans">Departure City</label>  
               <input   
                 type="text"   
                 placeholder="The Origin"  
@@ -57,7 +58,7 @@ export default function InvitationPage() {
           </div>
 
           <div className="flex flex-col border-b border-[#d4af37]/30 py-2">  
-            <label className="text-[10px] uppercase tracking-[0.3em] mb-2 text-[#d4af37]/60">The Vision</label>  
+            <label className="text-[10px] uppercase tracking-[0.3em] mb-2 text-[#d4af37]/60 font-sans">The Vision</label>  
             <textarea   
               rows={3}  
               placeholder="What defines this journey?"  
@@ -66,7 +67,7 @@ export default function InvitationPage() {
           </div>
 
           <div className="flex flex-col border-b border-[#d4af37]/30 py-2">  
-            <label className="text-[10px] uppercase tracking-[0.3em] mb-2 text-[#d4af37]/60">Aesthetic Notes</label>  
+            <label className="text-[10px] uppercase tracking-[0.3em] mb-2 text-[#d4af37]/60 font-sans">Aesthetic Notes</label>  
             <textarea   
               rows={2}  
               placeholder="Atmosphere, texture, and silence..."  
@@ -75,14 +76,12 @@ export default function InvitationPage() {
           </div>
 
           <div className="pt-8 text-center">  
-            <button className="group relative px-12 py-4 border border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37] hover:text-black transition-all duration-500 tracking-[0.4em] uppercase text-xs">  
+            <button type="button" className="group relative px-12 py-4 border border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37] hover:text-black transition-all duration-500 tracking-[0.4em] uppercase text-xs font-sans">  
               Begin the Dialogue  
             </button>  
           </div>  
         </form>  
-      </section>
-
-      <Footer />  
+      </section>  
     </main>  
   );  
 }  
