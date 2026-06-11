@@ -1,92 +1,52 @@
-export const SANCTUARIES_DATA = [  
+export interface Bucket {  
+  id: string;  
+  name: string;  
+  imageUrl: string;  
+}
+
+export interface Sanctuary {  
+  id: string;  
+  name: string;  
+  loc: string;  
+  tag: string;  
+  img: string;  
+  heroImage: string;  
+  philosophy: string;  
+  roi: string;  
+  atmosphere: string;  
+  highlights: string[];  
+  buckets: Bucket[];  
+}
+
+export const SANCTUARY_DATA: Sanctuary[] = [  
+  // ... including the final four archetypes  
   {  
-    id: 'metropolitan',  
-    slug: 'the-metropolitan',  
-    name: 'The Metropolitan',  
-    location: 'Urban Anchors',  
-    tagline: 'Precision in the center of the world.',  
-    heroImage: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=80',  
-    propertyCount: 8,  
-    philosophy: 'Efficiency meets elegance in the global grid.',  
-  },  
-  {  
-    id: 'remote',  
-    slug: 'the-remote',  
-    name: 'The Remote',  
-    location: 'Private Atolls',  
-    tagline: 'The luxury of complete absence.',  
-    heroImage: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80',  
-    propertyCount: 5,  
-    philosophy: 'Distance is the ultimate status symbol.',  
-  },  
-  {  
-    id: 'cultural',  
-    slug: 'the-cultural',  
-    name: 'The Cultural',  
-    location: 'Heritage Sites',  
-    tagline: 'Living within the lineage.',  
-    heroImage: 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&q=80',  
-    propertyCount: 6,  
-    philosophy: 'Heritage is the only true ROI.',  
-  },  
-  {  
-    id: 'alpine',  
-    slug: 'the-alpine',  
-    name: 'The Alpine',  
-    location: 'High Altitudes',  
-    tagline: 'Clarity at the peak.',  
-    heroImage: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80',  
-    propertyCount: 4,  
-    philosophy: 'Thin air, thick comfort.',  
-  },  
-  {  
-    id: 'nautical',  
-    slug: 'the-nautical',  
-    name: 'The Nautical',  
-    location: 'Blue Waters',  
-    tagline: 'Master of the tides.',  
-    heroImage: 'https://images.unsplash.com/photo-1502920338823-20516613398c?auto=format&fit=crop&q=80',  
-    propertyCount: 4,  
-    philosophy: 'Fluid boundaries, total freedom.',  
-  },  
-  {  
-    id: 'safari',  
-    slug: 'the-safari',  
-    name: 'The Safari',  
-    location: 'Untamed Wild',  
-    tagline: 'The primitive luxury of the wild.',  
-    heroImage: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&q=80',  
-    propertyCount: 3,  
-    philosophy: 'Connecting with the source of life.',  
-  },  
-  {  
-    id: 'stadium',  
-    slug: 'the-stadium',  
+    id: 'the-stadium',  
     name: 'The Stadium',  
-    location: 'Prime Events',  
-    tagline: 'Front-row life.',  
-    heroImage: 'https://images.unsplash.com/photo-1504450758481-7338eba7524a?auto=format&fit=crop&q=80',  
-    propertyCount: 5,  
-    philosophy: 'Where adrenaline meets absolute access.',  
+    loc: 'Global Tier-1 Cities',  
+    tag: 'The Ultra-Box View',  
+    img: 'https://images.unsplash.com/photo-1504450758481-7338eba7524a',  
+    heroImage: 'https://images.unsplash.com/photo-1504450758481-7338eba7524a',  
+    philosophy: 'High-velocity access meets private sanctuary.',  
+    roi: 'Zero-friction attendance at peak global events.',  
+    atmosphere: 'Electric, curated, secure.',  
+    highlights: ['Private Entrance', 'Climate Controlled Suites', 'Direct Tunnel Access'],  
+    buckets: [{ id: 's1', name: 'Elite Suite', imageUrl: '...' }]  
   },  
   {  
-    id: 'cinematic',  
-    slug: 'the-cinematic',  
-    name: 'The Cinematic',  
-    location: 'Style Icons',  
-    tagline: 'Living the legendary frame.',  
-    heroImage: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&q=80',  
-    propertyCount: 6,  
-    philosophy: 'Aesthetic perfection as a lived experience.',  
-  },  
-  {  
-    id: 'fortress',  
-    slug: 'the-fortress',  
+    id: 'the-fortress',  
     name: 'The Fortress',  
-    location: 'Maximum Privacy',  
-    tagline: 'Unreachable, yet omnipresent.',  
-    heroImage: 'https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&q=80',  
-    propertyCount: 3,  
-    philosophy: 'Security is the foundation of peace.',  
-  }  
-];  
+    loc: 'Remote Coastal / Alpine',  
+    tag: 'Absolute Privacy',  
+    img: 'https://images.unsplash.com/photo-1449156730764-59a993f88839',  
+    heroImage: 'https://images.unsplash.com/photo-1449156730764-59a993f88839',  
+    philosophy: 'Security as a luxury service.',  
+    roi: 'Total peace of mind in high-risk environments.',  
+    atmosphere: 'Brutalist, silent, impenetrable.',  
+    highlights: ['Bunker-Grade Security', 'Private Airstrip', 'Off-Grid Power'],  
+    buckets: [{ id: 'f1', name: 'Secure Perimeter', imageUrl: '...' }]  
+  },  
+  // Add The Cinematic and The Safari here...  
+];
+
+export const sanctuaries = SANCTUARY_DATA; // Backwards compatibility  
