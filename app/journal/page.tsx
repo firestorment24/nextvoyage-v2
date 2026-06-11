@@ -1,59 +1,63 @@
-import React from 'react';  
 import Link from 'next/link';
 
-export default function JournalPage() {  
-const entries = [  
+const JOURNAL_ENTRIES = [  
   {  
-    id: "01",  
-    category: "Intelligence",  
     title: "The South Pacific Drift",  
+    category: "Intelligence",  
+    date: "JUNE 2026",  
     slug: "the-south-pacific-drift",  
-    summary: "Three floating retreats where the horizon is the only neighbor.",  
-    date: "JUNE 2026"  
+    excerpt: "Analysis of the new ultra-remote: From private atolls to heli-access ridge estates.",  
+    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80"  
   },  
   {  
-    id: "02",  
-    category: "Seasonal",  
     title: "European Prestige Anchors",  
-    slug: "#", // To be built  
-    summary: "The quietest corners of the Mediterranean for late summer seclusion.",  
-    date: "JUNE 2026"  
+    category: "Seasonal",  
+    date: "JUNE 2026",  
+    slug: "european-prestige-anchors",  
+    excerpt: "The shift from Old World luxury to Living History in the Mediterranean.",  
+    image: "https://images.unsplash.com/photo-1519922639192-e73293ca430e?auto=format&fit=crop&q=80"  
   }  
 ];
 
-return (  
-  <main className="min-h-screen bg-[#F5F5F5] text-[#0A0A0A] selection:bg-[#C5A059] selection:text-white">  
-    <section className="pt-40 pb-20 px-6 max-w-7xl mx-auto">  
-      <header className="mb-20">  
-        <p className="text-black/40 uppercase tracking-[0.2em] text-xs mb-4">Curation & Intel</p>  
-        <h1 className="text-7xl font-serif tracking-tighter mb-4 text-[#0A0A0A]">The Journal</h1>  
-        <p className="text-lg text-black/60 max-w-xl border-l-2 border-[#C5A059] pl-6 italic">  
-          Practical notes on world-class sanctuaries and seasonal travel intelligence.  
-        </p>  
-      </header>
+export default function JournalHub() {  
+  return (  
+    <main className="min-h-screen bg-[#F9F8F6] text-[#1A1A1A] pt-32 pb-24">  
+      <div className="max-w-6xl mx-auto px-6">  
+        <header className="mb-20">  
+          <h1 className="text-5xl md:text-7xl font-light tracking-tighter mb-4">The Journal</h1>  
+          <p className="text-xl text-stone-500 font-light">Tactical Intelligence & Seasonal Curation.</p>  
+        </header>
 
-      <div className="grid md:grid-cols-2 gap-12">  
-        {entries.map((entry) => (  
-          <Link key={entry.id} href={`/journal/${entry.slug}`} className="group block h-full">  
-            <div className="border border-black/5 p-10 hover:bg-white transition-all duration-700 h-full flex flex-col justify-between">  
-              <div>  
-                <div className="flex justify-between items-start mb-12">  
-                  <span className="text-xs tracking-[0.3em] uppercase text-[#C5A059]">{entry.category}</span>  
-                  <span className="text-[10px] tracking-widest text-black/30 font-mono">{entry.date}</span>  
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16">  
+          {JOURNAL_ENTRIES.map((entry) => (  
+            <Link key={entry.slug} href={`/journal/${entry.slug}`} className="group">  
+              <article>  
+                <div className="aspect-[4/5] bg-stone-200 mb-8 overflow-hidden">  
+                  <img   
+                    src={entry.image}   
+                    alt={entry.title}   
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-105 group-hover:scale-100"  
+                  />  
                 </div>  
-                <h3 className="text-3xl font-serif mb-4 group-hover:translate-x-2 transition-transform duration-500">  
+                <div className="flex items-center space-x-4 mb-4 text-[10px] uppercase tracking-[0.2em] text-stone-500 font-medium">  
+                  <span>{entry.category}</span>  
+                  <span className="w-8 h-[1px] bg-stone-300"></span>  
+                  <span>{entry.date}</span>  
+                </div>  
+                <h2 className="text-3xl font-light tracking-tight mb-4 group-hover:italic transition-all">  
                   {entry.title}  
-                </h3>  
-                <p className="text-black/60 mb-8 font-light leading-relaxed">  
-                  {entry.summary}  
+                </h2>  
+                <p className="text-stone-600 font-light leading-relaxed mb-6">  
+                  {entry.excerpt}  
                 </p>  
-              </div>  
-              <div className="h-[1px] w-full bg-black/5 group-hover:bg-[#C5A059] transition-colors" />  
-            </div>  
-          </Link>  
-        ))}  
+                <span className="text-[10px] uppercase tracking-widest border-b border-black pb-1 group-hover:text-stone-500 group-hover:border-stone-500 transition-all">  
+                  Read Intelligence Report  
+                </span>  
+              </article>  
+            </Link>  
+          ))}  
+        </div>  
       </div>  
-    </section>  
-  </main>  
-);  
+    </main>  
+  );  
 }  
