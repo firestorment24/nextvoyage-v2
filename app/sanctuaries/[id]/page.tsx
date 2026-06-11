@@ -1,154 +1,92 @@
-import { notFound } from 'next/navigation'  
+'use client'
+
+import { useParams } from 'next/navigation'  
+import Hero from '@/components/Hero'  
+import { SANCTUARY_DATA } from '@/lib/data/sanctuaries'  
 import Link from 'next/link'  
-import { SANCTUARY_DATA } from '../../../data/sanctuaries'  
-import Navigation from '../../Navigation'
+import Image from 'next/image'
 
-/**  
-* Generates the static paths for all sanctuaries at build time.  
-*/  
-export function generateStaticParams() {  
-  // Using Object.keys to handle the data as a Record/Object  
-  return Object.keys(SANCTUARY_DATA).map((id) => ({  
-    id: id,  
-  }))  
-}
+export default function SanctuaryDetail() {  
+  const { id } = useParams()  
+  const sanctuary = SANCTUARY_DATA[id as string]
 
-export default function SanctuaryPage({ params }: { params: { id: string } }) {  
-  const { id } = params  
-    
-  // Cast to Record to satisfy the TS compiler for the dynamic lookup  
-  const data = SANCTUARY_DATA as Record<string, any>  
-  const sanctuary = data[id]
-
-  // Guard: If sanctuary ID doesn't exist, show 404  
-  if (!sanctuary) {  
-    notFound()  
-  }
+  if (!sanctuary) return <div className="min-h-screen bg-black flex items-center justify-center text-white">Sanctuary not found.</div>
 
   return (  
-    <main className="min-h-screen bg-white text-black font-sans selection:bg-[#C5A059]/30">  
-      <Navigation />
+    <main className="min-h-screen bg-[#000] text-white selection:bg-[#d4af37]/30">  
+      <Hero   
+        title={sanctuary.name}  
+        subtitle={sanctuary.tagline}  
+        heroImage={sanctuary.heroImage || sanctuary.image}  
+      />
 
-      {/* Hero Section - High-Impact Editorial */}  
-      <section className="relative h-[85vh] w-full overflow-hidden">  
-        <img  
-          src={sanctuary.heroImage || sanctuary.img}  
-          alt={sanctuary.name}  
-          className="w-full h-full object-cover"  
-        />  
-        <div className="absolute inset-0 bg-black/20" />  
-        <div className="absolute bottom-0 left-0 w-full p-8 md:p-16 lg:p-24 bg-gradient-to-t from-black/70 via-black/30 to-transparent text-white">  
-          <div className="max-w-7xl mx-auto">  
-            <span className="uppercase tracking-[0.4em] text-[10px] md:text-xs mb-4 block font-bold opacity-90">  
-              {sanctuary.tag} — {sanctuary.loc}  
-            </span>  
-            <h1 className="text-5xl md:text-7xl lg:text-9xl font-serif italic leading-tight">  
-              {sanctuary.name}  
-            </h1>  
+      {/* Philosophy Section */}  
+      <section className="py-24 px-6 md:px-12 max-w-5xl mx-auto">  
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 border-t border-white/10 pt-12">  
+          <div className="md:col-span-1">  
+            <h2 className="text-[#d4af37] text-xs tracking-[0.3em] uppercase font-medium">Philosophy</h2>  
           </div>  
-        </div>  
-      </section>
-
-      {/* Content Grid */}  
-      <section className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 py-32 grid grid-cols-1 lg:grid-cols-12 gap-20">  
-          
-        {/* Left Column: Narrative & Philosophy */}  
-        <div className="lg:col-span-7 space-y-20">  
-          <div>  
-            <h2 className="text-[#C5A059] uppercase tracking-[0.3em] text-[10px] font-black mb-10">  
-              The Philosophy  
-            </h2>  
-            <p className="text-3xl md:text-4xl lg:text-5xl font-serif leading-tight text-zinc-800 italic">  
-              "{sanctuary.philosophy}"  
+          <div className="md:col-span-2">  
+            <p className="text-2xl font-light leading-relaxed text-gray-200">  
+              {sanctuary.philosophy || sanctuary.description}  
             </p>  
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 pt-12 border-t border-zinc-100">  
-            <div>  
-              <h3 className="uppercase tracking-widest text-[10px] font-bold text-zinc-400 mb-6">  
-                Atmosphere  
-              </h3>  
-              <p className="text-zinc-600 leading-relaxed text-lg">  
-                {sanctuary.atmosphere}  
-              </p>  
-            </div>  
-            <div>  
-              <h3 className="uppercase tracking-widest text-[10px] font-bold text-zinc-400 mb-6">  
-                Strategic ROI  
-              </h3>  
-              <p className="text-zinc-600 leading-relaxed text-lg">  
-                {sanctuary.roi}  
-              </p>  
-            </div>  
-          </div>  
-        </div>
-
-        {/* Right Column: Highlights & Secured Inquiry */}  
-        <div className="lg:col-span-5 lg:pl-12">  
-          <div className="sticky top-32 space-y-12 bg-[#F9F9F7] p-10 md:p-14 border border-zinc-100 shadow-sm">  
-            <div>  
-              <h3 className="uppercase tracking-[0.2em] text-[10px] font-bold text-[#C5A059] mb-8 border-b border-[#C5A059]/20 pb-4">  
-                Exclusive Highlights  
-              </h3>  
-              <ul className="space-y-6">  
-                {sanctuary.highlights?.map((item: string, i: number) => (  
-                  <li key={i} className="flex items-start gap-4 text-sm md:text-base text-zinc-700">  
-                    <span className="text-[#C5A059] text-xs mt-1.5">✦</span>  
-                    {item}  
-                  </li>  
-                ))}  
-              </ul>  
-            </div>
-
-            <div className="space-y-4">  
-              <Link  
-                href="/concierge"  
-                className="block w-full bg-black text-white text-center py-6 uppercase tracking-[0.4em] text-xs font-bold hover:bg-[#C5A059] transition-all duration-700 ease-in-out"  
-              >  
-                Secure Inquiry  
-              </Link>  
-              <p className="text-[9px] text-zinc-400 text-center uppercase tracking-[0.2em] leading-relaxed">  
-                NexVoyage Guardian Layer™ <br />   
-                Private consultation required for access  
-              </p>  
-            </div>  
           </div>  
         </div>  
       </section>
 
-      {/* Structural Details / Buckets */}  
-      <section className="bg-zinc-50 border-y border-zinc-100">  
-        <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 py-32">  
-          <h2 className="text-center font-serif text-3xl italic mb-20">Sanctuary Specifications</h2>  
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 lg:gap-24">  
-            {sanctuary.buckets?.map((bucket: any, index: number) => (  
-              <div key={index} className="space-y-6">  
-                <h4 className="text-zinc-900 font-serif text-2xl border-b border-zinc-200 pb-4 italic">  
-                  {bucket.title}  
-                </h4>  
-                <p className="text-zinc-500 text-base leading-relaxed">  
-                  {bucket.description}  
-                </p>  
-              </div>  
-            ))}  
+      {/* Core Attributes */}  
+      <section className="pb-24 px-6 md:px-12 max-w-5xl mx-auto">  
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">  
+          <div className="p-8 bg-neutral-900/50 border border-white/5">  
+            <p className="text-[#d4af37] text-[10px] tracking-[0.4em] uppercase mb-4">Atmosphere</p>  
+            <p className="text-gray-400 font-light leading-relaxed">{sanctuary.atmosphere}</p>  
+          </div>  
+          <div className="p-8 bg-neutral-900/50 border border-white/5">  
+            <p className="text-[#d4af37] text-[10px] tracking-[0.4em] uppercase mb-4">Yield & ROI</p>  
+            <p className="text-gray-400 font-light leading-relaxed">{sanctuary.ROI}</p>  
+          </div>  
+          <div className="p-8 bg-neutral-900/50 border border-white/5">  
+            <p className="text-[#d4af37] text-[10px] tracking-[0.4em] uppercase mb-4">Location Strategy</p>  
+            <p className="text-gray-400 font-light leading-relaxed">{sanctuary.location}</p>  
           </div>  
         </div>  
       </section>
 
-      {/* Final Call to Action */}  
-      <section className="py-32 text-center bg-white">  
-        <div className="max-w-2xl mx-auto px-8">  
-          <h3 className="font-serif text-4xl italic mb-8">Ready to step inside?</h3>  
-          <p className="text-zinc-500 mb-12 leading-relaxed">  
-            Due to the exclusive nature of our sanctuaries, we provide detailed dossiers only after a preliminary vetting process.  
-          </p>  
-          <Link  
-            href="/concierge"  
-            className="inline-block border-b-2 border-black pb-2 uppercase tracking-[0.4em] text-xs font-bold hover:text-[#C5A059] hover:border-[#C5A059] transition-all"  
-          >  
-            Contact Concierge  
-          </Link>  
-        </div>  
+      {/* Dossiers / Sub-Properties (e.g., The Evrima for The Nautical) */}  
+      {sanctuary.buckets && sanctuary.buckets.length > 0 && (  
+        <section className="py-24 bg-[#0a0a0a]">  
+          <div className="max-w-7xl mx-auto px-6 md:px-12">  
+            <h2 className="text-[#d4af37] text-xs tracking-[0.3em] uppercase mb-16 text-center">Available Dossiers</h2>  
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">  
+              {sanctuary.buckets.map((dossier) => (  
+                <div key={dossier.id} className="group relative">  
+                  <div className="aspect-video relative overflow-hidden mb-6 bg-neutral-900">  
+                    <Image   
+                      src={dossier.imageUrl || dossier.image}   
+                      alt={dossier.name}   
+                      fill   
+                      className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-70 group-hover:opacity-100"  
+                    />  
+                  </div>  
+                  <h3 className="text-xl font-light tracking-widest uppercase mb-2">{dossier.name}</h3>  
+                  <p className="text-sm text-gray-500 max-w-md font-light leading-relaxed">  
+                    {dossier.atmosphere}  
+                  </p>  
+                </div>  
+              ))}  
+            </div>  
+          </div>  
+        </section>  
+      )}
+
+      {/* Global Footer CTA */}  
+      <section className="py-32 text-center border-t border-white/5">  
+        <Link   
+          href="/concierge"   
+          className="text-[#d4af37] text-xs tracking-[0.5em] uppercase hover:text-white transition-colors"  
+        >  
+          Inquire for Access — Limited Allocation  
+        </Link>  
       </section>  
     </main>  
   )  
