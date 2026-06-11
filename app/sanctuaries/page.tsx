@@ -9,12 +9,11 @@ export default function SanctuariesHub() {
           <h1 className="text-6xl md:text-8xl font-light tracking-tighter mb-6">The Collection</h1>  
           <p className="text-xl text-stone-500 font-light max-w-2xl">  
             Nine specialized archetypes designed to guarantee the ROI of Reset.   
-            Curated by the NexVoyage Collective.  
           </p>  
         </header>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-16">  
-          {SANCTUARIES_DATA.map((sanctuary) => (  
+          {SANCTUARIES_DATA.map((sanctuary, index) => (  
             <Link key={sanctuary.slug} href={`/sanctuaries/${sanctuary.slug}`} className="group block">  
               <div className="relative aspect-[3/4] bg-stone-200 mb-6 overflow-hidden">  
                 <img   
@@ -35,7 +34,7 @@ export default function SanctuariesHub() {
                     {sanctuary.name}  
                   </h2>  
                 </div>  
-                <span className="text-xs font-serif text-stone-300">/0{SANCTUARIES_DATA.indexOf(sanctuary) + 1}</span>  
+                <span className="text-xs font-serif text-stone-300">/0{index + 1}</span>  
               </div>  
               <p className="mt-4 text-sm text-stone-500 font-light leading-relaxed">  
                 {sanctuary.tagline}  
