@@ -2,66 +2,61 @@ import Link from 'next/link'
 
 export default function HomePage() {  
   return (  
-    <div className="min-h-screen bg-[#FCFAF7] text-[#1C1C1C] px-6 py-24 md:px-12 lg:px-24">  
-      {/* Editorial Header - Matching /sanctuaries style */}  
-      <header className="max-w-4xl mb-32">  
-        <p className="text-[10px] tracking-[0.3em] uppercase mb-8 text-gray-400 font-medium">  
-          Global Operations // Private Brief  
+    <div className="min-h-screen pt-32 pb-24 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">  
+      {/* Header Section - Matching the Sanctuaries /perspective vibe */}  
+      <div className="border-b border-black/10 pb-16 mb-24">  
+        <p className="font-sans text-[10px] tracking-[0.4em] uppercase mb-12 text-gray-400 font-medium">  
+          Global Operations // Private Dossier  
         </p>  
-        <h1 className="text-5xl md:text-8xl font-bold tracking-tighter leading-[0.9] uppercase mb-12">  
+          
+        <h1 className="font-serif text-6xl md:text-9xl leading-[0.85] tracking-tight italic mb-12">  
           Curating the <br />  
-          <span className="text-gray-300 italic font-light">Unreachable</span>  
-        </h1>  
-        <p className="text-xl md:text-2xl font-light max-w-2xl leading-relaxed border-l border-black pl-8 py-2">  
-          We do not sell travel. We engineer time, privacy, and perspective for those whose presence is their most valuable asset.  
-        </p>  
-      </header>
+          <span className="not-italic font-medium uppercase text-4xl md:text-6xl tracking-widest block mt-4">Unreachable</span>  
+        </h1>
 
-      {/* Ledger Grid Section - Mirrors the /sanctuaries layout structure */}  
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-16 border-t border-black/10 pt-16">  
-        <div className="space-y-6">  
-          <p className="text-[10px] tracking-[0.3em] uppercase text-gray-400">  
-            Current Status  
+        <div className="flex flex-col md:flex-row justify-between items-end gap-8">  
+          <p className="font-serif text-2xl md:text-3xl font-light max-w-xl leading-snug text-gray-700">  
+            We do not sell travel. We engineer time, privacy, and perspective for those whose presence is their most valuable asset.  
           </p>  
-          <h2 className="text-3xl font-bold uppercase tracking-tight">  
-            The Invitation  
-          </h2>  
-          <p className="text-sm leading-relaxed max-w-md text-gray-600">  
-            Access to the Collective is by referral only. We maintain a strict ratio of architects to clients to ensure the integrity of the "Atmospheric ROI."  
-          </p>  
-          <Link   
-            href="/invitation"   
-            className="inline-block text-[10px] tracking-[0.4em] uppercase font-bold border-b-2 border-black pb-1 hover:text-gray-500 transition-colors"  
-          >  
-            Request Briefing  
-          </Link>  
-        </div>
-
-        <div className="space-y-6">  
-          <p className="text-[10px] tracking-[0.3em] uppercase text-gray-400">  
-            Strategic Assets  
-          </p>  
-          <h2 className="text-3xl font-bold uppercase tracking-tight">  
-            The Collection  
-          </h2>  
-          <p className="text-sm leading-relaxed max-w-md text-gray-600">  
-            A curated atlas of nine sanctuary archetypes, from the boardroom in the clouds to total disconnection from the grid.  
-          </p>  
+            
           <Link   
             href="/sanctuaries"   
-            className="inline-block text-[10px] tracking-[0.4em] uppercase font-bold border-b-2 border-black pb-1 hover:text-gray-500 transition-colors"  
+            className="font-sans text-[10px] tracking-[0.5em] uppercase font-bold border-b border-black pb-2 hover:text-gray-400 transition-colors shrink-0"  
           >  
-            Explore Sanctuaries  
+            Access The Collection  
           </Link>  
         </div>  
-      </section>
+      </div>
 
-      {/* Footer Branding Note */}  
-      <footer className="mt-48">  
-        <p className="text-[10px] tracking-[0.5em] uppercase text-gray-300 text-center">  
-          NexVoyage Collective // Established 2026  
-        </p>  
-      </footer>  
+      {/* Grid Section - Ledger Style */}  
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-12 text-sm">  
+        <div className="space-y-4">  
+          <span className="font-sans text-[9px] tracking-[0.3em] uppercase text-gray-400">Section 01</span>  
+          <h3 className="font-sans font-bold uppercase tracking-widest border-b border-black pb-2">The Invitation</h3>  
+          <p className="font-serif italic text-lg text-gray-600 pt-2">By referral only.</p>  
+          <p className="font-sans text-xs leading-relaxed text-gray-500">  
+            Strict client-to-architect ratios ensure the integrity of every "Atmospheric ROI."  
+          </p>  
+        </div>
+
+        <div className="space-y-4">  
+          <span className="font-sans text-[9px] tracking-[0.3em] uppercase text-gray-400">Section 02</span>  
+          <h3 className="font-sans font-bold uppercase tracking-widest border-b border-black pb-2">The Perspective</h3>  
+          <p className="font-serif italic text-lg text-gray-600 pt-2">Beyond the itinerary.</p>  
+          <p className="font-sans text-xs leading-relaxed text-gray-500">  
+            Deep intelligence reports on seasonal global shifts and private sanctuary availability.  
+          </p>  
+        </div>
+
+        <div className="space-y-4">  
+          <span className="font-sans text-[9px] tracking-[0.3em] uppercase text-gray-400">Section 03</span>  
+          <h3 className="font-sans font-bold uppercase tracking-widest border-b border-black pb-2">The Reserve</h3>  
+          <p className="font-serif italic text-lg text-gray-600 pt-2">Total autonomy.</p>  
+          <p className="font-sans text-xs leading-relaxed text-gray-500">  
+            Secure, move-ready sanctuaries in the world's most remote and refined quadrants.  
+          </p>  
+        </div>  
+      </section>  
     </div>  
   )  
 }  
