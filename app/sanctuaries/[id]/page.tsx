@@ -1,92 +1,105 @@
 'use client'
 
-import { useParams } from 'next/navigation'  
-import Hero from '@/components/Hero'  
-import { SANCTUARY_DATA } from '@/lib/data/sanctuaries'  
-import Link from 'next/link'  
-import Image from 'next/image'
+import React from 'react'  
+import { useParams, useRouter } from 'next/navigation'  
+import { SANCTUARY_DATA } from '@/data/sanctuaries'  
+import { Button } from '@/components/ui/button'  
+import { ArrowLeft, MapPin, ShieldCheck, Waves } from 'lucide-react'
 
 export default function SanctuaryDetail() {  
-  const { id } = useParams()  
-  const sanctuary = SANCTUARY_DATA[id as string]
+  const params = useParams()  
+  const router = useRouter()  
+  const id = params?.id
 
-  if (!sanctuary) return <div className="min-h-screen bg-black flex items-center justify-center text-white">Sanctuary not found.</div>
+  // Fix: Find the sanctuary in the array rather than indexing  
+  const sanctuary = SANCTUARY_DATA.find(s => s.id === id)
+
+  if (!sanctuary) {  
+    return (  
+      <div className="min-h-screen bg-black flex flex-col items-center justify-center text-[#d4af37] p-4">  
+        <h1 className="text-2xl font-light tracking-[0.2em] uppercase mb-4">Sanctuary Not Found</h1>  
+        <Button   
+          variant="outline"   
+          onClick={() => router.push('/sanctuaries')}  
+          className="border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37] hover:text-black transition-all duration-500"  
+        >  
+          Return to Collection  
+        </Button>  
+      </div>  
+    )  
+  }
 
   return (  
-    <main className="min-h-screen bg-[#000] text-white selection:bg-[#d4af37]/30">  
-      <Hero   
-        title={sanctuary.name}  
-        subtitle={sanctuary.tagline}  
-        heroImage={sanctuary.heroImage || sanctuary.image}  
-      />
+    <main className="min-h-screen bg-black text-white font-sans selection:bg-[#d4af37] selection:text-black">  
+      {/* Hero Section */}  
+      <section className="relative h-[80vh] w-full overflow-hidden">  
+        <img   
+          src={sanctuary.heroImage || sanctuary.img}   
+          alt={sanctuary.name}  
+          className="absolute inset-0 w-full h-full object-cover opacity-70"  
+        />  
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />  
+          
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">  
+          <button   
+            onClick={() => router.back()}  
+            className="absolute top-12 left-8 flex items-center gap-2 text-[#d4af37] hover:opacity-70 transition-opacity uppercase tracking-widest text-xs"  
+          >  
+            <ArrowLeft className="w-4 h-4" /> Back  
+          </button>  
+            
+          <span className="text-[#d4af37] uppercase tracking-[0.4em] text-sm mb-6 animate-pulse">  
+            {sanctuary.tag || 'Exclusive Sanctuary'}  
+          </span>  
+          <h1 className="text-5xl md:text-7xl font-light tracking-[0.15em] uppercase mb-4 drop-shadow-2xl">  
+            {sanctuary.name}  
+          </h1>  
+          <div className="flex items-center gap-2 text-gray-400 uppercase tracking-widest text-xs">  
+            <MapPin className="w-3 h-3 text-[#d4af37]" />  
+            {sanctuary.loc || sanctuary.location}  
+          </div>  
+        </div>  
+      </section>
 
       {/* Philosophy Section */}  
-      <section className="py-24 px-6 md:px-12 max-w-5xl mx-auto">  
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 border-t border-white/10 pt-12">  
-          <div className="md:col-span-1">  
-            <h2 className="text-[#d4af37] text-xs tracking-[0.3em] uppercase font-medium">Philosophy</h2>  
-          </div>  
-          <div className="md:col-span-2">  
-            <p className="text-2xl font-light leading-relaxed text-gray-200">  
-              {sanctuary.philosophy || sanctuary.description}  
-            </p>  
-          </div>  
+      <section className="max-w-4xl mx-auto py-24 px-8 text-center border-b border-[#d4af37]/10">  
+        <h2 className="text-[#d4af37] uppercase tracking-[0.3em] text-xs mb-12">The Philosophy</h2>  
+        <p className="text-xl md:text-2xl font-light leading-relaxed tracking-wide text-gray-200">  
+          "{sanctuary.philosophy || sanctuary.atmosphere}"  
+        </p>  
+      </section>
+
+      {/* Details Grid */}  
+      <section className="max-w-6xl mx-auto py-24 px-8 grid grid-cols-1 md:grid-cols-3 gap-16">  
+        <div className="space-y-4">  
+          <ShieldCheck className="w-8 h-8 text-[#d4af37] mb-6" />  
+          <h3 className="uppercase tracking-[0.2em] text-[#d4af37] text-sm font-semibold">Security & Privacy</h3>  
+          <p className="text-gray-400 font-light leading-relaxed">  
+            Unparalleled discretion with multi-layer perimeter control and private transit corridors.  
+          </p>  
+        </div>  
+        <div className="space-y-4">  
+          <Waves className="w-8 h-8 text-[#d4af37] mb-6" />  
+          <h3 className="uppercase tracking-[0.2em] text-[#d4af37] text-sm font-semibold">Atmosphere</h3>  
+          <p className="text-gray-400 font-light leading-relaxed">  
+            {sanctuary.atmosphere || "A curated sensory experience designed for absolute restoration."}  
+          </p>  
+        </div>  
+        <div className="space-y-4">  
+          <div className="text-[#d4af37] mb-6 text-2xl font-light tracking-tighter">ROI</div>  
+          <h3 className="uppercase tracking-[0.2em] text-[#d4af37] text-sm font-semibold">Lifestyle Return</h3>  
+          <p className="text-gray-400 font-light leading-relaxed">  
+            {sanctuary.roi || "High-yield emotional equity and generational access to the unreachable."}  
+          </p>  
         </div>  
       </section>
 
-      {/* Core Attributes */}  
-      <section className="pb-24 px-6 md:px-12 max-w-5xl mx-auto">  
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">  
-          <div className="p-8 bg-neutral-900/50 border border-white/5">  
-            <p className="text-[#d4af37] text-[10px] tracking-[0.4em] uppercase mb-4">Atmosphere</p>  
-            <p className="text-gray-400 font-light leading-relaxed">{sanctuary.atmosphere}</p>  
-          </div>  
-          <div className="p-8 bg-neutral-900/50 border border-white/5">  
-            <p className="text-[#d4af37] text-[10px] tracking-[0.4em] uppercase mb-4">Yield & ROI</p>  
-            <p className="text-gray-400 font-light leading-relaxed">{sanctuary.ROI}</p>  
-          </div>  
-          <div className="p-8 bg-neutral-900/50 border border-white/5">  
-            <p className="text-[#d4af37] text-[10px] tracking-[0.4em] uppercase mb-4">Location Strategy</p>  
-            <p className="text-gray-400 font-light leading-relaxed">{sanctuary.location}</p>  
-          </div>  
-        </div>  
-      </section>
-
-      {/* Dossiers / Sub-Properties (e.g., The Evrima for The Nautical) */}  
-      {sanctuary.buckets && sanctuary.buckets.length > 0 && (  
-        <section className="py-24 bg-[#0a0a0a]">  
-          <div className="max-w-7xl mx-auto px-6 md:px-12">  
-            <h2 className="text-[#d4af37] text-xs tracking-[0.3em] uppercase mb-16 text-center">Available Dossiers</h2>  
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">  
-              {sanctuary.buckets.map((dossier) => (  
-                <div key={dossier.id} className="group relative">  
-                  <div className="aspect-video relative overflow-hidden mb-6 bg-neutral-900">  
-                    <Image   
-                      src={dossier.imageUrl || dossier.image}   
-                      alt={dossier.name}   
-                      fill   
-                      className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-70 group-hover:opacity-100"  
-                    />  
-                  </div>  
-                  <h3 className="text-xl font-light tracking-widest uppercase mb-2">{dossier.name}</h3>  
-                  <p className="text-sm text-gray-500 max-w-md font-light leading-relaxed">  
-                    {dossier.atmosphere}  
-                  </p>  
-                </div>  
-              ))}  
-            </div>  
-          </div>  
-        </section>  
-      )}
-
-      {/* Global Footer CTA */}  
-      <section className="py-32 text-center border-t border-white/5">  
-        <Link   
-          href="/concierge"   
-          className="text-[#d4af37] text-xs tracking-[0.5em] uppercase hover:text-white transition-colors"  
-        >  
-          Inquire for Access — Limited Allocation  
-        </Link>  
+      {/* Footer Call to Action */}  
+      <section className="py-32 bg-[#d4af37]/5 flex flex-col items-center justify-center text-center px-8 border-t border-[#d4af37]/10">  
+        <h3 className="text-3xl font-light tracking-[0.2em] uppercase mb-8">Secure Your Dossier</h3>  
+        <Button className="bg-[#d4af37] text-black hover:bg-white transition-all duration-500 px-12 py-6 rounded-none uppercase tracking-[0.3em] text-xs">  
+          Request Private Access  
+        </Button>  
       </section>  
     </main>  
   )  
