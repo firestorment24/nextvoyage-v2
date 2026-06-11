@@ -2,7 +2,7 @@ export interface Sanctuary {
   id: string  
   slug: string  
   name: string  
-  tag: string  
+  tagline: string // Changed from 'tag' to match the component's expectation  
   location: string  
   heroImage: string  
   image: string  
@@ -21,7 +21,7 @@ export const SANCTUARY_DATA: Sanctuary[] = [
     id: '1',  
     slug: 'the-metropolitan',  
     name: 'The Metropolitan',  
-    tag: 'Urban Pulse',  
+    tagline: 'Urban Pulse',  
     location: 'Global Hubs',  
     heroImage: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=80',  
     image: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=80',  
@@ -32,7 +32,7 @@ export const SANCTUARY_DATA: Sanctuary[] = [
     id: '2',  
     slug: 'the-remote',  
     name: 'The Remote',  
-    tag: 'Pure Isolation',  
+    tagline: 'Pure Isolation',  
     location: 'Hidden Frontiers',  
     heroImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&q=80',  
     image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&q=80',  
@@ -43,7 +43,7 @@ export const SANCTUARY_DATA: Sanctuary[] = [
     id: '3',  
     slug: 'the-cultural',  
     name: 'The Cultural',  
-    tag: 'Living History',  
+    tagline: 'Living History',  
     location: 'Heritage Sites',  
     heroImage: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80',  
     image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80',  
@@ -54,7 +54,7 @@ export const SANCTUARY_DATA: Sanctuary[] = [
     id: '4',  
     slug: 'the-alpine',  
     name: 'The Alpine',  
-    tag: 'High Altitude',  
+    tagline: 'High Altitude',  
     location: 'Mountain Peaks',  
     heroImage: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80',  
     image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80',  
@@ -65,7 +65,7 @@ export const SANCTUARY_DATA: Sanctuary[] = [
     id: '5',  
     slug: 'the-nautical',  
     name: 'The Nautical',  
-    tag: 'Oceanic Drift',  
+    tagline: 'Oceanic Drift',  
     location: 'South Pacific & Beyond',  
     heroImage: 'https://cdn.marblism.com/WyQj8qDQ3pQ.webp',  
     image: 'https://cdn.marblism.com/XuGl_zKVV2o.webp',  
@@ -90,7 +90,7 @@ export const SANCTUARY_DATA: Sanctuary[] = [
     id: '6',  
     slug: 'the-safari',  
     name: 'The Safari',  
-    tag: 'Wild Spirit',  
+    tagline: 'Wild Spirit',  
     location: 'Savannah Plains',  
     heroImage: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&q=80',  
     image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&q=80',  
@@ -101,7 +101,7 @@ export const SANCTUARY_DATA: Sanctuary[] = [
     id: '7',  
     slug: 'the-stadium',  
     name: 'The Stadium',  
-    tag: 'Peak Performance',  
+    tagline: 'Peak Performance',  
     location: 'Elite Arenas',  
     heroImage: 'https://images.unsplash.com/photo-1504450758481-7338eba7524a?auto=format&fit=crop&q=80',  
     image: 'https://images.unsplash.com/photo-1504450758481-7338eba7524a?auto=format&fit=crop&q=80',  
@@ -112,7 +112,7 @@ export const SANCTUARY_DATA: Sanctuary[] = [
     id: '8',  
     slug: 'the-cinematic',  
     name: 'The Cinematic',  
-    tag: 'Visual Story',  
+    tagline: 'Visual Story',  
     location: 'Iconic Sets',  
     heroImage: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&q=80',  
     image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&q=80',  
@@ -123,7 +123,7 @@ export const SANCTUARY_DATA: Sanctuary[] = [
     id: '9',  
     slug: 'the-fortress',  
     name: 'The Fortress',  
-    tag: 'Absolute Security',  
+    tagline: 'Absolute Security',  
     location: 'Strategic Strongholds',  
     heroImage: 'https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&q=80',  
     image: 'https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&q=80',  
@@ -134,4 +134,4 @@ export const SANCTUARY_DATA: Sanctuary[] = [
 
 // Double-lock exports for compatibility  
 export const SANCTUARIES_DATA = SANCTUARY_DATA  
-export const sanctuaries = SANCTUARY_DATA
+export const sanctuaries = SANCTUARY_DATA  
