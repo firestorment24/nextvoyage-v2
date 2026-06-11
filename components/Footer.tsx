@@ -1,57 +1,72 @@
-import React from 'react';  
 import Link from 'next/link';
 
 export default function Footer() {  
-return (  
-  <footer className="bg-[#050505] border-t border-white/5 pt-32 pb-20">  
-    <div className="max-w-7xl mx-auto px-6">  
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-16 mb-24">  
+  return (  
+    <footer className="bg-white py-20 px-8 border-t border-neutral-100">  
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 text-sm">  
           
-        {/* Brand Pillar */}  
-        <div className="md:col-span-5">  
-          <h2 className="font-serif text-4xl italic text-white mb-8">NexVoyage Collective</h2>  
-          <p className="text-white/30 text-[10px] tracking-[0.4em] uppercase leading-loose max-w-sm">  
-            Architecting sanctuaries for the global soul. Part of the NexVoyage "Guardian Layer".  
-          </p>  
+        {/* Collection Column */}  
+        <div className="space-y-6">  
+          <h4 className="font-medium tracking-widest uppercase text-neutral-400 text-xs">Collection</h4>  
+          <ul className="space-y-4">  
+            <li>  
+              <Link href="/sanctuaries" className="hover:text-[#C5A059] transition-colors">  
+                The Sanctuaries  
+              </Link>  
+            </li>  
+            <li>  
+              <Link href="/journal" className="hover:text-[#C5A059] transition-colors">  
+                Journal  
+              </Link>  
+            </li>  
+            <li>  
+              <Link href="/perspective" className="hover:text-[#C5A059] transition-colors">  
+                Perspective  
+              </Link>  
+            </li>  
+          </ul>  
         </div>
 
-        {/* Navigation */}  
-        <div className="md:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-12">  
-          <div className="space-y-6">  
-            <h3 className="text-[#A68966] text-[10px] tracking-[0.4em] uppercase font-bold">The Portfolio</h3>  
-            <ul className="space-y-4 text-[10px] tracking-[0.3em] uppercase text-white/50">  
-              <li><Link href="/sanctuaries" className="hover:text-white transition-colors">All Sanctuaries</Link></li>  
-              <li><Link href="/concierge" className="hover:text-white transition-colors">The Concierge</Link></li>  
-            </ul>  
-          </div>  
-            
-          <div className="space-y-6">  
-            <h3 className="text-[#A68966] text-[10px] tracking-[0.4em] uppercase font-bold">Legal</h3>  
-            <ul className="space-y-4 text-[10px] tracking-[0.3em] uppercase text-white/50">  
-              <li><Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>  
-              <li><Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link></li>  
-            </ul>  
-          </div>
+        {/* Connect Column */}  
+        <div className="space-y-6">  
+          <h4 className="font-medium tracking-widest uppercase text-neutral-400 text-xs">Connect</h4>  
+          <ul className="space-y-4">  
+            <li>  
+              <Link href="/concierge" className="text-[#C5A059] font-medium hover:opacity-80 transition-opacity">  
+                The Concierge  
+              </Link>  
+            </li>  
+            <li>  
+              <a href="https://instagram.com/nexvoyage" target="_blank" rel="noopener noreferrer" className="hover:text-[#C5A059] transition-colors">  
+                Instagram  
+              </a>  
+            </li>  
+          </ul>  
+        </div>
 
-          <div className="space-y-6">  
-            <h3 className="text-[#A68966] text-[10px] tracking-[0.4em] uppercase font-bold">Connect</h3>  
-            <ul className="space-y-4 text-[10px] tracking-[0.3em] uppercase text-white/50">  
-              {/* Changed this to point to the Concierge route per your request */}  
-              <li><Link href="/concierge" className="hover:text-white transition-colors">Secure Inquiry</Link></li>  
-              <li><a href="#" className="hover:text-white transition-colors">Instagram</a></li>  
-            </ul>  
-          </div>  
-        </div>  
-      </div>
+        {/* Legal Column */}  
+        <div className="space-y-6">  
+          <h4 className="font-medium tracking-widest uppercase text-neutral-400 text-xs">Legal</h4>  
+          <ul className="space-y-4 text-neutral-500">  
+            <li>  
+              <Link href="/privacy" className="hover:text-black transition-colors">  
+                Privacy Policy  
+              </Link>  
+            </li>  
+            <li>  
+              <Link href="/terms" className="hover:text-black transition-colors">  
+                Terms of Service  
+              </Link>  
+            </li>  
+          </ul>  
+        </div>
 
-      <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8">  
-        <div className="flex items-center gap-4">  
-          <div className="h-1.5 w-1.5 bg-[#A68966] rounded-full animate-pulse" />  
-          <span className="text-[9px] tracking-[0.5em] text-white/20 uppercase font-bold italic">Guardian Response Active</span>  
-        </div>  
-        <p className="text-[9px] tracking-[0.3em] text-white/10 uppercase">© 2026 NexVoyage Collective.</p>  
       </div>  
-    </div>  
-  </footer>  
-);  
+        
+      <div className="max-w-7xl mx-auto mt-20 pt-8 border-t border-neutral-50 flex justify-between items-center text-[10px] uppercase tracking-[0.2em] text-neutral-400">  
+        <p>© 2026 NexVoyage Collective</p>  
+        <p>Private & Confidential</p>  
+      </div>  
+    </footer>  
+  );  
 }  
