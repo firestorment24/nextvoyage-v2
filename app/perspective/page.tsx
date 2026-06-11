@@ -1,10 +1,12 @@
-import React from 'react';
+import React from 'react';  
+import Link from 'next/link';
 
 export default function PerspectivePage() {  
   const essays = [  
     {  
       volume: "01",  
       title: "The Silent ROI",  
+      slug: "the-silent-roi",  
       author: "D. Clark",  
       description: "Why the ultimate luxury investment isn't a property—it's a week of absolute, uninterrupted nothing.",  
       tag: "Manifesto"  
@@ -12,6 +14,7 @@ export default function PerspectivePage() {
     {  
       volume: "02",  
       title: "The Architecture of Calm",  
+      slug: "#", // Not built yet  
       author: "D. Clark",  
       description: "An exploration into the tactile reality of seclusion and why physical environment dictates mental clarity.",  
       tag: "Philosophy"  
@@ -31,8 +34,8 @@ export default function PerspectivePage() {
 
         <div className="grid gap-20">  
           {essays.map((essay) => (  
-            <article key={essay.volume} className="group cursor-pointer">  
-              <div className="flex flex-col md:flex-row gap-8 items-baseline">  
+            <Link key={essay.volume} href={`/perspective/${essay.slug}`} className="group block">  
+              <article className="flex flex-col md:flex-row gap-8 items-baseline">  
                 <span className="text-[#C5A059] font-mono text-sm tracking-widest">{essay.volume} — {essay.tag}</span>  
                 <div className="flex-1">  
                   <h2 className="text-4xl md:text-5xl font-serif mb-4 group-hover:italic transition-all duration-500">  
@@ -46,8 +49,8 @@ export default function PerspectivePage() {
                   </span>  
                 </div>  
                 <span className="hidden md:block text-white/20 uppercase tracking-tighter text-sm italic">Written by {essay.author}</span>  
-              </div>  
-            </article>  
+              </article>  
+            </Link>  
           ))}  
         </div>  
       </section>  
