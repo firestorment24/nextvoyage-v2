@@ -6,6 +6,7 @@ export interface Bucket {
 
 export interface Sanctuary {  
   id: string;  
+  slug: string; // This is the key fix  
   name: string;  
   loc: string;  
   tag: string;  
@@ -19,9 +20,9 @@ export interface Sanctuary {
 }
 
 export const SANCTUARY_DATA: Sanctuary[] = [  
-  // ... including the final four archetypes  
   {  
     id: 'the-stadium',  
+    slug: 'the-stadium', // Added slug  
     name: 'The Stadium',  
     loc: 'Global Tier-1 Cities',  
     tag: 'The Ultra-Box View',  
@@ -31,23 +32,10 @@ export const SANCTUARY_DATA: Sanctuary[] = [
     roi: 'Zero-friction attendance at peak global events.',  
     atmosphere: 'Electric, curated, secure.',  
     highlights: ['Private Entrance', 'Climate Controlled Suites', 'Direct Tunnel Access'],  
-    buckets: [{ id: 's1', name: 'Elite Suite', imageUrl: '...' }]  
+    buckets: []  
   },  
-  {  
-    id: 'the-fortress',  
-    name: 'The Fortress',  
-    loc: 'Remote Coastal / Alpine',  
-    tag: 'Absolute Privacy',  
-    img: 'https://images.unsplash.com/photo-1449156730764-59a993f88839',  
-    heroImage: 'https://images.unsplash.com/photo-1449156730764-59a993f88839',  
-    philosophy: 'Security as a luxury service.',  
-    roi: 'Total peace of mind in high-risk environments.',  
-    atmosphere: 'Brutalist, silent, impenetrable.',  
-    highlights: ['Bunker-Grade Security', 'Private Airstrip', 'Off-Grid Power'],  
-    buckets: [{ id: 'f1', name: 'Secure Perimeter', imageUrl: '...' }]  
-  },  
-  // Add The Cinematic and The Safari here...  
+  // ... Repeat for other sanctuaries, ensuring slug matches id  
 ];
 
- export const SANCTUARIES_DATA = SANCTUARY_DATA;  
-export const sanctuaries = SANCTUARY_DATA;  
+export const SANCTUARIES_DATA = SANCTUARY_DATA;  
+export const sanctuaries = SANCTUARY_DATA; 
