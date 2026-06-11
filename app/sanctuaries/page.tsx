@@ -1,52 +1,49 @@
-import { PROPERTIES_DATA } from '@/lib/properties'  
-import Link from 'next/link'  
-import Image from 'next/image'
+import Link from 'next/link';  
+import { SANCTUARIES_DATA } from '@/lib/data/sanctuaries';
 
-export default function SanctuariesPage() {  
+export default function SanctuariesHub() {  
   return (  
-    <div className="min-h-screen bg-black text-white pt-24 pb-12 px-6 lg:px-12">  
-      <header className="max-w-7xl mx-auto mb-16">  
-        <h1 className="text-4xl md:text-6xl font-light tracking-tighter mb-4">  
-          The Sanctuary Collection  
-        </h1>  
-        <p className="text-gray-500 text-lg max-w-2xl">  
-          A curated portfolio of high-security retreats, designed for those who value total discretion and absolute comfort.  
-        </p>  
-      </header>
+    <main className="min-h-screen bg-[#F9F8F6] text-[#1A1A1A] pt-32 pb-24 px-6">  
+      <div className="max-w-7xl mx-auto">  
+        <header className="mb-20">  
+          <h1 className="text-6xl md:text-8xl font-light tracking-tighter mb-6">The Collection</h1>  
+          <p className="text-xl text-stone-500 font-light max-w-2xl">  
+            Nine specialized archetypes designed to guarantee the ROI of Reset.   
+            Curated by the NexVoyage Collective.  
+          </p>  
+        </header>
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">  
-        {PROPERTIES_DATA.map((property) => (  
-          <div key={property.id} className="group flex flex-col space-y-4">  
-            <div className="relative aspect-[16/9] overflow-hidden bg-zinc-900 border border-zinc-800">  
-              <Image  
-                src={property.image}  
-                alt={property.name}  
-                fill  
-                className="object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"  
-              />  
-              <div className="absolute top-4 left-4 bg-black/80 backdrop-blur-md px-3 py-1 text-[10px] tracking-widest uppercase">  
-                {property.location}  
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-16">  
+          {SANCTUARIES_DATA.map((sanctuary) => (  
+            <Link key={sanctuary.slug} href={`/sanctuaries/${sanctuary.slug}`} className="group block">  
+              <div className="relative aspect-[3/4] bg-stone-200 mb-6 overflow-hidden">  
+                <img   
+                  src={sanctuary.heroImage}   
+                  alt={sanctuary.name}   
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-105 group-hover:scale-100"  
+                />  
+                <div className="absolute top-6 left-6 bg-black text-white px-3 py-1 text-[10px] tracking-widest uppercase">  
+                  {sanctuary.propertyCount} PROPERTIES  
+                </div>  
               </div>  
-            </div>  
-              
-            <div className="flex flex-col space-y-2">  
-              <div className="flex justify-between items-end">  
-                <h2 className="text-xl font-medium tracking-tight">{property.name}</h2>  
-                <span className="text-xs text-zinc-600 tracking-widest">{property.priceLevel}</span>  
+              <div className="flex justify-between items-start border-b border-stone-200 pb-4">  
+                <div>  
+                  <span className="text-[10px] uppercase tracking-[0.2em] text-stone-400 block mb-1">  
+                    {sanctuary.location}  
+                  </span>  
+                  <h2 className="text-2xl font-light tracking-tight group-hover:italic transition-all">  
+                    {sanctuary.name}  
+                  </h2>  
+                </div>  
+                <span className="text-xs font-serif text-stone-300">/0{SANCTUARIES_DATA.indexOf(sanctuary) + 1}</span>  
               </div>  
-              <p className="text-sm text-zinc-400 line-clamp-2">  
-                {property.highlight}  
+              <p className="mt-4 text-sm text-stone-500 font-light leading-relaxed">  
+                {sanctuary.tagline}  
               </p>  
-              <Link   
-                href={`/reserve?property=${property.id}`}  
-                className="text-xs tracking-[0.2em] uppercase pt-2 border-b border-zinc-800 pb-1 w-fit transition-colors hover:border-white hover:text-white text-zinc-500"  
-              >  
-                Reserve Sanctuary  
-              </Link>  
-            </div>  
-          </div>  
-        ))}  
+            </Link>  
+          ))}  
+        </div>  
       </div>  
-    </div>  
-  )  
+    </main>  
+  );  
 }  
