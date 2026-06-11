@@ -1,88 +1,65 @@
-// app/page.tsx  
-import Link from 'next/link';  
-import { SANCTUARIES_DATA } from '@/lib/data/sanctuaries';
+'use client'
 
-export default function Home() {  
+import Hero from './components/Hero'  
+import { SANCTUARY_DATA } from './lib/data/sanctuaries'  
+import Link from 'next/link'  
+import Image from 'next/image'
+
+export default function HomePage() {  
+  // We'll showcase a few archetypes on the home page  
+  const featuredSanctuaries = SANCTUARY_DATA.slice(0, 3)
+
   return (  
-    <main className="min-h-screen bg-stone-50 font-sans text-stone-900 selection:bg-stone-200">  
+    <main className="min-h-screen bg-stone-50">  
       {/* Hero Section */}  
-      <section className="relative h-[90vh] flex items-center justify-center overflow-hidden bg-stone-900">  
-        <div className="absolute inset-0 opacity-40">  
-          <img   
-            src="/images/hero-main.jpg"   
-            alt="NexVoyage Sanctuary"   
-            className="w-full h-full object-cover"  
-          />  
-        </div>  
-        <div className="relative z-10 text-center px-4">  
-          <span className="text-[10px] uppercase tracking-[0.4em] text-stone-300 mb-6 block animate-fade-in">  
-            NexVoyage Collective  
-          </span>  
-          <h1 className="text-5xl md:text-7xl font-extralight tracking-tighter text-white mb-8">  
-            Curating the <span className="italic">Unreachable</span>  
-          </h1>  
-          <p className="text-stone-300 max-w-xl mx-auto text-sm md:text-base font-light leading-relaxed mb-12">  
-            Bespoke travel sanctuaries and elite concierge services for the world's most discerning travelers.  
+      <Hero   
+        title="Beyond the Horizon"  
+        subtitle="The New Standard of Travel"  
+        heroImage="https://cdn.marblism.com/2kiplm3ni1A.webp"  
+        ctaText="Explore The Collection"  
+        ctaHref="/sanctuaries"  
+      />
+
+      {/* Philosophy Section */}  
+      <section className="py-24 px-6 md:px-12 bg-white text-stone-900">  
+        <div className="max-w-4xl mx-auto text-center">  
+          <p className="text-xl md:text-2xl font-light leading-relaxed tracking-wide">  
+            We don’t just book travel. We architect sanctuaries—temporary homes for the global soul,   
+            curated with obsessive attention to the quiet luxury of time and privacy.  
           </p>  
-          <Link   
-            href="/reserve"   
-            className="inline-block border border-white/20 bg-white/10 backdrop-blur-md px-10 py-4 text-[10px] uppercase tracking-[0.2em] text-white hover:bg-white hover:text-stone-900 transition-all duration-500"  
-          >  
-            Request Access  
-          </Link>  
         </div>  
       </section>
 
-      {/* The Collection Grid */}  
-      <section className="py-32 px-6 md:px-12 bg-white">  
+      {/* Featured Collection Teaser */}  
+      <section className="py-24 px-6 md:px-12 border-t border-stone-200">  
         <div className="max-w-7xl mx-auto">  
-          <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">  
-            <div className="max-w-2xl">  
-              <span className="text-[10px] uppercase tracking-[0.3em] text-stone-400 mb-4 block">  
-                The Index  
-              </span>  
-              <h2 className="text-4xl font-light tracking-tight text-stone-900 mb-6">  
-                The Sanctuary Archetypes  
-              </h2>  
-              <p className="text-stone-500 font-light leading-relaxed">  
-                A globally distributed network of vetted properties, each serving as a pillar of our Guardian Layer. Explore by archetype to find your next tactical retreat.  
-              </p>  
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">  
+            <div>  
+              <span className="text-xs uppercase tracking-widest text-stone-400 font-medium">01 / The Collection</span>  
+              <h2 className="text-4xl md:text-5xl font-extralight mt-4 text-stone-900 italic">A Curated Atlas</h2>  
             </div>  
             <Link   
               href="/sanctuaries"   
-              className="text-[10px] uppercase tracking-[0.2em] text-stone-900 border-b border-stone-200 pb-1 hover:border-stone-900 transition-all"  
+              className="text-stone-900 border-b border-stone-900 pb-1 hover:opacity-60 transition-opacity uppercase tracking-widest text-xs font-medium"  
             >  
-              View Full Collection  
+              View All Sanctuaries →  
             </Link>  
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-16">  
-            {SANCTUARIES_DATA.slice(0, 9).map((sanctuary) => (  
-              <Link   
-                key={sanctuary.id}   
-                href={`/sanctuaries/${sanctuary.slug}`}   
-                className="group block"  
-              >  
-                <div className="relative aspect-[4/5] bg-stone-100 overflow-hidden mb-6">  
-                  <img   
-                    src={sanctuary.heroImage}   
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">  
+            {featuredSanctuaries.map((sanctuary) => (  
+              <Link key={sanctuary.id} href={`/sanctuaries/${sanctuary.slug}`} className="group block">  
+                <div className="aspect-[4/5] relative overflow-hidden bg-stone-200 grayscale group-hover:grayscale-0 transition-all duration-700">  
+                  <Image   
+                    src={sanctuary.image}   
                     alt={sanctuary.name}  
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"  
+                    fill  
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"  
                   />  
-                  <div className="absolute inset-0 bg-stone-900/10 group-hover:bg-transparent transition-colors duration-500" />  
                 </div>  
-                <div className="flex justify-between items-start">  
-                  <div>  
-                    <span className="text-[9px] uppercase tracking-[0.2em] text-stone-400 mb-1 block">  
-                      {sanctuary.location}  
-                    </span>  
-                    <h3 className="text-xl font-light tracking-tight group-hover:italic transition-all">  
-                      {sanctuary.name}  
-                    </h3>  
-                  </div>  
-                  <span className="text-[10px] text-stone-400 mt-1 font-mono">  
-                    {sanctuary.propertyCount.toString().padStart(2, '0')}  
-                  </span>  
+                <div className="mt-6">  
+                  <h3 className="text-lg font-light tracking-wide text-stone-900 uppercase">{sanctuary.name}</h3>  
+                  <p className="text-sm text-stone-500 mt-2 font-light italic">{sanctuary.tagline}</p>  
                 </div>  
               </Link>  
             ))}  
@@ -90,21 +67,18 @@ export default function Home() {
         </div>  
       </section>
 
-      {/* Journal Highlight */}  
-      <section className="py-24 bg-stone-50 border-t border-stone-100">  
-        <div className="max-w-7xl mx-auto px-6 md:px-12 text-center">  
-          <span className="text-[10px] uppercase tracking-[0.3em] text-stone-400 mb-6 block">  
-            Intelligence Report  
-          </span>  
-          <h2 className="text-3xl font-light tracking-tight mb-8 italic">"The South Pacific Drift"</h2>  
+      {/* Secondary CTA/Inquiry */}  
+      <section className="py-32 px-6 md:px-12 bg-stone-900 text-stone-100 text-center">  
+        <div className="max-w-2xl mx-auto">  
+          <h2 className="text-3xl font-extralight mb-8 tracking-tight">Ready to transcend?</h2>  
           <Link   
-            href="/journal/the-south-pacific-drift"   
-            className="inline-block border border-stone-200 px-8 py-3 text-[10px] uppercase tracking-[0.2em] text-stone-600 hover:border-stone-900 hover:text-stone-900 transition-all"  
+            href="/concierge"   
+            className="inline-block px-12 py-4 border border-stone-100 text-stone-100 hover:bg-stone-100 hover:text-stone-900 transition-all duration-300 uppercase tracking-widest text-xs font-medium"  
           >  
-            Read the Dossier  
+            Start The Inquiry Flow  
           </Link>  
         </div>  
       </section>  
     </main>  
-  );  
+  )  
 }  
