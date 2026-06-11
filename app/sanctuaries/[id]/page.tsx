@@ -1,13 +1,14 @@
 import { notFound } from 'next/navigation'  
 import Link from 'next/link'  
-import { SANCTUARY_DATA, sanctuaries } from '../../../data/sanctuaries'  
-import Navigation from '../../../components/Navigation'
+import { SANCTUARY_DATA } from '../../data/sanctuaries'  
+import Navigation from '../../components/Navigation'
 
 /**  
  * Generates the static paths for all sanctuaries at build time.  
+ * Using Object.values since the data file exports the record.  
  */  
 export function generateStaticParams() {  
-  return sanctuaries.map((s) => ({  
+  return Object.values(SANCTUARY_DATA).map((s) => ({  
     id: s.id,  
   }))  
 }
@@ -86,7 +87,7 @@ export default function SanctuaryPage({ params }: { params: { id: string } }) {
                 Exclusive Highlights  
               </h3>  
               <ul className="space-y-6">  
-                {sanctuary.highlights?.map((item, i) => (  
+                {sanctuary.highlights?.map((item: string, i: number) => (  
                   <li key={i} className="flex items-start gap-4 text-sm md:text-base text-zinc-700">  
                     <span className="text-[#C5A059] text-xs mt-1.5">✦</span>  
                     {item}  
@@ -116,7 +117,7 @@ export default function SanctuaryPage({ params }: { params: { id: string } }) {
         <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 py-32">  
           <h2 className="text-center font-serif text-3xl italic mb-20">Sanctuary Specifications</h2>  
           <div className="grid grid-cols-1 md:grid-cols-3 gap-16 lg:gap-24">  
-            {sanctuary.buckets?.map((bucket, index) => (  
+            {sanctuary.buckets?.map((bucket: any, index: number) => (  
               <div key={index} className="space-y-6">  
                 <h4 className="text-zinc-900 font-serif text-2xl border-b border-zinc-200 pb-4 italic">  
                   {bucket.title}  
