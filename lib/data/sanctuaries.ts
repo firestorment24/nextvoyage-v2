@@ -1,10 +1,11 @@
 export interface Sanctuary {  
   id: string;  
+  slug: string; // Added to fix Link components in /sanctuaries/page.tsx  
   name: string;  
   tagline: string;  
   location: string;  
   heroImage: string;  
-  image: string; // Added for backward compatibility with app/page.tsx  
+  image: string;   
   philosophy: string;  
   specifications: string[];  
   engagements: string[];  
@@ -14,6 +15,7 @@ export interface Sanctuary {
 export const SANCTUARY_DATA: Sanctuary[] = [  
   {  
     id: "metropolitan",  
+    slug: "metropolitan",  
     name: "The Metropolitan",  
     tagline: "Precision in the global grid.",  
     location: "Urban Anchors • Global",  
@@ -26,6 +28,7 @@ export const SANCTUARY_DATA: Sanctuary[] = [
   },  
   {  
     id: "remote",  
+    slug: "remote",  
     name: "The Remote",  
     tagline: "The protocol of absence.",  
     location: "Private Atolls • Deep Ocean",  
@@ -38,6 +41,7 @@ export const SANCTUARY_DATA: Sanctuary[] = [
   },  
   {  
     id: "nautical",  
+    slug: "nautical",  
     name: "The Nautical",  
     tagline: "Boundless navigation. Zero latitude.",  
     location: "South Pacific Drift",  
@@ -50,6 +54,7 @@ export const SANCTUARY_DATA: Sanctuary[] = [
   },  
   {  
     id: "alpine",  
+    slug: "alpine",  
     name: "The Alpine",  
     tagline: "Clarity at the absolute ceiling.",  
     location: "High Altitudes • Europe/Asia",  
@@ -62,6 +67,7 @@ export const SANCTUARY_DATA: Sanctuary[] = [
   },  
   {  
     id: "safari",  
+    slug: "safari",  
     name: "The Safari",  
     tagline: "The primal archive. Ancestral surveillance.",  
     location: "Savannah • Africa",  
@@ -74,6 +80,7 @@ export const SANCTUARY_DATA: Sanctuary[] = [
   },  
   {  
     id: "fortress",  
+    slug: "fortress",  
     name: "The Fortress",  
     tagline: "Brutalist Sanctuary. Unbreachable peace.",  
     location: "Cliffsides • Mediterranean",  
@@ -86,6 +93,7 @@ export const SANCTUARY_DATA: Sanctuary[] = [
   },  
   {  
     id: "stadium",  
+    slug: "stadium",  
     name: "The Stadium",  
     tagline: "The Arena Protocol. Primary access.",  
     location: "Cultural Epicenters",  
@@ -98,6 +106,7 @@ export const SANCTUARY_DATA: Sanctuary[] = [
   },  
   {  
     id: "cinematic",  
+    slug: "cinematic",  
     name: "The Cinematic",  
     tagline: "The Still Life. Frames of existence.",  
     location: "Designed Environments",  
@@ -110,6 +119,7 @@ export const SANCTUARY_DATA: Sanctuary[] = [
   },  
   {  
     id: "cultural",  
+    slug: "cultural",  
     name: "The Cultural",  
     tagline: "The Cultural Anchor. Deep heritage extraction.",  
     location: "Heritage Sites • Global",  
