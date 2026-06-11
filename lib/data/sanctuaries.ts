@@ -123,6 +123,33 @@ export const SANCTUARIES_DATA: Sanctuary[] = [
   propertyCount: 2  
 }  
 ];
-
+// Nautical Archetype Update  
+{  
+  id: 'nautical',  
+  slug: 'the-nautical',  
+  name: 'The Nautical',  
+  location: 'South Pacific Drift',  
+  tagline: 'Master of the tides.',  
+  heroImage: 'https://images.unsplash.com/photo-1502920338823-20516613398c?auto=format&fit=crop&q=80',  
+  philosophy: 'Fluid boundaries, total freedom.',  
+  buckets: [  
+    {  
+      id: 'dossier-08-evrima',  
+      name: 'The Evrima',  
+      imageUrl: 'https://cdn.marblism.com/XuGl_zKVV2o.webp',  
+      atmosphere: 'Polished teak and indigo underwater lighting. Absolute silence.',  
+      roi: '1:1 staff-to-guest ratio; "No-Decision Economy" for executive focus.',  
+      guardianLayer: 'Secure tender transfers and discreet maritime security leadership.'  
+    },  
+    {  
+      id: 'dossier-09-luminara',  
+      name: 'The Luminara',  
+      imageUrl: 'https://cdn.marblism.com/WyQj8qDQ3pQ.webp',  
+      atmosphere: 'Contemporary elegance; a suspended grey-glass sanctuary.',  
+      roi: 'Fly-cruise efficiency and elite space-per-guest ratios.',  
+      guardianLayer: 'AIS-cloaking protocols and biometric-enabled suite access.'  
+    }  
+  ]  
+}  
 export const SANCTUARY_DATA = SANCTUARIES_DATA;  
 export const sanctuaries = SANCTUARIES_DATA;  
