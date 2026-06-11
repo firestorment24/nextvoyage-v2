@@ -16,83 +16,120 @@ export default function HomePage() {
   return (  
     <main className={`${inter.variable} ${cormorant.variable} font-sans bg-black text-white min-h-screen selection:bg-neutral-800`}>  
         
-      {/* Hero Section - The Ledger Entry */}  
+      {/* Hero Section: The Art of Withdrawal */}  
       <section className="min-h-screen flex flex-col justify-center items-center px-6 md:px-12 relative overflow-hidden">  
-        {/* Subtle Background Text */}  
-        <div className="absolute top-20 left-10 opacity-[0.03] select-none pointer-events-none">  
-          <span className="font-serif text-[20vw] leading-none">NV</span>  
+        {/* Subtle Background Watermark */}  
+        <div className="absolute top-20 left-10 opacity-[0.02] select-none pointer-events-none">  
+          <span className="font-serif text-[25vw] leading-none">NV</span>  
         </div>
 
-        <div className="max-w-5xl mx-auto text-center space-y-12 relative z-10">  
-          <p className="uppercase tracking-[0.5em] text-[10px] md:text-xs text-neutral-500 font-bold mb-4">  
-            NexVoyage Collective / Master Registry  
+        <div className="max-w-6xl mx-auto text-center space-y-12 relative z-10">  
+          <p className="uppercase tracking-[0.6em] text-[10px] md:text-xs text-neutral-600 font-bold mb-4">  
+            NexVoyage Collective / Registry Entry No. 001  
           </p>  
             
-          <h1 className="font-serif text-6xl md:text-[10rem] font-light leading-[0.9] tracking-tighter">  
+          <h1 className="font-serif text-7xl md:text-[11rem] font-light leading-[0.85] tracking-tighter">  
             The Art of <br />  
-            <span className="italic text-neutral-400">Withdrawal</span>  
+            <span className="italic text-neutral-500">Withdrawal</span>  
           </h1>
 
-          <div className="h-20 w-[1px] bg-neutral-800 mx-auto my-12"></div>
+          <div className="h-24 w-[1px] bg-gradient-to-b from-neutral-800 to-transparent mx-auto my-14"></div>
 
-          <p className="text-neutral-400 font-light text-xl md:text-2xl max-w-2xl mx-auto leading-relaxed font-serif italic">  
-            &ldquo;We do not just sell destinations; we curate the atmospheric return on your most valuable asset: time.&rdquo;  
+          <p className="text-neutral-400 font-light text-xl md:text-3xl max-w-3xl mx-auto leading-relaxed font-serif italic px-4">  
+            &ldquo;In an age of total visibility, the greatest luxury is the ability to disappear.&rdquo;  
           </p>
 
-          <div className="pt-16 flex flex-col items-center space-y-8">  
+          <div className="pt-20 flex flex-col items-center space-y-8">  
             <Link   
               href="/sanctuaries"  
-              className="group flex flex-col items-center space-y-4"  
+              className="group flex flex-col items-center space-y-6"  
             >  
-              <span className="text-[10px] uppercase tracking-[0.4em] text-neutral-500 group-hover:text-white transition-colors duration-500">  
-                Enter The Collection  
+              <span className="text-[11px] uppercase tracking-[0.5em] text-neutral-500 group-hover:text-white transition-all duration-700">  
+                Access The Collection  
               </span>  
-              <div className="w-12 h-[1px] bg-neutral-700 group-hover:w-24 group-hover:bg-white transition-all duration-700"></div>  
+              <div className="w-16 h-[1px] bg-neutral-800 group-hover:w-40 group-hover:bg-neutral-400 transition-all duration-1000"></div>  
             </Link>  
           </div>  
         </div>
 
-        {/* Bottom Status Bar */}  
-        <div className="absolute bottom-10 w-full px-12 hidden md:flex justify-between items-end border-t border-neutral-900 pt-8 opacity-40">  
-          <div className="space-y-1">  
-            <p className="text-[9px] uppercase tracking-widest text-neutral-500">Service Model</p>  
-            <p className="font-serif text-sm italic">Ultra-High Networth Only</p>  
-          </div>  
-          <div className="text-center space-y-1">  
-            <p className="text-[9px] uppercase tracking-widest text-neutral-500">Current Status</p>  
-            <p className="font-serif text-sm italic">Accepting Inquiries</p>  
-          </div>  
-          <div className="text-right space-y-1">  
-            <p className="text-[9px] uppercase tracking-widest text-neutral-500">Location</p>  
-            <p className="font-serif text-sm italic">Global Operations</p>  
+        {/* Floating Metadata Labels */}  
+        <div className="absolute top-1/2 left-8 -translate-y-1/2 hidden lg:block vertical-text space-y-10 opacity-20">  
+          <p className="text-[9px] uppercase tracking-[0.4em] font-mono text-neutral-500 -rotate-90">Precision Operations</p>  
+          <p className="text-[9px] uppercase tracking-[0.4em] font-mono text-neutral-500 -rotate-90">Global Reach</p>  
+        </div>  
+      </section>
+
+      {/* Philosophy Section: The Mandate */}  
+      <section className="py-52 bg-[#030303] border-y border-neutral-900">  
+        <div className="max-w-6xl mx-auto px-6">  
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-32 items-start">  
+            <div className="space-y-12">  
+              <p className="text-[10px] uppercase tracking-[0.4em] text-neutral-700 font-bold">The Mandate</p>  
+              <h2 className="font-serif text-5xl md:text-7xl font-light leading-[1.1]">  
+                Atmospheric <br />  
+                <span className="italic text-neutral-500 text-4xl md:text-6xl">Return on Investment</span>  
+              </h2>  
+              <p className="text-neutral-500 leading-relaxed font-light text-lg max-w-md">  
+                We do not track miles; we track the quality of silence. Our engineering team designs environments where your pulse slows and your perspective clears.  
+              </p>  
+              <div className="pt-8">  
+                <Link href="/philosophy" className="text-[10px] uppercase tracking-[0.4em] text-neutral-600 hover:text-white transition-colors border-b border-neutral-900 pb-1">  
+                  View Our Metrics  
+                </Link>  
+              </div>  
+            </div>
+
+            {/* The Manifest Card */}  
+            <div className="border border-neutral-800 p-12 md:p-16 space-y-10 bg-black shadow-[0_0_50px_rgba(0,0,0,0.5)] relative overflow-hidden">  
+               <div className="absolute top-0 right-0 p-6 opacity-5 font-mono text-[80px] leading-none select-none">ROI</div>  
+              <p className="text-[10px] uppercase tracking-[0.3em] text-neutral-600 font-bold border-b border-neutral-900 pb-4">Service Protocol 09.2</p>  
+                
+              <div className="space-y-12">  
+                {[  
+                  { num: '01', title: 'Zero Footprint', desc: 'Total digital and physical extraction from global tracking.' },  
+                  { num: '02', title: 'Bespoke Extraction', desc: 'Secure transit from boardroom to sanctuary in < 6 hours.' },  
+                  { num: '03', title: 'Sovereign Peace', desc: 'Environments optimized for recovery, focus, and clarity.' }  
+                ].map((item) => (  
+                  <div key={item.num} className="flex space-x-8">  
+                    <span className="font-serif text-neutral-700 italic">{item.num}</span>  
+                    <div className="space-y-2">  
+                      <h4 className="font-serif text-2xl text-neutral-200">{item.title}</h4>  
+                      <p className="text-sm text-neutral-500 leading-relaxed">{item.desc}</p>  
+                    </div>  
+                  </div>  
+                ))}  
+              </div>  
+            </div>  
           </div>  
         </div>  
       </section>
 
-      {/* Philosophy Section - Minimalist & Punchy */}  
-      <section className="py-40 bg-[#050505] border-t border-neutral-900">  
-        <div className="max-w-4xl mx-auto px-6">  
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-24 items-center">  
-            <div className="space-y-8">  
-              <h2 className="font-serif text-4xl md:text-6xl font-light leading-tight">  
-                Privacy is the <br />  
-                <span className="italic text-neutral-500">Last Luxury.</span>  
-              </h2>  
-              <p className="text-neutral-500 leading-relaxed font-light">  
-                In an age of total visibility, we offer the opposite. Our sanctuaries are engineered for absolute discretion, ensuring your presence remains a secret and your peace remains undisturbed.  
-              </p>  
-            </div>  
-            <div className="border border-neutral-800 p-8 space-y-6 bg-black shadow-2xl">  
-              <p className="text-[9px] uppercase tracking-[0.3em] text-neutral-600 font-bold border-b border-neutral-900 pb-2">The Mandate</p>  
-              <ul className="space-y-4 font-serif text-lg text-neutral-300">  
-                <li>01. Zero Digital Footprint</li>  
-                <li>02. Bespoke Extraction</li>  
-                <li>03. Atmospheric ROI</li>  
-              </ul>  
-            </div>  
+      {/* Call to Action: The Invitation */}  
+      <section className="py-60 px-6 relative overflow-hidden">  
+        <div className="max-w-4xl mx-auto text-center space-y-16 relative z-10">  
+          <h3 className="font-serif text-4xl md:text-6xl font-light leading-tight text-neutral-400">  
+            Membership is by <br />  
+            <span className="italic text-white">Private Referral Only</span>  
+          </h3>  
+          <p className="text-neutral-600 tracking-[0.3em] text-[10px] uppercase font-bold">  
+            Currently accepting four new dossiers for the 2026 Season  
+          </p>  
+          <div className="pt-12">  
+            <Link   
+              href="/inquire"   
+              className="inline-block border border-neutral-800 px-12 py-5 text-[11px] uppercase tracking-[0.5em] text-neutral-400 hover:text-white hover:border-neutral-500 transition-all duration-500 hover:bg-[#080808]"  
+            >  
+              Begin Inquiry  
+            </Link>  
           </div>  
         </div>  
-      </section>  
+      </section>
+
+      {/* Footer Branding */}  
+      <footer className="py-12 border-t border-neutral-900 px-12 flex justify-between items-center opacity-30 grayscale hover:grayscale-0 transition-all duration-1000">  
+        <p className="text-[9px] uppercase tracking-widest">© 2026 NexVoyage Collective</p>  
+        <p className="text-[9px] uppercase tracking-widest font-serif italic text-right">London / Tokyo / NYC / Zurich</p>  
+      </footer>  
     </main>  
   )  
 }  
