@@ -1,82 +1,81 @@
+// app/invitation/page.tsx  
 import React from 'react';
 
 export default function InvitationPage() {  
   return (  
-    <main className="bg-[#0a0a0a] text-[#d4af37] min-h-screen font-serif selection:bg-[#d4af37] selection:text-black">  
-      {/*   
-          Navigation and Footer are handled by the root layout.   
-          The content below will be injected into the layout's {children} slot.  
-      */}  
-        
-      <section className="max-w-4xl mx-auto px-6 pt-32 pb-20">  
-        <div className="text-center mb-16">  
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-widest mb-6 uppercase">  
+    <main className="min-h-screen bg-[#0a0a0a] text-[#d4d4d4] font-serif selection:bg-[#c5a47e] selection:text-[#0a0a0a]">  
+      <section className="max-w-4xl mx-auto pt-32 pb-20 px-6">  
+        <header className="mb-16 border-l border-[#c5a47e]/30 pl-8">  
+          <span className="text-[#c5a47e] uppercase tracking-[0.3em] text-xs mb-4 block">  
+            Invitation // The Initial Dialogue  
+          </span>  
+          <h1 className="text-4xl md:text-5xl font-light text-white leading-tight">  
             The Beginning of a Collaboration  
           </h1>  
-          <p className="text-lg md:text-xl text-[#a0a0a0] max-w-2xl mx-auto leading-relaxed italic">  
-            This is not an inquiry; it is the opening of a conversation. Tell us where your imagination is leading you.  
+          <p className="mt-6 text-lg text-[#a1a1a1] leading-relaxed max-w-2xl">  
+            At NexVoyage, we believe the finest journeys are co-created. This form is the start of that process—a way for us to understand the rhythm, aesthetic, and intent behind your next departure.  
           </p>  
-        </div>
+        </header>
 
-        <form className="space-y-12 max-w-2xl mx-auto border-t border-[#d4af37]/20 pt-12">  
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">  
-            <div className="flex flex-col border-b border-[#d4af37]/30 py-2">  
-              <label className="text-[10px] uppercase tracking-[0.3em] mb-2 text-[#d4af37]/60 font-sans">Full Name</label>  
+        <form className="space-y-12 bg-[#111] p-10 rounded-sm border border-white/5 shadow-2xl">  
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">  
+            <div className="space-y-2">  
+              <label className="text-xs uppercase tracking-widest text-[#c5a47e]">Full Name</label>  
               <input   
                 type="text"   
-                placeholder="Identity"  
-                className="bg-transparent border-none outline-none focus:ring-0 placeholder:text-[#333] text-lg"  
+                placeholder="Elias Thorne"  
+                className="w-full bg-transparent border-b border-white/10 py-3 focus:outline-none focus:border-[#c5a47e] transition-colors placeholder:text-white/10"  
               />  
             </div>  
-            <div className="flex flex-col border-b border-[#d4af37]/30 py-2">  
-              <label className="text-[10px] uppercase tracking-[0.3em] mb-2 text-[#d4af37]/60 font-sans">Email Address</label>  
+            <div className="space-y-2">  
+              <label className="text-xs uppercase tracking-widest text-[#c5a47e]">Email Address</label>  
               <input   
                 type="email"   
-                placeholder="Communication Channel"  
-                className="bg-transparent border-none outline-none focus:ring-0 placeholder:text-[#333] text-lg"  
+                placeholder="thorne@example.com"  
+                className="w-full bg-transparent border-b border-white/10 py-3 focus:outline-none focus:border-[#c5a47e] transition-colors placeholder:text-white/10"  
+              />  
+            </div>  
+            <div className="space-y-2">  
+              <label className="text-xs uppercase tracking-widest text-[#c5a47e]">Preferred Dates</label>  
+              <input   
+                type="text"   
+                placeholder="Autumn 2026"  
+                className="w-full bg-transparent border-b border-white/10 py-3 focus:outline-none focus:border-[#c5a47e] transition-colors placeholder:text-white/10"  
+              />  
+            </div>  
+            <div className="space-y-2">  
+              <label className="text-xs uppercase tracking-widest text-[#c5a47e]">Departure City</label>  
+              <input   
+                type="text"   
+                placeholder="London, UK"  
+                className="w-full bg-transparent border-b border-white/10 py-3 focus:outline-none focus:border-[#c5a47e] transition-colors placeholder:text-white/10"  
               />  
             </div>  
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">  
-            <div className="flex flex-col border-b border-[#d4af37]/30 py-2">  
-              <label className="text-[10px] uppercase tracking-[0.3em] mb-2 text-[#d4af37]/60 font-sans">Preferred Dates</label>  
-              <input   
-                type="text"   
-                placeholder="The Timing"  
-                className="bg-transparent border-none outline-none focus:ring-0 placeholder:text-[#333] text-lg"  
-              />  
-            </div>  
-            <div className="flex flex-col border-b border-[#d4af37]/30 py-2">  
-              <label className="text-[10px] uppercase tracking-[0.3em] mb-2 text-[#d4af37]/60 font-sans">Departure City</label>  
-              <input   
-                type="text"   
-                placeholder="The Origin"  
-                className="bg-transparent border-none outline-none focus:ring-0 placeholder:text-[#333] text-lg"  
-              />  
-            </div>  
+          <div className="space-y-4">  
+            <label className="text-xs uppercase tracking-widest text-[#c5a47e]">The Vision</label>  
+            <textarea   
+              rows={4}  
+              placeholder="Tell us about the atmosphere you're seeking..."  
+              className="w-full bg-white/5 border border-white/10 p-4 focus:outline-none focus:border-[#c5a47e] transition-colors placeholder:text-white/10 resize-none"  
+            />  
           </div>
 
-          <div className="flex flex-col border-b border-[#d4af37]/30 py-2">  
-            <label className="text-[10px] uppercase tracking-[0.3em] mb-2 text-[#d4af37]/60 font-sans">The Vision</label>  
+          <div className="space-y-4">  
+            <label className="text-xs uppercase tracking-widest text-[#c5a47e]">Aesthetic Notes</label>  
             <textarea   
               rows={3}  
-              placeholder="What defines this journey?"  
-              className="bg-transparent border-none outline-none focus:ring-0 placeholder:text-[#333] text-lg resize-none"  
+              placeholder="Textures, light, specific architectural preferences..."  
+              className="w-full bg-white/5 border border-white/10 p-4 focus:outline-none focus:border-[#c5a47e] transition-colors placeholder:text-white/10 resize-none"  
             />  
           </div>
 
-          <div className="flex flex-col border-b border-[#d4af37]/30 py-2">  
-            <label className="text-[10px] uppercase tracking-[0.3em] mb-2 text-[#d4af37]/60 font-sans">Aesthetic Notes</label>  
-            <textarea   
-              rows={2}  
-              placeholder="Atmosphere, texture, and silence..."  
-              className="bg-transparent border-none outline-none focus:ring-0 placeholder:text-[#333] text-lg resize-none"  
-            />  
-          </div>
-
-          <div className="pt-8 text-center">  
-            <button type="button" className="group relative px-12 py-4 border border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37] hover:text-black transition-all duration-500 tracking-[0.4em] uppercase text-xs font-sans">  
+          <div className="pt-6">  
+            <button   
+              type="submit"  
+              className="group relative px-12 py-4 bg-[#c5a47e] text-[#0a0a0a] uppercase tracking-[0.2em] text-sm font-bold hover:bg-white transition-all duration-500"  
+            >  
               Begin the Dialogue  
             </button>  
           </div>  
