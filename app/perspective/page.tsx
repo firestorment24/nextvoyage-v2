@@ -1,6 +1,4 @@
-import React from 'react';  
-import Navigation from '../components/Navigation';  
-import Footer from '../components/Footer';
+import React from 'react';
 
 export default function PerspectivePage() {  
   const essays = [  
@@ -22,8 +20,6 @@ export default function PerspectivePage() {
 
   return (  
     <main className="min-h-screen bg-[#0A0A0A] text-[#F5F5F5] selection:bg-[#C5A059] selection:text-black">  
-      <Navigation />  
-        
       <section className="pt-40 pb-20 px-6 max-w-6xl mx-auto">  
         <header className="mb-24 border-b border-white/10 pb-12">  
           <p className="text-[#C5A059] uppercase tracking-[0.3em] text-xs mb-4">Volume Index</p>  
@@ -54,9 +50,7 @@ export default function PerspectivePage() {
             </article>  
           ))}  
         </div>  
-      </section>
-
-      <Footer />  
+      </section>  
     </main>  
   );  
 }  
