@@ -26,7 +26,7 @@ const Navigation = () => {
           onClick={() => setIsOpen(!isOpen)}  
           className="text-[#C5A059] font-sans text-xs uppercase tracking-[0.3em]"  
         >  
-          {isOpen ? '[ Close ]' : '[ Concierge ]'}  
+          {isOpen ?  : ' Concierge '}  
         </button>  
       </nav>
 
