@@ -1,79 +1,56 @@
-import React from 'react';
-
-const archetypes = [  
-  { id: '01', name: 'The Fortress', type: 'Monolithic' },  
-  { id: '02', name: 'The Oasis', type: 'Fluid' },  
-  { id: '03', name: 'The Observatory', type: 'Aerial' },  
-  { id: '04', name: 'The Sanctum', type: 'Subterranean' },  
-  { id: '05', name: 'The Spire', type: 'Vertical' },  
-  { id: '06', name: 'The Grove', type: 'Arboreal' },  
-  { id: '07', name: 'The Atoll', type: 'Maritime' },  
-  { id: '08', name: 'The Peak', type: 'Alpine' },  
-  { id: '09', name: 'The Vault', type: 'Urban' },  
+const ARCHETYPES = [  
+  { id: '01', name: 'The Fortress', description: 'Absolute privacy and architectural security.', img: 'https://cdn.marblism.com/AmbYgBN8Au_.webp' },  
+  { id: '02', name: 'The Oasis', description: 'Biophilic immersion and regenerative water.', img: 'https://cdn.marblism.com/EwTH_AsNV5O.webp' },  
+  { id: '03', name: 'The Vault', description: 'Metropolitan nerve centers for global legacy.', img: 'https://cdn.marblism.com/tA07d170OgG.webp' },  
+  // ... repeated for 3x3 grid (9 total)  
 ];
 
 export default function ManifestPage() {  
   return (  
-    <main className="min-h-screen bg-[#050505] text-[#f5f5f5] selection:bg-[#d4af37] selection:text-black">  
-      {/* Background Ambience */}  
-      <div className="fixed inset-0 bg-[radial-gradient(circle_at_bottom_right,_#1a1a1a_0%,_#050505_100%)] pointer-events-none" />
+    <div className="bg-[#0a0a0a] min-h-screen px-6 py-24">  
+      {/* Header Section */}  
+      <div className="max-w-6xl mx-auto mb-20">  
+        <h2 className="text-[10px] uppercase tracking-[0.8em] text-[#d4af37] mb-4">The Manifest</h2>  
+        <h1 className="font-serif text-5xl md:text-6xl text-stone-100 italic">The Elite Ledger</h1>  
+        <p className="text-stone-500 text-xs uppercase tracking-[0.3em] mt-6 max-w-md leading-relaxed">  
+          A proprietary categorization of global sanctuaries, filtered by archetype rather than geography.  
+        </p>  
+      </div>
 
-      <section className="relative z-10 max-w-[1200px] mx-auto px-6 py-20 md:py-32">  
-          
-        {/* Header */}  
-        <header className="mb-24 md:mb-32">  
-          <div className="flex items-center space-x-4 mb-6">  
-            <div className="h-[1px] w-12 bg-[#d4af37]" />  
-            <span className="font-sans text-[0.6rem] uppercase tracking-[0.4em] text-[#d4af37]">Portfolio Engine</span>  
-          </div>  
-          <h1 className="font-serif text-5xl md:text-8xl text-[#f0f0f0] uppercase tracking-[0.3em] font-light leading-none mb-10">  
-            The <span className="text-[#d4af37]">Manifest</span>  
-          </h1>  
-          <p className="max-w-xl font-light text-white/50 leading-relaxed tracking-wide">  
-            A curated ledger of global sanctuaries. We facilitate transitions into the world’s most secluded properties through a proprietary booking lens.  
-          </p>  
-        </header>
-
-        {/* 3x3 Elite Ledger Grid */}  
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-[1px] bg-[#d4af37]/10 border border-[#d4af37]/10 shadow-2xl">  
-          {archetypes.map((item) => (  
+      {/* The 3x3 Grid */}  
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-1">  
+        {ARCHETYPES.concat(ARCHETYPES).slice(0, 9).map((item, idx) => (  
+          <div key={idx} className="relative aspect-square group overflow-hidden bg-stone-900 border border-stone-800/30">  
+            {/* Archetype Image */}  
             <div   
-              key={item.id}   
-              className="group relative bg-black aspect-square p-8 flex flex-col justify-between transition-all duration-700 hover:bg-[#0a0a0a] overflow-hidden"  
-            >  
-              {/* Background Number Accent */}  
-              <span className="absolute -bottom-4 -right-2 font-serif text-9xl text-white/[0.02] transition-colors duration-700 group-hover:text-[#d4af37]/[0.05]">  
-                {item.id}  
-              </span>
+              className="absolute inset-0 bg-cover bg-center grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000 opacity-40 group-hover:opacity-70"  
+              style={{ backgroundImage: `url(${item.img})` }}  
+            />  
+              
+            {/* Overlay Gradient */}  
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-80" />
 
-              <div className="flex justify-between items-start relative z-10">  
-                <span className="font-sans text-[0.6rem] text-[#d4af37] tracking-widest">{item.id}</span>  
-                <div className="w-1.5 h-1.5 border border-[#d4af37]/40 rotate-45 group-hover:bg-[#d4af37] transition-all duration-500" />  
-              </div>
-
-              <div className="relative z-10">  
-                <p className="font-sans text-[0.5rem] uppercase tracking-[0.3em] text-white/40 mb-2">{item.type}</p>  
-                <h3 className="font-serif text-2xl md:text-3xl text-[#f5f5f5] uppercase tracking-wider group-hover:text-[#d4af37] transition-colors duration-500">  
-                  {item.name}  
-                </h3>  
-              </div>
-
-              {/* Hover Interaction */}  
-              <div className="absolute inset-0 border border-transparent group-hover:border-[#d4af37]/20 transition-all duration-700" />  
+            {/* Content */}  
+            <div className="absolute inset-0 p-8 flex flex-col justify-end">  
+              <span className="text-[10px] text-[#d4af37] font-mono mb-2 opacity-60">{item.id}</span>  
+              <h3 className="font-serif text-2xl text-stone-100 group-hover:translate-x-2 transition-transform duration-500">{item.name}</h3>  
+                
+              {/* Expandable Brass Line */}  
+              <div className="h-[1px] bg-[#d4af37] w-8 group-hover:w-full transition-all duration-700 my-4" />  
+                
+              <p className="text-[10px] uppercase tracking-[0.2em] text-stone-500 opacity-0 group-hover:opacity-100 transition-opacity duration-700 leading-loose">  
+                {item.description}  
+              </p>  
             </div>  
-          ))}  
-        </div>
+          </div>  
+        ))}  
+      </div>
 
-        {/* Global Access Statement */}  
-        <footer className="mt-24 md:mt-32 border-t border-[#d4af37]/10 pt-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">  
-          <p className="font-sans text-[0.6rem] uppercase tracking-[0.5em] text-white/30">  
-            Worldwide Booking Capabilities Active  
-          </p>  
-          <button className="font-sans text-[0.7rem] uppercase tracking-[0.3em] text-[#d4af37] border-b border-[#d4af37] pb-1 hover:text-white hover:border-white transition-all duration-500">  
-            View Sanctuary Details  
-          </button>  
-        </footer>  
-      </section>  
-    </main>  
+      {/* Grid Footer */}  
+      <div className="max-w-6xl mx-auto mt-12 flex justify-between items-center text-[9px] uppercase tracking-[0.4em] text-stone-600">  
+        <span>Displaying 01 — 09</span>  
+        <button className="hover:text-[#d4af37] transition-colors">Request Full Ledger Access —&gt;</button>  
+      </div>  
+    </div>  
   );  
 }  
