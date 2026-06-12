@@ -1,76 +1,74 @@
-import { notFound } from 'next/navigation'  
-import { SANCTUARIES_DATA } from '@/lib/data/sanctuaries'  
-import Navigation from '@/components/Navigation'  
-import Link from 'next/link'
+// app/archive/[id]/page.tsx  
+import { SANCTUARIES } from '@/lib/data/sanctuaries'  
+import Link from 'next/link'  
+import { notFound } from 'next/navigation'
 
-export default function ArchiveDetail({ params }: { params: { id: string } }) {  
-  const sanctuary = SANCTUARIES_DATA.find((s) => s.id === params.id)
+export async function generateStaticParams() {  
+  return SANCTUARIES.map((item) => ({  
+    id: item.id,  
+  }))  
+}
 
-  if (!sanctuary) return notFound()
+export default function SanctuaryDetailPage({ params }: { params: { id: string } }) {  
+  const sanctuary = SANCTUARIES.find((s) => s.id === params.id)
+
+  if (!sanctuary) {  
+    notFound()  
+  }
 
   return (  
-    <main className="min-h-screen bg-[#FDFCFB] text-[#1a1a1a]">  
-      <Navigation />  
-        
-      <div className="max-w-screen-xl mx-auto px-6 pt-32 pb-24">  
+    <main className="min-h-screen bg-black text-white py-20 px-6">  
+      <div className="max-w-4xl mx-auto">  
+        {/* Navigation Back */}  
         <Link   
           href="/archive"   
-          className="text-[10px] uppercase tracking-[0.2em] opacity-40 hover:opacity-100 transition-opacity mb-12 block"  
+          className="text-xs uppercase tracking-widest opacity-50 hover:opacity-100 transition-opacity mb-12 inline-block"  
         >  
           ← Back to Archive  
         </Link>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">  
-            
-          {/* Left: Content Ledger */}  
-          <div className="lg:col-span-4 space-y-12">  
-            <header className="space-y-6">  
-              <h1 className="text-4xl md:text-5xl font-light tracking-tight leading-none">  
-                {sanctuary.name}  
-              </h1>  
-              <p className="text-xs uppercase tracking-[0.3em] opacity-50 italic">  
-                {sanctuary.loc} — {sanctuary.tag}  
-              </p>  
-            </header>
+        {/* Header Section */}  
+        <header className="mb-12">  
+          <div className="flex items-center gap-4 mb-4">  
+            <span className="text-[10px] uppercase tracking-[0.3em] px-2 py-1 border border-white/20">  
+              {sanctuary.tag}  
+            </span>  
+            <span className="text-[10px] uppercase tracking-[0.3em] opacity-50">  
+              {sanctuary.loc}  
+            </span>  
+          </div>  
+          <h1 className="text-4xl md:text-6xl font-light tracking-tight">  
+            {sanctuary.name}  
+          </h1>  
+        </header>
 
-            <div className="space-y-8 pt-8 border-t border-black/5">  
-              <div>  
-                <h3 className="text-[10px] uppercase tracking-[0.2em] mb-3 opacity-40 text-black font-semibold">Atmosphere</h3>  
-                <p className="text-sm leading-relaxed max-w-xs">{sanctuary.atmosphere}</p>  
-              </div>  
-                
-              <div>  
-                <h3 className="text-[10px] uppercase tracking-[0.2em] mb-3 opacity-40 text-black font-semibold">Inquiry Status</h3>  
-                <p className="text-sm font-medium">Available for Private Viewing</p>  
-              </div>
-
-              <button className="bg-black text-white px-8 py-4 text-[10px] uppercase tracking-[0.3em] w-full lg:w-auto hover:bg-zinc-800 transition-colors">  
-                Inquire with Rachel  
-              </button>  
-            </div>  
+        {/* Content Section */}  
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 border-t border-white/10 pt-12">  
+          <div className="md:col-span-2">  
+            <p className="text-lg leading-relaxed text-gray-300 font-light">  
+              {sanctuary.description}  
+            </p>  
           </div>
 
-          {/* Right: Visual Anchor & Dossier */}  
-          <div className="lg:col-span-8 space-y-16">  
-            <div className="relative aspect-[16/10] overflow-hidden grayscale opacity-80 brightness-105 transition-all duration-700 hover:opacity-100 hover:grayscale-0">  
-              <img   
-                src={sanctuary.heroImage}   
-                alt={sanctuary.name}  
-                className="object-cover w-full h-full"  
-              />  
+          <div className="space-y-8">  
+            <div>  
+              <h4 className="text-[10px] uppercase tracking-widest opacity-40 mb-2">Rachel's Inquiry Desk</h4>  
+              <p className="text-sm text-gray-400 mb-6">  
+                Connect with our AI Lead Analyst to initialize your dossier and unlock Daryl’s calendar.  
+              </p>  
+                
+              {/* UPDATED: Link to Rachel's Inquiry Page */}  
+              <Link   
+                href={`/inquiry?id=${sanctuary.id}`}  
+                className="inline-block w-full text-center bg-white text-black px-6 py-4 uppercase text-[10px] tracking-[0.2em] hover:bg-gray-200 transition-colors"  
+              >  
+                Connect with Concierge  
+              </Link>  
             </div>
 
-            <div className="max-w-2xl">  
-              <h2 className="text-[10px] uppercase tracking-[0.2em] mb-8 opacity-40">The Dossier</h2>  
-              <div className="space-y-10">  
-                {sanctuary.highlights.map((item, idx) => (  
-                  <div key={idx} className="group">  
-                    <p className="text-xl md:text-2xl font-light leading-snug border-b border-black/5 pb-6">  
-                      {item}  
-                    </p>  
-                  </div>  
-                ))}  
-              </div>  
+            <div className="pt-8 border-t border-white/10">  
+              <h4 className="text-[10px] uppercase tracking-widest opacity-40 mb-2">Status</h4>  
+              <p className="text-xs text-green-500 uppercase tracking-widest">Available for Booking</p>  
             </div>  
           </div>  
         </div>  
