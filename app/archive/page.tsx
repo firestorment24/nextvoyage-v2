@@ -1,8 +1,8 @@
 import Link from 'next/link';  
 import Image from 'next/image';  
-import { SANCTUARIES_DATA } from '@/lib/data'; // Adjust path if needed
+import { SANCTUARIES_DATA } from '@/lib/data/sanctuaries'; // Added /sanctuaries
 
-export default function ArchiveIndex() {  
+export default function ArchiveIndex() { 
   return (  
     <main className="min-h-screen bg-white pt-32 pb-20 px-6 sm:px-12">  
       {/* Editorial Header */}  
