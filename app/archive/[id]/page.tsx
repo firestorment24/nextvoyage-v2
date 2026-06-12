@@ -1,4 +1,3 @@
-// app/archive/[id]/page.tsx  
 import { notFound } from 'next/navigation'  
 import { SANCTUARIES_DATA } from '@/lib/data/sanctuaries'  
 import Navigation from '@/components/Navigation'  
@@ -23,6 +22,7 @@ export default function ArchiveDetail({ params }: { params: { id: string } }) {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">  
             
+          {/* Left: Content Ledger */}  
           <div className="lg:col-span-4 space-y-12">  
             <header className="space-y-6">  
               <h1 className="text-4xl md:text-5xl font-light tracking-tight leading-none">  
@@ -35,21 +35,22 @@ export default function ArchiveDetail({ params }: { params: { id: string } }) {
 
             <div className="space-y-8 pt-8 border-t border-black/5">  
               <div>  
-                <h3 className="text-[10px] uppercase tracking-[0.2em] mb-3 opacity-40 text-black">Atmosphere</h3>  
+                <h3 className="text-[10px] uppercase tracking-[0.2em] mb-3 opacity-40 text-black font-semibold">Atmosphere</h3>  
                 <p className="text-sm leading-relaxed max-w-xs">{sanctuary.atmosphere}</p>  
               </div>  
                 
               <div>  
-                <h3 className="text-[10px] uppercase tracking-[0.2em] mb-3 opacity-40 text-black">Inquiry Status</h3>  
+                <h3 className="text-[10px] uppercase tracking-[0.2em] mb-3 opacity-40 text-black font-semibold">Inquiry Status</h3>  
                 <p className="text-sm font-medium">Available for Private Viewing</p>  
               </div>
 
-              <button className="bg-black text-white px-8 py-4 text-[10px] uppercase tracking-[0.3em] w-full lg:w-auto">  
+              <button className="bg-black text-white px-8 py-4 text-[10px] uppercase tracking-[0.3em] w-full lg:w-auto hover:bg-zinc-800 transition-colors">  
                 Inquire with Rachel  
               </button>  
             </div>  
           </div>
 
+          {/* Right: Visual Anchor & Dossier */}  
           <div className="lg:col-span-8 space-y-16">  
             <div className="relative aspect-[16/10] overflow-hidden grayscale opacity-80 brightness-105 transition-all duration-700 hover:opacity-100 hover:grayscale-0">  
               <img   
@@ -64,7 +65,7 @@ export default function ArchiveDetail({ params }: { params: { id: string } }) {
               <div className="space-y-10">  
                 {sanctuary.highlights.map((item, idx) => (  
                   <div key={idx} className="group">  
-                    <p className="text-xl md:text-2xl font-light leading-snug">  
+                    <p className="text-xl md:text-2xl font-light leading-snug border-b border-black/5 pb-6">  
                       {item}  
                     </p>  
                   </div>  
