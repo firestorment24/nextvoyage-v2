@@ -1,161 +1,99 @@
-'use client'
+'use client';
 
-import React, { useState } from 'react'  
-import { useRouter } from 'next/navigation'
+import React, { useState } from 'react';  
+import Link from 'next/link';
 
 export default function InquiryPage() {  
-  const [step, setStep] = useState(1)  
-  const [loading, setLoading] = useState(false)  
-  const [submitted, setSubmitted] = useState(false)  
-    
-  const [formData, setFormData] = useState({  
-    name: '',  
-    email: '',  
-    occasion: '',  
-    travelers: '',  
-    timing: '',  
-    budget: '',  
-    objectives: '',  
-    challenges: ''  
-  })
+  const [submitted, setSubmitted] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {  
-    setFormData({ ...formData, [e.target.name]: e.target.value })  
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {  
-    e.preventDefault()  
-    setLoading(true)  
-      
-    // Simulate API call to /api/lead  
-    try {  
-      const res = await fetch('/api/lead', {  
-        method: 'POST',  
-        headers: { 'Content-Type': 'application/json' },  
-        body: JSON.stringify(formData)  
-      })  
-        
-      if (res.ok) {  
-        setSubmitted(true)  
-      }  
-    } catch (err) {  
-      console.error("Submission failed", err)  
-    } finally {  
-      setLoading(false)  
-    }  
-  }
+  const handleSubmit = (e: React.FormEvent) => {  
+    e.preventDefault();  
+    setSubmitted(true);  
+  };
 
   if (submitted) {  
     return (  
-      <div className="min-h-screen bg-[#0D0D0D] text-[#E2E0D5] flex flex-col items-center justify-center p-8 text-center">  
-        <h1 className="text-3xl font-light mb-4 uppercase tracking-widest">Receipt Confirmed</h1>  
-        <p className="max-w-md mb-8 font-serif italic opacity-80">  
-          Rachel is currently analyzing your request. A formal dossier and strategic roadmap will be dispatched to your inbox shortly.  
-        </p>  
-        <div className="border border-[#E2E0D5]/20 p-8 rounded-sm">  
-          <p className="mb-6 uppercase text-sm tracking-widest">Priority Access Unlocked</p>  
-          <a   
-            href="https://cal.com/nexvoyagecollective/discovery-call"   
-            target="_blank"   
-            rel="noopener noreferrer"  
-            className="px-8 py-4 bg-[#E2E0D5] text-[#0D0D0D] uppercase text-xs tracking-widest hover:bg-[#D4D2C8] transition-colors"  
-          >  
-            Schedule Discovery Call  
-          </a>  
+      <main className="min-h-screen bg-white flex flex-col items-center justify-center px-6">  
+        <div className="max-w-md text-center">  
+          <h1 className="text-4xl font-light tracking-tighter uppercase mb-6">Received</h1>  
+          <p className="text-sm text-neutral-500 leading-relaxed mb-12">  
+            The Collective is currently reviewing new entries. <br />   
+            A specialist will reach out if a vacancy aligns with your profile.  
+          </p>  
+          <Link href="/archive" className="text-xs uppercase tracking-widest border-b border-black pb-1">  
+            Back to Archive  
+          </Link>  
         </div>  
-      </div>  
-    )  
+      </main>  
+    );  
   }
 
   return (  
-    <div className="min-h-screen bg-[#0D0D0D] text-[#E2E0D5] p-8 md:p-24 font-sans">  
-      <div className="max-w-2xl mx-auto">  
-        <header className="mb-16 border-b border-[#E2E0D5]/10 pb-8">  
-          <p className="text-[10px] uppercase tracking-[0.3em] mb-2 opacity-50">Inquiry Desk — Phase 3</p>  
-          <h1 className="text-4xl font-light tracking-tighter italic">The Deep Dive</h1>  
+    <main className="min-h-screen bg-white pt-32 pb-20 px-6 sm:px-12">  
+      <div className="max-w-screen-md mx-auto">  
+        <header className="mb-24">  
+          <span className="text-[10px] uppercase tracking-[0.3em] text-neutral-400 block mb-4">  
+            Membership Application  
+          </span>  
+          <h1 className="text-6xl md:text-8xl font-light tracking-tighter uppercase leading-[0.9]">  
+            Begin the <br /> Vetting  
+          </h1>  
         </header>
 
-        <form onSubmit={handleSubmit} className="space-y-12">  
-          {/* Section 1: The Identity */}  
-          <section className="space-y-6">  
-            <h2 className="text-[10px] uppercase tracking-[0.4em] text-[#E2E0D5]/40 mb-8">— 01. Identity</h2>  
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">  
-              <div className="flex flex-col space-y-2">  
-                <label className="text-[10px] uppercase tracking-widest">Name</label>  
-                <input   
-                  required  
-                  name="name"  
-                  value={formData.name}  
-                  onChange={handleChange}  
-                  className="bg-transparent border-b border-[#E2E0D5]/30 py-2 focus:outline-none focus:border-[#E2E0D5] transition-colors"  
-                />  
-              </div>  
-              <div className="flex flex-col space-y-2">  
-                <label className="text-[10px] uppercase tracking-widest">Email</label>  
-                <input   
-                  required  
-                  type="email"  
-                  name="email"  
-                  value={formData.email}  
-                  onChange={handleChange}  
-                  className="bg-transparent border-b border-[#E2E0D5]/30 py-2 focus:outline-none focus:border-[#E2E0D5] transition-colors"  
-                />  
-              </div>  
-            </div>  
-          </section>
-
-          {/* Section 2: The Logistics */}  
-          <section className="space-y-6">  
-            <h2 className="text-[10px] uppercase tracking-[0.4em] text-[#E2E0D5]/40 mb-8">— 02. Parameters</h2>  
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">  
-              <div className="flex flex-col space-y-2">  
-                <label className="text-[10px] uppercase tracking-widest">Occasion</label>  
-                <input   
-                  name="occasion"  
-                  placeholder="e.g. Sabbatical, Reset, Milestone"  
-                  value={formData.occasion}  
-                  onChange={handleChange}  
-                  className="bg-transparent border-b border-[#E2E0D5]/30 py-2 focus:outline-none focus:border-[#E2E0D5] transition-colors"  
-                />  
-              </div>  
-              <div className="flex flex-col space-y-2">  
-                <label className="text-[10px] uppercase tracking-widest">Timing</label>  
-                <input   
-                  name="timing"  
-                  placeholder="Estimated dates or window"  
-                  value={formData.timing}  
-                  onChange={handleChange}  
-                  className="bg-transparent border-b border-[#E2E0D5]/30 py-2 focus:outline-none focus:border-[#E2E0D5] transition-colors"  
-                />  
-              </div>  
-            </div>  
-          </section>
-
-          {/* Section 3: The Intent */}  
-          <section className="space-y-6">  
-            <h2 className="text-[10px] uppercase tracking-[0.4em] text-[#E2E0D5]/40 mb-8">— 03. Strategic Intent</h2>  
-            <div className="flex flex-col space-y-2">  
-              <label className="text-[10px] uppercase tracking-widest">Intended Outcome</label>  
-              <textarea   
-                name="objectives"  
-                rows={3}  
-                placeholder="What must be true at the end of this journey?"  
-                value={formData.objectives}  
-                onChange={handleChange}  
-                className="bg-transparent border border-[#E2E0D5]/20 p-4 focus:outline-none focus:border-[#E2E0D5] transition-colors resize-none font-serif italic"  
+        <form onSubmit={handleSubmit} className="space-y-16">  
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">  
+            <div className="flex flex-col gap-2">  
+              <label className="text-[10px] uppercase tracking-widest text-neutral-400">Full Name</label>  
+              <input   
+                required  
+                type="text"   
+                className="bg-transparent border-b border-neutral-200 py-3 outline-none focus:border-black transition-colors text-lg font-light"   
               />  
             </div>  
-          </section>
+            <div className="flex flex-col gap-2">  
+              <label className="text-[10px] uppercase tracking-widest text-neutral-400">Digital Address</label>  
+              <input   
+                required  
+                type="email"   
+                className="bg-transparent border-b border-neutral-200 py-3 outline-none focus:border-black transition-colors text-lg font-light"   
+              />  
+            </div>  
+          </div>
 
-          <button   
-            type="submit"  
-            disabled={loading}  
-            className="w-full border border-[#E2E0D5] py-6 text-[10px] uppercase tracking-[0.5em] hover:bg-[#E2E0D5] hover:text-[#0D0D0D] transition-all duration-500 disabled:opacity-50"  
-          >  
-            {loading ? 'Processing Dossier...' : 'Transmit Inquiry'}  
-          </button>  
+          <div className="flex flex-col gap-2">  
+            <label className="text-[10px] uppercase tracking-widest text-neutral-400">Sanctuary of Interest</label>  
+            <select className="bg-transparent border-b border-neutral-200 py-3 outline-none focus:border-black transition-colors text-lg font-light appearance-none rounded-none">  
+              <option value="">General Collective Inquiry</option>  
+              <option value="metropolitan">The Metropolitan</option>  
+              <option value="island">The Island</option>  
+              <option value="fortress">The Fortress</option>  
+              {/* Add more as needed or map SANCTUARIES_DATA here */}  
+            </select>  
+          </div>
+
+          <div className="flex flex-col gap-2">  
+            <label className="text-[10px] uppercase tracking-widest text-neutral-400">Intent & Requirements</label>  
+            <textarea   
+              rows={4}  
+              placeholder="Tell us what you seek..."  
+              className="bg-transparent border-b border-neutral-200 py-3 outline-none focus:border-black transition-colors text-lg font-light resize-none"   
+            />  
+          </div>
+
+          <div className="pt-12 flex justify-between items-center">  
+            <p className="text-xs text-neutral-400 max-w-[200px] leading-relaxed">  
+              *Membership is subject to internal review and availability.  
+            </p>  
+            <button   
+              type="submit"  
+              className="group flex items-center gap-4 text-2xl font-light tracking-tight hover:italic transition-all"  
+            >  
+              Submit Application  
+              <span className="text-sm transition-transform group-hover:translate-x-2">→</span>  
+            </button>  
+          </div>  
         </form>  
       </div>  
-    </div>  
-  )  
+    </main>  
+  );  
 }  
