@@ -21,7 +21,7 @@ export default function Navigation() {
       {/* Static Header */}  
       <nav className="fixed top-0 left-0 w-full z-40 px-8 py-6 flex justify-between items-center bg-transparent">  
         <Link href="/" className="text-white font-extralight tracking-[0.2em] text-lg hover:text-[#d4af37] transition-colors">  
-          NEXTVOYAGE <span className="font-light">COLLECTIVE</span>  
+          NEXVOYAGE <span className="font-light">COLLECTIVE</span>  
         </Link>
 
         {/* Concierge Trigger */}  
