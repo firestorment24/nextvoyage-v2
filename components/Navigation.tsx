@@ -2,7 +2,7 @@
 import Link from 'next/link';
 
 export const Navigation = () => {  
-  const navLinks = [  
+  const navLinks = [   
     { name: 'Lobby', href: '/' },  
     { name: 'Archive', href: '/archive' },  
     { name: 'Perspective', href: '/perspective' },  
