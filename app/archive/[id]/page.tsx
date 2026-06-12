@@ -10,11 +10,10 @@ export default function ArchiveDetail({ params }: { params: { id: string } }) {
   if (!sanctuary) return notFound()
 
   return (  
-    <main className="min-h-screen bg-[#FDFCFB] text-[#1a1a1a] selection:bg-black/5">  
+    <main className="min-h-screen bg-[#FDFCFB] text-[#1a1a1a]">  
       <Navigation />  
         
       <div className="max-w-screen-xl mx-auto px-6 pt-32 pb-24">  
-        {/* Breadcrumb / Back */}  
         <Link   
           href="/archive"   
           className="text-[10px] uppercase tracking-[0.2em] opacity-40 hover:opacity-100 transition-opacity mb-12 block"  
@@ -24,7 +23,6 @@ export default function ArchiveDetail({ params }: { params: { id: string } }) {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">  
             
-          {/* Left Column: Metadata & Ledger */}  
           <div className="lg:col-span-4 space-y-12">  
             <header className="space-y-6">  
               <h1 className="text-4xl md:text-5xl font-light tracking-tight leading-none">  
@@ -46,22 +44,19 @@ export default function ArchiveDetail({ params }: { params: { id: string } }) {
                 <p className="text-sm font-medium">Available for Private Viewing</p>  
               </div>
 
-              {/* Static Concierge Button */}  
               <button className="bg-black text-white px-8 py-4 text-[10px] uppercase tracking-[0.3em] w-full lg:w-auto">  
                 Inquire with Rachel  
               </button>  
             </div>  
           </div>
 
-          {/* Right Column: Visual Anchor & Dossier */}  
           <div className="lg:col-span-8 space-y-16">  
             <div className="relative aspect-[16/10] overflow-hidden grayscale opacity-80 brightness-105 transition-all duration-700 hover:opacity-100 hover:grayscale-0">  
               <img   
                 src={sanctuary.heroImage}   
                 alt={sanctuary.name}  
-                className="object-cover w-full h-full scale-[1.01]"  
+                className="object-cover w-full h-full"  
               />  
-              <div className="absolute inset-0 bg-gradient-to-t from-[#FDFCFB]/20 to-transparent" />  
             </div>
 
             <div className="max-w-2xl">  
