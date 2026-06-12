@@ -1,74 +1,93 @@
-// app/inquiry/page.tsx  
-import React from 'react';
+'use client'
 
-const InquiryPage = () => {  
-return (  
-<main className="min-h-screen bg-[#0D0D0D] text-[#E2E0D5] selection:bg-[#E2E0D5] selection:text-[#0D0D0D]">  
-  {/* --- Header Section --- */}  
-  <section className="px-6 pt-32 pb-20 md:pt-48 md:pb-24 max-w-4xl mx-auto text-center">  
-    <span className="text-[10px] uppercase tracking-[0.5em] text-[#A69F88] block mb-6">The Journey Begins</span>  
-    <h1 className="text-4xl md:text-6xl font-serif italic text-white mb-8">The Inquiry</h1>  
-    <p className="text-sm md:text-base font-light leading-relaxed opacity-60 max-w-xl mx-auto italic text-[#A69F88]">  
-      Every experience we curate starts with a conversation. Tell us about the "Elsewhere" you are seeking, and we will help you find the way.  
-    </p>  
-  </section>
+import { useSearchParams } from 'next/navigation'  
+import Navigation from '@/components/Navigation'  
+import { Suspense, useState } from 'react'
 
-  {/* --- The Softened Ledger --- */}  
-  <section className="px-6 pb-48 max-w-4xl mx-auto">  
-    <form className="space-y-20">  
-        
-      {/* --- Section 1: Connection --- */}  
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">  
-        <div className="flex flex-col gap-3">  
-          <label className="text-[9px] uppercase tracking-[0.3em] text-[#A69F88]">Contact Name</label>  
-          <input type="text" placeholder="Your Name" className="bg-transparent border-b border-white/10 py-3 focus:border-[#A69F88] outline-none transition-colors placeholder:opacity-20 text-white" />  
-        </div>  
-        <div className="flex flex-col gap-3">  
-          <label className="text-[9px] uppercase tracking-[0.3em] text-[#A69F88]">Email Address</label>  
-          <input type="email" placeholder="Preferred Email" className="bg-transparent border-b border-white/10 py-3 focus:border-[#A69F88] outline-none transition-colors placeholder:opacity-20 text-white" />  
-        </div>  
-        <div className="flex flex-col gap-3">  
-          <label className="text-[9px] uppercase tracking-[0.3em] text-[#A69F88]">Desired Destination</label>  
-          <input type="text" placeholder="A specific Sanctuary or 'Discovery'" className="bg-transparent border-b border-white/10 py-3 focus:border-[#A69F88] outline-none transition-colors placeholder:opacity-20 text-white" />  
-        </div>  
-        <div className="flex flex-col gap-3">  
-          <label className="text-[9px] uppercase tracking-[0.3em] text-[#A69F88]">Travel Party</label>  
-          <input type="text" placeholder="Total number of guests" className="bg-transparent border-b border-white/10 py-3 focus:border-[#A69F88] outline-none transition-colors placeholder:opacity-20 text-white" />  
-        </div>  
-      </div>
+function InquiryForm() {  
+const searchParams = useSearchParams()  
+const initialProperty = searchParams.get('property') || ''
 
-      {/* --- Section 2: Timing --- */}  
-      <div className="flex flex-col gap-3">  
-        <label className="text-[9px] uppercase tracking-[0.3em] text-[#A69F88]">Preferred Timing</label>  
-        <input type="text" placeholder="Proposed dates or a season" className="bg-transparent border-b border-white/10 py-3 focus:border-[#A69F88] outline-none transition-colors placeholder:opacity-20 text-white" />  
-      </div>
+const [status, setStatus] = useState<'idle' | 'submitting' | 'booking'>('idle')
 
-      {/* --- Section 3: The Intention --- */}  
-      <div className="space-y-12 pt-8">  
-        <div className="flex flex-col gap-3">  
-          <label className="text-[9px] uppercase tracking-[0.3em] text-[#A69F88]">The Objective</label>  
-          <textarea   
-            rows={2}  
-            placeholder="What are you looking to find in this escape? (Clarity, connection, quiet...)"   
-            className="bg-transparent border-b border-white/10 py-3 focus:border-[#A69F88] outline-none transition-colors placeholder:opacity-20 resize-none text-white italic font-serif text-lg"  
-          />  
-        </div>  
-      </div>
+const handleSubmit = (e: React.FormEvent) => {  
+  e.preventDefault()  
+  setStatus('submitting')  
+  // Simulated lead capture logic  
+  setTimeout(() => setStatus('booking'), 1200)  
+}
 
-      {/* --- Action --- */}  
-      <div className="pt-20 text-center">  
-        <button className="px-24 py-5 border border-[#A69F88]/30 text-[10px] uppercase tracking-[0.8em] text-[#A69F88] hover:bg-[#A69F88] hover:text-[#0D0D0D] transition-all duration-1000">  
-          Send Inquiry  
-        </button>  
-        <p className="text-[8px] uppercase tracking-[0.3em] opacity-20 mt-12 text-[#A69F88]">  
-          The Collective Concierge will respond shortly.  
+if (status === 'booking') {  
+  return (  
+    <div className="max-w-4xl mx-auto space-y-12 py-12 animate-in fade-in slide-in-from-bottom-4 duration-700">  
+      <div className="text-center space-y-4">  
+        <h2 className="text-3xl font-light italic">Lead Analyzed.</h2>  
+        <p className="text-sm opacity-60 max-w-md mx-auto">  
+          Rachel has flagged your request. Please select a window for your discovery call below to finalize the dossier.  
         </p>  
+      </div>  
+        
+      {/* Cal.com Embed / Link */}  
+      <div className="bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm">  
+        <iframe   
+          src="https://cal.com/nexvoyagecollective/discovery-call"   
+          style={{ width: '100%', height: '600px', border: 'none' }}  
+          title="Discovery Call Scheduling"  
+        />  
+      </div>  
+    </div>  
+  )  
+}
+
+return (  
+  <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-12">  
+    <div className="space-y-8">  
+      <div className="space-y-4">  
+        <label className="text-[10px] uppercase tracking-[0.2em] opacity-40">Subject of Interest</label>  
+        <input   
+          type="text"   
+          defaultValue={initialProperty}  
+          className="w-full bg-transparent border-b border-black/10 pb-4 text-2xl font-light focus:outline-none focus:border-black transition-colors"  
+        />  
       </div>
 
-    </form>  
-  </section>  
-</main>  
-);  
-};
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">  
+        <div className="space-y-4">  
+          <label className="text-[10px] uppercase tracking-[0.2em] opacity-40">Full Name</label>  
+          <input required type="text" className="w-full bg-transparent border-b border-black/10 pb-4 text-lg font-light focus:outline-none focus:border-black transition-colors" />  
+        </div>  
+        <div className="space-y-4">  
+          <label className="text-[10px] uppercase tracking-[0.2em] opacity-40">Email Address</label>  
+          <input required type="email" className="w-full bg-transparent border-b border-black/10 pb-4 text-lg font-light focus:outline-none focus:border-black transition-colors" />  
+        </div>  
+      </div>  
+    </div>
 
-export default InquiryPage; 
+    <button   
+      type="submit"  
+      disabled={status === 'submitting'}  
+      className="w-full bg-black text-white py-6 text-[10px] uppercase tracking-[0.4em] hover:bg-zinc-800 transition-colors disabled:opacity-50"  
+    >  
+      {status === 'submitting' ? 'Processing...' : 'Proceed to Discovery Calendar'}  
+    </button>  
+  </form>  
+)  
+}
+
+export default function InquiryPage() {  
+return (  
+  <main className="min-h-screen bg-[#FDFCFB] text-[#1a1a1a]">  
+    <Navigation />  
+    <div className="max-w-screen-xl mx-auto px-6 pt-40 pb-24">  
+      <header className="mb-20 text-center space-y-4">  
+        <h1 className="text-5xl md:text-6xl font-light tracking-tighter text-black">Inquiry Desk</h1>  
+        <p className="text-xs uppercase tracking-[0.3em] opacity-40">Lead Analysis by Rachel AI</p>  
+      </header>  
+        
+      <Suspense fallback={<div className="text-center opacity-20">Loading Ledger...</div>}>  
+        <InquiryForm />  
+      </Suspense>  
+    </div>  
+  </main>  
+)  
+}  
