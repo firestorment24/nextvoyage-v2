@@ -35,7 +35,7 @@ return (
       <div className="absolute inset-0 z-0">  
         <img   
           src="https://cdn.marblism.com/5gKSV_IRXVD.webp"   
-          className="w-full h-full object-cover opacity-20 grayscale brightness-50"  
+          className="w-full h-full object-cover opacity-20 grayscale brightness-[0.4]"  
           alt="Menu Backdrop"  
         />  
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-transparent to-[#0a0a0a]" />  
@@ -44,7 +44,7 @@ return (
       {/* Close Button */}  
       <button   
         onClick={() => setIsOpen(false)}  
-        className="absolute top-10 right-10 flex items-center gap-4 text-stone-500 hover:text-[#d4af37] transition-all duration-700"  
+        className="absolute top-12 right-12 flex items-center gap-4 text-stone-600 hover:text-[#d4af37] transition-all duration-700"  
       >  
         <span className="text-[10px] uppercase tracking-[0.5em]">Close</span>  
         <div className="relative w-8 h-8 flex items-center justify-center">  
@@ -54,38 +54,46 @@ return (
       </button>
 
       {/* Nav Links */}  
-      <nav className="relative z-10 h-full flex flex-col justify-center px-12 md:px-32">  
-        <div className="space-y-12">  
+      <nav className="relative z-10 h-full flex flex-col justify-center px-8 md:px-24 lg:px-48">  
+        <div className="space-y-16">  
           {navLinks.map((link, i) => (  
             <div key={link.name} className="group overflow-hidden">  
               <Link   
                 href={link.path}   
                 onClick={() => setIsOpen(false)}  
-                className="block space-y-2"  
+                className="block no-underline outline-none"  
               >  
-                <div className="flex items-center gap-8">  
-                  <span className="text-stone-700 text-xs font-mono transition-colors duration-700 group-hover:text-[#d4af37]">0{i + 1}</span>  
-                  <h2 className="text-5xl md:text-8xl font-light tracking-tighter text-stone-300 group-hover:text-[#d4af37] group-hover:italic transition-all duration-1000">  
-                    {link.name}  
-                  </h2>  
+                <div className="flex items-start md:items-center gap-10">  
+                  <span className="text-stone-800 text-sm font-mono transition-colors duration-700 group-hover:text-[#d4af37]">  
+                    0{i + 1}  
+                  </span>  
+                  <div className="space-y-3">  
+                    <h2 className="text-5xl md:text-8xl font-extralight tracking-tighter text-stone-300 group-hover:text-[#d4af37] group-hover:italic transition-all duration-1000 ease-out">  
+                      {link.name}  
+                    </h2>  
+                    <p className="text-[10px] uppercase tracking-[0.7em] text-stone-700 transition-all duration-700 group-hover:text-[#d4af37] group-hover:opacity-60">  
+                      {link.desc}  
+                    </p>  
+                  </div>  
                 </div>  
-                <p className="text-[10px] uppercase tracking-[0.8em] text-stone-700 ml-16 md:ml-24 transition-all duration-700 group-hover:text-[#d4af37] group-hover:opacity-80">  
-                  {link.desc}  
-                </p>  
               </Link>  
             </div>  
           ))}  
         </div>
 
-        {/* Footer in Menu */}  
-        <div className="absolute bottom-16 left-12 md:left-32 flex gap-16 border-t border-stone-900 pt-10 w-2/3">  
-          <div className="space-y-2">  
-            <span className="text-[9px] uppercase tracking-widest text-stone-700">Digital Transmission</span>  
-            <p className="text-xs text-stone-500 hover:text-[#d4af37] cursor-pointer transition-colors">concierge@nexvoyage.com</p>  
+        {/* Footer Details */}  
+        <div className="absolute bottom-16 left-8 md:left-24 lg:left-48 flex flex-col md:flex-row gap-12 border-t border-stone-900/50 pt-12 w-full max-w-4xl">  
+          <div className="space-y-3 pr-12 border-r border-stone-900/50">  
+            <span className="text-[9px] uppercase tracking-[0.4em] text-stone-700 block">Communication</span>  
+            <p className="text-sm text-stone-500 hover:text-[#d4af37] transition-colors cursor-pointer">concierge@nexvoyage.com</p>  
           </div>  
-          <div className="space-y-2">  
-            <span className="text-[9px] uppercase tracking-widest text-stone-700">Presence</span>  
-            <p className="text-xs text-stone-500 hover:text-[#d4af37] cursor-pointer transition-colors">Instagram / LinkedIn</p>  
+          <div className="space-y-3">  
+            <span className="text-[9px] uppercase tracking-[0.4em] text-stone-700 block">Social Transmission</span>  
+            <div className="flex gap-8">  
+              {['Instagram', 'LinkedIn'].map(s => (  
+                <span key={s} className="text-sm text-stone-500 hover:text-[#d4af37] transition-colors cursor-pointer">{s}</span>  
+              ))}  
+            </div>  
           </div>  
         </div>  
       </nav>  
