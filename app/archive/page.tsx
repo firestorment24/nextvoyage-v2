@@ -1,53 +1,60 @@
-// app/archive/page.tsx  
-import Link from 'next/link';
+import React from 'react'  
+import Link from 'next/link'
 
-const SANCTUARIES = [  
-{ id: 'azure-heights', name: 'Azure Heights', location: 'Amalfi Coast, Italy' },  
-{ id: 'velvet-pines', name: 'Velvet Pines', location: 'Zermatt, Switzerland' },  
-{ id: 'obsidian-sands', name: 'Obsidian Sands', location: 'Iceland' },  
-{ id: 'gilded-dunes', name: 'Gilded Dunes', location: 'Abu Dhabi' },  
-{ id: 'jade-canopy', name: 'Jade Canopy', location: 'Bali' },  
-{ id: 'ivory-reef', name: 'Ivory Reef', location: 'Maldives' },  
-{ id: 'copper-ridge', name: 'Copper Ridge', location: 'Montana' },  
-{ id: 'silver-horizon', name: 'Silver Horizon', location: 'Santorini' },  
-];
+const sanctuaries = [  
+  { id: 'azure-heights', name: 'Azure Heights', location: 'Amalfi Coast, Italy', tagline: 'The blue hour, perfected.' },  
+  { id: 'velvet-pines', name: 'Velvet Pines', location: 'Zermatt, Switzerland', tagline: 'The pinnacle of alpine silence.' },  
+  { id: 'obsidian-sands', name: 'Obsidian Sands', location: 'Santorini, Greece', tagline: 'Volcanic luxury on the edge.' },  
+  { id: 'gilded-dunes', name: 'Gilded Dunes', location: 'Dubai, UAE', tagline: 'Desert royalty redefined.' },  
+  { id: 'jade-canopy', name: 'Jade Canopy', location: 'Ubud, Bali', tagline: 'A dialogue with the jungle.' },  
+  { id: 'ivory-reef', name: 'Ivory Reef', location: 'Maldives', tagline: 'The architecture of water.' },  
+]
 
 export default function ArchivePage() {  
-return (  
-  <main className="min-h-screen bg-[#0A0A0A] pt-40 pb-20 px-10 md:px-20">  
-    <div className="max-w-7xl mx-auto">  
-      <header className="mb-24 border-b border-white/10 pb-10">  
-        <p className="text-[#A69F88] uppercase tracking-[0.5em] text-xs mb-4">The Collection</p>  
-        <h1 className="text-5xl md:text-7xl font-serif text-white">The Archive</h1>  
+  return (  
+    <main className="min-h-screen bg-black pt-32 pb-20 px-8 md:px-20">  
+      <header className="mb-20">  
+        <h1 className="text-[#C5A059] font-serif text-5xl md:text-7xl tracking-tighter mb-4">  
+          The Elite Ledger  
+        </h1>  
+        <p className="text-[#C5A059]/40 font-sans text-xs uppercase tracking-[0.4em]">  
+          Quarterly Rotation: Summer 2026  
+        </p>  
       </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/10 border border-white/10">  
-        {SANCTUARIES.map((item) => (  
+      <div className="grid grid-cols-1 gap-12">  
+        {sanctuaries.map((item, index) => (  
           <Link   
             key={item.id}   
             href={`/archive/${item.id}`}  
-            className="group bg-[#0A0A0A] p-12 hover:bg-[#141414] transition-all duration-700 flex flex-col justify-between h-80"  
+            className="group border-b border-[#C5A059]/10 pb-12 flex flex-col md:flex-row md:items-end justify-between hover:border-[#C5A059]/30 transition-colors"  
           >  
-            <div>  
-              <p className="text-[#A69F88] uppercase tracking-[0.2em] text-xs mb-2">  
-                {item.location}  
-              </p>  
-              <h2 className="text-3xl font-serif text-white group-hover:translate-x-2 transition-transform duration-500">  
+            <div className="flex flex-col">  
+              <span className="text-[#C5A059]/40 font-sans text-[10px] mb-4 uppercase tracking-widest">  
+                Entry No. 00{index + 1}  
+              </span>  
+              <h2 className="text-[#C5A059] font-serif text-3xl md:text-5xl tracking-tight group-hover:text-white transition-colors">  
                 {item.name}  
               </h2>  
+              <span className="text-[#C5A059]/60 font-sans text-xs uppercase tracking-[0.2em] mt-2">  
+                {item.location}  
+              </span>  
             </div>  
-            <div className="flex justify-between items-end">  
-              <span className="text-[10px] text-gray-500 uppercase tracking-widest font-mono">  
-                Entry No. {item.id.toUpperCase()}  
-              </span>  
-              <span className="text-[#A69F88] opacity-0 group-hover:opacity-100 transition-opacity duration-700">  
-                View Access →  
-              </span>  
+              
+            <div className="mt-6 md:mt-0 md:text-right">  
+              <p className="text-[#C5A059]/40 font-serif italic text-lg">  
+                "{item.tagline}"  
+              </p>  
             </div>  
           </Link>  
         ))}  
-      </div>  
-    </div>  
-  </main>  
-);  
+      </div>
+
+      <footer className="mt-32 text-center">  
+        <p className="text-[#C5A059]/20 font-sans text-[10px] uppercase tracking-[0.5em]">  
+          End of Current Ledger  
+        </p>  
+      </footer>  
+    </main>  
+  )  
 }  
