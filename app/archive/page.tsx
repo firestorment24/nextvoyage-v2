@@ -1,6 +1,5 @@
 import React from 'react'    
 import Link from 'next/link'    
-// Swapping to the correct singular export name  
 import { SANCTUARY_DATA } from '@/data/sanctuaries' 
 
 export default function ArchiveGallery() {    
@@ -51,17 +50,20 @@ export default function ArchiveGallery() {
                 <div className="mt-8 flex justify-between items-start">  
                   <div className="space-y-2">  
                     <h2 className="text-2xl font-light tracking-tight">{sanctuary.name}</h2>  
-                    <p className="text-[10px] tracking-[0.2em] uppercase opacity-40">{sanctuary.location}</p>  
+                    {/* Changed .location to .loc */}  
+                    <p className="text-[10px] tracking-[0.2em] uppercase opacity-40">{sanctuary.loc}</p>  
                   </div>  
                   <div className="text-right">  
-                    <span className="text-[10px] tracking-[0.2em] uppercase opacity-40 block mb-1">Standard</span>  
-                    <p className="text-xs font-light italic">{sanctuary.standard}</p>  
+                    <span className="text-[10px] tracking-[0.2em] uppercase opacity-40 block mb-1">Status</span>  
+                    {/* Changed .standard to .tag */}  
+                    <p className="text-xs font-light italic">{sanctuary.tag}</p>  
                   </div>  
                 </div>  
                   
                 <div className="mt-6 border-t border-white/5 pt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">  
                   <p className="text-sm font-light leading-relaxed opacity-60 max-w-sm italic">  
-                    "{sanctuary.tagline}"  
+                    {/* Fallback to philosophy if tagline is missing in some versions */}  
+                    "{sanctuary.philosophy || sanctuary.name}"  
                   </p>  
                 </div>  
               </div>  
