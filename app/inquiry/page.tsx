@@ -12,14 +12,14 @@ export default function InquiryPage() {
 
   if (submitted) {  
     return (  
-      <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-6 text-center animate-in fade-in duration-1000">  
-        <h1 className="text-6xl md:text-9xl font-light tracking-tighter italic mb-8">Acknowledged.</h1>  
-        <p className="max-w-md text-zinc-500 uppercase tracking-[0.4em] text-[10px] mb-12 leading-loose">  
-          Your narrative has been dispatched. Rachel is reviewing the details for alignment.  
+      <div className="min-h-screen bg-[#FCFAF7] text-[#1C1C1C] flex flex-col items-center justify-center p-6 text-center animate-in fade-in duration-700">  
+        <h1 className="text-4xl font-light tracking-tight mb-4 italic">Thank You.</h1>  
+        <p className="max-w-md text-zinc-500 text-sm uppercase tracking-widest mb-10">  
+          Your inquiry has been received. Our team will review your details and reach out shortly.  
         </p>  
         <button   
           onClick={() => window.open('https://cal.com/daryl-clark', '_blank')}  
-          className="text-xs border border-zinc-800 px-12 py-6 hover:bg-white hover:text-black transition-all duration-700 uppercase tracking-[0.5em]"  
+          className="text-[10px] bg-[#1C1C1C] text-[#FCFAF7] px-10 py-4 hover:bg-[#d4af37] transition-all duration-500 uppercase tracking-[0.3em]"  
         >  
           Schedule Discovery  
         </button>  
@@ -28,71 +28,94 @@ export default function InquiryPage() {
   }
 
   return (  
-    <div className="min-h-screen bg-black text-white p-6 md:p-12 lg:p-24 selection:bg-white selection:text-black">  
-      <main className="max-w-6xl mx-auto pt-24 md:pt-32">  
-        <form onSubmit={handleSubmit} className="space-y-12 md:space-y-24">  
-          <header className="mb-24">  
-            <span className="text-[10px] uppercase tracking-[0.6em] text-zinc-700 mb-4 block">Intake Protocol</span>  
-            <h1 className="text-7xl md:text-[12rem] font-light tracking-tighter leading-[0.8] italic uppercase opacity-90">  
-              Inquiry  
-            </h1>  
-          </header>
+    <div className="min-h-screen bg-[#FCFAF7] text-[#1C1C1C] selection:bg-[#d4af37] selection:text-white">  
+      <main className="max-w-screen-xl mx-auto px-6 pt-32 pb-24">  
+        {/* Editorial Header */}  
+        <div className="mb-24 text-center md:text-left">  
+          <h1 className="text-5xl md:text-7xl font-light tracking-tighter mb-6">  
+            Begin the <span className="italic">Journey.</span>  
+          </h1>  
+          <div className="h-px w-24 bg-[#d4af37] mb-8 mx-auto md:mx-0" />  
+          <p className="text-[10px] uppercase tracking-[0.4em] text-zinc-400 max-w-sm leading-relaxed mx-auto md:mx-0">  
+            Private travel architecture for high-net-worth individuals.   
+            Please provide your initial details below.  
+          </p>  
+        </div>
 
-          <div className="text-3xl md:text-6xl lg:text-7xl font-light tracking-tight leading-tight md:leading-[1.1]">  
-            <span className="text-zinc-700">My name is</span>{" "}  
-            <input   
-              required  
-              type="text"   
-              placeholder="[ IDENTITY ]"  
-              className="bg-transparent border-b border-zinc-800 focus:border-white outline-none placeholder:text-zinc-900 transition-colors inline-block w-full md:w-auto uppercase italic"  
-            />  
-            {" "}<span className="text-zinc-700">and I am looking to explore</span>{" "}  
-            <input   
-              required  
-              type="text"   
-              placeholder="[ DESTINATION ]"  
-              className="bg-transparent border-b border-zinc-800 focus:border-white outline-none placeholder:text-zinc-900 transition-colors inline-block w-full md:w-auto uppercase italic"  
-            />  
-            <span className="text-zinc-700"> during </span>{" "}  
-            <input   
-              required  
-              type="text"   
-              placeholder="[ TIMEFRAME ]"  
-              className="bg-transparent border-b border-zinc-800 focus:border-white outline-none placeholder:text-zinc-900 transition-colors inline-block w-full md:w-auto uppercase italic"  
-            />  
-            <br className="hidden md:block" />  
-            <span className="text-zinc-700">You can reach me at</span>{" "}  
-            <input   
-              required  
-              type="email"   
-              placeholder="[ EMAIL ]"  
-              className="bg-transparent border-b border-zinc-800 focus:border-white outline-none placeholder:text-zinc-900 transition-colors inline-block w-full md:w-auto uppercase italic"  
-            />  
-            {" "}<span className="text-zinc-700">to discuss further.</span>  
+        <form onSubmit={handleSubmit} className="max-w-2xl mx-auto md:mx-0">  
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12">  
+              
+            {/* Full Name */}  
+            <div className="group relative">  
+              <label className="text-[9px] uppercase tracking-[0.3em] text-zinc-400 block mb-2 transition-colors group-focus-within:text-[#d4af37]">Full Name</label>  
+              <input   
+                required  
+                type="text"   
+                placeholder="Required"  
+                className="w-full bg-transparent border-b border-zinc-200 py-3 outline-none focus:border-[#1C1C1C] transition-all placeholder:text-zinc-200 text-sm tracking-wide"  
+              />  
+            </div>
+
+            {/* Email */}  
+            <div className="group relative">  
+              <label className="text-[9px] uppercase tracking-[0.3em] text-zinc-400 block mb-2 transition-colors group-focus-within:text-[#d4af37]">Email Address</label>  
+              <input   
+                required  
+                type="email"   
+                placeholder="Required"  
+                className="w-full bg-transparent border-b border-zinc-200 py-3 outline-none focus:border-[#1C1C1C] transition-all placeholder:text-zinc-200 text-sm tracking-wide"  
+              />  
+            </div>
+
+            {/* Destination */}  
+            <div className="group relative">  
+              <label className="text-[9px] uppercase tracking-[0.3em] text-zinc-400 block mb-2 transition-colors group-focus-within:text-[#d4af37]">Proposed Destination</label>  
+              <input   
+                required  
+                type="text"   
+                placeholder="Optional"  
+                className="w-full bg-transparent border-b border-zinc-200 py-3 outline-none focus:border-[#1C1C1C] transition-all placeholder:text-zinc-200 text-sm tracking-wide"  
+              />  
+            </div>
+
+            {/* Timeline */}  
+            <div className="group relative">  
+              <label className="text-[9px] uppercase tracking-[0.3em] text-zinc-400 block mb-2 transition-colors group-focus-within:text-[#d4af37]">Timeline</label>  
+              <input   
+                type="text"   
+                placeholder="e.g. Autumn 2026"  
+                className="w-full bg-transparent border-b border-zinc-200 py-3 outline-none focus:border-[#1C1C1C] transition-all placeholder:text-zinc-200 text-sm tracking-wide"  
+              />  
+            </div>
+
+            {/* Notes - Full Width */}  
+            <div className="md:col-span-2 group relative mt-4">  
+              <label className="text-[9px] uppercase tracking-[0.3em] text-zinc-400 block mb-2 transition-colors group-focus-within:text-[#d4af37]">Vision / Requirements</label>  
+              <textarea   
+                rows={4}  
+                placeholder="Describe your desired experience..."  
+                className="w-full bg-transparent border border-zinc-100 p-4 outline-none focus:border-[#d4af37] transition-all placeholder:text-zinc-200 text-sm tracking-wide resize-none"  
+              />  
+            </div>  
           </div>
 
-          <div className="pt-12 md:pt-24 flex flex-col md:flex-row items-start md:items-center justify-between border-t border-zinc-900">  
-            <div className="max-w-sm mb-8 md:mb-0">  
-              <p className="text-[10px] uppercase tracking-[0.3em] text-zinc-600 leading-relaxed">  
-                By submitting, you acknowledge that NexVoyage Collective operates as a private advisory. Rachel AI handles initial data processing for discovery alignment.  
-              </p>  
-            </div>  
+          <div className="mt-20 flex flex-col md:flex-row items-center justify-between gap-8">  
+            <p className="text-[9px] uppercase tracking-[0.2em] text-zinc-400 max-w-xs leading-loose italic">  
+              Your information is handled with absolute discretion by our private advisory team.  
+            </p>  
             <button   
               type="submit"  
-              className="text-4xl md:text-6xl font-light italic tracking-tighter hover:tracking-normal transition-all duration-700 uppercase group"  
+              className="w-full md:w-auto px-16 py-5 bg-[#1C1C1C] text-[#FCFAF7] text-[10px] uppercase tracking-[0.4em] hover:bg-[#d4af37] transition-all duration-500"  
             >  
-              Submit <span className="text-zinc-800 group-hover:text-white transition-colors">→</span>  
+              Submit Inquiry  
             </button>  
           </div>  
         </form>  
       </main>
 
-      <footer className="mt-48 flex justify-between items-end border-t border-zinc-900 pt-8">  
-        <div className="space-y-1">  
-          <p className="text-[9px] uppercase tracking-[0.5em] text-zinc-800 italic">Analyst: Rachel AI</p>  
-          <p className="text-[9px] uppercase tracking-[0.5em] text-zinc-800">Station: R-01</p>  
-        </div>  
-        <p className="text-[9px] uppercase tracking-[0.5em] text-zinc-800">© 2026 NexVoyage</p>  
+      <footer className="max-w-screen-xl mx-auto px-6 py-12 border-t border-zinc-100 flex justify-between items-center text-[9px] uppercase tracking-[0.3em] text-zinc-300">  
+        <span>NexVoyage Collective</span>  
+        <span>© 2026</span>  
       </footer>  
     </div>  
   );  
