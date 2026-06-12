@@ -1,98 +1,107 @@
-import Link from 'next/link'  
-import Image from 'next/image'
+// app/journal/page.tsx  
+import React from 'react';
 
-const JOURNAL_ENTRIES = [  
-{  
-  id: '01',  
-  slug: 'the-south-pacific-drift',  
-  category: 'Intelligence',  
-  title: 'The South Pacific Drift',  
-  date: 'June 2026',  
-  image: '/images/journal/south-pacific.jpg',  
-  description: 'A tactical analysis of the shift toward private archipelago autonomy.'  
-},  
-{  
-  id: '02',  
-  slug: 'european-prestige-anchors',  
-  category: 'Seasonal',  
-  title: 'European Prestige Anchors',  
-  date: 'June 2026',  
-  image: '/images/journal/european-anchors.jpg',  
-  description: 'Securing berth and sanctuary in the Mediterranean’s most congested month.'  
-}  
-]
+const JournalPage = () => {  
+  const dispatches = [  
+    {  
+      id: "01",  
+      location: "THE ATLAS MOUNTAINS",  
+      coordinates: "31.0546° N, 7.1352° W",  
+      title: "The Architecture of Dust",  
+      imageLabel: "Visual Study: 018",  
+      date: "Spring 2026",  
+    },  
+    {  
+      id: "02",  
+      location: "KYOTO, JAPAN",  
+      coordinates: "35.0116° N, 135.7681° E",  
+      title: "Silence as a Material",  
+      imageLabel: "Visual Study: 042",  
+      date: "Winter 2025",  
+    },  
+    {  
+      id: "03",  
+      location: "THE AEGEAN SEA",  
+      coordinates: "36.3932° N, 25.4615° E",  
+      title: "The Indigo Hour",  
+      imageLabel: "Visual Study: 009",  
+      date: "Summer 2026",  
+    },  
+    {  
+      id: "04",  
+      location: "REYKJAVÍK, ICELAND",  
+      coordinates: "64.1265° N, 21.8174° W",  
+      title: "The Edge of the Map",  
+      imageLabel: "Visual Study: 112",  
+      date: "Autumn 2025",  
+    }  
+  ];
 
-export default function JournalHub() {  
-return (  
-  <main className="min-h-screen bg-[#0A0A0A] pt-32 pb-24 px-6 md:px-12">  
-    <div className="max-w-7xl mx-auto">  
-      {/* Header */}  
-      <div className="mb-24">  
-        <h2 className="text-[#888] uppercase tracking-[0.3em] text-[10px] mb-4">  
-          Internal Perspective // Intelligence  
-        </h2>  
-        <h1 className="text-5xl md:text-7xl font-light text-[#E5E5E5] leading-tight">  
-          Tactical Reports & <span className="text-[#666]">Seasonal Logic.</span>  
-        </h1>  
-      </div>
+  return (  
+    <main className="min-h-screen bg-[#0D0D0D] text-[#E2E0D5] selection:bg-[#E2E0D5] selection:text-[#0D0D0D] pb-32">  
+      {/* --- Header --- */}  
+      <header className="px-6 pt-32 pb-20 md:pt-48 md:pb-32 max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-baseline gap-8">  
+        <div>  
+          <span className="text-[10px] uppercase tracking-[0.4em] text-[#A69F88] block mb-4">Volume I</span>  
+          <h1 className="text-5xl md:text-7xl font-serif italic text-white">Dispatches</h1>  
+        </div>  
+        <p className="max-w-xs text-sm leading-relaxed opacity-50 font-light italic">  
+          Fragments of feeling from the edges of our map. A visual record of the search for the essence of elsewhere.  
+        </p>  
+      </header>
 
-      {/* Journal Grid */}  
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">  
-        {JOURNAL_ENTRIES.map((entry) => (  
-          <Link   
-            key={entry.id}   
-            href={`/journal/${entry.slug}`}  
-            className="group relative flex flex-col border border-[#1a1a1a] bg-[#111] overflow-hidden"  
+      {/* --- The Journal Feed (Staggered Layout) --- */}  
+      <section className="px-6 max-w-7xl mx-auto space-y-32 md:space-y-64">  
+        {dispatches.map((item, idx) => (  
+          <div   
+            key={item.id}   
+            className={`flex flex-col ${idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-12 md:gap-24`}  
           >  
-            <div className="relative aspect-[16/9] overflow-hidden">  
-              <Image  
-                src={entry.image}  
-                alt={entry.title}  
-                fill  
-                className="object-cover opacity-60 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105"  
-              />  
-              <div className="absolute top-6 left-6 flex gap-2">  
-                <span className="text-[9px] tracking-widest uppercase bg-black px-2 py-1 border border-[#333]">  
-                  {entry.category}  
-                </span>  
-                <span className="text-[9px] tracking-widest uppercase bg-[#B4975A] text-black px-2 py-1 font-bold">  
-                  {entry.id}  
-                </span>  
+            {/* The Image Wrapper */}  
+            <div className="w-full md:w-3/5 group cursor-pointer overflow-hidden">  
+              <div className="aspect-[16/9] md:aspect-[4/3] bg-[#1A1A1A] relative overflow-hidden transition-all duration-1000 grayscale hover:grayscale-0">  
+                {/* Visual Placeholder: Imagine a very grainy, high-contrast shot of a mountain or a coastline */}  
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-700" />  
+                <div className="w-full h-full flex items-center justify-center text-[10px] uppercase tracking-[0.3em] opacity-10">  
+                  {item.imageLabel}  
+                </div>  
               </div>  
             </div>
 
-            <div className="p-10">  
-              <div className="flex justify-between items-baseline mb-6">  
-                <h3 className="text-3xl font-light group-hover:text-[#B4975A] transition-colors">  
-                  {entry.title}  
-                </h3>  
-                <span className="text-[10px] font-mono text-[#444]">{entry.date}</span>  
+            {/* The Context */}  
+            <div className="w-full md:w-2/5 space-y-6">  
+              <div className="space-y-1">  
+                <span className="text-[9px] uppercase tracking-[0.2em] text-[#A69F88]">{item.location}</span>  
+                <p className="text-[9px] font-mono opacity-30 tracking-widest">{item.coordinates}</p>  
               </div>  
-              <p className="text-[#888] text-sm leading-relaxed max-w-sm mb-8">  
-                {entry.description}  
-              </p>  
-              <span className="text-[10px] tracking-[0.4em] uppercase text-[#666] group-hover:text-white transition-colors">  
-                Read Intelligence →  
-              </span>  
+                
+              <h2 className="text-3xl md:text-4xl font-serif text-white italic leading-tight">  
+                {item.title}  
+              </h2>  
+                
+              <div className="pt-6 border-t border-white/5 flex justify-between items-center">  
+                <span className="text-[10px] uppercase tracking-widest opacity-40">{item.date}</span>  
+                <button className="text-[10px] uppercase tracking-[0.3em] text-[#A69F88] hover:text-white transition-colors duration-300 group flex items-center gap-2">  
+                  View Entry  
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>  
+                </button>  
+              </div>  
             </div>  
-          </Link>  
+          </div>  
         ))}  
-      </div>
+      </section>
 
-      {/* Subscription Teaser */}  
-      <div className="mt-32 pt-24 border-t border-[#1a1a1a] text-center">  
-        <h4 className="text-[#444] uppercase tracking-[0.4em] text-[10px] mb-6">The Collective Pulse</h4>  
-        <p className="text-[#888] max-w-md mx-auto text-sm leading-relaxed mb-12">  
-          Subscribe to receive monthly intelligence briefings directly to your secure communications channel.  
-        </p>  
-        <Link   
-          href="/invitation"  
-          className="inline-block border border-[#B4975A] px-10 py-4 text-[10px] uppercase tracking-[0.5em] hover:bg-[#B4975A] hover:text-black transition-all"  
-        >  
-          Request Access  
-        </Link>  
-      </div>  
-    </div>  
-  </main>  
-)  
-}  
+      {/* --- Bottom Navigation / Call to Action --- */}  
+      <footer className="mt-64 px-6 text-center">  
+        <div className="max-w-xl mx-auto border-t border-white/10 pt-20">  
+          <p className="font-serif italic text-2xl text-white mb-8">Ready to define your own Elsewhere?</p>  
+          <a href="/inquiry" className="inline-block text-[10px] uppercase tracking-[0.5em] text-[#A69F88] hover:text-white transition-all border border-[#A69F88]/30 px-12 py-4 hover:bg-[#A69F88]/5">  
+            Request Access  
+          </a>  
+        </div>  
+      </footer>  
+    </main>  
+  );  
+};
+
+export default JournalPage;  
