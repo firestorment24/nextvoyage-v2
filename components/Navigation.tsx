@@ -1,8 +1,8 @@
 // components/Navigation.tsx  
 import Link from 'next/link';
 
-export const Navigation = () => {  
-  const navLinks = [   
+const Navigation = () => {  
+  const navLinks = [  
     { name: 'Lobby', href: '/' },  
     { name: 'Archive', href: '/archive' },  
     { name: 'Perspective', href: '/perspective' },  
@@ -31,4 +31,6 @@ export const Navigation = () => {
       </div>  
     </nav>  
   );  
-};  
+};
+
+export default Navigation; // This is the line that fixes the build  
