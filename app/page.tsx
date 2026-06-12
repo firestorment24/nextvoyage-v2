@@ -1,74 +1,78 @@
 import React from 'react';  
 import Link from 'next/link';
 
+const LEDGER_ITEMS = [  
+{ id: '001', title: 'The Silent Haven', code: 'NV-LDR-001', location: 'Amangiri, Utah' },  
+{ id: '002', title: 'Latitude Zero', code: 'NV-LDR-002', location: 'Private Island, Maldives' },  
+{ id: '003', title: 'The Glass Monolith', code: 'NV-LDR-003', location: 'St. Moritz, Switzerland' },  
+{ id: '004', title: 'The Crimson Dune', code: 'NV-LDR-004', location: 'AlUla, Saudi Arabia' },  
+{ id: '005', title: 'The Verdant Estate', code: 'NV-LDR-005', location: 'Tuscany, Italy' },  
+{ id: '006', title: 'The Azure Cove', code: 'NV-LDR-006', location: 'Paros, Greece' },  
+{ id: '007', title: 'The Fortress', code: 'NV-LDR-007', location: 'Lofoten, Norway' },  
+{ id: '008', title: 'The Oasis', code: 'NV-LDR-008', location: 'Siwa, Egypt' },  
+{ id: '009', title: 'The Vault', code: 'NV-LDR-009', location: 'Tokyo, Japan' },  
+];
+
 export default function HomePage() {  
-  return (  
-    <div className="min-h-screen bg-[#FCFAF7] text-[#1C1C1C] selection:bg-[#d4af37] selection:text-white overflow-hidden">  
+return (  
+  <div className="min-h-screen bg-[#FCFAF7] text-[#1C1C1C] selection:bg-[#d4af37] selection:text-white">  
+    <main className="max-w-screen-xl mx-auto px-6 pt-32 pb-24">  
         
-      {/* Main Hero Section */}  
-      <main className="flex flex-col items-center justify-center min-h-[90vh] px-6">  
-          
-        {/* Geographic Markers */}  
-        <div className="mb-12 animate-in fade-in slide-in-from-bottom-4 duration-1000">  
-          <p className="text-[10px] md:text-[12px] uppercase tracking-[0.6em] text-zinc-400 font-light">  
-            London — Tokyo — New York  
-          </p>  
-        </div>
-
-        {/* Brand Identity */}  
-        <div className="text-center relative">  
-          <h1 className="text-[14vw] md:text-[12vw] font-light tracking-tighter leading-[0.8] mb-2 opacity-90">  
-            NexVoyage  
+      {/* Header Section */}  
+      <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">  
+        <div>  
+          <p className="text-[10px] uppercase tracking-[0.5em] text-[#d4af37] mb-4">NexVoyage Collective</p>  
+          <h1 className="text-5xl md:text-7xl font-light tracking-tighter leading-tight italic">  
+            Elite Ledger <span className="not-italic text-zinc-300">/</span> 01  
           </h1>  
-          <h2 className="text-[3vw] md:text-[2vw] font-light italic tracking-[0.4em] text-[#d4af37] opacity-80 uppercase ml-[4vw]">  
-            Collective  
-          </h2>  
-            
-          {/* Subtle Accent Line */}  
-          <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-[#d4af37] to-transparent opacity-30 hidden md:block" />  
-        </div>
-
-        {/* Manifesto / CTA */}  
-        <div className="mt-24 md:mt-32 max-w-xl text-center space-y-12 animate-in fade-in duration-1000 delay-500">  
-          <p className="text-sm md:text-base font-light leading-relaxed text-zinc-500 tracking-wide italic">  
-            "Private travel architecture for the world’s most discerning individuals.   
-            We do not just book travel; we design legacies."  
-          </p>  
-            
-          <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 pt-8">  
-            <Link   
-              href="/inquiry"   
-              className="text-[11px] uppercase tracking-[0.5em] border-b border-[#1C1C1C] pb-2 hover:text-[#d4af37] hover:border-[#d4af37] transition-all duration-500"  
-            >  
-              Begin Inquiry  
-            </Link>  
-            <Link   
-              href="/archive"   
-              className="text-[11px] uppercase tracking-[0.5em] text-zinc-400 hover:text-[#1C1C1C] transition-all duration-500"  
-            >  
-              The Archive  
-            </Link>  
-          </div>  
         </div>  
-      </main>
-
-      {/* Persistent Visual Footer (Homepage Specific) */}  
-      <div className="fixed bottom-12 left-6 md:left-12 hidden lg:block">  
-        <div className="flex flex-col gap-4">  
-          <div className="h-px w-8 bg-[#d4af37]" />  
-          <p className="text-[8px] uppercase tracking-[0.4em] text-zinc-300 vertical-text origin-left rotate-90 whitespace-nowrap mt-4">  
-            Established MMXXVI  
+        <div className="max-w-xs text-right">  
+          <p className="text-[10px] uppercase tracking-[0.3em] text-zinc-400 leading-relaxed">  
+            A private engine for high-net-worth travel and sanctuary curation. Access restricted to verified members.  
           </p>  
         </div>  
       </div>
 
-      <div className="fixed bottom-12 right-6 md:right-12 text-right">  
-        <p className="text-[9px] uppercase tracking-[0.3em] text-zinc-400 leading-loose">  
-          Private Access Only <br />  
-          <span className="text-[#d4af37] opacity-60">Status: Operational</span>  
+      {/* 3x3 Grid */}  
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-zinc-200 border border-zinc-200">  
+        {LEDGER_ITEMS.map((item) => (  
+          <Link   
+            key={item.id}  
+            href={`/archive/${item.id}`}  
+            className="group relative bg-[#FCFAF7] p-12 transition-all duration-700 hover:bg-[#1C1C1C] hover:text-[#FCFAF7]"  
+          >  
+            <div className="flex justify-between items-start mb-16">  
+              <span className="text-[9px] uppercase tracking-[0.4em] text-[#d4af37]">{item.code}</span>  
+              <span className="text-[9px] uppercase tracking-[0.4em] opacity-0 group-hover:opacity-100 transition-opacity duration-700">View Dossier</span>  
+            </div>  
+              
+            <h3 className="text-2xl md:text-3xl font-light tracking-tight mb-2 group-hover:italic transition-all duration-700">  
+              {item.title}  
+            </h3>  
+            <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-400 group-hover:text-zinc-500 transition-colors">  
+              {item.location}  
+            </p>
+
+            <div className="absolute bottom-8 right-8 text-[8px] uppercase tracking-[0.4em] opacity-20 group-hover:opacity-10 transition-opacity">  
+              Protocol R-01  
+            </div>  
+          </Link>  
+        ))}  
+      </div>
+
+      {/* Bottom Action */}  
+      <div className="mt-32 flex flex-col md:flex-row justify-between items-center border-t border-zinc-100 pt-12 gap-8">  
+        <p className="text-[10px] uppercase tracking-[0.4em] text-zinc-400">  
+          Status: All Systems Operational  
         </p>  
-      </div>
-
-    </div>  
-  );  
+        <Link   
+          href="/inquiry"  
+          className="px-16 py-5 bg-[#1C1C1C] text-[#FCFAF7] text-[10px] uppercase tracking-[0.4em] hover:bg-[#d4af37] transition-all duration-500"  
+        >  
+          Begin Intake Protocol  
+        </Link>  
+      </div>  
+    </main>  
+  </div>  
+);  
 }  
