@@ -59,8 +59,8 @@ return (
                 
               <div className="mt-6 border-t border-white/5 pt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">  
                 <p className="text-sm font-light leading-relaxed opacity-60 max-w-sm italic">  
-                  {/* Updated to use .atmosphere with fallbacks */}  
-                  "{sanctuary.atmosphere || sanctuary.tag || sanctuary.name}"  
+                  {/* Using 'tag' here as it's a confirmed property */}  
+                  "{sanctuary.tag}"  
                 </p>  
               </div>  
             </div>  
