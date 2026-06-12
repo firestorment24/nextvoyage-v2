@@ -34,7 +34,7 @@ export const Navigation = () => {
       {isOpen && (  
         <div className="fixed inset-0 z-[100] bg-black flex flex-col p-12 animate-in fade-in duration-500">  
           <div className="flex justify-between items-center mb-20 text-[#A69F88]">  
-            <span className="text-sm tracking-[0.3em] uppercase opacity-50 italic">The Concierge</span>  
+            <span className="text-sm tracking-[0.3em] uppercase opacity-50 italic">Concierge</span>  
             <button onClick={() => setIsOpen(false)} className="hover:rotate-90 transition-transform duration-300">  
               <X size={32} />  
             </button>  
