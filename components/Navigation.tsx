@@ -24,7 +24,7 @@ const Navigation = () => {
 
         <button   
           onClick={() => setIsOpen(!isOpen)}  
-          className="text-[#C5A059] font-sans text-xs uppercase tracking-[0.3em] transition-none"  
+          className="text-[#C5A059] font-sans text-xs uppercase tracking-[0.3em] transition-none outline-none"  
         >  
           {isOpen ? 'Close' : 'Concierge'}  
         </button>  
@@ -36,21 +36,21 @@ const Navigation = () => {
           isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'  
         }`}  
       >  
-        <div className="flex flex-col space-y-12 text-center">  
+        <div className="flex flex-col space-y-6 text-center">  
           {navItems.map((item, index) => (  
             <Link   
               key={item.name}  
               href={item.path}  
               onClick={() => setIsOpen(false)}  
-              className="group flex flex-col items-center"  
+              className="group flex flex-col items-center py-2"  
             >  
-              <span className="text-[#C5A059]/40 font-sans text-[10px] mb-2 uppercase tracking-widest">  
+              <span className="text-[#C5A059]/40 font-sans text-[9px] mb-1 uppercase tracking-widest">  
                 0{index + 1}  
               </span>  
-              <span className="text-[#C5A059] font-serif text-4xl md:text-6xl tracking-tight transition-colors duration-300 group-hover:text-white">  
+              <span className="text-[#C5A059] font-serif text-4xl md:text-5xl tracking-tight transition-colors duration-300 group-hover:text-white">  
                 {item.name}  
               </span>  
-              <span className="text-[#C5A059]/30 font-sans text-[10px] mt-2 uppercase tracking-[0.4em]">  
+              <span className="text-[#C5A059]/30 font-sans text-[9px] mt-1 uppercase tracking-[0.4em]">  
                 {item.subtitle}  
               </span>  
             </Link>  
