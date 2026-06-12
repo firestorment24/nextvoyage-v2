@@ -1,123 +1,99 @@
 "use client";
 
-import React, { useState } from 'react';  
-import Link from 'next/link';
+import React, { useState } from 'react';
 
 export default function InquiryPage() {  
-const [isSubmitting, setIsSubmitting] = useState(false);  
-const [isSuccess, setIsSuccess] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
-const handleSubmit = async (e: React.FormEvent) => {  
-  e.preventDefault();  
-  setIsSubmitting(true);  
-  await new Promise(resolve => setTimeout(resolve, 1500));  
-  setIsSubmitting(false);  
-  setIsSuccess(true);  
-};
+  const handleSubmit = (e: React.FormEvent) => {  
+    e.preventDefault();  
+    setSubmitted(true);  
+  };
 
-if (isSuccess) {  
-  return (  
-    <div className="min-h-screen bg-black text-white flex items-center justify-center p-6 font-serif">  
-      <div className="max-w-xl text-center animate-in fade-in duration-1000">  
-        <h1 className="text-5xl md:text-7xl font-light italic tracking-tighter mb-8 leading-tight">The journey begins.</h1>  
-        <p className="text-zinc-500 uppercase tracking-[0.3em] text-[10px] mb-12">  
-          Your narrative has been logged. Let's align on the details.  
+  if (submitted) {  
+    return (  
+      <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-6 text-center animate-in fade-in duration-1000">  
+        <h1 className="text-6xl md:text-9xl font-light tracking-tighter italic mb-8">Acknowledged.</h1>  
+        <p className="max-w-md text-zinc-500 uppercase tracking-[0.4em] text-[10px] mb-12 leading-loose">  
+          Your narrative has been dispatched. Rachel is reviewing the details for alignment.  
         </p>  
         <button   
           onClick={() => window.open('https://cal.com/daryl-clark', '_blank')}  
-          className="inline-block border border-white px-12 py-5 text-[10px] uppercase tracking-[0.4em] hover:bg-white hover:text-black transition-all duration-500"  
+          className="text-xs border border-zinc-800 px-12 py-6 hover:bg-white hover:text-black transition-all duration-700 uppercase tracking-[0.5em]"  
         >  
-          Book Discovery Session  
+          Schedule Discovery  
         </button>  
       </div>  
-    </div>  
-  );  
-}
+    );  
+  }
 
-return (  
-  <div className="min-h-screen bg-black text-white flex flex-col lg:flex-row overflow-hidden">  
-    {/* Left: Atmospheric Visual */}  
-    <div className="hidden lg:block lg:w-1/2 relative group overflow-hidden">  
-      <img   
-        src="https://images.unsplash.com/photo-1505833115364-e28a4a3950f2?q=80&w=2000&auto=format&fit=crop"   
-        alt="Atmospheric Landscape"  
-        className="object-cover w-full h-full grayscale opacity-60 group-hover:scale-105 transition-transform duration-[3000ms] ease-out"  
-      />  
-      <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent" />  
-      <div className="absolute bottom-12 left-12 max-w-sm">  
-        <p className="text-xs uppercase tracking-[0.5em] text-zinc-400 mb-2">Current Exhibition</p>  
-        <h2 className="text-3xl font-light italic tracking-tighter leading-tight opacity-80">  
-          "Where the unreachable becomes your reality."  
-        </h2>  
-      </div>  
-    </div>
+  return (  
+    <div className="min-h-screen bg-black text-white p-6 md:p-12 lg:p-24 selection:bg-white selection:text-black">  
+      <main className="max-w-6xl mx-auto pt-24 md:pt-32">  
+        <form onSubmit={handleSubmit} className="space-y-12 md:space-y-24">  
+          <header className="mb-24">  
+            <span className="text-[10px] uppercase tracking-[0.6em] text-zinc-700 mb-4 block">Intake Protocol</span>  
+            <h1 className="text-7xl md:text-[12rem] font-light tracking-tighter leading-[0.8] italic uppercase opacity-90">  
+              Inquiry  
+            </h1>  
+          </header>
 
-    {/* Right: The Inquiry Form */}  
-    <div className="flex-1 flex flex-col p-6 md:p-12 lg:p-24 overflow-y-auto">  
-      <nav className="flex justify-between items-start mb-16 lg:mb-24">  
-        <Link href="/" className="text-xl font-bold tracking-tighter hover:italic transition-all">NV / COLLECTIVE</Link>  
-        <Link href="/archive" className="text-[10px] uppercase tracking-[0.4em] text-zinc-500 hover:text-white transition-colors">Archive</Link>  
-      </nav>
-
-      <div className="max-w-lg mx-auto lg:mx-0 w-full">  
-        <header className="mb-12">  
-          <h1 className="text-6xl md:text-8xl font-light tracking-tighter italic leading-none mb-6">Inquiry</h1>  
-          <p className="text-zinc-500 uppercase tracking-[0.3em] text-[10px] leading-relaxed">  
-            Personalize your travel narrative. Our lead analyst, Rachel, will review your submission to ensure perfect alignment.  
-          </p>  
-        </header>
-
-        <form onSubmit={handleSubmit} className="space-y-10">  
-          <div className="space-y-8">  
-            <div className="group border-b border-zinc-800 focus-within:border-white transition-all duration-500 pb-2">  
-              <label className="block text-[9px] uppercase tracking-[0.3em] text-zinc-600 mb-1">Identity</label>  
-              <input   
-                required  
-                type="text"   
-                placeholder="FULL NAME"  
-                className="bg-transparent w-full outline-none text-xl tracking-widest placeholder:text-zinc-900 uppercase"  
-              />  
-            </div>
-
-            <div className="group border-b border-zinc-800 focus-within:border-white transition-all duration-500 pb-2">  
-              <label className="block text-[9px] uppercase tracking-[0.3em] text-zinc-600 mb-1">Channel</label>  
-              <input   
-                required  
-                type="email"   
-                placeholder="EMAIL ADDRESS"  
-                className="bg-transparent w-full outline-none text-xl tracking-widest placeholder:text-zinc-900 uppercase"  
-              />  
-            </div>
-
-            <div className="group border-b border-zinc-800 focus-within:border-white transition-all duration-500 pb-2">  
-              <label className="block text-[9px] uppercase tracking-[0.3em] text-zinc-600 mb-1">Narrative</label>  
-              <textarea   
-                required  
-                rows={4}  
-                placeholder="WHAT ARE YOU SEEKING?"  
-                className="bg-transparent w-full outline-none text-sm leading-relaxed tracking-widest placeholder:text-zinc-900 uppercase resize-none"  
-              />  
-            </div>  
+          <div className="text-3xl md:text-6xl lg:text-7xl font-light tracking-tight leading-tight md:leading-[1.1]">  
+            <span className="text-zinc-700">My name is</span>{" "}  
+            <input   
+              required  
+              type="text"   
+              placeholder="[ IDENTITY ]"  
+              className="bg-transparent border-b border-zinc-800 focus:border-white outline-none placeholder:text-zinc-900 transition-colors inline-block w-full md:w-auto uppercase italic"  
+            />  
+            {" "}<span className="text-zinc-700">and I am looking to explore</span>{" "}  
+            <input   
+              required  
+              type="text"   
+              placeholder="[ DESTINATION ]"  
+              className="bg-transparent border-b border-zinc-800 focus:border-white outline-none placeholder:text-zinc-900 transition-colors inline-block w-full md:w-auto uppercase italic"  
+            />  
+            <span className="text-zinc-700"> during </span>{" "}  
+            <input   
+              required  
+              type="text"   
+              placeholder="[ TIMEFRAME ]"  
+              className="bg-transparent border-b border-zinc-800 focus:border-white outline-none placeholder:text-zinc-900 transition-colors inline-block w-full md:w-auto uppercase italic"  
+            />  
+            <br className="hidden md:block" />  
+            <span className="text-zinc-700">You can reach me at</span>{" "}  
+            <input   
+              required  
+              type="email"   
+              placeholder="[ EMAIL ]"  
+              className="bg-transparent border-b border-zinc-800 focus:border-white outline-none placeholder:text-zinc-900 transition-colors inline-block w-full md:w-auto uppercase italic"  
+            />  
+            {" "}<span className="text-zinc-700">to discuss further.</span>  
           </div>
 
-          <div className="pt-8">  
+          <div className="pt-12 md:pt-24 flex flex-col md:flex-row items-start md:items-center justify-between border-t border-zinc-900">  
+            <div className="max-w-sm mb-8 md:mb-0">  
+              <p className="text-[10px] uppercase tracking-[0.3em] text-zinc-600 leading-relaxed">  
+                By submitting, you acknowledge that NexVoyage Collective operates as a private advisory. Rachel AI handles initial data processing for discovery alignment.  
+              </p>  
+            </div>  
             <button   
               type="submit"  
-              disabled={isSubmitting}  
-              className="group flex items-center space-x-6 hover:italic transition-all"  
+              className="text-4xl md:text-6xl font-light italic tracking-tighter hover:tracking-normal transition-all duration-700 uppercase group"  
             >  
-              <span className="text-3xl md:text-4xl font-light tracking-tighter uppercase italic">Dispatch</span>  
-              <span className="text-2xl text-zinc-700 group-hover:translate-x-4 transition-transform duration-500">→</span>  
+              Submit <span className="text-zinc-800 group-hover:text-white transition-colors">→</span>  
             </button>  
           </div>  
         </form>  
-      </div>
+      </main>
 
-      <footer className="mt-auto pt-24 text-[9px] text-zinc-800 uppercase tracking-[0.4em] flex justify-between font-mono">  
-        <span>Station: Rachel AI</span>  
-        <span>© 2026 NexVoyage</span>  
+      <footer className="mt-48 flex justify-between items-end border-t border-zinc-900 pt-8">  
+        <div className="space-y-1">  
+          <p className="text-[9px] uppercase tracking-[0.5em] text-zinc-800 italic">Analyst: Rachel AI</p>  
+          <p className="text-[9px] uppercase tracking-[0.5em] text-zinc-800">Station: R-01</p>  
+        </div>  
+        <p className="text-[9px] uppercase tracking-[0.5em] text-zinc-800">© 2026 NexVoyage</p>  
       </footer>  
     </div>  
-  </div>  
-);  
+  );  
 }  
