@@ -1,4 +1,4 @@
-"use client"; // Required for the toggle state
+"use client";
 
 import { useState } from 'react';  
 import Link from 'next/link';
@@ -24,7 +24,7 @@ const Navigation = () => {
 
         <button   
           onClick={() => setIsOpen(!isOpen)}  
-          className="text-[#C5A059] font-sans text-xs uppercase tracking-[0.3em] transition-all duration-500 hover:tracking-[0.4em]"  
+          className="text-[#C5A059] font-sans text-xs uppercase tracking-[0.3em]"  
         >  
           {isOpen ? '[ Close ]' : '[ Concierge ]'}  
         </button>  
