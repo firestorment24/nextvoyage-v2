@@ -1,104 +1,76 @@
-"use client"
+// components/Navigation.tsx  
+'use client';
 
-import React, { useState } from 'react'  
-import Link from 'next/link'
+import { useState } from 'react';  
+import Link from 'next/link';
 
 export default function Navigation() {  
-  const [isOpen, setIsOpen] = useState(false)
-
-  const toggleMenu = () => setIsOpen(!isOpen)  
-  const closeMenu = () => setIsOpen(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [  
-    { name: 'The Lobby', subtitle: 'Arrival & Overview', href: '/' },  
-    { name: 'The Manifest', subtitle: 'The Elite Ledger', href: '/manifest' },  
-    { name: 'The Mandate', subtitle: 'Our Philosophy', href: '/mandate' },  
-    { name: 'The Reserve', subtitle: 'Private Consultation', href: '/reserve' },  
-  ]
+    { name: 'The Lobby', href: '/' },  
+    { name: 'The Archive', href: '/archive' },  
+    { name: 'The Perspective', href: '/perspective' },  
+    { name: 'The Journal', href: '/journal' },  
+    { name: 'The Inquiry', href: '/inquiry' },  
+  ];
 
   return (  
     <>  
-      {/* Static Header */}  
-      <nav className="fixed top-0 left-0 w-full z-40 px-8 py-6 flex justify-between items-center bg-transparent">  
-        <Link href="/" className="text-white font-extralight tracking-[0.2em] text-lg hover:text-[#d4af37] transition-colors">  
-          NEXVOYAGE <span className="font-light">COLLECTIVE</span>  
+      {/* Top Bar */}  
+      <nav className="fixed top-0 left-0 w-full z-[100] px-10 py-8 flex justify-between items-center mix-blend-difference">  
+        <Link href="/" className="text-white font-serif text-2xl tracking-tighter hover:opacity-70 transition-opacity">  
+          NexVoyage  
         </Link>
 
-        {/* Concierge Trigger */}  
         <button   
-          onClick={toggleMenu}  
-          className="text-[#d4af37] font-extralight tracking-widest text-sm hover:opacity-80 transition-opacity flex items-center gap-2"  
+          onClick={() => setIsOpen(true)}  
+          className="group flex items-center gap-4 text-[#A69F88] uppercase tracking-[0.3em] text-xs font-light"  
         >  
-          <span className="w-8 h-[1px] bg-[#d4af37]"></span>  
-          CONCIERGE  
+          <span className="group-hover:mr-2 transition-all">The Concierge</span>  
+          <div className="w-8 h-px bg-[#A69F88] group-hover:w-12 transition-all" />  
         </button>  
       </nav>
 
-      {/* Cinematic Overlay Menu */}  
-      <div   
-        className={`fixed inset-0 z-50 bg-black transition-all duration-700 ease-in-out ${  
-          isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'  
-        }`}  
-      >  
-        {/* Blurred Background Image */}  
-        <div   
-          className="absolute inset-0 bg-cover bg-center opacity-40 grayscale"  
-          style={{ backgroundImage: "url('https://cdn.marblism.com/5gKSV_IRXVD.webp')" }}  
-        ></div>  
-        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+      {/* Full-Screen Overlay */}  
+      <div className={`fixed inset-0 z-[200] bg-[#0A0A0A] transition-all duration-1000 ease-in-out ${isOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}>  
+        {/* Header inside Menu */}  
+        <div className="absolute top-8 left-10 w-[calc(100%-80px)] flex justify-between items-center">  
+           <span className="text-white/20 font-serif text-2xl tracking-tighter">NexVoyage</span>  
+           <button   
+            onClick={() => setIsOpen(false)}  
+            className="text-[#A69F88] uppercase tracking-[0.3em] text-xs hover:text-white transition-colors"  
+          >  
+            Close / Exit  
+          </button>  
+        </div>
 
-        {/* Close Button */}  
-        <button   
-          onClick={closeMenu}  
-          className="absolute top-8 right-8 text-[#d4af37] hover:scale-110 transition-transform z-50 p-2"  
-          aria-label="Close Menu"  
-        >  
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">  
-            <line x1="18" y1="6" x2="6" y2="18"></line>  
-            <line x1="6" y1="6" x2="18" y2="18"></line>  
-          </svg>  
-        </button>
-
-        {/* Main Menu Layout */}  
-        <div className="relative h-full flex flex-col justify-center items-center px-4">  
-            
-          {/* Nav Links with Subtitles */}  
-          <div className="flex flex-col gap-10 md:gap-14 items-center">  
-            {navLinks.map((link) => (  
-              <Link  
-                key={link.name}  
-                href={link.href}  
-                onClick={closeMenu}  
-                className="group flex flex-col items-center text-center"  
-              >  
-                <span className="text-3xl md:text-5xl font-extralight tracking-[0.3em] text-white group-hover:text-[#d4af37] transition-all duration-300">  
-                  {link.name.toUpperCase()}  
-                </span>  
-                <span className="mt-2 text-[10px] md:text-xs font-extralight tracking-[0.4em] text-[#d4af37]/60 group-hover:text-[#d4af37] transition-colors uppercase">  
-                  {link.subtitle}  
-                </span>  
-              </Link>  
-            ))}  
-          </div>
-
-          {/* Secondary Footer / Contact Section */}  
-          <div className="mt-20 flex flex-col items-center gap-6 animate-in fade-in slide-in-from-bottom-4 duration-1000">  
-            <div className="w-12 h-[1px] bg-[#d4af37]/30"></div>  
-              
-            <a   
-              href="mailto:daryl.clark@fora.travel"  
-              className="text-white/60 font-extralight tracking-widest text-[10px] hover:text-[#d4af37] transition-colors"  
+        {/* Links Container */}  
+        <div className="h-full flex flex-col justify-center items-center space-y-8 md:space-y-12">  
+          {navLinks.map((link, idx) => (  
+            <Link  
+              key={link.name}  
+              href={link.href}  
+              onClick={() => setIsOpen(false)}  
+              className="group relative overflow-hidden"  
             >  
-              DARYL.CLARK@FORA.TRAVEL  
-            </a>
+              <span className="absolute -left-10 top-1/2 -translate-y-1/2 text-[10px] text-[#A69F88] font-mono opacity-0 group-hover:opacity-100 transition-opacity">  
+                0{idx + 1}  
+              </span>  
+              <h2 className="text-4xl md:text-7xl font-serif text-white hover:text-[#A69F88] transition-colors duration-500 uppercase tracking-tighter">  
+                {link.name}  
+              </h2>  
+            </Link>  
+          ))}  
+        </div>
 
-            <div className="flex gap-8">  
-              <a href="#" className="text-white/40 hover:text-[#d4af37] transition-colors text-[10px] tracking-widest uppercase font-extralight">Instagram</a>  
-              <a href="#" className="text-white/40 hover:text-[#d4af37] transition-colors text-[10px] tracking-widest uppercase font-extralight">LinkedIn</a>  
-            </div>  
-          </div>  
+        {/* Footer inside Menu */}  
+        <div className="absolute bottom-12 left-0 w-full text-center">  
+          <p className="text-white/20 uppercase tracking-[0.5em] text-[10px]">  
+            Curating the Unreachable — 2026  
+          </p>  
         </div>  
       </div>  
     </>  
-  )  
+  );  
 }  
