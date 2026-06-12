@@ -1,6 +1,5 @@
 import React from 'react';  
-import Link from 'next/link';  
-import { ChevronLeft, ShieldCheck, Clock, Zap } from 'lucide-react';
+import Link from 'next/link';
 
 // Sanctuary Data Map  
 const SANCTUARY_DATA: Record<string, any> = {  
@@ -42,6 +41,22 @@ const SANCTUARY_DATA: Record<string, any> = {
   }  
 };
 
+// Simple Inline SVGs to avoid dependency issues  
+const Icons = {  
+  ChevronLeft: () => (  
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>  
+  ),  
+  Shield: () => (  
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>  
+  ),  
+  Clock: () => (  
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>  
+  ),  
+  Zap: () => (  
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>  
+  )  
+};
+
 export default function SanctuaryDossier({ params }: { params: { id: string } }) {  
   const asset = SANCTUARY_DATA[params.id];
 
@@ -58,7 +73,7 @@ export default function SanctuaryDossier({ params }: { params: { id: string } })
       {/* Header / Nav */}  
       <nav className="p-8 flex justify-between items-center border-b border-white/10">  
         <Link href="/manifest" className="flex items-center gap-2 text-xs uppercase tracking-[0.3em] hover:opacity-50 transition-opacity">  
-          <ChevronLeft size={14} /> Back to Manifest  
+          <Icons.ChevronLeft /> Back to Manifest  
         </Link>  
         <div className="text-[10px] uppercase tracking-[0.4em] text-white/40">  
           Classification: Confidential // {asset.assetId}  
@@ -91,7 +106,7 @@ export default function SanctuaryDossier({ params }: { params: { id: string } })
           {/* Section: Narrative */}  
           <section className="space-y-4 max-w-xl">  
             <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-white/30">  
-              <ShieldCheck size={12} /> The Narrative  
+              <Icons.Shield /> The Narrative  
             </div>  
             <p className="text-lg leading-relaxed font-light opacity-80">  
               {asset.narrative}  
@@ -101,7 +116,7 @@ export default function SanctuaryDossier({ params }: { params: { id: string } })
           {/* Section: Optimal Timing */}  
           <section className="space-y-6">  
             <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-white/30">  
-              <Clock size={12} /> Optimal Timing  
+              <Icons.Clock /> Optimal Timing  
             </div>  
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">  
               <div className="space-y-1">  
@@ -120,7 +135,7 @@ export default function SanctuaryDossier({ params }: { params: { id: string } })
           {/* Section: ROI */}  
           <section className="space-y-4 max-w-xl">  
             <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-white/30">  
-              <Zap size={12} /> The ROI of Reset  
+              <Icons.Zap /> The ROI of Reset  
             </div>  
             <p className="text-sm leading-relaxed opacity-60">  
               {asset.roi}  
