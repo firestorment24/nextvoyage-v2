@@ -1,163 +1,82 @@
-// app/archive/[id]/page.tsx  
-import Link from 'next/link';
+import React from 'react'  
+import Link from 'next/link'
 
-// Our Curated Ledger of Sanctuaries  
-const SANCTUARIES = [  
-  {  
-    id: 'azure-heights',  
-    name: 'Azure Heights',  
-    location: 'Amalfi Coast, Italy',  
-    tagline: 'Suspended above the sapphire.',  
-    description: 'An infinity-edge villa carved into the cliffs, where the line between the Mediterranean and the architecture disappears. Experience the Amalfi from a height only the gods usually see.',  
-    image: 'https://cdn.marblism.com/yBrJxDpEKzp.webp',  
-    details: ['6 Suites', 'Private Helipad', 'Cliffs-edge Pool'],  
-  },   
-  {  
-    id: 'velvet-pines',  
-    name: 'Velvet Pines',  
-    location: 'Zermatt, Switzerland',  
-    tagline: 'The pinnacle of alpine silence.',  
-    description: 'A minimalist glass chalet surrounded by ancient pines and the towering presence of the Matterhorn. Silence is the ultimate luxury here.',  
-    image: 'https://cdn.marblism.com/uVf8PKIwMQs.webp',  
-    details: ['5 Suites', 'Thermal Spa', 'Ski-in/Ski-out Access'],  
-  },  
-  {  
-    id: 'obsidian-sands',  
-    name: 'Obsidian Sands',  
-    location: 'Southern Region, Iceland',  
-    tagline: 'Fire and frost in perfect stasis.',  
-    description: 'A brutalist masterpiece set against the black volcanic sands. Designed for those who find peace in the raw, unedited power of the Earth.',  
-    image: 'https://images.unsplash.com/photo-1504109586057-7a2ae83d1338?auto=format&fit=crop&q=80',  
-    details: ['4 Suites', 'Geothermal Bath', 'Aurora Observatory'],  
-  },  
-  {  
-    id: 'gilded-dunes',  
-    name: 'Gilded Dunes',  
-    location: 'Empty Quarter, Abu Dhabi',  
-    tagline: 'A mirage made manifest.',  
-    description: 'A fortress of luxury hidden within the shifting sands. Modern architecture meets ancient desert wisdom.',  
-    image: 'https://images.unsplash.com/photo-1451337516015-6b6e9a44a8a3?auto=format&fit=crop&q=80',  
-    details: ['8 Palatial Tents', 'Private Dunes', 'Falconry Center'],  
-  },  
-  {  
-    id: 'jade-canopy',  
-    name: 'Jade Canopy',  
-    location: 'Ubud, Bali',  
-    tagline: 'The rhythm of the rainforest.',  
-    description: 'A multi-level bamboo cathedral that breathes with the jungle. The boundary between indoors and the wild is nonexistent.',  
-    image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&q=80',  
-    details: ['3 Eco-Villas', 'River-side Yoga Shala', 'Personal Chef'],  
-  },  
-  {  
-    id: 'ivory-reef',  
-    name: 'Ivory Reef',  
-    location: 'Baa Atoll, Maldives',  
-    tagline: 'Where the ocean becomes your floor.',  
-    description: 'Over-water structures designed for total isolation. Accessible only by private seaplane, vetted for absolute privacy.',  
-    image: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&q=80',  
-    details: ['Uninhabited Atoll', 'Underwater Wine Cellar', 'Marine Biologist on Call'],  
-  },  
-  {  
-    id: 'copper-ridge',  
-    name: 'Copper Ridge',  
-    location: 'Big Sky, Montana',  
-    tagline: 'Primitive luxury in the wild.',  
-    description: 'A ranch reimagined for the modern collector. Hand-hewn logs meet Italian marble in a valley that time forgot.',  
-    image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80',  
-    details: ['12,000 Acres', 'Equestrian Center', 'Private Shooting Range'],  
-  },  
-  {  
-    id: 'silver-horizon',  
-    name: 'Silver Horizon',  
-    location: 'Oia, Santorini',  
-    tagline: 'The architecture of light.',  
-    description: 'Cycladic minimalism refined to its purest form. Every corner is a study in shadow and light, overlooking the caldera.',  
-    image: 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&q=80',  
-    details: ['3 Cliff-side Suites', 'Private Yacht Dock', 'Cave Spa'],  
-  },  
-];
-
-export default function SanctuaryPage({ params }: { params: { id: string } }) {  
-  const sanctuary = SANCTUARIES.find((s) => s.id === params.id);
-
-  if (!sanctuary) return <div className="p-20 text-[#A69F88]">Sanctuary Not Found.</div>;
+export default function ArchiveDetailPage({ params }: { params: { id: string } }) {  
+  // We'll use params.id now instead of slug to pull the property data  
+  const propertyName = params.id.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 
   return (  
-    <main className="min-h-screen bg-[#0A0A0A] text-white selection:bg-[#A69F88]">  
+    <main className="min-h-screen bg-black">  
       {/* Cinematic Hero */}  
-      <section className="relative h-[90vh] w-full overflow-hidden">  
-        <img  
-          src={sanctuary.image}  
-          alt={sanctuary.name}  
-          className="absolute inset-0 h-full w-full object-cover brightness-50"  
-        />  
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent" />  
-          
-        <div className="absolute bottom-20 left-10 md:left-20 max-w-4xl">  
-          <p className="text-[#A69F88] uppercase tracking-[0.3em] text-sm mb-4">  
-            {sanctuary.location}  
-          </p>  
-          <h1 className="text-6xl md:text-8xl font-serif leading-tight">  
-            {sanctuary.name}  
+      <section className="h-[80vh] w-full bg-[#111] relative overflow-hidden flex items-center justify-center">  
+        <div className="z-10 text-center px-4">  
+          <h1 className="text-white font-serif text-6xl md:text-8xl tracking-tighter mb-4">  
+            {propertyName}  
           </h1>  
-          <p className="text-xl md:text-2xl font-light italic text-gray-300 mt-6">  
-            "{sanctuary.tagline}"  
+          <p className="text-[#C5A059] font-sans text-xs uppercase tracking-[0.4em]">  
+            Confidential Entry // Ledger 2026-A  
           </p>  
         </div>  
+        {/* The background will eventually be a full-bleed cinematic loop */}  
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black" />  
       </section>
 
-      {/* The Essence & Vetting */}  
-      <section className="max-w-7xl mx-auto px-10 md:px-20 py-32 grid grid-cols-1 md:grid-cols-2 gap-20">  
+      {/* The Essence */}  
+      <section className="py-24 px-8 md:px-40 grid grid-cols-1 md:grid-cols-2 gap-20 border-b border-[#C5A059]/10">  
         <div>  
-          <h2 className="text-[#A69F88] uppercase tracking-[0.2em] text-xs mb-10">The Essence</h2>  
-          <p className="text-2xl leading-relaxed font-light text-gray-200">  
-            {sanctuary.description}  
+          <h2 className="text-[#C5A059] font-sans text-[10px] uppercase tracking-[0.4em] mb-8">  
+            The Essence  
+          </h2>  
+          <p className="text-[#C5A059]/80 font-serif text-2xl leading-relaxed">  
+            Beyond the glass and timber lies a sanctuary designed for those who seek the luxury of silence. Every detail—from the angle of the sun to the density of the linens—has been curated for a total primal reset.  
           </p>  
-            
-          <div className="mt-16 border-t border-white/10 pt-10 grid grid-cols-2 gap-6">  
-            {sanctuary.details.map((detail) => (  
-              <div key={detail} className="text-sm text-gray-400 font-mono">  
-                — {detail}  
-              </div>  
-            ))}  
+        </div>  
+          
+        <div className="space-y-12">  
+          <div>  
+            <h3 className="text-[#C5A059] font-sans text-[10px] uppercase tracking-[0.4em] mb-4">Architecture</h3>  
+            <p className="text-[#C5A059]/60 text-sm leading-loose">Minimalist brutalism meets alpine warmth. Designed to disappear into the landscape.</p>  
           </div>  
-        </div>
-
-        <div className="bg-[#141414] p-10 md:p-16 border border-white/5">  
-          <h2 className="text-[#A69F88] uppercase tracking-[0.2em] text-xs mb-10">The NexVoyage Standard</h2>  
-          <div className="space-y-8">  
-            <div className="group">  
-              <h3 className="text-lg font-serif mb-2 group-hover:text-[#A69F88] transition-colors">Vetted Isolation</h3>  
-              <p className="text-sm text-gray-400 leading-relaxed">  
-                Manually inspected by our security specialists for perimeter integrity and complete visual privacy from neighbors or air traffic.  
-              </p>  
-            </div>  
-            <div className="group">  
-              <h3 className="text-lg font-serif mb-2 group-hover:text-[#A69F88] transition-colors">Frictionless Logistics</h3>  
-              <p className="text-sm text-gray-400 leading-relaxed">  
-                Direct helipad or private runway coordination. Customs cleared on-site where available.  
-              </p>  
-            </div>  
-            <div className="group">  
-              <h3 className="text-lg font-serif mb-2 group-hover:text-[#A69F88] transition-colors">Invisible Concierge</h3>  
-              <p className="text-sm text-gray-400 leading-relaxed">  
-                A dedicated fixer stationed 15 minutes away, ensuring you never see them unless you need them.  
-              </p>  
-            </div>  
+          <div>  
+            <h3 className="text-[#C5A059] font-sans text-[10px] uppercase tracking-[0.4em] mb-4">Vibe</h3>  
+            <p className="text-[#C5A059]/60 text-sm leading-loose">The blue hour, perfected. Stillness that resonates.</p>  
           </div>  
         </div>  
       </section>
 
-      {/* Access CTA */}  
-      <section className="py-40 text-center border-t border-white/10">  
-        <h2 className="text-4xl font-serif mb-10">Desire Access?</h2>  
+      {/* The NexVoyage Standard (Vetting) */}  
+      <section className="py-24 px-8 md:px-40 bg-[#050505]">  
+        <h2 className="text-[#C5A059] font-sans text-[10px] uppercase tracking-[0.4em] mb-16 text-center">  
+          The NexVoyage Standard  
+        </h2>  
+          
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">  
+          {[  
+            { label: 'Security', value: 'Level 4 Private Perimeter' },  
+            { label: 'Privacy', value: 'Zero Overlook / No Fly Zone' },  
+            { label: 'Service', value: '1:4 Staff-to-Guest Ratio' },  
+            { label: 'Wellness', value: 'Private Medical-Grade Spa' },  
+            { label: 'Vetting', value: '18-Specialist Certified' },  
+            { label: 'Access', value: 'Private Helipad / Remote Entry' }  
+          ].map(spec => (  
+            <div key={spec.label} className="border border-[#C5A059]/10 p-8 text-center">  
+              <span className="block text-[#C5A059]/40 font-sans text-[9px] uppercase mb-2 tracking-widest">{spec.label}</span>  
+              <span className="text-[#C5A059] font-serif text-lg tracking-tight">{spec.value}</span>  
+            </div>  
+          ))}  
+        </div>  
+      </section>
+
+      {/* Inquiry CTA */}  
+      <section className="py-40 text-center border-t border-[#C5A059]/10">  
+        <h3 className="text-[#C5A059] font-serif text-3xl mb-8 italic">Interested in this sanctuary?</h3>  
         <Link   
-          href="/inquiry"  
-          className="inline-block border border-[#A69F88] text-[#A69F88] px-12 py-5 uppercase tracking-[0.3em] text-sm hover:bg-[#A69F88] hover:text-[#0A0A0A] transition-all duration-500"  
+          href="/inquiry"   
+          className="inline-block border border-[#C5A059] text-[#C5A059] px-12 py-4 font-sans text-xs uppercase tracking-[0.3em] hover:bg-[#C5A059] hover:text-black transition-all"  
         >  
-          Secure Your Sanctuary  
+          Initiate Intake  
         </Link>  
       </section>  
     </main>  
-  );  
+  )  
 }  
