@@ -113,7 +113,7 @@ export default function TheReserve() {
               </div>  
               <div className="space-y-4">  
                 <label className={labelStyle}>Allocated Budget</label>  
-                <input type="text" placeholder="e.g. $25k, $100k+, or 'Elite Tier'" className={inputStyle} />  
+                <input type="text" placeholder="e.g. $1k, 5k, 10k, 50k'" className={inputStyle} />  
               </div>  
             </div>  
           )}
