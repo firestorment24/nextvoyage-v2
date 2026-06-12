@@ -1,59 +1,101 @@
-import React from 'react';  
-import Link from 'next/link';
+// app/perspective/page.tsx  
+import React from 'react';
 
-export default function PerspectivePage() {  
+const PerspectivePage = () => {  
   const essays = [  
     {  
-      volume: "01",  
-      title: "The Silent ROI",  
-      slug: "the-silent-roi",  
-      author: "D. Clark",  
-      description: "Why the ultimate luxury investment isn't a property—it's a week of absolute, uninterrupted nothing.",  
-      tag: "Manifesto"  
+      title: "The Architecture of Silence",  
+      excerpt: "In a world of constant noise, the ultimate luxury is a vacuum. How we curate spaces where the world simply cannot reach you.",  
+      category: "Philosophy",  
     },  
     {  
-      volume: "02",  
-      title: "The Architecture of Calm",  
-      slug: "#", // Not built yet  
-      author: "D. Clark",  
-      description: "An exploration into the tactile reality of seclusion and why physical environment dictates mental clarity.",  
-      tag: "Philosophy"  
+      title: "Wealth Preservation: The Soul",  
+      excerpt: "True asset protection extends beyond the balance sheet. It requires the deliberate preservation of one’s own clarity and perspective.",  
+      category: "Theory",  
+    },  
+    {  
+      title: "In Search of the Unplugged Horizon",  
+      excerpt: "The geography of a reset. Why certain landscapes possess the inherent power to recalibrate the human nervous system.",  
+      category: "Exploration",  
     }  
   ];
 
   return (  
-    <main className="min-h-screen bg-[#0A0A0A] text-[#F5F5F5] selection:bg-[#C5A059] selection:text-black">  
-      <section className="pt-40 pb-20 px-6 max-w-6xl mx-auto">  
-        <header className="mb-24 border-b border-white/10 pb-12">  
-          <p className="text-[#C5A059] uppercase tracking-[0.3em] text-xs mb-4">Volume Index</p>  
-          <h1 className="text-6xl md:text-8xl font-serif mb-6 tracking-tight italic">The Perspective</h1>  
-          <p className="text-xl text-white/60 max-w-2xl font-light leading-relaxed">  
-            Intellectual observations on the intersection of privacy, wealth preservation, and the global soul.  
-          </p>  
-        </header>
+    <main className="min-h-screen bg-[#F9F8F6] text-[#1A1A1A] selection:bg-[#E2E0D5]">  
+      {/* --- Section 1: The Hero (Opening Statement) --- */}  
+      <section className="px-6 pt-32 pb-24 md:pt-48 md:pb-40 max-w-5xl mx-auto text-center">  
+        <h1 className="text-4xl md:text-6xl font-serif italic mb-8 leading-tight">  
+          The ROI of Reset  
+        </h1>  
+        <p className="text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto opacity-80">  
+          We view travel not as a luxury expense, but as a capital investment in the architecture of silence. A strategic recalibration for those whose most non-renewable resource is headspace.  
+        </p>  
+      </section>
 
-        <div className="grid gap-20">  
-          {essays.map((essay) => (  
-            <Link key={essay.volume} href={`/perspective/${essay.slug}`} className="group block">  
-              <article className="flex flex-col md:flex-row gap-8 items-baseline">  
-                <span className="text-[#C5A059] font-mono text-sm tracking-widest">{essay.volume} — {essay.tag}</span>  
-                <div className="flex-1">  
-                  <h2 className="text-4xl md:text-5xl font-serif mb-4 group-hover:italic transition-all duration-500">  
-                    {essay.title}  
-                  </h2>  
-                  <p className="text-lg text-white/50 max-w-xl mb-6 leading-relaxed">  
-                    {essay.description}  
-                  </p>  
-                  <span className="text-xs uppercase tracking-widest border-b border-white/20 pb-1 group-hover:border-[#C5A059] transition-colors">  
-                    Read Essay →  
-                  </span>  
+      {/* --- Section 2: The Manifesto (The Core) --- */}  
+      <section className="px-6 py-24 border-t border-black/5 bg-white">  
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-12">  
+          <div className="space-y-4">  
+            <span className="text-[10px] uppercase tracking-[0.2em] opacity-40">01. Perspective</span>  
+            <h3 className="text-2xl font-serif italic">The Luxury of Invisibility</h3>  
+            <p className="text-sm leading-relaxed opacity-70">  
+              The modern elite is over-exposed. We specialize in the curation of "blackouts"—moments and places where you are truly invisible to the grid, but entirely present to yourself.  
+            </p>  
+          </div>  
+          <div className="space-y-4">  
+            <span className="text-[10px] uppercase tracking-[0.2em] opacity-40">02. Philosophy</span>  
+            <h3 className="text-2xl font-serif italic">The Essence of Elsewhere</h3>  
+            <p className="text-sm leading-relaxed opacity-70">  
+              Elsewhere is not just a destination; it is a mental state. We bridge the gap between the geography of the map and the geography of the mind.  
+            </p>  
+          </div>  
+          <div className="space-y-4">  
+            <span className="text-[10px] uppercase tracking-[0.2em] opacity-40">03. Performance</span>  
+            <h3 className="text-2xl font-serif italic">Regenerative Value</h3>  
+            <p className="text-sm leading-relaxed opacity-70">  
+              High performance requires high-fidelity rest. Our "Resets" are designed to return the capacity for deep work and decisive action.  
+            </p>  
+          </div>  
+        </div>  
+      </section>
+
+      {/* --- Section 3: The Essays (The Feed) --- */}  
+      <section className="px-6 py-24 max-w-6xl mx-auto">  
+        <div className="flex justify-between items-end mb-12">  
+          <h2 className="text-xs uppercase tracking-[0.3em] font-medium border-b border-black/10 pb-2">  
+            The Editorial Archive  
+          </h2>  
+        </div>  
+          
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">  
+          {essays.map((essay, idx) => (  
+            <article key={idx} className="group cursor-pointer">  
+              <div className="aspect-[4/5] bg-[#E2E0D5] mb-6 overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">  
+                {/* Placeholder for evocative, grainy imagery */}  
+                <div className="w-full h-full flex items-center justify-center text-[10px] uppercase tracking-widest opacity-20">  
+                  Visual Study {idx + 1}  
                 </div>  
-                <span className="hidden md:block text-white/20 uppercase tracking-tighter text-sm italic">Written by {essay.author}</span>  
-              </article>  
-            </Link>  
+              </div>  
+              <span className="text-[10px] uppercase tracking-[0.15em] opacity-40 mb-2 block">{essay.category}</span>  
+              <h4 className="text-xl font-serif mb-3 group-hover:italic transition-all duration-300">  
+                {essay.title}  
+              </h4>  
+              <p className="text-sm leading-relaxed opacity-60">  
+                {essay.excerpt}  
+              </p>  
+            </article>  
           ))}  
         </div>  
-      </section>  
+      </section>
+
+      {/* --- Section 4: Footer Tagline --- */}  
+      <footer className="px-6 py-32 text-center border-t border-black/5">  
+        <p className="font-serif italic text-2xl opacity-30">  
+          "The world is too much with us; late and soon..."  
+        </p>  
+      </footer>  
     </main>  
   );  
-}  
+};
+
+export default PerspectivePage;  
