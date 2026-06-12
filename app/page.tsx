@@ -1,52 +1,59 @@
-import React from 'react';  
 import Link from 'next/link';
 
-export default function HomePage() {  
+export default function Home() {  
   return (  
-    <main className="min-h-screen bg-[#050505] flex flex-col items-center justify-center p-6 text-center">  
-      {/* Background Ambience */}  
-      <div className="fixed inset-0 bg-[radial-gradient(circle_at_center,_#1a1a1a_0%,_#050505_100%)] pointer-events-none" />
+    <div className="relative min-h-screen w-full overflow-hidden bg-[#0a0a0a]">  
+      {/* Cinematic Background Image */}  
+      <div   
+        className="absolute inset-0 bg-cover bg-center opacity-60 scale-105 transition-transform duration-1000"  
+        style={{ backgroundImage: `url('https://cdn.marblism.com/kMqxTAATCR-.webp')` }}  
+      />  
+        
+      {/* Gradient Overlay for Depth */}  
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/80 via-transparent to-[#0a0a0a]" />
 
-      <section className="relative z-10 space-y-12">  
-        <header className="space-y-4">  
-          <span className="font-sans text-[0.6rem] uppercase tracking-[0.6em] text-[#d4af37] opacity-60">  
-            London — Tokyo — New York  
-          </span>  
-          <h1 className="font-serif text-6xl md:text-9xl text-[#f0f0f0] uppercase tracking-[0.2em] font-light leading-none">  
-            NexVoyage  
-          </h1>  
-          <h2 className="font-serif text-2xl md:text-4xl text-[#d4af37] uppercase tracking-[0.5em] font-light opacity-80">  
-            Collective  
-          </h2>  
-        </header>
+      {/* Hero Content */}  
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 text-center">  
+        <h2 className="text-[10px] uppercase tracking-[0.8em] text-[#d4af37] mb-6 animate-pulse">  
+          NexVoyage Collective  
+        </h2>  
+          
+        <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl text-stone-100 tracking-tighter mb-12 max-w-4xl leading-tight">  
+          The Engine of <br />  
+          <span className="italic font-light">Exceptional</span> Travel.  
+        </h1>
 
-        <div className="h-[1px] w-24 bg-[#d4af37]/30 mx-auto" />
+        {/* Pillar Navigation Grid */}  
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 w-full max-w-5xl mt-12">  
+            
+          {/* Pillar 1: The Manifest */}  
+          <Link href="/manifest" className="group flex flex-col items-center">  
+            <span className="text-[9px] uppercase tracking-[0.4em] text-stone-500 group-hover:text-[#d4af37] transition-colors duration-500">I. Discovery</span>  
+            <h3 className="font-serif text-xl mt-2 group-hover:tracking-widest transition-all duration-700">The Manifest</h3>  
+            <div className="w-0 group-hover:w-12 h-[1px] bg-[#d4af37] mt-4 transition-all duration-500" />  
+          </Link>
 
-        <p className="max-w-md mx-auto font-sans text-[0.7rem] uppercase tracking-[0.3em] text-white/40 leading-relaxed font-extralight">  
-          The website engine for the world's most refined travel experiences.   
-          Seamless transitions. Secluded sanctuaries.  
-        </p>
+          {/* Pillar 2: The Mandate */}  
+          <Link href="/mandate" className="group flex flex-col items-center">  
+            <span className="text-[9px] uppercase tracking-[0.4em] text-stone-500 group-hover:text-[#d4af37] transition-colors duration-500">II. Philosophy</span>  
+            <h3 className="font-serif text-xl mt-2 group-hover:tracking-widest transition-all duration-700">The Mandate</h3>  
+            <div className="w-0 group-hover:w-12 h-[1px] bg-[#d4af37] mt-4 transition-all duration-500" />  
+          </Link>
 
-        {/* Navigation Portal */}  
-        <nav className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 pt-12">  
-          <Link href="/mandate" className="group">  
-            <span className="block font-sans text-[0.65rem] uppercase tracking-[0.4em] text-white/40 group-hover:text-[#d4af37] transition-colors duration-500">01. The Mandate</span>  
-          </Link>  
-          <Link href="/manifest" className="group">  
-            <span className="block font-sans text-[0.65rem] uppercase tracking-[0.4em] text-white/40 group-hover:text-[#d4af37] transition-colors duration-500">02. The Manifest</span>  
-          </Link>  
-          <Link href="/reserve" className="group">  
-            <span className="block font-sans text-[0.65rem] uppercase tracking-[0.4em] text-white/40 group-hover:text-[#d4af37] transition-colors duration-500">03. The Reserve</span>  
-          </Link>  
-        </nav>  
-      </section>
+          {/* Pillar 3: The Reserve */}  
+          <Link href="/reserve" className="group flex flex-col items-center">  
+            <span className="text-[9px] uppercase tracking-[0.4em] text-stone-500 group-hover:text-[#d4af37] transition-colors duration-500">III. Arrival</span>  
+            <h3 className="font-serif text-xl mt-2 group-hover:tracking-widest transition-all duration-700">The Reserve</h3>  
+            <div className="w-0 group-hover:w-12 h-[1px] bg-[#d4af37] mt-4 transition-all duration-500" />  
+          </Link>
 
-      {/* Footer Element */}  
-      <footer className="absolute bottom-12 w-full text-center">  
-        <p className="font-sans text-[0.5rem] uppercase tracking-[0.8em] text-white/20">  
-          Beginning the Dialogue  
-        </p>  
-      </footer>  
-    </main>  
+        </div>  
+      </div>
+
+      {/* Decorative Corner Element */}  
+      <div className="fixed bottom-12 right-12 text-[#d4af37]/20 font-serif text-6xl select-none pointer-events-none">  
+        NV  
+      </div>  
+    </div>  
   );  
 }  
