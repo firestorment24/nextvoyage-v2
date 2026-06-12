@@ -1,9 +1,27 @@
 "use client";
 
 import React, { useState } from 'react';  
-import Link from 'next/link';  
-import { Menu, X } from 'lucide-react';
+import Link from 'next/link';
 
+/**  
+ * INLINE SVG ICONS   
+ * Used to eliminate the 'lucide-react' dependency and fix build errors.  
+ */  
+const MenuIcon = () => (  
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>  
+);
+
+const CloseIcon = () => (  
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>  
+);
+
+/**  
+ * NAVIGATION COMPONENT  
+ * Features:  
+ * - Restore subtitles for each menu item.  
+ * - Cinematic overlay with gold/brass aesthetic (#A69F88).  
+ * - Dual export (named + default) to satisfy all page imports.  
+ */  
 export const Navigation = () => {  
   const [isOpen, setIsOpen] = useState(false);
 
@@ -17,8 +35,8 @@ export const Navigation = () => {
 
   return (  
     <>  
-      {/* Static Header */}  
-      <nav className="fixed top-0 left-0 w-full z-50 px-8 py-6 flex justify-between items-items-center mix-blend-difference text-[#A69F88]">  
+      {/* Fixed Header */}  
+      <nav className="fixed top-0 left-0 w-full z-50 px-8 py-6 flex justify-between items-center mix-blend-difference text-[#A69F88]">  
         <Link href="/" className="text-xl font-serif tracking-widest uppercase">  
           NexVoyage Collective  
         </Link>  
@@ -26,21 +44,24 @@ export const Navigation = () => {
           onClick={() => setIsOpen(true)}  
           className="flex items-center gap-2 uppercase tracking-widest text-sm hover:opacity-70 transition-opacity"  
         >  
-          Menu <Menu size={20} />  
+          Menu <MenuIcon />  
         </button>  
       </nav>
 
-      {/* Cinematic Overlay */}  
+      {/* Full-Screen Overlay */}  
       {isOpen && (  
-        <div className="fixed inset-0 z-[100] bg-black flex flex-col p-12 animate-in fade-in duration-500">  
-          <div className="flex justify-between items-center mb-20 text-[#A69F88]">  
-            <span className="text-sm tracking-[0.3em] uppercase opacity-50 italic">Concierge</span>  
-            <button onClick={() => setIsOpen(false)} className="hover:rotate-90 transition-transform duration-300">  
-              <X size={32} />  
+        <div className="fixed inset-0 z-[100] bg-black flex flex-col p-12 animate-in fade-in duration-500 overflow-y-auto">  
+          <div className="flex justify-between items-center mb-12 text-[#A69F88]">  
+            <span className="text-sm tracking-[0.3em] uppercase opacity-50 italic">The Concierge</span>  
+            <button   
+              onClick={() => setIsOpen(false)}   
+              className="hover:rotate-90 transition-transform duration-300"  
+            >  
+              <CloseIcon />  
             </button>  
           </div>
 
-          <div className="flex flex-col gap-12">  
+          <div className="flex flex-col gap-10 md:gap-12">  
             {navLinks.map((link, index) => (  
               <Link   
                 key={link.name}  
@@ -52,11 +73,11 @@ export const Navigation = () => {
                   <span className="text-[#A69F88] text-xs font-mono opacity-50 group-hover:opacity-100">  
                     0{index + 1}  
                   </span>  
-                  <span className="text-5xl md:text-7xl font-serif text-white group-hover:text-[#A69F88] transition-colors duration-300 uppercase tracking-tighter">  
+                  <span className="text-4xl md:text-7xl font-serif text-white group-hover:text-[#A69F88] transition-colors duration-300 uppercase tracking-tighter">  
                     {link.name}  
                   </span>  
                 </div>  
-                <span className="ml-14 text-[#A69F88] text-sm tracking-[0.2em] uppercase opacity-40 group-hover:opacity-100 transition-opacity duration-500 font-light italic">  
+                <span className="ml-14 text-[#A69F88] text-[10px] md:text-sm tracking-[0.2em] uppercase opacity-40 group-hover:opacity-100 transition-opacity duration-500 font-light italic">  
                   {link.subtitle}  
                 </span>  
               </Link>  
@@ -71,4 +92,7 @@ export const Navigation = () => {
       )}  
     </>  
   );  
-};  
+};
+
+// Default export to support mandate/manifest pages  
+export default Navigation; 
