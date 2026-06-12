@@ -1,16 +1,17 @@
 // app/archive/[id]/page.tsx  
-import { SANCTUARIES } from '@/lib/data/sanctuaries'  
+import { SANCTUARIES_DATA } from '@/lib/data/sanctuaries' // Corrected export name  
 import Link from 'next/link'  
 import { notFound } from 'next/navigation'
 
 export async function generateStaticParams() {  
-  return SANCTUARIES.map((item) => ({  
+  // Use the correct data object  
+  return SANCTUARIES_DATA.map((item) => ({  
     id: item.id,  
   }))  
 }
 
 export default function SanctuaryDetailPage({ params }: { params: { id: string } }) {  
-  const sanctuary = SANCTUARIES.find((s) => s.id === params.id)
+  const sanctuary = SANCTUARIES_DATA.find((s) => s.id === params.id)
 
   if (!sanctuary) {  
     notFound()  
@@ -57,7 +58,6 @@ export default function SanctuaryDetailPage({ params }: { params: { id: string }
                 Connect with our AI Lead Analyst to initialize your dossier and unlock Daryl’s calendar.  
               </p>  
                 
-              {/* UPDATED: Link to Rachel's Inquiry Page */}  
               <Link   
                 href={`/inquiry?id=${sanctuary.id}`}  
                 className="inline-block w-full text-center bg-white text-black px-6 py-4 uppercase text-[10px] tracking-[0.2em] hover:bg-gray-200 transition-colors"  
