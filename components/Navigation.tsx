@@ -1,113 +1,79 @@
-'use client';  
-import React, { useState } from 'react';  
-import Link from 'next/link';
+"use client"
+
+import React, { useState } from 'react'  
+import Link from 'next/link'  
+import { X } from 'lucide-react'
 
 export default function Navigation() {  
-const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
 
-const navLinks = [  
-{ name: 'The Lobby', path: '/', desc: 'Arrival & Overview' },  
-{ name: 'The Manifest', path: '/manifest', desc: 'The Elite Ledger' },  
-{ name: 'The Mandate', path: '/mandate', desc: 'Our Philosophy' },  
-{ name: 'The Reserve', path: '/reserve', desc: 'Private Consultation' },  
-];
+  const toggleMenu = () => setIsOpen(!isOpen)  
+  const closeMenu = () => setIsOpen(false)
 
-return (  
-<>  
-  {/* Static Header & Concierge Trigger */}  
-  <div className="fixed top-0 left-0 w-full z-[100] px-10 py-10 flex justify-between items-center pointer-events-none">  
-    {/* Static Brand Text (No Pulse) */}  
-    <div className="pointer-events-auto">  
-      <Link href="/" className="text-[10px] uppercase tracking-[0.6em] text-[#d4af37] font-bold no-underline">  
-        NexVoyage Collective  
-      </Link>  
-    </div>
+  const navLinks = [  
+    { name: 'Home', href: '/' },  
+    { name: 'The Manifest', href: '/manifest' },  
+    { name: 'The Reserve', href: '/reserve' },  
+  ]
 
-    {/* Concierge Trigger */}  
-    <button   
-      onClick={() => setIsOpen(true)}  
-      className="pointer-events-auto group flex items-center gap-4 transition-all"  
-    >  
-      <span className="text-[10px] uppercase tracking-[0.5em] text-[#d4af37] opacity-0 group-hover:opacity-100 transition-all duration-700 translate-x-4 group-hover:translate-x-0">  
-        Concierge  
-      </span>  
-      <div className="flex flex-col gap-2 items-end">  
-        <div className="w-8 h-[1px] bg-[#d4af37] group-hover:w-12 transition-all duration-700" />  
-        <div className="w-4 h-[1px] bg-[#d4af37] group-hover:w-12 transition-all duration-700" />  
-      </div>  
-    </button>  
-  </div>
+  return (  
+    <>  
+      {/* Static Header */}  
+      <nav className="fixed top-0 left-0 w-full z-40 px-8 py-6 flex justify-between items-center bg-transparent">  
+        <Link href="/" className="text-white font-extralight tracking-[0.2em] text-lg hover:text-[#d4af37] transition-colors">  
+          NEXTVOYAGE <span className="font-light">COLLECTIVE</span>  
+        </Link>
 
-  {/* Fullscreen Overlay */}  
-  <div className={`fixed inset-0 z-[110] bg-[#0a0a0a] transition-all duration-1000 ease-in-out ${isOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}>  
-      
-    {/* Background Visual */}  
-    <div className="absolute inset-0 z-0">  
-      <img   
-        src="https://cdn.marblism.com/5gKSV_IRXVD.webp"   
-        className="w-full h-full object-cover opacity-20 grayscale brightness-[0.4]"  
-        alt="Menu Backdrop"  
-      />  
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-transparent to-[#0a0a0a]" />  
-    </div>
+        {/* Concierge Trigger */}  
+        <button   
+          onClick={toggleMenu}  
+          className="text-[#d4af37] font-extralight tracking-widest text-sm hover:opacity-80 transition-opacity flex items-center gap-2"  
+        >  
+          <span className="w-8 h-[1px] bg-[#d4af37]"></span>  
+          CONCIERGE  
+        </button>  
+      </nav>
 
-    {/* Close Button */}  
-    <button   
-      onClick={() => setIsOpen(false)}  
-      className="absolute top-12 right-12 flex items-center gap-4 text-[#d4af37] hover:text-white transition-all duration-700"  
-    >  
-      <span className="text-[10px] uppercase tracking-[0.5em]">Close</span>  
-      <div className="relative w-8 h-8 flex items-center justify-center">  
-        <div className="absolute w-8 h-[1px] bg-current rotate-45" />  
-        <div className="absolute w-8 h-[1px] bg-current -rotate-45" />  
-      </div>  
-    </button>
+      {/* Cinematic Overlay Menu */}  
+      <div   
+        className={`fixed inset-0 z-50 bg-black transition-all duration-700 ease-in-out ${  
+          isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'  
+        }`}  
+      >  
+        {/* Blurred Background Image */}  
+        <div   
+          className="absolute inset-0 bg-cover bg-center opacity-40 grayscale"  
+          style={{ backgroundImage: "url('https://cdn.marblism.com/5gKSV_IRXVD.webp')" }}  
+        ></div>  
+        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
 
-    {/* Nav Links */}  
-    <nav className="relative z-10 h-full flex flex-col justify-center px-8 md:px-24 lg:px-48">  
-      <div className="space-y-16">  
-        {navLinks.map((link, i) => (  
-          <div key={link.name} className="group overflow-hidden">  
-            <Link   
-              href={link.path}   
-              onClick={() => setIsOpen(false)}  
-              className="block no-underline outline-none !text-[#d4af37]"  
+        {/* Close Button - Fixed Logic */}  
+        <button   
+          onClick={closeMenu}  
+          className="absolute top-8 right-8 text-[#d4af37] hover:scale-110 transition-transform z-50"  
+          aria-label="Close Menu"  
+        >  
+          <X size={32} strokeWidth={1} />  
+        </button>
+
+        {/* Menu Links */}  
+        <div className="relative h-full flex flex-col justify-center items-center gap-12">  
+          {navLinks.map((link) => (  
+            <Link  
+              key={link.name}  
+              href={link.href}  
+              onClick={closeMenu}  
+              className="text-4xl md:text-6xl font-extralight tracking-[0.3em] text-white hover:text-[#d4af37] transition-all duration-300"  
             >  
-              <div className="flex items-start md:items-center gap-10">  
-                <span className="text-[#d4af37] opacity-40 text-sm font-mono transition-opacity duration-700 group-hover:opacity-100">  
-                  0{i + 1}  
-                </span>  
-                <div className="space-y-3">  
-                  <h2 className="text-5xl md:text-8xl font-extralight tracking-tighter text-stone-300 group-hover:text-[#d4af37] group-hover:italic transition-all duration-1000 ease-out">  
-                    {link.name}  
-                  </h2>  
-                  <p className="text-[10px] uppercase tracking-[0.7em] text-[#d4af37] opacity-40 transition-all duration-700 group-hover:opacity-100">  
-                    {link.desc}  
-                  </p>  
-                </div>  
-              </div>  
+              {link.name.toUpperCase()}  
             </Link>  
-          </div>  
-        ))}  
-      </div>
-
-      {/* Footer Details */}  
-      <div className="absolute bottom-16 left-8 md:left-24 lg:left-48 flex flex-col md:flex-row gap-12 border-t border-stone-900/50 pt-12 w-full max-w-4xl">  
-        <div className="space-y-3 pr-12 border-r border-stone-900/50">  
-          <span className="text-[9px] uppercase tracking-[0.4em] text-[#d4af37] opacity-60 block">Communication</span>  
-          <p className="text-sm text-stone-500 hover:text-[#d4af37] transition-colors cursor-pointer">concierge@nexvoyage.com</p>  
-        </div>  
-        <div className="space-y-3">  
-          <span className="text-[9px] uppercase tracking-[0.4em] text-[#d4af37] opacity-60 block">Social Transmission</span>  
-          <div className="flex gap-8">  
-            {['Instagram', 'LinkedIn'].map(s => (  
-              <span key={s} className="text-sm text-stone-500 hover:text-[#d4af37] transition-colors cursor-pointer">{s}</span>  
-            ))}  
+          ))}  
+            
+          <div className="mt-12 text-[#d4af37]/50 font-extralight tracking-widest text-xs uppercase">  
+            Curating the Unforgettable  
           </div>  
         </div>  
       </div>  
-    </nav>  
-  </div>  
-</>  
-);  
+    </>  
+  )  
 }  
