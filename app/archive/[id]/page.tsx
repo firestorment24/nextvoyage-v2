@@ -11,7 +11,7 @@ const SANCTUARIES = [
     description: 'An infinity-edge villa carved into the cliffs, where the line between the Mediterranean and the architecture disappears. Experience the Amalfi from a height only the gods usually see.',  
     image: 'https://cdn.marblism.com/yBrJxDpEKzp.webp',  
     details: ['6 Suites', 'Private Helipad', 'Cliffs-edge Pool'],  
-  },  
+  },   
   {  
     id: 'velvet-pines',  
     name: 'Velvet Pines',  
