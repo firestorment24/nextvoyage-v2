@@ -1,6 +1,6 @@
 "use client";
 
-import { SANCTUARIES_DATA } from "@/lib/data/sanctuaries";    
+import { PROPERTY_DATA } from "@/lib/data/sanctuaries";    
 import Link from "next/link";
 
 export default function ArchivePage() {  
@@ -9,54 +9,46 @@ export default function ArchivePage() {
       <div className="max-w-7xl mx-auto">  
         <div className="mb-16 border-l border-white/20 pl-6">  
           <h1 className="text-[10px] uppercase tracking-[0.5em] text-[#666] mb-2 font-sans">  
-            Global Asset Directory  
+            The Elite Ledger  
           </h1>  
           <h2 className="text-4xl font-serif italic tracking-tight text-white">  
-            The Archive  
+            Property Archive  
           </h2>  
         </div>  
           
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">  
-          {SANCTUARIES_DATA.map((sanctuary) => (  
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">  
+          {PROPERTY_DATA.map((property) => (  
             <Link   
-              key={sanctuary.id}   
-              href={`/archive/${sanctuary.id}`}  
-              className="group block"  
+              key={property.id}   
+              href={`/archive/property/${property.id}`}  
+              className="group block border border-white/5 bg-white/[0.02] p-4 hover:border-white/20 transition-all duration-500"  
             >  
-              <div className="relative aspect-[16/10] overflow-hidden bg-white/5 border border-white/10 mb-6">  
+              <div className="relative aspect-[4/5] overflow-hidden bg-black mb-6">  
                 <img   
-                  src={sanctuary.heroImage}   
-                  alt={sanctuary.name}  
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-in-out"  
+                  src={property.imageUrl}   
+                  alt={property.name}  
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000"  
                 />  
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60" />  
-                <div className="absolute bottom-4 left-4">  
-                  <p className="text-[9px] uppercase tracking-[0.3em] text-white/70 font-sans">  
-                    Ref: {sanctuary.id}  
+                <div className="absolute top-4 left-4 bg-black/80 px-2 py-1 border border-white/10">  
+                  <p className="text-[9px] uppercase tracking-widest text-white font-sans">  
+                    {property.id}  
                   </p>  
                 </div>  
               </div>
 
-              <div className="flex justify-between items-start">  
-                <div>  
-                  <h3 className="text-2xl font-serif text-white group-hover:text-white/80 transition-colors">  
-                    {sanctuary.name}  
-                  </h3>  
-                  <p className="text-[10px] uppercase tracking-widest text-[#666] mt-1 font-sans">  
-                    {sanctuary.loc}  
-                  </p>  
-                </div>  
-                <div className="text-right">  
-                  <p className="text-[10px] uppercase tracking-widest text-[#444] font-sans">  
-                    Capacity  
-                  </p>  
-                  <p className="text-xs text-[#888] font-sans italic">  
-                    {sanctuary.propertyCount} Units  
-                  </p>  
-                </div>  
+              <div className="space-y-1">  
+                <h3 className="text-xl font-serif text-white tracking-wide">  
+                  {property.name}  
+                </h3>  
+                <p className="text-[10px] uppercase tracking-widest text-[#666] font-sans">  
+                  {property.location}  
+                </p>  
+              </div>
+
+              <div className="mt-4 flex justify-between items-center pt-4 border-t border-white/5">  
+                <span className="text-[9px] uppercase tracking-tighter text-[#444]">Status: Verified</span>  
+                <span className="text-[10px] text-[#888] font-serif italic italic group-hover:translate-x-1 transition-transform">View Dossier →</span>  
               </div>  
-                
-              <div className="mt-4 h-px bg-white/5 w-0 group-hover:w-full transition-all duration-500" />  
             </Link>  
           ))}  
         </div>  
