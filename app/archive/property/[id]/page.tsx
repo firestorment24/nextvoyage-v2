@@ -30,14 +30,14 @@ export default function PropertyDossierPage() {
             <div className="border border-white/10 p-2 bg-white/[0.02]">  
               <div className="aspect-[3/4] md:aspect-[16/10] overflow-hidden grayscale hover:grayscale-0 transition-all duration-1000">  
                 <img   
-                  src={property.imageUrl}   
+                  src={property.image}   
                   alt={property.name}   
                   className="w-full h-full object-cover"   
                 />  
               </div>  
             </div>  
+            {/* Context Assets (Placeholders for now) */}  
             <div className="mt-8 grid grid-cols-3 gap-4">  
-               {/* Placeholder for secondary technical shots */}  
                {[1,2,3].map(i => (  
                  <div key={i} className="aspect-square bg-white/[0.03] border border-white/5" />  
                ))}  
@@ -59,6 +59,7 @@ export default function PropertyDossierPage() {
               </p>  
             </section>
 
+            {/* Technical Specifications */}  
             <section className="grid grid-cols-2 gap-y-8 gap-x-4">  
               <div>  
                 <h4 className="text-[10px] uppercase tracking-widest text-[#444] mb-2">Technical Highlight</h4>  
