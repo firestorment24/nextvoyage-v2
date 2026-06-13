@@ -1,107 +1,75 @@
-import { PROPERTY_DATA } from '@/data/properties';  
-import Link from 'next/link';
-
-// Use this interface to match our high-end ledger needs  
-interface EliteLedgerProperty {  
-  id: string;  
-  name: string;  
-  location: string;  
-  image: string;  
-  priceLevel: string;  
-  exclusiveOffer: string;  
-  highlight: string;  
-}
+import Link from 'next/link'  
+import { PROPERTY_DATA } from '@/lib/data/sanctuaries'
 
 export default function ArchivePage() {  
-  // Bypassing strict overlap check to access full metadata  
-  const properties = PROPERTY_DATA as unknown as EliteLedgerProperty[];
-
   return (  
-    <main className="min-h-screen bg-[#0A0A0A] text-[#E5E5E5] font-sans selection:bg-[#B8A164]/30">  
-      {/* Header Section */}  
-      <header className="pt-32 pb-16 px-6 border-b border-[#B8A164]/10">  
-        <div className="max-w-[1400px] mx-auto">  
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">  
-            <div>  
-              <h1 className="text-5xl md:text-7xl font-serif tracking-tight mb-4">The Archive</h1>  
-              <div className="flex items-center gap-4">  
-                <div className="h-[1px] w-12 bg-[#B8A164]" />  
-                <p className="text-[10px] tracking-[0.5em] uppercase text-[#B8A164] font-bold">  
-                  Elite Ledger / Quarterly Rotation: Summer 2026  
-                </p>  
-              </div>  
-            </div>  
-            <div className="text-right">  
-              <p className="text-[10px] tracking-[0.3em] uppercase opacity-40 leading-loose">  
-                Total Assets Verified: {properties.length}<br />  
-                System Status: Operational / Full Green  
-              </p>  
-            </div>  
+    <main className="min-h-screen bg-white">  
+      {/* Editorial Header */}  
+      <section className="max-w-7xl mx-auto px-6 pt-32 pb-20 border-b border-gray-100">  
+        <div className="flex flex-col md:flex-row justify-between items-end gap-8">  
+          <div className="max-w-2xl">  
+            <h1 className="text-4xl md:text-6xl font-light tracking-[-0.03em] leading-tight text-black">  
+              The Elite <span className="italic serif font-normal">Ledger</span>  
+            </h1>  
+            <p className="mt-6 text-sm text-gray-400 uppercase tracking-[0.2em] leading-relaxed">  
+              Node 02: The Manifest — A curated index of the world's most discreet sanctuaries.  
+            </p>  
           </div>  
-        </div>  
-      </header>
-
-      {/* The Ledger Grid */}  
-      <section className="px-6 py-12">  
-        <div className="max-w-[1400px] mx-auto">  
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">  
-            {properties.map((property, index) => (  
-              <Link   
-                key={property.id}   
-                href={`/archive/${property.id}`}  
-                className="group block"  
-              >  
-                {/* Visual Asset */}  
-                <div className="relative aspect-[4/5] mb-6 overflow-hidden bg-zinc-900 border border-[#B8A164]/5">  
-                  <img   
-                    src={property.image}   
-                    alt={property.name}  
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 ease-in-out group-hover:scale-105"  
-                  />  
-                  <div className="absolute top-4 right-4 bg-[#0A0A0A]/80 backdrop-blur-md px-3 py-1 border border-[#B8A164]/20">  
-                    <span className="text-[9px] tracking-[0.2em] text-[#B8A164] uppercase font-bold">  
-                      NV-LDR-{(index + 1).toString().padStart(3, '0')}  
-                    </span>  
-                  </div>  
-                </div>
-
-                {/* Technical Specs */}  
-                <div className="space-y-3">  
-                  <div className="flex items-start justify-between border-b border-[#B8A164]/10 pb-2">  
-                    <h2 className="text-xl font-serif text-white group-hover:text-[#B8A164] transition-colors">  
-                      {property.name}  
-                    </h2>  
-                    <span className="text-[10px] tracking-widest opacity-40 uppercase pt-1">  
-                      {property.priceLevel}  
-                    </span>  
-                  </div>  
-                    
-                  <div className="flex justify-between items-center text-[10px] tracking-[0.2em] uppercase">  
-                    <span className="text-[#B8A164] font-bold">{property.location}</span>  
-                    <span className="opacity-40 italic font-serif lowercase tracking-normal text-sm">  
-                      {property.exclusiveOffer}  
-                    </span>  
-                  </div>  
-                    
-                  <p className="text-[11px] leading-relaxed text-zinc-500 font-light line-clamp-2 pt-2">  
-                    {property.highlight}  
-                  </p>  
-                </div>  
-              </Link>  
-            ))}  
+          <div className="text-right">  
+            <span className="text-[10px] font-mono text-gray-300 uppercase tracking-widest">  
+              Total Records: {PROPERTY_DATA.length}  
+            </span>  
           </div>  
         </div>  
       </section>
 
-      {/* Ledger Footer */}  
-      <footer className="py-24 px-6 border-t border-[#B8A164]/10">  
-        <div className="max-w-[1400px] mx-auto flex flex-col items-center">  
-          <div className="w-16 h-[1px] bg-[#B8A164]/30 mb-8" />  
-          <p className="text-[10px] tracking-[0.8em] uppercase opacity-30">  
-            End of Current Ledger  
-          </p>  
+      {/* Property Grid */}  
+      <section className="max-w-7xl mx-auto px-6 py-20">  
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-24">  
+          {PROPERTY_DATA.map((property) => (  
+            <Link key={property.id} href={`/archive/${property.id}`} className="group block">  
+              {/* Image Frame */}  
+              <div className="aspect-[4/5] overflow-hidden bg-gray-50 border border-gray-100 relative">  
+                <img  
+                  src={property.image}  
+                  alt={property.name}  
+                  className="h-full w-full object-cover grayscale transition-all duration-1000 ease-out group-hover:grayscale-0 group-hover:scale-105"  
+                />  
+                <div className="absolute top-4 right-4 text-[8px] tracking-[0.3em] text-white mix-blend-difference opacity-50 font-mono">  
+                  {property.id}  
+                </div>  
+              </div>
+
+              {/* Card Meta */}  
+              <div className="mt-6 space-y-2">  
+                <div className="flex justify-between items-start">  
+                  <h3 className="text-[11px] uppercase tracking-[0.4em] font-medium text-black">  
+                    {property.name}  
+                  </h3>  
+                </div>  
+                <p className="text-[12px] font-serif italic text-gray-400">  
+                  {property.location}  
+                </p>  
+                  
+                {/* Hover Reveal Line */}  
+                <div className="pt-4 overflow-hidden">  
+                  <div className="h-[1px] w-0 bg-black transition-all duration-700 group-hover:w-full" />  
+                  <p className="mt-3 text-[9px] uppercase tracking-[0.2em] text-gray-400 opacity-0 transform translate-y-2 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">  
+                    {property.highlight}  
+                  </p>  
+                </div>  
+              </div>  
+            </Link>  
+          ))}  
         </div>  
+      </section>
+
+      {/* Footer Branding */}  
+      <footer className="py-20 border-t border-gray-100 text-center">  
+        <p className="text-[10px] uppercase tracking-[0.5em] text-gray-300">  
+          NexVoyage Collective &copy; 2026 — All Rights Reserved  
+        </p>  
       </footer>  
     </main>  
-  );  
+  )  
 }  
