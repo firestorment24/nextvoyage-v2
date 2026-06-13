@@ -1,81 +1,64 @@
-'use client'
+"use client";
 
-import React, { useState } from 'react'  
-import { PROPERTY_DATA, Property } from '@/data/properties'
+import { SANCTUARIES } from "@/lib/data/sanctuaries";  
+import Link from "next/link";
 
 export default function ArchivePage() {  
-  const [filter, setFilter] = useState<string>('ALL')
-
-  const niches = Array.from(new Set(PROPERTY_DATA.map(p => p.niche)))  
-  const filteredProperties = filter === 'ALL'   
-    ? PROPERTY_DATA   
-    : PROPERTY_DATA.filter(p => p.niche === filter)
- 
   return (  
-    <div className="min-h-screen bg-black text-white p-8 font-sans">  
-      {/* MISSION PROFILE INDEX */}  
-      <header className="mb-16 border-b border-zinc-800 pb-8">  
-        <h1 className="text-4xl font-light tracking-tighter mb-6 uppercase">The Elite Ledger</h1>  
-        <div className="flex flex-wrap gap-x-6 gap-y-2 text-[10px] uppercase tracking-widest text-zinc-500">  
-          <button   
-            onClick={() => setFilter('ALL')}  
-            className={`hover:text-white transition ${filter === 'ALL' ? 'text-white' : ''}`}  
-          >  
-            [ VIEW_ALL ]  
-          </button>  
-          {niches.map(niche => (  
-            <button   
-              key={niche}  
-              onClick={() => setFilter(niche)}  
-              className={`hover:text-white transition ${filter === niche ? 'text-white border-b border-white' : ''}`}  
-            >  
-              {niche.replace(' Sanctuary', '').toUpperCase()}  
-            </button>  
-          ))}  
+    <main className="min-h-screen bg-[#000000] text-[#D4AF37] font-mono selection:bg-[#D4AF37] selection:text-black">  
+      {/* Editorial Header */}  
+      <header className="p-8 border-b border-[#D4AF37]/10">  
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-end gap-8">  
+          <div className="space-y-2">  
+            <h1 className="text-5xl font-light tracking-tighter">THE ARCHIVE</h1>  
+            <p className="text-[10px] tracking-[0.4em] opacity-40">PRIVATE_COLLECTION // V2.0</p>  
+          </div>  
+          <div className="text-right max-w-xs">  
+            <p className="text-[10px] leading-relaxed opacity-60 uppercase tracking-widest">  
+              A high-density registry of the world's most elusive sanctuaries. Refined for the next generation of global nomads.  
+            </p>  
+          </div>  
         </div>  
       </header>
 
-      {/* PROPERTY GRID */}  
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">  
-        {filteredProperties.map((property) => (  
-          <div key={property.id} className="group relative">  
-            <div className="overflow-hidden aspect-[4/5] bg-zinc-900 mb-4">  
+      {/* Grid Ledger */}  
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0.5 bg-[#D4AF37]/10 border-b border-[#D4AF37]/10">  
+        {SANCTUARIES.map((item) => (  
+          <Link   
+            key={item.id}   
+            href={`/archive/${item.id}`}  
+            className="group relative bg-black aspect-[4/5] overflow-hidden flex flex-col p-6 transition-all hover:bg-[#0a0a0a]"  
+          >  
+            <div className="absolute inset-0 opacity-40 group-hover:opacity-100 transition-opacity duration-700">  
               <img   
-                src={property.image}   
-                alt={property.name}  
-                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-105"  
+                src={item.heroImage}   
+                alt={item.name}   
+                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105"  
               />  
-              {property.status && (  
-                <div className="absolute top-4 left-4 bg-white text-black text-[9px] px-2 py-1 font-bold tracking-widest">  
-                  {property.status}  
-                </div>  
-              )}  
             </div>  
               
-            <div className="flex flex-col space-y-1">  
-              <span className="text-[9px] uppercase tracking-[0.2em] text-zinc-500 font-mono">  
-                {property.serial} // [ATMOS: {property.niche.toUpperCase()}]  
-              </span>  
-              <h2 className="text-xl font-light tracking-tight">{property.name}</h2>  
-              <p className="text-xs text-zinc-400">{property.location}</p>  
-              <p className="pt-4 text-xs italic text-zinc-500 leading-relaxed max-w-[280px]">  
-                "{property.highlight}"  
-              </p>  
+            <div className="relative z-10 h-full flex flex-col justify-between">  
+              <div className="flex justify-between items-start">  
+                <span className="text-[9px] tracking-widest opacity-50">REF_{item.id}</span>  
+                <span className="text-[9px] tracking-widest px-2 py-1 border border-[#D4AF37]/20 group-hover:border-[#D4AF37] transition-colors">  
+                  {item.tag.toUpperCase()}  
+                </span>  
+              </div>  
                 
-              {property.legalLink && (  
-                <a href="/legal/safety-consent" className="mt-4 inline-block text-[9px] text-zinc-300 border-b border-zinc-700 w-fit hover:border-white transition">  
-                  VIEW_COMPLIANCE_FRAMEWORK  
-                </a>  
-              )}  
+              <div className="space-y-1 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">  
+                <p className="text-[10px] tracking-widest opacity-50">{item.loc.toUpperCase()}</p>  
+                <h2 className="text-2xl font-light tracking-tighter leading-none group-hover:text-white transition-colors">  
+                  {item.name.toUpperCase()}  
+                </h2>  
+              </div>  
             </div>  
-          </div>  
+          </Link>  
         ))}  
       </div>
 
-      <footer className="mt-24 pt-8 border-t border-zinc-900 text-[10px] text-zinc-600 uppercase tracking-widest flex justify-between">  
-        <span>Total_Access_Points: {PROPERTY_DATA.length}</span>  
-        <span>Secure Protocol // NexVoyage Collective</span>  
+      <footer className="p-12 text-center opacity-20">  
+        <p className="text-[9px] tracking-[0.8em]">END_OF_LEDGER</p>  
       </footer>  
-    </div>  
-  )  
+    </main>  
+  );  
 }  
