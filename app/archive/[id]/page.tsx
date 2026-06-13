@@ -1,105 +1,68 @@
-import { PROPERTY_DATA } from '@/data/properties';  
-import { notFound } from 'next/navigation';  
-import Link from 'next/link';
+import { notFound } from 'next/navigation'  
+import Link from 'next/link'  
+import { PROPERTY_DATA } from '@/lib/data/sanctuaries'
 
-// Renamed to avoid collision and added unknown cast below  
-interface EliteProperty {  
-  id: string;  
-  name: string;  
-  location: string;  
-  image: string;  
-  priceLevel: string;  
-  exclusiveOffer: string;  
-  highlight: string;  
-  description: string;  
-  amenities: string[];  
-}
+export default function PropertyDetailPage({ params }: { params: { id: string } }) {  
+  const property = PROPERTY_DATA.find((p) => p.id === params.id)
 
-export default function PropertyDetail({ params }: { params: { id: string } }) {  
-  // Bypassing strict overlap check with unknown cast  
-  const property = (PROPERTY_DATA as unknown as EliteProperty[]).find((p) => p.id === params.id);
-
-  if (!property) {  
-    notFound();  
-  }
+  if (!property) return notFound()
 
   return (  
-    <main className="min-h-screen bg-[#0A0A0A] text-[#E5E5E5] font-sans selection:bg-[#B8A164]/30">  
+    <main className="min-h-screen bg-white">  
       {/* Navigation */}  
-      <nav className="fixed top-0 w-full z-50 border-b border-[#B8A164]/10 bg-[#0A0A0A]/80 backdrop-blur-md">  
-        <div className="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">  
-          <Link href="/archive" className="text-[10px] tracking-[0.4em] uppercase opacity-50 hover:opacity-100 transition-opacity">  
-            ← Back to Ledger  
-          </Link>  
-          <div className="text-[10px] tracking-[0.5em] uppercase font-bold text-[#B8A164]">  
-            NexVoyage / Detail  
-          </div>  
-          <div className="w-20" />   
-        </div>  
+      <nav className="p-8 fixed top-0 left-0 w-full z-50 flex justify-between mix-blend-difference text-white">  
+        <Link href="/archive" className="text-[10px] uppercase tracking-[0.3em] hover:opacity-50 transition-opacity">  
+          &larr; Back to Archive  
+        </Link>  
+        <span className="text-[10px] uppercase tracking-[0.3em] font-mono">  
+          REF: {property.id}  
+        </span>  
       </nav>
 
-      <div className="flex flex-col lg:flex-row min-h-screen pt-16">  
-        {/* Left: Immersive Visual */}  
-        <div className="w-full lg:w-1/2 h-[50vh] lg:h-[calc(100vh-64px)] sticky top-16 bg-zinc-900 overflow-hidden border-r border-[#B8A164]/10">  
-          <img   
-            src={property.image}   
+      {/* Split Screen Layout */}  
+      <div className="flex flex-col lg:flex-row min-h-screen">  
+        {/* Left: Visual (Sticky) */}  
+        <div className="w-full lg:w-1/2 h-[60vh] lg:h-screen lg:sticky lg:top-0 overflow-hidden">  
+          <img  
+            src={property.image}  
             alt={property.name}  
-            className="w-full h-full object-cover opacity-80 grayscale hover:grayscale-0 transition-all duration-1000 ease-in-out"  
+            className="w-full h-full object-cover"  
           />  
-          <div className="absolute bottom-8 left-8">  
-            <h1 className="text-4xl md:text-6xl font-serif text-white mb-2">{property.name}</h1>  
-            <p className="text-[10px] tracking-[0.4em] uppercase text-[#B8A164]">{property.location}</p>  
-          </div>  
         </div>
 
-        {/* Right: Technical Documentation */}  
-        <div className="w-full lg:w-1/2 p-8 md:p-16 lg:p-24 overflow-y-auto">  
-          <div className="max-w-lg">  
-            <div className="mb-16">  
-              <h3 className="text-[#B8A164] text-[10px] tracking-[0.3em] uppercase mb-4 opacity-50">Property Highlight</h3>  
-              <p className="text-lg md:text-xl font-serif leading-relaxed text-zinc-300 italic">  
-                "{property.highlight}"  
+        {/* Right: Narrative */}  
+        <div className="w-full lg:w-1/2 flex items-center justify-center p-12 lg:p-24 bg-white">  
+          <div className="max-w-lg space-y-12">  
+            <div className="space-y-4">  
+              <span className="text-[10px] uppercase tracking-[0.4em] text-gray-400">  
+                {property.location}  
+              </span>  
+              <h1 className="text-5xl font-light tracking-tight text-black leading-tight">  
+                {property.name}  
+              </h1>  
+              <div className="h-12 w-[1px] bg-gray-200" />  
+            </div>
+
+            <div className="space-y-8">  
+              <h2 className="text-sm uppercase tracking-[0.3em] font-medium text-black">  
+                {property.highlight}  
+              </h2>  
+              <p className="text-lg font-serif italic text-gray-600 leading-relaxed">  
+                "{property.description}"  
               </p>  
             </div>
 
-            <div className="grid grid-cols-2 gap-12 mb-16 border-y border-[#B8A164]/10 py-12">  
-              <div>  
-                <h4 className="text-[10px] tracking-[0.2em] uppercase text-[#B8A164] mb-2">Category</h4>  
-                <p className="text-sm font-medium uppercase tracking-wider">{property.priceLevel}</p>  
-              </div>  
-              <div>  
-                <h4 className="text-[10px] tracking-[0.2em] uppercase text-[#B8A164] mb-2">Benefit</h4>  
-                <p className="text-sm font-medium uppercase tracking-wider text-white">{property.exclusiveOffer}</p>  
-              </div>  
-            </div>
-
-            <div className="mb-16">  
-              <h3 className="text-[#B8A164] text-[10px] tracking-[0.3em] uppercase mb-6 opacity-50">Operational Dossier</h3>  
-              <p className="text-sm leading-relaxed text-zinc-400 font-light mb-8">  
-                {property.description}  
-              </p>  
-            </div>
-
-            <div>  
-              <h3 className="text-[#B8A164] text-[10px] tracking-[0.3em] uppercase mb-6 opacity-50">Technical Specifications</h3>  
-              <ul className="space-y-4">  
-                {property.amenities.map((item, i) => (  
-                  <li key={i} className="flex items-center gap-4 text-[11px] tracking-[0.1em] uppercase text-zinc-300">  
-                    <span className="w-1 h-1 bg-[#B8A164] rounded-full" />  
-                    {item}  
-                  </li>  
-                ))}  
-              </ul>  
-            </div>
-
-            <div className="mt-24">  
-              <button className="w-full py-4 border border-[#B8A164] text-[#B8A164] text-[10px] tracking-[0.5em] uppercase hover:bg-[#B8A164] hover:text-[#0A0A0A] transition-all duration-500">  
-                Initiate Inquiry  
+            <div className="pt-12 border-t border-gray-100 flex flex-col gap-6">  
+              <button className="w-full py-5 border border-black text-[10px] uppercase tracking-[0.4em] hover:bg-black hover:text-white transition-all duration-500">  
+                Inquire for Access  
               </button>  
+              <p className="text-[10px] text-center text-gray-300 uppercase tracking-widest">  
+                Discretion Guaranteed — Sanctuary Tier Restricted  
+              </p>  
             </div>  
           </div>  
         </div>  
       </div>  
     </main>  
-  );  
+  )  
 }  
