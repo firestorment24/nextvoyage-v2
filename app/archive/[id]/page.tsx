@@ -18,7 +18,7 @@ export default function PropertyDetailPage() {
       </div>  
     );  
   }
-
+ 
   return (  
     <main className="min-h-screen bg-black text-[#D4AF37] selection:bg-[#D4AF37] selection:text-black pt-24">  
       {/* Dossier Navigation */}  
