@@ -18,7 +18,7 @@ export interface Sanctuary {
   heroImage: string;  
   propertyCount: number;  
 }
-
+ 
 export const SANCTUARIES_DATA: Sanctuary[] = [  
   {  
     id: "alpine-stronghold",  
