@@ -1,7 +1,21 @@
 import { PROPERTY_DATA } from '@/data/properties';  
 import Link from 'next/link';
 
+// Define the full specification for the Ledger  
+interface EliteLedgerProperty {  
+  id: string;  
+  name: string;  
+  location: string;  
+  image: string;  
+  priceLevel: string;  
+  exclusiveOffer: string;  
+  highlight: string;  
+}
+
 export default function ArchivePage() {  
+  // Cast to unknown first to bypass the strict overlap check  
+  const properties = PROPERTY_DATA as unknown as EliteLedgerProperty[];
+
   return (  
     <main className="min-h-screen bg-[#0A0A0A] text-[#E5E5E5] font-sans selection:bg-[#B8A164]/30">  
       {/* Header Section */}  
@@ -19,7 +33,7 @@ export default function ArchivePage() {
             </div>  
             <div className="text-right">  
               <p className="text-[10px] tracking-[0.3em] uppercase opacity-40 leading-loose">  
-                Total Assets Verified: {PROPERTY_DATA.length}<br />  
+                Total Assets Verified: {properties.length}<br />  
                 System Status: Operational / Full Green  
               </p>  
             </div>  
@@ -31,7 +45,7 @@ export default function ArchivePage() {
       <section className="px-6 py-12">  
         <div className="max-w-[1400px] mx-auto">  
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">  
-            {PROPERTY_DATA.map((property, index) => (  
+            {properties.map((property, index) => (  
               <Link   
                 key={property.id}   
                 href={`/archive/${property.id}`}  
