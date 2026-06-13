@@ -16,10 +16,10 @@ const inter = Inter({
   variable: '--font-inter'  
 });
 
-// Defining the interface locally to ensure 'serial' is recognized  
-interface Property {  
+// Renamed to avoid collision with the library's Property type  
+interface DossierProperty {  
   id: string;  
-  serial: string; // The missing link  
+  serial: string;  
   name: string;  
   sanctuaryId: string;  
   location: string;  
@@ -34,16 +34,17 @@ export default async function PropertyDossierPage({
 }: {   
   params: Promise<{ id: string; propertyId: string }>   
 }) {  
-  const { id, propertyId } = await params;  
-    
+  const { id, propertyId } = await params;
+
   const sanctuary = SANCTUARIES_DATA.find(s => s.id === id);  
-  const property = PROPERTY_DATA.find(p => p.id === propertyId) as Property;
+    
+  // Using 'as unknown as DossierProperty' to bypass the type overlap error  
+  const property = PROPERTY_DATA.find(p => p.id === propertyId) as unknown as DossierProperty;
 
   if (!property || !sanctuary) return notFound();
 
   return (  
     <main className={`min-h-screen bg-[#0A0A0A] text-[#E5E5E5] ${cormorant.variable} ${inter.variable} font-sans selection:bg-[#D4AF37]/30`}>  
-      {/* Dossier Header */}  
       <div className="max-w-7xl mx-auto px-6 pt-32 pb-12">  
         <nav className="flex items-center space-x-4 text-xs tracking-widest uppercase mb-12 opacity-60">  
           <Link href="/archive" className="hover:text-[#D4AF37] transition-colors">Archive</Link>  
@@ -54,7 +55,6 @@ export default async function PropertyDossierPage({
         </nav>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">  
-          {/* Visual Evidence */}  
           <div className="lg:col-span-7">  
             <div className="relative aspect-[4/5] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 border border-white/10">  
               <Image  
@@ -68,7 +68,6 @@ export default async function PropertyDossierPage({
             </div>  
           </div>
 
-          {/* Dossier Details */}  
           <div className="lg:col-span-5 flex flex-col justify-center">  
             <div className="mb-8">  
               <span className="text-[#D4AF37] text-sm tracking-[0.3em] uppercase block mb-4">  
