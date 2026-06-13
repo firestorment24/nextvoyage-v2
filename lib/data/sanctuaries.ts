@@ -1,115 +1,95 @@
 // lib/data/sanctuaries.ts
 
-export interface Property {  
+export interface Sanctuary {  
   id: string;  
-  serial: string;  
   name: string;  
-  location: string;  
-  image: string;  
-  highlight: string;  
-  description: string;  
+  loc: string;  
+  tag: string;  
+  heroImage: string;  
+  atmosphere: string;  
+  highlights: string[];  
   atmosphericTags: string[];  
-  specs: { label: string; value: string }[];  
+  specs: {  
+    label: string;  
+    value: string;  
+  }[];  
 }
 
-export const PROPERTY_DATA: Property[] = [  
+export const SANCTUARIES: Sanctuary[] = [  
   {  
     id: "azure-heights",  
-    serial: "NV-LDR-001",  
     name: "Azure Heights",  
-    location: "Amalfi Coast, Italy",  
-    image: "https://cdn.marblism.com/yBrJxDpEKzp.webp",  
-    highlight: "Gravity-defying brutalism above the Tyrrhenian.",  
-    description: "A dialogue between raw concrete and the deep sapphire of the Mediterranean. Suspended 400m above sea level, the architecture is designed for the 'Blue Hour.' Rosemary and sea salt scents are piped via a geothermal ventilation system. Total acoustic isolation ensures the roar of the ocean is a choice, not a constant.",  
+    loc: "Amalfi Coast, Italy",  
+    tag: "The blue hour, perfected.",  
+    heroImage: "https://cdn.marblism.com/toFNfe5Nnov.webp",  
+    atmosphere: "A gravity-defying brutalist villa 400m above the Tyrrhenian. The air carries rosemary and sea salt; the silence is absolute.",  
+    highlights: ["Private Funicular Access", "Volcanic Stone Infinity Pool", "1982 Sassicaia Cellar"],  
     atmosphericTags: ["BRUTALIST", "COASTAL NOIR", "VERTICAL"],  
     specs: [  
       { label: "Privacy Grade", value: "Class A (No Line of Sight)" },  
-      { label: "Access", value: "Private Funicular / Helipad" },  
-      { label: "Vetting", value: "NexVoyage Triple-Cert (Acoustics, Privacy, Air)" }  
+      { label: "Access", value: "Private Helipad / Funicular" },  
+      { label: "Vetting", value: "NexVoyage Triple-Cert" }  
     ]  
   },  
   {  
     id: "velvet-pines",  
-    serial: "NV-LDR-002",  
     name: "Velvet Pines",  
-    location: "Zermatt, Switzerland",  
-    image: "https://cdn.marblism.com/uVf8PKIwMQs.webp",  
-    highlight: "The pinnacle of alpine silence.",  
-    description: "A high-altitude refuge carved from granite and black oak. Geothermal heating keeps floors at a constant 22°C while military-grade network encryption protects your digital footprint. Features a private ski-in/ski-out tunnel directly connecting the slopes to the master suite’s dressing room.",  
-    atmosphericTags: ["ALPINE NOIR", "HYPER-PRIVATE", "GOTHIC"],  
+    loc: "Zermatt, Switzerland",  
+    tag: "The pinnacle of alpine silence.",  
+    heroImage: "https://cdn.marblism.com/mRxfQ0N2_io.webp",  
+    atmosphere: "A high-altitude refuge wrapped in charred timber and velvet. Deep isolation with a direct view of the Matterhorn's north face.",  
+    highlights: ["Oxygen-Enriched Suites", "Sub-Zero Recovery Spa", "Monastic Design Aesthetic"],  
+    atmosphericTags: ["NEON NOIR", "ALPINE", "MINIMALIST"],  
     specs: [  
-      { label: "Oxygen", value: "Sleeping Quarter Enrichment" },  
-      { label: "Security", value: "On-site/Off-site Redundancy" },  
-      { label: "The Standard", value: "Calibrated for 0.0dB Ambient Noise" }  
+      { label: "Isolation", value: "Level 9 (Deep Alpine)" },  
+      { label: "Design", value: "Wabi-Sabi Industrial" },  
+      { label: "Service", value: "Invisible Staffing" }  
     ]  
   },  
   {  
     id: "obsidian-sands",  
-    serial: "NV-LDR-003",  
     name: "Obsidian Sands",  
-    location: "Santorini, Greece",  
-    image: "https://cdn.marblism.com/toFNfe5Nnov.webp",  
-    highlight: "Volcanic luxury on the edge.",  
-    description: "A subterranean masterwork stripping away Santorini's white-and-blue cliches. Raw volcanic stone and shadow dominate. The black-mirror pool is carved into the caldera rock, reflecting the Aegean in total stillness. Lighting is strictly warm neon noir to accentuate the earth's natural textures.",  
-    atmosphericTags: ["VOLCANIC NOIR", "MINIMALIST", "UNDERGROUND"],  
+    loc: "Santorini, Greece",  
+    tag: "Volcanic luxury on the edge.",  
+    heroImage: "https://cdn.marblism.com/mRxfQ0N2_io.webp",  
+    atmosphere: "Carved into the caldera, this sanctuary uses volcanic basalt to create a temperature-stable subterranean paradise.",  
+    highlights: ["In-Cave Cinema", "Black Sand Private Beach", "Geothermal Plunge Pools"],  
+    atmosphericTags: ["SOUTHERN GOTHIC", "VOLCANIC", "DARK LUXE"],  
     specs: [  
-      { label: "Climate", value: "Meltemi-Shielded Positioning" },  
-      { label: "Concierge", value: "After-hours Akrotiri Access" },  
-      { label: "Acoustics", value: "Natural Rock Resonance Calibration" }  
+      { label: "Structure", value: "Subterranean Basalt" },  
+      { label: "Privacy", value: "Caldera Edge (Absolute)" },  
+      { label: "Security", value: "Biometric Access" }  
     ]  
   },  
   {  
     id: "gilded-dunes",  
-    serial: "NV-LDR-004",  
     name: "Gilded Dunes",  
-    location: "Dubai, UAE",  
-    image: "https://cdn.marblism.com/rN5G7nLp8xq.webp",  
-    highlight: "Desert royalty redefined.",  
-    description: "A fortress of gold and glass rising from the Empty Quarter. The Gilded Dunes experience is built around total isolation and the 'invisible hand' of service. Sand-filtration systems keep the internal air at a crisp, mountain-air purity despite the desert heat.",  
-    atmosphericTags: ["SOUTHERN GOTHIC", "NEON NOIR", "DESERT"],  
+    loc: "Dubai, UAE",  
+    tag: "Desert royalty redefined.",  
+    heroImage: "https://cdn.marblism.com/vaBnm6isJ-C.webp",  
+    atmosphere: "A fortress of gold and glass in the deep desert. Advanced sand-filtration and climate control create a perpetual 22°C oasis.",  
+    highlights: ["Private Runway (G650)", "HEPA-H14 Environment", "Stargazing Observatory"],  
+    atmosphericTags: ["NEON NOIR", "DESERT", "CYBERPUNK"],  
     specs: [  
-      { label: "Filtration", value: "HEPA-H14 Environmental Control" },  
-      { label: "Staffing", value: "3:1 Ratio (Invisible Presence)" },  
-      { label: "Arrival", value: "Private Runway (G650 Compatible)" }  
+      { label: "Climate", value: "Internal Micro-Biosphere" },  
+      { label: "Arrival", value: "Private G650 Runway" },  
+      { label: "Staffing", value: "3:1 Ratio" }  
     ]  
   },  
   {  
     id: "jade-canopy",  
-    serial: "NV-LDR-005",  
     name: "Jade Canopy",  
-    location: "Ubud, Bali",  
-    image: "https://cdn.marblism.com/k9S2vM1L0p4.webp",  
-    highlight: "A dialogue with the jungle.",  
-    description: "High-density flora meets low-density living. Jade Canopy is a modular structure suspended above the Ayung River valley. The architecture uses bio-mimicry to blend with the rainforest, ensuring zero heat-signature and maximum cooling via natural air-channels.",  
+    loc: "Ubud, Bali",  
+    tag: "A dialogue with the jungle.",  
+    heroImage: "https://cdn.marblism.com/vEIkjdyc8FE.webp",  
+    atmosphere: "Zero-impact modular architecture suspended in the Ubud rainforest. Bio-mimicry at its most luxurious.",  
+    highlights: ["Volcanic Feed Onsen", "Zero Heat-Signature", "Foliage Screening"],  
     atmosphericTags: ["ORGANIC", "MYSTICAL", "TROPICAL NOIR"],  
     specs: [  
-      { label: "Construction", value: "Zero-Impact Modular Steel" },  
-      { label: "Privacy", value: "Dense Foliage Screening" },  
-      { label: "Wellness", value: "Private Onsen (Volcanic Feed)" }  
+      { label: "Impact", value: "Zero-Footprint Modular" },  
+      { label: "Wellness", value: "Private Volcanic Onsen" },  
+      { label: "Acoustics", value: "Active Noise Cancellation" }  
     ]  
   },  
-  // ... and so on for the remaining 14 properties  
-];
-
-export const SANCTUARIES_DATA = [  
-  {  
-    id: "azure-heights",  
-    name: "Azure Heights",  
-    loc: "French Riviera",  
-    tag: "Vertical Serenity",  
-    atmosphere: "Brutalist architecture meeting the Mediterranean cliffside. A study in blue and concrete.",  
-    highlights: ["Infinity Cliff Pool", "Private Funicular", "1982 Sassicaia Cellar"],  
-    heroImage: "https://cdn.marblism.com/yBrJxDpEKzp.webp",  
-    propertyCount: 12  
-  },  
-  {  
-    id: "velvet-pines",  
-    name: "Velvet Pines",  
-    loc: "Swiss Alps",  
-    tag: "High-Altitude Refuge",  
-    atmosphere: "Black oak and granite. The scent of burnt cedar and the tactile luxury of heavy cashmere.",  
-    highlights: ["Ski-in/Ski-out Tunnel", "Geothermal Floors", "Oxygen-Enriched Suites"],  
-    heroImage: "https://cdn.marblism.com/uVf8PKIwMQs.webp",  
-    propertyCount: 8  
-  }  
+  // ... and the remaining 14 properties mapping to the same structure  
 ];  
