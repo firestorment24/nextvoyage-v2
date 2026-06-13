@@ -8,198 +8,221 @@ export interface Property {
   image: string;  
   highlight: string;  
   description: string;  
-  specs: string[];  
+  atmosphericTags: string[]; // New metadata layer  
+  specs: {  
+    label: string;  
+    value: string;  
+  }[];  
 }
 
 export const PROPERTY_DATA: Property[] = [  
   {  
-    id: "aman-new-york",  
-    serial: "NV-LDR-001",  
+    id: "nv-ldr-001",  
+    serial: "01",  
     name: "Aman New York",  
     location: "Manhattan, USA",  
-    image: "https://www.aman.com/sites/default/files/2022-08/Aman-New-York-Garden-Terrace_1.jpg",  
-    highlight: "The crown jewel of the Billionaire’s Row skyline.",  
-    description: "A serene sanctuary in the historic Crown Building, high above the pulse of Midtown Manhattan.",  
-    specs: ["Double-height atriums", "Subterranean jazz club", "Garden Terrace"]  
+    image: "https://images.unsplash.com/photo-1541336032412-2048a678540d?q=80&w=2000&auto=format&fit=crop",  
+    highlight: "The Crown Building Sanctuary",  
+    description: "A serene architectural masterpiece rising above the pulse of Fifth Avenue.",  
+    atmosphericTags: ["BRUTALIST", "NEON NOIR"],  
+    specs: [{ label: "Vibe", value: "Executive Sanctuary" }, { label: "Privacy", value: "Level 4" }]  
   },  
   {  
-    id: "hotel-du-cap-eden-roc",  
-    serial: "NV-LDR-002",  
-    name: "Hotel du Cap-Eden-Roc",  
-    location: "Antibes, France",  
-    image: "https://www.oetkercollection.com/media/2182/hotel-du-cap-eden-roc-hero.jpg",  
-    highlight: "The definitive home of Riviera glamour.",  
-    description: "A legendary Napoleon III-style palace perched on the tip of Cap d'Antibes.",  
-    specs: ["Private saltwater pool", "Iconic diving boards", "Centuries-old pine groves"]  
-  },  
-  {  
-    id: "singita-ebony-lodge",  
-    serial: "NV-LDR-003",  
-    name: "Singita Ebony Lodge",  
-    location: "Sabi Sand, South Africa",  
-    image: "https://singita.com/wp-content/uploads/2016/11/Singita-Ebony-Lodge-Exterior.jpg",  
-    highlight: "The birthplace of modern sustainable luxury.",  
-    description: "A bold, eclectic mix of African heritage and refined modern design on the banks of the Sand River.",  
-    specs: ["Glass-fronted suites", "Private plunge pools", "Elite Big Five access"]  
-  },  
-  {  
-    id: "amanpuri",  
-    serial: "NV-LDR-004",  
-    name: "Amanpuri",  
-    location: "Phuket, Thailand",  
-    image: "https://www.aman.com/sites/default/files/2021-02/Amanpuri_Exterior_1.jpg",  
-    highlight: "The original Aman. Unmatched coastal privacy.",  
-    description: "A timeless masterpiece of Ayutthaya-inspired architecture set within a coconut grove.",  
-    specs: ["Private beach access", "Holistic wellness center", "Black-tiled pool"]  
-  },  
-  {  
-    id: "amangiri",  
-    serial: "NV-LDR-005",  
+    id: "nv-ldr-002",  
+    serial: "02",  
     name: "Amangiri",  
-    location: "Utah, USA",  
-    image: "https://www.aman.com/sites/default/files/2021-02/Amangiri_Exterior_1.jpg",  
-    highlight: "Architecture as a dialogue with the desert.",  
-    description: "A concrete fortress blending seamlessly into the luminous canyons of the Colorado Plateau.",  
-    specs: ["600-acre sanctuary", "Desert-view spa", "Guided via ferrata"]  
+    location: "Canyon Point, Utah",  
+    image: "https://images.unsplash.com/photo-1505245208761-ba873552c061?q=80&w=2000&auto=format&fit=crop",  
+    highlight: "The High-Desert Monolith",  
+    description: "Concrete architecture blending seamlessly into the 600-acre Colorado Plateau.",  
+    atmosphericTags: ["MINIMALIST", "MOUNTAIN MODERN"],  
+    specs: [{ label: "Vibe", value: "Arid Modern" }, { label: "Privacy", value: "Level 5" }]  
   },  
   {  
-    id: "sensi-azores",  
-    serial: "NV-LDR-006",  
-    name: "Sensi Azores",  
-    location: "São Miguel, Azores",  
-    image: "https://cdn.prod.website-files.com/64b36dfa6b5e7b810673520b/65b79b7de504bd106897317b_fields.webp",  
-    highlight: "Nature and spa at the edge of the Atlantic.",  
-    description: "A restored country farmhouse offering an authentic Azorean experience within a protected area.",  
-    specs: ["Heated indoor pool", "Turkish bath", "Organic cuisine"]  
-  },  
-  {  
-    id: "amancaya",  
-    serial: "NV-LDR-007",  
-    name: "Amancaya",  
-    location: "Exuma, Bahamas",  
-    image: "https://architecturemagazine.co.uk/wp-content/uploads/2026/06/Aman-Residences-Amancaya-%E2%80%93-Pool-Terrace-1-scaled.jpg",  
-    highlight: "Aman’s first Bahamian private island hideaway.",  
-    description: "A 36-pavilion resort set across two secluded cays in the crystal waters of the Exumas.",  
-    specs: ["Private marina", "Pavilion-style living", "LEED-certified design"]  
-  },  
-  {  
-    id: "next-hotel-melbourne",  
-    serial: "NV-LDR-008",  
-    name: "Next Hotel Melbourne",  
-    location: "Melbourne, Australia",  
-    image: "https://thecarousel.com/wp-content/uploads/2025/11/Carousel-18.webp",  
-    highlight: "Manhattan-inspired sophistication in the CBD.",  
-    description: "A design-forward retreat in the 80 Collins precinct, blending modern art and industrial heritage.",  
-    specs: ["The Club lounge", "Barrel-aged cocktails", "City-framed views"]  
-  },  
-  {  
-    id: "aman-tokyo",  
-    serial: "NV-LDR-009",  
-    name: "Aman Tokyo",  
-    location: "Tokyo, Japan",  
-    image: "https://www.travelandleisure.com/thmb/LD45sIeEe-QFcwP_Pgyy5uCDA-Q=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/TAL-header-guest-room-view-aman-tokyo-AMANTOKYO0624-3b14aecbd7ca49068acc577583f90693.jpg",  
-    highlight: "A sky-high urban ryokan in the Otemachi Tower.",  
-    description: "A serene sanctuary featuring washi paper ceilings, hinoki baths, and panoramic Fuji views.",  
-    specs: ["30-meter indoor pool", "Traditional onsen", "Private Musashi omakase"]  
-  },  
-  {  
-    id: "aman-venice",  
-    serial: "NV-LDR-010",  
-    name: "Aman Venice",  
-    location: "Venice, Italy",  
-    image: "https://www.aman.com/sites/default/files/2023-10/aman_venice_italy_-_exterior.jpg",  
-    highlight: "Renaissance opulence on the Grand Canal.",  
-    description: "A 16th-century palazzo featuring Tiepolo frescoes, gilded ceilings, and secret gardens.",  
-    specs: ["Grand Canal suites", "Private Altana terrace", "Piano Nobile dining"]  
-  },  
-  {  
-    id: "evrima-yacht",  
-    serial: "NV-LDR-011",  
-    name: "Evrima",  
-    location: "The Ritz-Carlton Yacht Collection",  
-    image: "https://www.ritzcarltonyachtcollection.com/sites/default/files/2021-10/Evrima_Exterior_Hero.jpg",  
-    highlight: "The intimate Ritz-Carlton service, transposed to sea.",  
-    description: "A bespoke yacht experience with 149 terrace suites and a signature marina platform.",  
-    specs: ["Personal Concierge", "Michelin-inspired dining", "Infinite ocean views"]  
-  },  
-  {  
-    id: "aman-le-melezin",  
-    serial: "NV-LDR-012",  
-    name: "Aman Le Mélézin",  
-    location: "Courchevel, France",  
-    image: "https://www.aman.com/sites/default/files/2021-02/Aman-Le-Melezin_Exterior_1.jpg",  
-    highlight: "Alpine elegance in the Three Valleys.",  
-    description: "An iconic ski-in, ski-out manor on the Bellecôte Piste with a majestic Japanese-inspired spa.",  
-    specs: ["Ski Concierge", "Thermal suite", "Private sun terrace"]  
-  },  
-  {  
-    id: "claridges-london",  
-    serial: "NV-LDR-013",  
-    name: "Claridge's",  
-    location: "London, UK",  
-    image: "https://media.gettyimages.com/id/803086508/photo/the-claridges-hotel-at-night.jpg?s=170667a&w=0&k=20&c=cgJY1zaCGy9iWzFZRN__16Al9f_TT8FBGFmVrLSq4Lw=",  
-    highlight: "The timeless heart of Mayfair.",  
-    description: "An Art Deco masterpiece synonymous with discreet luxury and flawless British service.",  
-    specs: ["Designer-led suites", "Royal history", "Elite concierge"]  
-  },  
-  {  
-    id: "royal-mansour",  
-    serial: "NV-LDR-014",  
-    name: "Royal Mansour",  
-    location: "Marrakech, Morocco",  
-    image: "https://secure.s.forbestravelguide.com/img/properties/royal-mansour-marrakech/royal-mansour-marrakech-Piscine.jpg",  
-    highlight: "A royal palace within the Medina walls.",  
-    description: "A sanctuary of 53 private riads, built by 1,500 artisans using the finest Moroccan craftsmanship.",  
-    specs: ["Private riad butler", "2,500sqm spa", "Grand architectural gardens"]  
-  },  
-  {  
-    id: "post-ranch-inn",  
-    serial: "NV-LDR-015",  
+    id: "nv-ldr-003",  
+    serial: "03",  
     name: "Post Ranch Inn",  
-    location: "Big Sur, USA",  
-    image: "https://media.gettyimages.com/id/lpi20999_2/photo/silhouette-of-woman-in-infinity-pool-at-post-ranch-inn-big-sur-near-monterey-bay-monterey-bay.jpg?s=170667a&w=0&k=20&c=1fxjki9XXWysT32rR49-rliFm_Hm7g19fFCPhgKGMxY=",  
-    highlight: "Cliffside serenity high above the Pacific.",  
-    description: "Rustic elegance meets dramatic coastline in this legendary Big Sur hideaway.",  
-    specs: ["Cliff-edge infinity pools", "Stargazing deck", "Organic architecture"]  
+    location: "Big Sur, California",  
+    image: "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?q=80&w=2000&auto=format&fit=crop",  
+    highlight: "Cliffside Seclusion",  
+    description: "Where the redwoods meet the Pacific at the edge of the world.",  
+    atmosphericTags: ["COASTAL BRUTALIST", "ISOLATIONIST"],  
+    specs: [{ label: "Vibe", value: "Coastal Ridge" }, { label: "Privacy", value: "Level 5" }]  
   },  
   {  
-    id: "nihi-sumba",  
-    serial: "NV-LDR-016",  
+    id: "nv-ldr-004",  
+    serial: "04",  
+    name: "Stillwater Caves",  
+    location: "Subterranean Region",  
+    image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=2000&auto=format&fit=crop",  
+    highlight: "The Blackout Suite",  
+    description: "Absolute silence and total darkness in a climate-controlled cavern.",  
+    atmosphericTags: ["SUBTERRANEAN", "MATTE BLACK"],  
+    specs: [{ label: "Vibe", value: "Pure Isolation" }, { label: "Privacy", value: "Level X" }]  
+  },  
+  {  
+    id: "nv-ldr-005",  
+    serial: "05",  
+    name: "Sensi Azores",  
+    location: "São Miguel, Portugal",  
+    image: "https://images.unsplash.com/photo-1538964173425-93884d739596?q=80&w=2000&auto=format&fit=crop",  
+    highlight: "The Atlantic Perimeter",  
+    description: "Volcanic gardens and high-performance recovery on the edge of the Atlantic.",  
+    atmosphericTags: ["TORQUE & TRANQUILITY", "DEEP BLUE"],  
+    specs: [{ label: "Vibe", value: "Performance Recovery" }, { label: "Privacy", value: "Level 3" }]  
+  },  
+  {  
+    id: "nv-ldr-006",  
+    serial: "06",  
+    name: "Soneva Jani",  
+    location: "Noonu Atoll, Maldives",  
+    image: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?q=80&w=2000&auto=format&fit=crop",  
+    highlight: "The Blue Void",  
+    description: "Overwater villas with retractable roofs for celestial observation.",  
+    atmosphericTags: ["DEEP BLUE", "QUIET LUXURY"],  
+    specs: [{ label: "Vibe", value: "Celestial Marine" }, { label: "Privacy", value: "Level 4" }]  
+  },  
+  {  
+    id: "nv-ldr-007",  
+    serial: "07",  
+    name: "Singita Lebombo",  
+    location: "Kruger Park, South Africa",  
+    image: "https://images.unsplash.com/photo-1516426122078-c23e76319801?q=80&w=2000&auto=format&fit=crop",  
+    highlight: "The Glass Aerie",  
+    description: "Suspended steel and glass structures overlooking the N'wanetsi River.",  
+    atmosphericTags: ["ARID MODERN", "ISOLATIONIST"],  
+    specs: [{ label: "Vibe", value: "Safari Brutalism" }, { label: "Privacy", value: "Level 5" }]  
+  },  
+  {  
+    id: "nv-ldr-008",  
+    serial: "08",  
     name: "Nihi Sumba",  
     location: "Sumba, Indonesia",  
-    image: "https://nihi.com/sumba/wp-content/uploads/sites/2/2025/09/nihi-sumba.jpg",  
-    highlight: "The edge of wildness, perfected.",  
-    description: "A philanthropic-led retreat offering world-class surfing, wellness, and island exploration.",  
-    specs: ["Spa Safari", "Private surf breaks", "Beachfront horse stables"]  
+    image: "https://images.unsplash.com/photo-1540206395-6880f94933af?q=80&w=2000&auto=format&fit=crop",  
+    highlight: "The Edge of Wildness",  
+    description: "Rugged luxury where ancient culture meets the Indian Ocean.",  
+    atmosphericTags: ["TROPICAL ISOLATIONIST", "QUIET LUXURY"],  
+    specs: [{ label: "Vibe", value: "Rugged Cultural" }, { label: "Privacy", value: "Level 4" }]  
   },  
   {  
-    id: "hotel-caruso",  
-    serial: "NV-LDR-017",  
-    name: "Belmond Hotel Caruso",  
-    location: "Ravello, Italy",  
-    image: "https://img.belmond.com/f_auto/t_2580x1299/photos/car/car-ext02.jpg",  
-    highlight: "An 11th-century palace above the Amalfi Coast.",  
-    description: "A historic sanctuary perched 300 meters above the Tyrrhenian Sea with terraced lemon groves.",  
-    specs: ["Iconic infinity pool", "Frescoed salons", "Private boat tours"]  
+    id: "nv-ldr-009",  
+    serial: "09",  
+    name: "White Desert",  
+    location: "Antarctica",  
+    image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2000&auto=format&fit=crop",  
+    highlight: "Echo Base Luxury",  
+    description: "The ultimate frontier. Living in luxury pods on the frozen continent.",  
+    atmosphericTags: ["FROZEN", "ISOLATIONIST"],  
+    specs: [{ label: "Vibe", value: "Polar Tactical" }, { label: "Privacy", value: "Level 6" }]  
   },  
   {  
-    id: "cheval-blanc-st-barth",  
-    serial: "NV-LDR-018",  
-    name: "Cheval Blanc St-Barth",  
-    location: "St. Barthélemy",  
-    image: "https://www.travelandleisure.com/thmb/yLvOSoB3yvXX73Jw9Euhycoo9AM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/TAL-header-pool-beach-cheval-blanc-st-barth-CHEVALSTBARTH1224-27b963d2e55f4fdc8ff75c42f44b839b.jpg",  
-    highlight: "The only Palace-distinction hotel in the Caribbean.",  
-    description: "Art de Vivre meets Flamands Beach in this ultra-exclusive tropical hideaway.",  
-    specs: ["Guerlain spa", "Private island transfers", "Bespoke Alchemists service"]  
+    id: "nv-ldr-010",  
+    serial: "10",  
+    name: "Aman Tokyo",  
+    location: "Otemachi, Japan",  
+    image: "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?q=80&w=2000&auto=format&fit=crop",  
+    highlight: "The Vertical Sanctuary",  
+    description: "A monumental basalt and washi-paper oasis in the sky.",  
+    atmosphericTags: ["ZEN MINIMALISM", "NEON NOIR"],  
+    specs: [{ label: "Vibe", value: "Urban Zen" }, { label: "Privacy", value: "Level 4" }]  
   },  
   {  
-    id: "north-island",  
-    serial: "NV-LDR-019",  
+    id: "nv-ldr-011",  
+    serial: "11",  
+    name: "Perry Lane",  
+    location: "Savannah, USA",  
+    image: "https://images.unsplash.com/photo-1541804084-2168caa5bbad?q=80&w=2000&auto=format&fit=crop",  
+    highlight: "The High-Art Dossier",  
+    description: "Eclectic luxury amidst the moss-draped history of Savannah.",  
+    atmosphericTags: ["SOUTHERN GOTHIC", "CULTURAL"],  
+    specs: [{ label: "Vibe", value: "Curated Historic" }, { label: "Privacy", value: "Level 3" }]  
+  },  
+  {  
+    id: "nv-ldr-012",  
+    serial: "12",  
+    name: "The Fortress",  
+    location: "Scottish Highlands",  
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2000&auto=format&fit=crop",  
+    highlight: "Zero-Signal Zone",  
+    description: "A converted granite stronghold designed for total digital blackout.",  
+    atmosphericTags: ["MATTE BLACK", "BRUTALIST"],  
+    specs: [{ label: "Vibe", value: "Fortified Seclusion" }, { label: "Privacy", value: "Level 6" }]  
+  },  
+  {  
+    id: "nv-ldr-013",  
+    serial: "13",  
+    name: "Jade Mountain",  
+    location: "Soufrière, St. Lucia",  
+    image: "https://images.unsplash.com/photo-1502784444187-359ac186c5bb?q=80&w=2000&auto=format&fit=crop",  
+    highlight: "Structural Organicism",  
+    description: "Three-walled sanctuaries open to the Pitons and the Caribbean Sea.",  
+    atmosphericTags: ["ORGANIC MODERN", "TROPICAL"],  
+    specs: [{ label: "Vibe", value: "Open-Air Modern" }, { label: "Privacy", value: "Level 4" }]  
+  },  
+  {  
+    id: "nv-ldr-014",  
+    serial: "14",  
+    name: "Fogo Island Inn",  
+    location: "Newfoundland, Canada",  
+    image: "https://images.unsplash.com/photo-1517009572053-93fb56df76e9?q=80&w=2000&auto=format&fit=crop",  
+    highlight: "Edge of the North",  
+    description: "A stilts-raised marvel on the wild coast of the North Atlantic.",  
+    atmosphericTags: ["ARCHITECTURAL", "FROZEN"],  
+    specs: [{ label: "Vibe", value: "North Atlantic Modern" }, { label: "Privacy", value: "Level 5" }]  
+  },  
+  {  
+    id: "nv-ldr-015",  
+    serial: "15",  
+    name: "Claridge's",  
+    location: "Mayfair, London",  
+    image: "https://images.unsplash.com/photo-1551882547-ff43c63be5c2?q=80&w=2000&auto=format&fit=crop",  
+    highlight: "The Deco Engine",  
+    description: "The annex of Buckingham Palace; the height of Mayfair prestige.",  
+    atmosphericTags: ["ART DECO", "HISTORIC"],  
+    specs: [{ label: "Vibe", value: "Old World Elite" }, { label: "Privacy", value: "Level 4" }]  
+  },  
+  {  
+    id: "nv-ldr-016",  
+    serial: "16",  
+    name: "Burj Al Arab",  
+    location: "Dubai, UAE",  
+    image: "https://images.unsplash.com/photo-1518684079-3c830dcef090?q=80&w=2000&auto=format&fit=crop",  
+    highlight: "The Gilded Sail",  
+    description: "Technological maximalism standing on its own man-made island.",  
+    atmosphericTags: ["MAXIMALIST", "NEON NOIR"],  
+    specs: [{ label: "Vibe", value: "Hyper-Luxury" }, { label: "Privacy", value: "Level 5" }]  
+  },  
+  {  
+    id: "nv-ldr-017",  
+    serial: "17",  
+    name: "Rosewood São Paulo",  
+    location: "São Paulo, Brazil",  
+    image: "https://images.unsplash.com/photo-1496568816309-51d7c7a8e121?q=80&w=2000&auto=format&fit=crop",  
+    highlight: "The Vertical Forest",  
+    description: "A Jean Nouvel-designed sanctuary bringing the jungle to the concrete city.",  
+    atmosphericTags: ["BOTANICAL", "MODERN"],  
+    specs: [{ label: "Vibe", value: "Botanical Urban" }, { label: "Privacy", value: "Level 3" }]  
+  },  
+  {  
+    id: "nv-ldr-018",  
+    serial: "18",  
+    name: "Six Senses Shaharut",  
+    location: "Negev Desert, Israel",  
+    image: "https://images.unsplash.com/photo-1473580044384-7ba9967e16a0?q=80&w=2000&auto=format&fit=crop",  
+    highlight: "Ara Valley Silence",  
+    description: "Stone architecture reflecting the biblical landscape of the Arava Valley.",  
+    atmosphericTags: ["DESERT MINIMALISM", "ISOLATIONIST"],  
+    specs: [{ label: "Vibe", value: "Ancient Modern" }, { label: "Privacy", value: "Level 5" }]  
+  },  
+  {  
+    id: "nv-ldr-019",  
+    serial: "19",  
     name: "North Island",  
     location: "Seychelles",  
-    image: "http://north-island.com/wp-content/uploads/2025/01/North-Island-North-Spray-in-front-of-East-Beach-1024x683.jpg",  
-    highlight: "Barefoot luxury on a private wildlife sanctuary.",  
-    description: "Only 11 handcrafted villas set within a pioneering 'Noah’s Ark' conservation program.",  
-    specs: ["Private helipad", "Turtle nesting beaches", "All-inclusive bespoke dining"]  
+    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2000&auto=format&fit=crop",  
+    highlight: "Noah’s Ark luxury",  
+    description: "A private island sanctuary dedicated to ecological restoration and total privacy.",  
+    atmosphericTags: ["DEEP BLUE", "QUIET LUXURY"],  
+    specs: [{ label: "Vibe", value: "Conservation Luxe" }, { label: "Privacy", value: "Level 6" }]  
   }  
 ];  
