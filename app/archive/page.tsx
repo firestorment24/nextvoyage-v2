@@ -10,7 +10,7 @@ export default function ArchivePage() {
   const filteredProperties = filter === 'ALL'   
     ? PROPERTY_DATA   
     : PROPERTY_DATA.filter(p => p.niche === filter)
-
+ 
   return (  
     <div className="min-h-screen bg-black text-white p-8 font-sans">  
       {/* MISSION PROFILE INDEX */}  
