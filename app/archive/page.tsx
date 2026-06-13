@@ -1,88 +1,93 @@
-// app/archive/page.tsx  
-import React from 'react'  
-import Link from 'next/link'  
-import Image from 'next/image'  
-import { SANCTUARIES_DATA } from '@/lib/data/sanctuaries'
+import { PROPERTY_DATA } from '@/data/properties';  
+import Link from 'next/link';
 
 export default function ArchivePage() {  
-// Ensure we're pulling all items from our data  
-const items = Array.isArray(SANCTUARIES_DATA)   
-  ? SANCTUARIES_DATA   
-  : Object.values(SANCTUARIES_DATA)
-
-return (  
-  <main className="min-h-screen bg-[#000000] text-[#D4AF37] selection:bg-[#D4AF37] selection:text-black">  
-    {/* Minimalist Header */}  
-    <header className="px-6 pt-32 pb-16 md:px-12 border-b border-[#D4AF37]/10">  
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-8">  
-        <div>  
-          <span className="block text-[10px] uppercase tracking-[0.6em] mb-4 opacity-50">  
-            Digital Exhibition // Index  
-          </span>  
-          <h1 className="text-4xl md:text-6xl font-light tracking-tighter uppercase">  
-            The Archive  
-          </h1>  
-        </div>  
-        <p className="max-w-md text-sm font-light leading-relaxed opacity-60 uppercase tracking-wider">  
-          A 3x3 ledger of sanctuary blueprints curated for the high-net-worth traveler.  
-        </p>  
-      </div>  
-    </header>
-
-    {/* The 3x3 Ledger Grid */}  
-    <section className="px-6 py-12 md:px-12 max-w-7xl mx-auto">  
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0.5 bg-[#D4AF37]/10 border border-[#D4AF37]/10">  
-        {items.map((item: any) => (  
-          <Link   
-            key={item.id}   
-            href={`/archive/${item.id}`}   
-            className="group relative bg-black aspect-[4/5] overflow-hidden block"  
-          >  
-            {/* Image Layer */}  
-            <Image  
-              src={item.image || item.heroImage}  
-              alt={item.name}  
-              fill  
-              className="object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 ease-in-out scale-100 group-hover:scale-110 opacity-70 group-hover:opacity-100"  
-            />  
-              
-            {/* Brass Hover Overlay */}  
-            <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-700" />  
-              
-            {/* Item Metadata (Bottom Left) */}  
-            <div className="absolute bottom-0 left-0 w-full p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">  
-              <div className="overflow-hidden">  
-                <p className="text-[9px] uppercase tracking-[0.4em] mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100">  
-                  {item.location}  
+  return (  
+    <main className="min-h-screen bg-[#0A0A0A] text-[#E5E5E5] font-sans selection:bg-[#B8A164]/30">  
+      {/* Header Section */}  
+      <header className="pt-32 pb-16 px-6 border-b border-[#B8A164]/10">  
+        <div className="max-w-[1400px] mx-auto">  
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">  
+            <div>  
+              <h1 className="text-5xl md:text-7xl font-serif tracking-tight mb-4">The Archive</h1>  
+              <div className="flex items-center gap-4">  
+                <div className="h-[1px] w-12 bg-[#B8A164]" />  
+                <p className="text-[10px] tracking-[0.5em] uppercase text-[#B8A164] font-bold">  
+                  Elite Ledger / Quarterly Rotation: Summer 2026  
                 </p>  
               </div>  
-              <h2 className="text-2xl font-light tracking-tight group-hover:tracking-widest transition-all duration-700">  
-                {item.name}  
-              </h2>  
-              <div className="h-[1px] w-0 group-hover:w-full bg-[#D4AF37] mt-4 transition-all duration-1000" />  
-            </div>
-
-            {/* Top Right Index Number */}  
-            <div className="absolute top-8 right-8 text-[10px] font-bold tracking-widest opacity-30 group-hover:opacity-100 transition-opacity">  
-              {item.id.toUpperCase()}  
             </div>  
-          </Link>  
-        ))}  
-      </div>  
-    </section>
+            <div className="text-right">  
+              <p className="text-[10px] tracking-[0.3em] uppercase opacity-40 leading-loose">  
+                Total Assets Verified: {PROPERTY_DATA.length}<br />  
+                System Status: Operational / Full Green  
+              </p>  
+            </div>  
+          </div>  
+        </div>  
+      </header>
 
-    {/* Footer CTA */}  
-    <footer className="px-6 py-24 md:px-12 text-center border-t border-[#D4AF37]/10">  
-      <Link   
-        href="/contact"   
-        className="group inline-flex flex-col items-center gap-4"  
-      >  
-        <span className="text-[10px] uppercase tracking-[0.5em] opacity-40 group-hover:opacity-100 transition-opacity">  
-          Request Portfolio Access  
-        </span>  
-        <div className="h-12 w-[1px] bg-[#D4AF37]/20 group-hover:h-20 transition-all duration-700" />  
-      </Link>  
-    </footer>  
-  </main>  
-)  
+      {/* The Ledger Grid */}  
+      <section className="px-6 py-12">  
+        <div className="max-w-[1400px] mx-auto">  
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">  
+            {PROPERTY_DATA.map((property, index) => (  
+              <Link   
+                key={property.id}   
+                href={`/archive/${property.id}`}  
+                className="group block"  
+              >  
+                {/* Visual Asset */}  
+                <div className="relative aspect-[4/5] mb-6 overflow-hidden bg-zinc-900 border border-[#B8A164]/5">  
+                  <img   
+                    src={property.image}   
+                    alt={property.name}  
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 ease-in-out group-hover:scale-105"  
+                  />  
+                  <div className="absolute top-4 right-4 bg-[#0A0A0A]/80 backdrop-blur-md px-3 py-1 border border-[#B8A164]/20">  
+                    <span className="text-[9px] tracking-[0.2em] text-[#B8A164] uppercase font-bold">  
+                      NV-LDR-{(index + 1).toString().padStart(3, '0')}  
+                    </span>  
+                  </div>  
+                </div>
+
+                {/* Technical Specs / Typography Mix */}  
+                <div className="space-y-3">  
+                  <div className="flex items-start justify-between border-b border-[#B8A164]/10 pb-2">  
+                    <h2 className="text-xl font-serif text-white group-hover:text-[#B8A164] transition-colors">  
+                      {property.name}  
+                    </h2>  
+                    <span className="text-[10px] tracking-widest opacity-40 uppercase pt-1">  
+                      {property.priceLevel}  
+                    </span>  
+                  </div>  
+                    
+                  <div className="flex justify-between items-center text-[10px] tracking-[0.2em] uppercase">  
+                    <span className="text-[#B8A164] font-bold">{property.location}</span>  
+                    <span className="opacity-40 italic font-serif lowercase tracking-normal text-sm">  
+                      {property.exclusiveOffer}  
+                    </span>  
+                  </div>  
+                    
+                  <p className="text-[11px] leading-relaxed text-zinc-500 font-light line-clamp-2 pt-2">  
+                    {property.highlight}  
+                  </p>  
+                </div>  
+              </Link>  
+            ))}  
+          </div>  
+        </div>  
+      </section>
+
+      {/* Ledger Footer */}  
+      <footer className="py-24 px-6 border-t border-[#B8A164]/10">  
+        <div className="max-w-[1400px] mx-auto flex flex-col items-center">  
+          <div className="w-16 h-[1px] bg-[#B8A164]/30 mb-8" />  
+          <p className="text-[10px] tracking-[0.8em] uppercase opacity-30">  
+            End of Current Ledger  
+          </p>  
+        </div>  
+      </footer>  
+    </main>  
+  );  
 }  
