@@ -2,8 +2,8 @@ import React from 'react'
 import { notFound } from 'next/navigation'  
 import Link from 'next/link'  
 import Image from 'next/image'  
-import { properties } from '../../../data/properties'  
-import { EliteAmenities } from '../../../components/EliteAmenities'
+import { PROPERTY_DATA as properties } from '../../../data/properties'
+import { PROPERTY_DATA as properties } from '../../data/properties'; 
 
 // We define a local interface to ensure all fields are recognized by the build  
 interface PropertyDetail {  
