@@ -14,7 +14,7 @@ export interface Property {
     value: string;  
   }[];  
 }
-
+ 
 export const PROPERTY_DATA: Property[] = [  
   {  
     id: "nv-ldr-001",  
