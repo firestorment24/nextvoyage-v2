@@ -1,92 +1,104 @@
-// Corrected Asset Detail View  
-import { PROPERTY_DATA } from '@/data/properties';
+import { PROPERTY_DATA } from '@/data/properties';  
+import { notFound } from 'next/navigation';  
+import Link from 'next/link';
 
-export default async function PropertyDetail({ params }: { params: Promise<{ id: string }> }) {  
-  const { id } = await params;  
-  const property = PROPERTY_DATA.find(p => p.id === id);
+// Fixed interface to include the missing fields  
+interface Property {  
+  id: string;  
+  name: string;  
+  location: string;  
+  image: string;  
+  priceLevel: string;  
+  exclusiveOffer: string;  
+  highlight: string; // This was the culprit  
+  description: string;  
+  amenities: string[];  
+}
+
+export default function PropertyDetail({ params }: { params: { id: string } }) {  
+  const property = (PROPERTY_DATA as Property[]).find((p) => p.id === params.id);
 
   if (!property) {  
-    return (  
-      <div className="h-screen bg-[#1A1A1A] flex items-center justify-center text-[#B8A164] uppercase tracking-widest">  
-        Asset Not Found in Ledger  
-      </div>  
-    );  
+    notFound();  
   }
 
   return (  
-    <main className="flex flex-col md:flex-row h-screen bg-[#1A1A1A] text-white overflow-hidden">  
-        
-      {/* LEFT SIDE: THE SHADOW (Visual Immersion) */}  
-      <section className="w-full md:w-3/5 relative border-b md:border-b-0 md:border-r border-[#B8A164]/30 h-1/2 md:h-full">  
-        <div   
-          className="absolute inset-0 bg-cover bg-center grayscale transition-all duration-1000 hover:grayscale-0"  
-          style={{ backgroundImage: `url(${property.image})` }}  
-        />  
-        <div className="absolute inset-0 bg-black/40" />  
-          
-        {/* Brass Asset Frame */}  
-        <div className="absolute bottom-8 left-8 md:bottom-12 md:left-12 p-6 md:p-8 border border-[#B8A164] bg-[#1A1A1A]/90 backdrop-blur-md max-w-sm">  
-          <p className="text-[#B8A164] text-[10px] tracking-[0.4em] uppercase mb-2">Ref No: {property.id.toUpperCase()}</p>  
-          <h1 className="text-3xl md:text-5xl font-serif leading-tight">{property.name}</h1>  
-          <p className="text-xs opacity-60 mt-3 uppercase tracking-widest">{property.location}</p>  
+    <main className="min-h-screen bg-[#0A0A0A] text-[#E5E5E5] font-sans selection:bg-[#B8A164]/30">  
+      {/* Navigation */}  
+      <nav className="fixed top-0 w-full z-50 border-b border-[#B8A164]/10 bg-[#0A0A0A]/80 backdrop-blur-md">  
+        <div className="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">  
+          <Link href="/archive" className="text-[10px] tracking-[0.4em] uppercase opacity-50 hover:opacity-100 transition-opacity">  
+            ← Back to Ledger  
+          </Link>  
+          <div className="text-[10px] tracking-[0.5em] uppercase font-bold text-[#B8A164]">  
+            NexVoyage / Detail  
+          </div>  
+          <div className="w-20" /> {/* Spacer */}  
         </div>  
-      </section>
+      </nav>
 
-      {/* RIGHT SIDE: THE BRASS (Technical Ledger) */}  
-      <section className="w-full md:w-2/5 bg-[#1A1A1A] p-8 md:p-16 flex flex-col justify-between overflow-y-auto h-1/2 md:h-full">  
-          
-        <div className="space-y-10 md:space-y-16">  
-          {/* Section 1: Philosophy */}  
-          <div>  
-            <h3 className="text-[#B8A164] text-[10px] tracking-[0.3em] uppercase mb-4 opacity-80">The Narrative</h3>  
-            <p className="text-lg md:text-xl font-serif leading-relaxed text-zinc-300">  
-              "{property.highlight}"  
-            </p>  
-          </div>
-
-          {/* Section 2: Technical Specifications */}  
-          <div>  
-            <h3 className="text-[#B8A164] text-[10px] tracking-[0.3em] uppercase mb-6 opacity-80 border-b border-[#B8A164]/20 pb-2">Technical Specs</h3>  
-            <div className="grid grid-cols-2 gap-y-6">  
-              <div>  
-                <p className="text-[10px] text-zinc-500 uppercase tracking-tighter">Status</p>  
-                <p className="text-sm font-bold text-[#B8A164] tracking-widest">VERIFIED</p>  
-              </div>  
-              <div>  
-                <p className="text-[10px] text-zinc-500 uppercase tracking-tighter">Inventory</p>  
-                <p className="text-sm">High-Yield Asset</p>  
-              </div>  
-              <div>  
-                <p className="text-[10px] text-zinc-500 uppercase tracking-tighter">Region</p>  
-                <p className="text-sm uppercase tracking-wider">{property.location.split(',')[1] || 'Global'}</p>  
-              </div>  
-              <div>  
-                <p className="text-[10px] text-zinc-500 uppercase tracking-tighter">Archive Date</p>  
-                <p className="text-sm tracking-tighter">06.12.2026</p>  
-              </div>  
-            </div>  
-          </div>
-
-          {/* Section 3: The Protocol (Perks) */}  
-          <div className="p-6 bg-[#B8A164]/5 border-l-2 border-[#B8A164]">  
-            <h3 className="text-[#B8A164] text-[10px] tracking-[0.3em] uppercase mb-3 font-bold underline decoration-1 underline-offset-4">Guardian Protocol</h3>  
-            <p className="text-sm leading-relaxed text-zinc-200">  
-              {property.exclusiveOffer}  
-            </p>  
+      <div className="flex flex-col lg:flex-row min-h-screen pt-16">  
+        {/* Left: Immersive Visual (Technical Spec Style) */}  
+        <div className="w-full lg:w-1/2 h-[50vh] lg:h-[calc(100vh-64px)] sticky top-16 bg-zinc-900 overflow-hidden border-r border-[#B8A164]/10">  
+          <img   
+            src={property.image}   
+            alt={property.name}  
+            className="w-full h-full object-cover opacity-80 grayscale hover:grayscale-0 transition-all duration-1000 ease-in-out"  
+          />  
+          <div className="absolute bottom-8 left-8">  
+            <h1 className="text-4xl md:text-6xl font-serif text-white mb-2">{property.name}</h1>  
+            <p className="text-[10px] tracking-[0.4em] uppercase text-[#B8A164]">{property.location}</p>  
           </div>  
         </div>
 
-        {/* Action Button */}  
-        <div className="mt-12">  
-          <button className="w-full py-5 bg-[#B8A164] text-black hover:bg-white hover:text-black transition-all duration-500 font-bold tracking-[0.2em] uppercase text-xs shadow-lg">  
-            Initiate Reserve Flow  
-          </button>  
-          <p className="text-center text-[9px] text-zinc-600 mt-6 uppercase tracking-widest leading-loose">  
-            Authentication Required <br/> NexVoyage Collective Internal Protocol  
-          </p>  
-        </div>  
-      </section>
+        {/* Right: Technical Documentation / The Vault */}  
+        <div className="w-full lg:w-1/2 p-8 md:p-16 lg:p-24 overflow-y-auto">  
+          <div className="max-w-lg">  
+            <div className="mb-16">  
+              <h3 className="text-[#B8A164] text-[10px] tracking-[0.3em] uppercase mb-4 opacity-50">Property Highlight</h3>  
+              <p className="text-lg md:text-xl font-serif leading-relaxed text-zinc-300 italic">  
+                "{property.highlight}"  
+              </p>  
+            </div>
 
+            <div className="grid grid-cols-2 gap-12 mb-16 border-y border-[#B8A164]/10 py-12">  
+              <div>  
+                <h4 className="text-[10px] tracking-[0.2em] uppercase text-[#B8A164] mb-2">Category</h4>  
+                <p className="text-sm font-medium uppercase tracking-wider">{property.priceLevel}</p>  
+              </div>  
+              <div>  
+                <h4 className="text-[10px] tracking-[0.2em] uppercase text-[#B8A164] mb-2">Benefit</h4>  
+                <p className="text-sm font-medium uppercase tracking-wider text-white">{property.exclusiveOffer}</p>  
+              </div>  
+            </div>
+
+            <div className="mb-16">  
+              <h3 className="text-[#B8A164] text-[10px] tracking-[0.3em] uppercase mb-6 opacity-50">Operational Dossier</h3>  
+              <p className="text-sm leading-relaxed text-zinc-400 font-light mb-8">  
+                {property.description}  
+              </p>  
+            </div>
+
+            <div>  
+              <h3 className="text-[#B8A164] text-[10px] tracking-[0.3em] uppercase mb-6 opacity-50">Technical Specifications</h3>  
+              <ul className="space-y-4">  
+                {property.amenities.map((item, i) => (  
+                  <li key={i} className="flex items-center gap-4 text-[11px] tracking-[0.1em] uppercase text-zinc-300">  
+                    <span className="w-1 h-1 bg-[#B8A164] rounded-full" />  
+                    {item}  
+                  </li>  
+                ))}  
+              </ul>  
+            </div>
+
+            <div className="mt-24">  
+              <button className="w-full py-4 border border-[#B8A164] text-[#B8A164] text-[10px] tracking-[0.5em] uppercase hover:bg-[#B8A164] hover:text-[#0A0A0A] transition-all duration-500">  
+                Initiate Inquiry  
+              </button>  
+            </div>  
+          </div>  
+        </div>  
+      </div>  
     </main>  
   );  
 }  
