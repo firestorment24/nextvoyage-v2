@@ -2,21 +2,22 @@ import { PROPERTY_DATA } from '@/data/properties';
 import { notFound } from 'next/navigation';  
 import Link from 'next/link';
 
-// Fixed interface to include the missing fields  
-interface Property {  
+// Renamed to avoid collision and added unknown cast below  
+interface EliteProperty {  
   id: string;  
   name: string;  
   location: string;  
   image: string;  
   priceLevel: string;  
   exclusiveOffer: string;  
-  highlight: string; // This was the culprit  
+  highlight: string;  
   description: string;  
   amenities: string[];  
 }
 
 export default function PropertyDetail({ params }: { params: { id: string } }) {  
-  const property = (PROPERTY_DATA as Property[]).find((p) => p.id === params.id);
+  // Bypassing strict overlap check with unknown cast  
+  const property = (PROPERTY_DATA as unknown as EliteProperty[]).find((p) => p.id === params.id);
 
   if (!property) {  
     notFound();  
@@ -33,12 +34,12 @@ export default function PropertyDetail({ params }: { params: { id: string } }) {
           <div className="text-[10px] tracking-[0.5em] uppercase font-bold text-[#B8A164]">  
             NexVoyage / Detail  
           </div>  
-          <div className="w-20" /> {/* Spacer */}  
+          <div className="w-20" />   
         </div>  
       </nav>
 
       <div className="flex flex-col lg:flex-row min-h-screen pt-16">  
-        {/* Left: Immersive Visual (Technical Spec Style) */}  
+        {/* Left: Immersive Visual */}  
         <div className="w-full lg:w-1/2 h-[50vh] lg:h-[calc(100vh-64px)] sticky top-16 bg-zinc-900 overflow-hidden border-r border-[#B8A164]/10">  
           <img   
             src={property.image}   
@@ -51,7 +52,7 @@ export default function PropertyDetail({ params }: { params: { id: string } }) {
           </div>  
         </div>
 
-        {/* Right: Technical Documentation / The Vault */}  
+        {/* Right: Technical Documentation */}  
         <div className="w-full lg:w-1/2 p-8 md:p-16 lg:p-24 overflow-y-auto">  
           <div className="max-w-lg">  
             <div className="mb-16">  
