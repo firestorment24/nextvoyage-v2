@@ -1,7 +1,7 @@
 import { PROPERTY_DATA } from '@/data/properties';  
 import Link from 'next/link';
 
-// Define the full specification for the Ledger  
+// Use this interface to match our high-end ledger needs  
 interface EliteLedgerProperty {  
   id: string;  
   name: string;  
@@ -13,7 +13,7 @@ interface EliteLedgerProperty {
 }
 
 export default function ArchivePage() {  
-  // Cast to unknown first to bypass the strict overlap check  
+  // Bypassing strict overlap check to access full metadata  
   const properties = PROPERTY_DATA as unknown as EliteLedgerProperty[];
 
   return (  
@@ -65,7 +65,7 @@ export default function ArchivePage() {
                   </div>  
                 </div>
 
-                {/* Technical Specs / Typography Mix */}  
+                {/* Technical Specs */}  
                 <div className="space-y-3">  
                   <div className="flex items-start justify-between border-b border-[#B8A164]/10 pb-2">  
                     <h2 className="text-xl font-serif text-white group-hover:text-[#B8A164] transition-colors">  
