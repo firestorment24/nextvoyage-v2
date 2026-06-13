@@ -17,8 +17,7 @@ export const SANCTUARIES: Sanctuary[] = [
     tag: "Alpine Refuge",  
     atmosphere: "A sanctuary of stone and pine, perched in the heart of Les Trois Vallées. A masterclass in high-altitude minimalism.",  
     highlights: ["Ski-in, ski-out access", "Subterranean holistic spa", "Culinarium of Savoyard traditions"],  
-    heroImage: "https://images.unsplash.com/photo-1551882547-ff43c63fedfe",  
-    propertyCount: 31  
+    heroImage:   'https://images.unsplash.com/photo-1548777123-e216912df7d8?q=80&w=2000&auto=format&fit=crop',    propertyCount: 31  
   },  
   {  
     id: "singita-lebombo",  
