@@ -1,106 +1,69 @@
-// app/archive/[id]/page.tsx  
 "use client";
 
-import { useParams, useRouter } from "next/navigation";  
-import { PROPERTY_DATA } from "@/lib/data/sanctuaries";  
+import { useParams, useRouter } from "next/navigation";    
+import { SANCTUARIES } from "@/lib/data/sanctuaries";    
 import Link from "next/link";
 
 export default function PropertyDetailPage() {  
-  const params = useParams();  
+  const { id } = useParams();  
   const router = useRouter();  
-  const id = params?.id as string;
-
-  const property = PROPERTY_DATA.find((p) => p.id === id);
+    
+  const property = SANCTUARIES.find((p) => p.id === id);
 
   if (!property) {  
     return (  
-      <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-6 text-center">  
-        <h1 className="text-2xl font-light mb-4">Record Not Found</h1>  
-        <p className="text-zinc-500 mb-8">The requested asset does not exist in the active ledger.</p>  
-        <Link href="/archive" className="text-sm border-b border-zinc-700 pb-1 hover:text-amber-500 hover:border-amber-500 transition-all">  
-          Return to Archive  
+      <div className="min-h-screen bg-black text-[#D4AF37] flex flex-col items-center justify-center p-8">  
+        <h1 className="text-2xl font-light mb-4 tracking-widest">RECORD NOT FOUND</h1>  
+        <Link href="/archive" className="text-xs border border-[#D4AF37] px-4 py-2 hover:bg-[#D4AF37] hover:text-black transition-all">  
+          RETURN TO ARCHIVE  
         </Link>  
       </div>  
     );  
   }
 
   return (  
-    <main className="min-h-screen bg-black text-white selection:bg-amber-500/30">  
-      <div className="max-w-7xl mx-auto px-6 py-12 md:py-24">  
-        {/* Navigation */}  
-        <nav className="mb-12 flex justify-between items-center">  
-          <Link href="/archive" className="group flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-zinc-500 hover:text-white transition-colors">  
-            <span className="group-hover:-translate-x-1 transition-transform">←</span> Back to Ledger  
-          </Link>  
-          <div className="text-[10px] uppercase tracking-[0.2em] text-zinc-700">  
-            Serial No. {property.serial} / active_record  
-          </div>  
-        </nav>
+    <main className="min-h-screen bg-black text-[#D4AF37] font-mono selection:bg-[#D4AF37] selection:text-black">  
+      {/* Header */}  
+      <nav className="p-6 border-b border-[#D4AF37]/20 flex justify-between items-center">  
+        <Link href="/archive" className="text-xs tracking-[0.3em] hover:opacity-50 transition-all cursor-pointer">  
+          &lt; BACK_TO_ARCHIVE  
+        </Link>  
+        <span className="text-[10px] opacity-40">REF_ID: {property.id}</span>  
+      </nav>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">  
-          {/* Left: Imagery */}  
-          <div className="lg:col-span-7">  
-            <div className="aspect-[4/5] bg-zinc-900 overflow-hidden">  
-              <img   
-                src={property.image}   
-                alt={property.name}  
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"  
-              />  
-            </div>  
-              
-            {/* Atmospheric Tags Display */}  
-            <div className="mt-8 flex flex-wrap gap-3">  
-              {property.atmosphericTags?.map((tag) => (  
-                <span key={tag} className="text-[9px] font-bold tracking-[0.15em] border border-zinc-800 px-3 py-1 text-zinc-500 uppercase">  
-                  {tag}  
-                </span>  
-              ))}  
-            </div>  
+      {/* Hero Section */}  
+      <section className="p-6 grid grid-cols-1 md:grid-cols-2 gap-12 mt-12 max-w-7xl mx-auto">  
+        <div className="space-y-8">  
+          <div className="space-y-2">  
+            <p className="text-[10px] tracking-widest opacity-50">{property.loc.toUpperCase()}</p>  
+            <h1 className="text-4xl md:text-6xl font-light tracking-tighter leading-none">{property.name.toUpperCase()}</h1>  
+          </div>  
+            
+          <div className="h-[400px] w-full grayscale hover:grayscale-0 transition-all duration-700 overflow-hidden border border-[#D4AF37]/20">  
+            <img src={property.heroImage} alt={property.name} className="w-full h-full object-cover transform hover:scale-105 transition-all duration-1000" />  
+          </div>  
+        </div>
+
+        <div className="flex flex-col justify-end space-y-12 pb-4">  
+          <div className="space-y-4">  
+             <h3 className="text-xs tracking-[0.2em] border-b border-[#D4AF37]/20 pb-2">ATMOSPHERE</h3>  
+             <p className="text-sm leading-relaxed opacity-80">{property.atmosphere}</p>  
           </div>
 
-          {/* Right: Intelligence / Specs */}  
-          <div className="lg:col-span-5 flex flex-col justify-center">  
-            <header className="mb-12">  
-              <h1 className="text-4xl md:text-5xl font-light tracking-tight mb-4">{property.name}</h1>  
-              <p className="text-amber-500 text-xs uppercase tracking-[0.3em] font-medium">{property.location}</p>  
-            </header>
-
-            <div className="space-y-12">  
-              <section>  
-                <h3 className="text-[10px] uppercase tracking-[0.2em] text-zinc-500 mb-4 font-bold italic">The Highlight</h3>  
-                <p className="text-xl font-light leading-relaxed text-zinc-300">  
-                  {property.highlight}  
-                </p>  
-              </section>
-
-              <section>  
-                <h3 className="text-[10px] uppercase tracking-[0.2em] text-zinc-500 mb-4 font-bold italic">Intelligence Brief</h3>  
-                <p className="text-sm font-light leading-relaxed text-zinc-400">  
-                  {property.description}  
-                </p>  
-              </section>
-
-              <section>  
-                <h3 className="text-[10px] uppercase tracking-[0.2em] text-zinc-500 mb-6 font-bold italic">Asset Specifications</h3>  
-                <ul className="grid grid-cols-1 gap-4 border-t border-zinc-900 pt-6">  
-                  {property.specs.map((spec, i) => (  
-                    <li key={i} className="flex justify-between items-center text-[11px] tracking-wide">  
-                      <span className="uppercase text-zinc-600 font-medium">{spec.label}</span>  
-                      <span className="text-zinc-300 uppercase">{spec.value}</span>  
-                    </li>  
-                  ))}  
-                </ul>  
-              </section>
-
-              <div className="pt-8">  
-                <button className="w-full bg-white text-black py-4 text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-amber-500 transition-colors">  
-                  Inquire for Access  
-                </button>  
-              </div>  
+          <div className="grid grid-cols-1 gap-6">  
+            <div className="space-y-4">  
+              <h3 className="text-xs tracking-[0.2em] border-b border-[#D4AF37]/20 pb-2">HIGHLIGHTS</h3>  
+              <ul className="space-y-2">  
+                {property.highlights.map((h, i) => (  
+                  <li key={i} className="text-xs opacity-70 flex items-center">  
+                    <span className="mr-2 text-[8px]">●</span> {h}  
+                  </li>  
+                ))}  
+              </ul>  
             </div>  
           </div>  
         </div>  
-      </div>  
+      </section>  
     </main>  
   );  
 }  
