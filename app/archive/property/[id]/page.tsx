@@ -3,7 +3,7 @@
 import { useParams } from "next/navigation";      
 import { PROPERTY_DATA } from "@/lib/data/sanctuaries";      
 import Link from "next/link";
-import Link from 'next/link';  
+
 
 
 export default function PropertyDossierPage() {  
