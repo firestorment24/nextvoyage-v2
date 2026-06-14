@@ -1,114 +1,94 @@
-// app/perspective/page.tsx  
-import Navigation from '@/components/Navigation';  
-import Footer from '@/components/Footer';  
+import React from 'react';  
 import Link from 'next/link';
 
-const ARTICLES = [  
+const volumes = [  
   {  
-    volume: "01",  
-    title: "The Silent ROI",  
-    subtitle: "A Manifesto of Presence",  
-    author: "Daryl Clark",  
-    description: "The preservation of presence and cognitive restoration in an age of constant access. Why the ultimate luxury is the ability to be inaccessible.",  
-    slug: "the-silent-roi",  
-    type: "Manifesto"  
+    id: 'vol-01',  
+    title: 'The Silent ROI',  
+    subtitle: 'The Perspective Manifesto',  
+    slug: 'the-silent-roi',  
+    image: 'https://cdn.marblism.com/rYQTev1orML.webp',  
+    label: 'Vol. 01',  
   },  
   {  
-    volume: "02",  
-    title: "The Architecture of Calm",  
-    subtitle: "The Tactile Reality of Seclusion",  
-    author: "Daryl Clark",  
-    description: "An exploration of physical space as a tool for stillness. How the environments we curate serve as the foundation for internal recalibration.",  
-    slug: "architecture-of-calm",  
-    type: "Philosophy"  
+    id: 'vol-02',  
+    title: 'The Architecture of Calm',  
+    subtitle: 'Our Philosophy',  
+    slug: 'the-architecture-of-calm',  
+    image: 'https://cdn.marblism.com/VymBul776ZU.webp',  
+    label: 'Vol. 02',  
   },  
   {  
-    volume: "03",  
-    title: "The Nine Sanctuary Pillars",  
-    subtitle: "The Framework of Restoration",  
-    author: "Editorial",  
-    description: "A technical breakdown of the environmental archetypes required for deep recovery, from Coastal Brutalism to High-Altitude Isolation.",  
-    slug: "sanctuary-pillars",  
-    type: "Intelligence"  
-  }  
+    id: 'vol-03',  
+    title: 'The Nine Sanctuary Pillars',  
+    subtitle: 'The Framework of Seclusion',  
+    slug: 'the-nine-pillars',  
+    image: 'https://cdn.marblism.com/UH9Ov0JJZZy.webp',  
+    label: 'Vol. 03',  
+  },  
 ];
 
-export default function PerspectivePage() {  
+const dispatches = [  
+  { title: 'The Quiet Recalibration', category: 'Wellness', slug: 'quiet-recalibration' },  
+  { title: 'The Architecture of the Journey', category: 'Itineraries', slug: 'architecture-of-journey' },  
+  { title: 'The Logistics of Composure', category: 'Aviation', slug: 'logistics-of-composure' },  
+];
+
+export default function PerspectiveHub() {  
   return (  
-    <main className="min-h-screen bg-[#050505] text-stone-200 selection:bg-[#B8860B]/30">  
-      <Navigation />  
-        
-      {/* Editorial Header */}  
-      <header className="pt-32 pb-20 px-6 max-w-7xl mx-auto border-b border-stone-800/50">  
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">  
-          <div>  
-            <h1 className="text-5xl md:text-7xl font-serif tracking-tight text-stone-100 italic">  
-              The Perspective  
-            </h1>  
-            <p className="mt-4 text-[#B8860B] font-mono text-sm tracking-[0.2em] uppercase">  
-              Intellectual Insights & Observations  
-            </p>  
-          </div>  
-          <div className="max-w-xs">  
-            <p className="text-sm text-stone-500 leading-relaxed font-light italic">  
-              A curated journal exploring the intersection of architecture, seclusion, and the preservation of the self.  
-            </p>  
-          </div>  
-        </div>  
+    <div className="bg-[#050505] min-h-screen text-[#F5F5F5] font-serif selection:bg-[#B8860B] selection:text-black">  
+      {/* Header */}  
+      <header className="pt-24 pb-12 px-8 md:px-24 border-b border-[#1A1A1A]">  
+        <h1 className="text-6xl md:text-8xl font-light tracking-tighter mb-4">Perspective</h1>  
+        <p className="text-[#B8860B] uppercase tracking-[0.3em] text-sm font-sans font-medium">  
+          The Editorial Manifesto Layer  
+        </p>  
       </header>
 
-      {/* Article Feed */}  
-      <section className="max-w-7xl mx-auto px-6 py-20">  
-        <div className="grid gap-24">  
-          {ARTICLES.map((article) => (  
-            <Link   
-              key={article.volume}  
-              href={`/perspective/${article.slug}`}  
-              className="group block"  
-            >  
-              <article className="grid md:grid-cols-12 gap-8 items-start">  
-                <div className="md:col-span-1">  
-                  <span className="text-[#B8860B] font-mono text-xs tracking-widest block pt-2">  
-                    VOL. {article.volume}  
-                  </span>  
+      {/* Featured Volumes */}  
+      <main className="px-8 md:px-24 py-24">  
+        <div className="grid grid-cols-1 gap-32">  
+          {volumes.map((vol) => (  
+            <Link key={vol.id} href={`/perspective/${vol.slug}`} className="group block">  
+              <div className="flex flex-col md:flex-row gap-12 items-center">  
+                <div className="w-full md:w-2/3 overflow-hidden bg-black aspect-[16/9]">  
+                  <img  
+                    src={vol.image}  
+                    alt={vol.title}  
+                    className="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-in-out"  
+                  />  
                 </div>  
-                  
-                <div className="md:col-span-7">  
-                  <h2 className="text-3xl md:text-5xl font-serif text-stone-200 group-hover:text-[#B8860B] transition-colors duration-500 mb-4">  
-                    {article.title}  
+                <div className="w-full md:w-1/3">  
+                  <span className="text-[#B8860B] font-sans text-xs tracking-widest uppercase mb-4 block">  
+                    {vol.label}  
+                  </span>  
+                  <h2 className="text-4xl md:text-5xl font-light mb-4 group-hover:translate-x-2 transition-transform duration-500">  
+                    {vol.title}  
                   </h2>  
-                  <p className="text-stone-400 font-light text-lg md:text-xl leading-relaxed max-w-2xl">  
-                    {article.description}  
+                  <p className="text-[#888] text-lg font-light leading-relaxed italic">  
+                    {vol.subtitle}  
                   </p>  
-                  <div className="mt-8 flex items-center gap-4 text-[10px] font-mono tracking-[0.3em] uppercase text-stone-600">  
-                    <span>By {article.author}</span>  
-                    <span className="w-8 h-[1px] bg-stone-800"></span>  
-                    <span className="text-[#B8860B]/70">{article.type}</span>  
-                  </div>  
-                </div>
-
-                <div className="md:col-span-4 flex justify-end md:pt-4">  
-                  <span className="inline-flex items-center gap-2 text-xs font-mono tracking-widest text-stone-500 group-hover:text-stone-200 transition-all duration-300">  
-                    [ READ DISPATCH ]  
-                    <span className="w-12 h-[1px] bg-stone-800 group-hover:bg-[#B8860B] transition-all"></span>  
-                  </span>  
                 </div>  
-              </article>  
-              <div className="mt-20 h-[1px] w-full bg-gradient-to-r from-transparent via-stone-800/50 to-transparent" />  
+              </div>  
             </Link>  
           ))}  
-        </div>  
-      </section>
+        </div>
 
-      {/* Editorial Footer Quote */}  
-      <section className="py-32 px-6 max-w-3xl mx-auto text-center">  
-        <blockquote className="text-2xl md:text-3xl font-serif italic text-stone-400 leading-relaxed">  
-          "The ability to be unreachable is the final frontier of autonomy."  
-        </blockquote>  
-        <div className="mt-8 w-12 h-[1px] bg-[#B8860B] mx-auto" />  
-      </section>
-
-      <Footer />  
-    </main>  
+        {/* Dispatches Section */}  
+        <section className="mt-48 pt-24 border-t border-[#1A1A1A]">  
+          <h3 className="text-xs uppercase tracking-[0.4em] text-[#B8860B] mb-12">Latest Dispatches</h3>  
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">  
+            {dispatches.map((dispatch) => (  
+              <Link key={dispatch.slug} href={`/perspective/${dispatch.slug}`} className="group border-b border-transparent hover:border-[#B8860B] pb-4 transition-all">  
+                <span className="text-[#555] font-sans text-[10px] uppercase tracking-widest mb-2 block">  
+                  {dispatch.category}  
+                </span>  
+                <h4 className="text-xl font-light">{dispatch.title}</h4>  
+              </Link>  
+            ))}  
+          </div>  
+        </section>  
+      </main>  
+    </div>  
   );  
 }  
