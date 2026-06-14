@@ -87,10 +87,7 @@ export default function PropertyDossierPage() {
   </p>  
 </section>  
             
-            <div className="pt-12">  
-              <button className="w-full border border-white/20 py-4 text-[11px] uppercase tracking-[0.4em] hover:bg-white hover:text-black transition-all duration-500">  
-                Request Acquisition Details  
-              </button>  
+             
             </div>  
           </div>  
         </div>  
