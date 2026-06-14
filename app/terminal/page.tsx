@@ -1,125 +1,164 @@
-"use client";
+'use client'
 
-import { useState } from "react";  
-import { commitToLedger } from "./actions";
+import { useState } from 'react'  
+import { commitToLedger } from './actions'
 
-export default function AdminTerminal() {  
-const [activeTab, setActiveTab] = useState("archive");  
-const [isAuthenticated, setIsAuthenticated] = useState(false);  
-const [password, setPassword] = useState("");
+export default function Terminal() {  
+  const [password, setPassword] = useState('')  
+  const [authenticated, setAuthenticated] = useState(false)  
+  const [activeTab, setActiveTab] = useState('archive')  
+  const [status, setStatus] = useState('')
 
-if (!isAuthenticated) {  
-  return (  
-    <div className="min-h-screen bg-black flex items-center justify-center p-6">  
-      <div className="w-full max-w-sm space-y-4">  
-        <h1 className="text-stone-400 font-serif text-2xl text-center uppercase tracking-widest text-white">Identify</h1>  
-        <input   
-          type="password"   
-          placeholder="ACCESS CODE"   
-          className="w-full bg-stone-900 border border-stone-800 p-3 text-stone-200 focus:outline-none focus:border-stone-500"  
-          value={password}  
-          onChange={(e) => setPassword(e.target.value)}  
-        />  
-        <button onClick={() => setIsAuthenticated(true)} className="w-full bg-stone-200 text-black py-3 uppercase text-xs font-bold">Authenticate</button>  
-      </div>  
-    </div>  
-  );  
-}
-
-return (  
-  <div className="min-h-screen bg-black text-stone-300 p-8 font-serif">  
-    <div className="max-w-4xl mx-auto">  
-      <header className="flex justify-between items-end border-b border-stone-800 pb-8 mb-12">  
-        <div>  
-          <h1 className="text-4xl uppercase tracking-tighter text-white">Admin Terminal</h1>  
-          <p className="text-[10px] font-sans uppercase tracking-[0.2em] text-stone-500 mt-2">NexVoyage Collective / Ledger</p>  
+  if (!authenticated) {  
+    return (  
+      <div className="min-h-screen bg-neutral-950 flex items-center justify-center p-6">  
+        <div className="max-w-sm w-full space-y-4 border border-amber-900/30 p-8 rounded-sm">  
+          <h1 className="text-amber-200 font-serif text-2xl text-center">Terminal Access</h1>  
+          <input   
+            type="password"   
+            placeholder="ADMIN_PASSWORD"  
+            className="w-full bg-neutral-900 border border-amber-900/20 text-amber-100 p-3 outline-none focus:border-amber-500 transition-colors"  
+            value={password}  
+            onChange={(e) => setPassword(e.target.value)}  
+          />  
+          <button   
+            onClick={() => password === 'NV2026' ? setAuthenticated(true) : alert('Access Denied')}  
+            className="w-full bg-amber-200 text-black p-3 font-medium hover:bg-amber-100 transition-colors"  
+          >  
+            Authenticate  
+          </button>  
         </div>  
-        <div className="flex gap-6 text-xs font-sans uppercase tracking-widest">  
-          {["archive", "perspective", "journal"].map((tab) => (  
-            <button   
+      </div>  
+    )  
+  }
+
+  return (  
+    <main className="min-h-screen bg-neutral-950 text-amber-100 pt-32 pb-20 px-6">  
+      <div className="max-w-3xl mx-auto">  
+        <header className="mb-12 border-b border-amber-900/30 pb-6">  
+          <h1 className="font-serif text-4xl text-amber-200">Admin Terminal</h1>  
+          <p className="text-amber-900 uppercase tracking-widest text-xs mt-2">NexVoyage Collective Data Ledger</p>  
+        </header>
+
+        {/* Tabs */}  
+        <div className="flex gap-8 mb-8 border-b border-amber-900/10">  
+          {['archive', 'perspective', 'journal'].map((tab) => (  
+            <button  
               key={tab}  
-              onClick={() => setActiveTab(tab)}   
-              className={activeTab === tab ? "text-white underline underline-offset-8" : "text-stone-600 hover:text-white transition-colors"}  
+              onClick={() => setActiveTab(tab)}  
+              className={`pb-4 text-sm uppercase tracking-widest transition-colors ${  
+                activeTab === tab ? 'text-amber-200 border-b border-amber-200' : 'text-amber-900 hover:text-amber-500'  
+              }`}  
             >  
               {tab}  
             </button>  
           ))}  
-        </div>  
-      </header>
-
-      {/* Increased top margin (mt-24) to prevent header overlap */}  
-      <form action={commitToLedger} key={activeTab} className="space-y-12 max-w-2xl mt-24 animate-in fade-in slide-in-from-bottom-4 duration-700">  
-        <input type="hidden" name="admin_password" value={password} />  
-        <input type="hidden" name="table_type" value={activeTab} />
-
-        <div className="min-h-[400px] space-y-8">  
-          {activeTab === "archive" && (  
-            <div className="space-y-6">  
-              <div className="grid grid-cols-2 gap-6">  
-                <div className="space-y-1">  
-                  <label className="text-[10px] uppercase text-stone-500 font-sans tracking-widest">Property Name</label>  
-                  <input name="name" required className="w-full bg-stone-900 border border-stone-800 p-3 focus:border-stone-500 outline-none transition-colors" />  
-                </div>  
-                <div className="space-y-1">  
-                  <label className="text-[10px] uppercase text-stone-500 font-sans tracking-widest">Location</label>  
-                  <input name="location" required className="w-full bg-stone-900 border border-stone-800 p-3 focus:border-stone-500 outline-none transition-colors" />  
-                </div>  
-              </div>  
-              <div className="space-y-1">  
-                <label className="text-[10px] uppercase text-stone-500 font-sans tracking-widest">Description</label>  
-                <textarea name="description" rows={5} className="w-full bg-stone-900 border border-stone-800 p-3 focus:border-stone-500 outline-none transition-colors" />  
-              </div>  
-              <div className="space-y-1">  
-                <label className="text-[10px] uppercase text-stone-500 font-sans tracking-widest">Specifications (Price / Details)</label>  
-                <input name="specs" placeholder="e.g. 5 BD / 6 BA / $14M" className="w-full bg-stone-900 border border-stone-800 p-3 focus:border-stone-500 outline-none transition-colors" />  
-              </div>  
-            </div>  
-          )}
-
-          {activeTab === "perspective" && (  
-            <div className="space-y-6">  
-              <div className="space-y-1">  
-                <label className="text-[10px] uppercase text-stone-500 font-sans tracking-widest">Article Title</label>  
-                <input name="title" required className="w-full bg-stone-900 border border-stone-800 p-3 focus:border-stone-500 outline-none transition-colors" />  
-              </div>  
-              <div className="space-y-1">  
-                <label className="text-[10px] uppercase text-stone-500 font-sans tracking-widest">Perspective Content</label>  
-                <textarea name="content" rows={15} required className="w-full bg-stone-900 border border-stone-800 p-3 focus:border-stone-500 outline-none font-sans text-sm leading-relaxed" />  
-              </div>  
-            </div>  
-          )}
-
-          {activeTab === "journal" && (  
-            <div className="space-y-6">  
-              <div className="space-y-1">  
-                <label className="text-[10px] uppercase text-stone-500 font-sans tracking-widest">Log Entry Title</label>  
-                <input name="title" required className="w-full bg-stone-900 border border-stone-800 p-3 focus:border-stone-500 outline-none transition-colors" />  
-              </div>  
-              <div className="space-y-1">  
-                <label className="text-[10px] uppercase text-stone-500 font-sans tracking-widest">Journal Entry</label>  
-                <textarea name="content" rows={10} required className="w-full bg-stone-900 border border-stone-800 p-3 focus:border-stone-500 outline-none transition-colors" />  
-              </div>  
-            </div>  
-          )}  
         </div>
 
-        <div className="pt-12 border-t border-stone-900 space-y-8">  
-           <div className="space-y-4">  
-             <label className="text-[10px] uppercase text-stone-600 font-sans block tracking-[0.3em] text-center">Batch Import via Data File (.csv)</label>  
-             <input   
+        {/* Status Message */}  
+        {status && (  
+          <div className="mb-6 p-4 bg-amber-950/20 border border-amber-900/50 text-amber-200 text-sm">  
+            {status}  
+          </div>  
+        )}
+
+        {/* Manual Entry Form */}  
+        <form action={async (formData) => {  
+          setStatus('Committing to ledger...')  
+          const res = await commitToLedger(formData, activeTab)  
+          setStatus(res.message)  
+        }} className="space-y-6">  
+            
+          <div className="grid grid-cols-1 gap-6">  
+            {activeTab === 'archive' && (  
+              <>  
+                <Field label="Property Name" name="title" />  
+                <Field label="Location" name="location" />  
+                <Field label="Image URL" name="image_url" />  
+                <Field label="Price/Details" name="price" />  
+                <Area label="Detailed Description" name="description" />  
+              </>  
+            )}
+
+            {activeTab === 'perspective' && (  
+              <>  
+                <Field label="Guide Title" name="title" />  
+                <Field label="Category" name="category" />  
+                <Field label="Author" name="author" />  
+                <Field label="Hero Image URL" name="image_url" />  
+                <Area label="Editorial Content" name="content" />  
+              </>  
+            )}
+
+            {activeTab === 'journal' && (  
+              <>  
+                <Field label="Entry Title" name="title" />  
+                <Field label="Date" name="date" placeholder="June 14, 2026" />  
+                <Field label="Image URL" name="image_url" />  
+                <Area label="Excerpt/Summary" name="excerpt" />  
+              </>  
+            )}  
+          </div>
+
+          <div className="pt-8 border-t border-amber-900/30">  
+            <h3 className="text-amber-900 uppercase tracking-widest text-xs mb-4">Manual Submission</h3>  
+            <button   
+              type="submit"  
+              className="w-full bg-amber-200 text-black p-4 font-serif text-lg hover:bg-amber-100 transition-colors"  
+            >  
+              Commit Single Entry  
+            </button>  
+          </div>
+
+          {/* CSV Upload Section */}  
+          <div className="pt-12 mt-12 border-t border-amber-900/30">  
+            <h3 className="text-amber-900 uppercase tracking-widest text-xs mb-4">Batch Upload (.csv)</h3>  
+            <div className="p-8 border-2 border-dashed border-amber-900/20 bg-neutral-900/30 text-center">  
+              <input   
                 type="file"   
-                name="csv_file"   
-                accept=".csv"   
-                className="block w-full text-[10px] text-stone-500 file:mr-4 file:py-2 file:px-4 file:border file:border-stone-800 file:bg-transparent file:text-stone-400 file:uppercase file:tracking-widest hover:file:bg-stone-900 cursor-pointer"   
-             />  
-           </div>  
-             
-           <button type="submit" className="w-full bg-stone-200 text-black py-5 uppercase text-[10px] font-bold tracking-[0.4em] hover:bg-white transition-all duration-500">  
-             Commit to Ledger  
-           </button>  
-        </div>  
-      </form>  
+                name="csv_file"  
+                accept=".csv"  
+                className="text-sm text-amber-900 file:mr-4 file:py-2 file:px-4 file:rounded-sm file:border-0 file:text-xs file:uppercase file:bg-amber-900/20 file:text-amber-200 hover:file:bg-amber-900/40 cursor-pointer"  
+              />  
+              <p className="text-amber-900 text-[10px] mt-4 uppercase tracking-tighter">  
+                Upload a CSV matching the {activeTab} schema to batch process records.  
+              </p>  
+            </div>  
+            <button   
+              type="submit"  
+              className="w-full mt-4 border border-amber-200 text-amber-200 p-4 font-serif text-lg hover:bg-amber-200 hover:text-black transition-all"  
+            >  
+              Execute Batch Process  
+            </button>  
+          </div>  
+        </form>  
+      </div>  
+    </main>  
+  )  
+}
+
+function Field({ label, name, placeholder = "" }: { label: string, name: string, placeholder?: string }) {  
+  return (  
+    <div className="space-y-2">  
+      <label className="text-[10px] uppercase tracking-[0.2em] text-amber-900">{label}</label>  
+      <input   
+        name={name}  
+        placeholder={placeholder}  
+        className="w-full bg-neutral-900 border border-amber-900/20 text-amber-100 p-3 outline-none focus:border-amber-500 transition-colors font-light"  
+      />  
     </div>  
-  </div>  
-);  
+  )  
+}
+
+function Area({ label, name }: { label: string, name: string }) {  
+  return (  
+    <div className="space-y-2">  
+      <label className="text-[10px] uppercase tracking-[0.2em] text-amber-900">{label}</label>  
+      <textarea   
+        name={name}  
+        rows={6}  
+        className="w-full bg-neutral-900 border border-amber-900/20 text-amber-100 p-3 outline-none focus:border-amber-500 transition-colors font-light"  
+      />  
+    </div>  
+  )  
 }  
