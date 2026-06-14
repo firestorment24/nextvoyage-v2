@@ -2,7 +2,6 @@
 import { notFound } from 'next/navigation';  
 import Link from 'next/link';
 
-// Force the page to be static and define the allowed slugs  
 export const dynamic = 'force-static';  
 export const dynamicParams = false;
 
@@ -20,43 +19,72 @@ export async function generateStaticParams() {
 const ARTICLE_DATA: Record<string, any> = {  
   "the-silent-roi": {  
     title: "The Silent ROI",  
-    subtitle: "Volume 01",  
+    subtitle: "Volume 01 — The Manifesto",  
     hero: "https://cdn.marblism.com/JXJNAcJDNQ7.webp",  
-    content: "The ultimate luxury is not found in the acquisition of things, but in the reclamation of one’s own nervous system. In a world of infinite noise, silence is the only asset that appreciates..."  
+    intro: "The ultimate luxury is not a destination, but a state of being. We examine why a nervous system at rest is the highest-yielding asset in a high-performance life.",  
+    body: [  
+      "In an era where every second is commoditized, the only remaining scarcity is silence. For the NexVoyage traveler, luxury has moved past the visible and into the biological. The 'Silent ROI' is the measurable return of clarity, focus, and composure that occurs only when the world is successfully held at bay.",  
+      "Stillness is not passive; it is a strategic requirement. We define this through the lens of 'Radical Seclusion'—environments engineered to reset the human frequency to zero. From deep-earth spas in the Swiss Alps to private archipelagos in the South Pacific, we prioritize properties that don't just offer service, but offer the absence of demand.",  
+      "The result of this investment is a total recalibration of the self. When you exit a NexVoyage sanctuary, you aren't just rested; you are restored to your most lethal state of mental acuity."  
+    ]  
   },  
   "the-architecture-of-calm": {  
     title: "The Architecture of Calm",  
-    subtitle: "Volume 02",  
+    subtitle: "Volume 02 — Design Philosophy",  
     hero: "https://cdn.marblism.com/GssaOUoI3J4.webp",  
-    content: "True seclusion is tactile. It is found in the weight of a burnished brass handle, the coolness of obsidian walls, and the specific way light dies in a corner..."  
+    intro: "Seclusion is tactile. We explore how the physical environment—from obsidian stone to burnished brass—dictates the frequency of the human experience.",  
+    body: [  
+      "The 'Architecture of Calm' is built on the principle of 'Brass & Shadow.' It is the belief that true luxury should feel weighty, grounded, and permanent. We avoid the clinical 'all-white' minimalism of the past decade in favor of dark, textured sanctuaries that absorb noise and light.",  
+      "Materials matter. We curate environments defined by cool obsidian, warm vintage leathers, and the specific golden glint of aged brass. These elements aren't just aesthetic choices; they are grounding agents that slow the heart rate and invite the eye to rest in the shadows.",  
+      "A sanctuary must be a fortress of the senses. This means soundscapes designed by silence, lighting that mimics the natural death of the day, and surfaces that demand to be touched."  
+    ]  
   },  
   "the-shadow-of-protection": {  
     title: "The Shadow of Protection",  
-    subtitle: "Volume 03",  
+    subtitle: "Volume 03 — Security & Privacy",  
     hero: "https://cdn.marblism.com/mYMtnpD3UpB.webp",  
-    content: "Privacy is no longer a setting; it is a fortress. We examine the 'Shadow of Protection'—the invisible layer of security that ensures sovereignty over your time and presence..."  
+    intro: "Privacy is no longer a luxury; it is the final frontier of sovereignty. We look at the 'invisible hand' that ensures your presence remains your own.",  
+    body: [  
+      "The 'Shadow of Protection' is the most critical layer of the NexVoyage experience. It is the security apparatus that you never see but always feel. It is the gatekeeper of your time, ensuring that the outside world remains an abstraction while you are within our care.",  
+      "We treat privacy as a technical discipline. From digital obfuscation for high-profile itineraries to the physical infrastructure of remote estates, we choreograph every movement to ensure zero-exposure travel.",  
+      "This is not about hiding; it is about sovereignty. It is the right to be unreachable, unobservable, and entirely focused on the present moment."  
+    ]  
   },  
   "the-quiet-recalibration": {  
     title: "The Quiet Recalibration",  
-    subtitle: "Wellness Dispatch",  
+    subtitle: "Dispatch — Wellness",  
     hero: "https://cdn.marblism.com/bVv_xym0Ckt.webp",  
-    content: "Navigating discrete wellness through dark stone and burnished brass meditation bowls. A restored nervous system is the silent return on investment..."  
+    intro: "Navigating the intersection of deep-tissue recovery and cognitive resets through the lens of 'Tactile Seclusion.'",  
+    body: [  
+      "Wellness is often misidentified as activity. At NexVoyage, we identify it as recalibration. Our dispatch on wellness focuses on the 'Architecture of the Reset'—using dark stone soaking tubs and the resonance of brass meditation bowls to induce a state of deep neurological repair.",  
+      "The focus is on discrete wellness. No public gyms or performative spas. Instead, we provide in-sanctuary technology and ancient practices that occur in total privacy, allowing for an intimate and observant relationship with one's own recovery.",  
+      "The 'Silent ROI' here is a nervous system that has been successfully de-escalated, ready to return to the world with absolute composure."  
+    ]  
   },  
   "the-architecture-of-the-journey": {  
     title: "The Architecture of the Journey",  
-    subtitle: "Itinerary Dispatch",  
+    subtitle: "Dispatch — Itineraries",  
     hero: "https://cdn.marblism.com/BZFczgXijCL.webp",  
-    content: "The invisible hand of radical personalization. We choreograph stillness through the play of light on old stone and the warmth of vintage leather..."  
+    intro: "The choreography of stillness. How we design movement to feel like a continuous state of arrival.",  
+    body: [  
+      "An itinerary is a composition. 'The Architecture of the Journey' is our blueprint for radical personalization, where every transition is an invisible hand guiding you toward the next moment of stillness.",  
+      "We favor the aesthetic of the 'Old World'—vintage leather, dark marble, and the play of light on centuries-old stone. These settings provide a historical weight that grounds the traveler, making the journey feel as significant as the destination.",  
+      "Movement should never be stressful. By managing the logistics of composure, we ensure that the traveler never feels the friction of transition, only the poetry of arrival."  
+    ]  
   },  
   "the-logistics-of-composure": {  
     title: "The Logistics of Composure",  
-    subtitle: "Aviation Dispatch",  
+    subtitle: "Dispatch — Aviation",  
     hero: "https://cdn.marblism.com/ARrjs4vNOgk.webp",  
-    content: "Private aviation as the infrastructure for sovereignty. Charcoal upholstery and rainy tarmac reflections—the logistics that allow for total mental focus..."  
+    intro: "Private aviation as the essential infrastructure for mental focus and time-sovereignty.",  
+    body: [  
+      "Time is the only asset that cannot be reclaimed. Aviation, therefore, is not a transport method; it is a time-machine. 'The Logistics of Composure' examines how private air travel serves as the infrastructure for total focus.",  
+      "The environment on board—charcoal upholstery, brass cabin lights, and the solitude of a quiet cabin—is designed to be an extension of the destination sanctuary. It is a space where strategic decisions are made and deep rest is achieved while the world passes by at 45,000 feet.",  
+      "By controlling the tarmac, the cabin, and the connection, we ensure that the traveler remains in the 'Shadow of Protection' from takeoff to landing."  
+    ]  
   }  
 };
 
-// Update: Added 'async' to the component and 'await' to the params  
 export default async function PerspectiveArticle({ params }: { params: Promise<{ slug: string }> }) {  
   const { slug } = await params;  
   const article = ARTICLE_DATA[slug];
@@ -88,11 +116,15 @@ export default async function PerspectiveArticle({ params }: { params: Promise<{
       {/* Content Section */}  
       <div className="max-w-3xl mx-auto px-8 py-24 leading-relaxed">  
         <div className="text-zinc-500 font-serif text-xl lg:text-2xl italic mb-16 border-l-2 border-[#b19149] pl-8">  
-          {article.content}  
+          {article.intro}  
         </div>  
           
-        <div className="prose prose-invert prose-zinc max-w-none prose-p:font-serif prose-p:text-lg prose-p:text-zinc-400">  
-           {/* Penny's content here */}  
+        <div className="space-y-12">  
+          {article.body.map((paragraph: string, index: number) => (  
+            <p key={index} className="font-serif text-lg lg:text-xl text-zinc-400 leading-relaxed">  
+              {paragraph}  
+            </p>  
+          ))}  
         </div>
 
         <footer className="mt-32 pt-12 border-t border-zinc-900 flex justify-between items-center">  
