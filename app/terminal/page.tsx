@@ -8,7 +8,7 @@ export default function Terminal() {
   const [authenticated, setAuthenticated] = useState(false)  
   const [activeTab, setActiveTab] = useState('archive')  
   const [status, setStatus] = useState('')
- 
+  
   if (!authenticated) {  
     return (  
       <div className="min-h-screen bg-neutral-950 flex items-center justify-center p-6">  
