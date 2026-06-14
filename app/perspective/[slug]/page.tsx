@@ -2,6 +2,18 @@
 import { notFound } from 'next/navigation';  
 import Link from 'next/link';
 
+// 1. THIS IS THE FIX: Pre-defining the slugs for the build engine  
+export async function generateStaticParams() {  
+  return [  
+    { slug: 'the-silent-roi' },  
+    { slug: 'the-architecture-of-calm' },  
+    { slug: 'the-shadow-of-protection' },  
+    { slug: 'the-quiet-recalibration' },  
+    { slug: 'the-architecture-of-the-journey' },  
+    { slug: 'the-logistics-of-composure' },  
+  ];  
+}
+
 const ARTICLE_DATA: Record<string, any> = {  
   "the-silent-roi": {  
     title: "The Silent ROI",  
@@ -74,9 +86,8 @@ export default function PerspectiveArticle({ params }: { params: { slug: string 
           {article.content}  
         </div>  
           
-        {/* Full editorial content would be rendered here via Penny's Markdown */}  
         <div className="prose prose-invert prose-zinc max-w-none prose-p:font-serif prose-p:text-lg prose-p:text-zinc-400">  
-           {/* Dynamic MDX Content Injection */}  
+           {/* Detailed Penny content loads here */}  
         </div>
 
         <footer className="mt-32 pt-12 border-t border-zinc-900 flex justify-between items-center">  
