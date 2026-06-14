@@ -13,8 +13,9 @@ export interface Sanctuary {
 }
 
 export interface Property {  
-  id: string; // NV-LDR-XXX  
-  sanctuaryId: string; // Links to Sanctuary ID  
+  id: string;  
+  sanctuaryId: string;  
+  serial: string; // The "NV-LDR-XXX" identifier used in the UI  
   name: string;  
   location: string;  
   image: string;  
@@ -107,6 +108,7 @@ export const SANCTUARIES_DATA: Sanctuary[] = [
 export const PROPERTY_DATA: Property[] = [  
   {  
     id: "NV-LDR-001",  
+    serial: "NV-LDR-001",  
     sanctuaryId: "brutalist",  
     name: "North Island",  
     location: "Seychelles",  
@@ -117,6 +119,7 @@ export const PROPERTY_DATA: Property[] = [
   },  
   {  
     id: "NV-LDR-002",  
+    serial: "NV-LDR-002",  
     sanctuaryId: "altiplano",  
     name: "Amangiri",  
     location: "Utah, USA",  
@@ -127,6 +130,7 @@ export const PROPERTY_DATA: Property[] = [
   },  
   {  
     id: "NV-LDR-003",  
+    serial: "NV-LDR-003",  
     sanctuaryId: "brutalist",  
     name: "Post Ranch Inn",  
     location: "Big Sur, USA",  
@@ -137,6 +141,7 @@ export const PROPERTY_DATA: Property[] = [
   },  
   {  
     id: "NV-LDR-004",  
+    serial: "NV-LDR-004",  
     sanctuaryId: "nordic",  
     name: "Deplar Farm",  
     location: "Troll Peninsula, Iceland",  
@@ -147,6 +152,7 @@ export const PROPERTY_DATA: Property[] = [
   },  
   {  
     id: "NV-LDR-005",  
+    serial: "NV-LDR-005",  
     sanctuaryId: "highland",  
     name: "Aman Tokyo",  
     location: "Tokyo, Japan",  
@@ -157,6 +163,7 @@ export const PROPERTY_DATA: Property[] = [
   },  
   {  
     id: "NV-LDR-006",  
+    serial: "NV-LDR-006",  
     sanctuaryId: "cycladic",  
     name: "Soneva Jani",  
     location: "Noonu Atoll, Maldives",  
@@ -167,6 +174,7 @@ export const PROPERTY_DATA: Property[] = [
   },  
   {  
     id: "NV-LDR-007",  
+    serial: "NV-LDR-007",  
     sanctuaryId: "cycladic",  
     name: "Nihi Sumba",  
     location: "Sumba, Indonesia",  
@@ -177,6 +185,7 @@ export const PROPERTY_DATA: Property[] = [
   },  
   {  
     id: "NV-LDR-008",  
+    serial: "NV-LDR-008",  
     sanctuaryId: "highland",  
     name: "Singita Kwitonda Lodge",  
     location: "Volcanoes National Park, Rwanda",  
@@ -187,6 +196,7 @@ export const PROPERTY_DATA: Property[] = [
   },  
   {  
     id: "NV-LDR-009",  
+    serial: "NV-LDR-009",  
     sanctuaryId: "gobi",  
     name: "Zannier Hotels Sonop",  
     location: "Namib Desert, Namibia",  
@@ -197,6 +207,7 @@ export const PROPERTY_DATA: Property[] = [
   },  
   {  
     id: "NV-LDR-010",  
+    serial: "NV-LDR-010",  
     sanctuaryId: "highland",  
     name: "Aman Kyoto",  
     location: "Kyoto, Japan",  
@@ -207,6 +218,7 @@ export const PROPERTY_DATA: Property[] = [
   },  
   {  
     id: "NV-LDR-011",  
+    serial: "NV-LDR-011",  
     sanctuaryId: "highland",  
     name: "Six Senses Bhutan",  
     location: "Paro/Thimphu/Punakha, Bhutan",  
@@ -217,6 +229,7 @@ export const PROPERTY_DATA: Property[] = [
   },  
   {  
     id: "NV-LDR-012",  
+    serial: "NV-LDR-012",  
     sanctuaryId: "gobi",  
     name: "Jack's Camp",  
     location: "Makgadikgadi Pans, Botswana",  
@@ -227,6 +240,7 @@ export const PROPERTY_DATA: Property[] = [
   },  
   {  
     id: "NV-LDR-013",  
+    serial: "NV-LDR-013",  
     sanctuaryId: "gobi",  
     name: "Shipwreck Lodge",  
     location: "Skeleton Coast, Namibia",  
@@ -237,6 +251,7 @@ export const PROPERTY_DATA: Property[] = [
   },  
   {  
     id: "NV-LDR-014",  
+    serial: "NV-LDR-014",  
     sanctuaryId: "cycladic",  
     name: "Kisawa Sanctuary",  
     location: "Benguerra Island, Mozambique",  
@@ -247,6 +262,7 @@ export const PROPERTY_DATA: Property[] = [
   },  
   {  
     id: "NV-LDR-015",  
+    serial: "NV-LDR-015",  
     sanctuaryId: "cycladic",  
     name: "The Brando",  
     location: "Tetiaroa, French Polynesia",  
@@ -257,6 +273,7 @@ export const PROPERTY_DATA: Property[] = [
   },  
   {  
     id: "NV-LDR-016",  
+    serial: "NV-LDR-016",  
     sanctuaryId: "cycladic",  
     name: "Joali Being",  
     location: "Bodufushi Island, Maldives",  
@@ -267,6 +284,7 @@ export const PROPERTY_DATA: Property[] = [
   },  
   {  
     id: "NV-LDR-017",  
+    serial: "NV-LDR-017",  
     sanctuaryId: "nordic",  
     name: "White Desert",  
     location: "Antarctica",  
@@ -277,6 +295,7 @@ export const PROPERTY_DATA: Property[] = [
   },  
   {  
     id: "NV-LDR-018",  
+    serial: "NV-LDR-018",  
     sanctuaryId: "altiplano",  
     name: "Alila Jabal Akhdar",  
     location: "Oman",  
@@ -287,6 +306,7 @@ export const PROPERTY_DATA: Property[] = [
   },  
   {  
     id: "NV-LDR-019",  
+    serial: "NV-LDR-019",  
     sanctuaryId: "highland",  
     name: "Nayara Tented Camp",  
     location: "Arenal Volcano, Costa Rica",  
@@ -300,4 +320,5 @@ export const PROPERTY_DATA: Property[] = [
 // Backward compatibility exports  
 export const SANCTUARIES = SANCTUARIES_DATA;  
 export const sanctuaries = SANCTUARIES_DATA;  
-export const properties = PROPERTY_DATA; 
+export const properties = PROPERTY_DATA;  
+export const SANCTUARIES_DATA_CONSTANT = SANCTUARIES_DATA; 
