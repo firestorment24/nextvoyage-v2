@@ -3,6 +3,8 @@
 import { useParams } from "next/navigation";      
 import { PROPERTY_DATA } from "@/lib/data/sanctuaries";      
 import Link from "next/link";
+import Link from 'next/link';  
+
 
 export default function PropertyDossierPage() {  
   const params = useParams();  
@@ -73,6 +75,18 @@ export default function PropertyDossierPage() {
               ))}  
             </section>
 
+{/* Vetting Action */}  
+<section className="pt-12 border-t border-white/5">  
+  <Link href="/inquiry" className="block">  
+    <button className="w-full border border-neutral-700 py-4 text-[10px] font-mono uppercase tracking-[0.4em] text-white hover:bg-white hover:text-black transition-all duration-500">  
+      Initialize Strategic Vetting  
+    </button>  
+  </Link>  
+  <p className="mt-4 text-[9px] text-[#444] uppercase tracking-widest text-center">  
+    Secure Transmission via NexVoyage Protocol  
+  </p>  
+</section>  
+            
             <div className="pt-12">  
               <button className="w-full border border-white/20 py-4 text-[11px] uppercase tracking-[0.4em] hover:bg-white hover:text-black transition-all duration-500">  
                 Request Acquisition Details  
