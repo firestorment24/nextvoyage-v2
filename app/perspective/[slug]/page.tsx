@@ -2,7 +2,9 @@
 import { notFound } from 'next/navigation';  
 import Link from 'next/link';
 
-// 1. THIS IS THE FIX: Pre-defining the slugs for the build engine  
+// THE FIX: Force the engine to only recognize our specific editorial slugs  
+export const dynamicParams = false; 
+
 export async function generateStaticParams() {  
   return [  
     { slug: 'the-silent-roi' },  
@@ -19,37 +21,37 @@ const ARTICLE_DATA: Record<string, any> = {
     title: "The Silent ROI",  
     subtitle: "Volume 01",  
     hero: "https://cdn.marblism.com/JXJNAcJDNQ7.webp",  
-    content: "The ultimate luxury is not found in the acquisition of things, but in the reclamation of one’s own nervous system. In a world of infinite noise, silence is the only asset that appreciates..."  
+    content: "The ultimate luxury is not found in the acquisition of things, but in the reclamation of one’s own nervous system..."  
   },  
   "the-architecture-of-calm": {  
     title: "The Architecture of Calm",  
     subtitle: "Volume 02",  
     hero: "https://cdn.marblism.com/GssaOUoI3J4.webp",  
-    content: "True seclusion is tactile. It is found in the weight of a burnished brass handle, the coolness of obsidian walls, and the specific way light dies in a corner..."  
+    content: "True seclusion is tactile. It is found in the weight of a burnished brass handle, the coolness of obsidian walls..."  
   },  
   "the-shadow-of-protection": {  
     title: "The Shadow of Protection",  
     subtitle: "Volume 03",  
     hero: "https://cdn.marblism.com/mYMtnpD3UpB.webp",  
-    content: "Privacy is no longer a setting; it is a fortress. We examine the 'Shadow of Protection'—the invisible layer of security that ensures sovereignty over your time and presence..."  
+    content: "Privacy is no longer a setting; it is a fortress. We examine the 'Shadow of Protection'..."  
   },  
   "the-quiet-recalibration": {  
     title: "The Quiet Recalibration",  
     subtitle: "Wellness Dispatch",  
     hero: "https://cdn.marblism.com/bVv_xym0Ckt.webp",  
-    content: "Navigating discrete wellness through dark stone and burnished brass meditation bowls. A restored nervous system is the silent return on investment..."  
+    content: "Navigating discrete wellness through dark stone and burnished brass meditation bowls..."  
   },  
   "the-architecture-of-the-journey": {  
     title: "The Architecture of the Journey",  
     subtitle: "Itinerary Dispatch",  
     hero: "https://cdn.marblism.com/BZFczgXijCL.webp",  
-    content: "The invisible hand of radical personalization. We choreograph stillness through the play of light on old stone and the warmth of vintage leather..."  
+    content: "The invisible hand of radical personalization. We choreograph stillness through the play of light..."  
   },  
   "the-logistics-of-composure": {  
     title: "The Logistics of Composure",  
     subtitle: "Aviation Dispatch",  
     hero: "https://cdn.marblism.com/ARrjs4vNOgk.webp",  
-    content: "Private aviation as the infrastructure for sovereignty. Charcoal upholstery and rainy tarmac reflections—the logistics that allow for total mental focus..."  
+    content: "Private aviation as the infrastructure for sovereignty. Charcoal upholstery and rainy tarmac reflections..."  
   }  
 };
 
@@ -87,7 +89,7 @@ export default function PerspectiveArticle({ params }: { params: { slug: string 
         </div>  
           
         <div className="prose prose-invert prose-zinc max-w-none prose-p:font-serif prose-p:text-lg prose-p:text-zinc-400">  
-           {/* Detailed Penny content loads here */}  
+           {/* Detailed editorial content */}  
         </div>
 
         <footer className="mt-32 pt-12 border-t border-zinc-900 flex justify-between items-center">  
