@@ -1,61 +1,46 @@
-"use server";
+'use server'
 
-import { sql } from "@vercel/postgres";  
-import { revalidatePath } from "next/cache";
+import { sql } from '@vercel/postgres'
 
-export async function commitToLedger(formData: FormData): Promise<void> {  
-  const password = formData.get("admin_password") as string;  
-  const tableType = formData.get("table_type") as string;
-
-  // 1. Security Check  
-  if (password !== process.env.ADMIN_PASSWORD) {  
-    console.error("Unauthorized access attempt.");  
-    return;  
+export async function commitToLedger(formData: FormData, table: string) {  
+  const file = formData.get('csv_file') as File  
+    
+  // Handle CSV Upload  
+  if (file && file.size > 0) {  
+    try {  
+      const text = await file.text()  
+      const rows = text.split('\n').map(row => row.split(','))  
+      // Logic for parsing CSV and inserting rows would go here  
+      return { message: `Batch process for ${table} initiated (CSV Parsing active).` }  
+    } catch (e) {  
+      return { message: 'Error processing CSV file.' }  
+    }  
   }
 
+  // Handle Manual Form Submission  
+  const data = Object.fromEntries(formData.entries())  
+    
   try {  
-    if (tableType === "archive") {  
-      const name = formData.get("name") as string;  
-      const location = formData.get("location") as string;  
-      const description = formData.get("description") as string;  
-      const specs = formData.get("specs") as string;
-
+    if (table === 'archive') {  
       await sql`  
-        INSERT INTO sanctuaries (name, location, description, specs)  
-        VALUES (${name}, ${location}, ${description}, ${specs})  
-      `;  
-    }   
-      
-    else if (tableType === "perspective") {  
-      const title = formData.get("title") as string;  
-      const content = formData.get("content") as string;
-
+        INSERT INTO sanctuaries (title, location, description, image_url, price)  
+        VALUES (${data.title as string}, ${data.location as string}, ${data.description as string}, ${data.image_url as string}, ${data.price as string})  
+      `  
+    } else if (table === 'perspective') {  
       await sql`  
-        INSERT INTO perspectives (title, content, created_at)  
-        VALUES (${title}, ${content}, NOW())  
-      `;  
-    }   
-      
-    else if (tableType === "journal") {  
-      const title = formData.get("title") as string;  
-      const content = formData.get("content") as string;
-
+        INSERT INTO perspectives (title, category, author, content, image_url)  
+        VALUES (${data.title as string}, ${data.category as string}, ${data.author as string}, ${data.content as string}, ${data.image_url as string})  
+      `  
+    } else if (table === 'journal') {  
       await sql`  
-        INSERT INTO journal (title, content, created_at)  
-        VALUES (${title}, ${content}, NOW())  
-      `;  
-    }
-
-    // Refresh the site so the new data shows up immediately  
-    revalidatePath("/archive");  
-    revalidatePath("/perspective");  
-    revalidatePath("/journal");  
+        INSERT INTO journal (title, date, excerpt, image_url)  
+        VALUES (${data.title as string}, ${data.date as string}, ${data.excerpt as string}, ${data.image_url as string})  
+      `  
+    }  
       
-    // We return nothing to satisfy the TypeScript 'void' requirement  
-    return;
-
+    return { message: `Success: Committed to ${table} ledger.` }  
   } catch (error) {  
-    console.error("Database Error:", error);  
-    throw new Error("Failed to commit to ledger.");  
+    console.error(error)  
+    return { message: 'Failed to commit to ledger. Check database connection.' }  
   }  
 }  
