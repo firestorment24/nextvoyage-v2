@@ -7,7 +7,7 @@ export default function AdminTerminal() {
   const [activeTab, setActiveTab] = useState("archive");  
   const [isAuthenticated, setIsAuthenticated] = useState(false);  
   const [password, setPassword] = useState("");
-
+ 
   if (!isAuthenticated) {  
     return (  
       <div className="min-h-screen bg-black flex items-center justify-center p-6">  
