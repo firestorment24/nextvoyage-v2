@@ -1,181 +1,168 @@
-'use client';  
-import React, { useState } from 'react';
+"use client";
 
-export default function TheReserve() {  
+import React, { useState } from 'react';  
+import { ChevronRight, ChevronLeft, Check } from 'lucide-react';
+
+const ReservePage = () => {  
   const [step, setStep] = useState(1);  
-  const totalSteps = 6;
+  const [formData, setFormData] = useState({  
+    name: '',  
+    email: '',  
+    location: '',  
+    sanctuary: '',  
+    dates: '',  
+    objectives: '',  
+    referral: ''  
+  });
 
-  const nextStep = () => setStep((prev) => Math.min(prev + 1, totalSteps));  
-  const prevStep = () => setStep((prev) => Math.max(prev - 1, 1));
+  const nextStep = () => setStep(prev => Math.min(prev + 1, 4));  
+  const prevStep = () => setStep(prev => Math.max(prev - 1, 1));
 
-  const inputStyle = "w-full bg-transparent border-b border-stone-800 py-6 outline-none focus:border-[#d4af37] transition-all duration-700 text-3xl font-light text-white placeholder:text-stone-900";  
-  const labelStyle = "block text-[11px] uppercase tracking-[0.5em] text-[#d4af37] mb-2 opacity-80";  
-  const choiceStyle = "px-8 py-5 border border-stone-900 text-[10px] uppercase tracking-[0.3em] text-stone-400 hover:border-[#d4af37] hover:text-[#d4af37] transition-all duration-500";
+  const steps = [  
+    { id: 1, title: "The Essentials", description: "Identity and reach." },  
+    { id: 2, title: "The Logistics", description: "Sanctuary and timing." },  
+    { id: 3, title: "The Touch", description: "The purpose of recalibration." },  
+    { id: 4, title: "The Connection", description: "Vetting and verification." }  
+  ];
 
   return (  
-    <div className="min-h-screen bg-[#0a0a0a] text-stone-200 flex flex-col md:flex-row overflow-hidden font-serif">  
-        
-      {/* Cinematic Sidebar */}  
-      <div className="md:w-1/4 h-32 md:h-screen relative overflow-hidden border-r border-stone-900">  
+    <div className="min-h-screen bg-[#0a0a0a] text-[#d4d4d4] font-serif selection:bg-[#404040]">  
+      {/* Background Hero Image with Heavy Overlay */}  
+      <div className="fixed inset-0 z-0">  
         <img   
-          src="https://cdn.marblism.com/Hz7T6Y3cGTU.webp"   
-          alt="The Concierge"   
-          className="absolute inset-0 w-full h-full object-cover grayscale brightness-[0.3]"  
+          src="https://res.cloudinary.com/dt9v7kvsc/image/upload/v1718300000/ARrjs4vNOgk.jpg"   
+          alt="Sanctuary Backdrop"  
+          className="w-full h-full object-cover opacity-30 grayscale"  
         />  
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#0a0a0a]" />  
-        <div className="absolute bottom-10 left-10">  
-          <p className="text-[10px] uppercase tracking-[0.5em] text-[#d4af37] mb-2">Phase</p>  
-          <div className="text-4xl font-light text-white italic">0{step}</div>  
-        </div>  
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-transparent to-[#0a0a0a]" />  
       </div>
 
-      {/* The Consultation Content */}  
-      <div className="md:w-3/4 flex flex-col justify-center p-8 md:p-24 lg:p-32 relative">  
-          
-        {/* Minimal Progress Line */}  
-        <div className="absolute top-0 left-0 w-full h-[1px] bg-stone-900">  
-          <div   
-            className="h-full bg-[#d4af37] transition-all duration-1000 ease-in-out"   
-            style={{ width: `${(step / totalSteps) * 100}%` }}  
-          />  
+      <div className="relative z-10 max-w-2xl mx-auto px-6 py-24 min-h-screen flex flex-col">  
+        {/* Progress Header */}  
+        <div className="mb-16">  
+          <div className="flex justify-between items-end mb-4">  
+            <div>  
+              <span className="text-[10px] uppercase tracking-[0.3em] text-[#737373] block mb-2">Step {step} of 4</span>  
+              <h1 className="text-2xl font-light tracking-tight">{steps[step-1].title}</h1>  
+            </div>  
+            <span className="text-[10px] uppercase tracking-[0.3em] text-[#737373] italic">NexVoyage Collective</span>  
+          </div>  
+          <div className="h-[1px] w-full bg-[#262626]">  
+            <div   
+              className="h-[1px] bg-[#d4d4d4] transition-all duration-700 ease-in-out"   
+              style={{ width: `${(step / 4) * 100}%` }}  
+            />  
+          </div>  
         </div>
 
-        <div className="max-w-4xl w-full">  
-            
-          {/* STEP 1: IDENTITY */}  
+        {/* Form Content */}  
+        <div className="flex-grow">  
           {step === 1 && (  
-            <div className="space-y-16 animate-in fade-in slide-in-from-bottom-4 duration-1000">  
-              <div className="space-y-4">  
-                <label className={labelStyle}>Who should we address?</label>  
-                <input type="text" placeholder="Full Name" className={inputStyle} autoFocus />  
-              </div>  
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-16">  
-                <div className="space-y-4">  
-                  <label className={labelStyle}>Contact Email</label>  
-                  <input type="email" placeholder="Email Address" className={inputStyle} />  
-                </div>  
-                <div className="space-y-4">  
-                  <label className={labelStyle}>Direct Line (Optional)</label>  
-                  <input type="tel" placeholder="Phone Number" className={inputStyle} />  
-                </div>  
-              </div>  
-            </div>  
-          )}
-
-          {/* STEP 2: DESTINATION & TIMING */}  
-          {step === 2 && (  
-            <div className="space-y-16 animate-in fade-in slide-in-from-bottom-4 duration-1000">  
-              <div className="space-y-4">  
-                <label className={labelStyle}>Where are you dreaming of?</label>  
-                <input type="text" placeholder="Destination or 'Surprise Me'" className={inputStyle} autoFocus />  
-              </div>  
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-16">  
-                <div className="space-y-4">  
-                  <label className={labelStyle}>Timeline</label>  
-                  <input type="text" placeholder="Dates or General Month" className={inputStyle} />  
-                </div>  
-                <div className="space-y-4">  
-                  <label className={labelStyle}>Length of Stay</label>  
-                  <input type="text" placeholder="Number of Nights" className={inputStyle} />  
-                </div>  
-              </div>  
-            </div>  
-          )}
-
-          {/* STEP 3: TRAVELERS */}  
-          {step === 3 && (  
-            <div className="space-y-16 animate-in fade-in slide-in-from-bottom-4 duration-1000">  
-              <div className="space-y-4">  
-                <label className={labelStyle}>Number of Travelers</label>  
-                <input type="text" placeholder="Adults, Children, and Ages" className={inputStyle} autoFocus />  
-              </div>  
-              <div className="space-y-8">  
-                <label className={labelStyle}>Type of Journey</label>  
-                <div className="flex flex-wrap gap-4">  
-                  {['Leisure', 'Corporate', 'Milestone', 'Group Retreat'].map(v => (  
-                    <button key={v} className={choiceStyle}>{v}</button>  
-                  ))}  
-                </div>  
-              </div>  
-            </div>  
-          )}
-
-          {/* STEP 4: PERSONALITY & BUDGET */}  
-          {step === 4 && (  
-            <div className="space-y-16 animate-in fade-in slide-in-from-bottom-4 duration-1000">  
-              <div className="space-y-8">  
-                <label className={labelStyle}>The Desired Vibe</label>  
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">  
-                  {['The Sanctuary', 'The Elite Pulse', 'The Family Legacy'].map(p => (  
-                    <button key={p} className={choiceStyle + " text-left py-10 px-6"}>{p}</button>  
-                  ))}  
-                </div>  
-              </div>  
-              <div className="space-y-4">  
-                <label className={labelStyle}>Allocated Budget</label>  
-                <input type="text" placeholder="e.g. $1k, 5k, 10k, 50k'" className={inputStyle} />  
-              </div>  
-            </div>  
-          )}
-
-          {/* STEP 5: MUST HAVES & DISCOVERY */}  
-          {step === 5 && (  
-            <div className="space-y-16 animate-in fade-in slide-in-from-bottom-4 duration-1000">  
-              <div className="space-y-4">  
-                <label className={labelStyle}>Must-Haves & Occasions</label>  
-                <input type="text" placeholder="Private Pool, Special Birthday, etc." className={inputStyle} autoFocus />  
-              </div>  
-              <div className="space-y-4">  
-                <label className={labelStyle}>How did you find the collective?</label>  
-                <input type="text" placeholder="Referral, Social, Search..." className={inputStyle} />  
-              </div>  
-            </div>  
-          )}
-
-          {/* STEP 6: FINAL TOUCH */}  
-          {step === 6 && (  
-            <div className="space-y-16 animate-in fade-in slide-in-from-bottom-4 duration-1000">  
-              <div className="space-y-4">  
-                <label className={labelStyle}>Final Briefing</label>  
-                <textarea   
-                  rows={2}   
-                  placeholder="Anything else we should know?"   
-                  className={inputStyle + " resize-none"}   
-                  autoFocus  
+            <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">  
+              <div className="group">  
+                <label className="text-[10px] uppercase tracking-[0.2em] text-[#737373] block mb-4 group-focus-within:text-[#d4d4d4] transition-colors">Legal Name</label>  
+                <input   
+                  type="text"  
+                  placeholder="Daryl Clark"  
+                  className="w-full bg-transparent border-b border-[#262626] py-4 outline-none focus:border-[#d4d4d4] transition-colors font-light text-lg"  
+                  onChange={(e) => setFormData({...formData, name: e.target.value})}  
                 />  
               </div>  
-              <p className="text-stone-500 text-sm italic font-light">Your inquiry will be transmitted directly to our advisory team.</p>  
+              <div className="group">  
+                <label className="text-[10px] uppercase tracking-[0.2em] text-[#737373] block mb-4 group-focus-within:text-[#d4d4d4] transition-colors">Digital Point of Contact</label>  
+                <input   
+                  type="email"  
+                  placeholder="daryl.clark@fora.travel"  
+                  className="w-full bg-transparent border-b border-[#262626] py-4 outline-none focus:border-[#d4d4d4] transition-colors font-light text-lg"  
+                  onChange={(e) => setFormData({...formData, email: e.target.value})}  
+                />  
+              </div>  
             </div>  
           )}
 
-          {/* Navigation Controls */}  
-          <div className="mt-24 flex items-center gap-12">  
-            {step < totalSteps ? (  
-              <button   
-                onClick={nextStep}   
-                className="group flex items-center gap-8 text-[#d4af37] uppercase tracking-[0.6em] text-[10px] font-bold"  
-              >  
-                Proceed  
-                <div className="w-16 h-[1px] bg-[#d4af37] group-hover:w-24 transition-all duration-700" />  
-              </button>  
-            ) : (  
-              <button className="bg-[#d4af37] text-black px-16 py-6 uppercase tracking-[0.6em] text-[10px] font-bold hover:bg-white transition-all duration-700 shadow-2xl">  
-                Transmit Inquiry  
-              </button>  
-            )}
+          {step === 2 && (  
+            <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">  
+              <div className="group">  
+                <label className="text-[10px] uppercase tracking-[0.2em] text-[#737373] block mb-4">Intended Sanctuary</label>  
+                <input   
+                  type="text"  
+                  placeholder="The Kyoto Aman, or similar seclusion"  
+                  className="w-full bg-transparent border-b border-[#262626] py-4 outline-none focus:border-[#d4d4d4] transition-colors font-light text-lg"  
+                  onChange={(e) => setFormData({...formData, sanctuary: e.target.value})}  
+                />  
+              </div>  
+              <div className="group">  
+                <label className="text-[10px] uppercase tracking-[0.2em] text-[#737373] block mb-4">Temporal Window</label>  
+                <input   
+                  type="text"  
+                  placeholder="Q4 2026 / 14 Days"  
+                  className="w-full bg-transparent border-b border-[#262626] py-4 outline-none focus:border-[#d4d4d4] transition-colors font-light text-lg"  
+                  onChange={(e) => setFormData({...formData, dates: e.target.value})}  
+                />  
+              </div>  
+            </div>  
+          )}
 
-            {step > 1 && (  
-              <button   
-                onClick={prevStep}   
-                className="text-stone-600 uppercase tracking-[0.4em] text-[9px] hover:text-stone-400 transition-all"  
-              >  
-                Go Back  
-              </button>  
-            )}  
-          </div>
+          {step === 3 && (  
+            <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">  
+              <div className="group">  
+                <label className="text-[10px] uppercase tracking-[0.2em] text-[#737373] block mb-4">Primary Objective</label>  
+                <textarea   
+                  rows={4}  
+                  placeholder="What must be achieved through this journey? Recalibration, expansion, or total shadow?"  
+                  className="w-full bg-transparent border-b border-[#262626] py-4 outline-none focus:border-[#d4d4d4] transition-colors font-light text-lg resize-none"  
+                  onChange={(e) => setFormData({...formData, objectives: e.target.value})}  
+                />  
+              </div>  
+            </div>  
+          )}
 
+          {step === 4 && (  
+            <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">  
+              <div className="group">  
+                <label className="text-[10px] uppercase tracking-[0.2em] text-[#737373] block mb-4">Referral / Institutional Code</label>  
+                <input   
+                  type="text"  
+                  placeholder="How did you find the collective?"  
+                  className="w-full bg-transparent border-b border-[#262626] py-4 outline-none focus:border-[#d4d4d4] transition-colors font-light text-lg"  
+                  onChange={(e) => setFormData({...formData, referral: e.target.value})}  
+                />  
+              </div>  
+              <p className="text-[12px] text-[#737373] leading-relaxed">  
+                By submitting this inquiry, you acknowledge that NexVoyage Collective operates on a vetting-first basis. Entry is not guaranteed.  
+              </p>  
+            </div>  
+          )}  
+        </div>
+
+        {/* Navigation Footer */}  
+        <div className="mt-16 flex justify-between items-center">  
+          <button   
+            onClick={prevStep}  
+            disabled={step === 1}  
+            className={`flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] transition-opacity ${step === 1 ? 'opacity-0' : 'opacity-50 hover:opacity-100'}`}  
+          >  
+            <ChevronLeft size={14} /> Back  
+          </button>
+
+          {step < 4 ? (  
+            <button   
+              onClick={nextStep}  
+              className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-[#d4d4d4] border border-[#d4d4d4]/20 px-8 py-3 hover:bg-[#d4d4d4] hover:text-[#0a0a0a] transition-all duration-500"  
+            >  
+              Continue <ChevronRight size={14} />  
+            </button>  
+          ) : (  
+            <button   
+              className="flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-[#0a0a0a] bg-[#d4d4d4] px-10 py-4 hover:tracking-[0.4em] transition-all duration-500"  
+            >  
+              Apply for Entry <Check size={14} />  
+            </button>  
+          )}  
         </div>  
       </div>  
     </div>  
   );  
-}  
+};
+
+export default ReservePage;  
