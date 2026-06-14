@@ -2,121 +2,134 @@
 
 import React, { useState } from 'react';
 
-export default function InquiryPage() {  
-  const [submitted, setSubmitted] = useState(false);
+const InquiryPage = () => {  
+  const [submitted, setSubmitted] = useState(false);  
+  const [formData, setFormData] = useState({  
+    name: '',  
+    email: '',  
+    sanctuary: '',  
+    dates: '',  
+    objectives: '',  
+    referral: ''  
+  });
 
   const handleSubmit = (e: React.FormEvent) => {  
     e.preventDefault();  
     setSubmitted(true);  
+    // Logic for handling the inquiry would go here  
   };
 
   if (submitted) {  
     return (  
-      <div className="min-h-screen bg-[#FCFAF7] text-[#1C1C1C] flex flex-col items-center justify-center p-6 text-center animate-in fade-in duration-700">  
-        <h1 className="text-4xl font-light tracking-tight mb-4 italic">Thank You.</h1>  
-        <p className="max-w-md text-zinc-500 text-sm uppercase tracking-widest mb-10">  
-          Your inquiry has been received. Our team will review your details and reach out shortly.  
-        </p>  
-        <button   
-          onClick={() => window.open('https://cal.com/daryl-clark', '_blank')}  
-          className="text-[10px] bg-[#1C1C1C] text-[#FCFAF7] px-10 py-4 hover:bg-[#d4af37] transition-all duration-500 uppercase tracking-[0.3em]"  
-        >  
-          Schedule Discovery  
-        </button>  
+      <div className="min-h-screen bg-[#111111] text-[#d4d4d4] font-serif flex flex-col items-center justify-center px-6">  
+        <div className="max-w-md text-center space-y-6 animate-in fade-in zoom-in duration-1000">  
+          <h1 className="text-3xl font-light tracking-tight">Transmission Received.</h1>  
+          <p className="text-sm text-[#525252] leading-relaxed tracking-wide font-sans uppercase">  
+            Your application is now under review by the NexVoyage engine. We will reach out via your digital point of contact if entry is granted.  
+          </p>  
+          <div className="pt-8">  
+            <a href="/" className="text-[10px] uppercase tracking-[0.4em] text-[#d4d4d4] border border-[#262626] px-8 py-3 hover:bg-[#d4d4d4] hover:text-[#111111] transition-all">Return to Hub</a>  
+          </div>  
+        </div>  
       </div>  
     );  
   }
 
   return (  
-    <div className="min-h-screen bg-[#FCFAF7] text-[#1C1C1C] selection:bg-[#d4af37] selection:text-white">  
-      <main className="max-w-screen-xl mx-auto px-6 pt-32 pb-24">  
-        {/* Editorial Header */}  
-        <div className="mb-24 text-center md:text-left">  
-          <h1 className="text-5xl md:text-7xl font-light tracking-tighter mb-6">  
-            Begin the <span className="italic">Journey.</span>  
-          </h1>  
-          <div className="h-px w-24 bg-[#d4af37] mb-8 mx-auto md:mx-0" />  
-          <p className="text-[10px] uppercase tracking-[0.4em] text-zinc-400 max-w-sm leading-relaxed mx-auto md:mx-0">  
-            Private travel architecture for high-net-worth individuals.   
-            Please provide your initial details below.  
-          </p>  
+    <div className="min-h-screen bg-[#111111] text-[#a3a3a3] font-serif selection:bg-[#404040]">  
+      {/* Subtle Background Depth */}  
+      <div className="fixed inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#1a1a1a] via-[#111111] to-[#0a0a0a] opacity-50" />  
+        
+      <div className="relative z-10 max-w-2xl mx-auto px-6 py-32 min-h-screen">  
+          
+        <div className="mb-20">  
+          <span className="text-[10px] uppercase tracking-[0.5em] text-[#525252] block mb-4 font-sans">Vetting Phase / Entry Inquiry</span>  
+          <h1 className="text-4xl font-light tracking-tight text-[#e5e5e5]">The Conversation</h1>  
         </div>
 
-        <form onSubmit={handleSubmit} className="max-w-2xl mx-auto md:mx-0">  
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12">  
-              
-            {/* Full Name */}  
-            <div className="group relative">  
-              <label className="text-[9px] uppercase tracking-[0.3em] text-zinc-400 block mb-2 transition-colors group-focus-within:text-[#d4af37]">Full Name</label>  
+        <form onSubmit={handleSubmit} className="space-y-16">  
+          {/* Section: Identity */}  
+          <div className="space-y-10">  
+            <div className="group">  
+              <label className="text-[10px] uppercase tracking-[0.3em] text-[#525252] block mb-2 group-focus-within:text-[#d4d4d4] transition-colors font-sans">Full Legal Name</label>  
               <input   
                 required  
-                type="text"   
-                placeholder="Required"  
-                className="w-full bg-transparent border-b border-zinc-200 py-3 outline-none focus:border-[#1C1C1C] transition-all placeholder:text-zinc-200 text-sm tracking-wide"  
+                type="text"  
+                placeholder="Daryl Clark"  
+                className="w-full bg-transparent border-b border-[#262626] py-4 outline-none focus:border-[#404040] transition-all font-light text-xl text-[#d4d4d4] placeholder:text-[#262626]"  
+                onChange={(e) => setFormData({...formData, name: e.target.value})}  
               />  
-            </div>
-
-            {/* Email */}  
-            <div className="group relative">  
-              <label className="text-[9px] uppercase tracking-[0.3em] text-zinc-400 block mb-2 transition-colors group-focus-within:text-[#d4af37]">Email Address</label>  
+            </div>  
+            <div className="group">  
+              <label className="text-[10px] uppercase tracking-[0.3em] text-[#525252] block mb-2 group-focus-within:text-[#d4d4d4] transition-colors font-sans">Digital Contact</label>  
               <input   
                 required  
-                type="email"   
-                placeholder="Required"  
-                className="w-full bg-transparent border-b border-zinc-200 py-3 outline-none focus:border-[#1C1C1C] transition-all placeholder:text-zinc-200 text-sm tracking-wide"  
-              />  
-            </div>
-
-            {/* Destination */}  
-            <div className="group relative">  
-              <label className="text-[9px] uppercase tracking-[0.3em] text-zinc-400 block mb-2 transition-colors group-focus-within:text-[#d4af37]">Proposed Destination</label>  
-              <input   
-                required  
-                type="text"   
-                placeholder="Optional"  
-                className="w-full bg-transparent border-b border-zinc-200 py-3 outline-none focus:border-[#1C1C1C] transition-all placeholder:text-zinc-200 text-sm tracking-wide"  
-              />  
-            </div>
-
-            {/* Timeline */}  
-            <div className="group relative">  
-              <label className="text-[9px] uppercase tracking-[0.3em] text-zinc-400 block mb-2 transition-colors group-focus-within:text-[#d4af37]">Timeline</label>  
-              <input   
-                type="text"   
-                placeholder="e.g. Autumn 2026"  
-                className="w-full bg-transparent border-b border-zinc-200 py-3 outline-none focus:border-[#1C1C1C] transition-all placeholder:text-zinc-200 text-sm tracking-wide"  
-              />  
-            </div>
-
-            {/* Notes - Full Width */}  
-            <div className="md:col-span-2 group relative mt-4">  
-              <label className="text-[9px] uppercase tracking-[0.3em] text-zinc-400 block mb-2 transition-colors group-focus-within:text-[#d4af37]">Vision / Requirements</label>  
-              <textarea   
-                rows={4}  
-                placeholder="Describe your desired experience..."  
-                className="w-full bg-transparent border border-zinc-100 p-4 outline-none focus:border-[#d4af37] transition-all placeholder:text-zinc-200 text-sm tracking-wide resize-none"  
+                type="email"  
+                placeholder="daryl.clark@fora.travel"  
+                className="w-full bg-transparent border-b border-[#262626] py-4 outline-none focus:border-[#404040] transition-all font-light text-xl text-[#d4d4d4] placeholder:text-[#262626]"  
+                onChange={(e) => setFormData({...formData, email: e.target.value})}  
               />  
             </div>  
           </div>
 
-          <div className="mt-20 flex flex-col md:flex-row items-center justify-between gap-8">  
-            <p className="text-[9px] uppercase tracking-[0.2em] text-zinc-400 max-w-xs leading-loose italic">  
-              Your information is handled with absolute discretion by our private advisory team.  
+          {/* Section: Logistics */}  
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">  
+            <div className="group">  
+              <label className="text-[10px] uppercase tracking-[0.3em] text-[#525252] block mb-2 font-sans">Intended Sanctuary</label>  
+              <input   
+                type="text"  
+                placeholder="Kyoto, Japan"  
+                className="w-full bg-transparent border-b border-[#262626] py-4 outline-none focus:border-[#404040] transition-all font-light text-lg text-[#d4d4d4] placeholder:text-[#262626]"  
+                onChange={(e) => setFormData({...formData, sanctuary: e.target.value})}  
+              />  
+            </div>  
+            <div className="group">  
+              <label className="text-[10px] uppercase tracking-[0.3em] text-[#525252] block mb-2 font-sans">Temporal Window</label>  
+              <input   
+                type="text"  
+                placeholder="Oct 2026"  
+                className="w-full bg-transparent border-b border-[#262626] py-4 outline-none focus:border-[#404040] transition-all font-light text-lg text-[#d4d4d4] placeholder:text-[#262626]"  
+                onChange={(e) => setFormData({...formData, dates: e.target.value})}  
+              />  
+            </div>  
+          </div>
+
+          {/* Section: Purpose */}  
+          <div className="group">  
+            <label className="text-[10px] uppercase tracking-[0.3em] text-[#525252] block mb-2 font-sans">Mission Objective</label>  
+            <textarea   
+              rows={3}  
+              placeholder="What must be achieved through this journey?"  
+              className="w-full bg-transparent border-b border-[#262626] py-4 outline-none focus:border-[#404040] transition-all font-light text-lg text-[#d4d4d4] placeholder:text-[#262626] resize-none"  
+              onChange={(e) => setFormData({...formData, objectives: e.target.value})}  
+            />  
+          </div>
+
+          <div className="group">  
+            <label className="text-[10px] uppercase tracking-[0.3em] text-[#525252] block mb-2 font-sans">Institutional Referral</label>  
+            <input   
+              type="text"  
+              placeholder="Source or access code"  
+              className="w-full bg-transparent border-b border-[#262626] py-4 outline-none focus:border-[#404040] transition-all font-light text-lg text-[#d4d4d4] placeholder:text-[#262626]"  
+              onChange={(e) => setFormData({...formData, referral: e.target.value})}  
+            />  
+          </div>
+
+          <div className="pt-12 flex flex-col items-center space-y-8">  
+            <p className="text-[10px] text-[#404040] text-center leading-relaxed tracking-[0.1em] font-sans uppercase">  
+              By initiating this conversation, you acknowledge the vetting-first policy of the NexVoyage Collective.  
             </p>  
             <button   
               type="submit"  
-              className="w-full md:w-auto px-16 py-5 bg-[#1C1C1C] text-[#FCFAF7] text-[10px] uppercase tracking-[0.4em] hover:bg-[#d4af37] transition-all duration-500"  
+              className="w-full md:w-auto text-[10px] uppercase tracking-[0.5em] text-[#111111] bg-[#d4d4d4] px-16 py-6 hover:bg-white transition-all duration-700 font-sans"  
             >  
-              Submit Inquiry  
+              Apply for Entry  
             </button>  
           </div>  
         </form>  
-      </main>
-
-      <footer className="max-w-screen-xl mx-auto px-6 py-12 border-t border-zinc-100 flex justify-between items-center text-[9px] uppercase tracking-[0.3em] text-zinc-300">  
-        <span>NexVoyage Collective</span>  
-        <span>© 2026</span>  
-      </footer>  
+      </div>  
     </div>  
   );  
-}  
+};
+
+export default InquiryPage;  
