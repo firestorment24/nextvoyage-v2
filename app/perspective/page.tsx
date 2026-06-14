@@ -32,7 +32,7 @@ export default async function PerspectivePage() {
           {articles.map((article) => (  
             <Link   
               key={article.id}   
-              href={`/perspective/${article.slug || article.id}`}  
+              href={`/perspective/${article.slug || article.id}`}               
               className="group block"  
             >  
               <div className="relative aspect-[4/5] mb-8 overflow-hidden bg-[#111111] border border-white/5">  
