@@ -11,7 +11,7 @@ export async function commitToLedger(formData: FormData) {
   if (password !== process.env.ADMIN_PASSWORD) {  
     throw new Error("Unauthorized: Invalid Master Key");  
   }
-  
+   
   if (type === "sanctuary") {  
     const propertyId = formData.get("property_id") as string;  
     const name = formData.get("name") as string;  
