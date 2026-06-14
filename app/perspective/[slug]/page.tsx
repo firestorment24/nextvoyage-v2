@@ -1,6 +1,8 @@
-import React from 'react';
+import React from 'react';  
+import Link from 'next/link'; // Added this missing import
 
 // This would ideally fetch from your CMS/Penny's resources  
+// For now, I'm using the Architecture of Calm (Vol. 02) as the blueprint  
 const content = {  
   title: "The Architecture of Calm",  
   subtitle: "Vol. 02 — Our Philosophy",  
