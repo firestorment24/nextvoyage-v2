@@ -67,7 +67,7 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">    
             <div>    
               <span className="text-[#c5a059] tracking-[0.4em] uppercase text-xs mb-4 block italic">Curated Collection</span>    
-              <h2 className="text-4xl font-serif text-white uppercase tracking-tighter">Featured Sanctuaries</h2>    
+              <h2 className="text-4xl font-serif text-white uppercase tracking-tighter">Featured Properties</h2>    
             </div>    
             <Link href="/sanctuaries" className="text-[#c5a059] text-xs tracking-[0.3em] uppercase border-b border-[#c5a059]/30 pb-1 hover:border-[#c5a059] transition-all">    
               View Entire Ledger    
