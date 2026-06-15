@@ -4,11 +4,14 @@ import { sql } from '@vercel/postgres'
 import { revalidatePath } from 'next/cache'
 
 export async function commitToLedger(formData: FormData, activeTab: string) {  
-  const password = formData.get('password') as string  
-    
+  const password = formData.get('password') as string
+
   // Authentication check  
   if (password !== 'NV2026') {  
-    throw new Error('Authentication failed: Invalid registry key.')  
+    return {   
+      success: false,   
+      message: 'Authentication failed: Invalid registry key.'   
+    }  
   }
 
   try {  
@@ -57,9 +60,15 @@ export async function commitToLedger(formData: FormData, activeTab: string) {
       revalidatePath('/journal')  
     }
 
-    return { success: true }  
+    return {   
+      success: true,   
+      message: `Entry successfully committed to the ${activeTab} ledger.`   
+    }  
   } catch (error: any) {  
     console.error('Database Error:', error)  
-    throw new Error(error.message || 'Failed to commit record to ledger.')  
+    return {   
+      success: false,   
+      message: `Error: ${error.message || 'Failed to commit record.'}`   
+    }  
   }  
 }  
