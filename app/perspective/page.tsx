@@ -4,8 +4,9 @@ import Link from 'next/link';
 export const revalidate = 0; // Always fetch fresh data
 
 export default async function PerspectivePage() {  
-  let articles = [];  
-    
+  // Explicitly typing as any[] to satisfy the build check  
+  let articles: any[] = []; 
+
   try {  
     const result = await sql`  
       SELECT * FROM perspectives   
