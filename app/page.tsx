@@ -5,18 +5,18 @@ import Link from 'next/link'
 
 export default function HomePage() {    
   const properties = [  
-    { id: 'aman-new-york', name: 'Aman New York', loc: 'Manhattan, USA', img: 'https://cdn.marblism.com/WuyrXpnAwo9.webp' },  
-    { id: 'habitas-alula', name: 'Habitas AlUla', loc: 'Ashar Valley, Saudi Arabia', img: 'https://cdn.marblism.com/WuyrXpnAwo9.webp' },  
-    { id: '7132-hotel', name: '7132 Hotel', loc: 'Vals, Switzerland', img: 'https://cdn.marblism.com/WuyrXpnAwo9.webp' },  
-    { id: 'passalacqua', name: 'Passalacqua', loc: 'Lake Como, Italy', img: 'https://cdn.marblism.com/WuyrXpnAwo9.webp' },  
-    { id: 'bulgari-tokyo', name: 'Bulgari Hotel', loc: 'Tokyo, Japan', img: 'https://cdn.marblism.com/WuyrXpnAwo9.webp' },  
-    { id: 'capella-ubud', name: 'Capella Ubud', loc: 'Bali, Indonesia', img: 'https://cdn.marblism.com/WuyrXpnAwo9.webp' },  
-    { id: 'amangiri', name: 'Amangiri', loc: 'Canyon Point, USA', img: 'https://cdn.marblism.com/WuyrXpnAwo9.webp' },  
-    { id: 'maybourne-riviera', name: 'The Maybourne Riviera', loc: 'Roquebrune-Cap-Martin, France', img: 'https://cdn.marblism.com/QaCq5-bi5FE.webp' },  
-    { id: 'aman-kyoto', name: 'Aman Kyoto', loc: 'Kyoto, Japan', img: 'https://cdn.marblism.com/WuyrXpnAwo9.webp' },  
-    { id: 'six-senses-southern-dunes', name: 'Six Senses Southern Dunes', loc: 'Red Sea, Saudi Arabia', img: 'https://cdn.marblism.com/WuyrXpnAwo9.webp' },  
-    { id: 'one-only-aesthesis', name: 'One&Only Aesthesis', loc: 'Athens, Greece', img: 'https://cdn.marblism.com/WuyrXpnAwo9.webp' },  
-    { id: 'singita-kwitonda', name: 'Singita Kwitonda Lodge', loc: 'Volcanoes National Park, Rwanda', img: 'https://cdn.marblism.com/WuyrXpnAwo9.webp' }  
+    { id: 'aman-new-york', name: 'Aman New York', loc: 'Manhattan, USA', img: 'https://www.aman.com/sites/default/files/2022-08/Correct_Aman%20New%20York_Landscape.jpg' },  
+    { id: 'habitas-alula', name: 'Habitas AlUla', loc: 'Ashar Valley, Saudi Arabia', img: 'https://www.ourhabitas.com/wp-content/uploads/2021/12/Habitas_Al-Ula_2021_01_000008.jpg' },  
+    { id: '7132-hotel', name: '7132 Hotel', loc: 'Vals, Switzerland', img: 'https://i0.wp.com/sidewalkhustle.com/wp-content/uploads/2026/03/web_20230116-357a8874_final-2023-julien-l-balmer-all-rights-reserved.jpg.webp' },  
+    { id: 'passalacqua', name: 'Passalacqua', loc: 'Lake Como, Italy', img: 'https://bamo.com/wp-content/uploads/2025/04/bamo-passalacqua-hotel-luxury-design-09-e1759344642447.jpg' },  
+    { id: 'bulgari-tokyo', name: 'Bulgari Hotel', loc: 'Tokyo, Japan', img: 'https://www.bulgarihotels.com/.imaging/bhr-960-jpg/dam/TOKYO-HOTEL/THE-HOTEL/DESTINATION/bulgari-hotel-tokyo-floor-terrace.jpg/jcr%3Acontent' },  
+    { id: 'capella-ubud', name: 'Capella Ubud', loc: 'Bali, Indonesia', img: 'https://capellahotels.com/assets/img/site_images/ubud/ubud-home01.jpg' },  
+    { id: 'amangiri', name: 'Amangiri', loc: 'Canyon Point, USA', img: 'https://www.aman.com/sites/default/files/2021-02/210204_AmanHero_Landscape_Amangiri.jpg' },  
+    { id: 'maybourne-riviera', name: 'The Maybourne Riviera', loc: 'Roquebrune-Cap-Martin, France', img: 'https://library.maybourne.com/transform/aa5bed1a-fc77-49f7-a3b5-7f9625871f68/MBR-AZUR-SUITE-01-jpg?format=avif&quality=80&io=transform%3Afill%2Cwidth%3A1260%2Cheight%3A840&resolution=high' },  
+    { id: 'aman-kyoto', name: 'Aman Kyoto', loc: 'Kyoto, Japan', img: 'https://www.aman.com/sites/default/files/2021-02/Aman-Kyoto_Homepage_1.jpg' },  
+    { id: 'six-senses-southern-dunes', name: 'Six Senses Southern Dunes', loc: 'Red Sea, Saudi Arabia', img: 'https://archtene.com/wp-content/uploads/2026/03/ss5.jpg' },  
+    { id: 'one-only-aesthesis', name: 'One&Only Aesthesis', loc: 'Athens, Greece', img: 'https://assets.kerzner.com/api/public/content/151c4cf7e63b4847ad72a5dea8ac5fbe?v=a4f0e42d&t=w576' },  
+    { id: 'singita-kwitonda', name: 'Singita Kwitonda Lodge', loc: 'Volcanoes National Park, Rwanda', img: 'https://images.ctfassets.net/wds1hqrprqxb/4xlmzPUDcL43cdOmzVGWb8/85ab1d40cc609879aa8b8da6ab1237de/SVNP_LODGE_Kwitonda_Lodge_Lounge_Ross_Couper_1.jpg?w=1920&h=1080&fl=progressive&q=90&fm=jpg' }  
   ];
 
   return (    
