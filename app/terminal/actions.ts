@@ -1,78 +1,65 @@
 'use server'
 
-import { sql } from '@vercel/postgres'
+import { sql } from '@vercel/postgres'  
+import { revalidatePath } from 'next/cache'
 
-export async function commitToLedger(formData: FormData, table: string) {  
-  const file = formData.get('csv_file') as File
-
-  // --- BATCH CSV PROCESSOR ---  
-  if (file && file.size > 0) {  
-    try {  
-      const text = await file.text()  
-      // Split by lines and filter out empty rows  
-      const rows = text.split('\n').map(row => row.split(',')).filter(row => row.length > 1)  
-        
-      // Assume the first row is headers and skip it  
-      const dataRows = rows.slice(1)  
-      let count = 0
-
-      for (const row of dataRows) {  
-        // Trim each cell to remove whitespace/newlines  
-        const cleanRow = row.map(cell => cell.trim())
-
-        if (table === 'archive') {  
-          // Schema: title, location, description, image_url, price  
-          await sql`  
-            INSERT INTO sanctuaries (title, location, description, image_url, price)  
-            VALUES (${cleanRow[0]}, ${cleanRow[1]}, ${cleanRow[2]}, ${cleanRow[3]}, ${cleanRow[4]})  
-          `  
-        } else if (table === 'perspective') {  
-          // Schema: title, category, author, content, image_url  
-          await sql`  
-            INSERT INTO perspectives (title, category, author, content, image_url)  
-            VALUES (${cleanRow[0]}, ${cleanRow[1]}, ${cleanRow[2]}, ${cleanRow[3]}, ${cleanRow[4]})  
-          `  
-        } else if (table === 'journal') {  
-          // Schema: title, date, excerpt, image_url  
-          await sql`  
-            INSERT INTO journal (title, date, excerpt, image_url)  
-            VALUES (${cleanRow[0]}, ${cleanRow[1]}, ${cleanRow[2]}, ${cleanRow[3]})  
-          `  
-        }  
-        count++  
-      }
-
-      return { message: `Batch Success: ${count} records committed to the ${table} ledger.` }  
-    } catch (e) {  
-      console.error(e)  
-      return { message: 'Error: CSV format mismatch or database rejection.' }  
-    }  
+export async function commitToLedger(formData: FormData, activeTab: string) {  
+  const password = formData.get('password') as string  
+    
+  // Authentication check  
+  if (password !== 'NV2026') {  
+    throw new Error('Authentication failed: Invalid registry key.')  
   }
 
-  // --- MANUAL ENTRY PROCESSOR ---  
-  const data = Object.fromEntries(formData.entries())
-
   try {  
-    if (table === 'archive') {  
+    if (activeTab === 'archive') {  
+      const name = formData.get('name') as string  
+      const location = formData.get('location') as string  
+      const description = formData.get('description') as string  
+      const imageUrl = formData.get('image_url') as string  
+      const slug = formData.get('slug') as string  
+      const price = formData.get('price') as string
+
       await sql`  
-        INSERT INTO sanctuaries (title, location, description, image_url, price)  
-        VALUES (${data.title as string}, ${data.location as string}, ${data.description as string}, ${data.image_url as string}, ${data.price as string})  
+        INSERT INTO sanctuaries (name, location, description, image_url, slug, price)  
+        VALUES (${name}, ${location}, ${description}, ${imageUrl}, ${slug}, ${price})  
       `  
-    } else if (table === 'perspective') {  
+      revalidatePath('/archive')  
+    }   
+      
+    else if (activeTab === 'perspective') {  
+      const title = formData.get('title') as string  
+      const author = formData.get('author') as string  
+      const date = formData.get('date') as string  
+      const content = formData.get('content') as string  
+      const slug = formData.get('slug') as string  
+      const imageUrl = formData.get('image_url') as string
+
       await sql`  
-        INSERT INTO perspectives (title, category, author, content, image_url)  
-        VALUES (${data.title as string}, ${data.category as string}, ${data.author as string}, ${data.content as string}, ${data.image_url as string})  
+        INSERT INTO perspectives (title, author, date, content, slug, image_url)  
+        VALUES (${title}, ${author}, ${date}, ${content}, ${slug}, ${imageUrl})  
       `  
-    } else if (table === 'journal') {  
+      revalidatePath('/perspective')  
+    }   
+      
+    else if (activeTab === 'journal') {  
+      const title = formData.get('title') as string  
+      const author = formData.get('author') as string  
+      const date = formData.get('date') as string  
+      const content = formData.get('content') as string  
+      const imageUrl = formData.get('image_url') as string  
+      const slug = formData.get('slug') as string
+
       await sql`  
-        INSERT INTO journal (title, date, excerpt, image_url)  
-        VALUES (${data.title as string}, ${data.date as string}, ${data.excerpt as string}, ${data.image_url as string})  
+        INSERT INTO journal (title, author, publish_date, content, thumbnail_url, slug)  
+        VALUES (${title}, ${author}, ${date}, ${content}, ${imageUrl}, ${slug})  
       `  
+      revalidatePath('/journal')  
     }
 
-    return { message: `Success: Manual entry committed to ${table} ledger.` }  
-  } catch (error) {  
-    console.error(error)  
-    return { message: 'Failed to commit to ledger. Check database connection.' }  
+    return { success: true }  
+  } catch (error: any) {  
+    console.error('Database Error:', error)  
+    throw new Error(error.message || 'Failed to commit record to ledger.')  
   }  
 }  
