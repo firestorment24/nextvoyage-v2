@@ -1,28 +1,152 @@
+// lib/data/sanctuaries.ts
+
+export interface Sanctuary {  
+  id: string;  
+  name: string;  
+  description: string;  
+  image: string;  
+}
+
 export interface Property {  
   id: string;  
+  serial: string; // Used for "001" style display  
   name: string;  
   location: string;  
   image: string;  
-  hook?: string;  
-  sanctuaryId: string; // Temporary fix for the old build routes  
+  hook: string;  
+  sanctuaryId: string; // Links property to a specific sanctuary  
+  verified: boolean;  
 }
 
-export const PROPERTY_DATA: Property[] = [  
-  { id: '001-NYC', sanctuaryId: 'elite-ledger', name: 'Aman New York', location: 'Manhattan, USA', image: 'https://www.aman.com/sites/default/files/2022-08/Correct_Aman%20New%20York_Landscape.jpg', hook: 'The Gilded Monolith' },  
-  { id: '002-ALU', sanctuaryId: 'elite-ledger', name: 'Habitas AlUla', location: 'Ashar Valley, Saudi Arabia', image: 'https://www.ourhabitas.com/wp-content/uploads/2021/12/Habitas_Al-Ula_2021_01_000008.jpg', hook: 'The Echo of the Ancients' },  
-  { id: '003-VAL', sanctuaryId: 'elite-ledger', name: '7132 Hotel', location: 'Vals, Switzerland', image: 'https://i0.wp.com/sidewalkhustle.com/wp-content/uploads/2026/03/web_20230116-357a8874_final-2023-julien-l-balmer-all-rights-reserved.jpg.webp', hook: 'The Quartz Sanctum' },  
-  { id: '004-COM', sanctuaryId: 'elite-ledger', name: 'Passalacqua', location: 'Lake Como, Italy', image: 'https://bamo.com/wp-content/uploads/2025/04/bamo-passalacqua-hotel-luxury-design-09-e1759344642447.jpg', hook: 'The Lake-Side Aria' },  
-  { id: '005-TYO', sanctuaryId: 'elite-ledger', name: 'Bulgari Hotel', location: 'Tokyo, Japan', image: 'https://www.bulgarihotels.com/.imaging/bhr-960-jpg/dam/TOKYO-HOTEL/THE-HOTEL/DESTINATION/bulgari-hotel-tokyo-floor-terrace.jpg/jcr%3Acontent', hook: 'The Sky Ledger' },  
-  { id: '006-UBU', sanctuaryId: 'elite-ledger', name: 'Capella Ubud', location: 'Bali, Indonesia', image: 'https://capellahotels.com/assets/img/site_images/ubud/ubud-home01.jpg', hook: 'The Emerald Veil' },  
-  { id: '007-AMN', sanctuaryId: 'elite-ledger', name: 'Amangiri', location: 'Canyon Point, USA', image: 'https://www.aman.com/sites/default/files/2021-02/210204_AmanHero_Landscape_Amangiri.jpg', hook: 'The Desert Monolith' },  
-  { id: '008-RIV', sanctuaryId: 'elite-ledger', name: 'The Maybourne Riviera', location: 'Roquebrune-Cap-Martin, France', image: 'https://library.maybourne.com/transform/aa5bed1a-fc77-49f7-a3b5-7f9625871f68/MBR-AZUR-SUITE-01-jpg?format=avif&quality=80&io=transform%3Afill%2Cwidth%3A1260%2Cheight%3A840&resolution=high', hook: 'The Azure Precipice' },  
-  { id: '009-KYO', sanctuaryId: 'elite-ledger', name: 'Aman Kyoto', location: 'Kyoto, Japan', image: 'https://www.aman.com/sites/default/files/2021-02/Aman-Kyoto_Homepage_1.jpg', hook: 'The Mossy Omen' },  
-  { id: '010-RED', sanctuaryId: 'elite-ledger', name: 'Six Senses Southern Dunes', location: 'Red Sea, Saudi Arabia', image: 'https://archtene.com/wp-content/uploads/2026/03/ss5.jpg', hook: 'The Red Sea Altar' },  
-  { id: '011-ATH', sanctuaryId: 'elite-ledger', name: 'One&Only Aesthesis', location: 'Athens, Greece', image: 'https://assets.kerzner.com/api/public/content/8761678806934ea9a633770485289849?v=7f8a1ab2&t=w2880', hook: 'The Athenian Shore' },  
-  { id: '012-VNP', sanctuaryId: 'elite-ledger', name: 'Singita Kwitonda Lodge', location: 'Volcanoes National Park, Rwanda', image: 'https://images.ctfassets.net/wds1hqrprqxb/4xlmzPUDcL43cdOmzVGWb8/85ab1d40cc609879aa8b8da6ab1237de/SVNP_LODGE_Kwitonda_Lodge_Lounge_Ross_Couper_1.jpg?w=1920&h=1080&fl=progressive&q=90&fm=jpg', hook: 'The Virunga Sentinel' }  
+// Restoring for legacy route compatibility  
+export const SANCTUARIES_DATA: Sanctuary[] = [  
+  {  
+    id: 'elite-ledger',  
+    name: 'The Elite Ledger',  
+    description: 'A curated chronicle of the world\'s most exceptional sanctuaries.',  
+    image: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=80'  
+  }  
 ];
 
-// Placeholder to satisfy the old build routes while we migrate  
-export const SANCTUARIES_DATA = [  
-  { id: 'elite-ledger', name: 'The Elite Ledger', properties: PROPERTY_DATA }  
+export const PROPERTY_DATA: Property[] = [  
+  {  
+    id: 'aman-new-york',  
+    serial: '001',  
+    name: 'Aman New York',  
+    location: 'Manhattan, USA',  
+    image: 'https://www.aman.com/sites/default/files/2022-08/Correct_Aman%20New%20York_Landscape.jpg',  
+    hook: 'A vertical sanctuary in the heart of the Crown Building.',  
+    sanctuaryId: 'elite-ledger',  
+    verified: true  
+  },  
+  {  
+    id: 'habitas-alula',  
+    serial: '002',  
+    name: 'Habitas AlUla',  
+    location: 'Ashar Valley, Saudi Arabia',  
+    image: 'https://images.unsplash.com/photo-1621359871545-288219464e8e?auto=format&fit=crop&q=80',  
+    hook: 'Immersive luxury amidst the ancient canyons.',  
+    sanctuaryId: 'elite-ledger',  
+    verified: true  
+  },  
+  {  
+    id: '7132-hotel',  
+    serial: '003',  
+    name: '7132 Hotel',  
+    location: 'Vals, Switzerland',  
+    image: 'https://images.unsplash.com/photo-1542259009477-d625272157b7?auto=format&fit=crop&q=80',  
+    hook: 'A brutalist masterpiece centered around thermal stones.',  
+    sanctuaryId: 'elite-ledger',  
+    verified: true  
+  },  
+  {  
+    id: 'passalacqua',  
+    serial: '004',  
+    name: 'Passalacqua',  
+    location: 'Lake Como, Italy',  
+    image: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&q=80',  
+    hook: 'The definitive expression of Lake Como elegance.',  
+    sanctuaryId: 'elite-ledger',  
+    verified: true  
+  },  
+  {  
+    id: 'bulgari-tokyo',  
+    serial: '005',  
+    name: 'Bulgari Hotel Tokyo',  
+    location: 'Tokyo, Japan',  
+    image: 'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&q=80',  
+    hook: 'Italian soul meeting Japanese precision above the clouds.',  
+    sanctuaryId: 'elite-ledger',  
+    verified: true  
+  },  
+  {  
+    id: 'capella-ubud',  
+    serial: '006',  
+    name: 'Capella Ubud',  
+    location: 'Bali, Indonesia',  
+    image: 'https://capellahotels.com/assets/img/site_images/ubud/ubud-home01.jpg',  
+    hook: 'Hyper-personalized luxury hidden in the Balinese jungle.',  
+    sanctuaryId: 'elite-ledger',  
+    verified: true  
+  },  
+  {  
+    id: 'amangiri',  
+    serial: '007',  
+    name: 'Amangiri',  
+    location: 'Utah, USA',  
+    image: 'https://images.unsplash.com/photo-1509023464722-18d996393ca8?auto=format&fit=crop&q=80',  
+    hook: 'Minimalist architecture carved into the Navajo desert.',  
+    sanctuaryId: 'elite-ledger',  
+    verified: true  
+  },  
+  {  
+    id: 'maybourne-riviera',  
+    serial: '008',  
+    name: 'The Maybourne Riviera',  
+    location: 'Roquebrune-Cap-Martin, France',  
+    image: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&q=80',  
+    hook: 'A dramatic cliffside retreat above the Mediterranean.',  
+    sanctuaryId: 'elite-ledger',  
+    verified: true  
+  },  
+  {  
+    id: 'aman-kyoto',  
+    serial: '009',  
+    name: 'Aman Kyoto',  
+    location: 'Kyoto, Japan',  
+    image: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=80',  
+    hook: 'A hidden garden sanctuary at the foot of Mount Hidari Daimonji.',  
+    sanctuaryId: 'elite-ledger',  
+    verified: true  
+  },  
+  {  
+    id: 'six-senses-southern-dunes',  
+    serial: '010',  
+    name: 'Six Senses Southern Dunes',  
+    location: 'The Red Sea, Saudi Arabia',  
+    image: 'https://images.unsplash.com/photo-1523438097201-51217c399a55?auto=format&fit=crop&q=80',  
+    hook: 'Sustainable luxury amidst rolling dunes and Nabataean heritage.',  
+    sanctuaryId: 'elite-ledger',  
+    verified: true  
+  },  
+  {  
+    id: 'one-and-only-aesthesis',  
+    serial: '011',  
+    name: 'One&Only Aesthesis',  
+    location: 'Athens, Greece',  
+    image: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&q=80',  
+    hook: 'Mid-century glamour on the Athenian Riviera.',  
+    sanctuaryId: 'elite-ledger',  
+    verified: true  
+  },  
+  {  
+    id: 'singita-kwitonda',  
+    serial: '012',  
+    name: 'Singita Kwitonda Lodge',  
+    location: 'Volcanoes National Park, Rwanda',  
+    image: 'https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&q=80',  
+    hook: 'A mindful outpost for gorilla trekking in the Virunga clouds.',  
+    sanctuaryId: 'elite-ledger',  
+    verified: true  
+  }  
 ];  
