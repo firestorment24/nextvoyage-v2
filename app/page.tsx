@@ -47,15 +47,15 @@ export default function HomePage() {
       <section className="py-12 border-y border-[#c5a059]/10 bg-[#0d0d0d]">    
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">    
           <div>    
-            <span className="text-[#c5a059] block text-xs tracking-[0.3em] uppercase mb-2">Service 01</span>    
+                
             <p className="text-sm tracking-widest font-light text-zinc-400">24/7 GLOBAL CONCIERGE</p>    
           </div>    
           <div className="border-x border-[#c5a059]/10">    
-            <span className="text-[#c5a059] block text-xs tracking-[0.3em] uppercase mb-2">Service 02</span>    
+              
             <p className="text-sm tracking-widest font-light text-zinc-400">OFF-MARKET PROPERTIES</p>    
           </div>    
           <div>    
-            <span className="text-[#c5a059] block text-xs tracking-[0.3em] uppercase mb-2">Service 03</span>    
+                
             <p className="text-sm tracking-widest font-light text-zinc-400">TAILORED ITINERARIES</p>    
           </div>    
         </div>    
