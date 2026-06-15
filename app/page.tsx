@@ -1,78 +1,56 @@
-import React from 'react';  
-import Navigation from '@/components/Navigation';
+import Image from 'next/image';  
+import Link from 'next/link';
 
-export default function Home() {  
-return (  
-<>  
-  <Navigation />  
-  <main className="bg-[#0F0F0F] text-[#E5E5E5] overflow-x-hidden">  
-    {/* Hero Section */}  
-    <section className="relative h-screen w-full flex items-center justify-center px-8 text-center overflow-hidden">  
-      {/* Brand Hero Image - Generated for NexVoyage Home */}  
-      <div className="absolute inset-0 z-0">  
-        <img   
-          src="https://cdn.marblism.com/qFTkeALRTbV.webp"   
-          alt="NexVoyage Luxury Expedition"   
-          className="h-full w-full object-cover brightness-[0.45] transition-transform duration-[12000ms] scale-110 hover:scale-100"  
-        />  
-        {/* Brass & Shadow Gradient Overlay */}  
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0F0F0F]/70 via-transparent to-[#0F0F0F]" />  
-      </div>
-
-      <div className="relative z-10 max-w-5xl space-y-12 animate-fade-in">  
-        <p className="font-mono text-[10px] uppercase tracking-[0.7em] text-[#B5A48B] opacity-90">  
-          NexVoyage Collective  
-        </p>  
-          
-        <h1 className="serif text-6xl md:text-8xl lg:text-[10rem] font-light tracking-tighter leading-[0.85]">  
-          Quiet Luxury. <br />  
-          <span className="italic text-white/95">Infinite Perspective.</span>  
-        </h1>
-
-        <div className="flex flex-col items-center space-y-14">  
-          <p className="max-w-xl text-base md:text-lg font-light text-stone-400 leading-relaxed tracking-wide">  
-            Bespoke maritime expeditions and terrestrial sanctuaries <br className="hidden md:block" />   
-            curated for the world&apos;s most discerning travelers.  
+export default function HomePage() {  
+  return (  
+    <div className="relative">  
+      {/* Hero Section Placeholder */}  
+      <section className="relative h-[90vh] flex items-center justify-center bg-black overflow-hidden">  
+        <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#2a2a2a] via-black to-black" />  
+        <div className="relative z-10 text-center px-4">  
+          <h1 className="text-5xl md:text-7xl mb-6 tracking-tighter text-[#c5a059]">  
+            THE ART OF <br /> DISCERNING TRAVEL  
+          </h1>  
+          <p className="max-w-xl mx-auto text-stone-400 text-lg md:text-xl font-light italic">  
+            Private sanctuaries and bespoke journeys for the world's most selective travelers.  
           </p>  
-            
-          <div className="pt-6">  
-            <a   
-              href="/inquiry"   
-              className="group relative inline-block px-16 py-7 border border-[#B5A48B]/30 hover:border-[#B5A48B] transition-all duration-700"  
-            >  
-              <span className="relative z-10 text-[10px] uppercase tracking-[0.5em] text-[#B5A48B] group-hover:text-[#0F0F0F] transition-colors duration-500">  
-                Secure Your Perspective  
-              </span>  
-              <div className="absolute inset-0 bg-[#B5A48B] scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 ease-out" />  
-            </a>  
+        </div>  
+      </section>
+
+      {/* Featured Properties Placeholders */}  
+      <section className="py-24 px-6 max-w-7xl mx-auto">  
+        <div className="flex justify-between items-end mb-12 border-b border-[#2a2a2a] pb-6">  
+          <div>  
+            <h2 className="text-3xl text-[#c5a059] tracking-tight">FEATURED SANCTUARIES</h2>  
+            <p className="text-stone-500 text-sm uppercase tracking-widest mt-2">Summer 2026 Collection</p>  
+          </div>  
+          <Link href="/sanctuaries" className="text-stone-400 hover:text-[#c5a059] transition-colors text-sm uppercase tracking-widest">  
+            View All →  
+          </Link>  
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">  
+          {/* Placeholder Property 1 */}  
+          <div className="group cursor-pointer">  
+            <div className="aspect-[16/10] bg-[#1a1a1a] border border-[#2a2a2a] flex items-center justify-center mb-6 overflow-hidden relative">  
+              <span className="text-[#2a2a2a] text-6xl font-bold">01</span>  
+              <div className="absolute inset-0 bg-[#c5a059]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />  
+            </div>  
+            <h3 className="text-xl text-stone-200 mb-2">Amanyara Private Villas</h3>  
+            <p className="text-stone-500 font-light italic">Turks & Caicos</p>  
+          </div>
+
+          {/* Placeholder Property 2 */}  
+          <div className="group cursor-pointer">  
+            <div className="aspect-[16/10] bg-[#1a1a1a] border border-[#2a2a2a] flex items-center justify-center mb-6 overflow-hidden relative">  
+              <span className="text-[#2a2a2a] text-6xl font-bold">02</span>  
+              <div className="absolute inset-0 bg-[#c5a059]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />  
+            </div>  
+            <h3 className="text-xl text-stone-200 mb-2">Cheval Blanc Randheli</h3>  
+            <p className="text-stone-500 font-light italic">Maldives</p>  
           </div>  
         </div>  
-      </div>
-
-      {/* Scroll Down Hint */}  
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center space-y-6 opacity-40">  
-        <div className="h-16 w-px bg-gradient-to-b from-[#B5A48B] to-transparent animate-pulse" />  
-      </div>  
-    </section>
-
-    {/* Manifesto Section */}  
-    <section className="py-48 px-8 border-t border-white/5 bg-[#0A0A0A]">  
-      <div className="max-w-4xl mx-auto text-center space-y-10">  
-        <p className="text-2xl md:text-4xl text-stone-500 font-light italic leading-relaxed serif tracking-tight">  
-          &ldquo;The ultimate luxury isn&apos;t access. <br className="hidden md:block" />   
-          It is the ability to be inaccessible.&rdquo;  
-        </p>  
-        <div className="h-px w-20 bg-[#B5A48B]/40 mx-auto" />  
-      </div>  
-    </section>
-
-    {/* Footer Link */}  
-    <section className="py-24 px-8 text-center border-t border-white/5">  
-      <a href="/archive" className="group text-[10px] uppercase tracking-[0.4em] text-[#444] hover:text-[#B5A48B] transition-all duration-500">  
-        Enter the Archive &mdash; Q2 2026  
-      </a>  
-    </section>  
-  </main>  
-</>  
-);  
+      </section>  
+    </div>  
+  );  
 }  
