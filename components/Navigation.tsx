@@ -30,7 +30,7 @@ return (
       onClick={() => setIsOpen(!isOpen)}  
       className="text-[#d4af37] font-mono text-[10px] tracking-[0.3em] uppercase hover:opacity-70 transition-all z-50"  
     >  
-      {isOpen ? '[ CLOSE ]' : 'CONCIERGE'}  
+      {isOpen ? 'CLOSE' : 'CONCIERGE'}  
     </button>
 
     {/* Full Screen Overlay */}  
