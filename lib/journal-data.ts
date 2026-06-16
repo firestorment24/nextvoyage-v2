@@ -1,197 +1,479 @@
-export const DESTINATIONS_DATA: Record<string, {  
+export interface Destination {  
+  id: string;  
   title: string;  
   subtitle: string;  
-  archive: string;  
+  location: string;  
+  region: string;  
+  coordinates: string;  
+  vibe: string;  
+  bestTime: string;  
+  topMustDos: string[];  
+  insiderTip: string;  
+  heroImage: string;  
+  summary: string;  
+  sanctuary: string;  
   orchestration: string;  
   quote: string;  
-}> = {  
-  'amalfi-coast': {  
-    title: 'Amalfi Coast',  
-    subtitle: 'The Architecture of the Shoreline',  
-    archive: 'Focusing on Villa Treville or Palazzo Avino. We prioritize cliffside estates with private moorings to bypass public corridors.',  
-    orchestration: 'Private Riva transfers between Positano and Ravello. After-hours access to the Duomo di Amalfi for a silent composition.',  
-    quote: 'A vertical labyrinth where stone meets the Tyrrhenian in perfect symmetry.'  
+}
+
+export const DESTINATIONS_DATA: Destination[] = [  
+  {  
+    id: "amalfi-coast",  
+    title: "Amalfi Coast",  
+    subtitle: "The Architecture of the Shoreline",  
+    location: "Italy",  
+    region: "Europe",  
+    coordinates: "40.6333° N, 14.6029° E",  
+    vibe: "Floating Elegance. Cliffside estates and private moorings.",  
+    bestTime: "May to September",  
+    topMustDos: ["Private Riva transfer to Positano", "After-hours Duomo access", "Path of the Gods sunrise hike"],  
+    insiderTip: "Villa Treville offers the only truly private access to secluded coves.",  
+    heroImage: "https://cdn.marblism.com/8yaFkqwqGZm.webp",  
+    summary: "A vertical labyrinth where stone meets the Tyrrhenian in perfect symmetry.",  
+    sanctuary: "Palazzo Avino",  
+    orchestration: "Private helicopter transfer from Naples directly to the cliffside helipad.",  
+    quote: "Stone and sea in a silent, cinematic embrace."  
   },  
-  'st-barts': {  
-    title: 'St. Barts',  
-    subtitle: 'The Caribbean’s Private Ledger',  
-    archive: 'The ultra-private villas of Colombier or the iconic Eden Rock Rockstar Suite. Total seclusion behind tropical foliage.',  
-    orchestration: 'Private turboprop transfers from St. Maarten. Reservation orchestration at Shellona and Le Ti for high-energy recalibration.',  
-    quote: 'Where French sophistication is distilled into the Caribbean coastline.'  
+  {  
+    id: "st-barts",  
+    title: "St. Barts",  
+    subtitle: "The Caribbean’s Private Stage",  
+    location: "French West Indies",  
+    region: "Caribbean",  
+    coordinates: "17.9000° N, 62.8333° W",  
+    vibe: "Midnight Lounge. Yacht-side galas and hidden white sands.",  
+    bestTime: "December to April",  
+    topMustDos: ["Sunset at Colombier Beach", "Shell Beach lunch", "Private yacht charter"],  
+    insiderTip: "The most exclusive villas are tucked behind the hills of Gouverneur.",  
+    heroImage: "https://cdn.marblism.com/c6ht_BdCZ0x.webp",  
+    summary: "Where the jet-set finds its quietest, most opulent corners.",  
+    sanctuary: "Cheval Blanc St-Barth Isle de France",  
+    orchestration: "Custom villa provisioning with rare vintages before arrival.",  
+    quote: "A playground for those who prefer the shade of a private sail."  
   },  
-  'kyoto': {  
-    title: 'Kyoto',  
-    subtitle: 'The Silence of the Machiya',  
-    archive: 'Aman Kyoto or the Ritz-Carlton. We lean toward hidden Ryokans in Gion that accept guests only by internal recommendation.',  
-    orchestration: 'Private audience with a Zen master. Guided architectural walks through the Fushimi Inari at sunrise to avoid the masses.',  
-    quote: 'A city built on the cadence of ritual and the architecture of stillness.'  
+  {  
+    id: "kyoto",  
+    title: "Kyoto",  
+    subtitle: "The Geometry of Silence",  
+    location: "Japan",  
+    region: "Asia",  
+    coordinates: "35.0116° N, 135.7681° E",  
+    vibe: "Minimalist Zen. Ancient temples meeting modern luxury.",  
+    bestTime: "March (Cherry Blossoms) or November (Maples)",  
+    topMustDos: ["Private tea ceremony", "Gion night walk", "Arashiyama bamboo grove at dawn"],  
+    insiderTip: "Access the hidden moss gardens of Saiho-ji through our local monastic ties.",  
+    heroImage: "https://cdn.marblism.com/ZZ6lTJI74VJ.webp",  
+    summary: "A masterclass in restraint, where every shadow tells a story.",  
+    sanctuary: "Aman Kyoto",  
+    orchestration: "Personalized calligraphy session with a grandmaster.",  
+    quote: "Beauty found in the space between the architecture."  
   },  
-  'courchevel': {  
-    title: 'Courchevel 1850',  
-    subtitle: 'High-Altitude Composure',  
-    archive: 'Les Airelles or Cheval Blanc. Ski-in/ski-out palaces with dedicated butler service and private ski rooms.',  
-    orchestration: 'Heli-skiing across the Vanoise National Park. Private Michelin-starred dining on the mountain summit.',  
-    quote: 'The pinnacle of Alpine luxury, where the air is thin and the service is absolute.'  
+  {  
+    id: "courchevel-1850",  
+    title: "Courchevel 1850",  
+    subtitle: "The Peak of Sophistication",  
+    location: "France",  
+    region: "Europe",  
+    coordinates: "45.4147° N, 6.6335° E",  
+    vibe: "Brass & Snow. High-altitude glamour and Michelin-starred firesides.",  
+    bestTime: "December to March",  
+    topMustDos: ["First tracks on Saulire", "Night skiing by torchlight", "Alpine spa immersion"],  
+    insiderTip: "Request a table at Le 1947 weeks in advance; it’s the only way.",  
+    heroImage: "https://cdn.marblism.com/s72hCqIM04m.webp",  
+    summary: "The ultimate winter sanctuary for the discerning voyager.",  
+    sanctuary: "Les Airelles",  
+    orchestration: "Private ski valet and bespoke boot fitting in-suite.",  
+    quote: "White peaks, black diamonds, and golden hours."  
   },  
-  'maasai-mara': {  
-    title: 'Maasai Mara',  
-    subtitle: 'The Logistics of the Wild',  
-    archive: 'Angama Mara or Cottar’s 1920s Safari Camp. Tent dwellings that offer 360-degree surveillance of the Great Migration.',  
-    orchestration: 'Hot air balloon transits at dawn. Private anti-poaching patrol briefings and high-end conservation engagement.',  
-    quote: 'The raw theatre of nature, viewed from a position of total security.'  
+  {  
+    id: "maasai-mara",  
+    title: "Maasai Mara",  
+    subtitle: "The Raw Narrative",  
+    location: "Kenya",  
+    region: "Africa",  
+    coordinates: "1.5271° S, 35.1927° E",  
+    vibe: "Primal Luxury. Unfiltered wildlife and canvas-bound comfort.",  
+    bestTime: "July to October (The Migration)",  
+    topMustDos: ["Dawn balloon safari", "Private sundowners on the Oloololo Escarpment", "Walking safari"],  
+    insiderTip: "The Mara North Conservancy offers much higher exclusivity than the main reserve.",  
+    heroImage: "https://cdn.marblism.com/q6-M5nd5uBe.webp",  
+    summary: "The cradle of life, viewed from a position of absolute refinement.",  
+    sanctuary: "Angama Mara",  
+    orchestration: "A private bush dinner under the equatorial stars, miles from the nearest camp.",  
+    quote: "Nature’s grandest theater, staged for the few."  
   },  
-  'maldives': {  
-    title: 'Maldives',  
-    subtitle: 'The Blue ROI',  
-    archive: 'Cheval Blanc Randheli or Soneva Jani. Overwater sanctuaries with retractable roofs and private lagoons.',  
-    orchestration: 'Deep-sea exploration via private submarine. Sandbank dining with zero light pollution for celestial navigation.',  
-    quote: 'A scattered archipelago where privacy is the primary currency.'  
+  {  
+    id: "maldives",  
+    title: "Maldives",  
+    subtitle: "Liquid Horizons",  
+    location: "Indian Ocean",  
+    region: "Asia",  
+    coordinates: "3.2028° N, 73.2207° E",  
+    vibe: "Azure Solitude. Overwater sanctuaries and bioluminescent nights.",  
+    bestTime: "November to April",  
+    topMustDos: ["Deep-sea exploration", "Private sandbank dinner", "Underwater spa"],  
+    insiderTip: "The Baa Atoll is a UNESCO Biosphere Reserve; prioritize it for marine life.",  
+    heroImage: "https://cdn.marblism.com/DfD56YUYEOI.webp",  
+    summary: "An archipelago of private dreams cast in turquoise.",  
+    sanctuary: "Soneva Fushi",  
+    orchestration: "Astronomer-led stargazing from your private observatory deck.",  
+    quote: "Where the sky ends and the ocean begins is a matter of perspective."  
   },  
-  'aspen': {  
-    title: 'Aspen',  
-    subtitle: 'Shadows on the Silver Queen',  
-    archive: 'The Little Nell or private residences in Red Mountain. High-security estates with direct gondola access.',  
-    orchestration: 'First-tracks access before the public opening. Private art gallery viewings and membership orchestration at Caribou Club.',  
-    quote: 'The intersection of rugged Americana and European high-society.'  
+  {  
+    id: "aspen",  
+    title: "Aspen",  
+    subtitle: "The Silver City",  
+    location: "USA",  
+    region: "North America",  
+    coordinates: "39.1911° N, 106.8175° W",  
+    vibe: "Alpine Chic. High-stakes adventure and high-end culture.",  
+    bestTime: "January to March",  
+    topMustDos: ["Highland Bowl hike", "Art Museum private tour", "Après-ski at Cloud Nine"],  
+    insiderTip: "The Little Nell’s wine cellar is legendary; ask for a private tasting.",  
+    heroImage: "https://cdn.marblism.com/z4jTlqMII_W.webp",  
+    summary: "A mountain town with the soul of a metropolis.",  
+    sanctuary: "The Little Nell",  
+    orchestration: "Backcountry cat-skiing with a private mountain guide.",  
+    quote: "Aspen leaves turn to gold; the memories remain brass."  
   },  
-  'lake-como': {  
-    title: 'Lake Como',  
-    subtitle: 'Neoclassical Restraint',  
-    archive: 'Villa d’Este or Mandarin Oriental. Neoclassical palaces with floating pools and historic manicured gardens.',  
-    orchestration: 'Wooden Riva boat transits to Bellagio. Private tour of Villa del Balbianello followed by an aperitivo on the water.',  
-    quote: 'The mirror of Northern Italy, reflecting centuries of aristocratic poise.'  
+  {  
+    id: "lake-como",  
+    title: "Lake Como",  
+    subtitle: "The Mirror of History",  
+    location: "Italy",  
+    region: "Europe",  
+    coordinates: "46.0160° N, 9.2572° E",  
+    vibe: "Aristocratic Calm. Renaissance villas and mahogany speedboats.",  
+    bestTime: "April to October",  
+    topMustDos: ["Villa del Balbianello tour", "Bellagio boat crawl", "Hidden garden picnic"],  
+    insiderTip: "The most serene views are found in the northern town of Varenna.",  
+    heroImage: "https://cdn.marblism.com/Q3f8zvBiCY5.webp",  
+    summary: "A deep blue stage for the world’s most elegant narratives.",  
+    sanctuary: "Villa d'Este",  
+    orchestration: "Private seaplane tour over the alpine foothills.",  
+    quote: "Reflections of a life well-lived."  
   },  
-  'mustique': {  
-    title: 'Mustique',  
-    subtitle: 'The Sovereign Escape',  
-    archive: 'The Cotton House or private villas like Les Jolies Eaux. An island where the paparazzi protocol is strictly non-existent.',  
-    orchestration: 'Beach-hopping via electric mules. Sunset cocktails at Basil’s Bar in the company of the island’s elusive residents.',  
-    quote: 'An island governed by the law of absolute discretion.'  
+  {  
+    id: "mustique",  
+    title: "Mustique",  
+    subtitle: "The Island Colony",  
+    location: "St. Vincent & The Grenadines",  
+    region: "Caribbean",  
+    coordinates: "12.8833° N, 61.1833° W",  
+    vibe: "Incognito Luxury. Private estates and barefoot elegance.",  
+    bestTime: "December to April",  
+    topMustDos: ["Macaroni Beach picnic", "Basil’s Bar sunset", "Equestrian trails"],  
+    insiderTip: "Rent a 'Moke' to explore the island’s hidden trails properly.",  
+    heroImage: "https://cdn.marblism.com/jlNvdbcJUZw.webp",  
+    summary: "A private kingdom where the only currency is privacy.",  
+    sanctuary: "Cotton House",  
+    orchestration: "Villa-hosted masquerade ball orchestration for your private party.",  
+    quote: "Off the map, but precisely on the pulse."  
   },  
-  'bhutan': {  
-    title: 'Bhutan',  
-    subtitle: 'The Kingdom of Contentment',  
-    archive: 'Amankora’s five lodges across the valleys. Minimalist sanctuaries that blend into the Himalayan pine forests.',  
-    orchestration: 'Private helicopter transits between Paro and Punakha. Blessing ceremonies in the Tiger’s Nest monastery.',  
-    quote: 'A spiritual recalibration in the last remaining Himalayan kingdom.'  
+  {  
+    id: "bhutan",  
+    title: "Bhutan",  
+    subtitle: "The Kingdom in the Clouds",  
+    location: "Himalayas",  
+    region: "Asia",  
+    coordinates: "27.5142° N, 90.4336° E",  
+    vibe: "Spiritual Grandeur. Ancient fortresses and high-altitude peace.",  
+    bestTime: "October to December",  
+    topMustDos: ["Tiger’s Nest hike", "Punakha Dzong blessing", "Archery lesson"],  
+    insiderTip: "The Gangtey Valley offers the most pristine trekking routes.",  
+    heroImage: "https://cdn.marblism.com/eOSXgkVAcuy.webp",  
+    summary: "A land where progress is measured in happiness, not speed.",  
+    sanctuary: "Amankora",  
+    orchestration: "Private blessing ceremony with a high-ranking Lama.",  
+    quote: "Higher than the eagles, deeper than the soul."  
   },  
-  'ibiza-north': {  
-    title: 'Ibiza (North)',  
-    subtitle: 'The Bohemian Shadow',  
-    archive: 'Six Senses Ibiza or private fincas in San Juan. Rugged, pine-scented estates far from the southern clubs.',  
-    orchestration: 'Yacht transits to Formentera for lunch at Juan y Andrea. Cliffside yoga sessions led by world-class practitioners.',  
-    quote: 'The rugged, quiet soul of the Mediterranean’s most famous island.'  
+  {  
+    id: "ibiza-north",  
+    title: "Ibiza (North)",  
+    subtitle: "The Bohemian Shadow",  
+    location: "Spain",  
+    region: "Europe",  
+    coordinates: "39.0200° N, 1.4800° E",  
+    vibe: "Rustic Noir. Pine forests, hidden coves, and spiritual luxury.",  
+    bestTime: "June to September",  
+    topMustDos: ["Formentera yacht day", "Moonlit yoga", "Es Vedrà sunset ritual"],  
+    insiderTip: "Avoid the clubs; the real magic is in the agroturismo estates of the north.",  
+    heroImage: "https://cdn.marblism.com/FicsOgWnObY.webp",  
+    summary: "The island's quiet heartbeat, far from the neon pulse.",  
+    sanctuary: "Six Senses Ibiza",  
+    orchestration: "Midnight sound-healing session in a limestone cave.",  
+    quote: "Sun-drenched by day, soul-drenched by night."  
   },  
-  'south-island-nz': {  
-    title: 'South Island',  
-    subtitle: 'The End of the Map',  
-    archive: 'Blanket Bay or Minaret Station. Remote lodges accessible only by air, offering extreme privacy.',  
-    orchestration: 'Heli-fishing in untouched glacial rivers. Private glacier landings for champagne luncheons.',  
-    quote: 'A landscape of epic proportions, requiring high-altitude logistics.'  
+  {  
+    id: "south-island-nz",  
+    title: "South Island NZ",  
+    subtitle: "The Edge of the World",  
+    location: "New Zealand",  
+    region: "Oceania",  
+    coordinates: "45.0000° S, 170.0000° E",  
+    vibe: "Epic Wilderness. Glacial lakes, fjords, and ultimate seclusion.",  
+    bestTime: "December to February",  
+    topMustDos: ["Milford Sound flight", "Heli-hiking Franz Josef", "Queenstown wine tour"],  
+    insiderTip: "The Ahuriri Valley is the most dramatic, least-visited landscape in the country.",  
+    heroImage: "https://cdn.marblism.com/66PWRYxq1Sm.webp",  
+    summary: "Nature at its most cinematic and unforgivingly beautiful.",  
+    sanctuary: "Matakauri Lodge",  
+    orchestration: "Private heli-picnic on a glacier overlooking the Tasman Sea.",  
+    quote: "Where the mountains meet the myth."  
   },  
-  'seychelles': {  
-    title: 'Seychelles',  
-    subtitle: 'Granite & Privacy',  
-    archive: 'North Island or Frégate Island Private. Ecological sanctuaries where villas are hidden within granite boulders.',  
-    orchestration: 'Guided interaction with giant Aldabra tortoises. Deep-sea fishing for Yellowfin Tuna on a private catamaran.',  
-    quote: 'The Garden of Eden, audited for modern luxury.'  
+  {  
+    id: "seychelles",  
+    title: "Seychelles",  
+    subtitle: "The Granite Eden",  
+    location: "Indian Ocean",  
+    region: "Africa",  
+    coordinates: "4.6796° S, 55.4920° E",  
+    vibe: "Jurassic Luxury. Giant boulders, turquoise waters, and rare flora.",  
+    bestTime: "April to May or October to November",  
+    topMustDos: ["La Digue bike tour", "Vallee de Mai walk", "Private island hop"],  
+    insiderTip: "North Island is the pinnacle of sustainable, high-net-worth privacy.",  
+    heroImage: "https://cdn.marblism.com/u7aOJu6_utr.webp",  
+    summary: "An archipelago of ancient stone and modern solitude.",  
+    sanctuary: "North Island",  
+    orchestration: "Guided turtle nesting observation with the island’s head ecologist.",  
+    quote: "Lost in the blue, found in the green."  
   },  
-  'provence': {  
-    title: 'Provence',  
-    subtitle: 'The Luberon Ledger',  
-    archive: 'La Bastide de Gordes or Domaine de la Baume. 18th-century chateaus surrounded by lavender fields.',  
-    orchestration: 'Private wine tastings in the cellars of Châteauneuf-du-Pape. Hot air balloon flights over the ochre cliffs of Roussillon.',  
-    quote: 'A sun-drenched study in the art of French country living.'  
+  {  
+    id: "provence",  
+    title: "Provence",  
+    subtitle: "The Lavender Path",  
+    location: "France",  
+    region: "Europe",  
+    coordinates: "43.9352° N, 5.5350° E",  
+    vibe: "Pastel Sophistication. Vineyards, Roman ruins, and slow living.",  
+    bestTime: "June to July (Lavender Season)",  
+    topMustDos: ["Luberon market tour", "Private truffle hunt", "Avignon art walk"],  
+    insiderTip: "Gordes is iconic, but the village of Ménerbes offers more peace.",  
+    heroImage: "https://cdn.marblism.com/ISXp34Epl5u.webp",  
+    summary: "A sensory landscape painted in light and scent.",  
+    sanctuary: "La Coquillade",  
+    orchestration: "Bespoke perfumery workshop in Grasse with a master 'nose'.",  
+    quote: "The art of being, perfected."  
   },  
-  'galapagos': {  
-    title: 'Galapagos',  
-    subtitle: 'Evolutionary Logistics',  
-    archive: 'Pikaia Lodge or the Aqua Mare yacht. Carbon-neutral luxury situated atop an extinct volcano.',  
-    orchestration: 'Scientific-led expeditions into the marine reserve. Private encounters with Blue-footed Boobies and Galápagos penguins.',  
-    quote: 'A living laboratory of evolution, traversed with zero impact.'  
+  {  
+    id: "galapagos",  
+    title: "Galapagos",  
+    subtitle: "The Darwinian Lab",  
+    location: "Ecuador",  
+    region: "South America",  
+    coordinates: "0.8293° S, 90.9821° W",  
+    vibe: "Scientific Wonder. Close encounters with evolutionary history.",  
+    bestTime: "December to May",  
+    topMustDos: ["Diving with hammerheads", "Giant tortoise sanctuary", "Volcanic hiking"],  
+    insiderTip: "Chartering a private yacht is the only way to see the outer islands.",  
+    heroImage: "https://cdn.marblism.com/rkRzyzCzbwL.webp",  
+    summary: "A living museum of life’s resilience and beauty.",  
+    sanctuary: "Pikaia Lodge",  
+    orchestration: "Private naturalist-led expedition to the remote Fernandina Island.",  
+    quote: "Evolution, witnessed from the front row."  
   },  
-  'santorini': {  
-    title: 'Santorini',  
-    subtitle: 'Caldera Calm',  
-    archive: 'Grace Hotel or Canaves Oia Epitome. Suites carved into the volcanic rock with private plunge pools.',  
-    orchestration: 'Private yacht cruises around the caldera at sunset. Archaeological tours of Akrotiri before the gates open.',  
-    quote: 'Where the white architecture meets the deep indigo of the Aegean.'  
+  {  
+    id: "santorini",  
+    title: "Santorini",  
+    subtitle: "The Caldera Watch",  
+    location: "Greece",  
+    region: "Europe",  
+    coordinates: "36.3932° N, 25.4615° E",  
+    vibe: "Volcanic Elegance. Whitewashed cliffs and Aegean sunsets.",  
+    bestTime: "May to October",  
+    topMustDos: ["Sunset cruise", "Akrotiri ruins tour", "Wine tasting in Pyrgos"],  
+    insiderTip: "The village of Imerovigli offers the best views with half the crowds of Oia.",  
+    heroImage: "https://cdn.marblism.com/u8BtTnO2eqU.webp",  
+    summary: "A crescent of myth rising from the deep blue.",  
+    sanctuary: "Grace Hotel",  
+    orchestration: "Private dinner on a secluded volcanic beach accessible only by boat.",  
+    quote: "A symphony of white and blue."  
   },  
-  'okavango-delta': {  
-    title: 'Okavango Delta',  
-    subtitle: 'Water & Wildlife',  
-    archive: 'Mombo Camp or Jao Camp. Elevated lodges in the heart of Botswana’s flooded wilderness.',  
-    orchestration: 'Mokoro (dugout canoe) safaris through lily-filled channels. Private wildlife photography workshops with world-renowned experts.',  
-    quote: 'A liquid oasis where the wildlife density is the highest on the continent.'  
+  {  
+    id: "okavango-delta",  
+    title: "Okavango Delta",  
+    subtitle: "The Liquid Wild",  
+    location: "Botswana",  
+    region: "Africa",  
+    coordinates: "19.2833° S, 22.7500° E",  
+    vibe: "Waterborne Safari. Mokoro paddles and hidden leopard tracks.",  
+    bestTime: "June to August (High Water)",  
+    topMustDos: ["Mokoro expedition", "Aerial safari", "Night drives"],  
+    insiderTip: "The Duba Plains region is famous for lion-buffalo interactions.",  
+    heroImage: "https://cdn.marblism.com/rWiY9ZW6XlW.webp",  
+    summary: "A desert that blooms into an oasis every year.",  
+    sanctuary: "Mombo Camp",  
+    orchestration: "Private sleep-out platform under the Kalahari stars.",  
+    quote: "The river that never finds the sea."  
   },  
-  'rajasthan': {  
-    title: 'Rajasthan',  
-    subtitle: 'The Royal Composition',  
-    archive: 'Aman-i-Khas or the Rambagh Palace. Former royal residences and luxury tented camps.',  
-    orchestration: 'Tiger safaris in Ranthambore. Private dinners on the ramparts of a Rajasthani fort under the stars.',  
-    quote: 'The desert state of India, where history is written in sandstone and silk.'  
+  {  
+    id: "rajasthan",  
+    title: "Rajasthan",  
+    subtitle: "The Land of Kings",  
+    location: "India",  
+    region: "Asia",  
+    coordinates: "27.0238° N, 74.2179° E",  
+    vibe: "Regal Opulence. Palatial forts and desert festivals.",  
+    bestTime: "October to March",  
+    topMustDos: ["Udaipur lake palace boat", "Jodhpur blue city walk", "Jaipur gem shopping"],  
+    insiderTip: "The small town of Bundi offers the most authentic, untouched Rajput architecture.",  
+    heroImage: "https://cdn.marblism.com/sxGOESxwN_s.webp",  
+    summary: "A kaleidoscope of history, color, and absolute royalty.",  
+    sanctuary: "Aman-i-Khas",  
+    orchestration: "Private elephant polo match or a Royal Thali dinner with local nobility.",  
+    quote: "Every stone has a story; every story is a legend."  
   },  
-  'gstaad': {  
-    title: 'Gstaad',  
-    subtitle: 'The Alpine Masterclass',  
-    archive: 'The Alpina Gstaad or Gstaad Palace. Ultra-exclusive retreats for the global elite.',  
-    orchestration: 'Membership orchestration for the Eagle Ski Club. Private shopping in the village’s high-end boutiques without crowds.',  
-    quote: 'The most discreet corner of the Swiss Alps, where wealth is quiet.'  
+  {  
+    id: "gstaad",  
+    title: "Gstaad",  
+    subtitle: "The Discreet Peak",  
+    location: "Switzerland",  
+    region: "Europe",  
+    coordinates: "46.4717° N, 7.2858° E",  
+    vibe: "Old Money. Traditional chalets and world-class discretion.",  
+    bestTime: "December to February",  
+    topMustDos: ["Sleigh ride to Lauenensee", "Glacier 3000 hike", "Exclusive gallery tours"],  
+    insiderTip: "The Palace Hotel’s GreenGo club is the place to see and not be seen.",  
+    heroImage: "https://cdn.marblism.com/lXCHNl0L_nW.webp",  
+    summary: "The quietest corner of the Alps, for the loudest personalities.",  
+    sanctuary: "The Alpina Gstaad",  
+    orchestration: "Private cheesemaking workshop in a 200-year-old alpine hut.",  
+    quote: "Come up, slow down."  
   },  
-  'tokyo': {  
-    title: 'Tokyo',  
-    subtitle: 'The Neon Symphony',  
-    archive: 'Aman Tokyo or Hoshinoya. Urban sanctuaries with views of the Imperial Palace Gardens.',  
-    orchestration: 'Private sushi omakase with a master chef. After-hours tours of the TeamLab installations for solitary reflection.',  
-    quote: 'A high-velocity metropolis with hidden pockets of absolute calm.'  
+  {  
+    id: "tokyo",  
+    title: "Tokyo",  
+    subtitle: "The Neon Grid",  
+    location: "Japan",  
+    region: "Asia",  
+    coordinates: "35.6895° N, 139.6917° E",  
+    vibe: "Futuristic Precision. Michelin dining and hidden cyberpunk alleys.",  
+    bestTime: "March to May or September to November",  
+    topMustDos: ["Tsukiji market tour", "Shinjuku Golden Gai crawl", "Omotesando architecture"],  
+    insiderTip: "The best sushi is found in the basement levels of Ginza’s nondescript buildings.",  
+    heroImage: "https://cdn.marblism.com/f6urdbRxOkM.webp",  
+    summary: "A city that lives in the future while honoring the past.",  
+    sanctuary: "Aman Tokyo",  
+    orchestration: "After-hours private tour of the Mori Art Museum.",  
+    quote: "A million lights, one silent soul."  
   },  
-  'bora-bora': {  
-    title: 'Bora Bora',  
-    subtitle: 'The Overwater Prelude',  
-    archive: 'Four Seasons Resort or St. Regis. Villas positioned over the world’s most beautiful lagoon.',  
-    orchestration: 'Private shark and ray snorkeling excursions. Helicopter tours over Mount Otemanu for a perspective of the atoll.',  
-    quote: 'The quintessential Polynesian dream, orchestrated for modern comfort.'  
+  {  
+    id: "bora-bora",  
+    title: "Bora Bora",  
+    subtitle: "The Blue Lagoon",  
+    location: "French Polynesia",  
+    region: "Oceania",  
+    coordinates: "16.5004° S, 151.7415° W",  
+    vibe: "Pacific Bliss. Overwater villas and volcanic peaks.",  
+    bestTime: "May to October",  
+    topMustDos: ["Shark and ray snorkel", "Mt. Otemanu hike", "Private motu lunch"],  
+    insiderTip: "The 'inter-island' flights offer the best aerial views of the reefs.",  
+    heroImage: "https://cdn.marblism.com/CCbVN43WLwC.webp",  
+    summary: "The postcard that finally comes to life.",  
+    sanctuary: "St. Regis Bora Bora",  
+    orchestration: "Canoe-delivered breakfast to your villa deck at sunrise.",  
+    quote: "The world’s most beautiful mistake."  
   },  
-  'tuscany': {  
-    title: 'Tuscany',  
-    subtitle: 'The Renaissance Recalibration',  
-    archive: 'Rosewood Castiglion del Bosco or Belmond Castello di Casole. Historic estates within private vineyards.',  
-    orchestration: 'Truffle hunting with local experts. Private viewing of the Uffizi Gallery in Florence with an art historian.',  
-    quote: 'A rolling landscape of cypress trees and centuries of artistic heritage.'  
+  {  
+    id: "tuscany",  
+    title: "Tuscany",  
+    subtitle: "The Golden Hills",  
+    location: "Italy",  
+    region: "Europe",  
+    coordinates: "43.7696° N, 11.2558° E",  
+    vibe: "Rustic Nobility. Cypress-lined roads and world-class vintages.",  
+    bestTime: "May to September",  
+    topMustDos: ["Val d'Orcia drive", "Uffizi private tour", "Chianti wine tasting"],  
+    insiderTip: "The town of Pienza is the 'ideal city' of the Renaissance; visit for the cheese and the views.",  
+    heroImage: "https://cdn.marblism.com/4i-PKQz9z4X.webp",  
+    summary: "A landscape designed by painters and perfected by time.",  
+    sanctuary: "Rosewood Castiglion del Bosco",  
+    orchestration: "Private hot air balloon flight over the Siena rooftops.",  
+    quote: "A toast to the sun."  
   },  
-  'iceland': {  
-    title: 'Iceland',  
-    subtitle: 'The Volcanic Architecture',  
-    archive: 'Deplar Farm or The Retreat at Blue Lagoon. Modernist structures that harness the island’s geothermal energy.',  
-    orchestration: 'Heli-skiing from the mountain peak to the ocean. Private super-jeep tours into the Highlands for Aurora viewing.',  
-    quote: 'A raw, prehistoric land where fire and ice dictate the logistics.'  
+  {  
+    id: "iceland",  
+    title: "Iceland",  
+    subtitle: "The Fire and Ice",  
+    location: "Nordic Atlantic",  
+    region: "Europe",  
+    coordinates: "64.9631° N, 19.0208° W",  
+    vibe: "Otherworldly Drama. Volcanic deserts and glacial lagoons.",  
+    bestTime: "September to March (Aurora) or June to August (Midnight Sun)",  
+    topMustDos: ["Blue Lagoon soak", "Golden Circle tour", "Ice cave exploration"],  
+    insiderTip: "The Highlands are only accessible in summer and require a serious 4x4.",  
+    heroImage: "https://cdn.marblism.com/LV-s85mId1A.webp",  
+    summary: "Where the earth’s raw power is visible at every turn.",  
+    sanctuary: "The Retreat at Blue Lagoon",  
+    orchestration: "Private helicopter tour of the active volcanic fissures.",  
+    quote: "A landscape still in the making."  
   },  
-  'paris': {  
-    title: 'Paris',  
-    subtitle: 'Haussmann’s Shadow',  
-    archive: 'Cheval Blanc Paris or Hôtel de Crillon. Palace-grade hotels overlooking the Seine or Place de la Concorde.',  
-    orchestration: 'Private atelier visits with haute couture houses. After-hours access to the Louvre for a personal viewing of the Mona Lisa.',  
-    quote: 'The City of Light, seen through a lens of exclusive access.'  
+  {  
+    id: "paris",  
+    title: "Paris",  
+    subtitle: "The City of Light",  
+    location: "France",  
+    region: "Europe",  
+    coordinates: "48.8566° N, 2.3522° E",  
+    vibe: "Haussmann Glamour. Haute couture and hidden bistros.",  
+    bestTime: "April to June or September to October",  
+    topMustDos: ["Louvre private tour", "Seine river cruise", "Marais gallery walk"],  
+    insiderTip: "The Palais-Royal gardens are the city’s most elegant 'secret' backyard.",  
+    heroImage: "https://cdn.marblism.com/K2W-WDHcZdl.webp",  
+    summary: "The eternal capital of style and sentiment.",  
+    sanctuary: "Hôtel de Crillon",  
+    orchestration: "Private atelier visit with a rising star in French fashion.",  
+    quote: "Paris is always a good idea, but a private Paris is better."  
   },  
-  'london': {  
-    title: 'London',  
-    subtitle: 'The Mayfair Protocol',  
-    archive: 'The Connaught or Claridge’s. Historic institutions in the heart of Mayfair.',  
-    orchestration: 'Private shopping at Savile Row and Bond Street. Access to the city’s most exclusive members-only clubs like Annabel’s.',  
-    quote: 'A global hub where tradition and modernity exist in a quiet truce.'  
+  {  
+    id: "london",  
+    title: "London",  
+    subtitle: "The Global Hub",  
+    location: "United Kingdom",  
+    region: "Europe",  
+    coordinates: "51.5074° N, 0.1278° W",  
+    vibe: "Stately Modernity. Royal history and cutting-edge art.",  
+    bestTime: "May to September",  
+    topMustDos: ["British Museum tour", "West End show", "Borough Market lunch"],  
+    insiderTip: "The best views aren't from the Shard, but from a private terrace in Richmond.",  
+    heroImage: "https://cdn.marblism.com/WWlmgBqGU_n.webp",  
+    summary: "A city of layers, from Roman ruins to glass towers.",  
+    sanctuary: "The Connaught",  
+    orchestration: "Private viewing of the Crown Jewels at the Tower of London.",  
+    quote: "The world, condensed into one city."  
   },  
-  'new-york': {  
-    title: 'New York',  
-    subtitle: 'The Manhattan Symphony',  
-    archive: 'Aman New York or The Carlyle. High-altitude sanctuaries above the noise of Fifth Avenue.',  
-    orchestration: 'Private box seats at the Met Opera. Guided architectural tours of the city’s skyline via private helicopter.',  
-    quote: 'The ultimate urban arena, navigated with tactical precision.'  
+  {  
+    id: "new-york",  
+    title: "New York",  
+    subtitle: "The Concrete Jungle",  
+    location: "USA",  
+    region: "North America",  
+    coordinates: "40.7128° N, 74.0060° W",  
+    vibe: "Unstoppable Energy. Skyscrapers and secret jazz clubs.",  
+    bestTime: "May to June or September to October",  
+    topMustDos: ["Met private tour", "High Line walk", "Broadway backstage access"],  
+    insiderTip: "The most exclusive bars in Manhattan don't have signs; they have memberships.",  
+    heroImage: "https://cdn.marblism.com/e2lcTnGPYOT.webp",  
+    summary: "The city that never sleeps, but always dreams.",  
+    sanctuary: "Aman New York",  
+    orchestration: "Private helicopter transfer from JFK to the 30th Street pad.",  
+    quote: "If you can make it here, you should do it in style."  
   },  
-  'marrakesh': {  
-    title: 'Marrakesh',  
-    subtitle: 'The Crimson Labyrinth',  
-    archive: 'Royal Mansour or Amanjena. Riads within the city walls or pavilions in the Palmeraie.',  
-    orchestration: 'Private guided tours through the souks with a focus on artisanal craft. Sunset dinners in the Agafay Desert.',  
-    quote: 'A sensory explosion tempered by the cool courtyards of a riad.'  
+  {  
+    id: "marrakesh",  
+    title: "Marrakesh",  
+    subtitle: "The Red City",  
+    location: "Morocco",  
+    region: "Africa",  
+    coordinates: "31.6295° N, 7.9811° W",  
+    vibe: "Intricate Mystery. Spice markets and hidden riads.",  
+    bestTime: "March to May or September to November",  
+    topMustDos: ["Jemaa el-Fnaa night walk", "Majorelle Garden tour", "Atlas Mountain trek"],  
+    insiderTip: "The best textiles are found in the specialized souks, not the main square.",  
+    heroImage: "https://cdn.marblism.com/q9dx3kvxCvy.webp",  
+    summary: "A sensory explosion of color, sound, and scent.",  
+    sanctuary: "Royal Mansour",  
+    orchestration: "Private dinner in the Agafay desert under a luxury nomad tent.",  
+    quote: "A labyrinth where you find yourself."  
   }  
-};  
+];  
