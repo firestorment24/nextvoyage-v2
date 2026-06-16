@@ -4,111 +4,119 @@ const ARTICLES = [
   {  
     id: 'the-south-pacific-drift',  
     title: 'The South Pacific Drift',  
-    category: 'Intelligence',  
-    date: 'JUNE 2026',  
+    category: 'INTELLIGENCE',  
+    date: '06.16.2026',  
+    image: 'https://cdn.marblism.com/qFTkeALRTbV.webp', // Moody island/water shot  
     excerpt: 'An analysis of private island accessibility and the shifting currents of Polynesian seclusion.'  
   },  
   {  
     id: 'european-prestige-anchors',  
     title: 'European Prestige Anchors',  
-    category: 'Seasonal',  
-    date: 'JUNE 2026',  
+    category: 'LOGISTICS',  
+    date: '06.12.2026',  
     excerpt: 'Securing berthage in the Mediterranean’s most guarded marinas ahead of the gala season.'  
   },  
   {  
     id: 'the-art-of-discretion',  
     title: 'The Art of Discretion',  
-    category: 'Philosophy',  
-    date: 'MAY 2026',  
+    category: 'PHILOSOPHY',  
+    date: '05.29.2026',  
     excerpt: 'Why the most exclusive experiences are the ones that never appear on a map.'  
   }  
 ]
 
 export default function JournalPage() {  
   return (  
-    <main className="min-main-screen bg-[#0a0a0a] text-[#A69F88] selection:bg-[#A69F88] selection:text-[#0a0a0a]">  
-      {/* Header Section */}  
-      <header className="max-w-6xl mx-auto px-6 pt-12 pb-24 border-b border-[#A69F88]/10">  
-        <div className="flex flex-col space-y-2 mb-12">  
-          <span className="font-mono text-[10px] tracking-[0.3em] uppercase opacity-50">  
-            Volume 01 // The Master Ledger  
-          </span>  
-          <h1 className="text-6xl md:text-8xl font-serif tracking-tight text-[#A69F88]">  
-            The Journal  
-          </h1>  
-        </div>  
-          
-        <p className="max-w-xl text-lg font-serif italic opacity-80 leading-relaxed">  
-          "True travel is not about the destination, but the orchestration of silence and the preservation of the unknown."  
-        </p>  
-      </header>
+    <main className="min-h-screen bg-[#000000] text-[#D4AF37] selection:bg-[#D4AF37] selection:text-[#000000] overflow-x-hidden">  
+        
+      {/* Cinematic Hero Section */}  
+      <section className="relative h-[80vh] flex flex-col justify-end px-6 md:px-12 pb-12">  
+        <div className="absolute inset-0 z-0">  
+          <img   
+            src={ARTICLES[0].image}   
+            alt="Hero"   
+            className="w-full h-full object-cover opacity-30 grayscale contrast-125"  
+          />  
+          <div className="absolute inset-0 bg-gradient-to-t from-[#000000] via-[#000000]/60 to-transparent" />  
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#000000_100%)]" />  
+        </div>
 
-      {/* Featured Entry */}  
-      <section className="max-w-6xl mx-auto px-6 py-20">  
-        <Link href={`/journal/${ARTICLES[0].id}`} className="group block">  
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-end">  
-            <div className="space-y-6">  
-              <div className="flex items-center space-x-4 font-mono text-[10px] tracking-widest uppercase">  
-                <span className="px-2 py-1 border border-[#A69F88]/30">Featured</span>  
-                <span className="opacity-50">{ARTICLES[0].category} // {ARTICLES[0].date}</span>  
-              </div>  
-              <h2 className="text-5xl md:text-6xl font-serif group-hover:italic transition-all duration-500">  
-                {ARTICLES[0].title}  
-              </h2>  
+        <div className="relative z-10 max-w-5xl">  
+          <Link href={`/journal/${ARTICLES[0].id}`} className="group inline-block">  
+            <div className="flex items-center space-x-3 mb-6 font-mono text-[10px] tracking-[0.4em] uppercase">  
+              <span className="w-8 h-[1px] bg-[#D4AF37]/50" />  
+              <span className="text-[#D4AF37]/80">Current Intelligence // {ARTICLES[0].date}</span>  
             </div>  
-            <div className="pb-2">  
-              <p className="text-sm opacity-60 leading-relaxed max-w-sm mb-6">  
-                {ARTICLES[0].excerpt}  
-              </p>  
-              <span className="font-mono text-[10px] tracking-[0.4em] uppercase border-b border-[#A69F88] pb-1 group-hover:pr-4 transition-all">  
-                Read Entry  
-              </span>  
-            </div>  
+            <h1 className="text-6xl md:text-[7rem] font-serif leading-[0.9] tracking-tighter mb-8 group-hover:italic transition-all duration-700">  
+              {ARTICLES[0].title}  
+            </h1>  
+            <p className="text-lg md:text-xl font-serif italic text-[#D4AF37]/60 max-w-xl leading-relaxed mb-8">  
+              "{ARTICLES[0].excerpt}"  
+            </p>  
+            <span className="font-mono text-[11px] tracking-[0.5em] uppercase border border-[#D4AF37]/30 px-6 py-3 group-hover:bg-[#D4AF37] group-hover:text-[#000000] transition-all">  
+              Examine Entry  
+            </span>  
+          </Link>  
+        </div>  
+      </section>
+
+      {/* The Ledger Rows (Shadow Aesthetic) */}  
+      <section className="px-6 md:px-12 py-32 border-t border-[#D4AF37]/10">  
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12">  
+            
+          {/* Vertical Label */}  
+          <div className="hidden md:block md:col-span-1">  
+            <span className="font-mono text-[10px] tracking-[0.6em] uppercase vertical-text opacity-30 rotate-180 whitespace-nowrap">  
+              ARCHIVE // 2026  
+            </span>  
+          </div>
+
+          <div className="md:col-span-11 space-y-32">  
+            {ARTICLES.slice(1).map((article, idx) => (  
+              <Link   
+                key={article.id}   
+                href={`/journal/${article.id}`}  
+                className="group grid grid-cols-1 md:grid-cols-2 gap-8 items-center border-b border-[#D4AF37]/5 pb-32"  
+              >  
+                <div className="space-y-4">  
+                  <span className="font-mono text-[9px] tracking-widest text-[#D4AF37]/40">  
+                    ENTRY {idx + 2} — {article.category}  
+                  </span>  
+                  <h2 className="text-4xl md:text-5xl font-serif tracking-tight group-hover:pl-4 transition-all duration-500">  
+                    {article.title}  
+                  </h2>  
+                </div>  
+                <div className="md:pl-12">  
+                  <p className="text-sm font-serif italic opacity-50 leading-relaxed mb-6 max-w-xs">  
+                    {article.excerpt}  
+                  </p>  
+                  <div className="flex items-center space-x-4">  
+                    <span className="font-mono text-[10px] tracking-widest uppercase opacity-30">{article.date}</span>  
+                    <span className="w-12 h-[1px] bg-[#D4AF37]/20 group-hover:w-24 group-hover:bg-[#D4AF37] transition-all" />  
+                  </div>  
+                </div>  
+              </Link>  
+            ))}  
           </div>  
-        </Link>  
-      </section>
-
-      {/* The Grid / Ledger Rows */}  
-      <section className="max-w-6xl mx-auto px-6 py-20 border-t border-[#A69F88]/10">  
-        <div className="space-y-0">  
-          {ARTICLES.slice(1).map((article) => (  
-            <Link   
-              key={article.id}   
-              href={`/journal/${article.id}`}  
-              className="group flex flex-col md:flex-row md:items-center justify-between py-12 border-b border-[#A69F88]/5 hover:bg-[#A69F88]/[0.02] transition-colors px-4 -mx-4"  
-            >  
-              <div className="flex flex-col space-y-1">  
-                <span className="font-mono text-[9px] tracking-widest uppercase opacity-40">  
-                  {article.category}  
-                </span>  
-                <h3 className="text-3xl font-serif group-hover:translate-x-2 transition-transform duration-500">  
-                  {article.title}  
-                </h3>  
-              </div>  
-              <div className="flex flex-col md:items-end mt-4 md:mt-0 space-y-1">  
-                <span className="font-mono text-[10px] opacity-40">{article.date}</span>  
-                <span className="text-xs italic opacity-0 group-hover:opacity-60 transition-opacity font-serif">  
-                  View Intelligence  
-                </span>  
-              </div>  
-            </Link>  
-          ))}  
         </div>  
       </section>
 
-      {/* Footer Navigation */}  
-      <footer className="max-w-6xl mx-auto px-6 py-24 flex justify-between items-center opacity-40 font-mono text-[10px] tracking-[0.3em] uppercase">  
-        <span>End of Ledger // Page 01 of 27</span>  
-        <Link href="/invitation" className="hover:text-[#A69F88] hover:opacity-100 transition-all">  
-          Next Pillar: Invitation →  
-        </Link>  
-      </footer>
+      {/* Global Vignette Overlay */}  
+      <div className="fixed inset-0 pointer-events-none z-50 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.4)_100%)]" />  
+        
+      {/* Ambient Soul Accents */}  
+      <div className="fixed top-1/4 -left-20 w-96 h-96 bg-[#D4AF37]/5 rounded-full blur-[150px] pointer-events-none" />  
+      <div className="fixed bottom-1/4 -right-20 w-96 h-96 bg-[#D4AF37]/5 rounded-full blur-[150px] pointer-events-none" />
 
-      {/* Subtle Ambient Glow */}  
-      <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-[-1] overflow-hidden">  
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#A69F88]/5 rounded-full blur-[120px]" />  
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#A69F88]/5 rounded-full blur-[120px]" />  
-      </div>  
+      <footer className="px-6 md:px-12 py-24 border-t border-[#D4AF37]/10 flex flex-col md:flex-row justify-between items-center opacity-30 font-mono text-[9px] tracking-[0.5em] uppercase">  
+        <div className="mb-4 md:mb-0 text-center md:text-left">  
+          NexVoyage Collective // Private Implementation  
+        </div>  
+        <div className="flex space-x-12">  
+          <Link href="/archive" className="hover:text-[#D4AF37] hover:opacity-100 transition-all">Archive</Link>  
+          <Link href="/invitation" className="hover:text-[#D4AF37] hover:opacity-100 transition-all">Invitation</Link>  
+        </div>  
+      </footer>  
     </main>  
   )  
 }  
