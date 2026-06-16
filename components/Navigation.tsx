@@ -52,7 +52,6 @@ return (
       </div>  
     </header>
 
-    {/* OVERLAY MENU */}  
     <div className={`fixed inset-0 z-[90] transition-all duration-1000 ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>  
       <div className="absolute inset-0 bg-[#0a0a0a]/95 backdrop-blur-3xl" />  
       <nav className="relative h-full flex flex-col justify-center px-8 md:px-24">  
