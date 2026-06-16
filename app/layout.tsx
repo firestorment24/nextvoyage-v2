@@ -1,48 +1,62 @@
-import './globals.css';  
-import Navigation from '@/components/Navigation';  
-import Footer from '@/components/Footer';
+import type { Metadata } from "next";  
+import { Playfair_Display, JetBrains_Mono } from "next/font/google";  
+import "./globals.css";
 
-export const metadata = {  
-  title: 'NexVoyage Collective | Bespoke Travel for High Net Worth Individuals',  
-  description: 'Curated luxury travel experiences for the discerning traveler.',  
+// The Soul: Luxury Serif for headings and editorial content  
+const serif = Playfair_Display({  
+  subsets: ["latin"],  
+  variable: "--font-serif",  
+  display: "swap",  
+});
+
+// The Nerves: Clean Mono for Rachel AI and technical data  
+const mono = JetBrains_Mono({  
+  subsets: ["latin"],  
+  variable: "--font-mono",  
+  display: "swap",  
+});
+
+export const metadata: Metadata = {  
+  title: "NexVoyage Collective | Private Orchestration",  
+  description: "Bespoke travel orchestration for the modern voyager.",  
 };
 
 export default function RootLayout({  
   children,  
-}: {  
+}: Readonly<{  
   children: React.ReactNode;  
-}) {  
+}>) {  
   return (  
-    <html lang="en">  
-      <head>  
-        {/* This small script pushes the fixed navigation down so the phone bar is visible */}  
-        <style dangerouslySetInnerHTML={{ __html: `  
-          nav, header { top: 32px !important; transition: top 0.3s ease; }  
-          @media (max-width: 768px) { nav, header { top: 36px !important; } }  
-        ` }} />  
-      </head>  
-      <body className="bg-[#0a0a0a] text-stone-200 antialiased font-serif">  
+    <html lang="en" className={`${serif.variable} ${mono.variable}`}>  
+      <body className="bg-[#0a0a0a] text-[#d4af37] antialiased selection:bg-[#d4af37] selection:text-black min-h-screen flex flex-col">  
           
-        {/* Global Contact Bar - Now Fixed and on Top */}  
-        <div className="fixed top-0 left-0 right-0 h-8 md:h-9 bg-[#1c1c1c] border-b border-[#2a2a2a] flex items-center justify-center z-[100] text-[10px] md:text-xs tracking-[0.2em] uppercase text-[#c5a059]">  
-          Direct Concierge: <a href="tel:8135358059" className="ml-2 hover:text-white transition-colors underline decoration-[#c5a059]/30 underline-offset-4">813-535-8059</a>  
+        {/* THE SOUL: Film Grain Texture Overlay */}  
+        {/* This creates a subtle tactile feel across the entire site */}  
+        <div   
+          className="fixed inset-0 pointer-events-none z-[9999] opacity-[0.04] mix-blend-overlay"  
+          style={{  
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`  
+          }}  
+        ></div>
+
+        {/* Global Cinematic Blur (Top & Bottom) */}  
+        <div className="fixed top-0 left-0 w-full h-32 bg-gradient-to-b from-[#0a0a0a] to-transparent pointer-events-none z-50"></div>  
+          
+        <main className="flex-grow relative z-10">  
+          {children}  
+        </main>
+
+        <footer className="relative z-10 p-8 border-t border-[#d4af37]/5 text-center">  
+          <p className="font-mono text-[9px] uppercase tracking-[0.5em] opacity-30">  
+            © 2026 NexVoyage Collective // Brass & Shadow Implementation  
+          </p>  
+        </footer>
+
+        {/* Background Ambience */}  
+        <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden">  
+          <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-[#d4af37] blur-[180px] rounded-full opacity-[0.03]"></div>  
+          <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-[#d4af37] blur-[180px] rounded-full opacity-[0.03]"></div>  
         </div>  
-          
-        {/* Padding-top here ensures the rest of the site doesn't get hidden under the bars */}  
-        <div className="pt-8 md:pt-9">  
-          <Navigation />  
-          <main className="min-h-screen">{children}</main>  
-          <Footer />  
-        </div>  
-          
-        {/* Global Floating Call Button (Mobile Only) */}  
-        <a   
-          href="tel:8135358059"  
-          className="fixed bottom-6 right-6 md:hidden bg-[#c5a059] text-black p-4 rounded-full shadow-2xl z-[110] active:scale-95 transition-transform"  
-        >  
-          <span className="sr-only">Call Concierge</span>  
-          <span className="text-xl">📞</span>  
-        </a>  
       </body>  
     </html>  
   );  
