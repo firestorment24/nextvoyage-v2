@@ -56,7 +56,7 @@ export default function InvitationPage() {
     },  
     {  
       id: 'summary',  
-      message: "I have gathered your requirements. I will now notify Daryl and prepare the vetting documents. Proceed to the calendar?",  
+      message: "I have gathered your requirements. I will now notify Daryl and prepare the vetting documents. Ready to schedule your consultation?",  
       fields: []  
     }  
   ];
