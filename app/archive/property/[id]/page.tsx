@@ -1,13 +1,23 @@
-import { notFound } from 'next/navigation';  
-import Link from 'next/link';  
-import Image from 'next/image';  
-import { PROPERTY_DATA } from '@/lib/data/sanctuaries';
+// app/archive/property/[id]/page.tsx
 
-interface PageProps {  
+import { PROPERTY_DATA } from '@/lib/data/sanctuaries';  
+import Link from 'next/link';  
+import { notFound } from 'next/navigation';  
+import { Metadata } from 'next';
+
+type Props = {  
   params: Promise<{ id: string }>;  
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {  
+  const { id } = await params;  
+  const property = PROPERTY_DATA.find((p) => p.id === id);  
+  return {  
+    title: property ? `${property.name} | The Archive` : 'Property Not Found',  
+  };  
 }
 
-export default async function PropertyPage({ params }: PageProps) {  
+export default async function PropertyDetailPage({ params }: Props) {  
   const { id } = await params;  
   const property = PROPERTY_DATA.find((p) => p.id === id);
 
@@ -16,90 +26,112 @@ export default async function PropertyPage({ params }: PageProps) {
   }
 
   return (  
-    <main className="min-h-screen bg-black text-white selection:bg-white selection:text-black">  
+    <main className="min-h-screen bg-[#0A0A0A] text-white selection:bg-[#C5A059]/30">  
+      {/* Navigation */}  
+      <nav className="fixed top-0 w-full z-50 px-8 py-6 flex justify-between items-center mix-blend-difference">  
+        <Link   
+          href="/archive"   
+          className="text-[10px] uppercase tracking-[0.4em] text-white/60 hover:text-white transition-colors duration-300"  
+        >  
+          ← Back to Archive  
+        </Link>  
+        <span className="text-[10px] uppercase tracking-[0.5em] font-light">  
+          Property {property.serial}  
+        </span>  
+      </nav>
+
       {/* Hero Section */}  
       <section className="relative h-[80vh] w-full overflow-hidden">  
-        <Image  
-          src={property.image}  
+        <img   
+          src={property.image}   
           alt={property.name}  
-          fill  
-          className="object-cover grayscale hover:grayscale-0 transition-all duration-1000 ease-in-out"  
-          priority  
+          className="w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-1000 ease-in-out"  
         />  
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />  
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent" />  
           
-        <div className="absolute bottom-12 left-6 md:left-12">  
-          <p className="text-[10px] uppercase tracking-[0.5em] text-white/50 mb-4">  
-            {property.serial} // {property.location}  
+        <div className="absolute bottom-12 left-12 max-w-2xl">  
+          <p className="text-[#C5A059] text-[10px] uppercase tracking-[0.4em] mb-4">  
+            {property.verified ? 'Verified Sanctuary' : 'Pending Verification'}  
           </p>  
-          <h1 className="text-5xl md:text-8xl font-light tracking-tighter uppercase">  
+          <h1 className="text-5xl md:text-7xl font-light tracking-tighter mb-4 leading-none">  
             {property.name}  
           </h1>  
+          <p className="text-white/40 uppercase tracking-[0.3em] text-xs">  
+            {property.location}  
+          </p>  
         </div>  
       </section>
 
-      {/* Narrative & Technical Specs */}  
-      <section className="max-w-7xl mx-auto px-6 md:px-12 py-24 grid grid-cols-1 lg:grid-cols-12 gap-16">  
+      {/* Narrative & Content */}  
+      <div className="max-w-7xl mx-auto px-8 py-24 grid grid-cols-1 lg:grid-cols-12 gap-16">  
           
-        {/* Left: Description */}  
+        {/* Left Column: Narrative */}  
         <div className="lg:col-span-7 space-y-12">  
-          <div className="space-y-6">  
-            <h2 className="text-xs uppercase tracking-[0.3em] text-white/40">The Perspective</h2>  
-            <p className="text-2xl md:text-3xl font-light leading-relaxed text-neutral-200">  
-              {property.description}  
+          <section>  
+            <h3 className="text-[10px] uppercase tracking-[0.4em] text-[#666] mb-8">Narrative</h3>  
+            <p className="font-serif italic text-2xl md:text-3xl leading-relaxed text-white/90">  
+              "{property.description}"  
             </p>  
-          </div>  
-            
-          <div className="pt-12 border-t border-white/10">  
-            <p className="text-lg text-neutral-400 italic font-light">  
-              "{property.highlight}"  
+          </section>
+
+          <section className="pt-12 border-t border-white/5">  
+            <h3 className="text-[10px] uppercase tracking-[0.4em] text-[#666] mb-8">Elite Amenities</h3>  
+            <div className="grid grid-cols-2 gap-4">  
+              {property.amenities.map((amenity, index) => (  
+                <div key={index} className="flex items-center space-x-3 text-white/60">  
+                  <div className="w-1 h-1 bg-[#C5A059] rotate-45" />  
+                  <span className="text-sm font-light tracking-wide">{amenity}</span>  
+                </div>  
+              ))}  
+            </div>  
+          </section>  
+        </div>
+
+        {/* Right Column: Technical Deep-Dive */}  
+        <div className="lg:col-span-5 space-y-12">  
+          <div className="bg-[#111] p-8 md:p-12 border border-white/5">  
+            <section className="mb-12">  
+              <h4 className="text-[10px] uppercase tracking-widest text-[#444] mb-4">Technical Highlight</h4>  
+              <p className="text-sm text-[#ccc] leading-snug font-light italic">  
+                {property.highlight}  
+              </p>  
+            </section>
+
+            <section className="space-y-6">  
+              <h4 className="text-[10px] uppercase tracking-widest text-[#444] mb-4">Specifications</h4>  
+              {Object.entries(property.specs).map(([key, value]) => (  
+                <div key={key} className="flex justify-between items-baseline border-b border-white/5 pb-2">  
+                  <span className="text-[10px] uppercase tracking-widest text-white/30">{key}</span>  
+                  <span className="text-xs text-white/70 font-light">{value}</span>  
+                </div>  
+              ))}  
+            </section>  
+          </div>
+
+          {/* The Invitation (CTA) */}  
+          <div className="pt-8">  
+            <h3 className="text-[10px] uppercase tracking-[0.4em] text-[#666] mb-6">The Invitation</h3>  
+            <p className="text-sm text-white/50 mb-8 leading-relaxed font-light">  
+              {property.invitation}  
             </p>  
+            <Link   
+              href="/invitation" // UPDATED: Direct link to invitation  
+              className="group relative inline-flex items-center px-8 py-4 bg-[#C5A059] text-black text-[10px] uppercase tracking-[0.3em] font-bold overflow-hidden transition-all duration-300 hover:bg-[#D4B57A]"  
+            >  
+              Request Access  
+              <span className="ml-4 transform group-hover:translate-x-1 transition-transform duration-300">→</span>  
+            </Link>  
           </div>  
         </div>
 
-        {/* Right: Technical Deep-Dive */}  
-        <div className="lg:col-span-4 lg:col-start-9 space-y-12">  
-          <div className="space-y-8">  
-            <h2 className="text-xs uppercase tracking-[0.3em] text-white/40">Specifications</h2>  
-              
-            <div className="space-y-6">  
-              <div>  
-                <p className="text-[10px] uppercase tracking-[0.2em] text-white/30 mb-1">Architect</p>  
-                <p className="text-sm tracking-wide">{property.specs.architect}</p>  
-              </div>  
-              <div>  
-                <p className="text-[10px] uppercase tracking-[0.2em] text-white/30 mb-1">Inauguration</p>  
-                <p className="text-sm tracking-wide">{property.specs.year}</p>  
-              </div>  
-              <div>  
-                <p className="text-[10px] uppercase tracking-[0.2em] text-white/30 mb-1">Primary Materials</p>  
-                <p className="text-sm tracking-wide leading-relaxed">{property.specs.materials}</p>  
-              </div>  
-            </div>  
-          </div>
+      </div>
 
-          {/* CTA Button */}  
-          <div className="pt-8">  
-            <Link   
-              href="/invitation"   
-              className="group relative flex items-center justify-center w-full bg-white text-black py-6 text-[10px] uppercase tracking-[0.5em] transition-all hover:bg-neutral-200"  
-            >  
-              Request Access  
-              <span className="absolute right-8 transform transition-transform group-hover:translate-x-2">→</span>  
-            </Link>  
-            <p className="mt-4 text-[9px] uppercase tracking-[0.2em] text-center text-white/20">  
-              Verification Required for Full Dossier  
-            </p>  
-          </div>  
-        </div>  
-      </section>
-
-      {/* Simple Footer Link to go back */}  
-      <div className="max-w-7xl mx-auto px-6 pb-24">  
-        <Link href="/archive" className="text-[10px] uppercase tracking-[0.3em] text-white/30 hover:text-white transition-colors">  
-          ← Return to Archive  
-        </Link>  
-      </div>  
+      {/* Footer Branding */}  
+      <footer className="py-24 border-t border-white/5 text-center">  
+        <p className="text-[10px] uppercase tracking-[1em] text-white/20">  
+          NexVoyage Collective  
+        </p>  
+      </footer>  
     </main>  
   );  
 }  
