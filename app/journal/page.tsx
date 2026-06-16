@@ -1,88 +1,85 @@
-import Link from 'next/link'  
-import { DESTINATIONS_DATA } from '@/lib/journal-data'
+import React from 'react';  
+import Link from 'next/link';  
+import { DESTINATIONS_DATA, Destination } from '@/lib/journal-data';
 
-interface Destination {  
-  id: string  
-  location: string  
-  coordinates: string  
-  summary: string  
-  heroImage: string // Updated to match lib/journal-data.ts  
-  sanctuary: {  
-    id: string  
-    name: string  
-    description: string  
-  }  
-  orchestration: string  
-}
+// Standardized slug function to match the detail pages  
+const getSlug = (name: string) => {  
+  return name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]/g, '');  
+};
 
 export default function JournalPage() {  
-  // Standardized slug helper to match detail page routing  
-  const getSlug = (location: string) => {  
-    return location  
-      .toLowerCase()  
-      .replace(/\s+/g, '-')  
-      .replace(/[()]/g, '')  
-      .replace(/--+/g, '-')  
-  }
-
   return (  
-    <main className="min-h-screen bg-[#0A0A0A] text-[#E5E5E5] selection:bg-[#d4af37] selection:text-black">  
-      {/* Editorial Header */}  
-      <header className="pt-24 pb-16 px-6 md:px-12 max-w-7xl mx-auto">  
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-[#d4af37]/20 pb-12">  
+    <main className="min-h-screen bg-[#050505] text-[#E5E5E5] selection:bg-zinc-800 selection:text-white">  
+      {/* Nuclear Style Fix to override global parchment backgrounds */}  
+      <style dangerouslySetInnerHTML={{ __html: `  
+        body, html, #__next { background-color: #050505 !important; background-image: none !important; }  
+        .bg-parchment, [class*="parchment"] { background: #050505 !important; background-image: none !important; }  
+      ` }} />
+
+      {/* Header */}  
+      <header className="pt-32 pb-20 px-6 md:px-12 max-w-7xl mx-auto border-b border-zinc-900/50">  
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">  
           <div>  
-            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#d4af37]/60 block mb-4">  
+            <p className="font-mono text-[10px] tracking-[0.3em] text-zinc-500 uppercase mb-4">  
               Volume 01 // The Master Ledger  
-            </span>  
-            <h1 className="text-6xl md:text-8xl font-serif leading-tight">  
+            </p>  
+            <h1 className="text-6xl md:text-8xl font-serif tracking-tighter leading-none italic">  
               The Journal  
             </h1>  
           </div>  
-          <div className="max-w-sm">  
-            <p className="font-serif italic text-lg text-[#d4af37]/80 leading-relaxed">  
-              &quot;Tactical intelligence and seasonal reports from the NexVoyage Collective.&quot;  
+          <div className="max-w-xs">  
+            <p className="text-sm text-zinc-400 leading-relaxed font-light italic">  
+              "Tactical intelligence and seasonal reports from the NexVoyage Collective."  
             </p>  
           </div>  
         </div>  
       </header>
 
       {/* Magazine Grid */}  
-      <section className="px-6 md:px-12 max-w-7xl mx-auto pb-32">  
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20">  
+      <section className="px-6 md:px-12 max-w-7xl mx-auto py-24">  
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-24">  
           {(DESTINATIONS_DATA as Destination[]).map((item) => (  
             <Link   
               key={item.id}   
               href={`/journal/${getSlug(item.location)}`}  
-              className="group block"  
+              className="group block space-y-6"  
             >  
-              <div className="relative aspect-[4/5] overflow-hidden mb-6 bg-[#1A1A1A]">    
-                <img    
-                  src={item.heroImage} // Changed from imageUrl to heroImage    
-                  alt={item.location}    
-                  className="object-cover w-full h-full transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"    
-                />    
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />  
-                <div className="absolute bottom-6 left-6 right-6">  
-                  <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[#d4af37]">  
+              {/* Image Container */}  
+              <div className="relative aspect-[4/5] overflow-hidden bg-zinc-900 grayscale hover:grayscale-0 transition-all duration-700 ease-in-out">  
+                <img   
+                  src={item.heroImage}   
+                  alt={item.location}  
+                  className="object-cover w-full h-full scale-105 group-hover:scale-100 transition-transform duration-1000"  
+                />  
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />  
+                  
+                {/* Meta Overlay */}  
+                <div className="absolute top-4 right-4 mix-blend-difference">  
+                  <p className="font-mono text-[9px] tracking-widest uppercase text-white/70">  
                     {item.coordinates}  
-                  </span>  
+                  </p>  
                 </div>  
               </div>
 
+              {/* Text Content */}  
               <div className="space-y-4">  
-                <h3 className="text-3xl font-serif group-hover:text-[#d4af37] transition-colors duration-300">  
-                  {item.location}  
-                </h3>  
-                <p className="text-sm text-[#E5E5E5]/60 leading-relaxed font-serif line-clamp-3">  
+                <div className="space-y-1">  
+                  <h2 className="text-2xl font-serif group-hover:italic transition-all duration-300">  
+                    {item.location}  
+                  </h2>  
+                  <p className="font-mono text-[9px] tracking-[0.2em] text-zinc-500 uppercase">  
+                    Field Report No. {item.id}  
+                  </p>  
+                </div>  
+                  
+                <p className="text-sm text-zinc-400 leading-relaxed font-light line-clamp-3">  
                   {item.summary}  
-                </p>  
-                <div className="pt-4 flex items-center justify-between border-t border-[#d4af37]/10">  
-                  <span className="font-mono text-[9px] uppercase tracking-widest text-[#d4af37]/40">  
-                    {item.orchestration}  
-                  </span>  
-                  <span className="font-mono text-[9px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300">  
-                    Read Report →  
-                  </span>  
+                </p>
+
+                {/* Footer Meta */}  
+                <div className="pt-4 border-t border-zinc-900 flex justify-between items-center text-[9px] font-mono tracking-widest uppercase text-zinc-600">  
+                  <span>Sanctuary // {item.sanctuary}</span>  
+                  <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-500">View Archive —&gt;</span>  
                 </div>  
               </div>  
             </Link>  
@@ -90,15 +87,13 @@ export default function JournalPage() {
         </div>  
       </section>
 
-      {/* Footer Nav */}  
-      <footer className="px-6 md:px-12 py-20 border-t border-[#d4af37]/10 max-w-7xl mx-auto flex justify-between items-center">  
-        <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#d4af37]/40">  
-          End of Ledger // Page 01 of 27  
-        </span>  
-        <Link href="/invitation" className="font-mono text-[10px] uppercase tracking-[0.3em] hover:text-[#d4af37] transition-colors">  
+      {/* Footer Navigation */}  
+      <footer className="py-20 px-6 md:px-12 max-w-7xl mx-auto border-t border-zinc-900/50 flex justify-between items-center text-[10px] font-mono tracking-[0.3em] text-zinc-500 uppercase">  
+        <div>End of Ledger // Page 01 of 27</div>  
+        <Link href="/invitation" className="hover:text-white transition-colors underline decoration-zinc-800 underline-offset-8">  
           Request Access  
         </Link>  
       </footer>  
     </main>  
-  )  
+  );  
 }  
