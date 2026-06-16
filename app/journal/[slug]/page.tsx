@@ -1,123 +1,74 @@
-'use client';
+"use client";
 
 import React from 'react';  
-import { useParams } from 'next/navigation';  
-import Navigation from '../../Navigation';  
-import Footer from '../../Footer';
+import { useParams, notFound } from 'next/navigation';  
+import { Cormorant_Garamond, Inter } from 'next/font/google';  
+import { DESTINATIONS_DATA } from '@/lib/journal-data';
 
-const POSTS: Record<string, any> = {  
-  'the-art-of-discretion': {  
-    title: 'The Art of Discretion',  
-    category: 'Philosophy',  
-    date: 'June 9, 2026',  
-    image: 'https://images.unsplash.com/photo-1490197415175-074fd86b1fcc?q=80&w=2074&auto=format&fit=crop',  
-    content: [  
-      "In a world that demands attention, there is a profound power in remaining unseen. True luxury has never been about the loud or the obvious; it is about the quiet details that only the initiated notice.",  
-      "At NexVoyage, we believe that discretion is the ultimate service. It is the art of knowing what a guest needs before they ask, and providing it so seamlessly that the hand behind the service remains invisible.",  
-      "The architecture of silence is built on three pillars: privacy, intuition, and restraint. When we curate a sanctuary, we aren't just looking for a beautiful view—we are looking for a place where the world cannot find you unless you wish to be found."  
-    ]  
-  },  
-  'metropolitan-sanctuaries': {  
-    title: 'Metropolitan Sanctuaries',  
-    category: 'Architecture',  
-    date: 'May 24, 2026',  
-    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop',  
-    content: [  
-      "The city never sleeps, but you should. Our metropolitan sanctuaries are designed to be acoustic and visual voids in the heart of the world's most vibrant capitals.",  
-      "We look for properties that utilize 'Negative Space'—areas where the design allows for breath and contemplation amidst the chaos of London, Tokyo, or New York.",  
-      "It is not enough to be behind a closed door. A true sanctuary must filter the energy of the city, keeping the inspiration while discarding the noise."  
-    ]  
-  },  
-  'the-silent-concierge': {  
-    title: 'The Silent Concierge',  
-    category: 'Intelligence',  
-    date: 'May 12, 2026',  
-    image: 'https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=1974&auto=format&fit=crop',  
-    content: [  
-      "The future of travel isn't a robot in a lobby; it is an invisible layer of intelligence that anticipates your rhythm.",  
-      "By blending historical preference data with real-time human intuition, we create a journey that feels like it is unfolding naturally, rather than being managed.",  
-      "When your favorite vintage is already breathing as you walk through the door, or the lighting adjusted to your jet-lagged biological clock—that is the silent concierge at work."  
-    ]  
-  }  
-};
+const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500'] });  
+const inter = Inter({ subsets: ['latin'], weight: ['300', '400'] });
 
-export default function ArticlePage() {  
+export default function JournalDetailPage() {  
   const params = useParams();  
-  const slug = params?.slug as string;  
-  const post = POSTS[slug];
+  const slug = params.slug as string;  
+  const data = DESTINATIONS_DATA[slug];
 
-  if (!post) {  
-    return (  
-      <div className="bg-black text-white min-h-screen flex items-center justify-center">  
-        <p className="tracking-widest uppercase opacity-50">Article Not Found</p>  
-      </div>  
-    );  
-  }
+  if (!data) return notFound();
 
   return (  
-    <main className="bg-black text-white min-h-screen selection:bg-white selection:text-black">  
-      <Navigation />
-
+    <main className={`min-h-screen bg-[#050505] text-[#E5E5E5] ${inter.className}`}>  
       {/* Hero Section */}  
-      <section className="relative h-[80vh] w-full overflow-hidden">  
-        <img   
-          src={post.image}   
-          alt={post.title}  
-          className="w-full h-full object-cover grayscale brightness-50"  
-        />  
-        <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-12 bg-gradient-to-t from-black to-transparent">  
-          <div className="max-w-screen-xl mx-auto w-full">  
-            <span className="text-[10px] uppercase tracking-[0.4em] mb-4 inline-block px-3 py-1 border border-white/30 rounded-full">  
-              {post.category}  
-            </span>  
-            <h1 className="text-5xl md:text-8xl font-light tracking-tighter leading-none mb-8 max-w-4xl">  
-              {post.title}  
-            </h1>  
-            <div className="flex items-center gap-8 text-[10px] uppercase tracking-widest text-white/50">  
-              <span>{post.date}</span>  
-              <span>By NexVoyage Editorial</span>  
-            </div>  
-          </div>  
+      <section className="h-[70vh] relative flex items-end p-8 md:p-24 border-b border-[#D4AF37]/10 overflow-hidden">  
+        <div className="max-w-4xl z-10">  
+          <p className="text-[#D4AF37] text-xs uppercase tracking-[0.5em] mb-6 italic">The Journal // Destination Guide</p>  
+          <h1 className={`${cormorant.className} text-6xl md:text-9xl font-light italic leading-none`}>  
+            {data.title}  
+          </h1>  
         </div>  
+        {/* Shadow Background */}  
+        <div className="absolute inset-0 bg-[#050505]/40 z-0" />  
       </section>
 
-      {/* Content Section */}  
-      <section className="py-24 px-6 md:px-12">  
-        <div className="max-w-2xl mx-auto">  
-          {post.content.map((paragraph: string, i: number) => (  
-            <p key={i} className="text-xl md:text-2xl font-light leading-relaxed text-white/80 mb-12 last:mb-0">  
-              {paragraph}  
+      {/* Editorial Content */}  
+      <article className="max-w-3xl mx-auto py-24 px-8 space-y-16">  
+        <div className="space-y-6">  
+          <p className={`${cormorant.className} text-3xl md:text-4xl text-white/90 leading-relaxed italic`}>  
+            {data.quote}  
+          </p>  
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 border-t border-white/10 pt-12">  
+          <div className="space-y-4">  
+            <h4 className="text-[10px] uppercase tracking-widest text-[#D4AF37]">The Sanctuary Archive</h4>  
+            <p className="text-sm text-white/70 leading-relaxed font-light">  
+              {data.archive}  
             </p>  
-          ))}  
-            
-          <div className="mt-24 pt-12 border-t border-white/10">  
-             <div className="flex justify-between items-center">  
-                <div className="space-y-1">  
-                  <p className="text-[10px] uppercase tracking-widest text-white/30">Share</p>  
-                  <p className="text-sm font-light italic">Discretion is advised.</p>  
-                </div>  
-                <button   
-                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}  
-                  className="text-[10px] uppercase tracking-widest hover:text-white/50 transition-colors"  
-                >  
-                  Back to Top ↑  
-                </button>  
-             </div>  
           </div>  
-        </div>  
-      </section>
+          <div className="space-y-4">  
+            <h4 className="text-[10px] uppercase tracking-widest text-[#D4AF37]">The Orchestration</h4>  
+            <p className="text-sm text-white/70 leading-relaxed font-light">  
+              {data.orchestration}  
+            </p>  
+          </div>  
+        </div>
 
-      {/* Footer CTA */}  
-      <section className="py-24 border-t border-white/10 bg-zinc-950/30">  
-        <div className="max-w-screen-xl mx-auto px-6 text-center">  
-          <p className="text-[10px] uppercase tracking-[0.3em] text-white/40 mb-8">Next Intelligence</p>  
-          <a href="/journal" className="text-3xl md:text-5xl font-light hover:italic transition-all inline-block">  
-            Explore the Journal Index →  
-          </a>  
+        {/* CTA */}  
+        <div className="pt-24 text-center border-t border-white/5">  
+          <button onClick={() => window.location.href = '/invitation'} className="group inline-block">  
+             <div className="text-[10px] text-white/30 uppercase tracking-[0.4em] mb-4">Request Vetting</div>  
+             <div className={`${cormorant.className} text-[#D4AF37] text-3xl italic group-hover:text-white transition-all`}>  
+               Orchestrate {data.title}  
+             </div>  
+             <div className="h-[1px] w-12 bg-[#D4AF37]/30 mx-auto mt-4 group-hover:w-full transition-all duration-700" />  
+          </button>  
         </div>  
-      </section>
+      </article>
 
-      <Footer />  
+      {/* Navigation Footer */}  
+      <footer className="p-8 border-t border-white/5 opacity-30 text-[9px] uppercase tracking-widest flex justify-between">  
+        <span>NexVoyage Collective // 2026</span>  
+        <span>ID: {slug.toUpperCase()}-X01</span>  
+      </footer>  
     </main>  
   );  
 }  
