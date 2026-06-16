@@ -1,195 +1,153 @@
-'use client'
+"use client";
 
-import { useState } from 'react'  
-import Link from 'next/link'
+import React, { useState, useEffect } from 'react';
 
-const CAL_LINK = "https://cal.com/nexvoyagecollective/discovery-call?fbclid=IwY2xjawSdjk1leHRuA2FlbQIxMABicmlkETFMaUpQZllqVG1UaW10VU9Yc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHrH3vHfYcZAlwsnYiz0ZNjnliDAhYu-7RjKjJDdPgi3jzfm864kztN8NmZuY_aem_PwKWf1vFWDQmfXykDyPT0g&user=nexvoyagecollective"
-
-const STEPS = [  
-  {  
-    id: 'intro',  
-    message: "I am Rachel, your Lead Analyst. Initiating secure manifest build for the NexVoyage Collective.",  
-    field: null  
-  },  
-  {  
-    id: 'name',  
-    message: "To begin, how shall I address you in our secure records?",  
-    label: "Identity",  
-    type: "text",  
-    placeholder: "E.g., Alexander Sterling"  
-  },  
-  {  
-    id: 'aviation',  
-    message: "Specify your preferred aviation protocol for this journey.",  
-    label: "Aviation Class",  
-    type: "choice",  
-    options: ["Private Aviation", "First Class", "Business Class", "Economy / Other"]  
-  },  
-  {  
-    id: 'logistics_origin',  
-    message: "What is your primary departure airport?",  
-    label: "Port of Origin",  
-    type: "text",  
-    placeholder: "E.g., JFK, VKO, or LHR"  
-  },  
-  {  
-    id: 'logistics_dates',  
-    message: "When do you intend to initiate this orchestration?",  
-    label: "Travel Window",  
-    type: "text",  
-    placeholder: "E.g., Mid-September 2026"  
-  },  
-  {  
-    id: 'consultation',  
-    message: "Compatibility verified. I have cleared a priority slot on Mr. Clark's schedule for a discovery orchestration.",  
-    label: "Schedule Discovery",  
-    type: "choice",  
-    options: ["Access Priority Calendar", "Manual Follow-up Required"]  
-  },  
-  {  
-    id: 'contact_email',  
-    message: "I require a secure email address to transmit your manifest details.",  
-    label: "Secure Email",  
-    type: "email",  
-    placeholder: "name@domain.com"  
-  },  
-  {  
-    id: 'contact_phone',  
-    message: "Finally, provide a direct line for urgent coordination.",  
-    label: "Direct Line",  
-    type: "tel",  
-    placeholder: "+1 (555) 000-0000"  
-  }  
-]
+// --- CONFIGURATION ---  
+const TIERS = [  
+  { id: 'continuum', name: 'Continuum', desc: 'Continuous orchestration for complex multi-leg global operations.' },  
+  { id: 'blind-manifest', name: 'Blind Manifest', desc: 'Privacy-first routing. All operational data is scrubbed post-execution.' },  
+  { id: 'frictionless-handoff', name: 'Frictionless Handoff', desc: 'Direct integration with your personal office or security detail.' },  
+  { id: 'encrypted-line', name: 'Encrypted Line', desc: 'Hardware-level secure communication for sensitive deployments.' }  
+];
 
 export default function InvitationPage() {  
-  const [currentStep, setCurrentStep] = useState(0)  
-  const [formData, setFormData] = useState<Record<string, string>>({})  
-  const [inputValue, setInputValue] = useState('')  
-  const [isProcessing, setIsProcessing] = useState(false)  
-  const [showCalLink, setShowCalLink] = useState(false)
+  const [step, setStep] = useState(0);  
+  const [isAnalyzing, setIsAnalyzing] = useState(false);  
+  const [manifest, setManifest] = useState({  
+    name: '',  
+    email: '',  
+    phone: '',  
+    aviation: 'Private',  
+    airport: '',  
+    dates: '',  
+    tier: ''  
+  });
 
-  const step = STEPS[currentStep]
+  // --- RACHEL'S LOGIC ---  
+  const nextStep = () => {  
+    setIsAnalyzing(true);  
+    setTimeout(() => {  
+      setIsAnalyzing(false);  
+      setStep(s => s + 1);  
+    }, 1200); // Simulated "Lead Analyst" processing time  
+  };
 
-  const handleNext = (val?: string) => {  
-    const finalVal = val || inputValue  
-    if (step.id !== 'intro' && !finalVal && step.type !== 'choice') return  
-      
-    if (step.id !== 'intro') {  
-      setFormData(prev => ({ ...prev, [step.id]: finalVal }))  
-    }
+  const handleSendRequest = () => {  
+    const baseUrl = "https://cal.com/daryl-clark/discovery";  
+    const params = new URLSearchParams({  
+      name: manifest.name,  
+      email: manifest.email,  
+      notes: `VETTED BY RACHEL AI\nTier: ${manifest.tier.toUpperCase()}\nAviation: ${manifest.aviation}\nAirport: ${manifest.airport}\nDates: ${manifest.dates}\nPhone: ${manifest.phone}`,  
+      'custom-tier': manifest.tier // Assuming a custom field in Cal.com  
+    });
 
-    if (step.id === 'consultation' && finalVal === "Access Priority Calendar") {  
-      setShowCalLink(true)  
-      return   
-    }
+    window.location.href = `${baseUrl}?${params.toString()}`;  
+  };
 
-    if (currentStep < STEPS.length - 1) {  
-      setIsProcessing(true)  
-      setTimeout(() => {  
-        setCurrentStep(prev => prev + 1)  
-        setInputValue('')  
-        setShowCalLink(false)  
-        setIsProcessing(false)  
-      }, 900)  
-    } else {  
-      console.log("Final Manifest Data:", formData)  
-      alert("Manifest Transmitted. Rachel is finalizing the dossier.")  
-    }  
-  }
+  // --- UI COMPONENTS ---  
+  const TerminalHeader = () => (  
+    <div className="mb-8 border-b border-white/10 pb-4">  
+      <div className="text-[10px] tracking-[0.3em] uppercase text-gray-500 mb-2">System Status: Active</div>  
+      <h1 className="text-xl font-light tracking-widest uppercase">Rachel AI // Lead Analyst</h1>  
+    </div>  
+  );
 
   return (  
-    <main className="min-h-screen bg-[#0a0a0a] text-stone-200 flex flex-col items-center justify-center p-6">  
-      <div className="max-w-xl w-full">  
-        {/* Rachel Status Header */}  
-        <div className="flex items-center justify-between mb-16 border-b border-stone-800 pb-4">  
-          <div className="text-[10px] uppercase tracking-[0.4em] text-stone-500 flex items-center gap-2">  
-            <span className="w-1.5 h-1.5 bg-[#c5a059] rounded-full animate-pulse shadow-[0_0_8px_#c5a059]" />  
-            Rachel AI // Lead Analyst  
-          </div>  
-          <div className="text-[10px] uppercase tracking-[0.2em] text-stone-700">  
-            SECURE_ID: {Math.random().toString(36).substring(7).toUpperCase()}  
-          </div>  
-        </div>
+    <div className="min-h-screen bg-[#050505] text-white font-mono flex flex-col items-center justify-center p-6">  
+      <div className="max-w-xl w-full border border-white/5 bg-[#0a0a0a] p-8 md:p-12 shadow-2xl">  
+        <TerminalHeader />
 
-        <div className="min-h-[400px] flex flex-col justify-center">  
-          {isProcessing ? (  
-            <div className="space-y-6">  
-              <div className="text-stone-500 text-[10px] uppercase tracking-[0.5em] animate-pulse">  
-                Analyzing Logistics...  
-              </div>  
-              <div className="h-[1px] bg-stone-900 w-full">  
-                <div className="h-full bg-[#c5a059] w-1/3 animate-[shimmer_2s_infinite]" />  
-              </div>  
+        {isAnalyzing ? (  
+          <div className="py-20 text-center animate-pulse">  
+            <div className="text-xs tracking-[0.4em] uppercase text-amber-500">Analyzing Manifest Data...</div>  
+            <div className="mt-4 h-1 w-full bg-gray-900 overflow-hidden">  
+              <div className="h-full bg-amber-500 animate-progress" style={{ width: '60%' }}></div>  
             </div>  
-          ) : (  
-            <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700">  
-              <p className="text-2xl md:text-3xl font-light leading-relaxed text-stone-100">  
-                "{step.message}"  
-              </p>
+          </div>  
+        ) : (  
+          <>  
+            {/* STEP 0: IDENTITY */}  
+            {step === 0 && (  
+              <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4">  
+                <p className="text-sm text-gray-400 leading-relaxed italic">"Identify yourself for the manifest. State your full name and primary secure email."</p>  
+                <input   
+                  type="text" placeholder="FULL NAME"   
+                  className="w-full bg-transparent border-b border-gray-800 p-2 focus:border-white outline-none transition-colors"  
+                  onChange={(e) => setManifest({...manifest, name: e.target.value})}  
+                />  
+                <input   
+                  type="email" placeholder="SECURE EMAIL"   
+                  className="w-full bg-transparent border-b border-gray-800 p-2 focus:border-white outline-none transition-colors"  
+                  onChange={(e) => setManifest({...manifest, email: e.target.value})}  
+                />  
+                <button onClick={nextStep} className="w-full py-4 border border-white/20 hover:bg-white hover:text-black transition-all uppercase text-xs tracking-widest">Initial Analysis</button>  
+              </div>  
+            )}
 
-              <div className="space-y-8">  
-                {step.type === 'choice' ? (  
-                  <div className="flex flex-col gap-3">  
-                    {step.options?.map(opt => (  
-                      <button  
-                        key={opt}  
-                        onClick={() => handleNext(opt)}  
-                        className="w-full text-left px-6 py-5 border border-stone-800 text-[10px] uppercase tracking-[0.4em] text-stone-400 hover:border-[#c5a059] hover:text-[#c5a059] transition-all bg-stone-900/10"  
-                      >  
-                        {opt}  
-                      </button>  
-                    ))}  
-                  </div>  
-                ) : step.field !== null ? (  
-                  <div className="space-y-4">  
-                    <label className="block text-[10px] uppercase tracking-[0.4em] text-[#c5a059]">  
-                      {step.label}  
-                    </label>  
-                    <input  
-                      autoFocus  
-                      type={step.type}  
-                      value={inputValue}  
-                      onChange={(e) => setInputValue(e.target.value)}  
-                      onKeyDown={(e) => e.key === 'Enter' && handleNext()}  
-                      placeholder={step.placeholder}  
-                      className="w-full bg-transparent border-b border-stone-800 py-4 text-xl focus:outline-none focus:border-[#c5a059] transition-colors placeholder:text-stone-800 font-light text-stone-100"  
-                    />  
-                  </div>  
-                ) : null}
-
-                {showCalLink && (  
-                  <div className="mt-8 p-8 border border-[#c5a059]/30 bg-[#c5a059]/5 animate-in zoom-in-95 duration-500 text-center">  
-                    <p className="text-stone-400 text-[10px] uppercase tracking-[0.3em] mb-6">Discovery Session Authorized</p>  
-                    <a   
-                      href={CAL_LINK}  
-                      target="_blank"   
-                      className="inline-block px-10 py-4 bg-[#c5a059] text-stone-950 text-[10px] uppercase tracking-[0.4em] font-bold hover:bg-stone-100 transition-all"  
-                    >  
-                      Open Calendar  
-                    </a>  
+            {/* STEP 1: LOGISTICS */}  
+            {step === 1 && (  
+              <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4">  
+                <p className="text-sm text-gray-400 italic">"Logistics verification required. Specify aviation class and primary hub."</p>  
+                <div className="flex gap-4">  
+                  {['Private', 'Commercial'].map(t => (  
                     <button   
-                      onClick={() => handleNext("Access Priority Calendar")}  
-                      className="block mx-auto mt-8 text-[9px] uppercase tracking-[0.3em] text-stone-600 hover:text-stone-300"  
+                      key={t}  
+                      onClick={() => setManifest({...manifest, aviation: t})}  
+                      className={`flex-1 py-2 text-[10px] tracking-widest uppercase border ${manifest.aviation === t ? 'border-amber-500 text-amber-500' : 'border-gray-800 text-gray-600'}`}  
                     >  
-                      Proceed to Final Verification  
+                      {t}  
                     </button>  
-                  </div>  
-                )}  
-              </div>
+                  ))}  
+                </div>  
+                <input   
+                  type="text" placeholder="DEPARTURE AIRPORT (CODE)"   
+                  className="w-full bg-transparent border-b border-gray-800 p-2 focus:border-white outline-none transition-colors"  
+                  onChange={(e) => setManifest({...manifest, airport: e.target.value})}  
+                />  
+                <input   
+                  type="text" placeholder="TRAVEL DATES"   
+                  className="w-full bg-transparent border-b border-gray-800 p-2 focus:border-white outline-none transition-colors"  
+                  onChange={(e) => setManifest({...manifest, dates: e.target.value})}  
+                />  
+                <button onClick={nextStep} className="w-full py-4 border border-white/20 hover:bg-white hover:text-black transition-all uppercase text-xs tracking-widest">Verify Logistics</button>  
+              </div>  
+            )}
 
-              {!showCalLink && (step.type === 'text' || step.type === 'email' || step.type === 'tel' || step.id === 'intro') && (  
-                <button  
-                  onClick={() => handleNext()}  
-                  className="text-[10px] uppercase tracking-[0.6em] text-[#c5a059] hover:text-stone-100 transition-colors pt-6 border-t border-stone-900 w-full text-left"  
-                >  
-                  {step.id === 'intro' ? "Begin Verification" : "Transmit Protocol →"}  
-                </button>  
-              )}  
-            </div>  
-          )}  
+            {/* STEP 2: CONDUCTING TIERS */}  
+            {step === 2 && (  
+              <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4">  
+                <p className="text-sm text-gray-400 italic">"Select your preferred Method of Conductance."</p>  
+                <div className="grid grid-cols-1 gap-3">  
+                  {TIERS.map(tier => (  
+                    <button   
+                      key={tier.id}  
+                      onClick={() => setManifest({...manifest, tier: tier.id})}  
+                      className={`text-left p-4 border transition-all ${manifest.tier === tier.id ? 'border-amber-500 bg-amber-500/5' : 'border-gray-900 hover:border-gray-700'}`}  
+                    >  
+                      <div className="text-[10px] tracking-widest uppercase mb-1">{tier.name}</div>  
+                      <div className="text-[10px] text-gray-500 leading-tight">{tier.desc}</div>  
+                    </button>  
+                  ))}  
+                </div>  
+                {manifest.tier && (  
+                  <button   
+                    onClick={handleSendRequest}  
+                    className="w-full py-6 bg-white text-black font-bold uppercase text-xs tracking-[0.3em] hover:bg-amber-500 transition-colors"  
+                  >  
+                    Send Request  
+                  </button>  
+                )}  
+              </div>  
+            )}  
+          </>  
+        )}
+
+        <div className="mt-12 pt-6 border-t border-white/5 flex justify-between items-center text-[9px] text-gray-600 tracking-widest">  
+          <div>LATENCY: 14MS</div>  
+          <div>ENCRYPTION: AES-256</div>  
+          <div>CONDUCTOR: D.CLARK</div>  
         </div>  
       </div>  
-    </main>  
-  )  
+    </div>  
+  );  
 }  
