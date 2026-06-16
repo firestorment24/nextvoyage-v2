@@ -1,6 +1,20 @@
-@import "tailwindcss";
+/* NexVoyage Sanctuary & Archive Visual Logic */  
+.sanctuary-card img {  
+  /* Default: Full color for mobile/touch devices */  
+  filter: grayscale(0%);  
+  transition: filter 0.8s cubic-bezier(0.4, 0, 0.2, 1);  
+  transform: scale(1);  
+  transition: transform 0.8s ease-in-out, filter 0.8s ease-in-out;  
+}
 
-html, body {  
-  background-color: #FCFAF7; /* Warm Parchment */  
-  color: #1C1C1C; /* Ink Black */  
+/* Desktop Only: Start Grayscale, Fade to Color on Hover */  
+@media (hover: hover) {  
+  .sanctuary-card img {  
+    filter: grayscale(100%);  
+  }
+
+  .sanctuary-card:hover img {  
+    filter: grayscale(0%);  
+    transform: scale(1.05); /* Optional: slight zoom for a premium feel */  
+  }  
 }  
