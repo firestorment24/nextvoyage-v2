@@ -4,8 +4,8 @@ import Link from 'next/link';
 import { PERSPECTIVE_POSTS } from '@/lib/data/perspectives';
 
 export default function PerspectivePage() {  
-  // Explicitly type the keys to match the 'size' property in our data  
-  const sizeClasses: Record<'small' | 'medium' | 'large', string> = {  
+  // Adding [key: string]: string ensures TypeScript allows indexing with a string variable  
+  const sizeClasses: { [key: string]: string } = {  
     small: "col-span-1 row-span-1",  
     medium: "col-span-1 md:col-span-2 row-span-1",  
     large: "col-span-1 md:col-span-2 row-span-2",  
@@ -32,7 +32,7 @@ export default function PerspectivePage() {
             <Link  
               key={post.id}  
               href={`/perspective/${post.id}`}  
-              className={`${sizeClasses[post.size]} group relative overflow-hidden border border-stone-800 bg-[#111] transition-all duration-500 hover:border-[#d4af37]/50`}  
+              className={`${sizeClasses[post.size] || sizeClasses.small} group relative overflow-hidden border border-stone-800 bg-[#111] transition-all duration-500 hover:border-[#d4af37]/50`}  
             >  
               {/* Background Image/Overlay */}  
               <div   
