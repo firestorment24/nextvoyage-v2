@@ -29,7 +29,7 @@ export default function JournalDetailPage() {
       {/* Hero Section */}  
       <section className="relative h-[80vh] w-full overflow-hidden border-b border-[#C5A059]/10">  
         <img  
-          src={destination.heroImage || destination.imageUrl}  
+          src={destination.heroImage}  
           alt={destination.name}  
           className="absolute inset-0 w-full h-full object-cover opacity-60 scale-105"  
         />  
@@ -89,7 +89,6 @@ export default function JournalDetailPage() {
               Return to Ledger  
             </span>  
           </Link>  
-            
           <p className="font-mono text-[10px] uppercase tracking-[0.4em] opacity-20 hidden md:block">  
             NexVoyage Collective // Confidential  
           </p>  
@@ -98,10 +97,7 @@ export default function JournalDetailPage() {
 
       <style>  
         {`  
-          body {  
-            background-color: #0A0A0A !important;  
-            margin: 0;  
-          }  
+          body { background-color: #0A0A0A !important; }  
         `}  
       </style>  
     </main>  
