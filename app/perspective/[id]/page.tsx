@@ -1,9 +1,14 @@
-import { perspectives } from '@/lib/data/perspectives'  
+import { PERSPECTIVE_POSTS } from '@/lib/data/perspectives'  
 import { notFound } from 'next/navigation'  
 import Link from 'next/link'
 
-export default function PerspectiveArticle({ params }: { params: { id: string } }) {  
-  const article = perspectives.find((p) => p.id === params.id)
+export default async function PerspectiveArticle({   
+  params   
+}: {   
+  params: Promise<{ id: string }>   
+}) {  
+  const { id } = await params  
+  const article = PERSPECTIVE_POSTS.find((p) => p.id === id)
 
   if (!article) {  
     notFound()  
