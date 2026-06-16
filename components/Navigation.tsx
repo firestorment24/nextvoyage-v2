@@ -11,7 +11,7 @@ const toggleMenu = () => {
   if (typeof document !== 'undefined') {  
     document.body.classList.toggle('menu-active');  
   }  
-};
+}; 
 
 const closeMenu = () => {  
   setIsOpen(false);  
