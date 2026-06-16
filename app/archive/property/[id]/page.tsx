@@ -1,92 +1,135 @@
-"use client";
+// app/archive/property/[id]/page.tsx
 
-import { useParams } from "next/navigation";        
-import { PROPERTY_DATA } from "@/lib/data/sanctuaries";        
-import Link from "next/link";
+import { PROPERTY_DATA } from '@/lib/data/sanctuaries';  
+import Link from 'next/link';  
+import { notFound } from 'next/navigation';  
+import { Metadata } from 'next';
 
-export default function PropertyDossierPage() {    
-  const params = useParams();    
-  const property = PROPERTY_DATA.find(p => p.id === params.id);
+interface Props {  
+  params: { id: string };  
+}
 
-  if (!property) return <div className="pt-24 px-6 text-[#444]">Asset not found in ledger.</div>;
+export async function generateMetadata({ params }: Props): Promise<Metadata> {  
+  const property = PROPERTY_DATA.find((p) => p.id === params.id);  
+  return {  
+    title: property ? `${property.name} | The Archive` : 'Property Not Found',  
+  };  
+}
 
-  return (    
-    <main className="min-h-screen bg-[#0a0a0a] text-[#e5e5e5] pt-24 pb-20">    
-      <div className="max-w-7xl mx-auto px-6">    
-        {/* Navigation / Metadata */}    
-        <div className="flex justify-between items-center mb-12 border-b border-white/10 pb-6">    
-          <Link href="/archive" className="text-[10px] uppercase tracking-[0.3em] text-[#666] hover:text-white transition-colors">    
-            ← Return to Ledger    
-          </Link>    
-          <div className="text-right">    
-            <p className="text-[10px] uppercase tracking-[0.5em] text-[#444]">Serial No.</p>    
-            <p className="text-sm font-sans tracking-widest">{property.id}</p>    
-          </div>    
+export default function PropertyDetailPage({ params }: Props) {  
+  const property = PROPERTY_DATA.find((p) => p.id === params.id);
+
+  if (!property) {  
+    notFound();  
+  }
+
+  return (  
+    <main className="min-h-screen bg-[#0A0A0A] text-white selection:bg-[#C5A059]/30">  
+      {/* Navigation */}  
+      <nav className="fixed top-0 w-full z-50 px-8 py-6 flex justify-between items-center mix-blend-difference">  
+        <Link   
+          href="/archive"   
+          className="text-[10px] uppercase tracking-[0.4em] text-white/60 hover:text-white transition-colors duration-300"  
+        >  
+          ← Back to Archive  
+        </Link>  
+        <span className="text-[10px] uppercase tracking-[0.5em] font-light">  
+          Property {property.serial}  
+        </span>  
+      </nav>
+
+      {/* Hero Section */}  
+      <section className="relative h-[80vh] w-full overflow-hidden">  
+        <img   
+          src={property.image}   
+          alt={property.name}  
+          className="w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-1000 ease-in-out"  
+        />  
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent" />  
+          
+        <div className="absolute bottom-12 left-12 max-w-2xl">  
+          <p className="text-[#C5A059] text-[10px] uppercase tracking-[0.4em] mb-4">  
+            {property.verified ? 'Verified Sanctuary' : 'Pending Verification'}  
+          </p>  
+          <h1 className="text-5xl md:text-7xl font-light tracking-tighter mb-4 leading-none">  
+            {property.name}  
+          </h1>  
+          <p className="text-white/40 uppercase tracking-[0.3em] text-xs">  
+            {property.location}  
+          </p>  
+        </div>  
+      </section>
+
+      {/* Narrative & Content */}  
+      <div className="max-w-7xl mx-auto px-8 py-24 grid grid-cols-1 lg:grid-cols-12 gap-16">  
+          
+        {/* Left Column: Narrative */}  
+        <div className="lg:col-span-7 space-y-12">  
+          <section>  
+            <h3 className="text-[10px] uppercase tracking-[0.4em] text-[#666] mb-8">Narrative</h3>  
+            <p className="font-serif italic text-2xl md:text-3xl leading-relaxed text-white/90">  
+              "{property.description}"  
+            </p>  
+          </section>
+
+          <section className="pt-12 border-t border-white/5">  
+            <h3 className="text-[10px] uppercase tracking-[0.4em] text-[#666] mb-8">Elite Amenities</h3>  
+            <div className="grid grid-cols-2 gap-4">  
+              {property.amenities.map((amenity, index) => (  
+                <div key={index} className="flex items-center space-x-3 text-white/60">  
+                  <div className="w-1 h-1 bg-[#C5A059] rotate-45" />  
+                  <span className="text-sm font-light tracking-wide">{amenity}</span>  
+                </div>  
+              ))}  
+            </div>  
+          </section>  
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">    
-          {/* Visual Asset */}    
-          <div className="lg:col-span-7">    
-            <div className="border border-white/10 p-2 bg-white/[0.02]">    
-              <div className="aspect-[3/4] md:aspect-[16/10] overflow-hidden grayscale hover:grayscale-0 transition-all duration-1000">    
-                <img     
-                  src={property.image}     
-                  alt={property.name}     
-                  className="w-full h-full object-cover"     
-                />    
-              </div>    
-            </div>    
-            {/* Context Assets */}    
-            <div className="mt-8 grid grid-cols-3 gap-4">    
-               {[1,2,3].map(i => (    
-                 <div key={i} className="aspect-square bg-white/[0.03] border border-white/5" />    
-               ))}    
-            </div>    
+        {/* Right Column: Technical Deep-Dive */}  
+        <div className="lg:col-span-5 space-y-12">  
+          <div className="bg-[#111] p-8 md:p-12 border border-white/5">  
+            <section className="mb-12">  
+              <h4 className="text-[10px] uppercase tracking-widest text-[#444] mb-4">Technical Highlight</h4>  
+              <p className="text-sm text-[#ccc] leading-snug font-light italic">  
+                {property.highlight}  
+              </p>  
+            </section>
+
+            <section className="space-y-6">  
+              <h4 className="text-[10px] uppercase tracking-widest text-[#444] mb-4">Specifications</h4>  
+              {Object.entries(property.specs).map(([key, value]) => (  
+                <div key={key} className="flex justify-between items-baseline border-b border-white/5 pb-2">  
+                  <span className="text-[10px] uppercase tracking-widest text-white/30">{key}</span>  
+                  <span className="text-xs text-white/70 font-light">{value}</span>  
+                </div>  
+              ))}  
+            </section>  
           </div>
 
-          {/* Intelligence Data */}    
-          <div className="lg:col-span-5 space-y-12">    
-            <section>    
-              <h1 className="text-5xl font-serif mb-4 leading-tight">{property.name}</h1>    
-              <p className="text-sm text-[#888] uppercase tracking-[0.2em] mb-8">{property.location}</p>    
-              <div className="h-px bg-gradient-to-r from-white/20 to-transparent w-full" />    
-            </section>
+          {/* The Invitation (CTA) */}  
+          <div className="pt-8">  
+            <h3 className="text-[10px] uppercase tracking-[0.4em] text-[#666] mb-6">The Invitation</h3>  
+            <p className="text-sm text-white/50 mb-8 leading-relaxed font-light">  
+              {property.invitation}  
+            </p>  
+            <Link   
+              href={`/reserve?property=${property.id}`}  
+              className="group relative inline-flex items-center px-8 py-4 bg-[#C5A059] text-black text-[10px] uppercase tracking-[0.3em] font-bold overflow-hidden transition-all duration-300 hover:bg-[#D4B57A]"  
+            >  
+              Request Access  
+              <span className="ml-4 transform group-hover:translate-x-1 transition-transform duration-300">→</span>  
+            </Link>  
+          </div>  
+        </div>
 
-            <section className="space-y-6">    
-              <h3 className="text-[10px] uppercase tracking-[0.4em] text-[#666]">Narrative Overview</h3>    
-              <p className="font-serif italic text-lg leading-relaxed text-white/90">    
-                "{property.description}"    
-              </p>    
-            </section>
+      </div>
 
-            {/* Technical Specifications */}    
-            <section className="grid grid-cols-2 gap-y-8 gap-x-4">    
-              <div>    
-                <h4 className="text-[10px] uppercase tracking-widest text-[#444] mb-2">Technical Highlight</h4>    
-                <p className="text-sm text-[#ccc] leading-snug">{property.highlight}</p>    
-              </div>    
-              {property.specs && Object.entries(property.specs).map(([key, value]) => (    
-                <div key={key}>    
-                  <h4 className="text-[10px] uppercase tracking-widest text-[#444] mb-2">{key}</h4>    
-                  <p className="text-sm text-[#ccc] leading-snug">{String(value)}</p>    
-                </div>    
-              ))}    
-            </section>
-
-            {/* Vetting Action */}    
-            <section className="pt-12 border-t border-white/5">    
-              <Link href="/inquiry" className="block">    
-                <button className="w-full border border-neutral-700 py-4 text-[10px] font-mono uppercase tracking-[0.4em] text-white hover:bg-white hover:text-black transition-all duration-500">    
-                  Begin Consultation    
-                </button>    
-              </Link>    
-              <p className="mt-4 text-[9px] text-[#444] uppercase tracking-widest text-center">    
-                Secure Transmission via NexVoyage Protocol    
-              </p>    
-            </section>    
-          </div>    
-        </div>    
-      </div>    
-    </main>    
-  );    
+      {/* Footer Branding */}  
+      <footer className="py-24 border-t border-white/5 text-center">  
+        <p className="text-[10px] uppercase tracking-[1em] text-white/20">  
+          NexVoyage Collective  
+        </p>  
+      </footer>  
+    </main>  
+  );  
 }  
