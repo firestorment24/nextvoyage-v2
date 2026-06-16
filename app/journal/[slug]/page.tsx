@@ -1,74 +1,99 @@
-"use client";
+'use client';
 
-import React from 'react';  
 import { useParams, notFound } from 'next/navigation';  
-import { Cormorant_Garamond, Inter } from 'next/font/google';  
-import { DESTINATIONS_DATA } from '@/lib/journal-data';
+import { DESTINATIONS_DATA } from '@/lib/journal-data';  
+import { Button } from '@/components/ui/button';  
+import Link from 'next/link';  
+import { ArrowLeft, MapPin, Calendar, Compass, Info } from 'lucide-react';
 
-const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500'] });  
-const inter = Inter({ subsets: ['latin'], weight: ['300', '400'] });
-
-export default function JournalDetailPage() {  
-  const params = useParams();  
-  const slug = params.slug as string;  
-  const data = DESTINATIONS_DATA[slug];
+export default function JournalEntry() {  
+  const params = useParams();    
+  const slug = params?.slug as string;    
+    
+  // Use .find() since DESTINATIONS_DATA is now an array  
+  const data = DESTINATIONS_DATA.find(d => d.id === slug);
 
   if (!data) return notFound();
 
   return (  
-    <main className={`min-h-screen bg-[#050505] text-[#E5E5E5] ${inter.className}`}>  
+    <div className="min-h-screen bg-[#050505] text-[#E5E5E5] font-sans selection:bg-[#D4AF37] selection:text-black">  
       {/* Hero Section */}  
-      <section className="h-[70vh] relative flex items-end p-8 md:p-24 border-b border-[#D4AF37]/10 overflow-hidden">  
-        <div className="max-w-4xl z-10">  
-          <p className="text-[#D4AF37] text-xs uppercase tracking-[0.5em] mb-6 italic">The Journal // Destination Guide</p>  
-          <h1 className={`${cormorant.className} text-6xl md:text-9xl font-light italic leading-none`}>  
-            {data.title}  
-          </h1>  
+      <section className="relative h-[80vh] w-full overflow-hidden">  
+        <div className="absolute inset-0">  
+          <img   
+            src={data.heroImage}   
+            alt={data.title}  
+            className="w-full h-full object-cover opacity-60 scale-105"  
+          />  
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent" />  
         </div>  
-        {/* Shadow Background */}  
-        <div className="absolute inset-0 bg-[#050505]/40 z-0" />  
+          
+        <div className="relative h-full flex flex-col justify-end px-6 pb-12 max-w-7xl mx-auto w-full">  
+          <Link href="/journal" className="flex items-center gap-2 text-[#D4AF37] mb-8 hover:opacity-70 transition-opacity w-fit uppercase tracking-widest text-xs font-medium">  
+            <ArrowLeft className="w-4 h-4" /> Back to Ledger  
+          </Link>  
+          <p className="text-[#D4AF37] font-serif italic text-xl mb-2">{data.subtitle}</p>  
+          <h1 className="text-6xl md:text-8xl font-serif font-bold tracking-tight mb-4">{data.title}</h1>  
+          <div className="flex items-center gap-6 text-sm text-[#A0A0A0] uppercase tracking-[0.2em]">  
+            <span className="flex items-center gap-2"><MapPin className="w-4 h-4 text-[#D4AF37]" /> {data.coordinates}</span>  
+            <span className="flex items-center gap-2"><Calendar className="w-4 h-4 text-[#D4AF37]" /> {data.bestTime}</span>  
+          </div>  
+        </div>  
       </section>
 
-      {/* Editorial Content */}  
-      <article className="max-w-3xl mx-auto py-24 px-8 space-y-16">  
-        <div className="space-y-6">  
-          <p className={`${cormorant.className} text-3xl md:text-4xl text-white/90 leading-relaxed italic`}>  
-            {data.quote}  
-          </p>  
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 border-t border-white/10 pt-12">  
-          <div className="space-y-4">  
-            <h4 className="text-[10px] uppercase tracking-widest text-[#D4AF37]">The Sanctuary Archive</h4>  
-            <p className="text-sm text-white/70 leading-relaxed font-light">  
-              {data.archive}  
+      {/* Narrative Section */}  
+      <section className="py-24 px-6 max-w-4xl mx-auto">  
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12">  
+          <div className="md:col-span-8">  
+            <p className="text-2xl md:text-3xl font-serif leading-relaxed mb-12 italic text-[#D4AF37]">  
+              "{data.quote}"  
             </p>  
+            <div className="space-y-8 text-lg leading-relaxed text-[#D0D0D0]">  
+              <p>{data.summary}</p>  
+              <div className="pt-8 border-t border-[#D4AF37]/20">  
+                <h3 className="text-[#D4AF37] uppercase tracking-widest text-sm font-bold mb-4 flex items-center gap-2">  
+                  <Compass className="w-4 h-4" /> The Orchestration  
+                </h3>  
+                <p className="font-serif italic text-xl">{data.orchestration}</p>  
+              </div>  
+            </div>  
           </div>  
-          <div className="space-y-4">  
-            <h4 className="text-[10px] uppercase tracking-widest text-[#D4AF37]">The Orchestration</h4>  
-            <p className="text-sm text-white/70 leading-relaxed font-light">  
-              {data.orchestration}  
-            </p>  
-          </div>  
-        </div>
+            
+          <div className="md:col-span-4 space-y-12">  
+            <div className="bg-[#111] p-8 border-l border-[#D4AF37]">  
+              <h4 className="text-xs uppercase tracking-widest text-[#A0A0A0] mb-4">The Sanctuary</h4>  
+              <p className="text-xl font-serif text-[#D4AF37]">{data.sanctuary}</p>  
+            </div>  
+              
+            <div className="space-y-6">  
+              <h4 className="text-xs uppercase tracking-widest text-[#A0A0A0] flex items-center gap-2">  
+                <Info className="w-4 h-4" /> Insider Tip  
+              </h4>  
+              <p className="text-sm italic leading-relaxed text-[#A0A0A0]">{data.insiderTip}</p>  
+            </div>
 
-        {/* CTA */}  
-        <div className="pt-24 text-center border-t border-white/5">  
-          <button onClick={() => window.location.href = '/invitation'} className="group inline-block">  
-             <div className="text-[10px] text-white/30 uppercase tracking-[0.4em] mb-4">Request Vetting</div>  
-             <div className={`${cormorant.className} text-[#D4AF37] text-3xl italic group-hover:text-white transition-all`}>  
-               Orchestrate {data.title}  
-             </div>  
-             <div className="h-[1px] w-12 bg-[#D4AF37]/30 mx-auto mt-4 group-hover:w-full transition-all duration-700" />  
-          </button>  
+            <div className="space-y-4">  
+              <h4 className="text-xs uppercase tracking-widest text-[#A0A0A0]">Essential Curations</h4>  
+              <ul className="space-y-3">  
+                {data.topMustDos.map((item, i) => (  
+                  <li key={i} className="text-sm flex items-start gap-3">  
+                    <span className="text-[#D4AF37]">0{i+1}</span>  
+                    <span>{item}</span>  
+                  </li>  
+                ))}  
+              </ul>  
+            </div>  
+          </div>  
         </div>  
-      </article>
+      </section>
 
-      {/* Navigation Footer */}  
-      <footer className="p-8 border-t border-white/5 opacity-30 text-[9px] uppercase tracking-widest flex justify-between">  
-        <span>NexVoyage Collective // 2026</span>  
-        <span>ID: {slug.toUpperCase()}-X01</span>  
-      </footer>  
-    </main>  
+      {/* CTA Section */}  
+      <section className="py-24 border-t border-[#1A1A1A] text-center">  
+        <h3 className="text-3xl font-serif mb-8">Begin the Orchestration.</h3>  
+        <Button asChild className="bg-[#D4AF37] text-black hover:bg-[#B48E27] px-12 py-6 rounded-none uppercase tracking-widest text-xs font-bold">  
+          <Link href="/contact">Enquire Privately</Link>  
+        </Button>  
+      </section>  
+    </div>  
   );  
 }  
