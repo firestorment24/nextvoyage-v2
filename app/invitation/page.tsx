@@ -1,119 +1,140 @@
-"use client";
+'use client'
 
-import { useState } from "react";
+import { useState, useEffect } from 'react'  
+import Link from 'next/link'
+
+const STEPS = [  
+  {  
+    id: 'intro',  
+    message: "I am Rachel, your Lead Analyst at NexVoyage. Before we proceed with an orchestration, I must verify the intent of your inquiry.",  
+    field: null  
+  },  
+  {  
+    id: 'name',  
+    message: "How shall I address you in our records?",  
+    label: "Full Name",  
+    type: "text",  
+    placeholder: "E.g., Alexander Sterling"  
+  },  
+  {  
+    id: 'context',  
+    message: "What is the primary occasion for this sanctuary visit? We specialize in legacy milestones and quiet retreats.",  
+    label: "Occasion",  
+    type: "text",  
+    placeholder: "E.g., Family Legacy Milestone"  
+  },  
+  {  
+    id: 'logistics',  
+    message: "Shall I prioritize private aviation protocols, or do you require commercial first-class coordination?",  
+    label: "Logistics Preference",  
+    type: "select",  
+    options: ["Private Aviation", "Commercial First-Class", "TBD"]  
+  },  
+  {  
+    id: 'final',  
+    message: "Understood. My system will now analyze your request for compatibility. Please provide your secure contact detail.",  
+    label: "Secure Email",  
+    type: "email",  
+    placeholder: "name@domain.com"  
+  }  
+]
 
 export default function InvitationPage() {  
-  const [loading, setLoading] = useState(false);  
-  const [submitted, setSubmitted] = useState(false);
+  const [currentStep, setCurrentStep] = useState(0)  
+  const [formData, setFormData] = useState<Record<string, string>>({})  
+  const [inputValue, setInputValue] = useState('')  
+  const [isProcessing, setIsProcessing] = useState(false)
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {  
-    e.preventDefault();  
-    setLoading(true);
+  const step = STEPS[currentStep]
 
-    const formData = new FormData(e.currentTarget);  
-    const payload = {  
-      name: formData.get("name"),  
-      email: formData.get("email"),  
-      phone: formData.get("phone"), // Captured here  
-      dates: formData.get("dates"),  
-      city: formData.get("city"),  
-      vision: formData.get("vision"),  
-      aesthetics: formData.get("aesthetics"),  
-    };
+  const handleNext = () => {  
+    if (step.id !== 'intro' && !inputValue) return  
+      
+    if (step.id !== 'intro') {  
+      setFormData(prev => ({ ...prev, [step.id]: inputValue }))  
+    }
 
-    try {  
-      const res = await fetch("/api/lead", {  
-        method: "POST",  
-        headers: { "Content-Type": "application/json" },  
-        body: JSON.stringify(payload),  
-      });
-
-      if (res.ok) setSubmitted(true);  
-      else alert("The orchestration could not be initiated. Please try again.");  
-    } catch (error) {  
-      console.error("Submission error:", error);  
-    } finally {  
-      setLoading(false);  
+    if (currentStep < STEPS.length - 1) {  
+      setIsProcessing(true)  
+      setTimeout(() => {  
+        setCurrentStep(prev => prev + 1)  
+        setInputValue('')  
+        setIsProcessing(false)  
+      }, 800)  
+    } else {  
+      // Final Submission logic would go here  
+      alert("Inquiry transmitted. Rachel is analyzing your compatibility.")  
     }  
   }
 
-  if (submitted) {  
-    return (  
-      <div className="flex flex-col items-center justify-center min-h-screen bg-black text-center px-4">  
-        <h1 className="text-xl font-light uppercase tracking-[0.4em] text-[#d4af37] mb-6">Dialogue Initiated</h1>  
-        <p className="text-[10px] uppercase tracking-widest text-stone-500 max-w-xs leading-relaxed">  
-          Your manifest has been received. Daryl will reach out shortly to begin the orchestration.  
-        </p>  
-      </div>  
-    );  
-  }
-
   return (  
-    <main className="bg-black text-stone-200 min-h-screen selection:bg-[#d4af37] selection:text-black">  
-      <div className="max-w-2xl mx-auto py-32 px-8">  
-        <header className="mb-20 text-center">  
-          <h1 className="text-3xl font-light uppercase tracking-[0.3em] mb-4">The Invitation</h1>  
-          <div className="h-[1px] w-12 bg-[#d4af37] mx-auto opacity-50"></div>  
-        </header>
-
-        <form onSubmit={handleSubmit} className="space-y-12">  
-          {/* Section 1: Identity */}  
-          <div className="space-y-10">  
-            <div className="group space-y-3">  
-              <label className="block text-[9px] uppercase tracking-[0.2em] text-stone-500 group-focus-within:text-[#d4af37] transition-colors">Full Name</label>  
-              <input required name="name" className="w-full bg-transparent border-b border-stone-800 py-2 focus:outline-none focus:border-[#d4af37] transition-colors font-light tracking-wide" />  
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">  
-              <div className="group space-y-3">  
-                <label className="block text-[9px] uppercase tracking-[0.2em] text-stone-500 group-focus-within:text-[#d4af37] transition-colors">Email Address</label>  
-                <input required name="email" type="email" className="w-full bg-transparent border-b border-stone-800 py-2 focus:outline-none focus:border-[#d4af37] transition-colors font-light tracking-wide" />  
-              </div>  
-              <div className="group space-y-3">  
-                <label className="block text-[9px] uppercase tracking-[0.2em] text-stone-500 group-focus-within:text-[#d4af37] transition-colors">Phone Number</label>  
-                <input name="phone" type="tel" className="w-full bg-transparent border-b border-stone-800 py-2 focus:outline-none focus:border-[#d4af37] transition-colors font-light tracking-wide" />  
-              </div>  
-            </div>  
-          </div>
-
-          {/* Section 2: Logistics */}  
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">  
-            <div className="group space-y-3">  
-              <label className="block text-[9px] uppercase tracking-[0.2em] text-stone-500 group-focus-within:text-[#d4af37] transition-colors">Departure City</label>  
-              <input name="city" className="w-full bg-transparent border-b border-stone-800 py-2 focus:outline-none focus:border-[#d4af37] transition-colors font-light tracking-wide" />  
-            </div>  
-            <div className="group space-y-3">  
-              <label className="block text-[9px] uppercase tracking-[0.2em] text-stone-500 group-focus-within:text-[#d4af37] transition-colors">Preferred Timeline</label>  
-              <input name="dates" className="w-full bg-transparent border-b border-stone-800 py-2 focus:outline-none focus:border-[#d4af37] transition-colors font-light tracking-wide" />  
-            </div>  
-          </div>
-
-          {/* Section 3: The Narrative */}  
-          <div className="space-y-12">  
-            <div className="group space-y-3">  
-              <label className="block text-[9px] uppercase tracking-[0.2em] text-stone-500 group-focus-within:text-[#d4af37] transition-colors">The Vision</label>  
-              <textarea name="vision" rows={3} className="w-full bg-transparent border-b border-stone-800 py-2 focus:outline-none focus:border-[#d4af37] transition-colors resize-none font-light leading-relaxed" />  
-            </div>
-
-            <div className="group space-y-3">  
-              <label className="block text-[9px] uppercase tracking-[0.2em] text-stone-500 group-focus-within:text-[#d4af37] transition-colors">Aesthetic Requirements</label>  
-              <textarea name="aesthetics" rows={2} className="w-full bg-transparent border-b border-stone-800 py-2 focus:outline-none focus:border-[#d4af37] transition-colors resize-none font-light leading-relaxed" />  
-            </div>  
-          </div>
-
-          <div className="pt-12">  
-            <button  
-              type="submit"  
-              disabled={loading}  
-              className="w-full group relative overflow-hidden py-5 border border-stone-800 uppercase tracking-[0.4em] text-[10px] transition-all hover:border-[#d4af37]"  
-            >  
-              <span className={`relative z-10 ${loading ? 'animate-pulse' : 'group-hover:text-[#d4af37]'}`}>  
-                {loading ? "Transmitting..." : "Begin the Dialogue"}  
-              </span>  
-            </button>  
+    <main className="min-h-screen bg-[#0a0a0a] text-stone-200 flex flex-col items-center justify-center p-6">  
+      <div className="max-w-xl w-full">  
+        {/* Terminal Header */}  
+        <div className="flex items-center justify-between mb-12 border-b border-stone-800 pb-4">  
+          <div className="text-[10px] uppercase tracking-[0.4em] text-stone-500">  
+            System: Rachel AI // Lead Analyst  
           </div>  
-        </form>  
+          <Link href="/" className="text-[10px] uppercase tracking-[0.2em] text-[#c5a059] hover:opacity-50">  
+            Exit  
+          </Link>  
+        </div>
+
+        {/* Content Area */}  
+        <div className="min-h-[300px] flex flex-col justify-center">  
+          {isProcessing ? (  
+            <div className="animate-pulse text-stone-500 text-[10px] uppercase tracking-widest">  
+              Rachel is processing...  
+            </div>  
+          ) : (  
+            <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">  
+              <p className="text-2xl md:text-3xl font-light leading-relaxed text-stone-100 italic">  
+                "{step.message}"  
+              </p>
+
+              {step.field !== null && (  
+                <div className="space-y-4">  
+                  <label className="block text-[10px] uppercase tracking-[0.3em] text-[#c5a059]">  
+                    {step.label}  
+                  </label>  
+                  {step.type === 'select' ? (  
+                    <div className="flex flex-wrap gap-4">  
+                      {step.options?.map(opt => (  
+                        <button  
+                          key={opt}  
+                          onClick={() => { setInputValue(opt); handleNext(); }}  
+                          className={`px-6 py-3 border text-[10px] uppercase tracking-widest transition-all ${  
+                            inputValue === opt ? 'bg-[#c5a059] text-stone-950 border-[#c5a059]' : 'border-stone-800 text-stone-400 hover:border-stone-600'  
+                          }`}  
+                        >  
+                          {opt}  
+                        </button>  
+                      ))}  
+                    </div>  
+                  ) : (  
+                    <input  
+                      autoFocus  
+                      type={step.type}  
+                      value={inputValue}  
+                      onChange={(e) => setInputValue(e.target.value)}  
+                      onKeyDown={(e) => e.key === 'Enter' && handleNext()}  
+                      placeholder={step.placeholder}  
+                      className="w-full bg-transparent border-b border-stone-800 py-4 text-xl focus:outline-none focus:border-[#c5a059] transition-colors placeholder:text-stone-700 font-light"  
+                    />  
+                  )}  
+                </div>  
+              )}
+
+              <button  
+                onClick={handleNext}  
+                className="text-[10px] uppercase tracking-[0.5em] text-[#c5a059] hover:text-stone-100 transition-colors pt-4"  
+              >  
+                {step.id === 'intro' ? "Proceed" : (currentStep === STEPS.length - 1 ? "Transmit Inquiry" : "Next Protocol")}  
+              </button>  
+            </div>  
+          )}  
+        </div>  
       </div>  
     </main>  
-  );  
+  )  
 }  
