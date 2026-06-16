@@ -86,8 +86,27 @@ export default function InvitationPage() {
   };
 
   const redirectToCal = () => {  
-    const calUrl = `https://cal.com/nexvoyagecollective/discovery-call?name=${encodeURIComponent(formData.name)}&email=${encodeURIComponent(formData.email)}&notes=${encodeURIComponent(`Tier: ${formData.tier}\nReason: ${formData.reason}`)}&phone=${encodeURIComponent(formData.phone)}`;  
-    window.location.href = calUrl;  
+    // 1. Format the phone number (replacing '+' with '%2B' for URL encoding)  
+    const encodedPhone = formData.phone.startsWith('+')   
+      ? `%2B${formData.phone.substring(1)}`   
+      : formData.phone;
+
+    // 2. Combine Tier and Reason into the 'notes' field (Standard Cal.com mapping)  
+    const combinedNotes = `Tier: ${formData.tier.toUpperCase()}\n\nReason for Orchestration:\n${formData.reason}`;
+
+    // 3. Construct the URL with exact Cal.com parameters:  
+    // name, email, notes (reason), smsReminderNumber (phone), and location (phone object)  
+    const baseUrl = `https://cal.com/nexvoyagecollective/discovery-call`;  
+    const params = new URLSearchParams({  
+      name: formData.name,  
+      email: formData.email,  
+      notes: combinedNotes,  
+      smsReminderNumber: formData.phone, // Standard for SMS fields  
+      attendeePhoneNumber: formData.phone, // Alternative for some Cal configs  
+      location: JSON.stringify({ value: 'phone', optionValue: formData.phone }) // Essential if location is 'phone'  
+    });
+
+    window.location.href = `${baseUrl}?${params.toString()}`;  
   };
 
   return (  
@@ -117,7 +136,7 @@ export default function InvitationPage() {
                 {field === 'reason' ? (  
                   <textarea  
                     autoFocus  
-                    placeholder="Type your response..."  
+                    placeholder="Describe your intent..."  
                     className="w-full bg-transparent border-b border-[#D4AF37]/30 py-3 text-lg focus:outline-none focus:border-[#D4AF37] transition-colors resize-none h-32"  
                     value={formData[field as keyof typeof formData]}  
                     onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}  
