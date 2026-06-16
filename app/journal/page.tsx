@@ -1,80 +1,97 @@
 'use client'
 
+import React from 'react'  
+import Link from 'next/link'  
 import { DESTINATIONS_DATA } from '@/lib/journal-data'  
-import Link from 'next/link'
+import { Cormorant_Garamond, Inter } from 'next/font/google'
+
+const cormorant = Cormorant_Garamond({   
+  subsets: ['latin'],   
+  weight: ['300', '400', '600'],  
+  variable: '--font-cormorant'  
+})
+
+const inter = Inter({   
+  subsets: ['latin'],  
+  variable: '--font-inter'  
+})
 
 export default function JournalPage() {  
   return (  
-    <main className="min-h-screen bg-[#0A0A0A] text-[#C5A059] selection:bg-[#C5A059] selection:text-[#0A0A0A]">  
-      <header className="pt-32 pb-16 px-6 max-w-7xl mx-auto border-b border-[#C5A059]/10">  
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">  
-          <div>  
-            <p className="font-mono text-[10px] uppercase tracking-[0.4em] opacity-50 mb-4">  
-              Volume 01 // The Master Ledger  
-            </p>  
-            <h1 className="text-7xl md:text-9xl font-serif lowercase tracking-tighter leading-[0.8]">  
-              the journal  
-            </h1>  
+    <main className={`min-h-screen bg-[#050505] text-[#E5E5E5] selection:bg-[#C5A059]/30 ${cormorant.variable} ${inter.variable} font-sans`}>  
+      {/* Header Section */}  
+      <header className="pt-24 pb-16 px-6 border-b border-[#C5A059]/10">  
+        <div className="max-w-7xl mx-auto space-y-4">  
+          <div className="flex items-center space-x-4">  
+            <span className="text-[#C5A059] text-xs tracking-[0.4em] uppercase">Volume 01 // The Master Ledger</span>  
+            <div className="h-px w-12 bg-[#C5A059]/30" />  
           </div>  
-          <div className="max-w-xs pb-2 text-right md:text-left">  
-            <p className="font-serif italic text-lg leading-relaxed opacity-80">  
-              "The world is a ledger of experiences; we simply help you curate the entries."  
-            </p>  
-          </div>  
+          <h1 className="text-6xl md:text-8xl font-serif text-[#C5A059] leading-tight">  
+            The Journal  
+          </h1>  
+          <p className="max-w-xl text-sm font-serif italic opacity-60 leading-relaxed">  
+            "To travel is to possess the world, one curated moment at a time. This is our private record of the exceptional."  
+          </p>  
         </div>  
       </header>
 
-      <section className="px-6 py-24 max-w-7xl mx-auto">  
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 lg:gap-24">  
-          {DESTINATIONS_DATA.map((item) => (  
-            <Link key={item.id} href={`/journal/${item.id}`} className="group block no-underline">  
-              <div className="relative aspect-[4/5] overflow-hidden mb-10 bg-[#111111] border border-[#C5A059]/5">  
-                <img  
-                  src={item.heroImage}  
-                  alt={item.name}  
-                  className="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all duration-1000 ease-in-out scale-105 group-hover:scale-100 opacity-80 group-hover:opacity-100"  
-                />  
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent opacity-60" />  
-              </div>
+      {/* Grid Section */}  
+      <section className="max-w-7xl mx-auto px-6 py-20">  
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[#C5A059]/10 border border-[#C5A059]/10">  
+          {DESTINATIONS_DATA.map((item) => {  
+            const slug = item.location.toLowerCase().replace(/\s+/g, '-')  
+              
+            return (  
+              <Link   
+                key={item.id}  
+                href={`/journal/${slug}`}  
+                className="group relative aspect-[4/5] bg-[#0A0A0A] overflow-hidden flex flex-col justify-end p-8 transition-colors duration-500 hover:bg-[#0D0D0D]"  
+              >  
+                {/* Background Image - Hover Reveal */}  
+                <div className="absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity duration-700">  
+                  <img    
+                    src={item.heroImage}    
+                    alt={item.location}    
+                    className="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all duration-1000 scale-105 group-hover:scale-100"   
+                  />    
+                </div>
 
-              <div className="space-y-5 bg-transparent">  
-                <p className="font-mono text-[10px] tracking-[0.3em] opacity-40 uppercase">  
-                  {item.coordinates}  
-                </p>  
-                <div className="space-y-2">  
-                  <h3 className="text-3xl font-serif lowercase tracking-tight group-hover:translate-x-3 transition-transform duration-700 ease-out">  
-                    {item.name}  
-                  </h3>  
-                  <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#C5A059]/60">  
-                    {item.title}  
-                  </p>  
+                <div className="relative z-10 space-y-4">  
+                  <div className="space-y-1">  
+                    <span className="text-[#C5A059] text-[10px] tracking-[0.3em] uppercase opacity-60 group-hover:opacity-100 transition-opacity">  
+                      {item.coordinates}  
+                    </span>  
+                    <h2 className="text-3xl font-serif text-white group-hover:text-[#C5A059] transition-colors duration-500">  
+                      {item.location}  
+                    </h2>  
+                  </div>  
+                    
+                  <p className="text-xs font-serif leading-relaxed opacity-40 group-hover:opacity-70 line-clamp-2 transition-opacity">  
+                    {item.summary}  
+                  </p>
+
+                  <div className="pt-4 border-t border-[#C5A059]/10 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">  
+                    <span className="text-[#C5A059] text-[9px] tracking-[0.4em] uppercase">View Intel →</span>  
+                  </div>  
                 </div>  
-                <p className="text-sm font-serif italic leading-relaxed opacity-60 line-clamp-2 max-w-[90%]">  
-                  {item.summary}  
-                </p>  
-                <div className="pt-6 flex items-center gap-4">  
-                  <span className="h-[1px] w-12 bg-[#C5A059]/30 group-hover:w-20 group-hover:bg-[#C5A059] transition-all duration-700" />  
-                  <span className="font-mono text-[9px] uppercase tracking-[0.4em] opacity-80">  
-                    Read Narrative  
-                  </span>  
-                </div>  
-              </div>  
-            </Link>  
-          ))}  
+              </Link>  
+            )  
+          })}  
         </div>  
       </section>
 
-      <footer className="py-32 px-6 border-t border-[#C5A059]/5 text-center">  
-        <p className="font-mono text-[10px] tracking-[0.5em] opacity-30 uppercase">  
-          End of Ledger // Page 01 of 01  
-        </p>  
-      </footer>
-
-      <style>  
-        {`  
-          body { background-color: #0A0A0A !important; }  
-        `}  
-      </style>  
+      {/* Footer Navigation */}  
+      <footer className="py-20 px-6 border-t border-[#C5A059]/10">  
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">  
+          <div className="text-[10px] tracking-[0.5em] uppercase opacity-30">  
+            End of Ledger // Page 01 of 27  
+          </div>  
+          <Link href="/invitation" className="group flex items-center space-x-6">  
+            <span className="text-[#C5A059] text-xs tracking-[0.3em] uppercase">Secure Your Membership</span>  
+            <div className="w-12 h-px bg-[#C5A059] group-hover:w-20 transition-all duration-500" />  
+          </Link>  
+        </div>  
+      </footer>  
     </main>  
   )  
 }  
