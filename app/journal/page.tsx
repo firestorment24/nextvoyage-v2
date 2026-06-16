@@ -1,54 +1,68 @@
-'use client'
-
-import React from 'react'  
+/**  
+ * app/journal/page.tsx  
+ */  
 import Link from 'next/link'  
 import { DESTINATIONS_DATA } from '@/lib/journal-data'
 
+// Standardized slug generator  
+const getSlug = (location: string) =>   
+  location.toLowerCase()  
+    .replace(/\s+/g, '-')  
+    .replace(/[().]/g, '') // Remove parentheses and dots  
+    .replace(/-+/g, '-')   // Remove double hyphens
+
 export default function JournalPage() {  
-  // Synchronized slug generator  
-  const getSlug = (loc: string) => loc.toLowerCase().replace(/[\s()]/g, '-').replace(/-+/g, '-')
-
   return (  
-    <main className="min-h-screen bg-[#0A0A0A] text-[#C5A059] font-serif selection:bg-[#C5A059]/30">  
-      <style dangerouslySetInnerHTML={{ __html: `  
-        h1, h2, h3, h4, p, span, div, section { background-color: transparent !important; }  
-        body { background-color: #0A0A0A !important; }  
-      `}} />
-
-      <div className="pt-32 pb-20 px-8 max-w-7xl mx-auto border-b border-[#C5A059]/20">  
-        <div className="flex flex-col gap-4">  
-          <span className="text-[10px] tracking-[0.4em] uppercase opacity-60">Volume 01 // The Master Ledger</span>  
-          <h1 className="text-6xl md:text-8xl font-light tracking-tighter leading-none">The Journal</h1>  
-          <p className="text-lg md:text-xl opacity-80 max-w-2xl italic font-light mt-4">  
-            "The world is a ledger of experiences; we simply help you curate the entries."  
+    <div className="min-h-screen bg-[#0A0A0A] text-[#E5E5E5] pt-32 pb-20 px-6">  
+      <div className="max-w-7xl mx-auto">  
+        <header className="mb-20 text-center">  
+          <h1 className="text-5xl md:text-7xl font-light font-serif mb-6 tracking-tight text-[#C5A059]">  
+            The Journal  
+          </h1>  
+          <p className="text-xl text-[#888] max-w-2xl mx-auto font-light leading-relaxed">  
+            Tactical intelligence and seasonal reports from the NexVoyage Collective.  
           </p>  
-        </div>  
-      </div>
+        </header>
 
-      <section className="max-w-7xl mx-auto px-8 py-20">  
-        <div className="flex flex-col">  
-          {DESTINATIONS_DATA.map((item) => (  
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">  
+          {DESTINATIONS_DATA.map((dest) => (  
             <Link   
-              key={item.location}  
-              href={`/journal/${getSlug(item.location)}`}  
-              className="group border-b border-[#C5A059]/10 py-12 flex flex-col md:flex-row md:items-center justify-between gap-8 transition-all hover:bg-[#C5A059]/5 px-4 -mx-4"  
+              key={dest.id}   
+              href={`/journal/${getSlug(dest.location)}`}  
+              className="group block"  
             >  
-              <div className="flex flex-col gap-2 max-w-xl">  
-                <span className="text-[10px] tracking-widest opacity-50 uppercase">{item.coordinates}</span>  
-                <h2 className="text-3xl md:text-4xl font-light group-hover:translate-x-2 transition-transform duration-500">  
-                  {item.location}  
-                </h2>  
-                <h3 className="text-sm uppercase tracking-[0.2em] opacity-60">{item.orchestration}</h3>  
-                <p className="text-sm opacity-40 leading-relaxed line-clamp-2 mt-2">{item.summary}</p>  
-              </div>
-
-              <div className="relative w-full md:w-64 h-40 overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700 border border-[#C5A059]/20">  
-                <img src={item.heroImage} alt={item.location} className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-1000" />  
+              <div className="relative aspect-[4/5] overflow-hidden bg-[#111] mb-6">  
+                <img  
+                  src={dest.heroImage}  
+                  alt={dest.location}  
+                  className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105 opacity-80"  
+                />  
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent opacity-60" />  
+                <div className="absolute bottom-6 left-6 right-6">  
+                  <p className="text-[10px] tracking-[0.3em] uppercase text-[#C5A059] mb-2">  
+                    {dest.coordinates}  
+                  </p>  
+                  <h3 className="text-2xl font-serif font-light tracking-wide">  
+                    {dest.location}  
+                  </h3>  
+                </div>  
+              </div>  
+              <div className="space-y-2">  
+                <h4 className="text-[#C5A059] font-serif italic text-lg leading-snug">  
+                  {dest.orchestration}  
+                </h4>  
+                <p className="text-sm text-[#888] leading-relaxed line-clamp-2 font-light">  
+                  {dest.summary}  
+                </p>  
+                <div className="pt-4 flex items-center gap-2 text-[10px] tracking-widest uppercase text-[#E5E5E5] group-hover:text-[#C5A059] transition-colors">  
+                  <span>Read Narrative</span>  
+                  <span className="h-px w-8 bg-[#C5A059]" />  
+                </div>  
               </div>  
             </Link>  
           ))}  
         </div>  
-      </section>  
-    </main>  
+      </div>  
+    </div>  
   )  
 }  
