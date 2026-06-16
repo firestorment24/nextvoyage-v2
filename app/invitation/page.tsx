@@ -1,191 +1,151 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from 'react';  
-import { Cormorant_Garamond, Inter } from 'next/font/google';
-
-const cormorant = Cormorant_Garamond({   
-  subsets: ['latin'],   
-  weight: ['300', '400', '500', '600'],  
-  display: 'swap'   
-});
-
-const inter = Inter({   
-  subsets: ['latin'],   
-  weight: ['300', '400'],  
-  display: 'swap'   
-});
-
-const TIERS = [  
-  { id: 'prelude', name: 'Prelude', desc: 'A focused discovery of singular travel objectives.' },  
-  { id: 'composition', name: 'Composition', desc: 'Multi-destination orchestration for seasoned travelers.' },  
-  { id: 'symphony', name: 'Symphony', desc: 'Complex logistics involving private aviation and security.' },  
-  { id: 'masterclass', name: 'Masterclass', desc: 'Full-spectrum lifestyle management for UHNW families.' },  
-];
+import React, { useState, useEffect } from 'react';
 
 export default function InvitationPage() {  
   const [step, setStep] = useState(0);  
-  const [fade, setFade] = useState(true);  
   const [formData, setFormData] = useState({  
     name: '',  
-    email: '',  
     phone: '',  
     reason: '',  
-    tier: 'composition'  
-  });
+  });  
+  const [displayTitle, setDisplayTitle] = useState('');  
+  const fullTitle = "RACHEL AI: SYSTEM INITIALIZED";
 
-  const steps = [  
-    {  
-      id: 'welcome',  
-      message: "Welcome to NexVoyage Collective. I am Rachel, your Lead Analyst for this orchestration. Before we proceed to the conductors, may I ask who I have the pleasure of speaking with?",  
-      fields: ['name']  
-    },  
-    {  
-      id: 'contact',  
-      message: (name: string) => `Thank you, ${name}. To ensure a secure line of communication, please provide your contact coordinates.`,  
-      fields: ['email', 'phone']  
-    },  
-    {  
-      id: 'intent',  
-      message: "What is the primary objective of your upcoming orchestration? Please be as detailed as you wish.",  
-      fields: ['reason']  
-    },  
-    {  
-      id: 'tier',  
-      message: "Based on the complexity of your request, which tier of conducting are you seeking?",  
-      fields: ['tier']  
-    },  
-    {  
-      id: 'summary',  
-      message: "I have gathered your requirements. I will now notify Daryl and prepare the vetting documents. Ready to schedule your consultation?",  
-      fields: []  
-    }  
-  ];
+  // Typewriter effect for the terminal header  
+  useEffect(() => {  
+    let i = 0;  
+    const interval = setInterval(() => {  
+      setDisplayTitle(fullTitle.slice(0, i));  
+      i++;  
+      if (i > fullTitle.length) clearInterval(interval);  
+    }, 50);  
+    return () => clearInterval(interval);  
+  }, []);
 
-  const handleNext = async () => {  
-    setFade(false);  
-    setTimeout(async () => {  
-      if (step === steps.length - 1) {  
-        await triggerNotification();  
-        redirectToCal();  
-      } else {  
-        setStep(step + 1);  
-        setFade(true);  
-      }  
-    }, 300);  
-  };
-
-  const triggerNotification = async () => {  
-    try {  
-      await fetch('/api/notify', {  
-        method: 'POST',  
-        body: JSON.stringify({ ...formData, source: 'Rachel AI Terminal' }),  
-      });  
-    } catch (err) {  
-      console.error("Notification failed.");  
-    }  
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {  
+    setFormData({ ...formData, [e.target.name]: e.target.value });  
   };
 
   const redirectToCal = () => {  
-    // 1. Format the phone number (replacing '+' with '%2B' for URL encoding)  
-    const encodedPhone = formData.phone.startsWith('+')   
-      ? `%2B${formData.phone.substring(1)}`   
-      : formData.phone;
-
-    // 2. Combine Tier and Reason into the 'notes' field (Standard Cal.com mapping)  
-    const combinedNotes = `Tier: ${formData.tier.toUpperCase()}\n\nReason for Orchestration:\n${formData.reason}`;
-
-    // 3. Construct the URL with exact Cal.com parameters:  
-    // name, email, notes (reason), smsReminderNumber (phone), and location (phone object)  
-    const baseUrl = `https://cal.com/nexvoyagecollective/discovery-call`;  
+    const baseUrl = "https://cal.com/darylclark/30min";  
     const params = new URLSearchParams({  
       name: formData.name,  
-      email: formData.email,  
-      notes: combinedNotes,  
-      smsReminderNumber: formData.phone, // Standard for SMS fields  
-      attendeePhoneNumber: formData.phone, // Alternative for some Cal configs  
-      location: JSON.stringify({ value: 'phone', optionValue: formData.phone }) // Essential if location is 'phone'  
-    });
-
+      // 'notes' handles the reason/intent  
+      notes: formData.reason,  
+      // 'smsReminderNumber' for the phone number  
+      smsReminderNumber: formData.phone,  
+    });  
+      
     window.location.href = `${baseUrl}?${params.toString()}`;  
   };
 
+  const handleSubmit = async (e: React.FormEvent) => {  
+    e.preventDefault();  
+      
+    // 1. Fire the Nerves (Notification Pipeline)  
+    try {  
+      await fetch('/api/notify', {  
+        method: 'POST',  
+        headers: { 'Content-Type': 'application/json' },  
+        body: JSON.stringify({  
+          guestName: formData.name,  
+          phone: formData.phone,  
+          intent: formData.reason,  
+          source: 'Rachel AI Terminal'  
+        }),  
+      });  
+    } catch (err) {  
+      console.error('Notification delivery failed:', err);  
+    }
+
+    // 2. Redirect to Booking  
+    redirectToCal();  
+  };
+
   return (  
-    <main className={`min-h-screen bg-[#050505] text-[#E5E5E5] flex flex-col items-center justify-center p-6 ${inter.className}`}>  
-      <div className="fixed inset-0 pointer-events-none border-[1px] border-[#D4AF37]/20 m-4 z-50" />  
-        
-      <div className="max-w-2xl w-full space-y-12 relative z-10">  
-        <header className="text-center space-y-2">  
-          <h1 className={`${cormorant.className} text-[#D4AF37] text-xs uppercase tracking-[0.4em] font-medium`}>  
-            Vetting Protocol 00-15-26  
+    <div className="min-h-screen bg-[#0a0a0a] text-[#d4af37] font-mono p-6 flex flex-col items-center justify-center selection:bg-[#d4af37] selection:text-black">  
+      {/* Terminal Container */}  
+      <div className="max-w-2xl w-full border border-[#d4af37]/30 bg-[#0f0f0f] shadow-[0_0_50px_rgba(212,175,55,0.05)] p-8 md:p-12">  
+          
+        {/* Rachel AI Header */}  
+        <div className="mb-12">  
+          <p className="text-xs opacity-50 mb-2">ACCESS GRANTED // ENCRYPTED SESSION</p>  
+          <h1 className="text-xl md:text-2xl tracking-widest uppercase font-light">  
+            {displayTitle}  
+            <span className="animate-pulse">_</span>  
           </h1>  
-          <p className="text-[10px] text-white/30 uppercase tracking-widest">Lead Analyst: Rachel AI</p>  
-        </header>
-
-        <div className={`min-h-[120px] text-center transition-all duration-500 transform ${fade ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>  
-          <div className={`${cormorant.className} text-2xl md:text-3xl font-light leading-relaxed text-white/90 italic`}>  
-            {typeof steps[step].message === 'function'   
-              ? (steps[step].message as Function)(formData.name)   
-              : steps[step].message}  
-          </div>  
         </div>
 
-        <div className={`space-y-6 transition-opacity duration-700 delay-200 ${fade ? 'opacity-100' : 'opacity-0'}`}>  
-          <div className="flex flex-col items-center gap-4">  
-            {steps[step].fields.map((field) => (  
-              <div key={field} className="w-full max-w-md">  
-                {field === 'reason' ? (  
-                  <textarea  
-                    autoFocus  
-                    placeholder="Describe your intent..."  
-                    className="w-full bg-transparent border-b border-[#D4AF37]/30 py-3 text-lg focus:outline-none focus:border-[#D4AF37] transition-colors resize-none h-32"  
-                    value={formData[field as keyof typeof formData]}  
-                    onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}  
-                  />  
-                ) : field === 'tier' ? (  
-                  <div className="grid grid-cols-1 gap-3 w-full">  
-                    {TIERS.map((tier) => (  
-                      <button  
-                        key={tier.id}  
-                        onClick={() => setFormData({ ...formData, tier: tier.id })}  
-                        className={`p-4 text-left border transition-all ${  
-                          formData.tier === tier.id   
-                          ? 'border-[#D4AF37] bg-[#D4AF37]/5'   
-                          : 'border-white/10 hover:border-white/30'  
-                        }`}  
-                      >  
-                        <div className={`${cormorant.className} text-[#D4AF37] text-lg`}>{tier.name}</div>  
-                        <div className="text-[10px] text-white/50 uppercase tracking-tighter">{tier.desc}</div>  
-                      </button>  
-                    ))}  
-                  </div>  
-                ) : (  
-                  <input  
-                    autoFocus  
-                    type={field === 'email' ? 'email' : 'text'}  
-                    placeholder={field.toUpperCase()}  
-                    className="w-full bg-transparent border-b border-[#D4AF37]/30 py-3 text-lg text-center focus:outline-none focus:border-[#D4AF37] transition-colors"  
-                    value={formData[field as keyof typeof formData]}  
-                    onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}  
-                  />  
-                )}  
-              </div>  
-            ))}
+        <form onSubmit={handleSubmit} className="space-y-10">  
+          {/* Name Field */}  
+          <div className="group">  
+            <label className="block text-[10px] uppercase tracking-[0.2em] mb-3 opacity-60 group-focus-within:opacity-100 transition-opacity">  
+              Identify Guest  
+            </label>  
+            <input  
+              required  
+              type="text"  
+              name="name"  
+              placeholder="FULL NAME"  
+              value={formData.name}  
+              onChange={handleChange}  
+              className="w-full bg-transparent border-b border-[#d4af37]/20 py-2 focus:outline-none focus:border-[#d4af37] transition-colors placeholder:opacity-20 text-lg uppercase tracking-tight"  
+            />  
+          </div>
 
-            <button onClick={handleNext} className="mt-8 group flex flex-col items-center gap-2">  
-              <div className={`${cormorant.className} text-[#D4AF37] text-sm uppercase tracking-[0.3em] group-hover:text-white transition-colors`}>  
-                {step === steps.length - 1 ? 'Send Request' : 'Continue'}  
-              </div>  
-              <div className="h-[1px] w-12 bg-[#D4AF37]/40 group-hover:w-24 transition-all duration-500" />  
+          {/* Phone Field */}  
+          <div className="group">  
+            <label className="block text-[10px] uppercase tracking-[0.2em] mb-3 opacity-60 group-focus-within:opacity-100 transition-opacity">  
+              Secure Line  
+            </label>  
+            <input  
+              required  
+              type="tel"  
+              name="phone"  
+              placeholder="+1 (000) 000-0000"  
+              value={formData.phone}  
+              onChange={handleChange}  
+              className="w-full bg-transparent border-b border-[#d4af37]/20 py-2 focus:outline-none focus:border-[#d4af37] transition-colors placeholder:opacity-20 text-lg uppercase tracking-tight"  
+            />  
+          </div>
+
+          {/* Reason Field */}  
+          <div className="group">  
+            <label className="block text-[10px] uppercase tracking-[0.2em] mb-3 opacity-60 group-focus-within:opacity-100 transition-opacity">  
+              Orchestration Intent  
+            </label>  
+            <textarea  
+              required  
+              name="reason"  
+              placeholder="DESCRIBE THE VISION..."  
+              rows={3}  
+              value={formData.reason}  
+              onChange={handleChange}  
+              className="w-full bg-transparent border border-[#d4af37]/20 p-4 focus:outline-none focus:border-[#d4af37] transition-colors placeholder:opacity-20 text-sm uppercase leading-relaxed resize-none"  
+            />  
+          </div>
+
+          {/* Submit Action */}  
+          <div className="pt-4">  
+            <button  
+              type="submit"  
+              className="w-full py-4 border border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37] hover:text-black transition-all duration-500 uppercase text-xs tracking-[0.3em] font-bold"  
+            >  
+              Initialize Manifest & Schedule  
             </button>  
+            <p className="mt-4 text-[9px] opacity-30 text-center uppercase tracking-widest">  
+              By proceeding, you authorize Rachel AI to process secure lead intelligence.  
+            </p>  
           </div>  
-        </div>
+        </form>  
+      </div>
 
-        <footer className="pt-24 opacity-20 flex justify-between text-[9px] uppercase tracking-[0.2em]">  
-          <div>EST. 2026</div>  
-          <div>FOR INTERNAL ORCHESTRATION ONLY</div>  
-          <div>NX-CL-01</div>  
-        </footer>  
+      {/* Background Ambience */}  
+      <div className="fixed top-0 left-0 w-full h-full pointer-events-none overflow-hidden opacity-20">  
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#d4af37] blur-[150px] rounded-full opacity-10"></div>  
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#d4af37] blur-[150px] rounded-full opacity-10"></div>  
       </div>  
-    </main>  
+    </div>  
   );  
 }  
