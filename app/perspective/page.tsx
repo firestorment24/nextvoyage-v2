@@ -1,68 +1,86 @@
-import React from 'react';
-
-// Sample data based on our refined list  
-const posts = [  
-  {  
-    title: "The CEO Reset: BCMC 2026",  
-    subtitle: "Orchestrating silence in a noisy world.",  
-    category: "Manifesto",  
-    size: "col-span-2 row-span-2", // Large feature  
-    image: "/images/ceo-reset.jpg"   
-  },  
-  {  
-    title: "Suncoast Jazz Festival",  
-    subtitle: "A protocol for the perfect weekend.",  
-    category: "Protocol",  
-    size: "col-span-1 row-span-1",  
-    image: "/images/jazz.jpg"  
-  },  
-  {  
-    title: "Rosewood Retreats",  
-    subtitle: "The architecture of sanctuary.",  
-    category: "Orchestration",  
-    size: "col-span-1 row-span-2",  
-    image: "/images/rosewood.jpg"  
-  },  
-  {  
-    title: "GSX 2026: Security & Serenity",  
-    subtitle: "Navigating global summits with ease.",  
-    category: "Protocol",  
-    size: "col-span-1 row-span-1",  
-    image: "/images/gsx.jpg"  
-  }  
-];
+// app/perspective/page.tsx  
+import React from 'react';  
+import Link from 'next/link';  
+import { PERSPECTIVE_POSTS } from '@/lib/data/perspectives';
 
 export default function PerspectivePage() {  
   return (  
-    <div className="min-h-screen bg-[#000] text-stone-300 p-8 pt-24">  
-      <header className="max-w-7xl mx-auto mb-12">  
-        <h1 className="text-4xl font-light tracking-widest text-[#d4af37] uppercase">Perspective</h1>  
-        <p className="mt-2 text-stone-500 italic">Protocols, Orchestrations, and Manifestos for the Discerning Voyager.</p>  
+    <div className="min-h-screen bg-[#0a0a0a] text-stone-300 selection:bg-[#d4af37] selection:text-black">  
+      {/* Header Section */}  
+      <header className="pt-24 pb-12 px-6 border-b border-stone-800/50">  
+        <div className="max-w-7xl mx-auto">  
+          <h1 className="text-5xl md:text-7xl font-light tracking-tighter text-white mb-4">  
+            THE <span className="text-[#d4af37]">PERSPECTIVE</span>  
+          </h1>  
+          <p className="text-stone-500 max-w-2xl text-lg font-light leading-relaxed">  
+            A curated archive of protocols, orchestrations, and manifestos designed for the high-net-worth traveler.  
+          </p>  
+        </div>  
       </header>
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[200px]">  
-        {posts.map((post, index) => (  
-          <div   
-            key={index}  
-            className={`${post.size} group relative overflow-hidden bg-stone-900 border border-stone-800 hover:border-[#d4af37] transition-all duration-500 cursor-pointer`}  
-          >  
-            {/* Background Image / Overlay */}  
-            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors z-10" />  
-              
-            <div className="absolute bottom-0 p-6 z-20">  
-              <span className="text-[10px] uppercase tracking-[0.2em] text-[#d4af37] mb-2 block">  
-                {post.category}  
-              </span>  
-              <h2 className="text-xl font-medium text-white group-hover:text-[#d4af37] transition-colors">  
-                {post.title}  
-              </h2>  
-              <p className="text-sm text-stone-400 mt-1 line-clamp-2">  
-                {post.subtitle}  
-              </p>  
-            </div>  
-          </div>  
-        ))}  
-      </div>  
+      {/* Bento Grid */}  
+      <main className="max-w-7xl mx-auto p-6 lg:p-12">  
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[240px]">  
+          {PERSPECTIVE_POSTS.map((post) => {  
+            // Mapping sizing logic for the grid  
+            const sizeClasses = {  
+              small: "col-span-1 row-span-1",  
+              medium: "col-span-1 md:col-span-2 row-span-1",  
+              large: "col-span-1 md:col-span-2 row-span-2",  
+            };
+
+            return (  
+              <Link  
+                key={post.id}  
+                href={`/perspective/${post.id}`}  
+                className={`${sizeClasses[post.size]} group relative overflow-hidden border border-stone-800 bg-[#111] transition-all duration-500 hover:border-[#d4af37]/50`}  
+              >  
+                {/* Background Image/Overlay */}  
+                <div   
+                  className="absolute inset-0 bg-cover bg-center grayscale opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:grayscale-0"  
+                  style={{ backgroundImage: `url(${post.image})` }}  
+                />  
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
+
+                {/* Content */}  
+                <div className="absolute inset-0 p-6 flex flex-col justify-end">  
+                  <div className="mb-2">  
+                    <span className="text-[10px] uppercase tracking-[0.2em] text-[#d4af37] font-bold px-2 py-1 border border-[#d4af37]/30 bg-black/50">  
+                      {post.category}  
+                    </span>  
+                  </div>  
+                  <h3 className="text-xl md:text-2xl font-light text-white leading-tight group-hover:text-[#d4af37] transition-colors">  
+                    {post.title}  
+                  </h3>  
+                  {post.size !== 'small' && (  
+                    <p className="mt-2 text-stone-400 text-sm font-light line-clamp-2 max-w-md">  
+                      {post.subtitle}  
+                    </p>  
+                  )}  
+                  <div className="mt-4 flex items-center gap-2 text-[10px] text-stone-500 uppercase tracking-widest">  
+                    <span>{post.date}</span>  
+                    <span className="w-1 h-1 rounded-full bg-stone-700" />  
+                    <span>Read Article</span>  
+                  </div>  
+                </div>  
+              </Link>  
+            );  
+          })}  
+        </div>  
+      </main>
+
+      {/* Footer CTA */}  
+      <section className="py-24 px-6 text-center border-t border-stone-800/50">  
+        <h2 className="text-2xl font-light text-stone-400 mb-8 italic">  
+          Seeking a more personal dialogue?  
+        </h2>  
+        <Link   
+          href="/invitation"  
+          className="inline-block px-8 py-4 bg-[#d4af37] text-black font-medium tracking-widest uppercase text-xs hover:bg-white transition-colors"  
+        >  
+          Begin the Dialogue  
+        </Link>  
+      </section>  
     </div>  
   );  
 }  
