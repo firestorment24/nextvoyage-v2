@@ -2,100 +2,83 @@
 
 import React from 'react'  
 import Link from 'next/link'  
-import { DESTINATIONS_DATA } from '@/lib/journal-data'  
-import { Cormorant_Garamond, Inter } from 'next/font/google'
-
-const cormorant = Cormorant_Garamond({   
-subsets: ['latin'],   
-weight: ['300', '400', '600'],  
-variable: '--font-cormorant'  
-})
-
-const inter = Inter({   
-subsets: ['latin'],  
-variable: '--font-inter'  
-})
+import { DESTINATIONS_DATA } from '@/lib/journal-data'
 
 export default function JournalPage() {  
-return (  
-  <main className={`min-h-screen bg-[#050505] text-[#E5E5E5] selection:bg-[#C5A059]/30 ${cormorant.variable} ${inter.variable} font-sans`}>  
-    {/* Header Section */}  
-    <header className="pt-24 pb-16 px-6 border-b border-[#C5A059]/10">  
-      <div className="max-w-7xl mx-auto space-y-4">  
-        <div className="flex items-center space-x-4">  
-          <span className="text-[#C5A059] text-xs tracking-[0.4em] uppercase">Volume 01 // The Master Ledger</span>  
-          <div className="h-px w-12 bg-[#C5A059]/30" />  
-        </div>  
-        <h1 className="text-6xl md:text-8xl font-serif text-[#C5A059] leading-tight">  
-          The Journal  
-        </h1>  
-        <p className="max-w-xl text-sm font-serif italic opacity-60 leading-relaxed">  
-          "To travel is to possess the world, one curated moment at a time. This is our private record of the exceptional."  
-        </p>  
-      </div>  
-    </header>
+  return (  
+    <main className="min-h-screen bg-[#0A0A0A] text-[#C5A059] font-serif selection:bg-[#C5A059]/30">  
+      {/* GLOBAL OVERRIDE: This kills the white background ghost on this page */}  
+      <style dangerouslySetInnerHTML={{ __html: `  
+        h1, h2, h3, h4, p, span, div, section {   
+          background-color: transparent !important;   
+          background: transparent !important;  
+        }  
+        body { background-color: #0A0A0A !important; }  
+      `}} />
 
-    {/* Grid Section */}  
-    <section className="max-w-7xl mx-auto px-6 py-20">  
-      {/* Container is now pure Ink Black with Brass borders */}  
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[#C5A059]/20 border border-[#C5A059]/20">  
-        {DESTINATIONS_DATA.map((item) => {  
-          const slug = item.location.toLowerCase().replace(/\s+/g, '-')  
-            
-          return (  
+      {/* Header */}  
+      <div className="pt-32 pb-20 px-8 max-w-7xl mx-auto border-b border-[#C5A059]/20">  
+        <div className="flex flex-col gap-4">  
+          <span className="text-[10px] tracking-[0.4em] uppercase opacity-60">  
+            Volume 01 // The Master Ledger  
+          </span>  
+          <h1 className="text-6xl md:text-8xl font-light tracking-tighter leading-none bg-transparent">  
+            The Journal  
+          </h1>  
+          <p className="text-lg md:text-xl opacity-80 max-w-2xl italic font-light mt-4 bg-transparent">  
+            "The world is a ledger of experiences; we simply help you curate the entries."  
+          </p>  
+        </div>  
+      </div>
+
+      {/* Narrative Feed */}  
+      <section className="max-w-7xl mx-auto px-8 py-20 bg-transparent">  
+        <div className="flex flex-col bg-transparent">  
+          {DESTINATIONS_DATA.map((item) => (  
             <Link   
-              key={item.id}  
-              href={`/journal/${slug}`}  
-              className="group relative aspect-[4/5] bg-[#0A0A0A] overflow-hidden flex flex-col justify-end p-8 transition-colors duration-500 hover:bg-[#0D0D0D]"  
+              key={item.location}  
+              href={`/journal/${item.location.toLowerCase().split(' ').join('-')}`}  
+              className="group border-b border-[#C5A059]/10 py-12 flex flex-col md:flex-row md:items-center justify-between gap-8 transition-all hover:bg-[#C5A059]/5 px-4 -mx-4"  
             >  
-              {/* Background Image - Hover Reveal */}  
-              <div className="absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity duration-700">  
-                <img    
-                  src={item.heroImage}    
-                  alt={item.location}    
-                  className="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all duration-1000 scale-105 group-hover:scale-100"   
-                />    
+              <div className="flex flex-col gap-2 max-w-xl bg-transparent">  
+                <span className="text-[10px] tracking-widest opacity-50 uppercase bg-transparent">  
+                  {item.coordinates}  
+                </span>  
+                <h2 className="text-3xl md:text-4xl font-light group-hover:translate-x-2 transition-transform duration-500 bg-transparent">  
+                  {item.location}  
+                </h2>  
+                <h3 className="text-sm uppercase tracking-[0.2em] opacity-60 bg-transparent">  
+                  {item.tagline}  
+                </h3>  
+                <p className="text-sm opacity-40 leading-relaxed line-clamp-2 mt-2 bg-transparent">  
+                  {item.description}  
+                </p>  
               </div>
 
-              {/* Gradient Overlay to ensure text readability */}  
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-80" />
-
-              <div className="relative z-10 space-y-4">  
-                <div className="space-y-1">  
-                  <span className="text-[#C5A059] text-[10px] tracking-[0.3em] uppercase opacity-60 group-hover:opacity-100 transition-opacity">  
-                    {item.coordinates}  
-                  </span>  
-                  <h2 className="text-3xl font-serif text-white group-hover:text-[#C5A059] transition-colors duration-500">  
-                    {item.location}  
-                  </h2>  
-                </div>  
-                  
-                <p className="text-xs font-serif leading-relaxed opacity-40 group-hover:opacity-70 line-clamp-2 transition-opacity">  
-                  {item.summary}  
-                </p>
-
-                <div className="pt-4 border-t border-[#C5A059]/10 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">  
-                  <span className="text-[#C5A059] text-[9px] tracking-[0.4em] uppercase">Read Narrative →</span>  
+              <div className="relative w-full md:w-64 h-40 overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700 border border-[#C5A059]/20">  
+                <img   
+                  src={item.heroImage}   
+                  alt={item.location}  
+                  className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-1000"  
+                />  
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[#0A0A0A]/40">  
+                  <span className="text-[10px] uppercase tracking-[0.3em] text-white">Read Narrative</span>  
                 </div>  
               </div>  
             </Link>  
-          )  
-        })}  
-      </div>  
-    </section>
-
-    {/* Footer Navigation */}  
-    <footer className="py-20 px-6 border-t border-[#C5A059]/10">  
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">  
-        <div className="text-[10px] tracking-[0.5em] uppercase opacity-30">  
-          End of Ledger // Page 01 of 27  
+          ))}  
         </div>  
-        <Link href="/invitation" className="group flex items-center space-x-6">  
-          <span className="text-[#C5A059] text-xs tracking-[0.3em] uppercase">Secure Your Membership</span>  
-          <div className="w-12 h-px bg-[#C5A059] group-hover:w-20 transition-all duration-500" />  
+      </section>
+
+      {/* Footer Nav */}  
+      <footer className="py-20 px-8 max-w-7xl mx-auto flex justify-between items-center border-t border-[#C5A059]/20 bg-transparent">  
+        <span className="text-[10px] tracking-[0.3em] uppercase opacity-40 bg-transparent">  
+          End of Ledger // Page 01 of 27  
+        </span>  
+        <Link href="/invitation" className="text-[10px] tracking-[0.3em] uppercase hover:opacity-100 opacity-60 transition-opacity flex items-center gap-2 bg-transparent">  
+          Request Access <span className="text-lg">→</span>  
         </Link>  
-      </div>  
-    </footer>  
-  </main>  
-)  
+      </footer>  
+    </main>  
+  )  
 }  
