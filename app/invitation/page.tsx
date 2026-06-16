@@ -1,148 +1,207 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';  
+import { motion, AnimatePresence } from 'framer-motion';  
+import { Cormorant_Garamond, Inter } from 'next/font/google';
 
-// --- LUXURY ORCHESTRATION TIERS ---  
+const cormorant = Cormorant_Garamond({   
+  subsets: ['latin'],   
+  weight: ['300', '400', '500', '600'],  
+  display: 'swap'   
+});
+
+const inter = Inter({   
+  subsets: ['latin'],   
+  weight: ['300', '400'],  
+  display: 'swap'   
+});
+
+// Vetting Tiers for the Conductors  
 const TIERS = [  
-  {   
-    id: 'continuum',   
-    name: 'Continuum',   
-    desc: 'Perpetual alignment across every horizon. A seamless extension of your lifestyle, curated without interruption.'   
-  },  
-  {   
-    id: 'blind-manifest',   
-    name: 'Blind Manifest',   
-    desc: 'The Invisible Journey. Absolute discretion where your presence leaves no trace, and your privacy remains paramount.'   
-  },  
-  {   
-    id: 'frictionless-handoff',   
-    name: 'Frictionless Handoff',   
-    desc: 'Symphonic Integration. Harmonizing directly with your personal office and security protocols for effortless transitions.'   
-  },  
-  {   
-    id: 'encrypted-line',   
-    name: 'Encrypted Line',   
-    desc: 'Sovereign Connection. A dedicated, secure channel for sensitive itineraries and immediate executive access.'   
-  }  
+  { id: 'prelude', name: 'Prelude', desc: 'A focused discovery of singular travel objectives.' },  
+  { id: 'composition', name: 'Composition', desc: 'Multi-destination orchestration for seasoned travelers.' },  
+  { id: 'symphony', name: 'Symphony', desc: 'Complex logistics involving private aviation and security.' },  
+  { id: 'masterclass', name: 'Masterclass', desc: 'Full-spectrum lifestyle management for UHNW families.' },  
 ];
 
 export default function InvitationPage() {  
   const [step, setStep] = useState(0);  
-  const [manifest, setManifest] = useState({  
+  const [isTyping, setIsTyping] = useState(false);  
+  const [formData, setFormData] = useState({  
     name: '',  
     email: '',  
-    aviation: 'Private',  
-    airport: '',  
-    dates: '',  
-    tier: ''  
+    phone: '',  
+    reason: '',  
+    tier: 'composition'  
   });
 
-  const handleRequest = () => {  
-    // The specific link you provided  
-    const baseCalUrl = "https://cal.com/nexvoyagecollective/discovery-call?fbclid=IwY2xjawSdlsRleHRuA2FlbQIxMABicmlkETFMaUpQZllqVG1UaW10VU9Yc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHiAoiLhI-r4_pNsC8bj1Bh-opriaGFTSmqtce0YMDL4z4rZCnFIo4Vx4P_Ia_aem_xXNWckXor_2NML12sOyyYw&user=nexvoyagecollective";  
-      
-    // Append the pre-fill data  
-    const params = new URLSearchParams({  
-      name: manifest.name,  
-      email: manifest.email,  
-      notes: `MANIFEST SUMMARY:\nTier: ${manifest.tier.toUpperCase()}\nAviation: ${manifest.aviation}\nAirport: ${manifest.airport}\nDates: ${manifest.dates}`  
-    });
+  // Rachel's Dialogue Logic  
+  const steps = [  
+    {  
+      id: 'welcome',  
+      message: "Welcome to NexVoyage Collective. I am Rachel, your Lead Analyst for this orchestration. Before we proceed to the conductors, may I ask who I have the pleasure of speaking with?",  
+      fields: ['name']  
+    },  
+    {  
+      id: 'contact',  
+      message: (name: string) => `Thank you, ${name}. To ensure a secure line of communication, please provide your contact coordinates.`,  
+      fields: ['email', 'phone']  
+    },  
+    {  
+      id: 'intent',  
+      message: "What is the primary objective of your upcoming orchestration? Please be as detailed as you wish.",  
+      fields: ['reason']  
+    },  
+    {  
+      id: 'tier',  
+      message: "Based on the complexity of your request, which tier of conducting are you seeking?",  
+      fields: ['tier']  
+    },  
+    {  
+      id: 'summary',  
+      message: "I have gathered your requirements. I will now notify Daryl and prepare the vetting documents. Would you like to proceed to the calendar?",  
+      fields: []  
+    }  
+  ];
 
-    window.location.href = `${baseCalUrl}&${params.toString()}`;  
+  const handleNext = async () => {  
+    if (step === steps.length - 1) {  
+      // Final Action: Send Notification & Redirect  
+      await triggerNotification();  
+      redirectToCal();  
+    } else {  
+      setStep(step + 1);  
+    }  
+  };
+
+  const triggerNotification = async () => {  
+    try {  
+      await fetch('/api/notify', {  
+        method: 'POST',  
+        body: JSON.stringify({ ...formData, source: 'Rachel AI Terminal' }),  
+      });  
+    } catch (err) {  
+      console.error("Notification failed, proceeding to Cal.com regardless.");  
+    }  
+  };
+
+  const redirectToCal = () => {  
+    const calUrl = `https://cal.com/nexvoyagecollective/discovery-call?name=${encodeURIComponent(formData.name)}&email=${encodeURIComponent(formData.email)}&notes=${encodeURIComponent(`Tier: ${formData.tier}\nReason: ${formData.reason}`)}&phone=${encodeURIComponent(formData.phone)}`;  
+    window.location.href = calUrl;  
   };
 
   return (  
-    <div className="min-h-screen bg-[#080808] text-[#d4d4d4] flex flex-col items-center justify-center p-8 font-serif">  
-      {/* Background Shadow Gradient */}  
-      <div className="fixed inset-0 bg-[radial-gradient(circle_at_center,_rgba(181,166,66,0.03)_0%,_transparent_70%)] pointer-events-none" />
-
-      <div className="max-w-2xl w-full relative z-10">  
-        <header className="text-center mb-16">  
-          <h2 className="text-[10px] tracking-[0.5em] uppercase text-[#B5A642] mb-4">Lead Analyst: Rachel AI</h2>  
-          <h1 className="text-4xl font-light tracking-tight text-white mb-2 italic">Conducting the Manifest</h1>  
-          <div className="h-px w-24 bg-[#B5A642] mx-auto mt-6 opacity-30" />  
+    <main className={`min-h-screen bg-[#050505] text-[#E5E5E5] flex flex-col items-center justify-center p-6 ${inter.className}`}>  
+      {/* Brass Accent Border */}  
+      <div className="fixed inset-0 pointer-events-none border-[1px] border-[#D4AF37]/20 m-4 z-50" />  
+        
+      <div className="max-w-2xl w-full space-y-12 relative z-10">  
+        {/* Terminal Header */}  
+        <header className="text-center space-y-2">  
+          <h1 className={`${cormorant.className} text-[#D4AF37] text-xs uppercase tracking-[0.4em] font-medium`}>  
+            Vetting Protocol 00-15-26  
+          </h1>  
+          <p className="text-[10px] text-white/30 uppercase tracking-widest">Lead Analyst: Rachel AI</p>  
         </header>
 
-        {/* STEP 0: IDENTITY */}  
-        {step === 0 && (  
-          <div className="space-y-12 animate-in fade-in duration-1000">  
-            <p className="text-center text-lg font-light text-gray-400">"Please identify the primary manifest holder for this orchestration."</p>  
-            <div className="space-y-8">  
-              <input   
-                type="text" placeholder="Full Name"   
-                className="w-full bg-transparent border-b border-white/10 py-4 text-xl focus:border-[#B5A642] outline-none transition-all placeholder:text-gray-700 text-white"  
-                onChange={(e) => setManifest({...manifest, name: e.target.value})}  
-              />  
-              <input   
-                type="email" placeholder="Secure Email Address"   
-                className="w-full bg-transparent border-b border-white/10 py-4 text-xl focus:border-[#B5A642] outline-none transition-all placeholder:text-gray-700 text-white"  
-                onChange={(e) => setManifest({...manifest, email: e.target.value})}  
-              />  
-            </div>  
-            <button   
-              onClick={() => setStep(1)}   
-              className="w-full py-5 border border-[#B5A642]/30 text-[#B5A642] tracking-[0.3em] uppercase text-xs hover:bg-[#B5A642] hover:text-black transition-all duration-500"  
+        {/* Rachel's Dialogue Box */}  
+        <div className="min-h-[120px] text-center">  
+          <AnimatePresence mode="wait">  
+            <motion.div  
+              key={step}  
+              initial={{ opacity: 0, y: 10 }}  
+              animate={{ opacity: 1, y: 0 }}  
+              exit={{ opacity: 0, y: -10 }}  
+              className={`${cormorant.className} text-2xl md:text-3xl font-light leading-relaxed text-white/90 italic`}  
             >  
-              Initialize Vetting  
-            </button>  
-          </div>  
-        )}
+              {typeof steps[step].message === 'function'   
+                ? (steps[step].message as Function)(formData.name)   
+                : steps[step].message}  
+            </motion.div>  
+          </AnimatePresence>  
+        </div>
 
-        {/* STEP 1: LOGISTICS & TIERS */}  
-        {step === 1 && (  
-          <div className="space-y-10 animate-in fade-in duration-1000">  
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">  
-              {TIERS.map(tier => (  
-                <button   
-                  key={tier.id}  
-                  onClick={() => setManifest({...manifest, tier: tier.id})}  
-                  className={`text-left p-6 border transition-all duration-500 group ${  
-                    manifest.tier === tier.id ? 'border-[#B5A642] bg-[#B5A642]/5' : 'border-white/5 hover:border-white/20'  
-                  }`}  
-                >  
-                  <h3 className={`text-sm tracking-widest uppercase mb-2 ${manifest.tier === tier.id ? 'text-[#B5A642]' : 'text-white'}`}>  
-                    {tier.name}  
-                  </h3>  
-                  <p className="text-[11px] leading-relaxed text-gray-500 group-hover:text-gray-300 transition-colors">  
-                    {tier.desc}  
-                  </p>  
-                </button>  
-              ))}  
-            </div>
+        {/* Input Interface */}  
+        <div className="space-y-6">  
+          <AnimatePresence mode="wait">  
+            <motion.div  
+              key={`input-${step}`}  
+              initial={{ opacity: 0 }}  
+              animate={{ opacity: 1 }}  
+              transition={{ delay: 0.5 }}  
+              className="flex flex-col items-center gap-4"  
+            >  
+              {steps[step].fields.map((field) => (  
+                <div key={field} className="w-full max-w-md">  
+                  {field === 'reason' ? (  
+                    <textarea  
+                      autoFocus  
+                      placeholder="Type your response..."  
+                      className="w-full bg-transparent border-b border-[#D4AF37]/30 py-3 text-lg focus:outline-none focus:border-[#D4AF37] transition-colors resize-none h-32"  
+                      value={formData[field as keyof typeof formData]}  
+                      onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}  
+                    />  
+                  ) : field === 'tier' ? (  
+                    <div className="grid grid-cols-1 gap-3 w-full">  
+                      {TIERS.map((tier) => (  
+                        <button  
+                          key={tier.id}  
+                          onClick={() => setFormData({ ...formData, tier: tier.id })}  
+                          className={`p-4 text-left border transition-all ${  
+                            formData.tier === tier.id   
+                            ? 'border-[#D4AF37] bg-[#D4AF37]/5'   
+                            : 'border-white/10 hover:border-white/30'  
+                          }`}  
+                        >  
+                          <div className={`${cormorant.className} text-[#D4AF37] text-lg`}>{tier.name}</div>  
+                          <div className="text-[10px] text-white/50 uppercase tracking-tighter">{tier.desc}</div>  
+                        </button>  
+                      ))}  
+                    </div>  
+                  ) : (  
+                    <input  
+                      autoFocus  
+                      type={field === 'email' ? 'email' : 'text'}  
+                      placeholder={field.toUpperCase()}  
+                      className="w-full bg-transparent border-b border-[#D4AF37]/30 py-3 text-lg text-center focus:outline-none focus:border-[#D4AF37] transition-colors"  
+                      value={formData[field as keyof typeof formData]}  
+                      onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}  
+                    />  
+                  )}  
+                </div>  
+              ))}
 
-            <div className="pt-6">  
-              <p className="text-center text-xs tracking-widest text-gray-600 mb-8 uppercase">Logistics Alignment</p>  
-              <div className="grid grid-cols-2 gap-6">  
-                <input   
-                  type="text" placeholder="Departure Hub (Airport)"   
-                  className="bg-transparent border-b border-white/10 py-2 focus:border-[#B5A642] outline-none text-sm"  
-                  onChange={(e) => setManifest({...manifest, airport: e.target.value})}  
-                />  
-                <input   
-                  type="text" placeholder="Preferred Dates"   
-                  className="bg-transparent border-b border-white/10 py-2 focus:border-[#B5A642] outline-none text-sm"  
-                  onChange={(e) => setManifest({...manifest, dates: e.target.value})}  
-                />  
-              </div>  
-            </div>
-
-            {manifest.tier && (  
-              <button   
-                onClick={handleRequest}  
-                className="w-full py-6 bg-white text-black font-bold uppercase text-xs tracking-[0.4em] hover:bg-[#B5A642] transition-all duration-500 shadow-2xl"  
+              <button  
+                onClick={handleNext}  
+                className="mt-8 group flex flex-col items-center gap-2"  
               >  
-                Send Request  
+                <div className={`${cormorant.className} text-[#D4AF37] text-sm uppercase tracking-[0.3em] group-hover:text-white transition-colors`}>  
+                  {step === steps.length - 1 ? 'Send Request' : 'Continue'}  
+                </div>  
+                <div className="h-[1px] w-12 bg-[#D4AF37]/40 group-hover:w-24 transition-all duration-500" />  
               </button>  
-            )}  
-          </div>  
-        )}
+            </motion.div>  
+          </AnimatePresence>  
+        </div>
 
-        <footer className="mt-20 text-center">  
-          <p className="text-[9px] tracking-[0.4em] text-gray-700 uppercase">  
-            NexVoyage Collective &copy; 2026 | Precision Orchestration  
-          </p>  
+        {/* Footer Ledger */}  
+        <footer className="pt-24 opacity-20 flex justify-between text-[9px] uppercase tracking-[0.2em]">  
+          <div>EST. 2026</div>  
+          <div>FOR INTERNAL ORCHESTRATION ONLY</div>  
+          <div>NX-CL-01</div>  
         </footer>  
-      </div>  
-    </div>  
+      </div>
+
+      <style jsx global>{`  
+        body {  
+          background-color: #050505;  
+          overflow-x: hidden;  
+        }  
+        ::selection {  
+          background: #D4AF37;  
+          color: #000;  
+        }  
+      `}</style>  
+    </main>  
   );  
 }  
