@@ -238,7 +238,7 @@ export const PROPERTY_DATA: Property[] = [
   serial: '011',  
   name: 'One&Only Aesthesis',  
   location: 'Athens, Greece',  
-  image: 'https://assets.kerzner.com/api/public/content/151c4cf7e63b4847ad72a5dea8ac5fbe?v=a4f0e42d&t=w576',  
+  image: 'https://assets.kerzner.com/api/public/content/8761678806934ea9a633770485289849?v=7f8a1ab2&t=w2880',  
   hook: 'Mid-century glamour on the Athenian Riviera.',  
   description: 'A revival of mid-century glamour on the Athenian Riviera, where sun-drenched shores meet sophisticated Greek living.',  
   sanctuaryId: 'elite-ledger',  
