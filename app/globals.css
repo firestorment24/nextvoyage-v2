@@ -1,20 +1,20 @@
-/* NexVoyage Sanctuary & Archive Visual Logic */  
+/* NexVoyage Sanctuary - Brass & Shadow Logic */  
 .sanctuary-card img {  
-  /* Default: Full color for mobile/touch devices */  
-  filter: grayscale(0%);  
-  transition: filter 0.8s cubic-bezier(0.4, 0, 0.2, 1);  
-  transform: scale(1);  
-  transition: transform 0.8s ease-in-out, filter 0.8s ease-in-out;  
+  /* Default: Full Color (Warm) */  
+  filter: sepia(0%) contrast(100%) brightness(100%);  
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);  
 }
 
-/* Desktop Only: Start Grayscale, Fade to Color on Hover */  
+/* Desktop Only: Muted Brass/Shadow state */  
 @media (hover: hover) {  
   .sanctuary-card img {  
-    filter: grayscale(100%);  
+    /* This creates a muted, golden-shadow look */  
+    filter: sepia(40%) contrast(90%) brightness(70%);  
   }
 
   .sanctuary-card:hover img {  
-    filter: grayscale(0%);  
-    transform: scale(1.05); /* Optional: slight zoom for a premium feel */  
+    /* Full vibrant color on hover */  
+    filter: sepia(0%) contrast(100%) brightness(100%);  
+    transform: scale(1.03);  
   }  
 }  
