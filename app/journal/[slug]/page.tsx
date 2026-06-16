@@ -10,7 +10,7 @@ const cormorant = Cormorant_Garamond({
   weight: ['300', '400', '600'],  
   variable: '--font-cormorant'  
 })
-
+ 
 const inter = Inter({   
   subsets: ['latin'],  
   variable: '--font-inter'  
