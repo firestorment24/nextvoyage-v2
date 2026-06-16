@@ -10,7 +10,7 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {  
-  const { id } = await params; // Await params in 2026 Next.js  
+  const { id } = await params;  
   const property = PROPERTY_DATA.find((p) => p.id === id);  
   return {  
     title: property ? `${property.name} | The Archive` : 'Property Not Found',  
@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function PropertyDetailPage({ params }: Props) {  
-  const { id } = await params; // Await params to get the actual ID  
+  const { id } = await params;  
   const property = PROPERTY_DATA.find((p) => p.id === id);
 
   if (!property) {  
@@ -115,7 +115,7 @@ export default async function PropertyDetailPage({ params }: Props) {
               {property.invitation}  
             </p>  
             <Link   
-              href={`/reserve?property=${property.id}`}  
+              href="/invitation" // UPDATED: Direct link to invitation  
               className="group relative inline-flex items-center px-8 py-4 bg-[#C5A059] text-black text-[10px] uppercase tracking-[0.3em] font-bold overflow-hidden transition-all duration-300 hover:bg-[#D4B57A]"  
             >  
               Request Access  
