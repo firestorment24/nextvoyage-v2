@@ -45,7 +45,7 @@ export default function Navigation() {
           {/* Direct Concierge - Brass Aesthetic */}  
           <div className="hidden lg:flex flex-col items-end font-mono text-[9px] tracking-[0.3em] text-stone-500 uppercase">  
             <span className="text-[7px] text-amber-200/40 mb-1 italic">Direct Concierge</span>  
-            <a href="tel:+1800NEXVOYG" className="hover:text-amber-200 transition-colors">+1 (800) NEX-VOYG</a>  
+            <a href="tel:+18135358059" className="hover:text-amber-200 transition-colors">+1 (813) 535-8059</a>  
           </div>
 
           <button   
