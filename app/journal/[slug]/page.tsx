@@ -10,7 +10,7 @@ export default function JournalDetailPage({ params }: { params: { slug: string }
   const destination = DESTINATIONS_DATA.find(  
     (d) => d.location.toLowerCase().replace(/[\s()]/g, '-').replace(/-+/g, '-') === params.slug  
   )
-
+ 
   if (!destination) notFound()
 
   return (  
