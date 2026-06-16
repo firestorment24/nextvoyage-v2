@@ -5,19 +5,21 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';  
 import { Metadata } from 'next';
 
-interface Props {  
-  params: { id: string };  
-}
+type Props = {  
+  params: Promise<{ id: string }>;  
+};
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {  
-  const property = PROPERTY_DATA.find((p) => p.id === params.id);  
+  const { id } = await params; // Await params in 2026 Next.js  
+  const property = PROPERTY_DATA.find((p) => p.id === id);  
   return {  
     title: property ? `${property.name} | The Archive` : 'Property Not Found',  
   };  
 }
 
-export default function PropertyDetailPage({ params }: Props) {  
-  const property = PROPERTY_DATA.find((p) => p.id === params.id);
+export default async function PropertyDetailPage({ params }: Props) {  
+  const { id } = await params; // Await params to get the actual ID  
+  const property = PROPERTY_DATA.find((p) => p.id === id);
 
   if (!property) {  
     notFound();  
