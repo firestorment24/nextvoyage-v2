@@ -1,86 +1,99 @@
-// app/invitation/page.tsx  
-import React from 'react';
+"use client";
+
+import { useState } from "react";
 
 export default function InvitationPage() {  
+  const [loading, setLoading] = useState(false);  
+  const [submitted, setSubmitted] = useState(false);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {  
+    e.preventDefault();  
+    setLoading(true);
+
+    const formData = new FormData(e.currentTarget);  
+    const payload = {  
+      name: formData.get("name"),  
+      email: formData.get("email"),  
+      dates: formData.get("dates"),  
+      city: formData.get("city"),  
+      vision: formData.get("vision"),  
+      aesthetics: formData.get("aesthetics"),  
+    };
+
+    try {  
+      const res = await fetch("/api/lead", {  
+        method: "POST",  
+        headers: { "Content-Type": "application/json" },  
+        body: JSON.stringify(payload),  
+      });
+
+      if (res.ok) {  
+        setSubmitted(true);  
+      } else {  
+        alert("The dialogue could not be initiated at this time. Please try again.");  
+      }  
+    } catch (error) {  
+      console.error("Submission error:", error);  
+    } finally {  
+      setLoading(false);  
+    }  
+  }
+
+  if (submitted) {  
+    return (  
+      <div className="flex flex-col items-center justify-center min-h-screen text-center px-4">  
+        <h1 className="text-2xl font-light uppercase tracking-widest mb-4">Dialogue Initiated</h1>  
+        <p className="text-sm text-zinc-500 max-w-md">  
+          Your manifest has been received. We will reach out shortly to begin the orchestration.  
+        </p>  
+      </div>  
+    );  
+  }
+
   return (  
-    <main className="min-h-screen bg-[#0a0a0a] text-[#d4d4d4] font-serif selection:bg-[#c5a47e] selection:text-[#0a0a0a]">  
-      <section className="max-w-4xl mx-auto pt-32 pb-20 px-6">  
-        <header className="mb-16 border-l border-[#c5a47e]/30 pl-8">  
-          <span className="text-[#c5a47e] uppercase tracking-[0.3em] text-xs mb-4 block">  
-            Invitation // The Initial Dialogue  
-          </span>  
-          <h1 className="text-4xl md:text-5xl font-light text-white leading-tight">  
-            The Beginning of a Collaboration  
-          </h1>  
-          <p className="mt-6 text-lg text-[#a1a1a1] leading-relaxed max-w-2xl">  
-            At NexVoyage, we believe the finest journeys are co-created. This form is the start of that process—a way for us to understand the rhythm, aesthetic, and intent behind your next departure.  
-          </p>  
-        </header>
+    <main className="max-w-2xl mx-auto py-24 px-6 min-h-screen">  
+      <h1 className="text-3xl font-light uppercase tracking-[0.2em] mb-12 text-center">  
+        The Invitation  
+      </h1>
 
-        <form className="space-y-12 bg-[#111] p-10 rounded-sm border border-white/5 shadow-2xl">  
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">  
-            <div className="space-y-2">  
-              <label className="text-xs uppercase tracking-widest text-[#c5a47e]">Full Name</label>  
-              <input   
-                type="text"   
-                placeholder="Elias Thorne"  
-                className="w-full bg-transparent border-b border-white/10 py-3 focus:outline-none focus:border-[#c5a47e] transition-colors placeholder:text-white/10"  
-              />  
-            </div>  
-            <div className="space-y-2">  
-              <label className="text-xs uppercase tracking-widest text-[#c5a47e]">Email Address</label>  
-              <input   
-                type="email"   
-                placeholder="thorne@example.com"  
-                className="w-full bg-transparent border-b border-white/10 py-3 focus:outline-none focus:border-[#c5a47e] transition-colors placeholder:text-white/10"  
-              />  
-            </div>  
-            <div className="space-y-2">  
-              <label className="text-xs uppercase tracking-widest text-[#c5a47e]">Preferred Dates</label>  
-              <input   
-                type="text"   
-                placeholder="Autumn 2026"  
-                className="w-full bg-transparent border-b border-white/10 py-3 focus:outline-none focus:border-[#c5a47e] transition-colors placeholder:text-white/10"  
-              />  
-            </div>  
-            <div className="space-y-2">  
-              <label className="text-xs uppercase tracking-widest text-[#c5a47e]">Departure City</label>  
-              <input   
-                type="text"   
-                placeholder="London, UK"  
-                className="w-full bg-transparent border-b border-white/10 py-3 focus:outline-none focus:border-[#c5a47e] transition-colors placeholder:text-white/10"  
-              />  
-            </div>  
-          </div>
-
-          <div className="space-y-4">  
-            <label className="text-xs uppercase tracking-widest text-[#c5a47e]">The Vision</label>  
-            <textarea   
-              rows={4}  
-              placeholder="Tell us about the atmosphere you're seeking..."  
-              className="w-full bg-white/5 border border-white/10 p-4 focus:outline-none focus:border-[#c5a47e] transition-colors placeholder:text-white/10 resize-none"  
-            />  
-          </div>
-
-          <div className="space-y-4">  
-            <label className="text-xs uppercase tracking-widest text-[#c5a47e]">Aesthetic Notes</label>  
-            <textarea   
-              rows={3}  
-              placeholder="Textures, light, specific architectural preferences..."  
-              className="w-full bg-white/5 border border-white/10 p-4 focus:outline-none focus:border-[#c5a47e] transition-colors placeholder:text-white/10 resize-none"  
-            />  
-          </div>
-
-          <div className="pt-6">  
-            <button   
-              type="submit"  
-              className="group relative px-12 py-4 bg-[#c5a47e] text-[#0a0a0a] uppercase tracking-[0.2em] text-sm font-bold hover:bg-white transition-all duration-500"  
-            >  
-              Begin the Dialogue  
-            </button>  
+      <form onSubmit={handleSubmit} className="space-y-8">  
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">  
+          <div className="space-y-2">  
+            <label className="text-[10px] uppercase tracking-widest text-zinc-500">Full Name</label>  
+            <input required name="name" className="w-full bg-transparent border-b border-zinc-800 py-2 focus:outline-none focus:border-white transition-colors" />  
           </div>  
-        </form>  
-      </section>  
+          <div className="space-y-2">  
+            <label className="text-[10px] uppercase tracking-widest text-zinc-500">Email Address</label>  
+            <input required name="email" type="email" className="w-full bg-transparent border-b border-zinc-800 py-2 focus:outline-none focus:border-white transition-colors" />  
+          </div>  
+          <div className="space-y-2">  
+            <label className="text-[10px] uppercase tracking-widest text-zinc-500">Departure City</label>  
+            <input name="city" className="w-full bg-transparent border-b border-zinc-800 py-2 focus:outline-none focus:border-white transition-colors" />  
+          </div>  
+          <div className="space-y-2">  
+            <label className="text-[10px] uppercase tracking-widest text-zinc-500">Preferred Dates</label>  
+            <input name="dates" className="w-full bg-transparent border-b border-zinc-800 py-2 focus:outline-none focus:border-white transition-colors" />  
+          </div>  
+        </div>
+
+        <div className="space-y-2">  
+          <label className="text-[10px] uppercase tracking-widest text-zinc-500">The Vision</label>  
+          <textarea name="vision" rows={3} className="w-full bg-transparent border-b border-zinc-800 py-2 focus:outline-none focus:border-white transition-colors resize-none" />  
+        </div>
+
+        <div className="space-y-2">  
+          <label className="text-[10px] uppercase tracking-widest text-zinc-500">Aesthetic Notes</label>  
+          <textarea name="aesthetics" rows={2} className="w-full bg-transparent border-b border-zinc-800 py-2 focus:outline-none focus:border-white transition-colors resize-none" />  
+        </div>
+
+        <button  
+          type="submit"  
+          disabled={loading}  
+          className="w-full mt-12 py-4 border border-zinc-800 uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-black transition-all disabled:opacity-50"  
+        >  
+          {loading ? "Transmitting..." : "Begin the Dialogue"}  
+        </button>  
+      </form>  
     </main>  
   );  
 }  
