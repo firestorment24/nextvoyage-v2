@@ -1,7 +1,6 @@
-import React from 'react';
-
-// Archive Page: Overriding global "Warm Parchment" for a "Dark Room" aesthetic.  
-// Fix: Removed 'styled-jsx' to resolve Vercel build error.
+import React from 'react';  
+import Link from 'next/link';  
+import { PROPERTY_DATA } from '@/lib/data/sanctuaries'; // Pulling the real content back in
 
 export default function ArchivePage() {  
   return (  
@@ -20,44 +19,66 @@ export default function ArchivePage() {
         `}  
       </style>
 
-      <main className="max-w-6xl mx-auto px-6 py-24">  
-        <header className="mb-20 border-b border-[#C5A059]/20 pb-12">  
-          <h1 className="text-4xl md:text-6xl font-light tracking-tighter mb-4 italic">  
+      <main className="max-w-7xl mx-auto px-6 py-24">  
+        <header className="mb-24 border-b border-[#C5A059]/20 pb-16 text-center">  
+          <h1 className="text-5xl md:text-7xl font-light tracking-tighter mb-6 italic">  
             The Sanctuary Archive  
           </h1>  
-          <p className="text-sm uppercase tracking-[0.3em] text-[#C5A059]/80">  
-            A Curated Collection of Discontinued Journeys  
+          <p className="text-xs uppercase tracking-[0.6em] text-[#C5A059]/80">  
+            A Legacy of Exceptional Journeys  
           </p>  
         </header>
 
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-16">  
-          <div className="group cursor-crosshair">  
-            <div className="aspect-[4/5] bg-neutral-900 mb-6 overflow-hidden border border-[#C5A059]/10 transition-colors duration-500 group-hover:border-[#C5A059]/40">  
-              <div className="w-full h-full flex items-center justify-center text-[#C5A059]/20 italic">  
-                Vaulted Imagery  
-              </div>  
-            </div>  
-            <h2 className="text-2xl font-light mb-2">The Kyoto Shadows</h2>  
-            <p className="text-sm text-[#FCFAF7]/60 leading-relaxed max-w-md">  
-              An exploration of twilight rituals in the Gion district. This journey has been retired to the archive to preserve its exclusivity.  
-            </p>  
-          </div>
+        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20">  
+          {PROPERTY_DATA.map((property) => (  
+            <Link   
+              key={property.id}   
+              href={`/archive/property/${property.id}`}  
+              className="group block"  
+            >  
+              <div className="relative aspect-[4/5] bg-neutral-900 mb-8 overflow-hidden border border-[#C5A059]/10 transition-all duration-700 group-hover:border-[#C5A059]/40">  
+                {property.imageUrl ? (  
+                  <img   
+                    src={property.imageUrl}   
+                    alt={property.name}  
+                    className="w-full h-full object-cover opacity-60 grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0 group-hover:opacity-100"  
+                  />  
+                ) : (  
+                  <div className="w-full h-full flex items-center justify-center text-[#C5A059]/20 italic text-sm tracking-widest">  
+                    Vaulted Imagery  
+                  </div>  
+                )}  
+                  
+                {/* Hover Overlay */}  
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">  
+                  <span className="text-[10px] uppercase tracking-[0.4em] border border-[#C5A059]/60 px-4 py-2 bg-[#1C1C1C]/80">  
+                    View Dossier  
+                  </span>  
+                </div>  
+              </div>
 
-          <div className="group cursor-crosshair">  
-            <div className="aspect-[4/5] bg-neutral-900 mb-6 overflow-hidden border border-[#C5A059]/10 transition-colors duration-500 group-hover:border-[#C5A059]/40">  
-              <div className="w-full h-full flex items-center justify-center text-[#C5A059]/20 italic">  
-                Vaulted Imagery  
+              <div className="space-y-3">  
+                <div className="flex justify-between items-end border-b border-[#C5A059]/10 pb-2">  
+                  <h2 className="text-xl font-light tracking-tight">{property.name}</h2>  
+                  <span className="text-[9px] uppercase tracking-widest text-[#C5A059]/60 mb-1">  
+                    {property.location}  
+                  </span>  
+                </div>  
+                <p className="text-xs text-[#FCFAF7]/50 leading-relaxed line-clamp-3 font-light italic">  
+                  {property.description}  
+                </p>  
               </div>  
-            </div>  
-            <h2 className="text-2xl font-light mb-2">Atacama Desolation</h2>  
-            <p className="text-sm text-[#FCFAF7]/60 leading-relaxed max-w-md">  
-              High-altitude solitude in the Martian landscapes of Chile. Replaced by the 2027 Lunar Series.  
-            </p>  
-          </div>  
+            </Link>  
+          ))}  
         </section>
 
-        <footer className="mt-32 pt-12 border-t border-[#C5A059]/10 text-[10px] uppercase tracking-[0.5em] text-[#C5A059]/40">  
-          NexVoyage Collective &copy; 2026 — All Rights Reserved  
+        <footer className="mt-40 pt-16 border-t border-[#C5A059]/10 flex flex-col md:flex-row justify-between items-center gap-8">  
+          <div className="text-[10px] uppercase tracking-[0.5em] text-[#C5A059]/40">  
+            NexVoyage Collective &copy; 2026  
+          </div>  
+          <div className="text-[9px] italic text-[#FCFAF7]/30 max-w-xs text-right">  
+            Access to archived sanctuaries is restricted to established members and legacy travelers.  
+          </div>  
         </footer>  
       </main>  
     </div>  
