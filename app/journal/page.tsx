@@ -1,44 +1,39 @@
 import Link from 'next/link'
 
-// These match the slugs and content from our previous builds  
-const JOURNAL_ENTRIES = [  
-  {  
-    slug: 'the-south-pacific-drift',  
-    title: 'The South Pacific Drift',  
-    category: 'CURATION',  
-    location: 'POLYNESIA',  
-    image: 'https://cdn.marblism.com/qFTkeALRTbV.webp',  
-    excerpt: 'An exploration of the world’s most remote archipelagos, where luxury is defined by silence and the absence of a signal.'  
-  },  
-  {  
-    slug: 'european-prestige-anchors',  
-    title: 'European Prestige Anchors',  
-    category: 'THE COLLECTION',  
-    location: 'MEDITERRANEAN',  
-    image: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=2069&auto=format&fit=crop',  
-    excerpt: 'Securing the unreachable. A guide to the Mediterranean’s most guarded marinas and private berths.'  
-  },  
-  {  
-    slug: 'the-art-of-discretion',  
-    title: 'The Art of Discretion',  
-    category: 'PERSPECTIVE',  
-    location: 'GLOBAL',  
-    image: 'https://images.unsplash.com/photo-1493333858339-4c486682664d?q=80&w=2070&auto=format&fit=crop',  
-    excerpt: 'In an era of total visibility, the ultimate luxury is being completely unaccounted for.'  
-  },  
-  {  
-    slug: 'metropolitan-sanctuaries',  
-    title: 'Metropolitan Sanctuaries',  
-    category: 'INTELLIGENCE',  
-    location: 'LONDON // TOKYO',  
-    image: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?q=80&w=2070&auto=format&fit=crop',  
-    excerpt: 'Mapping the hidden penthouses and private clubs that offer true isolation in the heart of the machine.'  
-  }  
+// The Master Ledger: 27 Destintion Guides  
+const DESTINATIONS = [  
+  { slug: 'amalfi-coast', name: 'Amalfi Coast', location: 'ITALY', category: 'THE COLLECTION' },  
+  { slug: 'st-barts', name: 'St. Barts', location: 'CARIBBEAN', category: 'THE COLLECTION' },  
+  { slug: 'kyoto', name: 'Kyoto', location: 'JAPAN', category: 'INTELLIGENCE' },  
+  { slug: 'courchevel-1850', name: 'Courchevel 1850', location: 'ALPS', category: 'THE COLLECTION' },  
+  { slug: 'maasai-mara', name: 'Maasai Mara', location: 'KENYA', category: 'CURATION' },  
+  { slug: 'maldives', name: 'Maldives', location: 'INDIAN OCEAN', category: 'THE COLLECTION' },  
+  { slug: 'aspen', name: 'Aspen', location: 'USA', category: 'THE COLLECTION' },  
+  { slug: 'lake-como', name: 'Lake Como', location: 'ITALY', category: 'INTELLIGENCE' },  
+  { slug: 'mustique', name: 'Mustique', location: 'GRENADINES', category: 'THE COLLECTION' },  
+  { slug: 'bhutan', name: 'Bhutan', location: 'HIMALAYAS', category: 'CURATION' },  
+  { slug: 'ibiza-north', name: 'Ibiza (North)', location: 'SPAIN', category: 'PERSPECTIVE' },  
+  { slug: 'south-island-nz', name: 'South Island', location: 'NEW ZEALAND', category: 'CURATION' },  
+  { slug: 'seychelles', name: 'Seychelles', location: 'INDIAN OCEAN', category: 'THE COLLECTION' },  
+  { slug: 'provence', name: 'Provence', location: 'FRANCE', category: 'THE COLLECTION' },  
+  { slug: 'galapagos', name: 'Galapagos', location: 'ECUADOR', category: 'CURATION' },  
+  { slug: 'santorini', name: 'Santorini', location: 'GREECE', category: 'THE COLLECTION' },  
+  { slug: 'okavango-delta', name: 'Okavango Delta', location: 'BOTSWANA', category: 'CURATION' },  
+  { slug: 'rajasthan', name: 'Rajasthan', location: 'INDIA', category: 'INTELLIGENCE' },  
+  { slug: 'gstaad', name: 'Gstaad', location: 'SWITZERLAND', category: 'THE COLLECTION' },  
+  { slug: 'tokyo', name: 'Tokyo', location: 'JAPAN', category: 'INTELLIGENCE' },  
+  { slug: 'bora-bora', name: 'Bora Bora', location: 'POLYNESIA', category: 'THE COLLECTION' },  
+  { slug: 'tuscany', name: 'Tuscany', location: 'ITALY', category: 'THE COLLECTION' },  
+  { slug: 'iceland', name: 'Iceland', location: 'NORDIC', category: 'CURATION' },  
+  { slug: 'paris', name: 'Paris', location: 'FRANCE', category: 'INTELLIGENCE' },  
+  { slug: 'london', name: 'London', location: 'UK', category: 'INTELLIGENCE' },  
+  { slug: 'new-york', name: 'New York', location: 'USA', category: 'INTELLIGENCE' },  
+  { slug: 'marrakesh', name: 'Marrakesh', location: 'MOROCCO', category: 'INTELLIGENCE' },  
 ]
 
 export default function JournalPage() {  
   return (  
-    <main className="min-h-screen bg-[#000000] text-[#D4AF37] selection:bg-[#D4AF37] selection:text-[#000000]">  
+    <main className="min-h-screen bg-[#000000] text-[#D4AF37] selection:bg-[#D4AF37] selection:text-[#000000] overflow-x-hidden">  
         
       {/* Editorial Header */}  
       <header className="pt-32 pb-20 px-6 md:px-12 max-w-7xl mx-auto text-center">  
@@ -52,12 +47,12 @@ export default function JournalPage() {
         </h1>  
       </header>
 
-      {/* Hero Narrative: The South Pacific Drift */}  
-      <section className="relative w-full h-[90vh] flex flex-col justify-center items-center text-center overflow-hidden border-y border-[#D4AF37]/10">  
+      {/* Hero Narrative: Featured Destination */}  
+      <section className="relative w-full h-[80vh] flex flex-col justify-center items-center text-center overflow-hidden border-y border-[#D4AF37]/10">  
         <div className="absolute inset-0 z-0">  
           <img   
-            src={JOURNAL_ENTRIES[0].image}   
-            alt="Feature"   
+            src="https://cdn.marblism.com/qFTkeALRTbV.webp"   
+            alt="Hero"   
             className="w-full h-full object-cover scale-105 opacity-40 grayscale"  
           />  
           <div className="absolute inset-0 bg-gradient-to-b from-[#000000] via-transparent to-[#000000]" />  
@@ -65,53 +60,41 @@ export default function JournalPage() {
 
         <div className="relative z-10 max-w-4xl px-6">  
           <span className="font-mono text-[10px] tracking-[0.5em] uppercase mb-6 block opacity-80">  
-            {JOURNAL_ENTRIES[0].category} — {JOURNAL_ENTRIES[0].location}  
+            INTELLIGENCE — JAPAN  
           </span>  
-          <Link href={`/journal/${JOURNAL_ENTRIES[0].slug}`} className="group">  
+          <Link href="/journal/kyoto" className="group">  
             <h2 className="text-5xl md:text-8xl font-serif leading-tight tracking-tight mb-8 group-hover:text-[#D4AF37]/80 transition-colors">  
-              {JOURNAL_ENTRIES[0].title}  
+              The Kyoto Protocol  
             </h2>  
             <div className="w-24 h-[1px] bg-[#D4AF37] mx-auto mb-8 group-hover:w-48 transition-all duration-700" />  
             <p className="text-xl md:text-2xl font-serif italic opacity-60 max-w-2xl mx-auto leading-relaxed">  
-              "{JOURNAL_ENTRIES[0].excerpt}"  
+              "A definitive exploration of Kyoto’s hidden Machiyas and the private ceremonies that remain closed to the public gaze."  
             </p>  
           </Link>  
         </div>  
       </section>
 
-      {/* The Collection Grid: Remaining Articles */}  
+      {/* The Master Ledger Grid: 27 Destinations */}  
       <section className="max-w-7xl mx-auto px-6 py-40">  
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-24 md:gap-40">  
-          {JOURNAL_ENTRIES.slice(1).map((article, idx) => (  
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-24">  
+          {DESTINATIONS.map((dest, idx) => (  
             <Link   
-              key={article.slug}   
-              href={`/journal/${article.slug}`}  
-              className={`group flex flex-col ${idx % 2 !== 0 ? 'md:mt-32' : ''}`}  
+              key={dest.slug}   
+              href={`/journal/${dest.slug}`}  
+              className={`group flex flex-col ${idx % 3 === 1 ? 'md:mt-12' : idx % 3 === 2 ? 'md:mt-24' : ''}`}  
             >  
-              <div className="relative aspect-[3/4] overflow-hidden mb-12 border border-[#D4AF37]/10 bg-[#0a0a0a]">  
-                <img   
-                  src={article.image}   
-                  alt={article.title}  
-                  className="w-full h-full object-cover opacity-50 grayscale group-hover:scale-110 group-hover:opacity-70 transition-all duration-1000"  
-                />  
-                <div className="absolute inset-0 bg-gradient-to-t from-[#000000] via-transparent to-transparent" />  
-              </div>  
-                
-              <div className="space-y-4">  
-                <div className="flex justify-between items-center font-mono text-[9px] tracking-[0.4em] uppercase opacity-50">  
-                  <span>{article.category}</span>  
-                  <span>{article.location}</span>  
+              <div className="border-t border-[#D4AF37]/10 pt-8 space-y-4">  
+                <div className="flex justify-between items-center font-mono text-[9px] tracking-[0.4em] uppercase opacity-40">  
+                  <span>{dest.category}</span>  
+                  <span>{dest.location}</span>  
                 </div>  
-                <h3 className="text-4xl md:text-5xl font-serif tracking-tight leading-none group-hover:italic transition-all">  
-                  {article.title}  
+                <h3 className="text-4xl font-serif tracking-tight leading-none group-hover:italic transition-all group-hover:pl-4">  
+                  {dest.name}  
                 </h3>  
-                <p className="text-sm font-serif italic opacity-40 max-w-xs leading-relaxed">  
-                  {article.excerpt}  
-                </p>  
-                <div className="pt-4 overflow-hidden">  
-                   <span className="inline-block font-mono text-[10px] tracking-widest border-b border-[#D4AF37]/30 pb-1 translate-y-0 group-hover:translate-x-2 transition-transform duration-500">  
-                    Read Narrative →  
-                   </span>  
+                <div className="flex items-center space-x-4 pt-4">  
+                  <span className="font-mono text-[10px] tracking-widest opacity-20">0{idx + 1}</span>  
+                  <span className="w-full h-[1px] bg-[#D4AF37]/5 group-hover:bg-[#D4AF37]/40 transition-all duration-500" />  
+                  <span className="font-mono text-[10px] tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">READ</span>  
                 </div>  
               </div>  
             </Link>  
