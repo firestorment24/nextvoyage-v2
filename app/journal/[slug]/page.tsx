@@ -1,85 +1,100 @@
-/**  
- * app/journal/[slug]/page.tsx  
- */  
-import { notFound } from 'next/navigation'  
-import Link from 'next/link'  
-import { DESTINATIONS_DATA } from '@/lib/journal-data'
+"use client";
 
-// Standardized slug generator (must match index page)  
-const getSlug = (location: string) =>   
-  location.toLowerCase()  
-    .replace(/\s+/g, '-')  
-    .replace(/[().]/g, '')  
-    .replace(/-+/g, '-')
+import React, { use } from 'react';  
+import Link from 'next/link';  
+import { notFound } from 'next/navigation';  
+import { DESTINATIONS_DATA } from '@/lib/journal-data';
 
-interface PageProps {  
-  params: Promise<{ slug: string }>  
-}
+const getSlug = (name: string) => {  
+  return name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]/g, '');  
+};
 
-export default async function JournalDetailPage({ params }: PageProps) {  
-  const { slug } = await params  
+export default function JournalDetailPage({ params }: { params: Promise<{ slug: string }> }) {  
+  const { slug } = use(params);  
     
-  // Lookup using the same slug logic  
+  // Robust lookup: check both location slug and id  
   const destination = DESTINATIONS_DATA.find(  
-    (d) => getSlug(d.location) === slug  
-  )
+    (d) => getSlug(d.location) === slug || d.id === slug  
+  );
 
   if (!destination) {  
-    notFound()  
+    notFound();  
   }
 
   return (  
-    <main className="min-h-screen bg-[#0A0A0A] text-[#E5E5E5]">  
+    <main className="min-h-screen bg-[#050505] text-[#E5E5E5] selection:bg-zinc-800 selection:text-white relative">  
+      {/* Heavy-Duty Style Override to kill white backgrounds */}  
+      <style dangerouslySetInnerHTML={{ __html: `  
+        html, body, #__next, main {   
+          background-color: #050505 !important;   
+          background-image: none !important;   
+        }  
+        h1, h2, h3, h4, h5, h6, span, div, section, header, footer {   
+          background-color: transparent !important;   
+          background-image: none !important;  
+          box-shadow: none !important;  
+        }  
+        [class*="parchment"], .bg-white, .bg-parchment {   
+          background: #050505 !important;   
+          background-image: none !important;   
+        }  
+        h1, h2, h3 { color: #E5E5E5 !important; }  
+      ` }} />
+
       {/* Hero Section */}  
-      <section className="relative h-[80vh] w-full">  
-        <img   
-          src={destination.heroImage}   
-          alt={destination.location}  
-          className="w-full h-full object-cover opacity-60"  
-        />  
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0A0A0A]" />  
+      <section className="relative h-[70vh] w-full overflow-hidden">  
+        <div className="absolute inset-0 grayscale-0 hover:grayscale transition-all duration-1000 ease-in-out group">  
+          <img   
+            src={destination.heroImage}   
+            alt={destination.location}  
+            className="w-full h-full object-cover scale-105"  
+          />  
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent" />  
+        </div>  
           
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">  
-          <p className="text-[12px] tracking-[0.4em] uppercase text-[#C5A059] mb-8 animate-fade-in">  
-            {destination.coordinates}  
-          </p>  
-          <h1 className="text-6xl md:text-8xl font-serif font-light mb-6 tracking-tighter">  
-            {destination.location}  
-          </h1>  
-          <p className="text-xl md:text-2xl font-serif italic text-[#C5A059] max-w-2xl">  
-            {destination.orchestration}  
-          </p>  
+        <div className="absolute bottom-0 left-0 w-full p-6 md:p-12 max-w-7xl mx-auto">  
+          <div className="space-y-4">  
+            <p className="font-mono text-[10px] tracking-[0.3em] text-zinc-500 uppercase">  
+              {destination.coordinates} // Field Report No. {destination.id}  
+            </p>  
+            <h1 className="text-5xl md:text-8xl font-serif tracking-tighter leading-none italic m-0">  
+              {destination.location}  
+            </h1>  
+          </div>  
         </div>  
       </section>
 
-      {/* Editorial Content */}  
-      <section className="max-w-4xl mx-auto px-6 py-24">  
-        <div className="space-y-12">  
-          <div className="border-l border-[#C5A059] pl-8 py-2">  
-            <p className="text-2xl font-serif font-light leading-relaxed text-[#D1D1D1]">  
-              {destination.summary}  
-            </p>  
-          </div>  
-            
-          <div className="prose prose-invert prose-brass max-w-none">  
-            <p className="text-lg text-[#888] leading-loose font-light">  
-              This report is part of the NexVoyage Master Ledger. The full tactical dossier including  
-              vetted sanctuaries, private transport logistics, and on-ground orchestration is available   
-              exclusively to Collective members.  
-            </p>  
-          </div>
+      {/* Content Section */}  
+      <section className="px-6 md:px-12 max-w-4xl mx-auto py-24 space-y-16">  
+        <div className="space-y-8">  
+          <p className="text-xl md:text-2xl font-serif leading-relaxed italic text-zinc-300">  
+            {destination.summary}  
+          </p>  
+          <div className="h-px w-24 bg-zinc-800" />  
+        </div>
 
-          <div className="pt-20 border-t border-[#1A1A1A]">  
-            <Link   
-              href="/journal"  
-              className="inline-flex items-center gap-4 text-[10px] tracking-[0.3em] uppercase text-[#C5A059] hover:text-white transition-colors group"  
-            >  
-              <span className="h-px w-12 bg-[#C5A059] group-hover:w-16 transition-all" />  
-              Return to Ledger  
-            </Link>  
+        {/* Tactical Intel / Details */}  
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 font-light text-zinc-400 leading-relaxed">  
+          <div className="space-y-4">  
+            <h3 className="font-mono text-[10px] tracking-[0.2em] text-zinc-600 uppercase">The Sanctuary</h3>  
+            <p className="text-sm">{destination.sanctuary}</p>  
+          </div>  
+          <div className="space-y-4">  
+            <h3 className="font-mono text-[10px] tracking-[0.2em] text-zinc-600 uppercase">The Orchestration</h3>  
+            <p className="text-sm">{destination.orchestration}</p>  
           </div>  
         </div>  
-      </section>  
+      </section>
+
+      {/* Back Navigation */}  
+      <footer className="py-20 px-6 md:px-12 max-w-7xl mx-auto border-t border-zinc-900/50 flex justify-between items-center text-[10px] font-mono tracking-[0.3em] text-zinc-500 uppercase">  
+        <Link href="/journal" className="hover:text-white transition-colors">  
+          &lt;— Back to Ledger  
+        </Link>  
+        <Link href="/invitation" className="hover:text-white transition-colors">  
+          Request Briefing  
+        </Link>  
+      </footer>  
     </main>  
-  )  
+  );  
 }  
