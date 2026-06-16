@@ -4,6 +4,13 @@ import Link from 'next/link';
 import { PERSPECTIVE_POSTS } from '@/lib/data/perspectives';
 
 export default function PerspectivePage() {  
+  // Explicitly type the keys to match the 'size' property in our data  
+  const sizeClasses: Record<'small' | 'medium' | 'large', string> = {  
+    small: "col-span-1 row-span-1",  
+    medium: "col-span-1 md:col-span-2 row-span-1",  
+    large: "col-span-1 md:col-span-2 row-span-2",  
+  };
+
   return (  
     <div className="min-h-screen bg-[#0a0a0a] text-stone-300 selection:bg-[#d4af37] selection:text-black">  
       {/* Header Section */}  
@@ -21,51 +28,42 @@ export default function PerspectivePage() {
       {/* Bento Grid */}  
       <main className="max-w-7xl mx-auto p-6 lg:p-12">  
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[240px]">  
-          {PERSPECTIVE_POSTS.map((post) => {  
-            // Mapping sizing logic for the grid  
-            const sizeClasses = {  
-              small: "col-span-1 row-span-1",  
-              medium: "col-span-1 md:col-span-2 row-span-1",  
-              large: "col-span-1 md:col-span-2 row-span-2",  
-            };
+          {PERSPECTIVE_POSTS.map((post) => (  
+            <Link  
+              key={post.id}  
+              href={`/perspective/${post.id}`}  
+              className={`${sizeClasses[post.size]} group relative overflow-hidden border border-stone-800 bg-[#111] transition-all duration-500 hover:border-[#d4af37]/50`}  
+            >  
+              {/* Background Image/Overlay */}  
+              <div   
+                className="absolute inset-0 bg-cover bg-center grayscale opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:grayscale-0"  
+                style={{ backgroundImage: `url(${post.image})` }}  
+              />  
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
 
-            return (  
-              <Link  
-                key={post.id}  
-                href={`/perspective/${post.id}`}  
-                className={`${sizeClasses[post.size]} group relative overflow-hidden border border-stone-800 bg-[#111] transition-all duration-500 hover:border-[#d4af37]/50`}  
-              >  
-                {/* Background Image/Overlay */}  
-                <div   
-                  className="absolute inset-0 bg-cover bg-center grayscale opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:grayscale-0"  
-                  style={{ backgroundImage: `url(${post.image})` }}  
-                />  
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
-
-                {/* Content */}  
-                <div className="absolute inset-0 p-6 flex flex-col justify-end">  
-                  <div className="mb-2">  
-                    <span className="text-[10px] uppercase tracking-[0.2em] text-[#d4af37] font-bold px-2 py-1 border border-[#d4af37]/30 bg-black/50">  
-                      {post.category}  
-                    </span>  
-                  </div>  
-                  <h3 className="text-xl md:text-2xl font-light text-white leading-tight group-hover:text-[#d4af37] transition-colors">  
-                    {post.title}  
-                  </h3>  
-                  {post.size !== 'small' && (  
-                    <p className="mt-2 text-stone-400 text-sm font-light line-clamp-2 max-w-md">  
-                      {post.subtitle}  
-                    </p>  
-                  )}  
-                  <div className="mt-4 flex items-center gap-2 text-[10px] text-stone-500 uppercase tracking-widest">  
-                    <span>{post.date}</span>  
-                    <span className="w-1 h-1 rounded-full bg-stone-700" />  
-                    <span>Read Article</span>  
-                  </div>  
+              {/* Content */}  
+              <div className="absolute inset-0 p-6 flex flex-col justify-end">  
+                <div className="mb-2">  
+                  <span className="text-[10px] uppercase tracking-[0.2em] text-[#d4af37] font-bold px-2 py-1 border border-[#d4af37]/30 bg-black/50">  
+                    {post.category}  
+                  </span>  
                 </div>  
-              </Link>  
-            );  
-          })}  
+                <h3 className="text-xl md:text-2xl font-light text-white leading-tight group-hover:text-[#d4af37] transition-colors">  
+                  {post.title}  
+                </h3>  
+                {post.size !== 'small' && (  
+                  <p className="mt-2 text-stone-400 text-sm font-light line-clamp-2 max-w-md">  
+                    {post.subtitle}  
+                  </p>  
+                )}  
+                <div className="mt-4 flex items-center gap-2 text-[10px] text-stone-500 uppercase tracking-widest">  
+                  <span>{post.date}</span>  
+                  <span className="w-1 h-1 rounded-full bg-stone-700" />  
+                  <span>Read Article</span>  
+                </div>  
+              </div>  
+            </Link>  
+          ))}  
         </div>  
       </main>
 
