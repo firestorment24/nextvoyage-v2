@@ -1,62 +1,111 @@
-// app/success/page.tsx  
-import React from 'react';
+"use client";
 
-const SuccessPage = () => {  
-  const steps = [  
-    {  
-      title: "The Manifest Received",  
-      description: "Your request has been successfully transmitted to the Lead Conductor's private terminal.",  
-      status: "complete"  
-    },  
-    {  
-      title: "Strategic Briefing",  
-      description: "Daryl Clark will personally review your requirements and reach out via your preferred channel within 24 hours.",  
-      status: "current"  
-    },  
-    {  
-      title: "Conductance Commences",  
-      description: "Upon alignment, we begin the orchestration of your itinerary and logistics.",  
-      status: "upcoming"  
-    }  
-  ];
+import React from 'react';  
+import { Cormorant_Garamond, Inter } from 'next/font/google';
 
+const cormorant = Cormorant_Garamond({   
+  subsets: ['latin'],   
+  weight: ['300', '400', '500', '600'],  
+  display: 'swap'   
+});
+
+const inter = Inter({   
+  subsets: ['latin'],   
+  weight: ['300', '400'],  
+  display: 'swap'   
+});
+
+const TIMELINE_STEPS = [  
+  {  
+    title: "Manifest Received",  
+    desc: "Rachel has finalized your preliminary dossier. Your data is now encrypted and secured within our vault.",  
+    status: "completed"  
+  },  
+  {  
+    title: "Strategic Briefing",  
+    desc: "Daryl will personally review your orchestration intent. Expect a high-priority reach-out within 24 hours.",  
+    status: "active"  
+  },  
+  {  
+    title: "Curation & Reveal",  
+    desc: "A custom-tailored architectural framework for your journey will be presented for refinement.",  
+    status: "pending"  
+  },  
+  {  
+    title: "Manifest Activation",  
+    desc: "Logistics, security, and private aviation are synchronized for deployment.",  
+    status: "pending"  
+  }  
+];
+
+export default function SuccessPage() {  
   return (  
-    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-6">  
-      <div className="max-w-2xl w-full text-center">  
-        <h1 className="text-4xl font-light tracking-widest mb-4 uppercase">Request Confirmed</h1>  
-        <p className="text-gray-400 mb-12 italic">"Precision in orchestration, excellence in execution."</p>  
-          
-        <div className="relative">  
-          {steps.map((step, index) => (  
-            <div key={index} className="flex items-start mb-12 last:mb-0">  
-              <div className="flex flex-col items-center mr-6">  
-                <div className={`w-4 h-4 rounded-full border ${  
-                  step.status === 'complete' ? 'bg-white border-white' :   
-                  step.status === 'current' ? 'bg-transparent border-white animate-pulse' :   
-                  'bg-transparent border-gray-700'  
-                }`} />  
-                {index !== steps.length - 1 && (  
-                  <div className="w-px h-16 bg-gray-800 my-2" />  
-                )}  
-              </div>  
-              <div className="text-left">  
-                <h3 className={`text-lg font-medium ${step.status === 'upcoming' ? 'text-gray-600' : 'text-white'}`}>  
+    <main className={`min-h-screen bg-[#050505] text-[#E5E5E5] flex flex-col items-center justify-center p-6 ${inter.className}`}>  
+      {/* Brass Accent Border */}  
+      <div className="fixed inset-0 pointer-events-none border-[1px] border-[#D4AF37]/20 m-4 z-50" />  
+        
+      <div className="max-w-xl w-full space-y-16 relative z-10 py-12">  
+        {/* Header */}  
+        <header className="text-center space-y-4">  
+          <div className="flex justify-center mb-6">  
+            <div className="h-16 w-[1px] bg-gradient-to-b from-transparent via-[#D4AF37] to-transparent" />  
+          </div>  
+          <h1 className={`${cormorant.className} text-[#D4AF37] text-4xl md:text-5xl font-light italic tracking-tight`}>  
+            Orchestration Initiated  
+          </h1>  
+          <p className="text-[10px] text-white/40 uppercase tracking-[0.4em]">Protocol: Vetting Success</p>  
+        </header>
+
+        {/* Vertical Timeline */}  
+        <div className="relative pl-8 space-y-12">  
+          {/* Vertical Brass Line */}  
+          <div className="absolute left-[3px] top-2 bottom-2 w-[1px] bg-[#D4AF37]/20" />
+
+          {TIMELINE_STEPS.map((step, idx) => (  
+            <div key={idx} className="relative group">  
+              {/* Timeline Indicator Dot */}  
+              <div className={`absolute -left-[32px] top-1.5 h-1.5 w-1.5 rounded-full border border-[#D4AF37] transition-all duration-700 ${  
+                step.status === 'completed' ? 'bg-[#D4AF37]' :   
+                step.status === 'active' ? 'bg-[#D4AF37] shadow-[0_0_8px_#D4AF37]' :   
+                'bg-transparent opacity-30'  
+              }`} />  
+                
+              <div className="space-y-2">  
+                <h3 className={`${cormorant.className} text-[#D4AF37] text-xl font-medium tracking-wide`}>  
                   {step.title}  
                 </h3>  
-                <p className="text-gray-500 mt-1 text-sm leading-relaxed">  
-                  {step.description}  
+                <p className="text-sm text-white/60 font-light leading-relaxed max-w-sm">  
+                  {step.desc}  
                 </p>  
               </div>  
             </div>  
           ))}  
         </div>
 
-        <div className="mt-16 border-t border-gray-900 pt-8">  
-          <p className="text-xs tracking-widest uppercase text-gray-600">Lead Conductor: Daryl Clark</p>  
-        </div>  
-      </div>  
-    </div>  
-  );  
-};
+        {/* Footer Branding */}  
+        <footer className="pt-8 text-center space-y-8">  
+          <div className="space-y-1">  
+            <p className="text-[10px] text-white/30 uppercase tracking-widest font-light">Lead Conductor</p>  
+            <p className={`${cormorant.className} text-white/90 text-2xl font-light`}>Daryl Clark</p>  
+          </div>  
+            
+          <button   
+            onClick={() => window.location.href = '/'}  
+            className="group flex flex-col items-center gap-2 mx-auto"  
+          >  
+            <div className="text-[9px] text-[#D4AF37] uppercase tracking-[0.3em] group-hover:text-white transition-colors">  
+              Return to Ledger  
+            </div>  
+            <div className="h-[1px] w-8 bg-[#D4AF37]/30 group-hover:w-16 transition-all duration-500" />  
+          </button>  
+        </footer>  
+      </div>
 
-export default SuccessPage;  
+      <style jsx global>{`  
+        body {  
+          background-color: #050505;  
+        }  
+      `}</style>  
+    </main>  
+  );  
+}  
