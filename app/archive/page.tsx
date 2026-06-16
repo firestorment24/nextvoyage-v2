@@ -1,22 +1,24 @@
 import React from 'react';
 
 // Archive Page: Overriding global "Warm Parchment" for a "Dark Room" aesthetic.  
-// Fix: h1-h4 background overrides to prevent parchment boxes.
+// Fix: Removed 'styled-jsx' to resolve Vercel build error.
 
 export default function ArchivePage() {  
   return (  
     <div className="min-h-screen bg-[#1C1C1C] text-[#FCFAF7] selection:bg-[#C5A059] selection:text-[#1C1C1C]">  
-      <style jsx global>{`  
-        /* Local override for global header backgrounds */  
-        h1, h2, h3, h4 {  
-          background-color: transparent !important;  
-          color: #C5A059 !important; /* Brass accent */  
-        }  
-          
-        body {  
-          background-color: #1C1C1C !important;  
-        }  
-      `}</style>
+      <style>  
+        {`  
+          /* Local override for global header backgrounds */  
+          h1, h2, h3, h4 {  
+            background-color: transparent !important;  
+            color: #C5A059 !important;  
+          }  
+            
+          body {  
+            background-color: #1C1C1C !important;  
+          }  
+        `}  
+      </style>
 
       <main className="max-w-6xl mx-auto px-6 py-24">  
         <header className="mb-20 border-b border-[#C5A059]/20 pb-12">  
@@ -29,10 +31,8 @@ export default function ArchivePage() {
         </header>
 
         <section className="grid grid-cols-1 md:grid-cols-2 gap-16">  
-          {/* Example Item */}  
           <div className="group cursor-crosshair">  
             <div className="aspect-[4/5] bg-neutral-900 mb-6 overflow-hidden border border-[#C5A059]/10 transition-colors duration-500 group-hover:border-[#C5A059]/40">  
-              {/* Image would go here */}  
               <div className="w-full h-full flex items-center justify-center text-[#C5A059]/20 italic">  
                 Vaulted Imagery  
               </div>  
