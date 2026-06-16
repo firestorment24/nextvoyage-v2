@@ -86,17 +86,7 @@ export default function Navigation() {
               </div>  
             ))}  
               
-            <div className="pt-16 border-t border-white/5 mt-16 inline-block">  
-              <Link   
-                href="/concierge"   
-                onClick={closeMenu}  
-                className="font-mono text-[9px] md:text-[11px] tracking-[0.5em] text-stone-500 hover:text-amber-200 transition-colors uppercase flex items-center gap-4"  
-              >  
-                <span className="w-8 h-[1px] bg-stone-800 group-hover:bg-amber-900"></span>  
-                Secure Private Concierge Gateway  
-                <span className="w-8 h-[1px] bg-stone-800 group-hover:bg-amber-900"></span>  
-              </Link>  
-            </div>  
+             
           </div>  
         </nav>  
       </div>  
