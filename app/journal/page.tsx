@@ -7,7 +7,6 @@ import { DESTINATIONS_DATA } from '@/lib/journal-data'
 export default function JournalPage() {  
   return (  
     <main className="min-h-screen bg-[#0A0A0A] text-[#C5A059] font-serif selection:bg-[#C5A059]/30">  
-      {/* GLOBAL OVERRIDE: This kills the white background ghost on this page */}  
       <style dangerouslySetInnerHTML={{ __html: `  
         h1, h2, h3, h4, p, span, div, section {   
           background-color: transparent !important;   
@@ -16,7 +15,6 @@ export default function JournalPage() {
         body { background-color: #0A0A0A !important; }  
       `}} />
 
-      {/* Header */}  
       <div className="pt-32 pb-20 px-8 max-w-7xl mx-auto border-b border-[#C5A059]/20">  
         <div className="flex flex-col gap-4">  
           <span className="text-[10px] tracking-[0.4em] uppercase opacity-60">  
@@ -31,7 +29,6 @@ export default function JournalPage() {
         </div>  
       </div>
 
-      {/* Narrative Feed */}  
       <section className="max-w-7xl mx-auto px-8 py-20 bg-transparent">  
         <div className="flex flex-col bg-transparent">  
           {DESTINATIONS_DATA.map((item) => (  
@@ -48,10 +45,10 @@ export default function JournalPage() {
                   {item.location}  
                 </h2>  
                 <h3 className="text-sm uppercase tracking-[0.2em] opacity-60 bg-transparent">  
-                  {item.tagline}  
+                  {item.orchestration}  
                 </h3>  
                 <p className="text-sm opacity-40 leading-relaxed line-clamp-2 mt-2 bg-transparent">  
-                  {item.description}  
+                  {item.summary}  
                 </p>  
               </div>
 
@@ -70,7 +67,6 @@ export default function JournalPage() {
         </div>  
       </section>
 
-      {/* Footer Nav */}  
       <footer className="py-20 px-8 max-w-7xl mx-auto flex justify-between items-center border-t border-[#C5A059]/20 bg-transparent">  
         <span className="text-[10px] tracking-[0.3em] uppercase opacity-40 bg-transparent">  
           End of Ledger // Page 01 of 27  
