@@ -9,7 +9,8 @@ import { MapPin, ArrowLeft, Clock, BookOpen } from 'lucide-react';
 export default function JournalDetailPage() {  
   const params = useParams();  
   const slug = params.slug as string;  
-  // Finding by slug or id depending on your data structure  
+    
+  // Finding the destination by slug (id)  
   const destination = DESTINATIONS_DATA.find((d) => d.id === slug);
 
   if (!destination) {  
@@ -34,7 +35,7 @@ export default function JournalDetailPage() {
           alt={destination.title}  
           className="w-full h-full object-cover"  
         />  
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/20 to-transparent" />  
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/40 to-transparent" />  
           
         <div className="absolute bottom-0 left-0 right-0 p-8 md:p-20 max-w-7xl mx-auto w-full">  
           <Link   
@@ -80,20 +81,22 @@ export default function JournalDetailPage() {
             </div>  
           </div>
 
-          {/* Article Body - Cleaned of all white background boxes */}  
+          {/* Article Body */}  
           <div className="md:col-span-3 space-y-12">  
             <div className="prose prose-invert prose-lg max-w-none">  
+              {/* Summary as Intro */}  
               <p className="text-2xl font-serif italic text-[#C5A059] leading-relaxed border-l border-[#C5A059] pl-8 mb-12">  
                 {destination.summary}  
               </p>  
                 
+              {/* Detailed Orchestration Narrative */}  
               <div className="space-y-8 text-[#E5E5E5] leading-relaxed font-serif text-lg">  
-                {destination.content ? (  
-                  destination.content.split('\n\n').map((para, i) => (  
+                {(destination as any).orchestration ? (  
+                  (destination as any).orchestration.split('\n\n').map((para: string, i: number) => (  
                     <p key={i}>{para}</p>  
                   ))  
                 ) : (  
-                  <p>Our scouts are currently finalizing the ledger for {destination.title}. Full details of this orchestration will be available shortly.</p>  
+                  <p>Our scouts are currently finalizing the ledger for {destination.title}. The orchestration of this sanctuary will be revealed shortly.</p>  
                 )}  
               </div>  
             </div>
@@ -104,14 +107,14 @@ export default function JournalDetailPage() {
                 <img   
                   src={destination.heroImage}   
                   className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"   
-                  alt="Detail"   
+                  alt="Detail View"   
                 />  
               </div>  
               <div className="aspect-[3/4] bg-[#1C1C1C] overflow-hidden group">  
                 <img   
                   src={destination.heroImage}   
                   className="w-full h-full object-cover scale-125 grayscale hover:grayscale-0 transition-all duration-1000"   
-                  alt="Detail"   
+                  alt="Detail View"   
                 />  
               </div>  
             </div>  
@@ -122,7 +125,7 @@ export default function JournalDetailPage() {
       {/* Footer Signature */}  
       <footer className="py-32 px-6 text-center border-t border-[#1C1C1C]">  
         <p className="text-[#C5A059] font-serif italic text-2xl max-w-2xl mx-auto">  
-          "The world is a ledger of experiences; we simply help you curate the entries."  
+          "Every journey is a signature; ensure yours is written in ink that lasts."  
         </p>  
       </footer>  
     </div>  
