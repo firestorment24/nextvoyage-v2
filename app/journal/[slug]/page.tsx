@@ -19,7 +19,7 @@ export default function JournalDetailPage({ params }: { params: { slug: string }
         h1, h2, h3, h4, p, span, div, section { background-color: transparent !important; }  
         body { background-color: #0A0A0A !important; }  
       `}} />
-
+ 
       <div className="relative h-[70vh] w-full overflow-hidden">  
         <img src={destination.heroImage} alt={destination.location} className="w-full h-full object-cover" />  
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-[#0A0A0A]" />  
