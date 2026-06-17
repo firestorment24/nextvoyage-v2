@@ -3,124 +3,111 @@
 import React, { useEffect, useState } from 'react'  
 import Link from 'next/link'
 
-// Signature Palette:  
-// Brass: #C5A059  
-// Shadow: #000000
-
 export default function HomePage() {  
-  const [isLoaded, setIsLoaded] = useState(false)
+const [mounted, setMounted] = useState(false)
 
-  useEffect(() => {  
-    setIsLoaded(true)  
-  }, [])
+useEffect(() => {  
+  setMounted(true)  
+}, [])
 
-  const featured = [  
-    { id: 'one-and-only-aesthesis', name: 'One&Only Aesthesis', location: 'Athens' },  
-    { id: 'aman-venice', name: 'Aman Venice', location: 'Venice' },  
-    { id: 'royal-mansour', name: 'Royal Mansour', location: 'Marrakech' },  
-  ]
+// Properties for the editorial grid  
+const properties = [  
+  { id: 'one-and-only-aesthesis', name: 'One&Only Aesthesis', loc: 'Athens' },  
+  { id: 'aman-venice', name: 'Aman Venice', loc: 'Venice' },  
+  { id: 'royal-mansour', name: 'Royal Mansour', loc: 'Marrakech' },  
+]
 
-  return (  
-    <main className="min-h-screen bg-[#000000] text-[#C5A059] selection:bg-[#C5A059] selection:text-black">  
-      {/*   
-          Surgical Strike on White Boxes:  
-          Force-overriding any inherited backgrounds to Shadow Black.  
-      */}  
-      <style jsx global>{`  
-        html, body, main {   
-          background-color: #000000 !important;   
-        }  
-        /* Target common navigation and container classes that often carry white backgrounds */  
-        header, nav, .nav-container, .bg-white, .bg-parchment, .bg-[#FCFAF7] {  
-          background-color: #000000 !important;  
-          background: #000000 !important;  
-        }  
-        /* Ensure all text elements respect the Brass theme */  
-        h1, h2, h3, p, a, span {  
-          color: #C5A059 !important;  
-        }  
-      `}</style>
+return (  
+  <main className="min-h-screen bg-black text-[#C5A059]">  
+    {/* THE FIX: Hard-overriding any inherited white backgrounds or box-shadows */}  
+    <style jsx global>{`  
+      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap');  
+        
+      html, body, #__next, main {   
+        background-color: #000000 !important;   
+        color: #C5A059 !important;  
+      }  
+        
+      /* Killing all white blocks, shadows, and borders that aren't brass */  
+      * {   
+        border-color: rgba(197, 160, 89, 0.1) !important;  
+        box-shadow: none !important;  
+      }  
+        
+      .bg-white, .bg-slate-50, .bg-[#FCFAF7], .shadow-sm, .shadow-md {  
+        background-color: transparent !important;  
+        background: none !important;  
+      }
 
-      {/* 1. CINEMATIC HERO: THE SOVEREIGN ARRIVAL */}  
-      <section className="relative h-screen w-full overflow-hidden bg-[#000000]">  
-        <div   
-          className={`absolute inset-0 transition-transform duration-[12000ms] ease-out ${isLoaded ? 'scale-110' : 'scale-100'}`}  
-        >  
-          <img   
-            src="https://cdn.marblism.com/8cCycGyYogj.webp"   
-            alt="The Sovereign Arrival"   
-            className="h-full w-full object-cover opacity-50 grayscale-[20%]"  
-          />  
-        </div>  
-          
-        {/* Deep Shadow Overlay for text readability */}  
-        <div className="absolute inset-0 bg-gradient-to-t from-[#000000] via-[#000000]/40 to-transparent" />  
-          
-        <div className="relative z-10 flex h-full flex-col items-center justify-center text-center px-6">  
-          <p className={`text-[10px] uppercase tracking-[0.8em] mb-10 text-[#C5A059] transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>  
-            NexVoyage Collective  
-          </p>  
-            
-          {/* Main Hero Text: Now in Brass on Shadow background */}  
-          <div className="bg-[#000000]/60 p-8 backdrop-blur-sm border border-[#C5A059]/10">  
-            <h1 className={`font-serif text-5xl md:text-9xl font-light tracking-tighter text-[#C5A059] transition-all duration-1000 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>  
-              THE SOVEREIGN <br />  
-              <span className="italic">ARRIVAL</span>  
-            </h1>  
-          </div>  
-            
-          <div className="mt-12 h-16 w-[1px] bg-[#C5A059]/40 animate-pulse" />  
-        </div>  
-      </section>
+      h1, h2, h3, h4, p, span, a {  
+        font-family: 'Cormorant Garamond', serif;  
+        background-color: transparent !important;  
+      }  
+    `}</style>
 
-      {/* 2. THE PERSPECTIVE (Minimalist Content) */}  
-      <section className="py-48 px-8 bg-[#000000]">  
-        <div className="max-w-4xl mx-auto text-center">  
-          <h2 className="font-serif text-4xl md:text-5xl italic font-light leading-relaxed text-[#C5A059]">  
-            Curated Expeditions for those <br />  
-            who seek the <span className="not-italic opacity-80">Unseen.</span>  
-          </h2>  
-        </div>  
-      </section>
+    {/* 1. CINEMATIC HERO */}  
+    <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-black">  
+      <div className={`absolute inset-0 transition-transform duration-[15000ms] ease-out ${mounted ? 'scale-110' : 'scale-100'}`}>  
+        <img   
+          src="https://cdn.marblism.com/8cCycGyYogj.webp"   
+          alt="The Sovereign Arrival"   
+          className="h-full w-full object-cover opacity-60 grayscale-[30%]"  
+        />  
+      </div>  
+        
+      {/* Black Gradient Overlay */}  
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40" />
 
-      {/* 3. THE COLLECTION (Editorial Stagger) */}  
-      <section className="pb-40 px-4 md:px-20 bg-[#000000]">  
-        <div className="flex flex-col gap-48">  
-          {featured.map((item, idx) => (  
-            <Link   
-              key={item.id}   
-              href={`/archive/property/${item.id}`}  
-              className={`group flex flex-col md:flex-row items-center gap-16 ${idx % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}  
-            >  
-              <div className="w-full md:w-7/12 overflow-hidden aspect-[16/9] border border-[#C5A059]/5">  
-                <img   
-                  src={`https://cdn.marblism.com/grid-${idx + 1}.webp`}   
-                  alt={item.name}  
-                  className="w-full h-full object-cover grayscale transition-all duration-[2000ms] group-hover:grayscale-0 group-hover:scale-105"  
-                />  
-              </div>  
-              <div className="w-full md:w-5/12 text-center md:text-left">  
-                <p className="text-[9px] uppercase tracking-[0.5em] opacity-40 mb-4">Location // {item.location}</p>  
-                <h3 className="font-serif text-5xl font-light group-hover:italic transition-all text-[#C5A059]">{item.name}</h3>  
-                <p className="mt-6 text-sm uppercase tracking-[0.3em] opacity-60">View Archive Entry</p>  
-              </div>  
-            </Link>  
-          ))}  
-        </div>  
-      </section>
+      <div className="relative z-10 text-center px-4">  
+        <h1 className="text-6xl md:text-9xl font-light tracking-tighter leading-none mb-4">  
+          THE SOVEREIGN <br />  
+          <span className="italic">ARRIVAL</span>  
+        </h1>  
+        <div className="h-[1px] w-32 bg-[#C5A059]/40 mx-auto mt-8" />  
+      </div>  
+    </section>
 
-      {/* 4. FINAL CTA */}  
-      <section className="py-64 bg-[#000000] text-center border-t border-[#C5A059]/10">  
-        <Link   
-          href="/archive"  
-          className="group relative inline-block"  
-        >  
-          <span className="text-4xl md:text-6xl font-serif font-light text-[#C5A059] group-hover:italic transition-all">  
-            Enter the Collection  
-          </span>  
-          <div className="mt-4 h-[1px] w-0 bg-[#C5A059] transition-all duration-700 group-hover:w-full mx-auto" />  
-        </Link>  
-      </section>  
-    </main>  
-  )  
+    {/* 2. CORE STATEMENT */}  
+    <section className="py-40 px-6 text-center bg-black">  
+      <h2 className="max-w-4xl mx-auto text-3xl md:text-5xl font-light italic leading-relaxed">  
+        "Navigating the intersection of editorial discovery <br className="hidden md:block" /> and bespoke architectural travel."  
+      </h2>  
+    </section>
+
+    {/* 3. EDITORIAL GRID (The 19 Properties) */}  
+    <section className="pb-40 px-6 md:px-20 bg-black">  
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">  
+        {properties.map((item, idx) => (  
+          <Link   
+            key={item.id}   
+            href={`/archive/property/${item.id}`}  
+            className="group block"  
+          >  
+            <div className="aspect-[4/5] overflow-hidden border border-[#C5A059]/10 bg-black">  
+              <img   
+                src={`https://cdn.marblism.com/grid-${idx + 1}.webp`}   
+                alt={item.name}  
+                className="w-full h-full object-cover grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:scale-105"  
+              />  
+            </div>  
+            <div className="mt-8 text-center">  
+              <p className="text-[10px] uppercase tracking-[0.4em] opacity-50 mb-2">{item.loc}</p>  
+              <h3 className="text-3xl font-light group-hover:italic transition-all">{item.name}</h3>  
+            </div>  
+          </Link>  
+        ))}  
+      </div>  
+    </section>
+
+    {/* 4. FOOTER CALL */}  
+    <section className="py-60 border-t border-[#C5A059]/10 text-center bg-black">  
+      <Link   
+        href="/archive"  
+        className="text-sm uppercase tracking-[0.8em] hover:opacity-100 opacity-60 transition-all"  
+      >  
+        Enter The Archive  
+      </Link>  
+    </section>  
+  </main>  
+)  
 }  
