@@ -17,10 +17,10 @@ const Navigation = () => {
   }, [isOpen]);
 
   const navLinks = [  
-    { name: 'HOME', href: '/', sub: 'The Beginning' },  
-    { name: 'THE ARCHIVE', href: '/archive', sub: 'Curated Collection' },  
+    { name: 'LOBBY', href: '/', sub: 'The Beginning' },  
+    { name: 'ARCHIVE', href: '/archive', sub: 'Curated Collection' },  
     { name: 'JOURNAL', href: '/journal', sub: 'Travel Stories' },  
-    { name: 'INQUIRY', href: '/invitation', sub: 'Direct Inquiry' },  
+    { name: 'INVITATION', href: '/invitation', sub: 'Direct Inquiry' },  
   ];
 
   const brass = '#C5A059';  
