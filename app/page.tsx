@@ -6,119 +6,124 @@ import Link from 'next/link';
 
 const PROPERTY_DATA = [  
   {  
+    id: "NV-LDR-002",  
+    name: "Amangiri",  
+    location: "Canyon Point, Utah",  
+    image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914", // Moody desert monolith  
+    atmosphere: 'A concrete sanctuary carved into the Navajo desert.',  
+    type: 'Desert Monolith'  
+  },  
+  {  
     id: "NV-LDR-001",  
     name: "North Island",  
     location: "Seychelles",  
-    image: "https://images.unsplash.com/photo-1506929113614-bb40ff1b61c3",  
-    highlights: ['Private Helicopter Landing', 'Full Island Seclusion'],  
-    atmosphere: 'Hyper-exclusive barefoot luxury with zero external visibility.'  
-  },  
-  {  
-    id: "NV-LDR-002",  
-    name: "Amangiri",  
-    location: "Utah, USA",  
-    image: "https://images.unsplash.com/photo-1504851149312-7a075b496cc7",  
-    highlights: ['Concrete Monoliths', 'Desert Silence'],  
-    atmosphere: 'Structural erasure within the Navajo desert landscape.'  
+    image: "https://images.unsplash.com/photo-1548574505-12730427929d", // Darker beach aerial  
+    atmosphere: 'Total island seclusion with restricted airspace protocol.',  
+    type: 'Marine Sanctuary'  
   },  
   {  
     id: "NV-LDR-016",  
     name: "Joali Being",  
-    location: "Maldives",  
-    image: "https://images.unsplash.com/photo-1544550581-5f7ceaf7f992",  
-    highlights: ['Sound Therapy', 'Biophilic Design'],  
-    atmosphere: 'Weightless architectural forms in a state of perpetual healing.'  
-  },  
-  {  
-    id: "NV-LDR-009",  
-    name: "Sonop",  
-    location: "Namib Desert, Namibia",  
-    image: "https://images.unsplash.com/photo-1473580044384-7ba9967e16a0",  
-    highlights: ['Stilted Tents', 'Zero Light Pollution'],  
-    atmosphere: 'A 1920s British colonial outpost reimagined for the modern nomad.'  
+    location: "Bodufushi, Maldives",  
+    image: "https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b", // Deep blue/shadow water  
+    atmosphere: 'Weightless architectural forms in a state of healing.',  
+    type: 'Wellness Fortress'  
   }  
 ];
 
 export default function HomePage() {  
   return (  
-    <main className="min-h-screen bg-[#0a0a0a] text-white selection:bg-[#C5A059]/30">  
+    <main className="min-h-screen bg-[#060606] text-white selection:bg-[#C5A059]/30 font-sans">  
       <Navigation />
 
-      {/* Hero Section */}  
-      <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">  
+      {/* Hero Section - The Shadow */}  
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">  
         <div className="absolute inset-0 z-0">  
           <img   
-            src="https://images.unsplash.com/photo-1504851149312-7a075b496cc7"   
+            src="https://images.unsplash.com/photo-1518005020951-eccb494ad742" // Brutalist brass/shadow architecture  
             alt="Hero Sanctuary"  
-            className="w-full h-full object-cover opacity-60 scale-105 animate-slow-zoom"  
+            className="w-full h-full object-cover opacity-40 scale-100 animate-slow-zoom"  
           />  
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/80 via-transparent to-[#0a0a0a]" />  
+          <div className="absolute inset-0 bg-gradient-to-t from-[#060606] via-transparent to-[#060606]/80" />  
         </div>
 
-        <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">  
-          <h2 className="text-[#C5A059] uppercase tracking-[0.4em] text-sm mb-6 font-medium">  
-            The Master Ledger  
+        <div className="relative z-10 text-center px-6">  
+          <h2 className="text-[#C5A059] uppercase tracking-[0.6em] text-[10px] mb-8 font-semibold">  
+            NexVoyage Collective  
           </h2>  
-          <h1 className="text-5xl md:text-8xl font-serif mb-8 leading-tight italic">  
-            Uncharted <span className="text-[#C5A059] not-italic">Sanctuaries</span>  
+          <h1 className="text-6xl md:text-[10rem] font-serif leading-[0.85] tracking-tighter italic">  
+            Brass <span className="text-[#C5A059] not-italic">&</span> <br />   
+            <span className="ml-12 md:ml-24">Shadow</span>  
           </h1>  
-          <p className="text-gray-400 max-w-xl mx-auto text-lg font-light leading-relaxed tracking-wide">  
-            A curated collective of the world’s most secure and secluded escapes for the modern sovereign traveler.  
-          </p>  
-          <div className="mt-12">  
-            <div className="w-px h-24 bg-gradient-to-b from-[#C5A059] to-transparent mx-auto" />  
+          <div className="mt-12 max-w-md mx-auto">  
+            <p className="text-gray-500 text-sm uppercase tracking-[0.2em] leading-loose">  
+              The definitive ledger of sovereign travel and secure sanctuaries.  
+            </p>  
           </div>  
         </div>  
       </section>
 
-      {/* Property Archive Grid */}  
-      <section className="max-w-7xl mx-auto px-6 py-24">  
-        <div className="flex justify-between items-end mb-16 border-b border-white/10 pb-8">  
-          <div>  
-            <h3 className="font-serif text-3xl italic mb-2">The Archive</h3>  
-            <p className="text-gray-500 uppercase tracking-widest text-xs">Current Availability — Vol. I</p>  
+      {/* Services Section - The Overview */}  
+      <section className="py-32 px-6 border-y border-white/5 bg-[#080808]">  
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-16">  
+          <div className="space-y-6">  
+            <span className="text-[#C5A059] font-serif italic text-2xl">01. Intelligence</span>  
+            <p className="text-gray-400 font-light leading-relaxed">  
+              We provide deep-vetted data on the world’s most secluded properties, ensuring physical security and digital privacy are baseline requirements.  
+            </p>  
           </div>  
-          <div className="text-[#C5A059] text-sm uppercase tracking-widest cursor-pointer hover:opacity-70 transition-opacity">  
-            View All Entries →  
+          <div className="space-y-6">  
+            <span className="text-[#C5A059] font-serif italic text-2xl">02. Logistics</span>  
+            <p className="text-gray-400 font-light leading-relaxed">  
+              End-to-end movement management. From private aviation to restricted water-space access, we handle the friction so you don't have to.  
+            </p>  
           </div>  
+          <div className="space-y-6">  
+            <span className="text-[#C5A059] font-serif italic text-2xl">03. Access</span>  
+            <p className="text-gray-400 font-light leading-relaxed">  
+              Our collective grants direct lines to sanctuaries that do not appear on public booking engines. Off-market, off-grid, and unmatched.  
+            </p>  
+          </div>  
+        </div>  
+      </section>
+
+      {/* Featured Properties - Staggered Ledger */}  
+      <section className="max-w-7xl mx-auto px-6 py-32">  
+        <div className="mb-24">  
+          <h3 className="text-[#C5A059] uppercase tracking-[0.4em] text-[10px] mb-4">The Current Ledger</h3>  
+          <h2 className="font-serif text-5xl italic">Featured Sanctuaries</h2>  
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">  
-          {PROPERTY_DATA.map((property) => (  
+        <div className="space-y-48">  
+          {PROPERTY_DATA.map((property, index) => (  
             <Link   
               key={property.id}  
               href={`/archive/property/${property.id}`}  
-              className="group relative block overflow-hidden bg-[#111]"  
+              className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-12 md:gap-24 group`}  
             >  
-              <div className="aspect-[16/10] overflow-hidden">  
+              <div className="w-full md:w-3/5 overflow-hidden relative">  
+                <div className="absolute inset-0 bg-[#C5A059]/10 group-hover:bg-transparent transition-colors z-10" />  
                 <img   
                   src={property.image}   
                   alt={property.name}  
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"  
+                  className="w-full aspect-[16/9] object-cover transition-transform duration-[2s] group-hover:scale-110"  
                 />  
               </div>  
                 
-              <div className="p-8 border border-white/5 border-t-0 group-hover:border-[#C5A059]/30 transition-colors">  
-                <div className="flex justify-between items-start mb-4">  
-                  <div>  
-                    <span className="text-[#C5A059] text-[10px] uppercase tracking-[0.3em] font-bold">  
-                      {property.id}  
-                    </span>  
-                    <h4 className="text-2xl font-serif mt-1">{property.name}</h4>  
-                    <p className="text-gray-500 text-sm">{property.location}</p>  
-                  </div>  
+              <div className="w-full md:w-2/5 space-y-6">  
+                <div className="flex items-center gap-4">  
+                  <span className="h-px w-8 bg-[#C5A059]" />  
+                  <span className="text-[#C5A059] text-[10px] uppercase tracking-widest font-bold">{property.id}</span>  
                 </div>  
-                  
-                <p className="text-gray-400 text-sm leading-relaxed mb-6 font-light italic">  
+                <h4 className="text-4xl font-serif italic group-hover:text-[#C5A059] transition-colors">{property.name}</h4>  
+                <p className="text-gray-500 uppercase tracking-widest text-[10px]">{property.location} — {property.type}</p>  
+                <p className="text-gray-400 font-light leading-relaxed text-lg">  
                   "{property.atmosphere}"  
-                </p>
-
-                <div className="flex flex-wrap gap-2">  
-                  {property.highlights.map((tag) => (  
-                    <span key={tag} className="text-[10px] uppercase tracking-widest border border-white/10 px-3 py-1 rounded-full text-gray-500">  
-                      {tag}  
-                    </span>  
-                  ))}  
+                </p>  
+                <div className="pt-4">  
+                  <span className="text-xs uppercase tracking-[0.3em] text-[#C5A059] border-b border-[#C5A059]/30 pb-2">  
+                    View Full Intelligence →  
+                  </span>  
                 </div>  
               </div>  
             </Link>  
@@ -126,19 +131,21 @@ export default function HomePage() {
         </div>  
       </section>
 
-      {/* Footer Signature */}  
-      <section className="py-32 text-center border-t border-white/5">  
-        <h2 className="font-serif italic text-4xl mb-4">NexVoyage Collective</h2>  
-        <p className="text-[#C5A059] uppercase tracking-[0.5em] text-[10px]">Simple. Secure. Sovereign.</p>  
-      </section>
+      {/* Footer */}  
+      <footer className="py-24 text-center border-t border-white/5">  
+        <div className="opacity-40 hover:opacity-100 transition-opacity cursor-default">  
+          <h2 className="font-serif italic text-2xl mb-2">NexVoyage Collective</h2>  
+          <p className="text-[#C5A059] uppercase tracking-[0.5em] text-[9px]">Simple. Secure. Sovereign.</p>  
+        </div>  
+      </footer>
 
       <style jsx global>{`  
         @keyframes slow-zoom {  
-          0% { transform: scale(1.05); }  
-          100% { transform: scale(1.15); }  
+          0% { transform: scale(1); }  
+          100% { transform: scale(1.1); }  
         }  
         .animate-slow-zoom {  
-          animation: slow-zoom 20s linear infinite alternate;  
+          animation: slow-zoom 30s ease-out infinite alternate;  
         }  
       `}</style>  
     </main>  
