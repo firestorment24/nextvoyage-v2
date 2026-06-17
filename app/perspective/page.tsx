@@ -1,74 +1,102 @@
 import React from 'react';
 
-const PerspectivePage = () => {  
-  const articles = [  
-    {  
-      id: 1,  
-      category: "PHILOSOPHY",  
-      title: "The Architecture of Stillness",  
-      excerpt: "In a world of constant noise, we curate the luxury of silence. How physical space dictates cognitive clarity.",  
-      image: "/images/perspective-1.jpg", // Placeholder path  
-    },  
-    {  
-      id: 2,  
-      category: "VETTING",  
-      title: "The Guardian Layer",  
-      excerpt: "Beyond security, we explore the invisible orchestration that keeps our sanctuaries truly private.",  
-      image: "/images/perspective-2.jpg",  
-    },  
-    {  
-      id: 3,  
-      category: "EXPEDITION",  
-      title: "Shadow over the Serengeti",  
-      excerpt: "A look at the private mobile camps redefining the 'Safari' for the modern sovereign traveler.",  
-      image: "/images/perspective-3.jpg",  
-    }  
-  ];
-
+export default function PerspectivePage() {  
   return (  
-    <div className="bg-black text-[#d4af37] min-h-screen font-sans selection:bg-[#d4af37] selection:text-black">  
-      {/* Hero Header */}  
-      <header className="pt-32 pb-20 px-6 text-center">  
-        <h1 className="text-xs uppercase tracking-[0.5em] mb-4 opacity-70">Editorial</h1>  
-        <h2 className="text-5xl md:text-7xl font-light tracking-[0.2em] uppercase">Perspective</h2>  
-      </header>
+    <main className="min-h-screen bg-[#000000] text-[#d4af37] selection:bg-[#d4af37] selection:text-[#000000]">  
+      {/* Nuclear Style Fix to force theme consistency */}  
+      <style dangerouslySetInnerHTML={{ __html: `  
+        body { background-color: #000000 !important; }  
+        * { border-color: #d4af371a !important; }  
+      `}} />
 
-      <main className="max-w-7xl mx-auto px-6 pb-40">  
-          
-        {/* Featured Cover Story */}  
-        <section className="mb-32 group cursor-pointer">  
-          <div className="relative aspect-[21/9] overflow-hidden bg-zinc-900 mb-8">  
-            {/* Image would go here */}  
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent transition-transform duration-700 group-hover:scale-105" />  
-          </div>  
-          <div className="max-w-3xl">  
-            <span className="text-[10px] tracking-[0.4em] uppercase border-b border-[#d4af37]/30 pb-1 mb-6 inline-block">Featured Insight</span>  
-            <h3 className="text-4xl tracking-widest uppercase mb-4 group-hover:text-white transition-colors">The Silent ROI of Seclusion</h3>  
-            <p className="text-lg font-light tracking-wide leading-relaxed opacity-80 max-w-2xl">  
-              Investment isn't always about the bottom line. It's about the recovery of the self. Discover the tactical advantages of deep-nature sanctuaries.  
+      {/* Hero Section */}  
+      <section className="pt-32 pb-20 px-6 max-w-7xl mx-auto text-center border-b border-[#d4af3733]">  
+        <h1 className="text-5xl md:text-7xl font-light tracking-tight mb-6">  
+          TRAVEL, PERFECTED.  
+        </h1>  
+        <p className="text-xl md:text-2xl font-extralight max-w-3xl mx-auto opacity-80 leading-relaxed">  
+          The NexVoyage Collective is the expert hand behind every journey—removing the friction of luxury so you can focus on the experience.  
+        </p>  
+      </section>
+
+      {/* The Guardian Layer */}  
+      <section className="py-24 px-6 max-w-7xl mx-auto">  
+        <h2 className="text-sm tracking-[0.3em] uppercase mb-12 opacity-60">The Guardian Layer</h2>  
+        <div className="grid md:grid-cols-3 gap-12">  
+          <div className="space-y-4">  
+            <h3 className="text-2xl font-light uppercase">24/7 Support</h3>  
+            <p className="font-extralight leading-relaxed opacity-70">  
+              We provide around-the-clock flight support. If a disruption occurs, we manage the rescheduling before you even land.  
             </p>  
           </div>  
-        </section>
+          <div className="space-y-4">  
+            <h3 className="text-2xl font-light uppercase">Resort Credits</h3>  
+            <p className="font-extralight leading-relaxed opacity-70">  
+              Exclusive amenities, room upgrades, and daily breakfast credits at the world's most prestigious properties.  
+            </p>  
+          </div>  
+          <div className="space-y-4">  
+            <h3 className="text-2xl font-light uppercase">Private Transfers</h3>  
+            <p className="font-extralight leading-relaxed opacity-70">  
+              Seamless doorstep-to-doorstep logistics. Coordinated private chauffeurs that meet you at every transition.  
+            </p>  
+          </div>  
+        </div>  
+      </section>
 
-        {/* Editorial Grid */}  
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8">  
-          {articles.map((article) => (  
-            <article key={article.id} className="group cursor-pointer">  
-              <div className="aspect-[4/5] bg-zinc-900 mb-6 overflow-hidden">  
-                 <div className="w-full h-full bg-gradient-to-br from-zinc-800 to-black transition-transform duration-700 group-hover:scale-110" />  
-              </div>  
-              <span className="text-[9px] tracking-[0.5em] uppercase opacity-60 mb-3 block">{article.category}</span>  
-              <h4 className="text-xl tracking-widest uppercase mb-4 group-hover:text-white transition-colors">{article.title}</h4>  
-              <p className="text-sm font-light leading-relaxed tracking-wide opacity-70">  
-                {article.excerpt}  
-              </p>  
-            </article>  
-          ))}  
-        </div>
+      {/* Specialized Services: Aviation & Villas */}  
+      <section className="py-24 px-6 bg-[#0a0a0a] border-y border-[#d4af371a]">  
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">  
+          <div className="space-y-8">  
+            <h2 className="text-4xl font-light uppercase">Private Aviation & <br/>Sanctuary Rentals</h2>  
+            <p className="font-extralight text-lg leading-relaxed opacity-80">  
+              For travelers who demand total privacy and autonomy. We facilitate private charter flights and secure off-market villas, curated through our global network of exclusive property owners.  
+            </p>  
+            <ul className="space-y-4 font-light text-sm tracking-widest uppercase">  
+              <li className="flex items-center gap-4">  
+                <span className="w-1.5 h-1.5 bg-[#d4af37] rounded-full"></span>  
+                Bespoke Flight Itineraries  
+              </li>  
+              <li className="flex items-center gap-4">  
+                <span className="w-1.5 h-1.5 bg-[#d4af37] rounded-full"></span>  
+                Off-Market Villa Access  
+              </li>  
+              <li className="flex items-center gap-4">  
+                <span className="w-1.5 h-1.5 bg-[#d4af37] rounded-full"></span>  
+                Complete Discretion  
+              </li>  
+            </ul>  
+          </div>  
+          <div className="aspect-[4/5] bg-[#111] border border-[#d4af3733] grayscale hover:grayscale-0 transition-all duration-700 flex items-center justify-center text-[10px] tracking-[0.5em] uppercase opacity-40">  
+            [ Placeholder: High-End Jet/Villa Visual ]  
+          </div>  
+        </div>  
+      </section>
 
-      </main>  
-    </div>  
+      {/* Partnership Network */}  
+      <section className="py-24 px-6 max-w-7xl mx-auto text-center">  
+        <h2 className="text-sm tracking-[0.3em] uppercase mb-16 opacity-60">The Collective Network</h2>  
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-16 items-center justify-center opacity-70">  
+          <div className="text-xl font-bold tracking-tighter italic">FORA</div>  
+          <div className="text-xl font-serif tracking-widest">VIRTUOSO</div>  
+          <div className="text-xl uppercase font-light">Singita</div>  
+          <div className="text-xl uppercase font-light">Regent</div>  
+          <div className="text-xl uppercase font-light">Explora</div>  
+          <div className="text-xl uppercase font-light">Silversea</div>  
+          <div className="text-xl uppercase font-light">Aman</div>  
+          <div className="text-xl uppercase font-light">Belmond</div>  
+        </div>  
+        <p className="mt-20 text-sm font-extralight max-w-2xl mx-auto opacity-50">  
+          Our affiliations grant you VIP status and exclusive leverage across the globe's finest cruise lines, safari concessions, and hotel collections.  
+        </p>  
+      </section>
+
+      {/* CTA */}  
+      <section className="py-32 px-6 text-center border-t border-[#d4af3733]">  
+        <a href="/contact" className="inline-block border border-[#d4af37] px-12 py-4 text-sm tracking-[0.4em] uppercase hover:bg-[#d4af37] hover:text-[#000000] transition-all duration-300">  
+          Begin Your Journey  
+        </a>  
+      </section>  
+    </main>  
   );  
-};
-
-export default PerspectivePage; 
+}  
