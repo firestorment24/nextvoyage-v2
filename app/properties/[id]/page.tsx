@@ -9,7 +9,7 @@ import Footer from '../../../components/Footer';
 interface PropertyDetail extends Property {  
   // Ensuring consistency with the PROPERTY_DATA manifest  
 }
-
+ 
 export async function generateStaticParams() {  
   return PROPERTY_DATA.map((property) => ({  
     id: property.id,  
