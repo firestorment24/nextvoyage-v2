@@ -6,7 +6,7 @@ import { SANCTUARIES_DATA } from '@/lib/data/sanctuaries';
 
 export default function HomePage() {  
   // We'll take the first 9 properties for the "Elite Ledger" 3x3 grid  
-  const featuredProperties = SANCTUARIES_DATA.slice(0, 9);
+  const featuredProperties = SANCTUARIES_DATA.slice(0, 9); 
 import React from 'react'        
 import Link from 'next/link'
 
