@@ -1,99 +1,51 @@
-import React from 'react';  
-import Link from 'next/link';  
-import Image from 'next/image';  
-import { PROPERTY_DATA } from '@/lib/data/sanctuaries';
-
-// Local interface to fix the "intel" type error  
-interface ExtendedProperty {  
-id: string;  
-name: string;  
-location: string;  
-image: string;  
-intel: {  
-  positioning: string;  
-  category: string;  
-  memberBenefits: string[];  
-};  
+export interface Property {  
+  id: string;  
+  name: string;  
+  location: string;  
+  image: string;  
+  intel: {  
+    positioning: string;  
+    category: string;  
+    memberBenefits: string[];  
+  };  
 }
 
-export default function ArchivePage() {  
-// Cast the data to our extended type to satisfy TypeScript  
-const properties = PROPERTY_DATA as unknown as ExtendedProperty[];
+export const PROPERTY_DATA: Property[] = [  
+  {  
+    id: "NV-LDR-001",  
+    name: "Kilchoan Estate",  
+    location: "Knoydart, Scotland",  
+    image: "https://images.unsplash.com/photo-1505832018823-50331d70d237?q=80&w=2000",  
+    intel: {  
+      positioning: "The Last Wilderness of the Highlands. Off-grid industrial luxury.",  
+      category: "Frontier Estate",  
+      memberBenefits: ["Private ghillie service", "Chartered rib transfers", "Helipad access"]  
+    }  
+  },  
+  {  
+    id: "NV-LDR-002",  
+    name: "Pongwe Island",  
+    location: "Zanzibar, Tanzania",  
+    image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=2000",  
+    intel: {  
+      positioning: "Private island isolation. Low-tide reef walks and raw coral aesthetics.",  
+      category: "Island Outpost",  
+      memberBenefits: ["Private dhow sunset cruise", "In-villa reef spa", "Sandbank picnic"]  
+    }  
+  },  
+  {  
+    id: "NV-LDR-013",  
+    name: "Setouchi Retreat Aonagi",  
+    location: "Matsuyama, Japan",  
+    image: "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?q=80&w=2000",  
+    intel: {  
+      positioning: "Tadao Ando minimalism. High-altitude concrete and water silence.",  
+      category: "Architectural Vault",  
+      memberBenefits: ["Private gallery tour", "OMAKASE in-suite", "Zen garden access"]  
+    }  
+  }  
+  // ... (Add the remaining 26 properties here)  
+];
 
-return (  
-  <div className="min-h-screen bg-[#1C1C1C] text-[#FCFAF7] selection:bg-[#C5A059] selection:text-[#1C1C1C]">  
-    <style dangerouslySetInnerHTML={{ __html: `  
-      h1, h2, h3, h4 {  
-        background-color: transparent !important;  
-        color: #C5A059 !important;  
-      }  
-      body {  
-        background-color: #1C1C1C !important;  
-      }  
-    `}} />
-
-    <main className="max-w-7xl mx-auto px-6 py-24">  
-      <header className="mb-24 border-b border-[#C5A059]/20 pb-16 text-center">  
-        <h1 className="text-5xl md:text-7xl font-light tracking-tighter mb-6 italic">  
-          The Sanctuary Archive  
-        </h1>  
-        <p className="text-xs uppercase tracking-[0.6em] text-[#C5A059]/80">  
-          A Legacy of Exceptional Journeys  
-        </p>  
-      </header>
-
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20">  
-        {properties.map((property) => (  
-          <Link   
-            key={property.id}   
-            href={`/archive/${property.id}`}  
-            className="group block"  
-          >  
-            <div className="relative aspect-[4/5] bg-neutral-900 mb-8 overflow-hidden border border-[#C5A059]/10 transition-all duration-700 group-hover:border-[#C5A059]/40">  
-              {property.image ? (  
-                <Image   
-                  src={property.image}   
-                  alt={property.name}  
-                  fill  
-                  className="object-cover opacity-90 transition-all duration-700 group-hover:scale-105 group-hover:grayscale group-hover:opacity-60"  
-                />  
-              ) : (  
-                <div className="w-full h-full flex items-center justify-center text-[#C5A059]/20 italic text-sm tracking-widest">  
-                  Vaulted Imagery  
-                </div>  
-              )}  
-                  
-              <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">  
-                <span className="text-[10px] uppercase tracking-[0.4em] border border-[#C5A059]/60 px-4 py-2 bg-[#1C1C1C]/80">  
-                  View Dossier  
-                </span>  
-              </div>  
-            </div>
-
-            <div className="space-y-3">  
-              <div className="flex justify-between items-end border-b border-[#C5A059]/10 pb-2">  
-                <h2 className="text-xl font-light tracking-tight">{property.name}</h2>  
-                <span className="text-[9px] uppercase tracking-widest text-[#C5A059]/60 mb-1">  
-                  {property.location}  
-                </span>  
-              </div>  
-              <p className="text-xs text-[#FCFAF7]/50 leading-relaxed line-clamp-3 font-light italic">  
-                {property.intel.positioning}  
-              </p>  
-            </div>  
-          </Link>  
-        ))}  
-      </section>
-
-      <footer className="mt-40 pt-16 border-t border-[#C5A059]/10 flex flex-col md:flex-row justify-between items-center gap-8">  
-        <div className="text-[10px] uppercase tracking-[0.5em] text-[#C5A059]/40">  
-          NexVoyage Collective &copy; 2026  
-        </div>  
-        <div className="text-[9px] italic text-[#FCFAF7]/30 max-w-xs text-right">  
-          Access to archived sanctuaries is restricted to established members and legacy travelers.  
-        </div>  
-      </footer>  
-    </main>  
-  </div>  
-);  
-}  
+// Backward compatibility for the Archive page  
+export const properties = PROPERTY_DATA;  
