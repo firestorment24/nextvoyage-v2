@@ -1,120 +1,118 @@
 "use client"
 
-import React from 'react'  
+import React, { useEffect, useState } from 'react'  
 import Link from 'next/link'
 
-// Signature Brass: #C5A059  
-// Black Void: #000000
+// Signature Palette  
+// Brass: #C5A059  
+// Shadow: #000000
 
 export default function HomePage() {  
-  // Mock data for the first 3 properties (NV-LDR-019)  
-  const featuredProperties = [  
-    {  
-      id: 'one-and-only-aesthesis',  
-      name: 'One&Only Aesthesis',  
-      location: 'Athens Riviera, Greece',  
-      image: 'https://cdn.marblism.com/grid-1.webp',  
-    },  
-    {  
-      id: 'aman-venice',  
-      name: 'Aman Venice',  
-      location: 'Venice, Italy',  
-      image: 'https://cdn.marblism.com/grid-2.webp',  
-    },  
-    {  
-      id: 'royal-mansour',  
-      name: 'Royal Mansour',  
-      location: 'Marrakech, Morocco',  
-      image: 'https://cdn.marblism.com/grid-3.webp',  
-    }  
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  useEffect(() => {  
+    setIsLoaded(true)  
+  }, [])
+
+  const featured = [  
+    { id: 'one-and-only-aesthesis', name: 'One&Only Aesthesis', location: 'Athens' },  
+    { id: 'aman-venice', name: 'Aman Venice', location: 'Venice' },  
+    { id: 'royal-mansour', name: 'Royal Mansour', location: 'Marrakech' },  
   ]
 
   return (  
-    <main className="min-h-screen bg-[#000000] text-[#C5A059] selection:bg-[#C5A059]/30 selection:text-white">  
-      {/* Global CSS Override to kill any rogue white blocks */}  
+    <main className="min-h-screen bg-[#000000] text-[#C5A059] selection:bg-[#C5A059] selection:text-black">  
+      {/*   
+          Targeted Style Overrides:   
+          Specifically killing the white blocks in the existing navigation   
+          without affecting the rest of the site's structure.  
+      */}  
       <style jsx global>{`  
-        body { background-color: #000000 !important; }  
-        .bg-white, .bg-slate-50, .bg-[#FCFAF7] { background-color: transparent !important; }  
-        h1, h2, h3, h4, p, span { color: #C5A059 !important; }  
+        header, nav, .nav-item, .menu-link {   
+          background-color: transparent !important;   
+          background: none !important;  
+        }  
+        .bg-white, .bg-slate-50, .bg-[#FCFAF7] {   
+          background-color: transparent !important;   
+        }  
+        /* Ensuring the green nav items don't have white highlights */  
+        header a, header span {  
+          background-color: transparent !important;  
+        }  
       `}</style>
 
-      {/* Hero Section: The Sovereign Arrival */}  
-      <section className="relative h-screen w-full overflow-hidden">  
-        <img   
-          src="https://cdn.marblism.com/8cCycGyYogj.webp"   
-          alt="The Sovereign Arrival"   
-          className="absolute inset-0 h-full w-full object-cover opacity-60 grayscale-[40%]"  
-        />  
-        <div className="absolute inset-0 bg-gradient-to-t from-[#000000] via-transparent to-transparent" />  
+      {/* 1. CINEMATIC HERO: THE SOVEREIGN ARRIVAL */}  
+      <section className="relative h-[90vh] w-full overflow-hidden">  
+        <div   
+          className={`absolute inset-0 transition-transform duration-[10000ms] ease-out ${isLoaded ? 'scale-110' : 'scale-100'}`}  
+        >  
+          <img   
+            src="https://cdn.marblism.com/8cCycGyYogj.webp"   
+            alt="The Sovereign Arrival"   
+            className="h-full w-full object-cover opacity-70"  
+          />  
+        </div>  
           
-        <div className="relative z-10 flex h-full flex-col justify-end px-8 pb-24 md:px-20">  
-          <h1 className="max-w-4xl font-serif text-5xl font-light tracking-tighter md:text-8xl">  
-            THE SOVEREIGN <br />  
-            <span className="italic font-normal">ARRIVAL</span>  
-          </h1>  
-          <p className="mt-6 max-w-xl font-sans text-sm uppercase tracking-[0.3em] opacity-80">  
-            Curated Expeditions for the Global Elite  
+        {/* Gradient Shadow Overlay */}  
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-[#000000]" />  
+          
+        <div className="relative z-10 flex h-full flex-col items-center justify-center text-center px-6">  
+          <p className={`text-[10px] uppercase tracking-[0.6em] mb-8 transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>  
+            Established 2026  
           </p>  
+          <h1 className={`font-serif text-5xl md:text-8xl font-light tracking-tighter transition-all duration-1000 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>  
+            THE SOVEREIGN <br />  
+            <span className="italic">ARRIVAL</span>  
+          </h1>  
         </div>  
       </section>
 
-      {/* Services Overview */}  
-      <section className="py-32 px-8 md:px-20 border-t border-[#C5A059]/10">  
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-20">  
-          <div>  
-            <h2 className="font-serif text-4xl font-light italic">The Collective Engine</h2>  
-          </div>  
-          <div className="space-y-8">  
-            <p className="text-lg leading-relaxed font-light">  
-              NexVoyage Collective serves as the bespoke architectural engine for travelers who demand more than luxury—they demand legacy.   
-              Our team navigates the intersection of editorial discovery and seamless logistics.  
-            </p>  
-            <div className="pt-8 border-t border-[#C5A059]/20 flex gap-12 text-[10px] uppercase tracking-[0.4em]">  
-              <span>Portfolio Management</span>  
-              <span>Asset Acquisition</span>  
-              <span>Global Concierge</span>  
-            </div>  
-          </div>  
+      {/* 2. THE MANIFESTO (Minimalist Context) */}  
+      <section className="py-40 px-8 flex justify-center">  
+        <div className="max-w-3xl text-center">  
+          <h2 className="font-serif text-3xl md:text-4xl italic font-light leading-snug">  
+            "A collection of perspectives curated for those who view travel as an architectural pursuit of the soul."  
+          </h2>  
+          <div className="mt-12 h-[1px] w-24 bg-[#C5A059]/30 mx-auto" />  
         </div>  
       </section>
 
-      {/* Featured Properties: Staggered Editorial Grid */}  
-      <section className="py-32 px-8 md:px-20 bg-[#000000]">  
-        <h2 className="mb-20 font-serif text-sm uppercase tracking-[0.5em] text-center">Selected Perspectives</h2>  
-          
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-0">  
-          {featuredProperties.map((property, idx) => (  
+      {/* 3. THE COLLECTION (Vertical Editorial Strips) */}  
+      <section className="pb-40 px-4 md:px-20">  
+        <div className="flex flex-col gap-32">  
+          {featured.map((item, idx) => (  
             <Link   
-              key={property.id}  
-              href={`/archive/property/${property.id}`}  
-              className={`group relative overflow-hidden transition-all duration-700 md:col-span-6   
-                ${idx === 1 ? 'md:mt-40 md:col-start-7' : ''}   
-                ${idx === 2 ? 'md:-mt-20 md:col-span-4 md:col-start-2' : ''}  
-              `}  
+              key={item.id}   
+              href={`/archive/property/${item.id}`}  
+              className={`group flex flex-col md:flex-row items-center gap-12 ${idx % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}  
             >  
-              <div className="aspect-[4/5] overflow-hidden">  
+              <div className="w-full md:w-3/5 overflow-hidden aspect-[16/9]">  
                 <img   
-                  src={property.image}   
-                  alt={property.name}  
-                  className="h-full w-full object-cover grayscale-[100%] transition-all duration-1000 group-hover:grayscale-0 group-hover:scale-105"  
+                  src={`https://cdn.marblism.com/grid-${idx + 1}.webp`}   
+                  alt={item.name}  
+                  className="w-full h-full object-cover grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:scale-105"  
                 />  
               </div>  
-              <div className="mt-6 space-y-1">  
-                <h3 className="font-serif text-2xl font-light tracking-tight group-hover:italic">{property.name}</h3>  
-                <p className="text-[10px] uppercase tracking-[0.2em] opacity-60">{property.location}</p>  
+              <div className="w-full md:w-2/5 text-center md:text-left">  
+                <span className="text-[10px] uppercase tracking-[0.4em] opacity-50">0{idx + 1} // {item.location}</span>  
+                <h3 className="mt-4 font-serif text-4xl font-light group-hover:italic transition-all">{item.name}</h3>  
+                <div className="mt-6 inline-block text-[10px] uppercase tracking-[0.4em] border-b border-[#C5A059]/20 pb-1 group-hover:border-[#C5A059] transition-all">  
+                  View Detail  
+                </div>  
               </div>  
             </Link>  
           ))}  
         </div>  
       </section>
 
-      {/* Bottom CTA */}  
-      <section className="py-40 text-center border-t border-[#C5A059]/10">  
+      {/* 4. THE CALL TO THE VOID (Footer CTA) */}  
+      <section className="py-60 bg-[#050505] text-center border-t border-[#C5A059]/5">  
+        <h2 className="font-serif text-sm uppercase tracking-[0.8em] mb-12">The Archive</h2>  
         <Link   
-          href="/archive"   
-          className="inline-block border border-[#C5A059] px-12 py-4 text-xs uppercase tracking-[0.5em] transition-all hover:bg-[#C5A059] hover:text-black"  
+          href="/archive"  
+          className="text-5xl md:text-7xl font-serif font-light hover:italic transition-all"  
         >  
-          Explore the Archive  
+          Begin Discovery  
         </Link>  
       </section>  
     </main>  
