@@ -1,160 +1,138 @@
-"use client"
-
-import React, { useEffect, useState } from 'react'  
-import Link from 'next/link'
+import {   
+  Navigation   
+} from '@/components/Navigation';  
+import {   
+  ArrowRight,   
+  MapPin,   
+  Globe,   
+  ShieldCheck,   
+  Award   
+} from 'lucide-react';
 
 export default function HomePage() {  
-const [mounted, setMounted] = useState(false)
+  return (  
+    <div className="bg-black text-white min-h-screen selection:bg-[#d4af37] selection:text-black">  
+      {/* GLOBAL CSS OVERRIDE */}  
+      <style dangerouslySetInnerHTML={{ __html: `  
+        * { background-color: transparent !important; }  
+        html, body, #__next, main, .bg-black { background-color: #000000 !important; }  
+        h1, h2, h3, p, span, li, div { color: #ffffff !important; }  
+        .text-brass { color: #d4af37 !important; }  
+        .border-brass { border-color: #d4af37 !important; }  
+      `}} />
 
-useEffect(() => {  
-  setMounted(true)  
-}, [])
- 
-const properties = [  
-  { id: 'one-and-only-aesthesis', name: 'One&Only Aesthesis', loc: 'Athens Riviera', img: 'https://cdn.marblism.com/grid-1.webp' },  
-  { id: 'aman-venice', name: 'Aman Venice', loc: 'Venice, Italy', img: 'https://cdn.marblism.com/grid-2.webp' },  
-  { id: 'royal-mansour', name: 'Royal Mansour', loc: 'Marrakech, Morocco', img: 'https://cdn.marblism.com/grid-3.webp' },  
-]
+      <Navigation />
 
-return (  
-  <main className="min-h-screen bg-black text-[#C5A059] selection:bg-[#C5A059]/30 selection:text-white">  
-    {/*   
-        BRASS & SHADOW SCORCHED EARTH:   
-        Forcing all typography to #C5A059 and all backgrounds to #000000.  
-    */}  
-    <style jsx global>{`  
-      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400&display=swap');  
-        
-      /* 1. Force the root and all parent containers to Shadow Black */  
-      html, body, #__next, .flex-col, .min-h-screen {   
-        background-color: #000000 !important;   
-        background: #000000 !important;  
-        margin: 0;   
-        padding: 0;  
-      }
-
-      /* 2. Kill Navigation/Header white blocks specifically */  
-      header, nav, [role="navigation"], .navbar, .header-container {  
-        background-color: transparent !important;  
-        background: none !important;  
-        box-shadow: none !important;  
-        border: none !important;  
-      }
-
-      /* 3. Global Typography Reset to Brass (#C5A059) */  
-      h1, h2, h3, h4, h5, h6, p, span, a, label, li {   
-        color: #C5A059 !important;   
-        background-color: transparent !important;  
-        background: none !important;  
-        text-decoration: none !important;  
-      }
-
-      h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; }  
-      p, span, a, label { font-family: 'Inter', sans-serif; }
-
-      /* 4. Kill common utility classes that carry white/gray backgrounds */  
-      .bg-white, .bg-slate-50, .bg-gray-50, .bg-gray-100, .bg-[#FCFAF7], .shadow-sm, .shadow-md, .shadow-lg {   
-        background-color: transparent !important;   
-        background: none !important;  
-        box-shadow: none !important;  
-      }  
-        
-      /* Thin Brass Scrollbar */  
-      ::-webkit-scrollbar { width: 4px; }  
-      ::-webkit-scrollbar-track { background: #000; }  
-      ::-webkit-scrollbar-thumb { background: #C5A059; }  
-    `}</style>
-
-    {/* 1. CINEMATIC HERO: Jouney Beyond the Ordinary */}  
-    <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-black">  
-      <div className={`absolute inset-0 transition-transform duration-[20000ms] ease-out ${mounted ? 'scale-110' : 'scale-100'}`}>  
-        <img   
-          src="https://cdn.marblism.com/8cCycGyYogj.webp"   
-          alt="Journey Beyond the Ordinary"   
-          className="h-full w-full object-cover opacity-50 grayscale-[40%]"  
-        />  
-      </div>  
-        
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black" />
-
-      <div className="relative z-10 text-center px-4">  
-<span style={{ color: '#FFFFFF !important' }} className="text-[10px] uppercase tracking-[0.8em] opacity-60 mb-6 block">Established 2026</span>  
-
-        <h1 className="text-7xl md:text-[10rem] font-light tracking-tighter leading-[0.8] mb-4">  
-          THE SOVEREIGN <br />  
-          <span className="italic">ARRIVAL</span>  
-        </h1>  
-        <div className="mt-12 h-20 w-[1px] bg-[#C5A059]/40 mx-auto" />  
-      </div>  
-    </section>
-
-    {/* 2. THE EDITORIAL GRID: STAGGERED LAYOUT */}  
-    <section className="py-40 px-6 md:px-20 bg-black">  
-      <div className="max-w-7xl mx-auto">  
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-y-32 md:gap-y-0">  
-          {properties.map((property, idx) => (  
-            <div   
-              key={property.id}  
-              className={`md:col-span-6 flex flex-col ${  
-                idx === 1 ? 'md:mt-64 md:col-start-7' :   
-                idx === 2 ? 'md:-mt-32 md:col-span-5 md:col-start-2' : ''  
-              }`}  
-            >  
-              <Link href={`/archive/property/${property.id}`} className="group block">  
-                <div className="relative aspect-[4/5] overflow-hidden border border-[#C5A059]/10 bg-[#050505]">  
-                  <img   
-                    src={property.img}   
-                    alt={property.name}  
-                    className="w-full h-full object-cover grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:scale-105"  
-                  />  
-                  <div className="absolute inset-0 bg-black/30 group-hover:bg-transparent transition-all duration-700" />  
-                </div>  
-                <div className="mt-10">  
-                  <span className="text-[9px] uppercase tracking-[0.4em] opacity-60">Property // {property.loc}</span>  
-                  <h3 className="text-4xl md:text-5xl font-light mt-2 group-hover:italic transition-all">  
-                    {property.name}  
-                  </h3>  
-                </div>  
-              </Link>  
-            </div>  
-          ))}  
+      {/* HERO - REFINED & DIRECT */}  
+      <section className="relative h-[85vh] flex items-center justify-center overflow-hidden border-b border-white/5">  
+        <div className="absolute inset-0 z-0">  
+          <img   
+            src="https://cdn.marblism.com/mPwPaCBHn3r.webp"   
+            className="w-full h-full object-cover opacity-40 grayscale"  
+            alt="Luxury Villa"  
+          />  
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black"></div>  
         </div>  
-      </div>  
-    </section>
-
-    {/* 3. THE COLLECTIVE SERVICES OVERVIEW */}  
-    <section className="py-40 px-6 border-t border-[#C5A059]/10 bg-[#020202]">  
-      <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20">  
-        <div>  
-          <h2 className="text-3xl md:text-4xl italic font-light">Architecting <br /> Legacy.</h2>  
-        </div>  
-        <div className="space-y-6">  
-          <p className="text-sm leading-relaxed opacity-80">  
-            NexVoyage Collective is the engine for high-net-worth travelers who view discovery as a legacy pursuit. We manage the intersection of editorial curiosity and logistical perfection.  
+          
+        <div className="relative z-10 text-center px-6 max-w-5xl">  
+          <p className="text-brass uppercase tracking-[0.5em] text-[10px] font-bold mb-8">NexVoyage Collective</p>  
+          <h1 className="text-6xl md:text-8xl font-light tracking-tighter mb-10 leading-[0.9]">  
+            The Art of <br/>  
+            <span className="italic font-serif text-brass">Frictionless Arrival.</span>  
+          </h1>  
+          <p className="text-xl md:text-2xl font-light max-w-2xl mx-auto opacity-80 leading-relaxed">  
+            A private travel collective for high-net-worth individuals. <br/>  
+            Expertly curated sanctuaries. Unrivaled global leverage.  
           </p>  
-          <Link   
-            href="/archive"   
-            className="inline-block text-[10px] uppercase tracking-[0.6em] border-b border-[#C5A059]/40 pb-2 hover:border-[#C5A059] transition-all"  
-          >  
-            The Full Portfolio  
-          </Link>  
+            
+          <div className="mt-12 flex flex-col md:flex-row items-center justify-center gap-6">  
+            <button className="px-12 py-4 bg-brass text-black font-bold uppercase tracking-widest text-xs hover:bg-white transition-all">  
+              Begin Your Journey  
+            </button>  
+            <span className="text-[10px] uppercase tracking-[0.2em] opacity-40">Or call the desk: +1.555.VOYAGE</span>  
+          </div>  
         </div>  
-      </div>  
-    </section>
+      </section>
 
-    {/* 4. FINAL JOURNEY FOOTER */}  
-    <section className="py-64 text-center bg-black relative overflow-hidden">  
-      <div className="absolute inset-0 opacity-10 pointer-events-none">  
-        <div className="h-full w-full bg-[radial-gradient(circle_at_center,_#C5A059_0%,_transparent_70%)] opacity-10" />  
-      </div>  
-      <h2 className="text-[11px] uppercase tracking-[1em] mb-12 opacity-50">Begin the Discovery</h2>  
-      <Link   
-        href="/archive"  
-        className="text-5xl md:text-8xl font-light hover:italic transition-all duration-700"  
-      >  
-        THE ARCHIVE  
-      </Link>  
-    </section>  
-  </main>  
-)  
+      {/* THE PROOF OF LEVERAGE (New Section) */}  
+      <section className="py-24 border-b border-white/10 bg-zinc-950/30">  
+        <div className="max-w-7xl mx-auto px-6">  
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16">  
+            <div className="space-y-4">  
+              <Globe className="text-brass w-8 h-8 mb-4" />  
+              <h3 className="text-xl font-medium">Global Network</h3>  
+              <p className="opacity-60 font-light">Direct access to 2,000+ vetted luxury properties through our premier Virtuoso & Fora partnerships.</p>  
+            </div>  
+            <div className="space-y-4">  
+              <Award className="text-brass w-8 h-8 mb-4" />  
+              <h3 className="text-xl font-medium">Preferred Status</h3>  
+              <p className="opacity-60 font-light">Automatic upgrades, daily breakfast, and $100+ resort credits at every major luxury brand worldwide.</p>  
+            </div>  
+            <div className="space-y-4">  
+              <ShieldCheck className="text-brass w-8 h-8 mb-4" />  
+              <h3 className="text-xl font-medium">Proactive Support</h3>  
+              <p className="opacity-60 font-light">From 24/7 flight monitoring to private chauffeur logistics—we manage the friction, you experience the destination.</p>  
+            </div>  
+          </div>  
+        </div>  
+      </section>
+
+      {/* THE SANCTUARY COLLECTION (Fixed Gatekeeping) */}  
+      <section className="py-32 px-6 max-w-7xl mx-auto">  
+        <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">  
+          <div>  
+            <h2 className="text-brass uppercase tracking-[0.4em] text-[10px] font-bold mb-4">The Archive</h2>  
+            <h3 className="text-5xl font-light tracking-tight italic font-serif">Vetted Sanctuaries</h3>  
+          </div>  
+          <p className="max-w-md opacity-60 font-light text-right md:text-left">  
+            A live catalog of properties where our collective maintains established relationships and guaranteed guest perks.  
+          </p>  
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">  
+          {/* Example Item with Substance */}  
+          <div className="group cursor-pointer">  
+            <div className="relative aspect-[4/5] overflow-hidden mb-6">  
+              <img src="https://cdn.marblism.com/jyV_xaai_p4.webp" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" alt="Aman Venice" />  
+              <div className="absolute top-4 right-4 bg-black/80 px-3 py-1 text-[10px] tracking-widest text-brass border border-brass/30">VIRTUOSO PREFERRED</div>  
+            </div>  
+            <h4 className="text-xl font-medium mb-2">Aman Venice, Italy</h4>  
+            <p className="text-brass text-xs tracking-widest uppercase mb-4">Signature Benefit: Private Canal Entry & Room Upgrade</p>  
+            <p className="opacity-60 text-sm font-light leading-relaxed">The pinnacle of Venetian grandeur. Our relationship here ensures canal-view upgrades and priority dining at the Palazzo.</p>  
+          </div>
+
+          <div className="group cursor-pointer">  
+            <div className="relative aspect-[4/5] overflow-hidden mb-6">  
+              <img src="https://cdn.marblism.com/DgdRhZ2LIeX.webp" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" alt="Amangiri" />  
+              <div className="absolute top-4 right-4 bg-black/80 px-3 py-1 text-[10px] tracking-widest text-brass border border-brass/30">DIRECT ACCESS</div>  
+            </div>  
+            <h4 className="text-xl font-medium mb-2">Amangiri, USA</h4>  
+            <p className="text-brass text-xs tracking-widest uppercase mb-4">Signature Benefit: $100 Spa Credit & Late Check-out</p>  
+            <p className="opacity-60 text-sm font-light leading-relaxed">Utah’s desert masterpiece. We bypass the standard booking lag to secure high-demand suites for our members.</p>  
+          </div>
+
+          <div className="group cursor-pointer">  
+            <div className="relative aspect-[4/5] overflow-hidden mb-6 flex items-center justify-center border border-white/10 bg-zinc-900/50">  
+              <span className="text-[10px] tracking-[0.4em] uppercase opacity-30 text-center px-12">View Full Portfolio <br/> (13 Vetted Properties)</span>  
+            </div>  
+          </div>  
+        </div>  
+      </section>
+
+      {/* THE HUMAN TOUCH */}  
+      <section className="py-32 border-t border-white/5">  
+        <div className="max-w-3xl mx-auto text-center px-6">  
+          <p className="text-brass uppercase tracking-[0.4em] text-[10px] font-bold mb-8">Guest Experience</p>  
+          <h2 className="text-4xl font-light mb-8">"Our goal is to be invisible until you need us to be indispensable."</h2>  
+          <div className="flex items-center justify-center gap-4">  
+            <div className="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center text-brass font-serif italic text-xl">R</div>  
+            <div className="text-left">  
+              <p className="text-sm font-bold uppercase tracking-widest">Rachel V.</p>  
+              <p className="text-[10px] opacity-50 uppercase tracking-widest">Lead Concierge</p>  
+            </div>  
+          </div>  
+        </div>  
+      </section>  
+    </div>  
+  );  
 }  
