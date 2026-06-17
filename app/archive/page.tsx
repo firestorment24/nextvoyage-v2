@@ -1,97 +1,137 @@
-import React from 'react';  
+// app/archive/page.tsx
+
+import { SANCTUARIES_DATA } from '@/lib/data/sanctuaries';  
 import Link from 'next/link';  
 import Image from 'next/image';  
-import { PROPERTY_DATA } from '@/lib/data/sanctuaries';
+import { Cormorant_Garamond, Inter } from 'next/font/google';
 
-interface ExtendedProperty {  
-  id: string;  
-  name: string;  
-  location: string;  
-  image: string;  
-  intel: {  
-    positioning: string;  
-    category: string;  
-    memberBenefits: string[];  
-  };  
-}
+const cormorant = Cormorant_Garamond({   
+  subsets: ['latin'],   
+  weight: ['300', '400', '500', '600'],  
+  variable: '--font-cormorant'   
+});
 
-export default function ArchivePage() {  
-  const properties = PROPERTY_DATA as unknown as ExtendedProperty[];
+const inter = Inter({   
+  subsets: ['latin'],  
+  variable: '--font-inter'  
+});
 
+export default function ArchiveIndexPage() {  
   return (  
-    <div className="min-h-screen bg-[#1C1C1C] text-[#FCFAF7] selection:bg-[#C5A059] selection:text-[#1C1C1C]">  
-      <style dangerouslySetInnerHTML={{ __html: `  
-        h1, h2, h3, h4 {  
-          background-color: transparent !important;  
-          color: #C5A059 !important;  
-        }  
-        body {  
-          background-color: #1C1C1C !important;  
-        }  
-      `}} />
-
-      <main className="max-w-7xl mx-auto px-6 py-24">  
-        <header className="mb-24 border-b border-[#C5A059]/20 pb-16 text-center">  
-          <h1 className="text-5xl md:text-7xl font-light tracking-tighter mb-6 italic">  
-            The Sanctuary Archive  
+    <main className={`min-h-screen bg-[#0A0A0A] text-[#E5E5E5] ${cormorant.variable} ${inter.variable} font-sans selection:bg-[#d4af37] selection:text-black`}>  
+        
+      {/* Registry Header */}  
+      <section className="relative pt-40 pb-20 px-6 border-b border-[#d4af37]/10">  
+        <div className="max-w-7xl mx-auto">  
+          <div className="flex items-center gap-4 mb-6">  
+            <div className="h-[1px] w-12 bg-[#d4af37]" />  
+            <span className="text-[#d4af37] text-xs font-mono tracking-[0.4em] uppercase">Global Asset Registry</span>  
+          </div>  
+            
+          <h1 className="text-7xl md:text-9xl font-serif text-white uppercase tracking-tighter leading-none mb-12">  
+            The <span className="italic text-[#d4af37]">Archive</span>  
           </h1>  
-          <p className="text-xs uppercase tracking-[0.6em] text-[#C5A059]/80">  
-            A Legacy of Exceptional Journeys  
-          </p>  
-        </header>
-
-        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20">  
-          {properties.map((property) => (  
-            <Link   
-              key={property.id}   
-              href={`/archive/${property.id}`}  
-              className="group block"  
-            >  
-              <div className="relative aspect-[4/5] bg-neutral-900 mb-8 overflow-hidden border border-[#C5A059]/10 transition-all duration-700 group-hover:border-[#C5A059]/40">  
-                {property.image ? (  
-                  <Image   
-                    src={property.image}   
-                    alt={property.name}  
-                    fill  
-                    className="object-cover opacity-90 transition-all duration-700 group-hover:scale-105 group-hover:grayscale group-hover:opacity-60"  
-                  />  
-                ) : (  
-                  <div className="w-full h-full flex items-center justify-center text-[#C5A059]/20 italic text-sm tracking-widest">  
-                    Vaulted Imagery  
-                  </div>  
-                )}  
-                  
-                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">  
-                  <span className="text-[10px] uppercase tracking-[0.4em] border border-[#C5A059]/60 px-4 py-2 bg-[#1C1C1C]/80">  
-                    View Dossier  
-                  </span>  
-                </div>  
-              </div>
-
-              <div className="space-y-3">  
-                <div className="flex justify-between items-end border-b border-[#C5A059]/10 pb-2">  
-                  <h2 className="text-xl font-light tracking-tight">{property.name}</h2>  
-                  <span className="text-[9px] uppercase tracking-widest text-[#C5A059]/60 mb-1">  
-                    {property.location}  
-                  </span>  
-                </div>  
-                <p className="text-xs text-[#FCFAF7]/50 leading-relaxed line-clamp-3 font-light italic">  
-                  {property.intel.positioning}  
-                </p>  
+            
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8">  
+            <div className="md:col-span-8">  
+              <p className="text-xl md:text-2xl text-gray-400 font-light leading-relaxed max-w-3xl">  
+                A consolidated intelligence manifest of the world’s most significant properties.   
+                Deconstructed by terrain, intent, and architectural significance.   
+                For the eyes of the Vanguard only.  
+              </p>  
+            </div>  
+            <div className="md:col-span-4 flex md:justify-end items-end">  
+              <div className="text-right font-mono text-[10px] text-gray-600 uppercase tracking-widest leading-loose">  
+                Status: Operational<br />  
+                Last Update: 17-JUN-2026<br />  
+                Security: Level 5  
               </div>  
-            </Link>  
-          ))}  
-        </section>
+            </div>  
+          </div>  
+        </div>  
+      </section>
 
-        <footer className="mt-40 pt-16 border-t border-[#C5A059]/10 flex flex-col md:flex-row justify-between items-center gap-8">  
-          <div className="text-[10px] uppercase tracking-[0.5em] text-[#C5A059]/40">  
-            NexVoyage Collective &copy; 2026  
+      {/* Dossier Grid */}  
+      <section className="py-24 px-6">  
+        <div className="max-w-7xl mx-auto">  
+          <div className="grid grid-cols-1 gap-1">  
+            {SANCTUARIES_DATA.map((dossier, index) => (  
+              <Link   
+                href={`/archive/${dossier.id}`}   
+                key={dossier.id}  
+                className="group relative block border-b border-white/5 py-16 hover:bg-white/[0.02] transition-colors duration-700"  
+              >  
+                <div className="grid grid-cols-1 md:grid-cols-12 items-center gap-12 relative z-10">  
+                    
+                  {/* Index */}  
+                  <div className="md:col-span-1">  
+                    <span className="text-xs font-mono text-[#d4af37]/40 group-hover:text-[#d4af37] transition-colors duration-500">  
+                      [0{index + 1}]  
+                    </span>  
+                  </div>
+
+                  {/* Identity */}  
+                  <div className="md:col-span-5">  
+                    <h2 className="text-5xl md:text-7xl font-serif text-white uppercase tracking-tight group-hover:translate-x-4 transition-transform duration-700">  
+                      {dossier.name}  
+                    </h2>  
+                  </div>
+
+                  {/* Summary */}  
+                  <div className="md:col-span-4">  
+                    <p className="text-sm text-gray-500 font-mono uppercase tracking-widest leading-relaxed max-w-sm opacity-0 group-hover:opacity-100 transition-opacity duration-700">  
+                      {dossier.description.split('.')[0]}.  
+                    </p>  
+                  </div>
+
+                  {/* CTA */}  
+                  <div className="md:col-span-2 text-right">  
+                    <span className="text-[#d4af37] text-xs font-mono tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-500">  
+                      OPEN DOSSIER →  
+                    </span>  
+                  </div>  
+                </div>
+
+                {/* Hover Image Preview (Floating effect) */}  
+                <div className="absolute right-[15%] top-1/2 -translate-y-1/2 w-64 h-80 pointer-events-none opacity-0 group-hover:opacity-60 group-hover:scale-110 transition-all duration-1000 ease-out z-0 overflow-hidden hidden lg:block border border-[#d4af37]/20">  
+                  <Image   
+                    src={dossier.image}   
+                    alt={dossier.name}  
+                    fill  
+                    className="object-cover grayscale"  
+                  />  
+                  <div className="absolute inset-0 bg-[#0A0A0A]/40" />  
+                </div>  
+              </Link>  
+            ))}  
           </div>  
-          <div className="text-[9px] italic text-[#FCFAF7]/30 max-w-xs text-right">  
-            Access to archived sanctuaries is restricted to established members and legacy travelers.  
+        </div>  
+      </section>
+
+      {/* Registry Footer Decorations */}  
+      <section className="py-20 px-6 border-t border-[#d4af37]/5">  
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-end gap-12">  
+          <div className="space-y-4">  
+            <div className="flex gap-2">  
+              {[...Array(5)].map((_, i) => (  
+                <div key={i} className="w-8 h-[2px] bg-[#d4af37]/20" />  
+              ))}  
+            </div>  
+            <p className="text-[10px] font-mono text-gray-600 uppercase tracking-[0.5em]">  
+              NexVoyage Collective // Internal Asset Retrieval  
+            </p>  
           </div>  
-        </footer>  
-      </main>  
-    </div>  
+            
+          <div className="text-right">  
+            <span className="text-xs font-mono text-gray-500 uppercase tracking-tighter block mb-2">Authenticated Connection</span>  
+            <div className="flex gap-4 justify-end">  
+              <div className="w-2 h-2 rounded-full bg-green-500/50 animate-pulse" />  
+              <div className="w-2 h-2 rounded-full bg-[#d4af37]/50" />  
+              <div className="w-2 h-2 rounded-full bg-white/20" />  
+            </div>  
+          </div>  
+        </div>  
+      </section>  
+    </main>  
   );  
 }  
