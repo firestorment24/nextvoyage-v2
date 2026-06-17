@@ -17,26 +17,45 @@ export default function HomePage() {
   ]
 
   return (  
-    <main className="min-h-screen bg-black text-[#C5A059] selection:bg-[#C5A059]/30 selection:text-white">  
+    <main className="min-h-screen bg-black text-white selection:bg-[#C5A059]/40 selection:text-white">  
       {/*   
-          BRASS & SHADOW GLOBAL RESET  
-          Force-killing any external component styles that might bleed white or gray.  
+          SCORCHED EARTH CSS:   
+          This kills every white background in the DOM, including the Navigation and Layout wrappers.  
       */}  
       <style jsx global>{`  
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400&display=swap');  
           
-        body, html {   
+        /* 1. Force the root and all parent containers to Black */  
+        html, body, #__next, .flex-col, .min-h-screen {   
           background-color: #000000 !important;   
+          background: #000000 !important;  
           margin: 0;   
           padding: 0;  
+        }
+
+        /* 2. Kill Navigation/Header white blocks specifically */  
+        header, nav, [role="navigation"], .navbar, .header-container {  
+          background-color: transparent !important;  
+          background: none !important;  
+          box-shadow: none !important;  
+          border: none !important;  
+        }
+
+        /* 3. Global Typography Reset to White */  
+        h1, h2, h3, h4, h5, h6, p, span, a, label, li {   
+          color: #FFFFFF !important;   
+          background-color: transparent !important;  
+          background: none !important;  
         }
 
         h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; }  
         p, span, a, label { font-family: 'Inter', sans-serif; }
 
-        .bg-white, .bg-slate-50, .bg-[#FCFAF7] {   
+        /* 4. Kill common utility classes that carry white/gray backgrounds */  
+        .bg-white, .bg-slate-50, .bg-gray-50, .bg-gray-100, .bg-[#FCFAF7], .shadow-sm, .shadow-md, .shadow-lg {   
           background-color: transparent !important;   
           background: none !important;  
+          box-shadow: none !important;  
         }  
           
         /* Thin Brass Scrollbar */  
@@ -51,19 +70,19 @@ export default function HomePage() {
           <img   
             src="https://cdn.marblism.com/8cCycGyYogj.webp"   
             alt="The Sovereign Arrival"   
-            className="h-full w-full object-cover opacity-50 grayscale-[40%]"  
+            className="h-full w-full object-cover opacity-60 grayscale-[20%]"  
           />  
         </div>  
           
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black" />
 
         <div className="relative z-10 text-center px-4">  
-          <span className="text-[10px] uppercase tracking-[0.8em] opacity-60 mb-6 block">Established 2026</span>  
-          <h1 className="text-7xl md:text-[10rem] font-light tracking-tighter leading-[0.8] mb-4">  
+          <span className="text-[10px] uppercase tracking-[0.8em] opacity-60 mb-6 block text-white">Established 2026</span>  
+          <h1 className="text-7xl md:text-[10rem] font-light tracking-tighter leading-[0.8] mb-4 text-white">  
             THE SOVEREIGN <br />  
             <span className="italic">ARRIVAL</span>  
           </h1>  
-          <div className="mt-12 h-20 w-[1px] bg-[#C5A059]/30 mx-auto" />  
+          <div className="mt-12 h-20 w-[1px] bg-[#C5A059]/40 mx-auto" />  
         </div>  
       </section>
 
@@ -86,11 +105,11 @@ export default function HomePage() {
                       alt={property.name}  
                       className="w-full h-full object-cover grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:scale-105"  
                     />  
-                    <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-700" />  
+                    <div className="absolute inset-0 bg-black/30 group-hover:bg-transparent transition-all duration-700" />  
                   </div>  
                   <div className="mt-10">  
-                    <span className="text-[9px] uppercase tracking-[0.4em] opacity-40">Property // {property.loc}</span>  
-                    <h3 className="text-4xl md:text-5xl font-light mt-2 group-hover:italic transition-all">  
+                    <span className="text-[9px] uppercase tracking-[0.4em] opacity-60 text-white">Property // {property.loc}</span>  
+                    <h3 className="text-4xl md:text-5xl font-light mt-2 group-hover:italic transition-all text-white">  
                       {property.name}  
                     </h3>  
                   </div>  
@@ -105,15 +124,15 @@ export default function HomePage() {
       <section className="py-40 px-6 border-t border-[#C5A059]/10 bg-[#020202]">  
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20">  
           <div>  
-            <h2 className="text-3xl md:text-4xl italic font-light">Architecting <br /> Legacy.</h2>  
+            <h2 className="text-3xl md:text-4xl italic font-light text-white">Architecting <br /> Legacy.</h2>  
           </div>  
           <div className="space-y-6">  
-            <p className="text-sm leading-relaxed opacity-80">  
+            <p className="text-sm leading-relaxed opacity-90 text-white">  
               NexVoyage Collective is the engine for high-net-worth travelers who view discovery as a legacy pursuit. We manage the intersection of editorial curiosity and logistical perfection.  
             </p>  
             <Link   
               href="/archive"   
-              className="inline-block text-[10px] uppercase tracking-[0.6em] border-b border-[#C5A059]/40 pb-2 hover:border-[#C5A059] transition-all"  
+              className="inline-block text-[10px] uppercase tracking-[0.6em] border-b border-[#C5A059]/40 pb-2 hover:border-white transition-all text-white"  
             >  
               The Full Portfolio  
             </Link>  
@@ -124,12 +143,12 @@ export default function HomePage() {
       {/* 4. FINAL JOURNEY FOOTER */}  
       <section className="py-64 text-center bg-black relative overflow-hidden">  
         <div className="absolute inset-0 opacity-10 pointer-events-none">  
-          <div className="h-full w-full bg-[radial-gradient(circle_at_center,_#C5A059_0%,_transparent_70%)] opacity-10" />  
+          <div className="h-full w-full bg-[radial-gradient(circle_at_center,_#C5A059_0%,_transparent_70%)] opacity-5" />  
         </div>  
-        <h2 className="text-[11px] uppercase tracking-[1em] mb-12 opacity-50">Begin the Discovery</h2>  
+        <h2 className="text-[11px] uppercase tracking-[1em] mb-12 opacity-60 text-white">Begin the Discovery</h2>  
         <Link   
           href="/archive"  
-          className="text-5xl md:text-8xl font-light hover:italic transition-all duration-700"  
+          className="text-5xl md:text-8xl font-light hover:italic transition-all duration-700 text-white"  
         >  
           THE ARCHIVE  
         </Link>  
