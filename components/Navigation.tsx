@@ -19,7 +19,7 @@ export default function Navigation() {
     <>  
       <nav className="fixed top-0 left-0 w-full z-[100] px-6 py-8 flex justify-between items-center mix-blend-difference">  
         <Link href="/" className="text-[#D4AF37] font-serif text-2xl tracking-[0.3em] uppercase">  
-          NexVoyage  
+          NexVoyage Collective
         </Link>
 
         {/* The 3 Lines (Hamburger) - Forced to Brass Gold */}  
