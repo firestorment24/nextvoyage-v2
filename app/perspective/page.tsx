@@ -2,10 +2,18 @@ import React from 'react';
 
 export default function PerspectivePage() {  
   return (  
-    <main className="min-h-screen bg-[#000000] text-[#d4af37] selection:bg-[#d4af37] selection:text-[#000000]">  
-      {/* Nuclear Style Fix to force theme consistency */}  
+    <main className="min-h-screen bg-black text-[#d4af37] selection:bg-[#d4af37] selection:text-black">  
+      {/* THE NUCLEAR FIX: Forcing total transparency and black background */}  
       <style dangerouslySetInnerHTML={{ __html: `  
-        body { background-color: #000000 !important; }  
+        body, html, main { background-color: #000000 !important; }  
+        section, div, p, h1, h2, h3, h4, span, ul, li {   
+          background-color: transparent !important;   
+          background: transparent !important;  
+        }  
+        /* Killing the specific 'weird' white/parchment background classes */  
+        .bg-white, .bg-[#FCFAF7], .bg-neutral-50, .bg-stone-50 {  
+          background-color: transparent !important;  
+        }  
         * { border-color: #d4af371a !important; }  
       `}} />
 
@@ -14,7 +22,7 @@ export default function PerspectivePage() {
         <h1 className="text-5xl md:text-7xl font-light tracking-tight mb-6">  
           TRAVEL, PERFECTED.  
         </h1>  
-        <p className="text-xl md:text-2xl font-extralight max-w-3xl mx-auto opacity-80 leading-relaxed">  
+        <p className="text-xl md:text-2xl font-extralight max-w-3xl mx-auto opacity-80 leading-relaxed bg-transparent">  
           The NexVoyage Collective is the expert hand behind every journey—removing the friction of luxury so you can focus on the experience.  
         </p>  
       </section>
@@ -45,7 +53,7 @@ export default function PerspectivePage() {
       </section>
 
       {/* Specialized Services: Aviation & Villas */}  
-      <section className="py-24 px-6 bg-[#0a0a0a] border-y border-[#d4af371a]">  
+      <section className="py-24 px-6 border-y border-[#d4af371a]">  
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">  
           <div className="space-y-8">  
             <h2 className="text-4xl font-light uppercase">Private Aviation & <br/>Sanctuary Rentals</h2>  
@@ -67,8 +75,8 @@ export default function PerspectivePage() {
               </li>  
             </ul>  
           </div>  
-          <div className="aspect-[4/5] bg-[#111] border border-[#d4af3733] grayscale hover:grayscale-0 transition-all duration-700 flex items-center justify-center text-[10px] tracking-[0.5em] uppercase opacity-40">  
-            [ Placeholder: High-End Jet/Villa Visual ]  
+          <div className="aspect-[4/5] bg-neutral-900 border border-[#d4af3733] grayscale flex items-center justify-center text-[10px] tracking-[0.5em] uppercase opacity-40">  
+            [ High-End Jet/Villa Visual ]  
           </div>  
         </div>  
       </section>
@@ -93,7 +101,7 @@ export default function PerspectivePage() {
 
       {/* CTA */}  
       <section className="py-32 px-6 text-center border-t border-[#d4af3733]">  
-        <a href="/contact" className="inline-block border border-[#d4af37] px-12 py-4 text-sm tracking-[0.4em] uppercase hover:bg-[#d4af37] hover:text-[#000000] transition-all duration-300">  
+        <a href="/contact" className="inline-block border border-[#d4af37] px-12 py-4 text-sm tracking-[0.4em] uppercase hover:bg-[#d4af37] hover:text-black transition-all duration-300">  
           Begin Your Journey  
         </a>  
       </section>  
