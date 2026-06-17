@@ -52,96 +52,116 @@ return (
     </div>    
   </section>
 
-  {/* Strategic Alliances - Trust Strip */}  
-  <section className="py-12 border-b border-[#C5A059]/5 bg-[#0D0D0D]">  
-    <div className="max-w-[1600px] mx-auto px-6">  
-      <div className="flex flex-wrap justify-center md:justify-between items-center gap-8 opacity-40 grayscale hover:opacity-100 transition-opacity duration-700">  
-        <span className="text-[10px] tracking-[0.4em] uppercase font-bold">Virtuoso Member</span>  
-        <span className="text-[10px] tracking-[0.4em] uppercase font-bold">Fora Travel Partner</span>  
-        <span className="text-[10px] tracking-[0.4em] uppercase font-bold">ILTM Global</span>  
-        <span className="text-[10px] tracking-[0.4em] uppercase font-bold">Rosewood Elite</span>  
-        <span className="text-[10px] tracking-[0.4em] uppercase font-bold">Aman Preferred</span>  
+  {/* STRATEGIC ALLIANCES SECTION */}  
+<section className="py-24 bg-[#0A0A0A] border-t border-zinc-800">  
+  <div className="max-w-7xl mx-auto px-6">  
+    <p className="text-xs tracking-[0.3em] text-zinc-500 mb-12 uppercase">  
+      Unmatched Access. Preferred Status. Global Leverage.  
+    </p>  
+      
+    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 opacity-80 grayscale hover:grayscale-0 transition-all duration-700">  
+      {/* Starting with Fora as requested */}  
+      <div className="flex flex-col gap-1">  
+        <span className="text-[10px] text-zinc-600 font-mono italic">Primary Node</span>  
+        <span className="text-white tracking-widest uppercase text-sm">Fora Travel Partner</span>  
+      </div>  
+      <div className="flex flex-col gap-1">  
+        <span className="text-[10px] text-zinc-600 font-mono">Network</span>  
+        <span className="text-white tracking-widest uppercase text-sm">Virtuoso Member</span>  
+      </div>  
+      <div className="flex flex-col gap-1">  
+        <span className="text-[10px] text-zinc-600 font-mono">Pillar</span>  
+        <span className="text-white tracking-widest uppercase text-sm">Four Seasons Preferred</span>  
+      </div>  
+      <div className="flex flex-col gap-1">  
+        <span className="text-[10px] text-zinc-600 font-mono">Pillar</span>  
+        <span className="text-white tracking-widest uppercase text-sm">Aman Preferred</span>  
+      </div>  
+      <div className="flex flex-col gap-1">  
+        <span className="text-[10px] text-zinc-600 font-mono">Pillar</span>  
+        <span className="text-white tracking-widest uppercase text-sm">Belmond Bellini Club</span>  
+      </div>  
+      <div className="flex flex-col gap-1">  
+        <span className="text-[10px] text-zinc-600 font-mono">Pillar</span>  
+        <span className="text-white tracking-widest uppercase text-sm">Mandarin Oriental Fan Club</span>  
+      </div>  
+      <div className="flex flex-col gap-1">  
+        <span className="text-[10px] text-zinc-600 font-mono">Pillar</span>  
+        <span className="text-white tracking-widest uppercase text-sm">Rosewood Elite</span>  
+      </div>  
+      <div className="flex flex-col gap-1">  
+        <span className="text-[10px] text-zinc-600 font-mono">Pillar</span>  
+        <span className="text-white tracking-widest uppercase text-sm">Peninsula PenClub</span>  
+      </div>  
+      <div className="flex flex-col gap-1">  
+        <span className="text-[10px] text-zinc-600 font-mono">Pillar</span>  
+        <span className="text-white tracking-widest uppercase text-sm">Dorchester Diamond Club</span>  
+      </div>  
+      <div className="flex flex-col gap-1">  
+        <span className="text-[10px] text-zinc-600 font-mono">Pillar</span>  
+        <span className="text-white tracking-widest uppercase text-sm">Hyatt Privé</span>  
+      </div>  
+      <div className="flex flex-col gap-1">  
+        <span className="text-[10px] text-zinc-600 font-mono">Pillar</span>  
+        <span className="text-white tracking-widest uppercase text-sm">Oetker Pearl Partner</span>  
+      </div>  
+      <div className="flex flex-col gap-1">  
+        <span className="text-[10px] text-zinc-600 font-mono">Authority</span>  
+        <span className="text-white tracking-widest uppercase text-sm">ILTM Global</span>  
       </div>  
     </div>  
-  </section>
+  </div>  
+</section>
 
-  {/* Ledger Grid */}    
-  <section className="py-32 px-6 md:px-12 max-w-[1600px] mx-auto">    
-    <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-6">    
-      <div className="space-y-4">    
-        <h2 className="text-xs tracking-[0.5em] uppercase text-[#C5A059]">Curated Archive</h2>    
-        <p className="text-4xl md:text-5xl font-serif font-light tracking-tight">The Current Collection</p>    
-      </div>    
-      <Link     
-        href="/archive"     
-        className="group flex items-center gap-6 text-[10px] tracking-[0.3em] uppercase text-zinc-500 hover:text-[#C5A059] transition-all"    
-      >    
-        Explore Entire Ledger    
-        <span className="w-16 h-[1px] bg-zinc-800 group-hover:w-24 group-hover:bg-[#C5A059] transition-all" />    
-      </Link>    
-    </div>
+{/* PROPERTY PORTFOLIO SECTION */}  
+<section className="py-24 bg-[#0A0A0A]">  
+  <div className="max-w-7xl mx-auto px-6">  
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-16">  
+      {/* Property 001 */}  
+      <div className="group cursor-crosshair">  
+        <div className="overflow-hidden mb-6 bg-zinc-900 aspect-[16/9]">  
+          <img   
+            src="/aman-ny-detail.jpg"   
+            alt="NV-001"   
+            className="w-full h-full object-cover grayscale-0 group-hover:grayscale transition-all duration-1000"  
+          />  
+        </div>  
+        <div className="flex justify-between items-baseline border-b border-zinc-800 pb-4">  
+          <h3 className="text-white text-lg tracking-tighter uppercase">Aman New York</h3>  
+          <span className="text-zinc-600 font-mono text-xs italic">NV-001</span>  
+        </div>  
+      </div>
 
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-16 gap-y-28">    
-      {featuredProperties.map((property, idx) => (    
-        <Link     
-          key={property.id}     
-          href={`/archive/${property.id}`}    
-          className="group block"    
-        >    
-          <div className="image-container relative aspect-[4/5] overflow-hidden mb-8 shadow-2xl">    
-            <Image    
-              src={property.images[0]}    
-              alt={property.name}    
-              fill    
-              className="object-cover transition-all duration-1000 grayscale-0 group-hover:grayscale group-hover:scale-105"    
-            />    
-            <div className="absolute top-6 left-6 text-[10px] tracking-[0.3em] text-white/80 font-bold uppercase mix-blend-difference">    
-              NV-{String(idx + 1).padStart(3, '0')}    
-            </div>    
-          </div>    
-          <div className="space-y-3">    
-            <h3 className="text-2xl font-serif font-light tracking-wide group-hover:text-[#C5A059] transition-colors">    
-              {property.name}    
-            </h3>    
-            <div className="flex items-center gap-4 text-[9px] tracking-[0.25em] uppercase text-zinc-500">    
-              <span className="text-[#C5A059]/80 italic">{property.location}</span>    
-              <span className="w-1 h-1 rounded-full bg-zinc-800" />    
-              <span>{getSanctuaryName(property.sanctuaryId)}</span>    
-            </div>    
-          </div>    
-        </Link>    
-      ))}    
-    </div>    
-  </section>
+      {/* Property 002 */}  
+      <div className="group cursor-crosshair">  
+        <div className="overflow-hidden mb-6 bg-zinc-900 aspect-[16/9]">  
+          <img   
+            src="/lanesborough-london.jpg"   
+            alt="NV-002"   
+            className="w-full h-full object-cover grayscale-0 group-hover:grayscale transition-all duration-1000"  
+          />  
+        </div>  
+        <div className="flex justify-between items-baseline border-b border-zinc-800 pb-4">  
+          <h3 className="text-white text-lg tracking-tighter uppercase">The Lanesborough</h3>  
+          <span className="text-zinc-600 font-mono text-xs italic">NV-002</span>  
+        </div>  
+      </div>  
+    </div>  
+  </div>  
+</section>
 
-  {/* Concierge Intake */}    
-  <section className="py-40 bg-[#0D0D0D] border-y border-[#C5A059]/5 relative overflow-hidden">    
-    <div className="max-w-4xl mx-auto text-center px-6 relative z-10">    
-      <h2 className="text-xs tracking-[0.6em] uppercase text-[#C5A059] mb-10">Private Inquiry</h2>    
-      <h3 className="text-4xl md:text-7xl font-serif font-light mb-10 leading-tight">Secure Your Passage</h3>    
-      <p className="text-zinc-400 text-lg md:text-xl leading-relaxed mb-16 font-light italic max-w-2xl mx-auto">    
-        "Membership is not granted; it is recognized. We provide the keys to the unreachable for those who require nothing less."    
-      </p>    
-      <Link     
-        href="/concierge"    
-        className="inline-block px-16 py-5 border border-[#C5A059]/30 text-[11px] tracking-[0.4em] uppercase hover:bg-[#C5A059] hover:text-black transition-all duration-700 ease-in-out"    
-      >    
-        Begin Intake    
-      </Link>    
-    </div>    
-    <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/dark-leather.png')]" />    
-  </section>
-
-  {/* Journal Teaser */}    
-  <section className="py-32 bg-[#0A0A0A]">    
-    <div className="max-w-4xl mx-auto text-center px-6">    
-      <h2 className="text-xs tracking-[0.4em] uppercase text-zinc-600 mb-8">Editorial Perspective</h2>    
-      <Link href="/perspective" className="group inline-block">    
-        <h3 className="text-3xl md:text-4xl font-serif font-light mb-6 group-hover:text-[#C5A059] transition-colors">The ROI of Reset</h3>    
-        <p className="text-zinc-500 text-sm tracking-widest uppercase group-hover:tracking-[0.3em] transition-all duration-500">Read the Journal</p>    
-      </Link>    
-    </div>    
-  </section>    
-</main>    
-);    
-}  
+{/* CONCIERGE INTAKE (REPLACING PRIVATE INQUIRY) */}  
+<section className="py-32 bg-[#0A0A0A] border-t border-zinc-900">  
+  <div className="max-w-3xl mx-auto px-6 text-center">  
+    <h2 className="text-3xl md:text-5xl text-white tracking-tighter mb-8 uppercase italic font-light">  
+      Initiate the Collective Access.  
+    </h2>  
+    <p className="text-zinc-400 mb-12 leading-relaxed font-light">  
+      The Bespoke Travel Manifest is now open for Q3 and Q4.   
+      Secure your position within the cohort.  
+    </p>  
+    <button className="bg-transparent border border-zinc-700 text-white px-12 py-4 tracking-[0.4em] uppercase text-xs hover:bg-white hover:text-black transition-all duration-500">  
+      Open Concierge Intake  
+    </button>  
+  </div>  
+</section>  
