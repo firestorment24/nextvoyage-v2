@@ -1,154 +1,192 @@
 import React from 'react';
 
 export default function Home() {  
-  return (  
-    <main className="min-h-screen bg-[#0A0A0A] text-white selection:bg-zinc-800">  
-      {/* NUCLEAR FIX: ELIMINATE ALL GHOST BOXES & FORCED DARK MODE */}  
-      <style dangerouslySetInnerHTML={{ __html: `  
-        body, html, #__next, main { background-color: #0A0A0A !important; }  
-        * { box-shadow: none !important; border-radius: 0 !important; }  
-        ::-webkit-scrollbar { display: none; }  
-      `}} />
+return (  
+  <main className="min-h-screen bg-[#0A0A0A] text-white selection:bg-[#B5A48B]/30">  
+    {/* NUCLEAR FIX: FORCE BLACK BACKGROUND & ELIMINATE GHOST BOXES */}  
+    <style dangerouslySetInnerHTML={{ __html: `  
+      body, html, #__next, main { background-color: #0A0A0A !important; margin: 0; padding: 0; }  
+      * { box-shadow: none !important; border-radius: 0 !important; }  
+      ::-webkit-scrollbar { display: none; }  
+      .perspective-text { writing-mode: vertical-rl; text-orientation: mixed; }  
+    `}} />
 
-      {/* HERO: AMAN NEW YORK HIGH-CONTRAST */}  
-      <section className="relative h-[90vh] w-full overflow-hidden flex items-center justify-center">  
-        <div className="absolute inset-0 z-0">  
-          <img   
-            src="https://images.unsplash.com/photo-1578683062331-92935539d7a0?q=80&w=2670&auto=format&fit=crop"   
-            alt="Aman New York"   
-            className="w-full h-full object-cover grayscale-[0.3] brightness-75"  
-          />  
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-black/40" />  
+    {/* HERO SECTION: THE PORTAL */}  
+    <section className="relative h-[85vh] w-full flex items-center justify-center overflow-hidden border-b border-zinc-900">  
+      <div className="absolute inset-0 z-0">  
+        <img   
+          src="https://images.unsplash.com/photo-1578683062331-92935539d7a0?q=80&w=2670&auto=format&fit=crop"   
+          alt="Aman New York"   
+          className="w-full h-full object-cover brightness-50"  
+        />  
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-black/20" />  
+      </div>  
+        
+      <div className="relative z-10 text-center px-6">  
+        <div className="flex items-center justify-center gap-3 mb-8">  
+          <div className="h-[1px] w-8 bg-[#B5A48B]" />  
+          <span className="text-[9px] tracking-[0.8em] uppercase text-[#B5A48B] font-medium">System Active</span>  
+          <div className="h-[1px] w-8 bg-[#B5A48B]" />  
+        </div>  
+        <h1 className="text-6xl md:text-9xl font-light tracking-tighter mb-6 italic">  
+          NexVoyage  
+        </h1>  
+        <p className="max-w-xl mx-auto text-zinc-500 text-[10px] md:text-xs tracking-[0.5em] leading-relaxed uppercase">  
+          The Private Infrastructure of <br/>Exceptional Hospitality.  
+        </p>  
+      </div>  
+    </section>
+
+    {/* STRATEGIC ALLIANCES: THE ACCESS MANIFEST */}  
+    <section className="py-24 bg-[#0A0A0A]">  
+      <div className="max-w-7xl mx-auto px-6">  
+        <div className="flex justify-between items-end mb-16 border-b border-zinc-900 pb-8">  
+          <div>  
+            <h2 className="text-xs tracking-[0.4em] text-white uppercase mb-2">Strategic Alliances</h2>  
+            <p className="text-[10px] text-zinc-600 font-mono uppercase tracking-widest italic">Global Node Mapping // Status: Verified</p>  
+          </div>  
+          <div className="hidden md:block">  
+            <span className="text-[10px] text-zinc-700 font-mono tracking-widest uppercase">Capacity: 24 Nodes Active</span>  
+          </div>  
         </div>  
           
-        <div className="relative z-10 text-center px-6">  
-          <p className="text-[10px] tracking-[1em] uppercase text-[#B5A48B] mb-6 font-light">  
-            THE ARCHIVE // MMXXVI  
-          </p>  
-          <h1 className="text-6xl md:text-9xl font-light tracking-tighter mb-8 italic">  
-            NexVoyage  
-          </h1>  
-          <p className="max-w-2xl mx-auto text-zinc-400 text-xs md:text-sm tracking-[0.4em] leading-relaxed uppercase">  
-            Curating the invisible layers of global hospitality.  
-          </p>  
-        </div>  
-      </section>
-
-      {/* TRUST STRIP: THE CORE 5 */}  
-      <div className="border-y border-zinc-900 bg-[#0D0D0D] py-4">  
-        <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-between items-center gap-8 opacity-40 grayscale">  
-          {["Virtuoso Member", "Fora Travel Partner", "ILTM Global", "Rosewood Elite", "Aman Preferred"].map((trust) => (  
-            <span key={trust} className="text-[9px] tracking-[0.3em] uppercase font-mono">{trust}</span>  
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-x-8 gap-y-12">  
+          {[  
+            { n: "01", name: "Fora Travel", type: "Host" },  
+            { n: "02", name: "Virtuoso", type: "Network" },  
+            { n: "03", name: "Four Seasons", type: "PP" },  
+            { n: "04", name: "Aman", type: "Preferred" },  
+            { n: "05", name: "Belmond", type: "Bellini" },  
+            { n: "06", name: "Mandarin Oriental", type: "Fan Club" },  
+            { n: "07", name: "Rosewood", type: "Elite" },  
+            { n: "08", name: "Peninsula", type: "PenClub" },  
+            { n: "09", name: "Dorchester", type: "Diamond" },  
+            { n: "10", name: "Hyatt Privé", type: "Pillar" },  
+            { n: "11", name: "Oetker", type: "Pearl" },  
+            { n: "12", name: "Auberge", type: "Preferred" },  
+            { n: "13", name: "One&Only", type: "Pillar" },  
+            { n: "14", name: "Relais & Châteaux", type: "Partner" },  
+            { n: "15", name: "SLH", type: "withIN" },  
+            { n: "16", name: "LHW", type: "Leaders" },  
+            { n: "17", name: "Accor", type: "HERA" },  
+            { n: "18", name: "IHG", type: "Destined" },  
+            { n: "19", name: "St. Regis", type: "STARS" },  
+            { n: "20", name: "Ritz-Carlton", type: "STARS" },  
+            { n: "21", name: "Waldorf Astoria", type: "Luxe" },  
+            { n: "22", name: "Conrad", type: "Luxe" },  
+            { n: "23", name: "Bvlgari", type: "Elite" },  
+            { n: "24", name: "ILTM", type: "Global" }  
+          ].map((item) => (  
+            <div key={item.n} className="group border-t border-zinc-900 pt-4 hover:border-[#B5A48B] transition-colors duration-500">  
+              <div className="flex justify-between items-center mb-1">  
+                <span className="text-[8px] font-mono text-zinc-700">{item.n}</span>  
+                <span className="text-[7px] font-mono text-[#B5A48B] uppercase tracking-tighter opacity-0 group-hover:opacity-100 transition-opacity">Access Confirmed</span>  
+              </div>  
+              <p className="text-white tracking-widest text-[10px] uppercase font-light">{item.name}</p>  
+              <p className="text-[8px] text-zinc-600 font-mono tracking-tighter uppercase">{item.type}</p>  
+            </div>  
           ))}  
         </div>  
-      </div>
+      </div>  
+    </section>
 
-      {/* EXPANDED STRATEGIC ALLIANCES: 18 ELITE PARTNERS */}  
-      <section className="py-32 bg-[#0A0A0A]">  
-        <div className="max-w-7xl mx-auto px-6">  
-          <div className="flex items-center gap-4 mb-20">  
-            <div className="h-[1px] w-12 bg-[#B5A48B]" />  
-            <p className="text-[10px] tracking-[0.5em] text-[#B5A48B] uppercase">Global Leverage Network</p>  
-          </div>  
-            
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-y-16 gap-x-12">  
-            {[  
-              { label: "Fora Travel", type: "Host" },  
-              { label: "Four Seasons", type: "Preferred" },  
-              { label: "Belmond", type: "Bellini Club" },  
-              { label: "Mandarin Oriental", type: "Fan Club" },  
-              { label: "Peninsula", type: "PenClub" },  
-              { label: "Dorchester", type: "Diamond Club" },  
-              { label: "Hyatt Privé", type: "Pillar" },  
-              { label: "Oetker", type: "Pearl Partner" },  
-              { label: "Auberge", type: "Preferred" },  
-              { label: "One&Only", type: "Pillar" },  
-              { label: "Relais & Châteaux", type: "Preferred" },  
-              { label: "Small Luxury Hotels", type: "withIN" },  
-              { label: "LHW", type: "Leaders Club" },  
-              { label: "Accor", type: "HERA" },  
-              { label: "IHG", type: "Destined" },  
-              { label: "Langham", type: "Couture" },  
-              { label: "Jumeirah", type: "Passport" },  
-              { label: "Rocco Forte", type: "Knights" }  
-            ].map((partner) => (  
-              <div key={partner.label} className="group border-l border-zinc-900 pl-4 hover:border-[#B5A48B] transition-colors duration-700">  
-                <p className="text-[8px] text-zinc-600 font-mono mb-1 uppercase">{partner.type}</p>  
-                <p className="text-zinc-300 group-hover:text-white tracking-widest text-[11px] uppercase transition-colors">{partner.label}</p>  
-              </div>  
-            ))}  
-          </div>  
-        </div>  
-      </section>
+    {/* THE COLLECTION: NV-00X PORTFOLIO */}  
+    <section className="py-32 bg-[#0D0D0D] border-y border-zinc-900">  
+      <div className="max-w-7xl mx-auto px-6">  
+        <div className="flex justify-between items-center mb-24">  
+          <p className="text-[10px] tracking-[0.5em] text-[#B5A48B] uppercase">The Collection</p>  
+          <div className="h-[1px] flex-1 bg-zinc-900 mx-8" />  
+          <p className="text-[9px] font-mono text-zinc-700 uppercase">Vault Ref: 2026.Archive</p>  
+        </div>
 
-      {/* PROPERTY PORTFOLIO: NV-00X SERIES */}  
-      <section className="py-32 border-t border-zinc-900">  
-        <div className="max-w-7xl mx-auto px-6">  
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-32">  
-            <div className="group cursor-crosshair">  
-              <div className="aspect-[16/11] overflow-hidden bg-zinc-900 mb-8">  
-                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover transition-all duration-1000 grayscale-0 group-hover:grayscale" alt="NV-001" />  
-              </div>  
-              <div className="flex justify-between items-end pb-4 border-b border-zinc-900">  
-                <div>  
-                  <p className="text-[10px] text-[#B5A48B] font-mono mb-2 uppercase tracking-widest">NV-001 // AMAN NY</p>  
-                  <h3 className="text-2xl text-white font-light tracking-tighter italic uppercase">The Urban Monolith</h3>  
-                </div>  
-                <span className="text-[10px] text-zinc-600 uppercase tracking-widest">View Entry</span>  
-              </div>  
-            </div>
-
-            <div className="group cursor-crosshair">  
-              <div className="aspect-[16/11] overflow-hidden bg-zinc-900 mb-8">  
-                <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover transition-all duration-1000 grayscale-0 group-hover:grayscale" alt="NV-002" />  
-              </div>  
-              <div className="flex justify-between items-end pb-4 border-b border-zinc-900">  
-                <div>  
-                  <p className="text-[10px] text-[#B5A48B] font-mono mb-2 uppercase tracking-widest">NV-002 // LONDON</p>  
-                  <h3 className="text-2xl text-white font-light tracking-tighter italic uppercase">The Belgravia Archive</h3>  
-                </div>  
-                <span className="text-[10px] text-zinc-600 uppercase tracking-widest">View Entry</span>  
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-24">  
+          {/* Item 001 */}  
+          <div className="group cursor-none">  
+            <div className="relative aspect-[4/5] overflow-hidden bg-zinc-950 mb-10">  
+              <img   
+                src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=1500"   
+                className="w-full h-full object-cover transition-all duration-1000 grayscale-0 group-hover:grayscale brightness-90 group-hover:brightness-50 scale-100 group-hover:scale-105"   
+                alt="NV-001"   
+              />  
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-700">  
+                <span className="text-[10px] tracking-[0.8em] uppercase text-[#B5A48B] border border-[#B5A48B] px-6 py-3">Open Record</span>  
               </div>  
             </div>  
-          </div>  
-        </div>  
-      </section>
-
-      {/* CONCIERGE: BESPOKE TRAVEL MANIFEST */}  
-      <section className="py-48 bg-[#0D0D0D] border-t border-zinc-900">  
-        <div className="max-w-4xl mx-auto px-6 text-center">  
-          <h2 className="text-5xl md:text-7xl text-white font-extralight tracking-tighter mb-12 italic">  
-            The Bespoke Travel Manifest  
-          </h2>  
-            
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-20 text-left border-y border-zinc-800 py-12">  
-            <div>  
-              <p className="text-[9px] text-zinc-600 font-mono uppercase mb-4">Current Window</p>  
-              <p className="text-white text-xs tracking-widest uppercase">Q3 / Q4 2026</p>  
-            </div>  
-            <div>  
-              <p className="text-[9px] text-zinc-600 font-mono uppercase mb-4">Target Cohort</p>  
-              <p className="text-white text-xs tracking-widest uppercase">Private Advisory Only</p>  
-            </div>  
-            <div>  
-              <p className="text-[9px] text-zinc-600 font-mono uppercase mb-4">Current Status</p>  
-              <p className="text-[#B5A48B] text-xs tracking-widest uppercase animate-pulse">Waitlist Active</p>  
+            <div className="flex justify-between items-start">  
+              <div>  
+                <h3 className="text-xl text-white font-light tracking-tighter uppercase italic mb-2">The Urban Monolith</h3>  
+                <p className="text-[9px] text-zinc-600 tracking-widest uppercase">New York City // Sanctuary Node</p>  
+              </div>  
+              <span className="text-zinc-800 font-mono text-sm group-hover:text-[#B5A48B] transition-colors">NV-001</span>  
             </div>  
           </div>
 
-          <button className="group relative overflow-hidden px-16 py-6 border border-[#B5A48B]">  
-            <span className="relative z-10 text-[10px] tracking-[0.6em] text-[#B5A48B] uppercase group-hover:text-black transition-colors duration-500">Open Intake</span>  
-            <div className="absolute inset-0 bg-[#B5A48B] translate-y-full group-hover:translate-y-0 transition-transform duration-500" />  
+          {/* Item 002 */}  
+          <div className="group cursor-none">  
+            <div className="relative aspect-[4/5] overflow-hidden bg-zinc-950 mb-10">  
+              <img   
+                src="https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&q=80&w=1500"   
+                className="w-full h-full object-cover transition-all duration-1000 grayscale-0 group-hover:grayscale brightness-90 group-hover:brightness-50 scale-100 group-hover:scale-105"   
+                alt="NV-002"   
+              />  
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-700">  
+                <span className="text-[10px] tracking-[0.8em] uppercase text-[#B5A48B] border border-[#B5A48B] px-6 py-3">Open Record</span>  
+              </div>  
+            </div>  
+            <div className="flex justify-between items-start">  
+              <div>  
+                <h3 className="text-xl text-white font-light tracking-tighter uppercase italic mb-2">The Belgravia Archive</h3>  
+                <p className="text-[9px] text-zinc-600 tracking-widest uppercase">London // Cultural Node</p>  
+              </div>  
+              <span className="text-zinc-800 font-mono text-sm group-hover:text-[#B5A48B] transition-colors">NV-002</span>  
+            </div>  
+          </div>  
+        </div>  
+      </div>  
+    </section>
+
+    {/* CONCIERGE: INTAKE MANIFEST */}  
+    <section className="py-40 bg-[#0A0A0A]">  
+      <div className="max-w-4xl mx-auto px-6 text-center">  
+        <div className="inline-block px-4 py-1 border border-zinc-900 mb-12">  
+          <span className="text-[9px] font-mono text-zinc-600 uppercase tracking-widest">Protocol: Concierge Intake</span>  
+        </div>  
+        <h2 className="text-5xl md:text-8xl text-white font-extralight tracking-tighter mb-10 italic">  
+          Initiate <span className="text-zinc-700">Access.</span>  
+        </h2>  
+        <p className="text-zinc-500 mb-20 leading-relaxed font-light tracking-[0.2em] text-xs max-w-2xl mx-auto uppercase">  
+          The Bespoke Travel Manifest is currently reviewing <br/>private advisory placements for the upcoming fiscal window.  
+        </p>  
+          
+        <div className="flex flex-col md:flex-row items-center justify-center gap-12 border-t border-zinc-950 pt-16">  
+          <div className="text-left">  
+            <p className="text-[8px] text-zinc-700 font-mono uppercase mb-2">Window</p>  
+            <p className="text-white text-[10px] tracking-widest uppercase italic">Q3 / Q4 2026</p>  
+          </div>  
+          <div className="h-12 w-[1px] bg-zinc-900 hidden md:block" />  
+          <div className="text-left">  
+            <p className="text-[8px] text-zinc-700 font-mono uppercase mb-2">Status</p>  
+            <p className="text-[#B5A48B] text-[10px] tracking-widest uppercase animate-pulse">Waitlist Only</p>  
+          </div>  
+          <div className="h-12 w-[1px] bg-zinc-900 hidden md:block" />  
+          <button className="px-12 py-4 bg-transparent border border-zinc-800 hover:border-[#B5A48B] hover:text-[#B5A48B] transition-all duration-700 text-xs tracking-[0.5em] uppercase">  
+            Open Manifest  
           </button>  
         </div>  
-      </section>
+      </div>  
+    </section>
 
-      {/* FOOTER */}  
-      <footer className="py-20 border-t border-zinc-950 text-center">  
-        <p className="text-[9px] font-mono text-zinc-800 tracking-[0.8em] uppercase">  
-          NexVoyage Collective &copy; 2026 // Private Engine  
+    {/* FOOTER: SYSTEM LOG */}  
+    <footer className="py-16 bg-black border-t border-zinc-950">  
+      <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">  
+        <p className="text-[8px] font-mono text-zinc-800 tracking-[1em] uppercase">  
+          NexVoyage Collective // Private Node  
         </p>  
-      </footer>  
-    </main>  
-  );  
+        <p className="text-[8px] font-mono text-zinc-800 uppercase italic">  
+          Verified access only  
+        </p>  
+      </div>  
+    </footer>  
+  </main>  
+);  
 }  
