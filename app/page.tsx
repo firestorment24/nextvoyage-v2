@@ -78,7 +78,7 @@ return (
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black" />
 
       <div className="relative z-10 text-center px-4">  
-        <span className="text-[10px] uppercase tracking-[0.8em] opacity-60 mb-6 block">Established 2026</span>  
+        <span className="text-[10px] uppercase tracking-[0.8em] opacity-60 mb-6 block">Since 2026</span>  
         <h1 className="text-7xl md:text-[10rem] font-light tracking-tighter leading-[0.8] mb-4">  
           THE SOVEREIGN <br />  
           <span className="italic">ARRIVAL</span>  
