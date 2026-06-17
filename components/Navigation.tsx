@@ -20,7 +20,7 @@ const Navigation = () => {
     { name: 'HOME', href: '/', sub: 'The Beginning' },  
     { name: 'THE ARCHIVE', href: '/archive', sub: 'Curated Collection' },  
     { name: 'JOURNAL', href: '/journal', sub: 'Travel Stories' },  
-    { name: 'CONCIERGE', href: '/inquiry', sub: 'Direct Inquiry' },  
+    { name: 'INQUIRY', href: '/invitation', sub: 'Direct Inquiry' },  
   ];
 
   const brass = '#C5A059';  
