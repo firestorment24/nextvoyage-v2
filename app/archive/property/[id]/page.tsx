@@ -1,108 +1,109 @@
-import React from 'react';  
-import { notFound } from 'next/navigation';  
+// app/archive/property/[id]/page.tsx
+
 import { PROPERTY_DATA } from '@/lib/data/sanctuaries';  
-import Link from 'next/link';
+import { notFound } from 'next/navigation';  
+import Link from 'next/link';  
+import { Cormorant_Garamond, Inter } from 'next/font/google';
 
-export default async function PropertyDossierPage({ params }: { params: { id: string } }) {  
-const { id } = await params;  
-const property = PROPERTY_DATA.find((p) => p.id === id);
+const cormorant = Cormorant_Garamond({   
+  subsets: ['latin'],   
+  variable: '--font-cormorant'   
+});
 
-if (!property) {  
-  notFound();  
-}
+const inter = Inter({   
+  subsets: ['latin'],  
+  variable: '--font-inter'  
+});
 
-return (  
-  <div className="min-h-screen bg-[#1C1C1C] text-[#FCFAF7] selection:bg-[#C5A059] selection:text-[#1C1C1C]">  
-    <style>  
-      {`  
-        h1, h2, h3, h4 {  
-          background-color: transparent !important;  
-          color: #C5A059 !important;  
-        }  
-        body {  
-          background-color: #1C1C1C !important;  
-        }  
-      `}  
-    </style>
+export default async function ArchivePropertyDetail({ params }: { params: { id: string } }) {  
+  const { id } = params;  
+  const property = PROPERTY_DATA.find(p => p.id === id);
 
-    <div className="relative h-[60vh] md:h-[80vh] w-full overflow-hidden border-b border-[#C5A059]/20">  
-      {property.image ? (  
-        <img   
-          src={property.image}   
-          alt={property.name}   
-          className="w-full h-full object-cover"  
-        />  
-      ) : (  
-        <div className="w-full h-full bg-neutral-900 flex items-center justify-center italic text-[#C5A059]/20">  
-          Vaulted Imagery Unavailable  
-        </div>  
-      )}  
-      <div className="absolute inset-0 bg-gradient-to-t from-[#1C1C1C] via-transparent to-transparent" />  
-        
-      <div className="absolute bottom-12 left-6 md:left-12">  
-        <span className="text-[10px] uppercase tracking-[0.5em] text-[#C5A059] mb-4 block">  
-          Verified Sanctuary  
-        </span>  
-        <h1 className="text-4xl md:text-7xl font-light tracking-tighter italic">  
-          {property.name}  
-        </h1>  
-        <p className="text-sm md:text-base uppercase tracking-[0.3em] text-[#FCFAF7]/60 mt-2">  
-          {property.location}  
-        </p>  
-      </div>  
-    </div>
+  if (!property) return notFound();
 
-    <main className="max-w-4xl mx-auto px-6 py-24 space-y-24">  
-      <section className="space-y-6">  
-        <h3 className="text-[10px] uppercase tracking-[0.5em] text-[#C5A059]/60">Narrative</h3>  
-        <p className="text-xl md:text-2xl font-light leading-relaxed italic text-[#FCFAF7]/90">  
-          "{property.description}"  
-        </p>  
-      </section>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-16">  
-        <section className="space-y-6">  
-          <h3 className="text-[10px] uppercase tracking-[0.5em] text-[#C5A059]/60">Elite Amenities</h3>  
-          <ul className="space-y-4">  
-            {property.highlight?.split(',').map((item, i) => (  
-              <li key={i} className="text-sm tracking-wide border-l border-[#C5A059]/30 pl-4 py-1">  
-                {item.trim()}  
-              </li>  
-            ))}  
-          </ul>  
-        </section>
-
-        <section className="space-y-6 bg-[#C5A059]/5 p-8 border border-[#C5A059]/10">  
-          <h3 className="text-[10px] uppercase tracking-[0.5em] text-[#C5A059]/60">Specifications</h3>  
-          <div className="grid grid-cols-2 gap-y-4 text-[10px] uppercase tracking-widest">  
-            {/* Dynamic Mapping of Specs Object */}  
-            {property.specs && typeof property.specs === 'object' &&   
-              Object.entries(property.specs).map(([key, value]) => (  
-                <React.Fragment key={key}>  
-                  <span className="text-[#C5A059]/40">{key}</span>  
-                  <span>{value as string}</span>  
-                </React.Fragment>  
-              ))  
-            }  
-              
-            <span className="text-[#C5A059]/40">Status</span>  
-            <span className="text-[#C5A059]">Archived</span>  
-              
-            <span className="text-[#C5A059]/40">Serial</span>  
-            <span>{property.serial}</span>  
+  return (  
+    <main className={`min-h-screen bg-[#0A0A0A] text-[#E5E5E5] ${cormorant.variable} ${inter.variable} font-sans`}>  
+      {/* Cinematic Hero Section */}  
+      <div className="relative h-[60vh] md:h-[80vh] w-full overflow-hidden border-b border-[#d4af37]/20">  
+        {property.images && property.images.length > 0 ? (  
+          <img   
+            src={property.images[0]}   
+            alt={property.name}   
+            className="w-full h-full object-cover grayscale opacity-60 hover:grayscale-0 transition-all duration-1000"  
+          />  
+        ) : (  
+          <div className="w-full h-full bg-[#111]" />  
+        )}  
+          
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent" />  
+          
+        <div className="absolute bottom-0 left-0 w-full p-8 md:p-16">  
+          <div className="max-w-7xl mx-auto">  
+            <Link   
+              href="/archive"   
+              className="text-[#d4af37] text-xs font-mono tracking-widest mb-6 block uppercase hover:text-white transition-colors"  
+            >  
+              ← Return to Archive Registry  
+            </Link>  
+            <h1 className="text-6xl md:text-8xl font-serif uppercase tracking-tighter text-white mb-4">  
+              {property.name}  
+            </h1>  
+            <p className="text-[#d4af37] text-sm font-mono tracking-[0.3em] uppercase">  
+              Location // {property.location}  
+            </p>  
           </div>  
-        </section>  
+        </div>  
       </div>
 
-      <footer className="pt-24 border-t border-[#C5A059]/20 flex justify-between items-center">  
-        <Link href="/archive" className="text-[10px] uppercase tracking-[0.4em] text-[#C5A059] hover:opacity-60 transition-opacity">  
-          ← Return to Archive  
-        </Link>  
-        <Link href="/invitation" className="text-[10px] uppercase tracking-[0.4em] bg-[#C5A059] text-[#1C1C1C] px-6 py-3 font-bold hover:bg-[#FCFAF7] transition-all">  
-          Request Access  
-        </Link>  
-      </footer>  
+      {/* Intel Breakdown */}  
+      <section className="py-24 px-8">  
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-16">  
+          {/* Dossier Description */}  
+          <div className="md:col-span-7">  
+            <div className="mb-12">  
+              <span className="text-xs font-mono text-gray-500 block mb-4 uppercase tracking-widest">[ FIELD REPORT SUMMARY ]</span>  
+              <p className="text-2xl md:text-3xl font-serif text-gray-300 leading-relaxed italic">  
+                {property.description}  
+              </p>  
+            </div>  
+          </div>
+
+          {/* Technical Specs / Intel */}  
+          <div className="md:col-span-5">  
+            <div className="bg-[#111] border border-[#d4af37]/10 p-8 space-y-8">  
+              <div>  
+                <span className="text-[#d4af37] text-[10px] font-mono uppercase tracking-[0.4em] block mb-2">Classification</span>  
+                <p className="text-white font-serif text-xl uppercase tracking-widest">  
+                  {property.intel?.category || "Standard Luxury Asset"}  
+                </p>  
+              </div>
+
+              <div>  
+                <span className="text-[#d4af37] text-[10px] font-mono uppercase tracking-[0.4em] block mb-2">Member Intel</span>  
+                <ul className="space-y-3">  
+                  {property.intel?.memberBenefits.map((benefit, i) => (  
+                    <li key={i} className="text-gray-400 text-sm font-mono uppercase flex items-start gap-3">  
+                      <span className="text-[#d4af37]">•</span>  
+                      {benefit}  
+                    </li>  
+                  ))}  
+                </ul>  
+              </div>
+
+              <div className="pt-8 border-t border-white/5">  
+                <span className="text-gray-600 text-[9px] font-mono uppercase tracking-tighter">  
+                  RECORD ID: NV-{property.id.toUpperCase()}-026  
+                </span>  
+              </div>  
+            </div>  
+          </div>  
+        </div>  
+      </section>
+
+      {/* End of Report footer */}  
+      <div className="py-12 border-t border-white/5 text-center opacity-20">  
+        <span className="text-[10px] font-mono tracking-[1em] uppercase">End of Dossier</span>  
+      </div>  
     </main>  
-  </div>  
-);  
+  );  
 }  
