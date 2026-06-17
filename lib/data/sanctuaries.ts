@@ -10,6 +10,17 @@ export interface Property {
   };  
 }
 
+export interface Sanctuary {  
+  id: string;  
+  name: string;  
+  loc: string;  
+  tag: string;  
+  atmosphere: string;  
+  highlights: string[];  
+  heroImage: string;  
+  propertyCount: number;  
+}
+
 export const PROPERTY_DATA: Property[] = [  
   // THE ORIGINALS (001-012)  
   {  
@@ -335,4 +346,29 @@ export const PROPERTY_DATA: Property[] = [
   }  
 ];
 
-export const properties = PROPERTY_DATA; 
+export const SANCTUARIES_DATA: Sanctuary[] = [  
+  {  
+    id: "azure-heights",  
+    name: "Azure Heights",  
+    loc: "French Riviera",  
+    tag: "Vertical Serenity",  
+    atmosphere: "Brutalist concrete meets the Mediterranean blue.",  
+    highlights: ["Cliffside dining", "Private yacht mooring"],  
+    heroImage: "https://images.unsplash.com/photo-1533105079780-92b9be482077?q=80&w=2000",  
+    propertyCount: 12  
+  },  
+  {  
+    id: "velvet-pines",  
+    name: "Velvet Pines",  
+    loc: "Swiss Alps",  
+    tag: "High-Altitude Refuge",  
+    atmosphere: "Dark timber and shadow-play in the heart of Zermatt.",  
+    highlights: ["Ski-in/Ski-out", "Alpha-thermal spa"],  
+    heroImage: "https://images.unsplash.com/photo-1502784444187-359ac186c5bb?q=80&w=2000",  
+    propertyCount: 8  
+  }  
+];
+
+// Compatibility exports  
+export const sanctuaries = SANCTUARIES_DATA;  
+export const properties = PROPERTY_DATA;  
