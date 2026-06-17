@@ -35,7 +35,7 @@ const Navigation = () => {
           href="/"   
           className="text-[#C5A059] text-2xl font-serif tracking-[0.3em] hover:opacity-80 transition-opacity pointer-events-auto"  
         >  
-          NEXTVOYAGE  
+          NEXVOYAGE COLLECTIVE  
         </Link>
 
         {/* The Toggle Button */}  
@@ -58,10 +58,7 @@ const Navigation = () => {
           isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'  
         }`}  
       >  
-        {/* Subtle "Watermark" Background Text */}  
-        <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none">  
-          <span className="text-white/[0.02] text-[20vw] font-serif select-none">VOYAGE</span>  
-        </div>
+        
 
         <div className="relative h-full flex flex-col items-center justify-center px-6">  
           <div className="flex flex-col space-y-10 md:space-y-12 text-center">  
