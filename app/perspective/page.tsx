@@ -44,11 +44,7 @@ return (
         Expertise over mystery. We remove the friction of movement <br className="hidden md:block"/> to maximize the impact of your arrival.  
       </p>
 
-      <div className="mt-12 flex flex-wrap justify-center items-center gap-8 opacity-70">  
-        <span className="text-[10px] tracking-[0.2em] uppercase font-bold border-r border-white/20 pr-8">Partnered With</span>  
-        <span className="text-sm font-serif tracking-widest uppercase">Fora Travel</span>  
-        <span className="text-sm font-serif tracking-widest uppercase">Virtuoso</span>  
-      </div>  
+      
     </div>  
     <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-black via-black/50 to-transparent"></div>  
   </section>
