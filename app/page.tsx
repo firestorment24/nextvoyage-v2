@@ -70,7 +70,7 @@ return (
       <div className={`absolute inset-0 transition-transform duration-[20000ms] ease-out ${mounted ? 'scale-110' : 'scale-100'}`}>  
         <img   
           src="https://cdn.marblism.com/8cCycGyYogj.webp"   
-          alt="The Sovereign Arrival"   
+          alt="Journey Beyond the Ordinary"   
           className="h-full w-full object-cover opacity-50 grayscale-[40%]"  
         />  
       </div>  
