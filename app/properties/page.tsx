@@ -3,7 +3,7 @@
 import React, { useState } from 'react';  
 import Navigation from '../Navigation';  
 import Footer from '../Footer';  
-import { properties } from '../../data/properties';
+import { PROPERTY_DATA } from '../../data/properties'; 
 
 export default function PropertiesPage() {  
 const [filter, setFilter] = useState('All');
@@ -13,9 +13,8 @@ const uniqueCategories = Array.from(new Set(properties.map((p: any) => p.categor
 const categories = ['All', ...uniqueCategories];
 
 const filteredProperties = filter === 'All'   
-? properties   
-: properties.filter((p: any) => p.category === filter);
-
+  ? PROPERTY_DATA   
+  : PROPERTY_DATA.filter(p => p.intel.category === filter); 
 return (  
 <main className="bg-black text-white min-h-screen selection:bg-white selection:text-black font-light">  
   <Navigation />
