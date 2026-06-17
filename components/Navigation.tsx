@@ -43,11 +43,26 @@ export default function Navigation() {
           </Link>  
         </div>
 
-        <button   
-          onClick={() => setIsOpen(!isOpen)}  
-          className="pointer-events-auto z-[1000] flex flex-col space-y-2 focus:outline-none group p-4 -mr-4"  
-          aria-label="Toggle Menu"  
-        >  
+        {/* Mobile Toggle */}  
+<button   
+  className="md:hidden p-2 focus:outline-none relative z-[1001]"  
+  onClick={() => setIsOpen(!isOpen)}  
+  aria-label="Toggle Menu"  
+  style={{   
+    color: '#C5A059',   
+    display: 'flex',   
+    alignItems: 'center',   
+    justifyContent: 'center',  
+    background: 'rgba(10, 10, 10, 0.4)', // Subtle dark circle to make icons pop  
+    borderRadius: '50%'   
+  }}  
+>  
+  {isOpen ? (  
+    <X size={28} color="#C5A059" strokeWidth={2.5} />  
+  ) : (  
+    <Menu size={28} color="#C5A059" strokeWidth={2.5} />  
+  )}  
+</button>  
           {/* Hamburger Lines with inline background to override "Nuclear" CSS */}  
           <span   
             className={`block w-8 h-[1px] transition-all duration-500 ease-in-out ${isOpen ? 'rotate-45 translate-y-[9px]' : ''}`}  
