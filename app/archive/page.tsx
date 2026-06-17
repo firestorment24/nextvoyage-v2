@@ -6,93 +6,99 @@ import Image from 'next/image';
 import { Cormorant_Garamond, Inter } from 'next/font/google';
 
 const cormorant = Cormorant_Garamond({   
-subsets: ['latin'],   
-weight: ['300', '400', '500', '600'],  
-variable: '--font-cormorant'   
+  subsets: ['latin'],   
+  weight: ['300', '400', '500', '600'],  
+  variable: '--font-cormorant'   
 });
 
 const inter = Inter({   
-subsets: ['latin'],  
-variable: '--font-inter'  
+  subsets: ['latin'],  
+  variable: '--font-inter'  
 });
 
 export default function ArchiveIndexPage() {  
-return (  
-  <main className={`min-h-screen bg-[#0A0A0A] text-[#E5E5E5] ${cormorant.variable} ${inter.variable} font-sans selection:bg-[#d4af37] selection:text-black`}>  
-      
-    {/* Refined Header - No background boxes */}  
-    <section className="relative pt-48 pb-32 px-6 bg-transparent">  
-      <div className="max-w-5xl mx-auto text-center bg-transparent">  
-        <span className="text-[#d4af37] text-xs font-mono tracking-[0.5em] uppercase mb-6 block bg-transparent">  
-          Curated Portfolios  
-        </span>  
-        <h1 className="text-7xl md:text-8xl font-serif text-white tracking-tight leading-tight mb-10 bg-transparent">  
-          The <span className="italic">Collection</span>  
-        </h1>  
-        <p className="text-xl md:text-2xl text-gray-400 font-light leading-relaxed max-w-2xl mx-auto font-serif italic bg-transparent">  
-          A definitive selection of the world’s most significant escapes,   
-          curated for those who seek the intersection of soul and luxury.  
-        </p>  
-      </div>  
-    </section>
+  return (  
+    <main className={`min-h-screen !bg-[#0A0A0A] text-[#E5E5E5] ${cormorant.variable} ${inter.variable} font-sans selection:bg-[#d4af37] selection:text-black`}>  
+        
+      {/* Editorial Header */}  
+      <section className="relative pt-48 pb-32 px-6 !bg-transparent">  
+        <div className="max-w-7xl mx-auto !bg-transparent">  
+          <div className="flex flex-col items-start !bg-transparent">  
+            <span className="text-[#d4af37] text-xs font-mono tracking-[0.6em] uppercase mb-8 !bg-transparent">  
+              Registry of Significance  
+            </span>  
+            <h1 className="text-8xl md:text-[12rem] font-serif text-white tracking-tighter leading-[0.8] mb-12 !bg-transparent uppercase">  
+              The <br />  
+              <span className="italic ml-12 md:ml-24 text-[#d4af37]">Archive</span>  
+            </h1>  
+            <div className="w-full h-[1px] bg-[#d4af37]/20 mb-12" />  
+            <p className="text-xl md:text-2xl text-gray-500 font-light leading-relaxed max-w-2xl font-serif italic !bg-transparent">  
+              A curated selection of the world’s most significant escapes, deconstructed for the discerning traveler.  
+            </p>  
+          </div>  
+        </div>  
+      </section>
 
-    {/* Collection Grid - Visual First, Explicitly Transparent */}  
-    <section className="pb-40 px-6 bg-transparent">  
-      <div className="max-w-7xl mx-auto bg-transparent">  
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 bg-transparent">  
-          {SANCTUARIES_DATA.map((collection) => (  
+      {/* Journal-Style List (Editorial Flow) */}  
+      <section className="pb-40 px-6 !bg-transparent">  
+        <div className="max-w-7xl mx-auto !bg-transparent space-y-32">  
+          {SANCTUARIES_DATA.map((collection, index) => (  
             <Link   
               href={`/archive/${collection.id}`}   
               key={collection.id}  
-              className="group block relative overflow-hidden bg-transparent border-none outline-none"  
+              className="group flex flex-col md:flex-row items-center gap-12 md:gap-24 !bg-transparent border-none"  
             >  
-              {/* Image Container - Using dark background to prevent white flickering */}  
-              <div className="relative aspect-[4/5] overflow-hidden mb-8 bg-[#111]">  
+              {/* Image Side - Editorial Framing */}  
+              <div className="w-full md:w-1/2 relative aspect-[3/4] overflow-hidden !bg-[#111]">  
                 <Image   
                   src={collection.image}   
                   alt={collection.name}  
                   fill  
-                  sizes="(max-width: 768px) 100vw, 33vw"  
-                  className="object-cover scale-105 group-hover:scale-100 transition-transform duration-1000 ease-out grayscale group-hover:grayscale-0"  
+                  sizes="(max-width: 768px) 100vw, 50vw"  
+                  className="object-cover grayscale group-hover:grayscale-0 scale-105 group-hover:scale-100 transition-all duration-1000 ease-out"  
                 />  
-                  
-                {/* Brass Border Overlay - Transparent background */}  
-                <div className="absolute inset-0 border border-transparent group-hover:border-[#d4af37]/30 transition-colors duration-700 m-4 pointer-events-none" />  
-                  
-                {/* Vignette */}  
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/90 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-700" />  
+                {/* Thin Brass Border Frame */}  
+                <div className="absolute inset-0 border border-[#d4af37]/10 group-hover:border-[#d4af37]/40 transition-colors duration-700 m-6 pointer-events-none" />  
               </div>
 
-              {/* Collection Details - Force Transparent */}  
-              <div className="text-center px-4 bg-transparent">  
-                <h2 className="text-3xl md:text-4xl font-serif text-white uppercase tracking-widest mb-3 transition-colors duration-500 group-hover:text-[#d4af37] bg-transparent">  
+              {/* Text Side - Journal Typography */}  
+              <div className="w-full md:w-1/2 !bg-transparent">  
+                <span className="text-xs font-mono text-[#d4af37] tracking-[0.4em] mb-4 block !bg-transparent">  
+                  COLLECTION No. 0{index + 1}  
+                </span>  
+                <h2 className="text-6xl md:text-8xl font-serif text-white uppercase tracking-tight mb-8 group-hover:italic transition-all duration-500 !bg-transparent">  
                   {collection.name}  
                 </h2>  
-                <div className="w-8 h-[1px] bg-[#d4af37]/40 mx-auto mb-4 group-hover:w-16 transition-all duration-700" />  
-                <p className="text-xs text-gray-500 font-mono tracking-[0.2em] uppercase bg-transparent">  
-                  Explore Portfolio  
+                <p className="text-gray-400 text-lg md:text-xl font-light leading-relaxed mb-10 max-w-md !bg-transparent">  
+                  {collection.description}  
                 </p>  
+                <div className="flex items-center gap-6 !bg-transparent">  
+                  <span className="text-[#d4af37] text-xs font-mono tracking-widest !bg-transparent">VIEW PORTFOLIO</span>  
+                  <div className="h-[1px] w-12 bg-[#d4af37]/40 group-hover:w-24 transition-all duration-700" />  
+                </div>  
               </div>  
             </Link>  
           ))}  
         </div>  
-      </div>  
-    </section>
+      </section>
 
-    {/* Elegant Footer Detail */}  
-    <footer className="py-20 px-6 border-t border-white/5 bg-[#0A0A0A]">  
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] font-mono text-gray-600 uppercase tracking-[0.4em] bg-transparent">  
-        <div className="flex items-center gap-4 bg-transparent">  
-          <span className="text-[#d4af37]">●</span>  
-          <span>Global Concierge Active</span>  
+      {/* Minimalistic Journal Footer */}  
+      <footer className="py-24 px-6 border-t border-white/5 !bg-[#0A0A0A]">  
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12 !bg-transparent">  
+          <div className="!bg-transparent text-center md:text-left">  
+            <h3 className="text-2xl font-serif text-white italic mb-2 !bg-transparent">NexVoyage Collective</h3>  
+            <p className="text-[10px] font-mono text-gray-600 tracking-[0.5em] uppercase !bg-transparent">  
+              Defining the frontier of luxury.  
+            </p>  
+          </div>  
+            
+          <div className="flex gap-16 font-mono text-[10px] text-gray-500 uppercase tracking-[0.3em] !bg-transparent">  
+            <Link href="/" className="hover:text-[#d4af37] transition-colors !bg-transparent">Intelligence</Link>  
+            <Link href="/archive" className="hover:text-[#d4af37] transition-colors !bg-transparent">Archive</Link>  
+            <Link href="/about" className="hover:text-[#d4af37] transition-colors !bg-transparent">Philosophy</Link>  
+          </div>  
         </div>  
-        <span className="bg-transparent">NexVoyage Collective // Established 2026</span>  
-        <div className="flex gap-8 bg-transparent">  
-          <Link href="/" className="hover:text-white transition-colors bg-transparent">Home</Link>  
-          <Link href="/about" className="hover:text-white transition-colors bg-transparent">Philosophy</Link>  
-        </div>  
-      </div>  
-    </footer>  
-  </main>  
-);  
+      </footer>  
+    </main>  
+  );  
 }  
