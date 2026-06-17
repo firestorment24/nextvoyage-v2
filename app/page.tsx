@@ -65,7 +65,7 @@ return (
       ::-webkit-scrollbar-thumb { background: #C5A059; }  
     `}</style>
 
-    {/* 1. CINEMATIC HERO: THE SOVEREIGN ARRIVAL */}  
+    {/* 1. CINEMATIC HERO: Jouney Beyond the Ordinary */}  
     <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-black">  
       <div className={`absolute inset-0 transition-transform duration-[20000ms] ease-out ${mounted ? 'scale-110' : 'scale-100'}`}>  
         <img   
