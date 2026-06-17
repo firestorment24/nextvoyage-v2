@@ -6,7 +6,6 @@ import Link from 'next/link'
 export default function Navigation() {  
   const [isOpen, setIsOpen] = useState(false)
 
-  // Prevent scrolling when menu is open  
   useEffect(() => {  
     if (isOpen) {  
       document.body.style.overflow = 'hidden'  
@@ -26,45 +25,71 @@ export default function Navigation() {
     { name: 'Invitation', href: '/concierge', subtitle: 'Join Us' },  
   ]
 
+  // Brass & Shadow Color Palette  
+  const brass = '#C5A059'  
+  const shadow = '#0A0A0A'
+
   return (  
     <>  
       {/* Header Bar */}  
-      <nav className="fixed top-0 left-0 w-full z-[100] px-6 py-8 flex justify-between items-center bg-transparent pointer-events-none">  
+      <nav className="fixed top-0 left-0 w-full z-[999] px-8 py-10 flex justify-between items-center bg-transparent pointer-events-none">  
         <div className="pointer-events-auto">  
-          <Link href="/" className="text-[#D4AF37] text-xl font-light tracking-[0.2em] uppercase hover:opacity-70 transition-opacity">  
+          <Link   
+            href="/"   
+            className="text-white text-xl font-light tracking-[0.3em] uppercase hover:opacity-70 transition-opacity"  
+            style={{ color: brass }}  
+          >  
             NexVoyage  
           </Link>  
         </div>
 
         <button   
           onClick={() => setIsOpen(!isOpen)}  
-          className="pointer-events-auto z-[110] flex flex-col space-y-1.5 focus:outline-none group p-2"  
+          className="pointer-events-auto z-[1000] flex flex-col space-y-2 focus:outline-none group p-4 -mr-4"  
           aria-label="Toggle Menu"  
         >  
-          <span className={`block w-8 h-0.5 bg-[#D4AF37] transition-transform duration-300 ${isOpen ? 'rotate-45 translate-y-2' : ''}`}></span>  
-          <span className={`block w-8 h-0.5 bg-[#D4AF37] transition-opacity duration-300 ${isOpen ? 'opacity-0' : 'opacity-100'}`}></span>  
-          <span className={`block w-8 h-0.5 bg-[#D4AF37] transition-transform duration-300 ${isOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>  
+          {/* Hamburger Lines with inline background to override "Nuclear" CSS */}  
+          <span   
+            className={`block w-8 h-[1px] transition-all duration-500 ease-in-out ${isOpen ? 'rotate-45 translate-y-[9px]' : ''}`}  
+            style={{ backgroundColor: brass }}  
+          ></span>  
+          <span   
+            className={`block w-8 h-[1px] transition-all duration-500 ease-in-out ${isOpen ? 'opacity-0' : 'opacity-100'}`}  
+            style={{ backgroundColor: brass }}  
+          ></span>  
+          <span   
+            className={`block w-8 h-[1px] transition-all duration-500 ease-in-out ${isOpen ? '-rotate-45 -translate-y-[9px]' : ''}`}  
+            style={{ backgroundColor: brass }}  
+          ></span>  
         </button>  
       </nav>
 
       {/* Fullscreen Overlay Menu */}  
       <div   
-        className={`fixed inset-0 bg-black z-[90] transition-transform duration-500 ease-in-out flex flex-col items-center justify-center ${  
-          isOpen ? 'translate-y-0' : '-translate-y-full'  
+        className={`fixed inset-0 z-[998] flex flex-col items-center justify-center transition-all duration-700 ease-in-out ${  
+          isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'  
         }`}  
+        style={{ backgroundColor: `${shadow}f2`, backdropFilter: 'blur(10px)' }}  
       >  
-        <div className="flex flex-col items-center justify-center h-full space-y-12">  
-          {navLinks.map((link) => (  
+        <div className="flex flex-col items-center justify-center h-full space-y-16">  
+          {navLinks.map((link, index) => (  
             <Link  
               key={link.name}  
               href={link.href}  
               onClick={() => setIsOpen(false)}  
-              className="group flex flex-col items-center"  
+              className="group flex flex-col items-center no-underline"  
+              style={{ transitionDelay: `${index * 50}ms` }}  
             >  
-              <span className="text-[#D4AF37] text-3xl md:text-5xl font-light tracking-[0.15em] uppercase transition-all duration-300 group-hover:tracking-[0.25em]">  
+              <span   
+                className="text-4xl md:text-6xl font-extralight tracking-[0.2em] uppercase transition-all duration-500 group-hover:tracking-[0.4em] group-hover:opacity-70"  
+                style={{ color: brass }}  
+              >  
                 {link.name}  
               </span>  
-              <span className="text-[#A69F88] text-[10px] md:text-xs tracking-[0.4em] uppercase mt-2 opacity-60 group-hover:opacity-100 transition-opacity">  
+              <span   
+                className="text-[10px] md:text-xs tracking-[0.5em] uppercase mt-4 opacity-40 group-hover:opacity-100 transition-all duration-500"  
+                style={{ color: '#A69F88' }}  
+              >  
                 {link.subtitle}  
               </span>  
             </Link>  
