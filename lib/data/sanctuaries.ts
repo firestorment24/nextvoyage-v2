@@ -1,276 +1,99 @@
-// lib/data/sanctuaries.ts
+import React from 'react';  
+import Link from 'next/link';  
+import Image from 'next/image';  
+import { PROPERTY_DATA } from '@/lib/data/sanctuaries';
 
-export interface Sanctuary {  
+// Local interface to fix the "intel" type error  
+interface ExtendedProperty {  
 id: string;  
-name: string;  
-description: string;  
-image: string;  
-}
-
-export interface Property {  
-id: string;  
-serial: string;   
 name: string;  
 location: string;  
 image: string;  
-hook: string;  
-description: string;  
-sanctuaryId: string;  
-verified: boolean;  
-amenities: string[];  
-invitation: string;  
-highlight: string; // NEW: Required for Technical Highlight section  
-specs: Record<string, string>; // NEW: Required for the specs grid  
+intel: {  
+  positioning: string;  
+  category: string;  
+  memberBenefits: string[];  
+};  
 }
 
-export const SANCTUARIES_DATA: Sanctuary[] = [  
-{  
-  id: 'elite-ledger',  
-  name: 'The Elite Ledger',  
-  description: 'A curated chronicle of the world\'s most exceptional sanctuaries.',  
-  image: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=80'  
-}  
-];
+export default function ArchivePage() {  
+// Cast the data to our extended type to satisfy TypeScript  
+const properties = PROPERTY_DATA as unknown as ExtendedProperty[];
 
-export const PROPERTY_DATA: Property[] = [  
-{  
-  id: 'aman-new-york',  
-  serial: '001',  
-  name: 'Aman New York',  
-  location: 'Manhattan, USA',  
-  image: 'https://www.aman.com/sites/default/files/2022-08/Correct_Aman%20New%20York_Landscape.jpg',  
-  hook: 'A vertical sanctuary in the heart of the Crown Building.',  
-  description: 'A vertical sanctuary where serene minimalist design meets the vibrant energy of Manhattan. It is a place of peace in the city that never sleeps.',  
-  sanctuaryId: 'elite-ledger',  
-  verified: true,  
-  amenities: ['2,300sqm Spa', 'Garden Terrace', 'Jazz Club', 'Arva & Nama Dining'],  
-  invitation: 'Experience the pinnacle of Manhattan serenity. Your garden in the sky awaits.',  
-  highlight: 'The integration of a world-class urban spa within a neoclassical landmark.',  
-  specs: {  
-    'Architect': 'Denniston (Jean-Michel Gathy)',  
-    'Building': 'The Crown Building (est. 1921)',  
-    'Style': 'Modern Zen / Neoclassical',  
-    'Volume': '83 Suites'  
-  }  
-},  
-{  
-  id: 'habitas-alula',  
-  serial: '002',  
-  name: 'Habitas AlUla',  
-  location: 'Ashar Valley, Saudi Arabia',  
-  image: 'https://www.ourhabitas.com/wp-content/uploads/2021/12/Habitas_Al-Ula_2021_01_000008.jpg',  
-  hook: 'Immersive luxury amidst the ancient canyons.',  
-  description: 'An immersive retreat nestled within the ancient canyons of Ashar Valley, designed for cultural discovery and soulful reconnection with nature.',  
-  sanctuaryId: 'elite-ledger',  
-  verified: true,  
-  amenities: ['Thuraya Wellness', 'Tama Dining', 'Outdoor Cinema', 'Art Installations'],  
-  invitation: 'Journey into the heart of AlUla. Discover a new rhythm of life amidst the stones.',  
-  highlight: 'Low-impact modular construction that preserves the ancient landscape.',  
-  specs: {  
-    'Method': 'Modular / Eco-Sustainable',  
-    'Material': 'Raw Timber / Native Stone',  
-    'Setting': 'UNESCO Heritage Proximity',  
-    'Scale': '96 Villas'  
-  }  
-},  
-{  
-  id: '7132-hotel',  
-  serial: '003',  
-  name: '7132 Hotel',  
-  location: 'Vals, Switzerland',  
-  image: 'https://i0.wp.com/sidewalkhustle.com/wp-content/uploads/2026/03/web_20230116-357a8874_final-2023-julien-l-balmer-all-rights-reserved.jpg.webp',  
-  hook: 'A brutalist masterpiece centered around thermal stones.',  
-  description: 'A brutalist architectural masterpiece centered around the legendary thermal stones of Vals, offering an unparalleled sensory experience in the Swiss Alps.',  
-  sanctuaryId: 'elite-ledger',  
-  verified: true,  
-  amenities: ['Peter Zumthor Therme', '7132 Silver Gastronomy', 'Helicopter Transfers', 'Valser Quartz Design'],  
-  invitation: 'Surrender to the architecture of stone and water. The Alps have never been this intimate.',  
-  highlight: 'The juxtaposition of raw concrete and 60,000 slabs of local quartzite.',  
-  specs: {  
-    'Architect': 'Peter Zumthor / Tadao Ando',  
-    'Material': 'Valser Quartzite / Exposed Concrete',  
-    'Altitude': '1,252 Meters',  
-    'Concept': 'Sensory Brutalism'  
-  }  
-},  
-{  
-  id: 'passalacqua',  
-  serial: '004',  
-  name: 'Passalacqua',  
-  location: 'Lake Como, Italy',  
-  image: 'https://bamo.com/wp-content/uploads/2025/04/bamo-passalacqua-hotel-luxury-design-09-e1759344642447.jpg',  
-  hook: 'The definitive expression of Lake Como elegance.',  
-  description: 'The definitive expression of Lake Como elegance, this historic villa is a place where timeless beauty and modern luxury coalesce.',  
-  sanctuaryId: 'elite-ledger',  
-  verified: true,  
-  amenities: ['Terraced Gardens', 'Private Pier', 'Vintage Speedboat', 'Artisanal Italian Breakfast'],  
-  invitation: 'The gates of the villa are open. Lake Como is yours to command.',  
-  highlight: 'The meticulous restoration of 18th-century frescoes and terraced gardens.',  
-  specs: {  
-    'Era': '18th Century Villa',  
-    'Owner': 'De Santis Family',  
-    'Feature': 'Subterranean Spa Tunnels',  
-    'Gardens': 'Centuries-old Cedars'  
-  }  
-},  
-{  
-  id: 'bulgari-tokyo',  
-  serial: '005',  
-  name: 'Bulgari Hotel Tokyo',  
-  location: 'Tokyo, Japan',  
-  image: 'https://www.bulgarihotels.com/.imaging/bhr-960-jpg/dam/TOKYO-HOTEL/THE-HOTEL/DESTINATION/bulgari-hotel-tokyo-floor-terrace.jpg/jcr%3Acontent',  
-  hook: 'Italian soul meeting Japanese precision above the clouds.',  
-  description: 'Italian soul meets Japanese precision in this sky-high sanctuary, offering sweeping views and uncompromising sophistication above the Tokyo skyline.',  
-  sanctuaryId: 'elite-ledger',  
-  verified: true,  
-  amenities: ['Bulgari Spa', 'Il Ristorante - Niko Romito', 'Bulgari Dolci', 'Rooftop Terrace'],  
-  invitation: 'Ascend to a new standard of luxury. Tokyo brilliance meets Italian warmth.',  
-  highlight: 'The fusion of Italian marble craftsmanship with Japanese wood joinery.',  
-  specs: {  
-    'Architect': 'ACPV Architects (Antonio Citterio)',  
-    'Floor': '40th - 45th Floor',  
-    'Material': 'Black Granite / Saffron Silk',  
-    'Signature': 'Murano Glass Details'  
-  }  
-},  
-{  
-  id: 'capella-ubud',  
-  serial: '006',  
-  name: 'Capella Ubud',  
-  location: 'Bali, Indonesia',  
-  image: 'https://capellahotels.com/assets/img/site_images/ubud/ubud-home01.jpg',  
-  hook: 'Hyper-personalized luxury hidden in the Balinese jungle.',  
-  description: 'A hyper-personalized jungle retreat where luxury tents blend seamlessly with the lush tropical surroundings of Bali\'s spiritual heart.',  
-  sanctuaryId: 'elite-ledger',  
-  verified: true,  
-  amenities: ['Saltwater Plunge Pool', 'The Officers Tent', 'Auriga Wellness', 'Mads Lange Dining'],  
-  invitation: 'The jungle whispers your name. Step into a world of tented wonder.',  
-  highlight: 'A zero-waste construction philosophy that removed no trees during build.',  
-  specs: {  
-    'Architect': 'Bill Bensley',  
-    'Style': '19th Century Expedition',  
-    'Feature': 'Individual Tented Retreats',  
-    'Nature': 'Wos River Proximity'  
-  }  
-},  
-{  
-  id: 'amangiri',  
-  serial: '007',  
-  name: 'Amangiri',  
-  location: 'Utah, USA',  
-  image: 'https://www.aman.com/sites/default/files/2021-02/210204_AmanHero_Landscape_Amangiri.jpg',  
-  hook: 'Minimalist architecture carved into the Navajo desert.',  
-  description: 'A minimalist architectural marvel carved into the luminous canyons of the Navajo desert, where silence is the greatest luxury.',  
-  sanctuaryId: 'elite-ledger',  
-  verified: true,  
-  amenities: ['Desert Spa', 'Via Ferrata', 'Aman Dining', 'Stargazing Pavilions'],  
-  invitation: 'Find your center in the silence of the desert. The canyons are calling.',  
-  highlight: 'The iconic swimming pool built directly around a 165-million-year-old rock.',  
-  specs: {  
-    'Architect': 'I-Wei Huang / Rick Joy',  
-    'Material': 'Poured Concrete / Sand',  
-    'Region': 'Canyon Point, Utah',  
-    'Landscape': 'Navajo Nation Territory'  
-  }  
-},  
-{  
-  id: 'maybourne-riviera',  
-  serial: '008',  
-  name: 'The Maybourne Riviera',  
-  location: 'Roquebrune-Cap-Martin, France',  
-  image: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&q=80',  
-  hook: 'A dramatic cliffside retreat above the Mediterranean.',  
-  description: 'A dramatic cliffside sanctuary perched high above the Mediterranean, offering avant-garde design and breathtaking vistas of the Côte d\'Azur.',  
-  sanctuaryId: 'elite-ledger',  
-  verified: true,  
-  amenities: ['Infinite Pool', 'Ceto by Mauro Colagreco', 'The Riviera Spa', 'Private Beach Access'],  
-  invitation: 'Hover between the sea and the sky. The Riviera has a new viewpoint.',  
-  highlight: 'Cantilevered glass structures that create the illusion of floating over the sea.',  
-  specs: {  
-    'Architect': 'Jean-Michel Wilmotte',  
-    'Location': 'Cliffside Plateau',  
-    'Vibe': 'Futuristic Glamour',  
-    'Dining': 'Michelin-starred Seafood'  
-  }  
-},  
-{  
-  id: 'aman-kyoto',  
-  serial: '009',  
-  name: 'Aman Kyoto',  
-  location: 'Kyoto, Japan',  
-  image: 'https://www.aman.com/sites/default/files/2021-02/Aman-Kyoto_Homepage_1.jpg',  
-  hook: 'A hidden garden sanctuary at the foot of Mount Hidari Daimonji.',  
-  description: 'A hidden garden sanctuary where traditional Japanese aesthetics and modern comfort find perfect harmony amidst ancient forests.',  
-  sanctuaryId: 'elite-ledger',  
-  verified: true,  
-  amenities: ['Onsen Hot Springs', 'The Living Pavilion', 'Taka-An Kaiseki', 'Forest Wellness'],  
-  invitation: 'Wander through the moss-covered gardens of time. Kyoto\'s best-kept secret is yours.',  
-  highlight: 'The preservation of a secret garden originally designed for a textile museum.',  
-  specs: {  
-    'Architect': 'Kerry Hill',  
-    'Grounds': '80 Acres of Forest',  
-    'Design': 'Ryokan-inspired Modernism',  
-    'Bath': 'Natural Onsen Water'  
-  }  
-},  
-{  
-  id: 'six-senses-southern-dunes',  
-  serial: '010',  
-  name: 'Six Senses Southern Dunes',  
-  location: 'The Red Sea, Saudi Arabia',  
-  image: 'https://archtene.com/wp-content/uploads/2026/03/ss5.jpg',  
-  hook: 'Sustainable luxury amidst rolling dunes and Nabataean heritage.',  
-  description: 'A sustainable luxury outpost celebrating Nabataean heritage and desert serenity amidst the rolling dunes of the Red Sea.',  
-  sanctuaryId: 'elite-ledger',  
-  verified: true,  
-  amenities: ['Earth Lab', 'Alchemy Bar', 'Desert Oasis Spa', 'Bariyah Dining'],  
-  invitation: 'A new chapter of the Red Sea begins here. Sustainable, soulful, and supreme.',  
-  highlight: 'The LEED Platinum architecture inspired by the rippling sand of the dunes.',  
-  specs: {  
-    'Architect': 'Foster + Partners',  
-    'Energy': '100% Solar Powered',  
-    'Method': 'Prefabricated Assemblies',  
-    'Concept': 'Red Sea Global'  
-  }  
-},  
-{  
-  id: 'one-and-only-aesthesis',  
-  serial: '011',  
-  name: 'One&Only Aesthesis',  
-  location: 'Athens, Greece',  
-  image: 'https://assets.kerzner.com/api/public/content/8761678806934ea9a633770485289849?v=7f8a1ab2&t=w2880',  
-  hook: 'Mid-century glamour on the Athenian Riviera.',  
-  description: 'A revival of mid-century glamour on the Athenian Riviera, where sun-drenched shores meet sophisticated Greek living.',  
-  sanctuaryId: 'elite-ledger',  
-  verified: true,  
-  amenities: ['Chenot Spa', 'Minotaur Bar', 'Ora by Ettore Botrini', 'Private Beach Club'],  
-  invitation: 'The Athenian Riviera is reborn. Experience the aesthetic of the Greek sun.',  
-  highlight: 'The reimagining of a 1950s icon into a contemporary beachside sanctuary.',  
-  specs: {  
-    'Style': 'Greek Mid-century Modern',  
-    'Shoreline': 'Glyfada Coastline',  
-    'Vibe': 'Hollywood Era Reimagined',  
-    'Feature': 'Bungalows with Plunge Pools'  
-  }  
-},  
-{  
-  id: 'singita-kwitonda',  
-  serial: '012',  
-  name: 'Singita Kwitonda Lodge',  
-  location: 'Volcanoes National Park, Rwanda',  
-  image: 'https://images.ctfassets.net/wds1hqrprqxb/4xlmzPUDcL43cdOmzVGWb8/85ab1d40cc609879aa8b8da6ab1237de/SVNP_LODGE_Kwitonda_Lodge_Lounge_Ross_Couper_1.jpg?w=1920&h=1080&fl=progressive&q=90&fm=jpg',  
-  hook: 'A mindful outpost for gorilla trekking in the Virunga clouds.',  
-  description: 'A mindful outpost dedicated to the conservation of Rwanda\'s natural heritage, set right on the edge of Volcanoes National Park.',  
-  sanctuaryId: 'elite-ledger',  
-  verified: true,  
-  amenities: ['Akarabo Nursery', 'Conservation Room', 'Singita Spa', 'Farm-to-Table Dining'],  
-  invitation: 'Walk with the giants of the Virunga. A transformative journey into the wild.',  
-  highlight: 'The use of locally sourced volcanic stone and handmade ceramic tiles.',  
-  specs: {  
-    'Impact': 'Carbon-Neutral Operations',  
-    'Elevation': '2,500 Meters',  
-    'Mission': 'Gorilla Conservation',  
-    'Material': 'Volcanic Stone / Timber'  
-  }  
+return (  
+  <div className="min-h-screen bg-[#1C1C1C] text-[#FCFAF7] selection:bg-[#C5A059] selection:text-[#1C1C1C]">  
+    <style dangerouslySetInnerHTML={{ __html: `  
+      h1, h2, h3, h4 {  
+        background-color: transparent !important;  
+        color: #C5A059 !important;  
+      }  
+      body {  
+        background-color: #1C1C1C !important;  
+      }  
+    `}} />
+
+    <main className="max-w-7xl mx-auto px-6 py-24">  
+      <header className="mb-24 border-b border-[#C5A059]/20 pb-16 text-center">  
+        <h1 className="text-5xl md:text-7xl font-light tracking-tighter mb-6 italic">  
+          The Sanctuary Archive  
+        </h1>  
+        <p className="text-xs uppercase tracking-[0.6em] text-[#C5A059]/80">  
+          A Legacy of Exceptional Journeys  
+        </p>  
+      </header>
+
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20">  
+        {properties.map((property) => (  
+          <Link   
+            key={property.id}   
+            href={`/archive/${property.id}`}  
+            className="group block"  
+          >  
+            <div className="relative aspect-[4/5] bg-neutral-900 mb-8 overflow-hidden border border-[#C5A059]/10 transition-all duration-700 group-hover:border-[#C5A059]/40">  
+              {property.image ? (  
+                <Image   
+                  src={property.image}   
+                  alt={property.name}  
+                  fill  
+                  className="object-cover opacity-90 transition-all duration-700 group-hover:scale-105 group-hover:grayscale group-hover:opacity-60"  
+                />  
+              ) : (  
+                <div className="w-full h-full flex items-center justify-center text-[#C5A059]/20 italic text-sm tracking-widest">  
+                  Vaulted Imagery  
+                </div>  
+              )}  
+                  
+              <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">  
+                <span className="text-[10px] uppercase tracking-[0.4em] border border-[#C5A059]/60 px-4 py-2 bg-[#1C1C1C]/80">  
+                  View Dossier  
+                </span>  
+              </div>  
+            </div>
+
+            <div className="space-y-3">  
+              <div className="flex justify-between items-end border-b border-[#C5A059]/10 pb-2">  
+                <h2 className="text-xl font-light tracking-tight">{property.name}</h2>  
+                <span className="text-[9px] uppercase tracking-widest text-[#C5A059]/60 mb-1">  
+                  {property.location}  
+                </span>  
+              </div>  
+              <p className="text-xs text-[#FCFAF7]/50 leading-relaxed line-clamp-3 font-light italic">  
+                {property.intel.positioning}  
+              </p>  
+            </div>  
+          </Link>  
+        ))}  
+      </section>
+
+      <footer className="mt-40 pt-16 border-t border-[#C5A059]/10 flex flex-col md:flex-row justify-between items-center gap-8">  
+        <div className="text-[10px] uppercase tracking-[0.5em] text-[#C5A059]/40">  
+          NexVoyage Collective &copy; 2026  
+        </div>  
+        <div className="text-[9px] italic text-[#FCFAF7]/30 max-w-xs text-right">  
+          Access to archived sanctuaries is restricted to established members and legacy travelers.  
+        </div>  
+      </footer>  
+    </main>  
+  </div>  
+);  
 }  
-];  
