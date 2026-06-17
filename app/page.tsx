@@ -129,3 +129,22 @@ export default function HomePage() {
           </div>  
         </div>  
       </section>
+
+      {/* Grounded Statement Section */}  
+      <section className="py-40 px-6 bg-[#0a0a0a] border-t border-zinc-900">  
+        <div className="max-w-4xl mx-auto text-center">  
+          <Award className="w-12 h-12 text-[#d4af37] mx-auto mb-10 opacity-50" />  
+          <h2 className="text-3xl md:text-5xl font-light mb-12 !text-white italic tracking-tight leading-tight">  
+            "Luxury is the elimination of friction."  
+          </h2>  
+          <div className="w-20 h-px bg-[#d4af37] mx-auto mb-12" />  
+          <p className="text-zinc-400 text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed !text-white">  
+            NexVoyage is a private travel office. We operate at the intersection of deep hospitality relationships and meticulous logistics. No theater. Just service.  
+          </p>  
+        </div>  
+      </section>
+
+      <Footer />  
+    </main>  
+  );  
+}  
