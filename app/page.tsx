@@ -40,7 +40,7 @@ export default function HomePage() {
       <section className="relative h-screen flex items-center justify-center overflow-hidden">  
         <div className="absolute inset-0 z-0">  
           <img   
-            src="https://images.unsplash.com/photo-1518005020951-eccb494ad742" // Brutalist brass/shadow architecture  
+            src="https://cdn.marblism.com/8cCycGyYogj.webp" 
             alt="Hero Sanctuary"  
             className="w-full h-full object-cover opacity-40 scale-100 animate-slow-zoom"  
           />  
