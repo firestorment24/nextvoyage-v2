@@ -10,7 +10,7 @@ import Image from 'next/image';
 export default function PropertiesPage() {  
 const [filter, setFilter] = useState('All');
 
-const categories = ['All', ...new Set(PROPERTY_DATA.map(p => p.intel.category))];
+const categories = ['All', ...Array.from(new Set(PROPERTY_DATA.map(p => p.intel.category)))];  
 
 const filteredProperties = filter === 'All'   
   ? PROPERTY_DATA   
