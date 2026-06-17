@@ -9,7 +9,7 @@ const [mounted, setMounted] = useState(false)
 useEffect(() => {  
   setMounted(true)  
 }, [])
-
+ 
 const properties = [  
   { id: 'one-and-only-aesthesis', name: 'One&Only Aesthesis', loc: 'Athens Riviera', img: 'https://cdn.marblism.com/grid-1.webp' },  
   { id: 'aman-venice', name: 'Aman Venice', loc: 'Venice, Italy', img: 'https://cdn.marblism.com/grid-2.webp' },  
