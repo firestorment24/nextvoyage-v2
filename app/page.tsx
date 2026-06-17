@@ -1,21 +1,8 @@
 import Navigation from '@/components/Navigation';  
 import Footer from '@/components/Footer';  
-import {   
-  ArrowRight,   
-  ShieldCheck,   
-  Globe,   
-  Zap,  
-  Award  
-} from 'lucide-react';
+import { ArrowRight, Map, Compass, Shield } from 'lucide-react';
 
 export default function HomePage() {  
-  const partners = [  
-    "Aman", "Belmond", "Singita", "Regent Seven Seas",   
-    "Explora Journeys", "Silversea", "Six Senses", "Rosewood",   
-    "One&Only", "Abercrombie & Kent", "Orient Express",   
-    "Mandarin Oriental", "Scott Dunn", "Four Seasons", "St. Regis"  
-  ];
-
   return (  
     <main className="min-h-screen bg-black text-white font-sans selection:bg-[#d4af37] selection:text-black">  
       {/* NUCLEAR FIX: Kill all white background ghosts */}  
@@ -27,115 +14,105 @@ export default function HomePage() {
         .bg-white, .bg-slate-50, .bg-zinc-50, .bg-zinc-100 { background-color: transparent !important; }  
         .text-black { color: #ffffff !important; }  
         h1, h2, h3, h4, p, span, a { background-color: transparent !important; }  
-        /* Preserve specific background colors we WANT */  
+        /* Preserve specific backgrounds */  
         .bg-black { background-color: #000000 !important; }  
         .bg-\\[\\#0a0a0a\\] { background-color: #0a0a0a !important; }  
-        .bg-\\[\\#050505\\] { background-color: #050505 !important; }  
         .bg-\\[\\#d4af37\\] { background-color: #d4af37 !important; color: black !important; }  
-        .bg-white.text-black { background-color: #ffffff !important; color: #000000 !important; }  
+        .group:hover .bg-zinc-900 { background-color: #18181b !important; }  
       `}} />
 
       <Navigation />
 
-      {/* Hero Section */}  
-      <section className="relative h-[95vh] flex items-center justify-center overflow-hidden bg-black">  
+      {/* Hero: The Entry Point */}  
+      <section className="relative h-[85vh] flex items-center px-6 md:px-20 overflow-hidden bg-black border-b border-zinc-900">  
         <div className="absolute inset-0 z-0">  
           <img   
-            src="https://cdn.marblism.com/mPwPaCBHn3r.webp"   
-            alt="Luxury Villa Entrance"   
-            className="w-full h-full object-cover opacity-70"  
+            src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&q=80&w=2070"   
+            alt="Private Aviation"   
+            className="w-full h-full object-cover opacity-50 grayscale hover:grayscale-0 transition-all duration-1000"  
           />  
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black" />  
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent" />  
         </div>
 
-        <div className="relative z-10 max-w-5xl px-6 text-center">  
-          <h1 className="text-5xl md:text-8xl font-light tracking-tight mb-8 !text-white">  
-            Travel, <span className="text-[#d4af37]">Perfected.</span>  
+        <div className="relative z-10 max-w-4xl">  
+          <h1 className="text-6xl md:text-8xl font-light tracking-tighter mb-8 !text-white leading-[0.9]">  
+            NexVoyage <br />  
+            <span className="text-[#d4af37] italic">Collective.</span>  
           </h1>  
-          <p className="text-xl md:text-2xl text-zinc-300 max-w-2xl mx-auto mb-12 font-light leading-relaxed !text-white">  
-            We apply global leverage and deep industry relationships to ensure your time is never wasted. High-value travel, managed.  
+          <p className="text-xl md:text-2xl text-zinc-400 max-w-xl mb-12 font-light leading-relaxed !text-white">  
+            Operational leverage for the high-net-worth traveler. We don't just plan trips; we manage your most non-renewable resource: time.  
           </p>  
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">  
-            <a href="/concierge" className="px-10 py-5 bg-[#d4af37] text-black font-semibold hover:bg-[#b8952d] transition-all flex items-center gap-2">  
-              Begin Inquiry <ArrowRight className="w-4 h-4" />  
-            </a>  
-            <a href="/perspective" className="px-10 py-5 border border-zinc-700 hover:bg-zinc-900 transition-all !text-white">  
-              The Perspective  
-            </a>  
-          </div>  
-        </div>  
-      </section>
-
-      {/* Operational Leverage Section */}  
-      <section className="py-32 px-6 border-y border-zinc-900 bg-[#0a0a0a]">  
-        <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-16">  
-          <div className="space-y-6 group">  
-            <div className="w-12 h-12 flex items-center justify-center border border-[#d4af37]/30 group-hover:border-[#d4af37] transition-colors">  
-              <ShieldCheck className="w-6 h-6 text-[#d4af37]" />  
+          <a href="/concierge" className="inline-flex items-center gap-4 group">  
+            <span className="text-sm uppercase tracking-[0.3em] font-medium !text-white border-b border-[#d4af37] pb-1">Begin Inquiry</span>  
+            <div className="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center group-hover:bg-[#d4af37] group-hover:border-[#d4af37] transition-all">  
+              <ArrowRight className="w-4 h-4 group-hover:text-black transition-colors" />  
             </div>  
-            <h3 className="text-2xl font-light tracking-wide !text-white">Preferred Status</h3>  
-            <p className="text-zinc-400 leading-relaxed text-lg !text-white font-light">  
-              Through our Fora Travel and Virtuoso affiliations, our clients move to the top of the list for upgrades, late check-outs, and private amenities.  
-            </p>  
-          </div>  
-          <div className="space-y-6 group">  
-            <div className="w-12 h-12 flex items-center justify-center border border-[#d4af37]/30 group-hover:border-[#d4af37] transition-colors">  
-              <Globe className="w-6 h-6 text-[#d4af37]" />  
-            </div>  
-            <h3 className="text-2xl font-light tracking-wide !text-white">Global Leverage</h3>  
-            <p className="text-zinc-400 leading-relaxed text-lg !text-white font-light">  
-              Our network spans the world's most elite hospitality pillars. We have direct lines to general managers, not reservation desks.  
-            </p>  
-          </div>  
-          <div className="space-y-6 group">  
-            <div className="w-12 h-12 flex items-center justify-center border border-[#d4af37]/30 group-hover:border-[#d4af37] transition-colors">  
-              <Zap className="w-6 h-6 text-[#d4af37]" />  
-            </div>  
-            <h3 className="text-2xl font-light tracking-wide !text-white">Time Preservation</h3>  
-            <p className="text-zinc-400 leading-relaxed text-lg !text-white font-light">  
-              We handle the friction of logistics so you can focus on the experience. No theater—just professional operational excellence.  
-            </p>  
-          </div>  
-        </div>  
-      </section>
-
-      {/* The Partner Grid */}  
-      <section className="py-32 px-6 bg-black">  
-        <div className="max-w-7xl mx-auto">  
-          <div className="text-center mb-20">  
-            <h2 className="text-xs uppercase tracking-[0.4em] text-[#d4af37] mb-6">Strategic Alliances</h2>  
-            <h3 className="text-4xl md:text-5xl font-light !text-white">Unmatched Access.</h3>  
-          </div>  
-            
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-px bg-zinc-900 border border-zinc-900">  
-            {partners.map((partner) => (  
-              <div key={partner} className="bg-black p-10 flex items-center justify-center text-center group hover:bg-[#0a0a0a] transition-all">  
-                <span className="text-zinc-500 group-hover:text-[#d4af37] transition-colors text-xs font-medium uppercase tracking-[0.2em]">  
-                  {partner}  
-                </span>  
-              </div>  
-            ))}  
-          </div>  
-            
-          <div className="mt-20 flex flex-wrap items-center justify-center gap-12 opacity-40 grayscale contrast-125">  
-             <div className="text-2xl font-serif italic text-zinc-400 tracking-widest">VIRTUOSO</div>  
-             <div className="text-2xl font-serif italic text-zinc-400 tracking-widest">FORA TRAVEL</div>  
-             <div className="text-2xl font-serif italic text-zinc-400 tracking-widest">ILTM</div>  
-          </div>  
-        </div>  
-      </section>
-
-      {/* Final CTA */}  
-      <section className="py-40 px-6 bg-[#050505] relative border-t border-zinc-900">  
-        <div className="max-w-3xl mx-auto text-center">  
-          <Award className="w-16 h-16 text-[#d4af37] mx-auto mb-10" />  
-          <h2 className="text-4xl md:text-6xl font-light mb-8 !text-white tracking-tight">The next era of travel.</h2>  
-          <p className="text-zinc-400 text-xl mb-14 !text-white font-light leading-relaxed">  
-            We are currently accepting new clients for the 2026-2027 season. Simple, professional, and uncompromising service.  
-          </p>  
-          <a href="/concierge" className="inline-block px-14 py-6 bg-white text-black font-bold hover:bg-[#d4af37] hover:text-black transition-all uppercase tracking-widest text-sm">  
-            Contact the Desk  
           </a>  
+        </div>  
+      </section>
+
+      {/* The Hub: Three Entry Points */}  
+      <section className="py-24 px-6 md:px-20 bg-black">  
+        <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">  
+            
+          {/* Tile 1: The Archive */}  
+          <a href="/archive" className="group relative aspect-[4/5] overflow-hidden border border-zinc-900 flex flex-col justify-end p-8 hover:border-[#d4af37]/50 transition-all">  
+            <div className="absolute inset-0 z-0 grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">  
+              <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&q=80&w=1000" alt="Safari" className="w-full h-full object-cover opacity-40" />  
+            </div>  
+            <div className="relative z-10">  
+              <Map className="w-6 h-6 text-[#d4af37] mb-4" />  
+              <h3 className="text-2xl font-light mb-2 !text-white">The Archive</h3>  
+              <p className="text-zinc-400 text-sm font-light leading-relaxed !text-white">Detailed field reports from our global scouting operations.</p>  
+            </div>  
+          </a>
+
+          {/* Tile 2: The Perspective */}  
+          <a href="/perspective" className="group relative aspect-[4/5] overflow-hidden border border-zinc-900 flex flex-col justify-end p-8 hover:border-[#d4af37]/50 transition-all">  
+            <div className="absolute inset-0 z-0 grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">  
+              <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&q=80&w=1000" alt="Villa View" className="w-full h-full object-cover opacity-40" />  
+            </div>  
+            <div className="relative z-10">  
+              <Compass className="w-6 h-6 text-[#d4af37] mb-4" />  
+              <h3 className="text-2xl font-light mb-2 !text-white">The Perspective</h3>  
+              <p className="text-zinc-400 text-sm font-light leading-relaxed !text-white">Our philosophy on luxury, leverage, and the art of travel.</p>  
+            </div>  
+          </a>
+
+          {/* Tile 3: The Concierge */}  
+          <a href="/concierge" className="group relative aspect-[4/5] overflow-hidden border border-zinc-900 flex flex-col justify-end p-8 hover:border-[#d4af37]/50 transition-all">  
+            <div className="absolute inset-0 z-0 grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">  
+              <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&q=80&w=1000" alt="Concierge" className="w-full h-full object-cover opacity-40" />  
+            </div>  
+            <div className="relative z-10">  
+              <Shield className="w-6 h-6 text-[#d4af37] mb-4" />  
+              <h3 className="text-2xl font-light mb-2 !text-white">The Concierge</h3>  
+              <p className="text-zinc-400 text-sm font-light leading-relaxed !text-white">Direct access to our preferred status and partner network.</p>  
+            </div>  
+          </a>
+
+        </div>  
+      </section>
+
+      {/* Trust Strip */}  
+      <section className="py-12 border-y border-zinc-900 bg-[#0a0a0a]">  
+        <div className="max-w-7xl mx-auto px-6 flex flex-wrap items-center justify-between gap-8 opacity-40 grayscale contrast-125">  
+          <span className="text-xs tracking-[0.4em] uppercase font-bold text-zinc-500">Virtuoso Member</span>  
+          <span className="text-xs tracking-[0.4em] uppercase font-bold text-zinc-500">Fora Travel Partner</span>  
+          <span className="text-xs tracking-[0.4em] uppercase font-bold text-zinc-500">ILTM Global</span>  
+          <span className="text-xs tracking-[0.4em] uppercase font-bold text-zinc-500">Rosewood Elite</span>  
+          <span className="text-xs tracking-[0.4em] uppercase font-bold text-zinc-500">Aman Preferred</span>  
+        </div>  
+      </section>
+
+      {/* Grounded Statement */}  
+      <section className="py-32 px-6 bg-black text-center">  
+        <div className="max-w-2xl mx-auto">  
+          <h2 className="text-3xl font-light mb-8 !text-white italic">"Luxury is not a commodity. It is the elimination of friction."</h2>  
+          <div className="w-12 h-px bg-[#d4af37] mx-auto mb-8" />  
+          <p className="text-zinc-500 font-light tracking-wide !text-white leading-relaxed">  
+            NexVoyage is a private travel office. We operate at the intersection of deep hospitality relationships and meticulous logistics. No memberships. No theater. Just service.  
+          </p>  
         </div>  
       </section>
 
