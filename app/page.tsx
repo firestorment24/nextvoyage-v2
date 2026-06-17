@@ -11,7 +11,7 @@ export default function HomePage() {
     <main className="min-h-screen bg-[#0a0a0a] text-white selection:bg-[#D4AF37] selection:text-black">  
       {/* Nuclear CSS Overrides for Brass & Shadow Aesthetic */}  
       <style dangerouslySetInnerHTML={{ __html: `  
-        h1 { color: #D4AF37 ! agriculture; font-weight: 300; }  
+        h1 { color: #D4AF37 !important; font-weight: 300; }  
         h2 { color: #ffffff !important; }  
         .property-card:hover .property-image { filter: grayscale(0%); }  
         .property-image { filter: grayscale(100%); transition: filter 0.6s cubic-bezier(0.4, 0, 0.2, 1); }  
@@ -51,7 +51,7 @@ export default function HomePage() {
                   {property.id}  
                 </span>  
                 <span className="text-[10px] tracking-[0.2em] text-zinc-600 uppercase">  
-                  {property.location}  
+                  {property.loc}  
                 </span>  
               </div>
 
