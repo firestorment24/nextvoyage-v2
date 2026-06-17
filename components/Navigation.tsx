@@ -39,7 +39,7 @@ export default function Navigation() {
             className="text-white text-xl font-light tracking-[0.3em] uppercase hover:opacity-70 transition-opacity"  
             style={{ color: brass }}  
           >  
-            NexVoyage  
+            NexVoyage Collective  
           </Link>  
         </div>
 
