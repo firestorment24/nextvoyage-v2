@@ -28,12 +28,7 @@ return (
       alt="Luxury Villa Arrival"  
       className="absolute inset-0 w-full h-full object-cover opacity-60 scale-105"  
     />  
-    <div className="relative z-10 text-center px-4 max-w-5xl">  
-      <div className="flex items-center justify-center gap-4 mb-8">  
-        <span className="h-[1px] w-12 bg-brass opacity-50"></span>  
-        <p className="text-brass uppercase tracking-[0.5em] text-[10px] font-bold">NexVoyage Collective</p>  
-        <span className="h-[1px] w-12 bg-brass opacity-50"></span>  
-      </div>  
+   
         
       <h1 className="text-6xl md:text-8xl font-normal tracking-tighter mb-8 leading-[0.9]">  
         Travel, <br/>  
