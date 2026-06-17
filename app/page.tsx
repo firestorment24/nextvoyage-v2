@@ -1,6 +1,9 @@
+"use client"
+
 import React from 'react'  
 import Image from 'next/image'  
 import Link from 'next/link'  
+import { motion } from 'framer-motion'  
 import { PROPERTY_DATA } from '@/lib/data/sanctuaries'
 
 export default function Home() {  
@@ -17,7 +20,7 @@ export default function Home() {
             src="https://cdn.marblism.com/qFTkeALRTbV.webp"  
             alt="NexVoyage Sanctuary"  
             fill  
-            className="object-cover opacity-50 grayscale-[30%] transition-transform duration-[20s] scale-110 hover:scale-100"  
+            className="object-cover opacity-50 grayscale-[30%] transition-transform duration-[20s] scale-110"  
             priority  
           />  
           {/* Brass & Shadow Gradient Overlay */}  
@@ -25,9 +28,10 @@ export default function Home() {
         </div>
 
         <div className="relative z-10 text-center px-6">  
-          <motion-div   
+          <motion.div   
             initial={{ opacity: 0, y: 20 }}  
             animate={{ opacity: 1, y: 0 }}  
+            transition={{ duration: 1.2, ease: "easeOut" }}  
             className="space-y-6"  
           >  
             <p className="text-[10px] md:text-xs tracking-[0.8em] text-[#C5A059] font-mono uppercase opacity-90">  
@@ -37,7 +41,7 @@ export default function Home() {
               THE ROI <br/> OF RESET  
             </h1>  
             <div className="mt-12 h-[1px] w-32 bg-[#C5A059] mx-auto opacity-40" />  
-          </motion-div>  
+          </motion.div>  
         </div>
 
         {/* Scroll Indicator */}  
