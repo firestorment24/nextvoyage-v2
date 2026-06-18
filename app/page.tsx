@@ -98,7 +98,12 @@ export default function HomePage() {
                   className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000"    
                 />    
               </div>    
-              <h3 className="text-2xl font-light tracking-tight text-white! mb-2">{prop.name}</h3>    
+<h3   
+  style={{ fontFamily: "'Cormorant Garamond', serif" }}   
+  className="text-2xl font-serif font-light tracking-tight !text-white mb-2"  
+>  
+  {prop.name}  
+</h3>  
               <p className="text-[#C5A059] text-[11px] uppercase tracking-[0.25em] font-medium">    
                 {prop.location}    
               </p>    
