@@ -137,7 +137,7 @@ const HomePage = () => {
 {/* Client Testimonials Section */}  
 <section className="py-24 bg-black border-t border-white/10">  
   <div className="max-w-7xl mx-auto px-6">  
-   <h2 className="text-3xl md:text-4xl font-serif text-white mb-16 text-center italic">    
+   <h2 style={{ color: 'white !important' }} className="text-3xl md:text-4xl font-serif mb-16 text-center italic">      
       Client Perspectives  
     </h2>  
     <div className="grid grid-cols-1 md:grid-cols-3 gap-12">  
