@@ -20,7 +20,7 @@ const HomePage = () => {
  
   const featured = [  
     { name: "Aman New York", location: "Manhattan, USA", img: "https://www.aman.com/sites/default/files/2022-08/Correct_Aman%20New%20York_Landscape.jpg" },  
-    { name: "Hotel Amigo", location: "Brussels, Belgium", img: "https://cdn.marblism.com/eJbtOstda_Y.web" },  
+    { name: "Hotel Amigo", location: "Brussels, Belgium", img: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/55/01/65/caption.jpg?w=1400&h=-1&s=1" },  
     { name: "Habitas AlUla", location: "Ashar Valley, Saudi Arabia", img: "https://www.ourhabitas.com/wp-content/uploads/2021/12/Habitas_Al-Ula_2021_01_000008.jpg" }  
   ];
 
