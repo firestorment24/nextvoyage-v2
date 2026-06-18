@@ -1,205 +1,154 @@
-import React from 'react';
+'use client'
 
-export default function Home() {  
-return (  
-<main className="min-h-screen bg-[#0A0A0A] text-white selection:bg-[#B5A48B]/30">  
-  {/* AGGRESSIVE NUCLEAR FIX: KILL ALL GHOST BOXES & FORCED SHADOW */}  
-  <style dangerouslySetInnerHTML={{ __html: `  
-    body, html, #__next, main { background-color: #0A0A0A !important; }  
-    * {   
-      box-shadow: none !important;   
-      border-radius: 0 !important;   
-      -webkit-font-smoothing: antialiased;  
-    }  
-    .ghost-box-fix, div, section, article {   
-      background-color: transparent !important;   
-      box-shadow: none !important;   
-    }  
-    main { background-color: #0A0A0A !important; }  
-    ::-webkit-scrollbar { display: none; }  
-  `}} />
+import { Card, CardContent } from "@/components/ui/card"  
+import { motion } from "framer-motion"  
+import { Shield, Target, Zap } from "lucide-react"  
+import Link from "next/link"
 
-  {/* HERO SECTION - THE SANCTUARY */}  
-  <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">  
-    <div className="absolute inset-0 z-0">  
-      <img   
-        src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/9a/b3/f2/chable-villa.jpg?w=1800&h=-1&s=1"   
-        alt="Chable Villa"   
-        className="w-full h-full object-cover brightness-[0.4]"  
-      />  
-      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-[#0A0A0A]" />  
-    </div>  
-      
-    <div className="relative z-10 text-center px-6">  
-      <p className="text-[10px] tracking-[1.2em] uppercase text-[#B5A48B] mb-8 font-medium">  
-        NexVoyage Collective  
-      </p>  
-      <h1 className="text-7xl md:text-9xl font-extralight tracking-tighter mb-10 italic">  
-        Shadow <span className="text-[#B5A48B] font-serif">&</span> Brass  
-      </h1>  
-      <p className="max-w-xl mx-auto text-zinc-500 text-[11px] tracking-[0.6em] leading-relaxed uppercase">  
-        The Private Engine of Global Hospitality.  
-      </p>  
-    </div>  
-  </section>
+export default function HomePage() {  
+  const alliances = [  
+    { name: "Fora Travel", type: "Anchor", id: "NV-001" },  
+    { name: "Virtuoso", type: "Network", id: "NV-002" },  
+    { name: "Aman", type: "Direct", id: "NV-003" },  
+    { name: "Four Seasons", type: "Partner", id: "NV-004" },  
+    { name: "Belmond", type: "Member", id: "NV-005" },  
+    { name: "Rosewood", type: "Elite", id: "NV-006" },  
+    { name: "Mandarin Oriental", type: "Fan Club", id: "NV-007" },  
+    { name: "Peninsula", type: "PenClub", id: "NV-008" },  
+    { name: "Dorchester", type: "Diamond", id: "NV-009" },  
+    { name: "Oetker", type: "Pearl", id: "NV-010" },  
+    { name: "Auberge", type: "Ensemble", id: "NV-011" },  
+    { name: "Hyatt Privé", type: "Status", id: "NV-012" },  
+  ]
 
-  {/* THE GUARDIAN LAYER: TRAVEL ADVOCACY */}  
-  <section className="py-40 bg-[#0A0A0A]">  
-    <div className="max-w-7xl mx-auto px-6">  
-      <div className="grid md:grid-cols-2 gap-24 items-center">  
-        <div className="relative group">  
-          <div className="aspect-[3/4] overflow-hidden">  
-            <img   
-              src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=2670&auto=format&fit=crop"   
-              alt="The Detail"   
-              className="w-full h-full object-cover grayscale-0 group-hover:grayscale transition-all duration-1000 brightness-90 group-hover:brightness-50"  
-            />  
-          </div>  
-          <div className="absolute top-10 -right-10 hidden lg:block">  
-            <p className="text-[9px] font-mono text-zinc-800 tracking-[0.5em] uppercase [writing-mode:vertical-rl]">The Curated Detail</p>  
-          </div>  
-        </div>
+  const properties = [  
+    { title: "Amangiri", loc: "Utah, USA", img: "https://images.unsplash.com/photo-1509114397022-ed747cca3f65?auto=format&fit=crop&q=80" },  
+    { title: "Soneva Jani", loc: "Maldives", img: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&q=80" },  
+    { title: "Hôtel de Crillon", loc: "Paris, France", img: "https://images.unsplash.com/photo-1551882547-ff43c63efe81?auto=format&fit=crop&q=80" },  
+  ]
 
-        <div>  
-          <p className="text-[10px] tracking-[0.5em] text-[#B5A48B] uppercase mb-12">The Guardian Layer</p>  
-          <h2 className="text-5xl md:text-7xl text-white font-extralight tracking-tighter mb-12 italic leading-[0.9]">  
-            Your Global <br/> <span className="text-[#B5A48B]">Advocate.</span>  
-          </h2>  
-          <p className="text-zinc-400 text-sm tracking-widest uppercase leading-loose mb-16 max-w-md">  
-            NexVoyage is the invisible buffer between you and the travel industry. We don't just facilitate journeys; we curate the hospitality layer to match your precise intent.  
+  return (  
+    <main className="min-h-screen bg-[#0A0A0A] text-[#D4AF37] selection:bg-[#D4AF37] selection:text-[#0A0A0A]">  
+      {/* NUCLEAR FIX 2.0 - Forced CSS Injection */}  
+      <style dangerouslySetInnerHTML={{ __html: `  
+        * {   
+          box-shadow: none !important;   
+          background-image: none !important;  
+        }  
+        body, main, section, div, header, footer, .card, .card-content {   
+          background-color: #0A0A0A !important;   
+          border-color: rgba(212, 175, 55, 0.1) !important;  
+        }  
+        img { filter: grayscale(100%); transition: filter 0.5s ease; }  
+        img:hover { filter: grayscale(0%); }  
+        .hero-img { filter: grayscale(0%) !important; }  
+      `}} />
+
+      {/* Hero Section */}  
+      <section className="relative h-screen flex items-center justify-center overflow-hidden border-b border-[#D4AF37]/10">  
+        <div className="absolute inset-0 z-0">  
+          <img   
+            src="/chable-villa.jpg"   
+            alt="Chablé Resort"   
+            className="hero-img w-full h-full object-cover opacity-40"  
+          />  
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0A0A0A]/60 to-[#0A0A0A]" />  
+        </div>  
+          
+        <div className="relative z-10 text-center px-4">  
+          <motion.h1   
+            initial={{ opacity: 0, y: 20 }}  
+            animate={{ opacity: 1, y: 0 }}  
+            className="text-8xl md:text-[12rem] font-serif tracking-tighter leading-none mb-6"  
+          >  
+            THE ROI OF RESET  
+          </motion.h1>  
+          <p className="text-2xl md:text-4xl font-light tracking-[0.5em] uppercase text-[#D4AF37]/80">  
+            NexVoyage Collective  
           </p>  
-            
-          <div className="space-y-16">  
-            <div className="group">  
-              <h4 className="text-white text-xs tracking-[0.3em] uppercase mb-4 flex items-center gap-4">  
-                <span className="text-[#B5A48B] font-mono text-[10px]">01</span>  
-                The Anticipated Arrival  
-              </h4>  
-              <p className="text-zinc-600 text-[10px] tracking-widest uppercase leading-relaxed max-w-sm">  
-                Your status is not a membership—it is a relationship. We ensure every property recognizes your presence before you step through the door.  
+        </div>  
+      </section>
+
+      {/* Strategic Alliances */}  
+      <section className="py-32 px-6 max-w-7xl mx-auto">  
+        <h2 className="text-6xl md:text-8xl font-serif mb-16 border-l-4 border-[#D4AF37] pl-8">  
+          STRATEGIC ALLIANCES  
+        </h2>  
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-1">  
+          {alliances.map((partner, i) => (  
+            <div key={i} className="p-8 border border-[#D4AF37]/10 flex flex-col justify-between aspect-video hover:bg-[#D4AF37]/5 transition-colors">  
+              <span className="text-xs font-mono text-[#D4AF37]/40">{partner.id}</span>  
+              <div>  
+                <p className="text-2xl font-serif">{partner.name}</p>  
+                <p className="text-[10px] tracking-widest uppercase opacity-60">{partner.type}</p>  
+              </div>  
+            </div>  
+          ))}  
+        </div>  
+      </section>
+
+      {/* Jet Cabin Visual */}  
+      <section className="h-[70vh] w-full px-6">  
+        <img   
+          src="/jyV_xaai_p4.webp"   
+          alt="Private Jet Interior"   
+          className="w-full h-full object-cover rounded-sm border border-[#D4AF37]/10"  
+        />  
+      </section>
+
+      {/* Guardian Layer */}  
+      <section className="py-32 px-6 bg-[#0A0A0A]">  
+        <div className="max-w-7xl mx-auto">  
+          <h2 className="text-6xl md:text-8xl font-serif mb-20 text-right">  
+            GUARDIAN LAYER  
+          </h2>  
+          <div className="grid md:grid-cols-3 gap-12">  
+            <div className="space-y-6">  
+              <Shield className="w-12 h-12 stroke-[1px]" />  
+              <h3 className="text-4xl font-serif italic">Invisible Advocacy</h3>  
+              <p className="text-xl text-[#D4AF37]/70 leading-relaxed">  
+                Operating behind the curtain of global hospitality, we navigate the institutional layers to secure preferential status before you arrive.  
               </p>  
             </div>  
-            <div className="group">  
-              <h4 className="text-white text-xs tracking-[0.3em] uppercase mb-4 flex items-center gap-4">  
-                <span className="text-[#B5A48B] font-mono text-[10px]">02</span>  
-                Relationship Leverage  
-              </h4>  
-              <p className="text-zinc-600 text-[10px] tracking-widest uppercase leading-relaxed max-w-sm">  
-                Accessing the unlisted and the off-market. Through our core alliance, we secure the upgrades and experiences that never reach the public domain.  
+            <div className="space-y-6">  
+              <Target className="w-12 h-12 stroke-[1px]" />  
+              <h3 className="text-4xl font-serif italic">Status Leverage</h3>  
+              <p className="text-xl text-[#D4AF37]/70 leading-relaxed">  
+                Our position within the Fora and Virtuoso networks converts collective influence into individual priority for our travelers.  
               </p>  
             </div>  
-            <div className="group">  
-              <h4 className="text-white text-xs tracking-[0.3em] uppercase mb-4 flex items-center gap-4">  
-                <span className="text-[#B5A48B] font-mono text-[10px]">03</span>  
-                Frictionless Advocacy  
-              </h4>  
-              <p className="text-zinc-600 text-[10px] tracking-widest uppercase leading-relaxed max-w-sm">  
-                We manage the nuances of hospitality so you never feel the friction. We are the stewards of your time and the guardians of your peace.  
+            <div className="space-y-6">  
+              <Zap className="w-12 h-12 stroke-[1px]" />  
+              <h3 className="text-4xl font-serif italic">Tactical Oversight</h3>  
+              <p className="text-xl text-[#D4AF37]/70 leading-relaxed">  
+                24/7 monitoring of the luxury logistics chain, ensuring that every transition—from tarmac to suite—is handled with zero friction.  
               </p>  
             </div>  
           </div>  
         </div>  
-      </div>  
-    </div>  
-  </section>
+      </section>
 
-  {/* STRATEGIC ALLIANCES: THE CORE 12 */}  
-  <section className="py-32 border-y border-zinc-900 bg-transparent">  
-    <div className="max-w-7xl mx-auto px-6">  
-      <div className="flex items-center gap-6 mb-20">  
-        <span className="text-[10px] tracking-[0.5em] text-[#B5A48B] uppercase">Strategic Alliances</span>  
-        <div className="h-[1px] flex-1 bg-zinc-900" />  
-        <span className="text-[10px] font-mono text-zinc-800 uppercase">Status Verified</span>  
-      </div>  
-        
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-x-12 gap-y-16">  
-        {[  
-          { name: "Fora Travel", type: "Primary Node" },  
-          { name: "Virtuoso", type: "Network Hub" },  
-          { name: "Aman", type: "Preferred Partner" },  
-          { name: "Four Seasons", type: "Elite Pillar" },  
-          { name: "Belmond", type: "Bellini Club" },  
-          { name: "Rosewood", type: "Elite Status" },  
-          { name: "Mandarin Oriental", type: "Fan Club" },  
-          { name: "Peninsula", type: "PenClub" },  
-          { name: "Dorchester", type: "Diamond Club" },  
-          { name: "Oetker", type: "Pearl Partner" },  
-          { name: "Auberge", type: "Strategic" },  
-          { name: "Hyatt Privé", type: "Pillar" }  
-        ].map((partner, i) => (  
-          <div key={partner.name} className="group cursor-default">  
-            <p className="text-[8px] font-mono text-zinc-800 mb-2 uppercase">0{i + 1}</p>  
-            <p className="text-zinc-300 group-hover:text-[#B5A48B] tracking-widest text-[11px] uppercase transition-colors duration-500">{partner.name}</p>  
-            <p className="text-[8px] text-zinc-700 font-mono tracking-tighter uppercase mt-1">{partner.type}</p>  
-          </div>  
-        ))}  
-      </div>  
-    </div>  
-  </section>
-
-  {/* ASYMMETRICAL PORTFOLIO: THE VAULT */}  
-  <section className="py-40">  
-    <div className="max-w-7xl mx-auto px-6">  
-      <div className="grid grid-cols-12 gap-12 items-end">  
-        {/* NV-001 */}  
-        <div className="col-span-12 md:col-span-8 md:col-start-5 group mb-24">  
-          <div className="aspect-[16/9] overflow-hidden mb-8 bg-zinc-900">  
-            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover grayscale-0 group-hover:grayscale transition-all duration-1000 scale-100 group-hover:scale-105" alt="NV-001" />  
-          </div>  
-          <div className="flex justify-between items-baseline"><h3 className="text-2xl text-white font-light tracking-tighter uppercase italic">The Monolith Sanctuary</h3><span className="text-[#B5A48B] font-mono text-xs">NV-001</span></div>  
+      {/* Property Gallery */}  
+      <section className="py-32 px-6 max-w-7xl mx-auto">  
+        <div className="columns-1 md:columns-2 gap-6 space-y-6">  
+          {properties.map((prop, i) => (  
+            <div key={i} className="relative group overflow-hidden border border-[#D4AF37]/10">  
+              <img src={prop.img} alt={prop.title} className="w-full grayscale group-hover:grayscale-0 transition-all duration-700" />  
+              <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-[#0A0A0A] to-transparent">  
+                <p className="text-3xl font-serif italic">{prop.title}</p>  
+                <p className="text-sm tracking-widest uppercase opacity-60">{prop.loc}</p>  
+              </div>  
+            </div>  
+          ))}  
         </div>  
-        {/* NV-002 */}  
-        <div className="col-span-12 md:col-span-5 group md:-mt-48 z-10">  
-          <div className="aspect-[4/5] overflow-hidden mb-8 bg-zinc-900">  
-            <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover grayscale-0 group-hover:grayscale transition-all duration-1000 scale-100 group-hover:scale-105" alt="NV-002" />  
-          </div>  
-          <div className="flex justify-between items-baseline"><h3 className="text-xl text-white font-light tracking-tighter uppercase italic">The Belgravia Archive</h3><span className="text-[#B5A48B] font-mono text-xs">NV-002</span></div>  
-        </div>  
-        {/* NV-003 */}  
-        <div className="col-span-12 group mt-32">  
-          <div className="aspect-[21/9] overflow-hidden mb-8 bg-zinc-900">  
-            <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&q=80&w=2000" className="w-full h-full object-cover grayscale-0 group-hover:grayscale transition-all duration-1000 scale-100 group-hover:scale-105" alt="NV-003" />  
-          </div>  
-          <div className="flex justify-between items-baseline max-w-4xl"><h3 className="text-2xl text-white font-light tracking-tighter uppercase italic">The Alpine Bastion</h3><span className="text-[#B5A48B] font-mono text-xs">NV-003</span></div>  
-        </div>  
-      </div>  
-    </div>  
-  </section>
+      </section>
 
-  {/* PRIVATE TRANSIT: CUSTOM JET */}  
-  <section className="py-32 border-y border-zinc-900">  
-    <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-20 items-center">  
-      <div className="order-2 md:order-1">  
-        <span className="text-[10px] tracking-[0.5em] text-[#B5A48B] uppercase mb-8 block">Private Motion</span>  
-        <h2 className="text-4xl md:text-6xl text-white font-extralight tracking-tighter mb-8 italic leading-tight">The Global Fleet.</h2>  
-        <p className="text-zinc-600 text-[10px] tracking-widest uppercase leading-loose mb-12 max-w-md">Propelling the Collective with invisible efficiency. Private aviation, maritime assets, and secured ground logistics tailored to the itinerary.</p>  
-        <div className="flex gap-8 text-zinc-800 font-mono text-[9px] uppercase tracking-widest"><span>Aviation Access</span><span>•</span><span>Yacht Charter</span><span>•</span><span>Ground Logistics</span></div>  
-      </div>  
-      <div className="relative aspect-video overflow-hidden group order-1 md:order-2">  
-        <img src="https://cdn.marblism.com/jyV_xaai_p4.webp" className="w-full h-full object-cover grayscale-0 group-hover:grayscale transition-all duration-1000 brightness-75 group-hover:brightness-50" alt="Private Jet" />  
-      </div>  
-    </div>  
-  </section>
-
-  {/* CONCIERGE: INTAKE MANIFEST */}  
-  <section className="py-48 text-center">  
-    <div className="max-w-3xl mx-auto px-6">  
-      <div className="inline-block px-4 py-1 border border-[#B5A48B]/20 mb-12"><span className="text-[8px] font-mono text-[#B5A48B] uppercase tracking-widest">Access Protocol</span></div>  
-      <h2 className="text-5xl md:text-8xl text-white font-extralight tracking-tighter mb-12 italic">Initiate <span className="text-zinc-800">Access.</span></h2>  
-      <button className="group relative overflow-hidden px-20 py-6 border border-zinc-900 bg-transparent">  
-        <span className="relative z-10 text-[10px] tracking-[0.8em] text-[#B5A48B] uppercase group-hover:text-black transition-colors duration-500">Open Manifest</span>  
-        <div className="absolute inset-0 bg-[#B5A48B] translate-y-full group-hover:translate-y-0 transition-transform duration-500" />  
-      </button>  
-    </div>  
-  </section>
-
-  {/* FOOTER */}  
-  <footer className="py-20 border-t border-zinc-950 bg-black">  
-    <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">  
-      <p className="text-[8px] font-mono text-zinc-800 tracking-[1em] uppercase">NexVoyage Collective // Private Node</p>  
-      <div className="flex gap-12 text-[8px] font-mono text-zinc-800 uppercase tracking-widest"><span>Archive</span><span>Journal</span><span>Concierge</span></div>  
-    </div>  
-  </footer>  
-</main>  
-);  
+      {/* Footer */}  
+      <footer className="py-20 border-t border-[#D4AF37]/10 text-center">  
+        <p className="text-xs tracking-[1em] uppercase opacity-40">  
+          NexVoyage Collective &copy; 2026 | Private Access Only  
+        </p>  
+      </footer>  
+    </main>  
+  )  
 }  
