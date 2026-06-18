@@ -58,12 +58,12 @@ export default function HomePage() {
         />    
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-black/40"></div>    
         <div className="relative z-10 text-center px-4">    
-<h1   
-  style={{ color: 'white' }}   
-  className="text-6xl md:text-8xl font-light tracking-tighter mb-4"  
->  
-  The Art of Discerning Travel  
-</h1>  
+<h1     
+  style={{ color: 'white', fontFamily: "'Cormorant Garamond', serif" }}     
+  className="text-6xl md:text-8xl font-serif font-light tracking-tighter mb-4"    
+>    
+  The Art of Discerning Travel    
+</h1> 
           <p className="text-xl uppercase tracking-[0.3em] font-extralight text-[#C5A059]/90">    
             NexVoyage Collective    
           </p>    
