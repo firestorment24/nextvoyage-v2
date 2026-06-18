@@ -45,8 +45,7 @@ export default function HomePage() {
       {/* Final Nuclear Fix for Ghost Boxes */}    
       <style dangerouslySetInnerHTML={{ __html: `    
         * { background-color: transparent !important; box-shadow: none !important; }    
-        html, body, main { background-color: black !important; }    
-        h1, h2, h3, p, span, a, div { background: none !important; border-color: transparent !important; }    
+        html, body, main { background-color: black !important; }    h2 { color: #C5A059 !important; }        h1, h2, h3, p, span, a, div { background: none !important; border-color: transparent !important; }    
         .border-y { border-top: 1px solid rgba(197, 160, 89, 0.2) !important; border-bottom: 1px solid rgba(197, 160, 89, 0.2) !important; }    
       `}} />
 
