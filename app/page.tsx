@@ -34,13 +34,12 @@ const partners = [
 ];
 
 return (  
-  <main className="min-h-screen bg-black text-white">  
-    {/* NUCLEAR CSS: Kills ghost boxes globally */}  
-    <style dangerouslySetInnerHTML={{ __html: `  
-      div, section, article, header { background-color: transparent !important; }  
-      main, body, html { background-color: #000000 !important; }  
-      .hero-gradient { background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%) !important; }  
-    `}} />
+ {/* NUCLEAR CSS: Kills ghost boxes globally */}  
+<style dangerouslySetInnerHTML={{ __html: `  
+  div, section, article, header { background-color: transparent !important; }  
+  main, body, html { background-color: #000000 !important; }  
+  .hero-gradient { background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%) !important; }  
+`}} />  
 
     <Navigation />  
       
