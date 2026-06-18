@@ -21,10 +21,10 @@ export default function HomePage() {
 
   const properties = [    
     {    
-      name: 'Chablé Villa',    
-      location: 'Yucatán, Mexico',    
-      image: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/9a/b3/f2/chable-villa.jpg?w=1800&h=-1&s=1',    
-      id: 'chable-villa'    
+      name: 'Silversands Beach House,    
+      location: 'St. George's, Granada',    
+      image: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/30/2a/6b/4c/two-bedroom-suite-king.jpg?w=1400&h=-1&s=1',    
+      id: 'silversands-beach-house'    
     },    
     {    
       name: 'Aman New York',    
