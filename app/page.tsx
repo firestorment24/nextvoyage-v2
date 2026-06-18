@@ -62,7 +62,7 @@ return (
         <h1 className="text-6xl md:text-8xl font-light tracking-tighter text-[#C5A059] mb-4">  
           The Art of Discerning Travel  
         </h1>  
-        <p className="text-xl uppercase tracking-[0.3em] font-extralight text-white/80">  
+        <p className="text-xl uppercase tracking-[0.3em] font-extralight text-[#C5A059]/80">  
           NexVoyage Collective  
         </p>  
       </div>  
