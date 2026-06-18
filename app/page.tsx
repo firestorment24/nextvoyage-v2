@@ -144,17 +144,17 @@ const HomePage = () => {
       {[  
         {  
           quote: "The level of discretion and curation provided by NexVoyage is unparalleled. They don't just find properties; they find sanctuaries.",  
-          author: "Private Equity Principal",  
+          author: "Andrew H.",  
           location: "London / NYC"  
         },  
         {  
           quote: "A seamless transition from inquiry to acquisition. Their understanding of 'Quiet Luxury' is evident in every recommendation.",  
-          author: "Family Office Director",  
+          author: "Daniel and Elaine G.",  
           location: "Geneva"  
         },  
         {  
           quote: "The Archive is a masterclass in discerning travel. Every detail was considered before I even had to ask.",  
-          author: "Tech Founder",  
+          author: "Ronald J.",  
           location: "San Francisco"  
         }  
       ].map((testimonial, index) => (  
