@@ -85,7 +85,7 @@ export default function HomePage() {
 
       {/* Property Showcase */}    
       <section className="py-24 px-6 max-w-7xl mx-auto">    
-        <h2 className="text-[#C5A059] text-sm uppercase tracking-[0.4em] mb-16 text-center font-light">    
+        <h2 className="text-[#C5A059] text-2xl uppercase tracking-[0.4em] mb-16 text-center font-light">    
           The Sanctuary Collection    
         </h2>    
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">    
