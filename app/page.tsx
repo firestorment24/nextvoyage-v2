@@ -58,16 +58,16 @@ const HomePage = () => {
         }  
       `}} />
 
-      {/* Hero Section */}  
-      <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">  
-        <Image   
-          src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/9a/b3/f2/chable-villa.jpg?w=1800&h=-1&s=1"  
-          alt="Chablé Villa"  
-          fill  
-          className="object-cover opacity-60"  
-          priority  
-          quality={100}  
-        />  
+     {/* Hero Section */}  
+    <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">  
+      <Image   
+        src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/f2/d3/31/caption.jpg?w=1400&h=-1&s=1"  
+        alt="NexVoyage Sanctuary"  
+        fill  
+        className="object-cover opacity-60"  
+        priority  
+        quality={100}  
+      />   
         {/* Dark Overlay to blend with the Shadow aesthetic */}  
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black" />  
           
