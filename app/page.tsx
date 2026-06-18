@@ -28,6 +28,12 @@ const HomePage = () => {
     <main className="min-h-screen bg-black text-white font-sans selection:bg-brass/30">  
       {/* NUCLEAR FIX 5.0: EXTERMINATING GHOST BOXES */}  
       <style dangerouslySetInnerHTML={{ __html: `  
+        h1 {   
+    font-family: 'Cormorant Garamond', serif !important;  
+    font-weight: 300 !important;  
+    font-style: italic !important; /* Optional: Looks incredible in Garamond */  
+  }
+        
         * {   
           background-color: transparent !important;   
           box-shadow: none !important;   
