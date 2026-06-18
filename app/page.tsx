@@ -121,7 +121,7 @@ const HomePage = () => {
           <div className="grid md:grid-cols-3 gap-12">  
             {featured.map((item, i) => (  
               <div key={i} className="space-y-4 group cursor-pointer">  
-                <div className="relative aspect-[4/5] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">  
+                <div className="relative aspect-[4/5] overflow-hidden grayscale-0 hover:grayscale transition-all duration-700">  
                   <Image src={item.img} alt={item.name} fill className="object-cover" />  
                 </div>  
                 <div>  
