@@ -134,6 +134,48 @@ const HomePage = () => {
         </div>  
       </section>
 
+{/* Client Testimonials Section */}  
+<section className="py-24 bg-black border-t border-white/10">  
+  <div className="max-w-7xl mx-auto px-6">  
+    <h2 className="text-3xl md:text-4xl font-serif text-[#d4af37] mb-16 text-center italic">  
+      Client Perspectives  
+    </h2>  
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-12">  
+      {[  
+        {  
+          quote: "The level of discretion and curation provided by NexVoyage is unparalleled. They don't just find properties; they find sanctuaries.",  
+          author: "Private Equity Principal",  
+          location: "London / NYC"  
+        },  
+        {  
+          quote: "A seamless transition from inquiry to acquisition. Their understanding of 'Quiet Luxury' is evident in every recommendation.",  
+          author: "Family Office Director",  
+          location: "Geneva"  
+        },  
+        {  
+          quote: "The Archive is a masterclass in discerning travel. Every detail was considered before I even had to ask.",  
+          author: "Tech Founder",  
+          location: "San Francisco"  
+        }  
+      ].map((testimonial, index) => (  
+        <div key={index} className="flex flex-col items-center text-center">  
+          <span className="text-[#d4af37] text-4xl mb-6 font-serif">“</span>  
+          <p className="text-white/80 text-lg leading-relaxed mb-8 italic font-serif">  
+            {testimonial.quote}  
+          </p>  
+          <div className="h-px w-8 bg-[#d4af37] mb-4"></div>  
+          <p className="text-[#d4af37] uppercase tracking-[0.2em] text-xs font-bold">  
+            {testimonial.author}  
+          </p>  
+          <p className="text-white/40 text-[10px] uppercase tracking-widest mt-1">  
+            {testimonial.location}  
+          </p>  
+        </div>  
+      ))}  
+    </div>  
+  </div>  
+</section>  
+      
       {/* The Guardian Layer (Services) */}  
       <section className="py-32 border-t border-brass/10">  
         <div className="max-w-4xl mx-auto text-center px-6">  
