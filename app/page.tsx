@@ -6,16 +6,16 @@ const HomePage = () => {
   const partners = [  
     { name: "FORA TRAVEL", label: "Flagship Partner", font: "font-serif tracking-tighter" },  
     { name: "VIRTUOSO", label: "Preferred Network", font: "font-sans tracking-widest uppercase" },  
-    { name: "AMAN", label: "Strategic Alliance", font: "font-serif tracking-widest" },  
+    { name: "AMAN", label: "Preferred Partner", font: "font-serif tracking-widest" },  
     { name: "FOUR SEASONS", label: "Preferred Partner", font: "font-sans tracking-tight uppercase" },  
     { name: "BELMOND", label: "Bellini Club", font: "font-serif italic tracking-wide" },  
     { name: "ROSEWOOD", label: "Elite Member", font: "font-sans tracking-widest uppercase" },  
     { name: "MANDARIN ORIENTAL", label: "Fan Club", font: "font-serif tracking-normal" },  
     { name: "PENINSULA", label: "PenClub", font: "font-serif tracking-widest uppercase" },  
     { name: "DORCHESTER", label: "Diamond Club", font: "font-serif tracking-tight" },  
-    { name: "AUBERGE", label: "Direct Access", font: "font-sans tracking-widest uppercase" },  
+    { name: "AUBERGE", label: "Preferred Partner", font: "font-sans tracking-widest uppercase" },  
     { name: "OETKER COLLECTION", label: "Pearl Partner", font: "font-serif tracking-tighter" },  
-    { name: "HYATT PRIVÉ", label: "Elite Tier", font: "font-sans tracking-widest" }  
+    { name: "HYATT", label: "Privé", font: "font-sans tracking-widest" }  
   ];
  
   const featured = [  
@@ -139,7 +139,7 @@ const HomePage = () => {
         <div className="max-w-4xl mx-auto text-center px-6">  
           <h2 className="brass-text text-sm uppercase tracking-[0.4em] mb-8">The Guardian Layer</h2>  
           <p className="white-text text-2xl md:text-4xl font-serif leading-relaxed mb-12">  
-            We operate in the shadows so you can remain in the light. From off-market villa acquisitions to 24/7 global extraction logistics, our concierge is your invisible perimeter.  
+            We manage the complexities behind the scenes so you can remain focused on what matters most. From discreet off-market villa acquisitions to seamless global logistics and personalized concierge support, we provide an invisible layer of expertise, access, and protection at every stage of your journey.
           </p>  
           <div className="grid md:grid-cols-3 gap-8 text-left border-t border-brass/10 pt-12">  
             <div>  
