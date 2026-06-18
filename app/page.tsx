@@ -72,7 +72,7 @@ export default function HomePage() {
         <div className="max-w-5xl mx-auto px-6">    
           <div className="grid grid-cols-3 md:grid-cols-5 gap-y-6 gap-x-4 items-center text-center">    
             {partners.map((partner) => (    
-              <span key={partner.name} className={`text-[#C5A059] opacity-80 text-[10px] md:text-[12px] ${partner.style}`}>    
+              <span key={partner.name} className={`text-white opacity-80 text-[10px] md:text-[12px] ${partner.style}`}>    
                 {partner.name}    
               </span>    
             ))}    
