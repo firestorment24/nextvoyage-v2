@@ -65,7 +65,7 @@ const HomePage = () => {
       `}} />
 
      {/* Hero Section */}  
-    <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">  
+               <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">  
       <Image   
         src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/f2/d3/31/caption.jpg?w=1400&h=-1&s=1"  
         alt="NexVoyage Sanctuary"  
@@ -77,14 +77,17 @@ const HomePage = () => {
         {/* Dark Overlay to blend with the Shadow aesthetic */}  
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black" />  
           
-        <div className="relative z-10 text-center px-4 max-w-5xl">  
-          <h1 className="brass-text text-5xl md:text-8xl font-serif mb-6 tracking-tighter animate-fade-in">  
-            The Art of Discerning Travel  
-          </h1>  
-          <p className="white-text text-lg md:text-xl font-light tracking-[0.4em] uppercase opacity-80">  
-            Private Sanctuaries & Bespoke Journeys  
-          </p>  
-        </div>  
+         <div className="relative z-10 text-center px-4 max-w-5xl">  
+  <h1   
+    className="brass-text text-5xl md:text-8xl mb-6 tracking-tight animate-fade-in"  
+    style={{ fontFamily: "'Cormorant Garamond', serif" }}  
+  >  
+    The Art of Discerning Travel  
+  </h1>  
+  <p className="white-text text-lg md:text-xl font-light tracking-[0.4em] uppercase opacity-80">  
+    Private Sanctuaries & Bespoke Journeys  
+  </p>  
+</div>  
       </section>
 
       {/* Partner Alliance Grid */}  
