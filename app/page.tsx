@@ -1,134 +1,102 @@
-'use client'
-
-import { Shield, Target, Zap } from "lucide-react"  
-import Link from "next/link"
+import React from 'react'
 
 export default function HomePage() {  
-const alliances = [  
-  { name: "FORA TRAVEL", font: "font-sans font-bold tracking-[0.1em]" },  
-  { name: "VIRTUOSO", font: "font-serif tracking-[0.2em] font-light" },  
-  { name: "AMAN", font: "font-serif tracking-[0.4em]" },  
-  { name: "FOUR SEASONS", font: "font-serif tracking-widest font-semibold" },  
-  { name: "BELMOND", font: "font-serif tracking-[0.1em] italic" },  
-  { name: "ROSEWOOD", font: "font-serif tracking-normal uppercase" },  
-  { name: "MANDARIN ORIENTAL", font: "font-sans tracking-[0.1em] font-light" },  
-  { name: "PENINSULA", font: "font-serif tracking-tighter" },  
-  { name: "DORCHESTER COLLECTION", font: "font-serif tracking-wider font-semibold" },  
-  { name: "OETKER COLLECTION", font: "font-serif italic" },  
-  { name: "AUBERGE RESORTS", font: "font-sans tracking-[0.2em] font-thin" },  
-  { name: "HYATT PRIVÉ", font: "font-sans tracking-tighter font-bold" },  
-]
+  const properties = [  
+    {  
+      name: 'Chablé Villa',  
+      location: 'Yucatán, Mexico',  
+      image: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/9a/b3/f2/chable-villa.jpg?w=1800&h=-1&s=1',  
+      id: 'chable-villa'  
+    },  
+    {  
+      name: 'Aman New York',  
+      location: 'Manhattan, USA',  
+      image: 'https://www.aman.com/sites/default/files/2022-08/Correct_Aman%20New%20York_Landscape.jpg',  
+      id: 'aman-new-york'  
+    },  
+    {  
+      name: 'Amangiri',  
+      location: 'Canyon Point, Utah',  
+      image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Amangiri_Spa_at_Night.jpg/1200px-Amangiri_Spa_at_Night.jpg',  
+      id: 'amangiri'  
+    }  
+  ]
 
-const properties = [  
-  { id: "amangiri", title: "Amangiri", loc: "Utah, USA", img: "https://images.unsplash.com/photo-1509114397022-ed747cca3f65?auto=format&fit=crop&q=80", size: "md:col-span-2 h-[550px]" },  
-  { id: "soneva-jani", title: "Soneva Jani", loc: "Maldives", img: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&q=80", size: "md:col-span-1 h-[350px] mt-12" },  
-  { id: "hotel-de-crillon", title: "Hôtel de Crillon", loc: "Paris, France", img: "https://images.unsplash.com/photo-1551882547-ff43c63efe81?auto=format&fit=crop&q=80", size: "md:col-span-1 h-[450px] -mt-16" },  
-]
+  return (  
+    <main className="bg-black text-white min-h-screen">  
+      {/*   
+          EXTREME NUCLEAR FIX:   
+          Forcibly removing every possible background color, shadow, and border   
+          that could create "ghost white boxes" around text elements.  
+      */}  
+      <style dangerouslySetInnerHTML={{ __html: `  
+        * {   
+          background-color: transparent !important;   
+          background-image: none !important;   
+          box-shadow: none !important;   
+          text-shadow: none !important;   
+        }  
+        html, body, main, #__next {   
+          background-color: black !important;   
+        }  
+        h1, h2, h3, h4, p, span, a, div, section, article {   
+          background: none !important;   
+          background-color: transparent !important;  
+        }  
+        /* Restore specific image visibility */  
+        img { opacity: inherit; }  
+        /* Restore intentional borders only */  
+        .border-y { border-top-width: 1px !important; border-bottom-width: 1px !important; border-color: rgba(255,255,255,0.1) !important; }  
+      `}} />
 
-return (  
-  <main className="min-h-screen bg-[#0A0A0A] text-white selection:bg-[#D4AF37] selection:text-black">  
-    {/* REFINED NUCLEAR FIX 5.0 - Brass H1, White Text */}  
-    <style dangerouslySetInnerHTML={{ __html: `  
-      * { box-shadow: none !important; }  
-      body, main, section, div, header, footer { background-color: #0A0A0A !important; border: none !important; }  
-      h1 { color: #D4AF37 !important; }  
-      h2, h3, p, span, a { color: white !important; }  
-      .hero-title { font-size: clamp(3rem, 9vw, 6rem); }  
-      img { filter: grayscale(100%); transition: all 0.7s ease; }  
-      img:hover { filter: grayscale(0%); }  
-      .no-gray { filter: grayscale(0%) !important; }  
-    `}} />
-
-    {/* Hero Section - Chablé Villa */}  
-    <section className="relative h-screen flex items-center justify-center overflow-hidden">  
-      <div className="absolute inset-0 z-0">  
+      {/* Hero Section */}  
+      <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">  
         <img   
           src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/9a/b3/f2/chable-villa.jpg?w=1800&h=-1&s=1"   
-          alt="Chablé Villa"   
-          className="no-gray w-full h-full object-cover opacity-60"  
+          className="absolute inset-0 w-full h-full object-cover opacity-60 grayscale"  
+          alt="Chablé Villa Hero"  
         />  
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent" />  
-      </div>  
-        
-      <div className="relative z-10 text-center px-6">  
-        <h1 className="hero-title font-serif tracking-tighter leading-none mb-6 uppercase">  
-          THE ROI OF RESET  
-        </h1>  
-        <p className="text-lg md:text-xl font-light tracking-[0.5em] uppercase opacity-90">  
-          NexVoyage Collective  
-        </p>  
-      </div>  
-    </section>
-
-    {/* Tightened Alliance Grid */}  
-    <section className="py-24 px-6 max-w-5xl mx-auto">  
-      <div className="grid grid-cols-3 md:grid-cols-4 gap-y-12 gap-x-8 items-center justify-center">  
-        {alliances.map((partner, i) => (  
-          <div key={i} className="text-center">  
-            <span className={`${partner.font} text-[10px] md:text-xs opacity-60 hover:opacity-100 transition-opacity whitespace-nowrap`}>  
-              {partner.name}  
-            </span>  
-          </div>  
-        ))}  
-      </div>  
-    </section>
-
-    {/* Asymmetric Property Gallery - Linked to Archive */}  
-    <section className="py-32 px-6 max-w-7xl mx-auto">  
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">  
-        {properties.map((prop, i) => (  
-          <Link key={i} href={`/archive/${prop.id}`} className={`relative group overflow-hidden block ${prop.size}`}>  
-            <img src={prop.img} alt={prop.title} className="w-full h-full object-cover" />  
-            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors" />  
-            <div className="absolute bottom-0 left-0 p-8">  
-              <p className="text-3xl font-serif italic mb-1 uppercase tracking-tight">{prop.title}</p>  
-              <p className="text-[9px] tracking-[0.4em] uppercase opacity-70">{prop.loc}</p>  
-            </div>  
-          </Link>  
-        ))}  
-      </div>  
-    </section>
-
-    {/* Jet Visual */}  
-    <section className="w-full px-6 mb-32">  
-      <div className="h-[60vh] w-full overflow-hidden rounded-sm">  
-        <img src="/jyV_xaai_p4.webp" alt="Private Jet" className="no-gray w-full h-full object-cover" />  
-      </div>  
-    </section>
-
-    {/* Guardian Layer */}  
-    <section className="py-32 px-6 border-y border-white/5">  
-      <div className="max-w-7xl mx-auto">  
-        <div className="grid md:grid-cols-2 gap-20 items-center mb-32">  
-          <h2 className="text-6xl font-serif tracking-tight leading-tight uppercase">  
-            THE GUARDIAN LAYER  
-          </h2>  
-          <p className="text-xl font-light leading-relaxed opacity-90">  
-            Operating as the invisible interface between our clients and the global luxury machine.  
+        <div className="relative z-10 text-center">  
+          <h1 className="text-6xl md:text-8xl font-light tracking-tighter text-[#C5A059] mb-4">  
+            The Art of Discerning Travel  
+          </h1>  
+          <p className="text-xl uppercase tracking-[0.3em] font-extralight text-white">  
+            NexVoyage Collective  
           </p>  
         </div>  
-          
-        <div className="grid md:grid-cols-3 gap-16">  
-          {[  
-            { icon: Shield, title: "Invisible Advocacy", desc: "Securing status before you arrive." },  
-            { icon: Target, title: "Status Leverage", desc: "Direct access to elite hospitality pillars." },  
-            { icon: Zap, title: "Tactical Oversight", desc: "24/7 monitoring of your movement." }  
-          ].map((item, idx) => (  
-            <div key={idx} className="space-y-6">  
-              <item.icon className="w-8 h-8 stroke-[1px]" />  
-              <h3 className="text-2xl font-serif italic uppercase tracking-wider">{item.title}</h3>  
-              <p className="text-md opacity-70 leading-relaxed font-light">{item.desc}</p>  
-            </div>  
+      </section>
+
+      {/* Strategic Alliances - Tightened & Slimmed */}  
+      <section className="py-6 border-y border-white/10">  
+        <div className="max-w-4xl mx-auto px-6">  
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 opacity-40 grayscale hover:opacity-100 transition-opacity duration-700 items-center text-center italic font-serif text-base tracking-widest">  
+            <span>AMAN</span>  
+            <span>BELMOND</span>  
+            <span>ROSEWOOD</span>  
+            <span>O&O</span>  
+          </div>  
+        </div>  
+      </section>
+
+      {/* Featured Property Showcase */}  
+      <section className="py-24 px-6 max-w-7xl mx-auto">  
+        <h2 className="text-[#C5A059] text-sm uppercase tracking-widest mb-16 text-center font-light">The Sanctuary Collection</h2>  
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">  
+          {properties.map((prop) => (  
+            <a key={prop.id} href={`/archive/${prop.id}`} className="group block">  
+              <div className="overflow-hidden aspect-[3/4] mb-6 bg-neutral-900 border border-white/5">  
+                <img   
+                  src={prop.image}   
+                  alt={prop.name}  
+                  className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000"  
+                />  
+              </div>  
+              <h3 className="text-2xl font-light tracking-tight text-white">{prop.name}</h3>  
+              <p className="text-white/40 text-sm uppercase tracking-widest mt-2">{prop.location}</p>  
+            </a>  
           ))}  
         </div>  
-      </div>  
-    </section>
-
-    <footer className="py-24 text-center">  
-      <p className="text-[9px] tracking-[1.5em] uppercase opacity-40">  
-        NexVoyage Collective &copy; 2026 | Private Access Only  
-      </p>  
-    </footer>  
-  </main>  
-)  
+      </section>  
+    </main>  
+  )  
 }  
