@@ -55,25 +55,6 @@ export default function HomePage() {
         </div>  
       </section>
 
-      {/* Property Grid */}  
-      <section className="py-24 px-6 md:px-12 max-w-7xl mx-auto">  
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">  
-          {properties.map((prop) => (  
-            <div key={prop.id} className="group cursor-pointer">  
-              <div className="aspect-[4/5] overflow-hidden mb-6 bg-neutral-900">  
-                <img   
-                  src={prop.image}   
-                  alt={prop.name}  
-                  className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"  
-                />  
-              </div>  
-              <h3 className="!text-white font-serif text-2xl mb-1">{prop.name}</h3>  
-              <p className="text-neutral-500 uppercase tracking-widest text-xs">{prop.location}</p>  
-            </div>  
-          ))}  
-        </div>  
-      </section>
-
       {/* Strategic Alliances */}  
       <section className="py-24 border-t border-neutral-900">  
         <div className="max-w-7xl mx-auto px-6 md:px-12 text-center">  
@@ -91,3 +72,22 @@ export default function HomePage() {
     </main>  
   );  
 }  
+
+  {/* Property Grid */}  
+      <section className="py-24 px-6 md:px-12 max-w-7xl mx-auto">  
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">  
+          {properties.map((prop) => (  
+            <div key={prop.id} className="group cursor-pointer">  
+              <div className="aspect-[4/5] overflow-hidden mb-6 bg-neutral-900">  
+                <img   
+                  src={prop.image}   
+                  alt={prop.name}  
+                  className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"  
+                />  
+              </div>  
+              <h3 className="!text-white font-serif text-2xl mb-1">{prop.name}</h3>  
+              <p className="text-neutral-500 uppercase tracking-widest text-xs">{prop.location}</p>  
+            </div>  
+          ))}  
+        </div>  
+      </section>
