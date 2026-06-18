@@ -1,130 +1,88 @@
+import React from 'react';  
 import Navigation from '@/components/Navigation';
 
 export default function HomePage() {  
-  const properties = [  
-    {  
-      name: "Silversands Beach House",  
-      location: "St. George&apos;s, Grenada",  
-      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/30/2a/6b/4c/two-bedroom-villa.jpg?w=1200&h=-1&s=1",  
-      id: "silversands-beach-house"  
-    },  
-    {  
-      name: "The Silversands Origin",  
-      location: "Grand Anse Beach, Grenada",  
-      image: "https://images.squarespace-cdn.com/content/v1/5b30693a31d0d970364c783c/1531238466638-0S9I7X9P4X5Y5Z5Z5Z5Z/Silversands+Grenada+1.jpg",  
-      id: "silversands-origin"  
-    },  
-    {  
-      name: "Mount Cinnamon",  
-      location: "St. George&apos;s, Grenada",  
-      image: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/228182414.jpg?k=3f8e4c7d9a1d1e6e9b4d8a2d3c4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u&o=&hp=1",  
-      id: "mount-cinnamon"  
-    }  
-  ];
-
-  const partners = [  
-    { name: "Fora Travel", role: "Flagship Partner" },  
-    { name: "Virtuoso", role: "Luxury Network" },  
-    { name: "Four Seasons Preferred", role: "Elite Status" },  
-    { name: "Belmond Bellini Club", role: "Private Access" },  
-    { name: "Rosewood Elite", role: "Preferred Partner" },  
-    { name: "Dorchester Diamond", role: "Exclusive Benefits" },  
-    { name: "Mandarin Oriental Fan Club", role: "Priority Status" },  
-    { name: "Rocco Forte Knights", role: "VIP Leverage" }  
-  ];
-
   return (  
-    <main className="min-h-screen bg-black text-white">  
-      {/* NUCLEAR CSS: Forces everything to transparent/black to kill ghost boxes */}  
+    <main className="min-h-screen bg-black text-white selection:bg-white/20">  
+      {/* NUCLEAR FIX 3.0: Eradicate all ghost boxes and forced backgrounds */}  
       <style dangerouslySetInnerHTML={{ __html: `  
-        html, body { background-color: #000000 !important; }  
-        div, section, article, header, footer { background-color: transparent !important; }  
-        .force-black { background-color: #000000 !important; }  
-        .hero-gradient { background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%) !important; }  
-        * { border-color: #1a1a1a !important; }  
-      `}} />
+        * { background-color: transparent !important; border-color: #1a1a1a !important; }  
+        html, body, main, #__next { background-color: #000 !important; }  
+        .bg-white, .bg-slate-50, .bg-gray-50, .bg-stone-50 { background-color: transparent !important; }  
+        section, div, article, nav, footer { background-color: transparent !important; }  
+        input, textarea, button { background-color: transparent !important; }  
+        h1, h2, h3, h4, p, span, a { background-color: transparent !important; }  
+      ` }} />
 
-      <Navigation />  
-        
-      {/* 1. HERO SECTION */}  
-      <section className="relative h-[85vh] flex items-center justify-center overflow-hidden">  
-        <div   
-          className="absolute inset-0 bg-cover bg-center z-0"   
-          style={{ backgroundImage: "url('https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/9a/b3/f2/chable-villa.jpg?w=1800&h=-1&s=1')" }}  
-        />  
-        <div className="absolute inset-0 hero-gradient z-10" />  
+      <Navigation />
+
+      {/* 1. HERO SECTION: Chablé Villa */}  
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">  
+        <div className="absolute inset-0 z-0">  
+          <img   
+            src="https://images.squarespace-cdn.com/content/v1/645163158f36c53531b2682e/1683130397558-8W9W9W9W9W9W9W9W9W9W/Chable-Yucatan-Villa-Presidential-1.jpg"   
+            alt="Chablé Villa"   
+            className="w-full h-full object-cover opacity-60"  
+          />  
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black" />  
+        </div>  
           
-        <div className="relative z-20 text-center px-4">  
-          <p className="tracking-[0.4em] !text-[#C5A059] !text-xl uppercase mb-6 !font-serif">  
-            The Sanctuary Collection  
-          </p>  
-          <h1 className="!text-white !font-serif text-6xl md:text-8xl italic leading-tight">  
-            The Art of Discerning Travel  
+        <div className="relative z-10 text-center px-6">  
+          <h1 className="text-[12rem] leading-none font-serif tracking-tighter opacity-90 animate-fade-in">  
+            NexVoyage  
           </h1>  
+          <p className="mt-4 text-xl tracking-[0.3em] uppercase font-light">  
+            Collective  
+          </p>  
         </div>  
       </section>
 
-      {/* 2. STRATEGIC ALLIANCES */}  
-      <section className="py-20 border-b border-neutral-900 force-black">  
-        <div className="max-w-7xl mx-auto px-6 md:px-12">  
-          <h2 className="!text-white !font-serif text-2xl mb-12 italic text-center tracking-widest opacity-80 uppercase">Strategic Alliances</h2>  
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-12 gap-x-8">  
-            {partners.map((partner) => (  
-              <div key={partner.name} className="flex flex-col items-center">  
-                <span className="!text-white uppercase tracking-[0.2em] text-[10px] md:text-xs mb-2 !font-sans">{partner.name}</span>  
-                <span className="text-neutral-600 text-[9px] uppercase tracking-widest !font-sans">{partner.role}</span>  
+      {/* 2. STRATEGIC ALLIANCES: Property Partners */}  
+      <section className="py-32 px-12 border-t border-white/5">  
+        <div className="max-w-7xl mx-auto">  
+          <h2 className="text-8xl font-serif mb-20 tracking-tight">Strategic Alliances</h2>  
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">  
+            {/* Property Cards - grayscale to color transition */}  
+            {[1, 2, 3].map((item) => (  
+              <div key={item} className="group cursor-pointer">  
+                <div className="aspect-[4/5] overflow-hidden bg-[#0A0A0A] border border-white/10 transition-all duration-700 hover:border-white/30">  
+                  <div className="w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100 bg-[#111]" />  
+                </div>  
+                <h3 className="mt-6 text-2xl font-serif tracking-wide italic">Partner Estate {item}</h3>  
               </div>  
             ))}  
           </div>  
         </div>  
       </section>
 
-      {/* 3. THE GUARDIAN LAYER */}  
-      <section className="py-24 force-black">  
-        <div className="max-w-5xl mx-auto px-6 text-center">  
-          <h2 className="!text-[#C5A059] !font-serif text-4xl md:text-5xl italic mb-8">The Guardian Layer</h2>  
-          <p className="!text-white !font-serif text-xl md:text-2xl leading-relaxed mb-16 opacity-90 max-w-3xl mx-auto">  
-            Bespoke travel management for the discerning elite. We navigate the complexities of global travel so your journey remains seamless, secure, and infinitely elevated.  
+      {/* 3. GUARDIAN LAYER */}  
+      <section className="py-32 px-12 bg-black">  
+        <div className="max-w-5xl mx-auto text-center">  
+          <h2 className="text-8xl font-serif mb-12 tracking-tight">The Guardian Layer</h2>  
+          <p className="text-2xl leading-relaxed font-light text-white/70 max-w-3xl mx-auto font-serif italic">  
+            "An invisible shield of logistical perfection. We don't just book travel; we secure the continuity of your lifestyle across every border."  
           </p>  
-            
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-left border-t border-neutral-900 pt-16">  
-            <div>  
-              <h4 className="!text-[#C5A059] !font-serif text-lg uppercase tracking-widest mb-4">Invisible Advocacy</h4>  
-              <p className="text-neutral-400 text-sm leading-relaxed">24/7 global flight support and real-time logistics management. We solve problems before they reach your itinerary.</p>  
-            </div>  
-            <div>  
-              <h4 className="!text-[#C5A059] !font-serif text-lg uppercase tracking-widest mb-4">Status Leverage</h4>  
-              <p className="text-neutral-400 text-sm leading-relaxed">Direct access to the world&apos;s most exclusive hospitality networks, securing resort credits, upgrades, and private benefits.</p>  
-            </div>  
-            <div>  
-              <h4 className="!text-[#C5A059] !font-serif text-lg uppercase tracking-widest mb-4">Tactical Oversight</h4>  
-              <p className="text-neutral-400 text-sm leading-relaxed">Coordinated private transfers and elite logistical vetting. We ensure every touchpoint meets our rigorous standards.</p>  
-            </div>  
+        </div>  
+      </section>
+
+      {/* 4. THE SANCTUARY COLLECTION */}  
+      <section className="py-32 px-12 border-t border-white/5">  
+        <div className="max-w-7xl mx-auto">  
+          <div className="flex justify-between items-end mb-16">  
+            <h2 className="text-8xl font-serif tracking-tight">The Sanctuary Collection</h2>  
+            <button className="px-8 py-3 border border-white/20 hover:bg-white hover:text-black transition-all duration-500 uppercase tracking-widest text-xs">  
+              View All  
+            </button>  
+          </div>  
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-1 px-1">  
+            <div className="h-[600px] bg-[#0A0A0A] border border-white/5 flex items-center justify-center italic text-white/30">Sanctuary I</div>  
+            <div className="h-[600px] bg-[#0A0A0A] border border-white/5 flex items-center justify-center italic text-white/30">Sanctuary II</div>  
           </div>  
         </div>  
       </section>
 
-      {/* 4. THE COLLECTION */}  
-      <section className="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-neutral-900 force-black">  
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-16">  
-          {properties.map((prop) => (  
-            <div key={prop.id} className="group cursor-pointer">  
-              <div className="aspect-[4/5] overflow-hidden mb-8 bg-neutral-900 shadow-2xl">  
-                <img   
-                  src={prop.image}   
-                  alt={prop.name}  
-                  className="w-full h-full object-cover grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:scale-110"  
-                />  
-              </div>  
-              <h3 className="!text-white !font-serif text-3xl mb-2">{prop.name}</h3>  
-              <p className="text-neutral-500 uppercase tracking-[0.3em] text-[10px]" dangerouslySetInnerHTML={{ __html: prop.location }} />  
-            </div>  
-          ))}  
-        </div>  
-      </section>
-
-      <footer className="py-12 border-t border-neutral-900 text-center force-black">  
-        <p className="text-neutral-700 text-[10px] uppercase tracking-[0.5em]">NexVoyage Collective &copy; 2026</p>  
+      <footer className="py-20 text-center border-t border-white/5 opacity-40">  
+        <p className="text-xs tracking-[0.5em] uppercase">NexVoyage Collective &copy; 2026</p>  
       </footer>  
     </main>  
   );  
