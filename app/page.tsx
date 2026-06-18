@@ -17,7 +17,7 @@ const HomePage = () => {
     { name: "OETKER COLLECTION", label: "Pearl Partner", font: "font-serif tracking-tighter" },  
     { name: "HYATT PRIVÉ", label: "Elite Tier", font: "font-sans tracking-widest" }  
   ];
-
+ 
   const featured = [  
     { name: "Aman New York", location: "Manhattan, USA", img: "https://www.aman.com/sites/default/files/2022-08/Correct_Aman%20New%20York_Landscape.jpg" },  
     { name: "Hotel Amigo", location: "Brussels, Belgium", img: "https://cdn.marblism.com/eJbtOstda_Y.web" },  
