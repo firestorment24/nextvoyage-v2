@@ -176,29 +176,35 @@ const HomePage = () => {
   </div>  
 </section>  
       
-      {/* The Guardian Layer (Services) */}  
-      <section className="py-32 border-t border-brass/10">  
-        <div className="max-w-4xl mx-auto text-center px-6">  
-          <h2 className="brass-text text-sm uppercase tracking-[0.4em] mb-8">Cornerstone Assurance</h2>  
-          <p className="white-text text-2xl md:text-4xl font-serif leading-relaxed mb-12">  
-            We manage the complexities behind the scenes so you can remain focused on what matters most. From discreet off-market villa acquisitions to seamless global logistics and personalized concierge support, we provide an invisible layer of expertise, access, and protection at every stage of your journey.
-          </p>  
-          <div className="grid md:grid-cols-3 gap-8 text-left border-t border-brass/10 pt-12">  
-            <div>  
-              <span className="brass-text block mb-2 text-xs uppercase tracking-widest">The Private Collection</span>  
-              <p className="white-text text-sm opacity-70">Gain entry to an off-market collection of private islands, historic estates, and urban sanctuaries that never touch a public booking engine. Our access isn't just about availability; it’s about the unlisted—properties reserved exclusively for those who value absolute discretion.</p>  
-            </div>  
-            <div>  
-              <span className="brass-text block mb-2 text-xs uppercase tracking-widest">The Sentinel Standard</span>  
-              <p className="white-text text-sm opacity-70 "Our standards extend far beyond aesthetics. We carefully evaluate every property, partner, and experience for service excellence, discretion, reliability, and operational integrity. From pre-arrival inspections and personalized arrival planning to seamless coordination throughout your journey, we ensure every detail is thoughtfully managed—creating an experience that is as effortless as it is exceptional.></p>  
-            </div>  
-            <div>  
-              <span className="brass-text block mb-2 text-xs uppercase tracking-widest">Stewardship</span>  
-              <p className="white-text text-sm opacity-70 "Effortless global travel, personally managed through a dedicated advisor who remains with you every step of the way.></p>  
-            </div>  
-          </div>  
-        </div>  
-      </section>
+      {/* The Guardian Layer Pillars */}  
+<div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-24">  
+  {/* Column 1: Access */}  
+  <div className="space-y-4 border-t border-zinc-800 pt-8">  
+    <span className="text-[10px] text-zinc-500 font-mono uppercase tracking-[0.2em]">01 / Access</span>  
+    <h3 className="text-white text-lg font-light tracking-widest uppercase">The Private Collection</h3>  
+    <p className="text-zinc-400 text-sm leading-relaxed font-light">  
+      Beyond the reach of public listings lies a sequestered ledger of unlisted estates and off-market retreats, secured through two decades of global leverage.  
+    </p>  
+  </div>
+
+  {/* Column 2: Intelligence */}  
+  <div className="space-y-4 border-t border-zinc-800 pt-8">  
+    <span className="text-[10px] text-zinc-500 font-mono uppercase tracking-[0.2em]">02 / Intelligence</span>  
+    <h3 className="text-white text-lg font-light tracking-widest uppercase">The Sentinel Standard</h3>  
+    <p className="text-zinc-400 text-sm leading-relaxed font-light">  
+      We vet for what cannot be seen. From technical security to behavioral vetting, every property and partner is audited to ensure your absolute sanctuary.  
+    </p>  
+  </div>
+
+  {/* Column 3: Continuity */}  
+  <div className="space-y-4 border-t border-zinc-800 pt-8">  
+    <span className="text-[10px] text-zinc-500 font-mono uppercase tracking-[0.2em]">03 / The Constant</span>  
+    <h3 className="text-white text-lg font-light tracking-widest uppercase">Seamless Stewardship</h3>  
+    <p className="text-zinc-400 text-sm leading-relaxed font-light">  
+      A singular, unwavering point of contact for your entire global footprint. We manage the friction of travel so you never have to encounter it.  
+    </p>  
+  </div>  
+</div>  
 
       {/* Footer */}  
       <footer className="py-12 border-t border-brass/10 text-center">  
