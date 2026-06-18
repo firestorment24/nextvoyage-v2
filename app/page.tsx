@@ -32,10 +32,13 @@ const HomePage = () => {
           background-color: transparent !important;   
           box-shadow: none !important;   
           text-shadow: none !important;  
-          border-color: rgba(212, 175, 55, 0.2) !important;  
+          border-color: rgba(212, 175, 55, 0.15) !important;  
         }  
-        html, body, main, section, div[class*="container"] {   
+        html, body, main {   
           background-color: #000000 !important;   
+        }  
+        section, div[class*="container"] {   
+          background-color: transparent !important;   
         }  
         h1, h2, h3, p, span, a, li {   
           background: none !important;  
@@ -43,28 +46,36 @@ const HomePage = () => {
           backdrop-filter: none !important;  
           -webkit-backdrop-filter: none !important;  
         }  
-        .hero-overlay {  
-          background: linear-gradient(to bottom, rgba(0,0,0,0.1), #000000) !important;  
-        }  
         .brass-text { color: #d4af37 !important; }  
         .white-text { color: #ffffff !important; }  
+          
+        .animate-fade-in {  
+          animation: fadeIn 2s ease-in-out;  
+        }  
+        @keyframes fadeIn {  
+          from { opacity: 0; transform: translateY(10px); }  
+          to { opacity: 1; transform: translateY(0); }  
+        }  
       `}} />
 
       {/* Hero Section */}  
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">  
+      <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">  
         <Image   
           src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/9a/b3/f2/chable-villa.jpg?w=1800&h=-1&s=1"  
           alt="Chablé Villa"  
           fill  
           className="object-cover opacity-60"  
           priority  
+          quality={100}  
         />  
-        <div className="hero-overlay absolute inset-0" />  
-        <div className="relative z-10 text-center px-4">  
-          <h1 className="brass-text text-5xl md:text-7xl font-serif mb-4 tracking-tighter">  
+        {/* Dark Overlay to blend with the Shadow aesthetic */}  
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black" />  
+          
+        <div className="relative z-10 text-center px-4 max-w-5xl">  
+          <h1 className="brass-text text-5xl md:text-8xl font-serif mb-6 tracking-tighter animate-fade-in">  
             The Art of Discerning Travel  
           </h1>  
-          <p className="text-xl md:text-2xl font-light tracking-widest uppercase opacity-80">  
+          <p className="white-text text-lg md:text-xl font-light tracking-[0.4em] uppercase opacity-80">  
             Private Sanctuaries & Bespoke Journeys  
           </p>  
         </div>  
@@ -90,7 +101,7 @@ const HomePage = () => {
       </section>
 
       {/* Featured Sanctuaries */}  
-      <section className="py-24 bg-black">  
+      <section className="py-24">  
         <div className="max-w-7xl mx-auto px-6">  
           <div className="flex justify-between items-end mb-12">  
             <h2 className="brass-text text-4xl font-serif">The Sanctuary Collection</h2>  
@@ -148,4 +159,4 @@ const HomePage = () => {
   );  
 };
 
-export default HomePage; 
+export default HomePage;  
