@@ -1,152 +1,151 @@
 import React from 'react';  
-import Navigation from '@/components/Navigation';
+import Link from 'next/link';  
+import Image from 'next/image';
 
-export default function HomePage() {  
+const HomePage = () => {  
   const partners = [  
-    { name: "FORA TRAVEL", font: "font-sans tracking-[0.3em]", type: "Flagship Partner" },  
-    { name: "VIRTUOSO", font: "font-serif italic tracking-widest", type: "Preferred Network" },  
-    { name: "AMAN", font: "font-sans tracking-[0.5em]", type: "Direct Access" },  
-    { name: "FOUR SEASONS", font: "font-serif tracking-tighter", type: "Preferred Partner" },  
-    { name: "BELMOND", font: "font-serif italic", type: "Bellini Club" },  
-    { name: "ROSEWOOD", font: "font-sans tracking-widest uppercase", type: "Elite Member" },  
-    { name: "MANDARIN ORIENTAL", font: "font-serif uppercase tracking-normal", type: "Fan Club" },  
-    { name: "PENINSULA", font: "font-serif tracking-tight", type: "PenClub Status" },  
-    { name: "DORCHESTER", font: "font-serif uppercase italic", type: "Diamond Club" },  
-    { name: "AUBERGE", font: "font-sans font-light", type: "Preferred Status" },  
-    { name: "OETKER COLLECTION", font: "font-serif tracking-widest", type: "Pearl Partner" },  
-    { name: "HYATT PRIVÉ", font: "font-sans font-bold tracking-tighter", type: "Elite Tier" }  
+    { name: "FORA TRAVEL", label: "Flagship Partner", font: "font-serif tracking-tighter" },  
+    { name: "VIRTUOSO", label: "Preferred Network", font: "font-sans tracking-widest uppercase" },  
+    { name: "AMAN", label: "Strategic Alliance", font: "font-serif tracking-widest" },  
+    { name: "FOUR SEASONS", label: "Preferred Partner", font: "font-sans tracking-tight uppercase" },  
+    { name: "BELMOND", label: "Bellini Club", font: "font-serif italic tracking-wide" },  
+    { name: "ROSEWOOD", label: "Elite Member", font: "font-sans tracking-widest uppercase" },  
+    { name: "MANDARIN ORIENTAL", label: "Fan Club", font: "font-serif tracking-normal" },  
+    { name: "PENINSULA", label: "PenClub", font: "font-serif tracking-widest uppercase" },  
+    { name: "DORCHESTER", label: "Diamond Club", font: "font-serif tracking-tight" },  
+    { name: "AUBERGE", label: "Direct Access", font: "font-sans tracking-widest uppercase" },  
+    { name: "OETKER COLLECTION", label: "Pearl Partner", font: "font-serif tracking-tighter" },  
+    { name: "HYATT PRIVÉ", label: "Elite Tier", font: "font-sans tracking-widest" }  
+  ];
+
+  const featured = [  
+    { name: "Aman New York", location: "Manhattan, USA", img: "https://www.aman.com/sites/default/files/2022-08/Correct_Aman%20New%20York_Landscape.jpg" },  
+    { name: "Hotel Amigo", location: "Brussels, Belgium", img: "https://images.luxuryhotelsmag.com/nv-ldr-006-amigo.jpg" },  
+    { name: "Habitas AlUla", location: "Ashar Valley, Saudi Arabia", img: "https://www.ourhabitas.com/wp-content/uploads/2021/12/Habitas_Al-Ula_2021_01_000008.jpg" }  
   ];
 
   return (  
-    <main className="min-h-screen bg-black text-white selection:bg-[#D4AF37]/30">  
-      {/* NUCLEAR CSS: LOCKING BRASS & SHADOW */}  
+    <main className="min-h-screen bg-black text-white font-sans selection:bg-brass/30">  
+      {/* NUCLEAR FIX 5.0: EXTERMINATING GHOST BOXES */}  
       <style dangerouslySetInnerHTML={{ __html: `  
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Inter:wght@200;300;400&display=swap');  
-          
-        html, body, main { background-color: #000 !important; font-family: 'Inter', sans-serif; }  
-        .font-serif { font-family: 'Cormorant Garamond', serif; }  
-          
-        h1 { color: #D4AF37 !important; font-family: 'Cormorant Garamond', serif; }  
-        h2 { color: #FFFFFF !important; font-family: 'Cormorant Garamond', serif; }  
-        h3 { color: #D4AF37 !important; font-family: 'Cormorant Garamond', serif; }  
-          
-        section, div { background-color: transparent !important; }  
-      ` }} />
+        * {   
+          background-color: transparent !important;   
+          box-shadow: none !important;   
+          text-shadow: none !important;  
+          border-color: rgba(212, 175, 55, 0.2) !important;  
+        }  
+        html, body, main, section, div[class*="container"] {   
+          background-color: #000000 !important;   
+        }  
+        h1, h2, h3, p, span, a, li {   
+          background: none !important;  
+          background-color: transparent !important;  
+          backdrop-filter: none !important;  
+          -webkit-backdrop-filter: none !important;  
+        }  
+        .hero-overlay {  
+          background: linear-gradient(to bottom, rgba(0,0,0,0.1), #000000) !important;  
+        }  
+        .brass-text { color: #d4af37 !important; }  
+        .white-text { color: #ffffff !important; }  
+      `}} />
 
-      <Navigation />
-
-      {/* 1. HERO SECTION */}  
+      {/* Hero Section */}  
       <section className="relative h-screen flex items-center justify-center overflow-hidden">  
-        <div className="absolute inset-0 z-0">  
-          <img   
-            src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/9a/b3/f2/chable-villa.jpg?w=1800&h=-1&s=1"   
-            alt="Chablé Villa"   
-            className="w-full h-full object-cover opacity-60 scale-105"  
-          />  
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black" />  
-        </div>  
-          
-        <div className="relative z-10 text-center px-6">  
-          <h1 className="text-7xl md:text-[11rem] leading-[0.8] tracking-tighter opacity-90 mb-4">  
-            NexVoyage  
+        <Image   
+          src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/9a/b3/f2/chable-villa.jpg?w=1800&h=-1&s=1"  
+          alt="Chablé Villa"  
+          fill  
+          className="object-cover opacity-60"  
+          priority  
+        />  
+        <div className="hero-overlay absolute inset-0" />  
+        <div className="relative z-10 text-center px-4">  
+          <h1 className="brass-text text-5xl md:text-7xl font-serif mb-4 tracking-tighter">  
+            The Art of Discerning Travel  
           </h1>  
-          <p className="text-lg md:text-xl tracking-[0.5em] uppercase font-light text-white/60">  
-            The Collective Sanctuary  
+          <p className="text-xl md:text-2xl font-light tracking-widest uppercase opacity-80">  
+            Private Sanctuaries & Bespoke Journeys  
           </p>  
         </div>  
       </section>
 
-      {/* 2. PARTNERSHIP NETWORK (4x3 Grid) */}  
-      <section className="py-32 px-8 md:px-24 border-t border-white/5">  
-        <div className="max-w-7xl mx-auto">  
-          <h2 className="text-5xl md:text-6xl mb-24 tracking-tight text-center">Strategic Alliances</h2>  
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-12 gap-y-24">  
-            {partners.map((p, i) => (  
-              <div key={i} className="text-center group">  
-                <p className={`${p.font} text-lg md:text-xl text-white group-hover:text-[#D4AF37] transition-colors duration-500`}>  
-                  {p.name}  
-                </p>  
-                <span className="text-[10px] uppercase tracking-[0.3em] text-white/30 mt-4 block">  
-                  {p.type}  
-                </span>  
-              </div>  
-            ))}  
-          </div>  
+      {/* Partner Alliance Grid */}  
+      <section className="py-24 px-6 max-w-6xl mx-auto">  
+        <h2 className="white-text text-xs uppercase tracking-[0.3em] mb-16 text-center opacity-50">  
+          The Global Alliance  
+        </h2>  
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-y-16 gap-x-8">  
+          {partners.map((partner, i) => (  
+            <div key={i} className="text-center group">  
+              <span className={`white-text text-lg block mb-2 ${partner.font} group-hover:text-[#d4af37] transition-colors`}>  
+                {partner.name}  
+              </span>  
+              <span className="brass-text text-[10px] uppercase tracking-widest opacity-60">  
+                {partner.label}  
+              </span>  
+            </div>  
+          ))}  
         </div>  
       </section>
 
-      {/* 3. FEATURED PROPERTIES (Journal Assets) */}  
-      <section className="py-32 px-8 md:px-24 bg-[#050505]">  
-        <div className="max-w-7xl mx-auto">  
-          <h2 className="text-5xl md:text-6xl mb-20 tracking-tight italic text-center">The Journal Selects</h2>  
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">  
-            {[  
-              { name: "Amangiri", location: "Canyon Point, Utah", img: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b" },  
-              { name: "Soneva Jani", location: "Noonu Atoll, Maldives", img: "https://images.unsplash.com/photo-1544644181-1484b3fdfc62" },  
-              { name: "Hôtel de Crillon", location: "Paris, France", img: "https://images.unsplash.com/photo-1551882547-ff43c63fedfe" }  
-            ].map((prop, i) => (  
-              <div key={i} className="group cursor-pointer">  
-                <div className="aspect-[3/4] overflow-hidden border border-white/10 mb-8">  
-                  <img src={prop.img} alt={prop.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000" />  
+      {/* Featured Sanctuaries */}  
+      <section className="py-24 bg-black">  
+        <div className="max-w-7xl mx-auto px-6">  
+          <div className="flex justify-between items-end mb-12">  
+            <h2 className="brass-text text-4xl font-serif">The Sanctuary Collection</h2>  
+            <Link href="/archive" className="white-text text-xs uppercase tracking-widest border-b border-brass pb-1 opacity-70 hover:opacity-100 transition-opacity">  
+              View Entire Ledger  
+            </Link>  
+          </div>  
+          <div className="grid md:grid-cols-3 gap-12">  
+            {featured.map((item, i) => (  
+              <div key={i} className="space-y-4 group cursor-pointer">  
+                <div className="relative aspect-[4/5] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">  
+                  <Image src={item.img} alt={item.name} fill className="object-cover" />  
                 </div>  
-                <h3 className="text-3xl mb-2">{prop.name}</h3>  
-                <p className="text-xs uppercase tracking-widest text-white/40">{prop.location}</p>  
+                <div>  
+                  <h3 className="white-text text-xl font-medium tracking-tight">{item.name}</h3>  
+                  <p className="brass-text text-xs uppercase tracking-widest opacity-60">{item.location}</p>  
+                </div>  
               </div>  
             ))}  
           </div>  
         </div>  
       </section>
 
-      {/* 4. CORE SERVICES */}  
-      <section className="py-40 px-8 md:px-24 border-t border-white/5">  
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-24 items-center">  
-          <div>  
-            <h2 className="text-6xl mb-8 leading-tight">Private Management & Invisible Advocacy</h2>  
-            <p className="text-lg text-white/60 leading-relaxed font-light font-sans max-w-lg">  
-              We operate as the silent interface between you and the world's most exclusive travel institutions. Our mission is to secure your continuity of lifestyle, regardless of coordinates.  
-            </p>  
-          </div>  
-          <div className="grid grid-cols-1 gap-12">  
-            {[  
-              { title: "Tactical Planning", desc: "Minute-by-minute logistical orchestration for complex global movements." },  
-              { title: "Status Negotiation", desc: "Leveraging the Collective to ensure you are recognized as the highest priority." },  
-              { title: "Security Liaison", desc: "Seamless integration with private security details and vetting protocols." }  
-            ].map((s, i) => (  
-              <div key={i} className="border-l border-[#D4AF37]/40 pl-8">  
-                <h3 className="text-2xl mb-2 uppercase tracking-wide">{s.title}</h3>  
-                <p className="text-sm text-white/50 font-sans font-light">{s.desc}</p>  
-              </div>  
-            ))}  
-          </div>  
-        </div>  
-      </section>
-
-      {/* 5. EXCLUSIVE PERKS */}  
-      <section className="py-32 px-8 md:px-24 bg-white/5">  
-        <div className="max-w-5xl mx-auto text-center">  
-          <h2 className="text-5xl md:text-6xl mb-16 tracking-tight">The Perks of Partnership</h2>  
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">  
-            {[  
-              "Daily $100+ Credits",  
-              "Room Upgrades",  
-              "Early Check-In",  
-              "Late Check-Out",  
-              "Private VIP Transfers",  
-              "Aman Insider Access",  
-              "Fora Priority",  
-              "Direct GM Liaisons"  
-            ].map((perk, i) => (  
-              <div key={i} className="py-6 px-4 border border-white/5 bg-black/40">  
-                <p className="text-[10px] uppercase tracking-[0.4em] font-sans font-light text-[#D4AF37]">{perk}</p>  
-              </div>  
-            ))}  
+      {/* The Guardian Layer (Services) */}  
+      <section className="py-32 border-t border-brass/10">  
+        <div className="max-w-4xl mx-auto text-center px-6">  
+          <h2 className="brass-text text-sm uppercase tracking-[0.4em] mb-8">The Guardian Layer</h2>  
+          <p className="white-text text-2xl md:text-4xl font-serif leading-relaxed mb-12">  
+            We operate in the shadows so you can remain in the light. From off-market villa acquisitions to 24/7 global extraction logistics, our concierge is your invisible perimeter.  
+          </p>  
+          <div className="grid md:grid-cols-3 gap-8 text-left border-t border-brass/10 pt-12">  
+            <div>  
+              <span className="brass-text block mb-2 text-xs uppercase tracking-widest">01. Access</span>  
+              <p className="white-text text-sm opacity-70">Unlisted inventory and private-member-only estates worldwide.</p>  
+            </div>  
+            <div>  
+              <span className="brass-text block mb-2 text-xs uppercase tracking-widest">02. Intelligence</span>  
+              <p className="white-text text-sm opacity-70">Deep-dive property vetting and real-time security coordination.</p>  
+            </div>  
+            <div>  
+              <span className="brass-text block mb-2 text-xs uppercase tracking-widest">03. Continuity</span>  
+              <p className="white-text text-sm opacity-70">Seamless travel transition with a single point of contact globally.</p>  
+            </div>  
           </div>  
         </div>  
       </section>
 
-      <footer className="py-20 text-center border-t border-white/5 opacity-40">  
-        <p className="text-[10px] tracking-[0.6em] uppercase">NexVoyage Collective © 2026</p>  
+      {/* Footer */}  
+      <footer className="py-12 border-t border-brass/10 text-center">  
+        <p className="brass-text text-[10px] uppercase tracking-[0.5em] opacity-40">  
+          NexVoyage Collective &copy; 2026 | Pure Discretion  
+        </p>  
       </footer>  
     </main>  
   );  
-}  
+};
+
+export default HomePage; 
