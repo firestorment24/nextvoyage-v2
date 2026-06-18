@@ -55,7 +55,24 @@ export default function HomePage() {
         </div>  
       </section>
 
-      {/* Property Grid */}  
+      {/* Strategic Alliances */}  
+      <section className="py-24 border-t border-neutral-900">  
+        <div className="max-w-7xl mx-auto px-6 md:px-12 text-center">  
+          <h2 className="!text-white font-serif text-3xl mb-16 italic text-center">Strategic Alliances</h2>  
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-12 gap-x-8">  
+            {partners.map((partner) => (  
+              <div key={partner.name} className="flex flex-col items-center">  
+                <span className="!text-white uppercase tracking-[0.2em] text-xs mb-2">{partner.name}</span>  
+                <span className="text-neutral-600 text-[10px] uppercase tracking-widest">{partner.role}</span>  
+              </div>  
+            ))}  
+          </div>  
+        </div>  
+      </section>  
+    </main>  
+  
+
+{/* Property Grid */}  
       <section className="py-24 px-6 md:px-12 max-w-7xl mx-auto">  
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">  
           {properties.map((prop) => (  
@@ -73,21 +90,5 @@ export default function HomePage() {
           ))}  
         </div>  
       </section>
-
-      {/* Strategic Alliances */}  
-      <section className="py-24 border-t border-neutral-900">  
-        <div className="max-w-7xl mx-auto px-6 md:px-12 text-center">  
-          <h2 className="!text-white font-serif text-3xl mb-16 italic text-center">Strategic Alliances</h2>  
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-12 gap-x-8">  
-            {partners.map((partner) => (  
-              <div key={partner.name} className="flex flex-col items-center">  
-                <span className="!text-white uppercase tracking-[0.2em] text-xs mb-2">{partner.name}</span>  
-                <span className="text-neutral-600 text-[10px] uppercase tracking-widest">{partner.role}</span>  
-              </div>  
-            ))}  
-          </div>  
-        </div>  
-      </section>  
-    </main>  
-  );  
+);  
 }  
