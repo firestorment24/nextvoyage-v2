@@ -102,9 +102,7 @@ export default function InvitationPage() {
       <main className="min-h-screen bg-[#0A0A0A] text-white px-6 py-16 flex flex-col items-center">
         {/* ── Letterhead ──────────────────────────────────── */}
         <div className="w-full max-w-2xl mb-12 text-center">
-          <p className="font-['Inter'] text-[#d4af37] tracking-[0.15em] text-xs uppercase mb-2">
-            Rachel — Reception & Orchestration
-          </p>
+        
           <div className="w-16 h-[1px] bg-[#d4af37]/30 mx-auto mb-4" />
           <h1 className="font-['Cormorant_Garamond'] text-white text-3xl sm:text-4xl font-light tracking-wide">
             Application for Entry
