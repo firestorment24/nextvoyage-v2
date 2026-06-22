@@ -132,7 +132,7 @@ export default function AdminPage() {
               color: '#0A0A0A',
               border: 'none',
               borderRadius: '4px',
-              padding: '0.75rem',
+              padding: '6rem 2rem 2rem',
               fontFamily: 'Inter, sans-serif',
               fontWeight: 600,
               fontSize: '0.85rem',
