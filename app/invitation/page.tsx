@@ -100,8 +100,7 @@ export default function InvitationPage() {
 
         <form onSubmit={onSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 20, background: 'transparent' }}>
 
-          {/* 01 */}  
-          <p style={s.num}>01</p>  
+          {/* 01 */}    
           <h2 style={s.secTitle}>Traveler Profile</h2>
 
           <div style={s.field}>  
@@ -119,8 +118,7 @@ export default function InvitationPage() {
 
           <div style={{ height: 32, background: 'transparent' }} />
 
-          {/* 02 */}  
-          <p style={s.num}>02</p>  
+          {/* 02 */}   
           <h2 style={s.secTitle}>Trip Parameters</h2>
 
           <div style={s.field}>  
@@ -150,8 +148,7 @@ export default function InvitationPage() {
 
           <div style={{ height: 32, background: 'transparent' }} />
 
-          {/* 03 */}  
-          <p style={s.num}>03</p>  
+          {/* 03 */}   
           <h2 style={s.secTitle}>Additional Information</h2>
 
         
