@@ -57,10 +57,7 @@ export default function InvitationPage() {
     return (
       <main className="min-h-screen bg-[#0A0A0A] flex items-center justify-center px-6">
         <div className="text-center max-w-lg">
-          <p className="font-['Inter'] text-[#d4af37] tracking-[0.15em] text-xs uppercase mb-6">
-            Rachel — Reception & Orchestration
-          </p>
-          <h1 className="font-['Cormorant_Garamond'] text-white text-4xl sm:text-5xl font-light tracking-wide mb-4">
+                    <h1 className="font-['Cormorant_Garamond'] text-white text-4xl sm:text-5xl font-light tracking-wide mb-4">
             Application Received
           </h1>
           <div className="w-12 h-[1px] bg-[#d4af37]/40 mx-auto mb-6" />
