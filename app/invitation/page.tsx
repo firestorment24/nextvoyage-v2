@@ -135,9 +135,9 @@ export default function InvitationPage() {
           {/* ─── SECTION 1: The Sovereign Profile ─────────── */}  
           <section>  
             <h2 className="font-['Cormorant_Garamond'] text-white text-xl sm:text-2xl font-light tracking-wide mb-1">  
-              The Sovereign Profile  
+              TProfile  
             </h2>  
-            <p className="font-['Inter'] text-[#c8c8c8]/40 text-xs tracking-[0.1em] uppercase mb-6">  
+            <p className="font-['Inter'] text-[#D4AF37]/40 text-xs tracking-[0.1em] uppercase mb-6">  
               Who is traveling  
             </p>  
             <div className="space-y-5">  
@@ -148,12 +148,12 @@ export default function InvitationPage() {
             </div>  
           </section>
 
-          {/* ─── SECTION 2: Mission Parameters ────────────── */}  
+          {/* ─── SECTION 2: Travel Parameters ────────────── */}  
           <section>  
             <h2 className="font-['Cormorant_Garamond'] text-white text-xl sm:text-2xl font-light tracking-wide mb-1">  
-              Mission Parameters  
+              Travel Parameters  
             </h2>  
-            <p className="font-['Inter'] text-[#c8c8c8]/40 text-xs tracking-[0.1em] uppercase mb-6">  
+            <p className="font-['Inter'] text-[#D4AF37]/40 text-xs tracking-[0.1em] uppercase mb-6">  
               The itinerary  
             </p>  
             <div className="space-y-5">  
@@ -167,9 +167,9 @@ export default function InvitationPage() {
           {/* ─── SECTION 3: Cultural Fit ──────────────────── */}  
           <section>  
             <h2 className="font-['Cormorant_Garamond'] text-white text-xl sm:text-2xl font-light tracking-wide mb-1">  
-              Cultural Fit  
+              Additional Information  
             </h2>  
-            <p className="font-['Inter'] text-[#c8c8c8]/40 text-xs tracking-[0.1em] uppercase mb-6">  
+            <p className="font-['Inter'] text-[#D4AF37]/40 text-xs tracking-[0.1em] uppercase mb-6">  
               How you found us  
             </p>  
             <div className="space-y-5">  
@@ -194,20 +194,13 @@ export default function InvitationPage() {
           <div className="text-center pt-4">  
             <button  
               type="submit"  
-              className="font-['Inter'] text-xs tracking-[0.2em] uppercase text-white bg-[#d4af37]/10 border border-[#d4af37]/30 px-10 py-4 hover:bg-[#d4af37]/20 hover:border-[#d4af37]/60 transition-all duration-500"  
+              className="font-['Inter'] text-xs tracking-[0.2em] uppercase text-[#D4AF37] bg-[#d4af37]/10 border border-[#d4af37]/30 px-10 py-4 hover:bg-[#d4af37]/20 hover:border-[#d4af37]/60 transition-all duration-500"  
             >  
               Submit Application  
             </button>  
           </div>  
         </form>
-
-        {/* ── Footer ──────────────────────────────────────── */}  
-        <div className="w-full max-w-2xl mt-16 pt-8 border-t border-[#d4af37]/10 text-center">  
-          <p className="font-['Cormorant_Garamond'] text-[#c8c8c8]/30 text-sm italic">  
-            Rachel — Reception & Orchestration &ensp;•&ensp; NexVoyage Collective  
-          </p>  
-        </div>  
-      </main>  
+            </main>  
     </>  
   );  
 }
