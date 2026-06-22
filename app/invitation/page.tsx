@@ -57,7 +57,10 @@ export default function InvitationPage() {
     return (
       <main className="min-h-screen bg-[#0A0A0A] flex items-center justify-center px-6">
         <div className="text-center max-w-lg">
-                    <h1 className="font-['Cormorant_Garamond'] text-white text-4xl sm:text-5xl font-light tracking-wide mb-4">
+          <p className="font-['Inter'] text-[#d4af37] tracking-[0.15em] text-xs uppercase mb-6">
+            Rachel — Reception & Orchestration
+          </p>
+          <h1 className="font-['Cormorant_Garamond'] text-white text-4xl sm:text-5xl font-light tracking-wide mb-4">
             Application Received
           </h1>
           <div className="w-12 h-[1px] bg-[#d4af37]/40 mx-auto mb-6" />
@@ -102,7 +105,9 @@ export default function InvitationPage() {
       <main className="min-h-screen bg-[#0A0A0A] text-white px-6 py-16 flex flex-col items-center">
         {/* ── Letterhead ──────────────────────────────────── */}
         <div className="w-full max-w-2xl mb-12 text-center">
-        
+          <p className="font-['Inter'] text-[#d4af37] tracking-[0.15em] text-xs uppercase mb-2">
+            Rachel — Reception & Orchestration
+          </p>
           <div className="w-16 h-[1px] bg-[#d4af37]/30 mx-auto mb-4" />
           <h1 className="font-['Cormorant_Garamond'] text-white text-3xl sm:text-4xl font-light tracking-wide">
             Application for Entry
@@ -114,7 +119,7 @@ export default function InvitationPage() {
           {/* ─── SECTION 1: The Sovereign Profile ─────────── */}
           <section>
             <h2 className="font-['Cormorant_Garamond'] text-white text-xl sm:text-2xl font-light tracking-wide mb-1">
-              Traveler Profile
+              The Sovereign Profile
             </h2>
             <p className="font-['Inter'] text-[#c8c8c8]/40 text-xs tracking-[0.1em] uppercase mb-6">
               Who is traveling
@@ -130,7 +135,7 @@ export default function InvitationPage() {
           {/* ─── SECTION 2: Mission Parameters ────────────── */}
           <section>
             <h2 className="font-['Cormorant_Garamond'] text-white text-xl sm:text-2xl font-light tracking-wide mb-1">
-              Travel Parameters
+              Mission Parameters
             </h2>
             <p className="font-['Inter'] text-[#c8c8c8]/40 text-xs tracking-[0.1em] uppercase mb-6">
               The itinerary
@@ -146,7 +151,7 @@ export default function InvitationPage() {
           {/* ─── SECTION 3: Cultural Fit ──────────────────── */}
           <section>
             <h2 className="font-['Cormorant_Garamond'] text-white text-xl sm:text-2xl font-light tracking-wide mb-1">
-              Additional Information
+              Cultural Fit
             </h2>
             <p className="font-['Inter'] text-[#c8c8c8]/40 text-xs tracking-[0.1em] uppercase mb-6">
               How you found us
