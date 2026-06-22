@@ -95,10 +95,8 @@ export default function InvitationPage() {
 
   return (  
     <main style={s.page}>  
-      <div style={{ maxWidth: 560, width: '100%', margin: '0 auto', background: 'transparent' }}>  
-        <p style={s.badge}>RACHEL — RECEPTION & ORCHESTRATION</p>  
-        <h1 style={s.h1}>Application for Entry</h1>  
-        <p style={s.sub}>The Collective operates on invitation. Submit your profile below for consideration.</p>
+      <div style={{ maxWidth: 560, width: '100%', margin: '0 auto', background: 'transparent' }}>   
+        <h1 style={s.h1}>Inquiry</h1>  
 
         <form onSubmit={onSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 20, background: 'transparent' }}>
 
@@ -170,12 +168,10 @@ export default function InvitationPage() {
           {error && <p style={{ color: '#c0392b', fontSize: 13 }}>{error}</p>}
 
           <button type="submit" disabled={loading} style={s.btn}>  
-            {loading ? 'Transmitting…' : 'Submit Application'}  
+            {loading ? 'Transmitting…' : 'Start the Conversation'}  
           </button>  
         </form>  
-      </div>
-
-      <p style={s.footer}>Rachel — Reception & Orchestration • NexVoyage Collective</p>  
+      </div> 
       <style>{nukeCss}</style>  
     </main>  
   )  
