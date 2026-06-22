@@ -155,31 +155,7 @@ background: '#0A0A0A',
 color: '#F5F5F0',  
 fontFamily: 'Inter, sans-serif',  
 paddingTop: '6rem',  
-position: 'relative',  
 }}>  
-<button  
-onClick={() => {  
-setIsAuthenticated(false)  
-setPassword('')  
-}}  
-style={{  
-position: 'fixed',  
-top: '1rem',  
-right: '1rem',  
-background: '#1A1A1A',  
-border: '1px solid #2A2A2A',  
-borderRadius: '4px',  
-color: '#F5F5F0',  
-padding: '0.5rem 1rem',  
-fontFamily: 'Inter, sans-serif',  
-fontSize: '0.8rem',  
-cursor: 'pointer',  
-zIndex: 9999,  
-}}  
->  
-Sign Out  
-</button>
-
 <main style={{ padding: '0 2rem 2rem', maxWidth: '1200px', margin: '0 auto' }}>  
 <div style={{  
 display: 'grid',  
@@ -360,6 +336,27 @@ View
 </div>  
 ))  
 )}  
+</div>
+
+<div style={{ textAlign: 'center', marginTop: '2rem', paddingBottom: '2rem' }}>  
+<button  
+onClick={() => {  
+setIsAuthenticated(false)  
+setPassword('')  
+}}  
+style={{  
+background: '#1A1A1A',  
+border: '1px solid #2A2A2A',  
+borderRadius: '4px',  
+color: '#F5F5F0',  
+padding: '0.5rem 1.5rem',  
+fontFamily: 'Inter, sans-serif',  
+fontSize: '0.8rem',  
+cursor: 'pointer',  
+}}  
+>  
+Sign Out  
+</button>  
 </div>  
 </main>  
 </div>  
