@@ -225,7 +225,7 @@ function Field({
   name: string;  
   type?: string;  
   value: string;  
-  onChange: React.ChangeEvent<HTMLInputElement>["handleChange"];  
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;    
   placeholder: string;  
 }) {  
   return (  
@@ -258,7 +258,7 @@ function SelectField({
   label: string;  
   name: string;  
   value: string;  
-  onChange: React.ChangeEvent<HTMLSelectElement>["handleChange"];  
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;  
   options: string[];  
   placeholder: string;  
 }) {  
