@@ -119,7 +119,7 @@ export default function InvitationPage() {
           {/* ─── SECTION 1: The Sovereign Profile ─────────── */}
           <section>
             <h2 className="font-['Cormorant_Garamond'] text-white text-xl sm:text-2xl font-light tracking-wide mb-1">
-              The Sovereign Profile
+              Traveler Profile
             </h2>
             <p className="font-['Inter'] text-[#c8c8c8]/40 text-xs tracking-[0.1em] uppercase mb-6">
               Who is traveling
@@ -135,7 +135,7 @@ export default function InvitationPage() {
           {/* ─── SECTION 2: Mission Parameters ────────────── */}
           <section>
             <h2 className="font-['Cormorant_Garamond'] text-white text-xl sm:text-2xl font-light tracking-wide mb-1">
-              Mission Parameters
+              Travel Parameters
             </h2>
             <p className="font-['Inter'] text-[#c8c8c8]/40 text-xs tracking-[0.1em] uppercase mb-6">
               The itinerary
@@ -151,7 +151,7 @@ export default function InvitationPage() {
           {/* ─── SECTION 3: Cultural Fit ──────────────────── */}
           <section>
             <h2 className="font-['Cormorant_Garamond'] text-white text-xl sm:text-2xl font-light tracking-wide mb-1">
-              Cultural Fit
+              Additional Information
             </h2>
             <p className="font-['Inter'] text-[#c8c8c8]/40 text-xs tracking-[0.1em] uppercase mb-6">
               How you found us
