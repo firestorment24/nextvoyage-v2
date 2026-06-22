@@ -109,7 +109,7 @@ export default function InvitationPage() {
   if (submitted) {  
     return (  
       <main  
-        className={`${cormorant.variable} ${inter.variable} min-h-screen bg-[#0a0a0a] text-[#c8c8c8] font-[family-name:var(--font-inter)] flex flex-col items-center justify-center px-6`}  
+        className={`${cormorant.variable} ${inter.variable} min-h-screen bg-[#0a0a0a] text-white font-[family-name:var(--font-inter)] flex flex-col items-center justify-center px-6`}  
       >  
         <div className="max-w-lg text-center space-y-8">  
           <div className="space-y-2">  
@@ -121,14 +121,14 @@ export default function InvitationPage() {
             >  
               Application Received  
             </h1>  
-            <p className="text-lg text-[#c8c8c8]/70 font-light italic">  
+            <p className="text-lg text-white/70 font-light italic">  
               Dialogue Initiated  
             </p>  
           </div>
 
           <div className="h-px w-16 bg-[#d4af37]/40 mx-auto" />
 
-          <p className="text-sm text-[#c8c8c8]/60 leading-relaxed max-w-sm mx-auto">  
+          <p className="text-sm text-w/60 leading-relaxed max-w-sm mx-auto">  
             Your travel preferences are now being reviewed by our  
             concierge team. A member of the Collective will reach out  
             within <span className="text-[#d4af37]">48 hours</span>.  
