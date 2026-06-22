@@ -89,7 +89,7 @@ export default function AdminPage() {
           gap: '1.5rem',
           width: '100%',
           maxWidth: '400px',
-          padding: '2rem',
+          padding: '6rem',
         }}>
           <div style={{
             fontFamily: 'Cormorant Garamond, serif',
