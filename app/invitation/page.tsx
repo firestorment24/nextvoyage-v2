@@ -5,160 +5,185 @@ import { useState } from "react";
 import { Cormorant_Garamond, Inter } from "next/font/google";
 
 const cormorant = Cormorant_Garamond({  
-  subsets: ["latin"],  
-  weight: ["300", "400", "500", "600", "700"],  
-  variable: "--font-cormorant",  
+subsets: ["latin"],  
+weight: ["300", "400", "500", "600", "700"],  
+variable: "--font-cormorant",  
 });
 
 const inter = Inter({  
-  subsets: ["latin"],  
-  weight: ["300", "400", "500"],  
-  variable: "--font-inter",  
+subsets: ["latin"],  
+weight: ["300", "400", "500"],  
+variable: "--font-inter",  
 });
 
 const OCCASIONS = [  
-  "Anniversary",  
-  "Birthday",  
-  "Honeymoon",  
-  "Business & Leisure",  
-  "Family Gathering",  
-  "Personal Retreat",  
-  "Exploration",  
-  "Other",  
+"Anniversary",  
+"Birthday",  
+"Honeymoon",  
+"Business & Leisure",  
+"Family Gathering",  
+"Personal Retreat",  
+"Exploration",  
+"Other",  
 ];
 
 const AVIATION_CLASSES = [  
-  "Commercial First Class",  
-  "Commercial Business",  
-  "Private Charter",  
-  "Flexible / Undecided",  
+"Commercial First Class",  
+"Commercial Business",  
+"Private Charter",  
+"Flexible / Undecided",  
 ];
 
 const HEAR_ABOUT = [  
-  "Personal Referral",  
-  "Instagram",  
-  "Word of Mouth",  
-  "Article / Feature",  
-  "Event",  
-  "Other",  
+"Personal Referral",  
+"Instagram",  
+"Word of Mouth",  
+"Article / Feature",  
+"Event",  
+"Other",  
 ];
 
 type FormData = {  
-  name: string;  
-  email: string;  
-  phone: string;  
-  occasion: string;  
-  destinations: string;  
-  travelWindow: string;  
-  partySize: string;  
-  aviationClass: string;  
-  hearAbout: string;  
-  notes: string;  
+name: string;  
+email: string;  
+phone: string;  
+occasion: string;  
+destinations: string;  
+travelWindow: string;  
+partySize: string;  
+aviationClass: string;  
+hearAbout: string;  
+notes: string;  
 };
 
 const initialForm: FormData = {  
-  name: "",  
-  email: "",  
-  phone: "",  
-  occasion: "",  
-  destinations: "",  
-  travelWindow: "",  
-  partySize: "",  
-  aviationClass: "",  
-  hearAbout: "",  
-  notes: "",  
+name: "",  
+email: "",  
+phone: "",  
+occasion: "",  
+destinations: "",  
+travelWindow: "",  
+partySize: "",  
+aviationClass: "",  
+hearAbout: "",  
+notes: "",  
 };
 
 export default function InvitationPage() {  
-  const [form, setForm] = useState<FormData>(initialForm);  
-  const [submitting, setSubmitting] = useState(false);  
-  const [submitted, setSubmitted] = useState(false);  
-  const [manifestId, setManifestId] = useState<string | null>(null);
+const [form, setForm] = useState<FormData>(initialForm);  
+const [submitting, setSubmitting] = useState(false);  
+const [submitted, setSubmitted] = useState(false);  
+const [manifestId, setManifestId] = useState<string | null>(null);
 
-  const handleChange = (  
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>  
-  ) => {  
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));  
-  };
+const handleChange = (  
+  e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>  
+) => {  
+  setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));  
+};
 
-  const handleSubmit = async (e: React.FormEvent) => {  
-    e.preventDefault();  
-    setSubmitting(true);
+const handleSubmit = async (e: React.FormEvent) => {  
+  e.preventDefault();  
+  setSubmitting(true);
 
-    try {  
-      const res = await fetch("/api/lead", {  
-        method: "POST",  
-        headers: { "Content-Type": "application/json" },  
-        body: JSON.stringify(form),  
-      });
+  try {  
+    const res = await fetch("/api/lead", {  
+      method: "POST",  
+      headers: { "Content-Type": "application/json" },  
+      body: JSON.stringify(form),  
+    });
 
-      const data = await res.json();
+    const data = await res.json();
 
-      if (data.success) {  
-        setManifestId(data.manifestId);  
-        setSubmitted(true);  
-      }  
-    } catch {  
-      // silent fail — form remains interactive  
-    } finally {  
-      setSubmitting(false);  
+    if (data.success) {  
+      setManifestId(data.manifestId);  
+      setSubmitted(true);  
     }  
-  };
+  } catch {  
+    // silent fail — form remains interactive  
+  } finally {  
+    setSubmitting(false);  
+  }  
+};
 
-  // ── Success Screen ──────────────────────────────────────────────  
-  if (submitted) {  
-    return (  
-      <main  
-        className={`${cormorant.variable} ${inter.variable} min-h-screen bg-[#0a0a0a] text-[#c8c8c8] font-[family-name:var(--font-inter)] flex flex-col items-center justify-center px-6`}  
-      >  
-        <div className="max-w-lg text-center space-y-8">  
-          <div className="space-y-2">  
-            <p className="text-[10px] tracking-[0.25em] uppercase text-[#d4af37]/60 font-[family-name:var(--font-inter)]">  
-              Rachel — Reception & Orchestration  
-            </p>  
-            <h1  
-              className={`text-4xl sm:text-5xl font-light text-[#d4af37] font-[family-name:var(--font-cormorant)] tracking-wide`}  
-            >  
-              Application Received  
-            </h1>  
-            <p className="text-lg text-[#c8c8c8]/70 font-light italic">  
-              Dialogue Initiated  
-            </p>  
-          </div>
-
-          <div className="h-px w-16 bg-[#d4af37]/40 mx-auto" />
-
-          <p className="text-sm text-[#c8c8c8]/60 leading-relaxed max-w-sm mx-auto">  
-            Your travel preferences are now being reviewed by our  
-            concierge team. A member of the Collective will reach out  
-            within <span className="text-[#d4af37]">48 hours</span>.  
-          </p>
-
-          {manifestId && (  
-            <p className="text-[10px] tracking-[0.2em] uppercase text-[#d4af37]/40 font-[family-name:var(--font-inter)]">  
-              Manifest {manifestId}  
-            </p>  
-          )}
-
-          <div className="pt-8">  
-            <a  
-              href="/"  
-              className="inline-block border border-[#d4af37]/30 text-[#d4af37] text-xs tracking-[0.2em] uppercase px-8 py-3 hover:bg-[#d4af37]/5 transition-colors duration-500"  
-            >  
-              Return  
-            </a>  
-          </div>
-
-          <p className="text-[9px] tracking-[0.3em] uppercase text-[#d4af37]/30 pt-12 font-[family-name:var(--font-inter)]">  
-            Rachel — Reception & Orchestration &bull; NexVoyage Collective  
-          </p>  
-        </div>  
-      </main>  
-    );  
-  }
-
-  // ── Form Screen ─────────────────────────────────────────────────  
+// ── Success Screen ──────────────────────────────────────────────  
+if (submitted) {  
   return (  
+    <main  
+      className={`${cormorant.variable} ${inter.variable} min-h-screen bg-[#0a0a0a] text-[#c8c8c8] font-[family-name:var(--font-inter)] flex flex-col items-center justify-center px-6`}  
+    >  
+      <div className="max-w-lg text-center space-y-8">  
+        <div className="space-y-2">  
+          <p className="text-[10px] tracking-[0.25em] uppercase text-[#d4af37]/60 font-[family-name:var(--font-inter)]">  
+            Rachel — Reception & Orchestration  
+          </p>  
+          <h1  
+            className={`text-4xl sm:text-5xl font-light text-[#d4af37] font-[family-name:var(--font-cormorant)] tracking-wide`}  
+          >  
+            Application Received  
+          </h1>  
+          <p className="text-lg text-[#c8c8c8]/70 font-light italic">  
+            Dialogue Initiated  
+          </p>  
+        </div>
+
+        <div className="h-px w-16 bg-[#d4af37]/40 mx-auto" />
+
+        <p className="text-sm text-[#c8c8c8]/60 leading-relaxed max-w-sm mx-auto">  
+          Your travel preferences are now being reviewed by our  
+          concierge team. A member of the Collective will reach out  
+          within <span className="text-[#d4af37]">48 hours</span>.  
+        </p>
+
+        {manifestId && (  
+          <p className="text-[10px] tracking-[0.2em] uppercase text-[#d4af37]/40 font-[family-name:var(--font-inter)]">  
+            Manifest {manifestId}  
+          </p>  
+        )}
+
+        <div className="pt-8">  
+          <a  
+            href="/"  
+            className="inline-block border border-[#d4af37]/30 text-[#d4af37] text-xs tracking-[0.2em] uppercase px-8 py-3 hover:bg-[#d4af37]/5 transition-colors duration-500"  
+          >  
+            Return  
+          </a>  
+        </div>
+
+        <p className="text-[9px] tracking-[0.3em] uppercase text-[#d4af37]/30 pt-12 font-[family-name:var(--font-inter)]">  
+          Rachel — Reception & Orchestration &bull; NexVoyage Collective  
+        </p>  
+      </div>  
+    </main>  
+  );  
+}
+
+// ── Form Screen ─────────────────────────────────────────────────  
+return (  
+  <>  
+    {/* ═══════════════════════════════════════════════════════  
+         NUCLEAR FIX — kill ghost white backgrounds globally  
+         ═══════════════════════════════════════════════════ */}  
+    <style jsx global>{`  
+      /* ── Kill any inherited background on all heading/text elements ── */  
+      h1, h2, h3, h4, h5, h6, p, span, label, div, section, form {  
+        background: transparent !important;  
+        background-color: transparent !important;  
+      }  
+      /* ── Nuke .bg-white, .bg-parchment, .bg-card and similar ── */  
+      [class*="bg-white"],  
+      [class*="bg-parchment"],  
+      [class*="bg-card"],  
+      [class*="bg-gray"],  
+      [class*="bg-neutral"] {  
+        background: transparent !important;  
+        background-color: transparent !important;  
+      }  
+      /* ── Force the page background solid dark ── */  
+      body, #__next, main {  
+        background: #0a0a0a !important;  
+      }  
+    `}</style>
+
     <main  
       className={`${cormorant.variable} ${inter.variable} min-h-screen bg-[#0a0a0a] text-[#c8c8c8] font-[family-name:var(--font-inter)] flex flex-col items-center px-4 py-16 sm:py-24`}  
     >  
@@ -430,5 +455,6 @@ export default function InvitationPage() {
         </form>  
       </div>  
     </main>  
-  );  
+  </>  
+);  
 }  
