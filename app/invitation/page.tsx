@@ -51,28 +51,21 @@ export default function InvitationPage() {
     notes: '',  
   })
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) {  
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))  
+  function h(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) {  
+    setForm(p => ({ ...p, [e.target.name]: e.target.value }))  
   }
 
-  async function handleSubmit(e: FormEvent) {  
+  async function onSubmit(e: FormEvent) {  
     e.preventDefault()  
     setLoading(true)  
-    setError('')
-
+    setError('')  
     try {  
-      const res = await fetch('/api/lead', {  
+      const r = await fetch('/api/lead', {  
         method: 'POST',  
         headers: { 'Content-Type': 'application/json' },  
-        body: JSON.stringify({  
-          ...form,  
-          partySize: Number(form.partySize),  
-          source: 'Application for Entry',  
-        }),  
-      })
-
-      if (!res.ok) throw new Error('Submission failed')
-
+        body: JSON.stringify({ ...form, partySize: Number(form.partySize), source: 'Application for Entry' }),  
+      })  
+      if (!r.ok) throw new Error('fail')  
       setSubmitted(true)  
     } catch {  
       setError('Something went wrong. Please try again.')  
@@ -83,212 +76,174 @@ export default function InvitationPage() {
 
   if (submitted) {  
     return (  
-      <main style={{ ...s.page, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>  
-        <div style={s.successWrap}>  
-          <div style={s.checkmark}>✓</div>  
-          <h1 style={s.heading}>Application Received</h1>  
-          <p style={s.brassSub}>Dialogue Initiated</p>  
-          <p style={s.bodyText}>  
+      <main style={s.page}>  
+        <div style={{ ...s.successWrap, background: 'transparent' }}>  
+          <div style={s.check}>✓</div>  
+          <h1 style={{ ...s.h1, marginBottom: 8 }}>Application Received</h1>  
+          <p style={s.brass}>Dialogue Initiated</p>  
+          <p style={s.body}>  
             Your travel preferences are now being reviewed by our concierge team.  
             A member of the Collective will reach out within 48 hours.  
           </p>  
-          <a href="/" style={s.returnLink}>Return to Lobby</a>  
+          <a href="/" style={s.link}>Return to Lobby</a>  
         </div>  
-        <p style={s.footer}>Rachel — Reception & Orchestration • NexVoyage Collective</p>
-
-        <style>{keyframesCSS}</style>  
+        <p style={s.footer}>Rachel — Reception & Orchestration • NexVoyage Collective</p>  
+        <style>{nukeCss}</style>  
       </main>  
     )  
   }
 
   return (  
     <main style={s.page}>  
-      <div style={s.container}>  
+      <div style={{ maxWidth: 560, width: '100%', margin: '0 auto', background: 'transparent' }}>  
         <p style={s.badge}>RACHEL — RECEPTION & ORCHESTRATION</p>  
-        <h1 style={s.heading}>Application for Entry</h1>  
-        <p style={s.subtitle}>  
-          The Collective operates on invitation. Submit your profile below for consideration.  
-        </p>
+        <h1 style={s.h1}>Application for Entry</h1>  
+        <p style={s.sub}>The Collective operates on invitation. Submit your profile below for consideration.</p>
 
-        <form onSubmit={handleSubmit} style={s.form}>  
-          {/* Section 1 */}  
-          <SectionNumber number="01" />  
-          <SectionTitle text="The Sovereign Profile" />
+        <form onSubmit={onSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 20, background: 'transparent' }}>
 
-          <Field label="Full Name" required>  
-            <input name="name" value={form.name} onChange={handleChange} required style={s.input} placeholder="e.g. James Whitfield" />  
-          </Field>  
-          <Field label="Email Address" required>  
-            <input name="email" type="email" value={form.email} onChange={handleChange} required style={s.input} placeholder="james@example.com" />  
-          </Field>  
-          <Field label="Phone Number" required>  
-            <input name="phone" type="tel" value={form.phone} onChange={handleChange} required style={s.input} placeholder="+1 212 555 0198" />  
-          </Field>
+          {/* 01 */}  
+          <p style={s.num}>01</p>  
+          <h2 style={s.secTitle}>The Sovereign Profile</h2>
 
-          {/* Section 2 */}  
-          <div style={{ height: 32, background: 'transparent' }} />  
-          <SectionNumber number="02" />  
-          <SectionTitle text="Mission Parameters" />
+          <div style={s.field}>  
+            <label style={s.label}>Full Name *</label>  
+            <input name="name" value={form.name} onChange={h} required style={s.inp} placeholder="e.g. James Whitfield" />  
+          </div>  
+          <div style={s.field}>  
+            <label style={s.label}>Email Address *</label>  
+            <input name="email" type="email" value={form.email} onChange={h} required style={s.inp} placeholder="james@example.com" />  
+          </div>  
+          <div style={s.field}>  
+            <label style={s.label}>Phone Number *</label>  
+            <input name="phone" type="tel" value={form.phone} onChange={h} required style={s.inp} placeholder="+1 212 555 0198" />  
+          </div>
 
-          <Field label="Occasion / Intent">  
-            <select name="occasion" value={form.occasion} onChange={handleChange} style={s.select}>  
-              {OCCASIONS.map((o) => <option key={o} value={o === 'Select occasion…' ? '' : o}>{o}</option>)}  
+          <div style={{ height: 32, background: 'transparent' }} />
+
+          {/* 02 */}  
+          <p style={s.num}>02</p>  
+          <h2 style={s.secTitle}>Mission Parameters</h2>
+
+          <div style={s.field}>  
+            <label style={s.label}>Occasion / Intent</label>  
+            <select name="occasion" value={form.occasion} onChange={h} style={s.inp}>  
+              {OCCASIONS.map(o => <option key={o} value={o === 'Select occasion…' ? '' : o}>{o}</option>)}  
             </select>  
-          </Field>  
-          <Field label="Desired Destinations">  
-            <input name="destinations" value={form.destinations} onChange={handleChange} style={s.input} placeholder="e.g. Santorini, Kyoto, Patagonia" />  
-          </Field>  
-          <Field label="Travel Window">  
-            <input name="travelWindow" value={form.travelWindow} onChange={handleChange} style={s.input} placeholder="e.g. Q4 2026 or March 2027" />  
-          </Field>  
-          <Field label="Party Size">  
-            <input name="partySize" type="number" min={1} value={form.partySize} onChange={handleChange} style={s.input} />  
-          </Field>  
-          <Field label="Aviation Class">  
-            <select name="aviationClass" value={form.aviationClass} onChange={handleChange} style={s.select}>  
-              {AVIATION_CLASSES.map((a) => <option key={a} value={a === 'Select preference…' ? '' : a}>{a}</option>)}  
+          </div>  
+          <div style={s.field}>  
+            <label style={s.label}>Desired Destinations</label>  
+            <input name="destinations" value={form.destinations} onChange={h} style={s.inp} placeholder="e.g. Santorini, Kyoto, Patagonia" />  
+          </div>  
+          <div style={s.field}>  
+            <label style={s.label}>Travel Window</label>  
+            <input name="travelWindow" value={form.travelWindow} onChange={h} style={s.inp} placeholder="e.g. Q4 2026 or March 2027" />  
+          </div>  
+          <div style={s.field}>  
+            <label style={s.label}>Party Size</label>  
+            <input name="partySize" type="number" min={1} value={form.partySize} onChange={h} style={s.inp} />  
+          </div>  
+          <div style={s.field}>  
+            <label style={s.label}>Aviation Class</label>  
+            <select name="aviationClass" value={form.aviationClass} onChange={h} style={s.inp}>  
+              {AVIATION_CLASSES.map(a => <option key={a} value={a === 'Select preference…' ? '' : a}>{a}</option>)}  
             </select>  
-          </Field>
+          </div>
 
-          {/* Section 3 */}  
-          <div style={{ height: 32, background: 'transparent' }} />  
-          <SectionNumber number="03" />  
-          <SectionTitle text="Cultural Fit" />
+          <div style={{ height: 32, background: 'transparent' }} />
 
-          <Field label="How did you hear about us?">  
-            <select name="hearAbout" value={form.hearAbout} onChange={handleChange} style={s.select}>  
-              {HEAR_ABOUT.map((h) => <option key={h} value={h === 'Select source…' ? '' : h}>{h}</option>)}  
+          {/* 03 */}  
+          <p style={s.num}>03</p>  
+          <h2 style={s.secTitle}>Cultural Fit</h2>
+
+          <div style={s.field}>  
+            <label style={s.label}>How did you hear about us?</label>  
+            <select name="hearAbout" value={form.hearAbout} onChange={h} style={s.inp}>  
+              {HEAR_ABOUT.map(h => <option key={h} value={h === 'Select source…' ? '' : h}>{h}</option>)}  
             </select>  
-          </Field>  
-          <Field label="Additional Notes / Preferences">  
-            <textarea name="notes" value={form.notes} onChange={handleChange} style={{ ...s.input, ...s.textarea }} placeholder="Anything else we should know…" />  
-          </Field>
+          </div>  
+          <div style={s.field}>  
+            <label style={s.label}>Additional Notes / Preferences</label>  
+            <textarea name="notes" value={form.notes} onChange={h} style={{ ...s.inp, minHeight: 100, resize: 'vertical' }} placeholder="Anything else we should know…" />  
+          </div>
 
-          {error && <p style={s.error}>{error}</p>}
+          {error && <p style={{ color: '#c0392b', fontSize: 13 }}>{error}</p>}
 
-          <button type="submit" disabled={loading} style={s.button}>  
+          <button type="submit" disabled={loading} style={s.btn}>  
             {loading ? 'Transmitting…' : 'Submit Application'}  
           </button>  
         </form>  
       </div>
 
-      <p style={s.footer}>Rachel — Reception & Orchestration • NexVoyage Collective</p>
-
-      <style>{keyframesCSS}</style>  
-      <style>{ghostKillerCSS}</style>  
+      <p style={s.footer}>Rachel — Reception & Orchestration • NexVoyage Collective</p>  
+      <style>{nukeCss}</style>  
     </main>  
   )  
 }
-
-// --- Sub-components ---
-
-function SectionNumber({ number }: { number: string }) {  
-  return <p style={s.sectionNumber}>{number}</p>  
-}
-
-function SectionTitle({ text }: { text: string }) {  
-  return <h2 style={s.sectionTitle}>{text}</h2>  
-}
-
-function Field({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {  
-  return (  
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 6, background: 'transparent' }}>  
-      <label style={s.label}>{label}{required && ' *'}</label>  
-      {children}  
-    </div>  
-  )  
-}
-
-// --- Keyframes ---
-
-const keyframesCSS = `  
-@keyframes scaleIn {  
-  0% { transform: scale(0); opacity: 0; }  
-  60% { transform: scale(1.2); opacity: 1; }  
-  100% { transform: scale(1); opacity: 1; }  
-}  
-`
-
-const ghostKillerCSS = `  
-input, select, textarea, button {  
-  background: transparent !important;  
-  -webkit-autofill,  
-  -webkit-autofill:hover,  
-  -webkit-autofill:focus,  
-  -webkit-autofill:active {  
-    -webkit-box-shadow: 0 0 0 30px #0a0a0a inset !important;  
-    -webkit-text-fill-color: #f0ede6 !important;  
-    caret-color: #f0ede6;  
-  }  
-}  
-`
 
 // --- Styles ---
 
 const s: Record<string, React.CSSProperties> = {  
   page: {  
-    minHeight: '100vh',  
     backgroundColor: '#0a0a0a',  
+    minHeight: '100vh',  
     color: '#f0ede6',  
     fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",  
     padding: '60px 24px',  
-    background: '#0a0a0a',  
-  },  
-  container: {  
-    maxWidth: 560,  
-    width: '100%',  
-    margin: '0 auto',  
-    background: 'transparent',  
+    display: 'flex',  
+    flexDirection: 'column',  
+    alignItems: 'center',  
+    justifyContent: 'center',  
   },  
   badge: {  
     fontSize: 11,  
     letterSpacing: 3,  
-    textTransform: 'uppercase' as const,  
+    textTransform: 'uppercase',  
     color: '#d4af37',  
     marginBottom: 8,  
   },  
-  heading: {  
+  h1: {  
     fontSize: 32,  
     fontWeight: 300,  
     letterSpacing: 1,  
     margin: '0 0 8px 0',  
     color: '#f0ede6',  
   },  
-  subtitle: {  
+  sub: {  
     fontSize: 14,  
     color: '#a09c94',  
     lineHeight: 1.6,  
     marginBottom: 48,  
   },  
-  form: {  
-    display: 'flex',  
-    flexDirection: 'column' as const,  
-    gap: 20,  
-    background: 'transparent',  
-  },  
-  sectionNumber: {  
+  num: {  
     fontSize: 48,  
     fontWeight: 100,  
     color: '#2a2a2a',  
     lineHeight: 1,  
     margin: '0 0 4px 0',  
   },  
-  sectionTitle: {  
+  secTitle: {  
     fontSize: 20,  
     fontWeight: 300,  
-    fontStyle: 'italic' as const,  
+    fontStyle: 'italic',  
     color: '#d4af37',  
     margin: '0 0 20px 0',  
     letterSpacing: 0.5,  
   },  
+  field: {  
+    display: 'flex',  
+    flexDirection: 'column',  
+    gap: 6,  
+    background: 'transparent',  
+  },  
   label: {  
     fontSize: 11,  
     letterSpacing: 2,  
-    textTransform: 'uppercase' as const,  
+    textTransform: 'uppercase',  
     color: '#8a867e',  
   },  
-  input: {  
-    background: 'transparent !important' as any,  
+  inp: {  
+    background: 'transparent',  
     border: '1px solid #2a2a2a',  
     borderRadius: 0,  
     padding: '12px 14px',  
@@ -296,73 +251,49 @@ const s: Record<string, React.CSSProperties> = {
     color: '#f0ede6',  
     outline: 'none',  
     fontFamily: 'inherit',  
-    transition: 'border-color 0.2s',  
     WebkitAppearance: 'none',  
   },  
-  textarea: {  
-    minHeight: 100,  
-    resize: 'vertical' as const,  
-  },  
-  select: {  
-    background: 'transparent !important' as any,  
-    border: '1px solid #2a2a2a',  
-    borderRadius: 0,  
-    padding: '12px 14px',  
-    fontSize: 14,  
-    color: '#f0ede6',  
-    outline: 'none',  
-    fontFamily: 'inherit',  
-    cursor: 'pointer',  
-    appearance: 'none' as const,  
-    WebkitAppearance: 'none',  
-  },  
-  button: {  
+  btn: {  
     marginTop: 12,  
-    background: 'transparent !important' as any,  
+    background: 'transparent',  
     border: '1px solid #d4af37',  
     color: '#d4af37',  
     padding: '14px 28px',  
     fontSize: 13,  
     letterSpacing: 2,  
-    textTransform: 'uppercase' as const,  
+    textTransform: 'uppercase',  
     cursor: 'pointer',  
-    transition: 'all 0.3s',  
     fontFamily: 'inherit',  
-  },  
-  error: {  
-    color: '#c0392b',  
-    fontSize: 13,  
   },  
   successWrap: {  
     textAlign: 'center' as const,  
     maxWidth: 480,  
-    background: 'transparent',  
   },  
-  checkmark: {  
+  check: {  
     fontSize: 64,  
     color: '#d4af37',  
     animation: 'scaleIn 0.5s ease-out',  
     marginBottom: 16,  
   },  
-  brassSub: {  
+  brass: {  
     color: '#d4af37',  
     fontSize: 14,  
     letterSpacing: 2,  
-    textTransform: 'uppercase' as const,  
+    textTransform: 'uppercase',  
     marginBottom: 24,  
   },  
-  bodyText: {  
+  body: {  
     fontSize: 14,  
     color: '#a09c94',  
     lineHeight: 1.7,  
     marginBottom: 32,  
   },  
-  returnLink: {  
+  link: {  
     color: '#d4af37',  
     textDecoration: 'none',  
     fontSize: 13,  
     letterSpacing: 2,  
-    textTransform: 'uppercase' as const,  
+    textTransform: 'uppercase',  
     borderBottom: '1px solid #d4af37',  
     paddingBottom: 2,  
   },  
@@ -371,6 +302,37 @@ const s: Record<string, React.CSSProperties> = {
     fontSize: 11,  
     color: '#4a4a4a',  
     letterSpacing: 1.5,  
-    textTransform: 'uppercase' as const,  
+    textTransform: 'uppercase',  
   },  
+}
+
+// --- Nuclear ghost killer ---
+
+const nukeCss = `  
+@keyframes scaleIn {  
+  0% { transform: scale(0); opacity: 0; }  
+  60% { transform: scale(1.2); opacity: 1; }  
+  100% { transform: scale(1); opacity: 1; }  
 }  
+html, body, main, div, section, form, p, h1, h2, span, a {  
+  background-color: #0a0a0a !important;  
+}  
+input, select, textarea, button {  
+  background-color: #0a0a0a !important;  
+  border-color: #2a2a2a !important;  
+  color: #f0ede6 !important;  
+}  
+input:-webkit-autofill,  
+input:-webkit-autofill:hover,  
+input:-webkit-autofill:focus,  
+input:-webkit-autofill:active,  
+select:-webkit-autofill,  
+textarea:-webkit-autofill {  
+  -webkit-box-shadow: 0 0 0 1000px #0a0a0a inset !important;  
+  -webkit-text-fill-color: #f0ede6 !important;  
+}  
+option {  
+  background-color: #0a0a0a !important;  
+  color: #f0ede6 !important;  
+}  
+`  
