@@ -102,7 +102,7 @@ export default function InvitationPage() {
 
           {/* 01 */}  
           <p style={s.num}>01</p>  
-          <h2 style={s.secTitle}>The Sovereign Profile</h2>
+          <h2 style={s.secTitle}>Traveler Profile</h2>
 
           <div style={s.field}>  
             <label style={s.label}>Full Name *</label>  
@@ -121,7 +121,7 @@ export default function InvitationPage() {
 
           {/* 02 */}  
           <p style={s.num}>02</p>  
-          <h2 style={s.secTitle}>Mission Parameters</h2>
+          <h2 style={s.secTitle}>Trip Parameters</h2>
 
           <div style={s.field}>  
             <label style={s.label}>Occasion / Intent</label>  
@@ -152,19 +152,21 @@ export default function InvitationPage() {
 
           {/* 03 */}  
           <p style={s.num}>03</p>  
-          <h2 style={s.secTitle}>Cultural Fit</h2>
+          <h2 style={s.secTitle}>Additional Information</h2>
 
-          <div style={s.field}>  
-            <label style={s.label}>How did you hear about us?</label>  
-            <select name="hearAbout" value={form.hearAbout} onChange={h} style={s.inp}>  
-              {HEAR_ABOUT.map(h => <option key={h} value={h === 'Select source…' ? '' : h}>{h}</option>)}  
-            </select>  
-          </div>  
+        
           <div style={s.field}>  
             <label style={s.label}>Additional Notes / Preferences</label>  
             <textarea name="notes" value={form.notes} onChange={h} style={{ ...s.inp, minHeight: 100, resize: 'vertical' }} placeholder="Anything else we should know…" />  
           </div>
 
+  <div style={s.field}>  
+            <label style={s.label}>How did you hear about us?</label>  
+            <select name="hearAbout" value={form.hearAbout} onChange={h} style={s.inp}>  
+              {HEAR_ABOUT.map(h => <option key={h} value={h === 'Select source…' ? '' : h}>{h}</option>)}  
+            </select>  
+          </div>  
+          
           {error && <p style={{ color: '#c0392b', fontSize: 13 }}>{error}</p>}
 
           <button type="submit" disabled={loading} style={s.btn}>  
