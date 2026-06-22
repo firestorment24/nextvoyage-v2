@@ -160,9 +160,6 @@ export default function InvitationPage() {
   // ── Form Screen ─────────────────────────────────────────────────  
   return (  
     <>  
-      {/* ═══════════════════════════════════════════════════════  
-           NUCLEAR FIX — kill ghost white backgrounds globally  
-           ═══════════════════════════════════════════════════ */}  
       <style jsx global>{`  
         h1, h2, h3, h4, h5, h6, p, span, label, div, section, form {  
           background: transparent !important;  
@@ -182,7 +179,7 @@ export default function InvitationPage() {
       `}</style>
 
       <main  
-        className={`${cormorant.variable} ${inter.variable} min-h-screen bg-[#0a0a0a] text-[#c8c8c8] font-[family-name:var(--font-inter)] flex flex-col items-center px-4 py-16 sm:py-24`}  
+        className={`${cormorant.variable} ${inter.variable} min-h-screen bg-[#0a0a0a] text-white font-[family-name:var(--font-inter)] flex flex-col items-center px-4 py-16 sm:py-24`}  
       >  
         <div className="w-full max-w-2xl">  
           {/* ── Header ────────────────────────────────────────── */}  
@@ -219,7 +216,6 @@ export default function InvitationPage() {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">  
-                {/* Full Name */}  
                 <div className="sm:col-span-2 space-y-1.5">  
                   <label className="text-[10px] tracking-[0.2em] uppercase text-[#c8c8c8]/40 font-[family-name:var(--font-inter)]">  
                     Full Name  
@@ -230,12 +226,11 @@ export default function InvitationPage() {
                     value={form.name}  
                     onChange={handleChange}  
                     required  
-                    className="w-full bg-transparent border border-[#d4af37]/20 px-4 py-3 text-sm text-[#c8c8c8] placeholder:text-[#c8c8c8]/20 focus:outline-none focus:border-[#d4af37]/60 transition-colors duration-300 font-light"  
+                    className="w-full bg-transparent border border-[#d4af37]/20 px-4 py-3 text-sm text-white placeholder:text-[#c8c8c8]/30 focus:outline-none focus:border-[#d4af37]/60 transition-colors duration-300 font-light"  
                     placeholder="Your name"  
                   />  
                 </div>
 
-                {/* Email */}  
                 <div className="space-y-1.5">  
                   <label className="text-[10px] tracking-[0.2em] uppercase text-[#c8c8c8]/40 font-[family-name:var(--font-inter)]">  
                     Email  
@@ -246,12 +241,11 @@ export default function InvitationPage() {
                     value={form.email}  
                     onChange={handleChange}  
                     required  
-                    className="w-full bg-transparent border border-[#d4af37]/20 px-4 py-3 text-sm text-[#c8c8c8] placeholder:text-[#c8c8c8]/20 focus:outline-none focus:border-[#d4af37]/60 transition-colors duration-300 font-light"  
+                    className="w-full bg-transparent border border-[#d4af37]/20 px-4 py-3 text-sm text-white placeholder:text-[#c8c8c8]/30 focus:outline-none focus:border-[#d4af37]/60 transition-colors duration-300 font-light"  
                     placeholder="you@example.com"  
                   />  
                 </div>
 
-                {/* Phone */}  
                 <div className="space-y-1.5">  
                   <label className="text-[10px] tracking-[0.2em] uppercase text-[#c8c8c8]/40 font-[family-name:var(--font-inter)]">  
                     Phone  
@@ -262,7 +256,7 @@ export default function InvitationPage() {
                     value={form.phone}  
                     onChange={handleChange}  
                     required  
-                    className="w-full bg-transparent border border-[#d4af37]/20 px-4 py-3 text-sm text-[#c8c8c8] placeholder:text-[#c8c8c8]/20 focus:outline-none focus:border-[#d4af37]/60 transition-colors duration-300 font-light"  
+                    className="w-full bg-transparent border border-[#d4af37]/20 px-4 py-3 text-sm text-white placeholder:text-[#c8c8c8]/30 focus:outline-none focus:border-[#d4af37]/60 transition-colors duration-300 font-light"  
                     placeholder="+1 (555) 000-0000"  
                   />  
                 </div>  
@@ -284,7 +278,6 @@ export default function InvitationPage() {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">  
-                {/* Occasion */}  
                 <div className="space-y-1.5">  
                   <label className="text-[10px] tracking-[0.2em] uppercase text-[#c8c8c8]/40 font-[family-name:var(--font-inter)]">  
                     Occasion  
@@ -294,7 +287,7 @@ export default function InvitationPage() {
                     value={form.occasion}  
                     onChange={handleChange}  
                     required  
-                    className="w-full bg-[#0a0a0a] border border-[#d4af37]/20 px-4 py-3 text-sm text-[#c8c8c8] focus:outline-none focus:border-[#d4af37]/60 transition-colors duration-300 font-light appearance-none"  
+                    className="w-full bg-[#0a0a0a] border border-[#d4af37]/20 px-4 py-3 text-sm text-white focus:outline-none focus:border-[#d4af37]/60 transition-colors duration-300 font-light appearance-none"  
                   >  
                     <option value="" disabled className="bg-[#0a0a0a]">  
                       Select occasion  
@@ -307,7 +300,6 @@ export default function InvitationPage() {
                   </select>  
                 </div>
 
-                {/* Travel Window */}  
                 <div className="space-y-1.5">  
                   <label className="text-[10px] tracking-[0.2em] uppercase text-[#c8c8c8]/40 font-[family-name:var(--font-inter)]">  
                     Travel Window  
@@ -318,12 +310,11 @@ export default function InvitationPage() {
                     value={form.travelWindow}  
                     onChange={handleChange}  
                     required  
-                    className="w-full bg-transparent border border-[#d4af37]/20 px-4 py-3 text-sm text-[#c8c8c8] placeholder:text-[#c8c8c8]/20 focus:outline-none focus:border-[#d4af37]/60 transition-colors duration-300 font-light"  
+                    className="w-full bg-transparent border border-[#d4af37]/20 px-4 py-3 text-sm text-white placeholder:text-[#c8c8c8]/30 focus:outline-none focus:border-[#d4af37]/60 transition-colors duration-300 font-light"  
                     placeholder="e.g. September 2026"  
                   />  
                 </div>
 
-                {/* Destinations */}  
                 <div className="sm:col-span-2 space-y-1.5">  
                   <label className="text-[10px] tracking-[0.2em] uppercase text-[#c8c8c8]/40 font-[family-name:var(--font-inter)]">  
                     Destinations / Regions of Interest  
@@ -334,12 +325,11 @@ export default function InvitationPage() {
                     value={form.destinations}  
                     onChange={handleChange}  
                     required  
-                    className="w-full bg-transparent border border-[#d4af37]/20 px-4 py-3 text-sm text-[#c8c8c8] placeholder:text-[#c8c8c8]/20 focus:outline-none focus:border-[#d4af37]/60 transition-colors duration-300 font-light"  
+                    className="w-full bg-transparent border border-[#d4af37]/20 px-4 py-3 text-sm text-white placeholder:text-[#c8c8c8]/30 focus:outline-none focus:border-[#d4af37]/60 transition-colors duration-300 font-light"  
                     placeholder="e.g. French Riviera, Kyoto, Patagonia"  
                   />  
                 </div>
 
-                {/* Party Size */}  
                 <div className="space-y-1.5">  
                   <label className="text-[10px] tracking-[0.2em] uppercase text-[#c8c8c8]/40 font-[family-name:var(--font-inter)]">  
                     Party Size  
@@ -350,12 +340,11 @@ export default function InvitationPage() {
                     value={form.partySize}  
                     onChange={handleChange}  
                     required  
-                    className="w-full bg-transparent border border-[#d4af37]/20 px-4 py-3 text-sm text-[#c8c8c8] placeholder:text-[#c8c8c8]/20 focus:outline-none focus:border-[#d4af37]/60 transition-colors duration-300 font-light"  
+                    className="w-full bg-transparent border border-[#d4af37]/20 px-4 py-3 text-sm text-white placeholder:text-[#c8c8c8]/30 focus:outline-none focus:border-[#d4af37]/60 transition-colors duration-300 font-light"  
                     placeholder="e.g. 2 Adults"  
                   />  
                 </div>
 
-                {/* Aviation Class */}  
                 <div className="space-y-1.5">  
                   <label className="text-[10px] tracking-[0.2em] uppercase text-[#c8c8c8]/40 font-[family-name:var(--font-inter)]">  
                     Aviation Preference  
@@ -365,7 +354,7 @@ export default function InvitationPage() {
                     value={form.aviationClass}  
                     onChange={handleChange}  
                     required  
-                    className="w-full bg-[#0a0a0a] border border-[#d4af37]/20 px-4 py-3 text-sm text-[#c8c8c8] focus:outline-none focus:border-[#d4af37]/60 transition-colors duration-300 font-light appearance-none"  
+                    className="w-full bg-[#0a0a0a] border border-[#d4af37]/20 px-4 py-3 text-sm text-white focus:outline-none focus:border-[#d4af37]/60 transition-colors duration-300 font-light appearance-none"  
                   >  
                     <option value="" disabled className="bg-[#0a0a0a]">  
                       Select class  
@@ -395,7 +384,6 @@ export default function InvitationPage() {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">  
-                {/* Hear About */}  
                 <div className="space-y-1.5">  
                   <label className="text-[10px] tracking-[0.2em] uppercase text-[#c8c8c8]/40 font-[family-name:var(--font-inter)]">  
                     How did you hear about us?  
@@ -405,7 +393,7 @@ export default function InvitationPage() {
                     value={form.hearAbout}  
                     onChange={handleChange}  
                     required  
-                    className="w-full bg-[#0a0a0a] border border-[#d4af37]/20 px-4 py-3 text-sm text-[#c8c8c8] focus:outline-none focus:border-[#d4af37]/60 transition-colors duration-300 font-light appearance-none"  
+                    className="w-full bg-[#0a0a0a] border border-[#d4af37]/20 px-4 py-3 text-sm text-white focus:outline-none focus:border-[#d4af37]/60 transition-colors duration-300 font-light appearance-none"  
                   >  
                     <option value="" disabled className="bg-[#0a0a0a]">  
                       Select source  
@@ -418,7 +406,6 @@ export default function InvitationPage() {
                   </select>  
                 </div>
 
-                {/* Notes */}  
                 <div className="sm:col-span-2 space-y-1.5">  
                   <label className="text-[10px] tracking-[0.2em] uppercase text-[#c8c8c8]/40 font-[family-name:var(--font-inter)]">  
                     Discretion Notes &mdash; Vision, Aesthetic, Unspoken Wishes  
@@ -428,7 +415,7 @@ export default function InvitationPage() {
                     value={form.notes}  
                     onChange={handleChange}  
                     rows={4}  
-                    className="w-full bg-transparent border border-[#d4af37]/20 px-4 py-3 text-sm text-[#c8c8c8] placeholder:text-[#c8c8c8]/20 focus:outline-none focus:border-[#d4af37]/60 transition-colors duration-300 font-light resize-none"  
+                    className="w-full bg-transparent border border-[#d4af37]/20 px-4 py-3 text-sm text-white placeholder:text-[#c8c8c8]/30 focus:outline-none focus:border-[#d4af37]/60 transition-colors duration-300 font-light resize-none"  
                     placeholder="Describe the feeling, the imagery, the unspoken details that matter most..."  
                   />  
                 </div>  
