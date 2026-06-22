@@ -83,121 +83,117 @@ export default function InvitationPage() {
 
   if (submitted) {  
     return (  
-      <main style={styles.page}>  
-        <div style={styles.successWrap}>  
-          <div style={styles.checkmark}>✓</div>  
-          <h1 style={styles.heading}>Application Received</h1>  
-          <p style={styles.brassSub}>Dialogue Initiated</p>  
-          <p style={styles.bodyText}>  
+      <main style={{ ...s.page, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>  
+        <div style={s.successWrap}>  
+          <div style={s.checkmark}>✓</div>  
+          <h1 style={s.heading}>Application Received</h1>  
+          <p style={s.brassSub}>Dialogue Initiated</p>  
+          <p style={s.bodyText}>  
             Your travel preferences are now being reviewed by our concierge team.  
             A member of the Collective will reach out within 48 hours.  
           </p>  
-          <a href="/" style={styles.returnLink}>Return to Lobby</a>  
+          <a href="/" style={s.returnLink}>Return to Lobby</a>  
         </div>  
-        <p style={styles.footer}>Rachel — Reception & Orchestration • NexVoyage Collective</p>
+        <p style={s.footer}>Rachel — Reception & Orchestration • NexVoyage Collective</p>
 
-        <style>{successKeyframes}</style>  
+        <style>{keyframesCSS}</style>  
       </main>  
     )  
   }
 
   return (  
-    <main style={styles.page}>  
-      <div style={styles.container}>  
-        <p style={styles.badge}>RACHEL — RECEPTION & ORCHESTRATION</p>  
-        <h1 style={styles.heading}>Application for Entry</h1>  
-        <p style={styles.subtitle}>  
+    <main style={s.page}>  
+      <div style={s.container}>  
+        <p style={s.badge}>RACHEL — RECEPTION & ORCHESTRATION</p>  
+        <h1 style={s.heading}>Application for Entry</h1>  
+        <p style={s.subtitle}>  
           The Collective operates on invitation. Submit your profile below for consideration.  
         </p>
 
-        <form onSubmit={handleSubmit} style={styles.form}>  
+        <form onSubmit={handleSubmit} style={s.form}>  
           {/* Section 1 */}  
           <SectionNumber number="01" />  
           <SectionTitle text="The Sovereign Profile" />
 
           <Field label="Full Name" required>  
-            <input name="name" value={form.name} onChange={handleChange} required style={styles.input} placeholder="e.g. James Whitfield" />  
-          </Field>
-
+            <input name="name" value={form.name} onChange={handleChange} required style={s.input} placeholder="e.g. James Whitfield" />  
+          </Field>  
           <Field label="Email Address" required>  
-            <input name="email" type="email" value={form.email} onChange={handleChange} required style={styles.input} placeholder="james@example.com" />  
-          </Field>
-
+            <input name="email" type="email" value={form.email} onChange={handleChange} required style={s.input} placeholder="james@example.com" />  
+          </Field>  
           <Field label="Phone Number" required>  
-            <input name="phone" type="tel" value={form.phone} onChange={handleChange} required style={styles.input} placeholder="+1 212 555 0198" />  
+            <input name="phone" type="tel" value={form.phone} onChange={handleChange} required style={s.input} placeholder="+1 212 555 0198" />  
           </Field>
 
           {/* Section 2 */}  
-          <div style={styles.sectionGap} />  
+          <div style={{ height: 32, background: 'transparent' }} />  
           <SectionNumber number="02" />  
           <SectionTitle text="Mission Parameters" />
 
           <Field label="Occasion / Intent">  
-            <select name="occasion" value={form.occasion} onChange={handleChange} style={styles.select}>  
+            <select name="occasion" value={form.occasion} onChange={handleChange} style={s.select}>  
               {OCCASIONS.map((o) => <option key={o} value={o === 'Select occasion…' ? '' : o}>{o}</option>)}  
             </select>  
-          </Field>
-
+          </Field>  
           <Field label="Desired Destinations">  
-            <input name="destinations" value={form.destinations} onChange={handleChange} style={styles.input} placeholder="e.g. Santorini, Kyoto, Patagonia" />  
-          </Field>
-
+            <input name="destinations" value={form.destinations} onChange={handleChange} style={s.input} placeholder="e.g. Santorini, Kyoto, Patagonia" />  
+          </Field>  
           <Field label="Travel Window">  
-            <input name="travelWindow" value={form.travelWindow} onChange={handleChange} style={styles.input} placeholder="e.g. Q4 2026 or March 2027" />  
-          </Field>
-
+            <input name="travelWindow" value={form.travelWindow} onChange={handleChange} style={s.input} placeholder="e.g. Q4 2026 or March 2027" />  
+          </Field>  
           <Field label="Party Size">  
-            <input name="partySize" type="number" min={1} value={form.partySize} onChange={handleChange} style={styles.input} />  
-          </Field>
-
+            <input name="partySize" type="number" min={1} value={form.partySize} onChange={handleChange} style={s.input} />  
+          </Field>  
           <Field label="Aviation Class">  
-            <select name="aviationClass" value={form.aviationClass} onChange={handleChange} style={styles.select}>  
+            <select name="aviationClass" value={form.aviationClass} onChange={handleChange} style={s.select}>  
               {AVIATION_CLASSES.map((a) => <option key={a} value={a === 'Select preference…' ? '' : a}>{a}</option>)}  
             </select>  
           </Field>
 
           {/* Section 3 */}  
-          <div style={styles.sectionGap} />  
+          <div style={{ height: 32, background: 'transparent' }} />  
           <SectionNumber number="03" />  
           <SectionTitle text="Cultural Fit" />
 
           <Field label="How did you hear about us?">  
-            <select name="hearAbout" value={form.hearAbout} onChange={handleChange} style={styles.select}>  
+            <select name="hearAbout" value={form.hearAbout} onChange={handleChange} style={s.select}>  
               {HEAR_ABOUT.map((h) => <option key={h} value={h === 'Select source…' ? '' : h}>{h}</option>)}  
             </select>  
-          </Field>
-
+          </Field>  
           <Field label="Additional Notes / Preferences">  
-            <textarea name="notes" value={form.notes} onChange={handleChange} style={{ ...styles.input, ...styles.textarea }} placeholder="Anything else we should know…" />  
+            <textarea name="notes" value={form.notes} onChange={handleChange} style={{ ...s.input, ...s.textarea }} placeholder="Anything else we should know…" />  
           </Field>
 
-          {error && <p style={styles.error}>{error}</p>}
+          {error && <p style={s.error}>{error}</p>}
 
-          <button type="submit" disabled={loading} style={styles.button}>  
+          <button type="submit" disabled={loading} style={s.button}>  
             {loading ? 'Transmitting…' : 'Submit Application'}  
           </button>  
         </form>  
       </div>
 
-      <p style={styles.footer}>Rachel — Reception & Orchestration • NexVoyage Collective</p>  
+      <p style={s.footer}>Rachel — Reception & Orchestration • NexVoyage Collective</p>
+
+      <style>{keyframesCSS}</style>  
+      <style>{ghostKillerCSS}</style>  
     </main>  
   )  
 }
 
-// --- Helpers ---
+// --- Sub-components ---
 
 function SectionNumber({ number }: { number: string }) {  
-  return <p style={styles.sectionNumber}>{number}</p>  
+  return <p style={s.sectionNumber}>{number}</p>  
 }
 
 function SectionTitle({ text }: { text: string }) {  
-  return <h2 style={styles.sectionTitle}>{text}</h2>  
+  return <h2 style={s.sectionTitle}>{text}</h2>  
 }
 
 function Field({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {  
   return (  
-    <div style={styles.field}>  
-      <label style={styles.label}>{label}{required && ' *'}</label>  
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 6, background: 'transparent' }}>  
+      <label style={s.label}>{label}{required && ' *'}</label>  
       {children}  
     </div>  
   )  
@@ -205,31 +201,44 @@ function Field({ label, required, children }: { label: string; required?: boolea
 
 // --- Keyframes ---
 
-const successKeyframes = `  
-  @keyframes scaleIn {  
-    0% { transform: scale(0); opacity: 0; }  
-    60% { transform: scale(1.2); opacity: 1; }  
-    100% { transform: scale(1); opacity: 1; }  
+const keyframesCSS = `  
+@keyframes scaleIn {  
+  0% { transform: scale(0); opacity: 0; }  
+  60% { transform: scale(1.2); opacity: 1; }  
+  100% { transform: scale(1); opacity: 1; }  
+}  
+`
+
+const ghostKillerCSS = `  
+input, select, textarea, button {  
+  background: transparent !important;  
+  -webkit-autofill,  
+  -webkit-autofill:hover,  
+  -webkit-autofill:focus,  
+  -webkit-autofill:active {  
+    -webkit-box-shadow: 0 0 0 30px #0a0a0a inset !important;  
+    -webkit-text-fill-color: #f0ede6 !important;  
+    caret-color: #f0ede6;  
   }  
+}  
 `
 
 // --- Styles ---
 
-const styles: Record<string, React.CSSProperties> = {  
+const s: Record<string, React.CSSProperties> = {  
   page: {  
     minHeight: '100vh',  
     backgroundColor: '#0a0a0a',  
     color: '#f0ede6',  
     fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",  
-    display: 'flex',  
-    flexDirection: 'column',  
-    alignItems: 'center',  
-    justifyContent: 'center',  
     padding: '60px 24px',  
+    background: '#0a0a0a',  
   },  
   container: {  
     maxWidth: 560,  
     width: '100%',  
+    margin: '0 auto',  
+    background: 'transparent',  
   },  
   badge: {  
     fontSize: 11,  
@@ -243,6 +252,7 @@ const styles: Record<string, React.CSSProperties> = {
     fontWeight: 300,  
     letterSpacing: 1,  
     margin: '0 0 8px 0',  
+    color: '#f0ede6',  
   },  
   subtitle: {  
     fontSize: 14,  
@@ -254,9 +264,7 @@ const styles: Record<string, React.CSSProperties> = {
     display: 'flex',  
     flexDirection: 'column' as const,  
     gap: 20,  
-  },  
-  sectionGap: {  
-    height: 32,  
+    background: 'transparent',  
   },  
   sectionNumber: {  
     fontSize: 48,  
@@ -273,11 +281,6 @@ const styles: Record<string, React.CSSProperties> = {
     margin: '0 0 20px 0',  
     letterSpacing: 0.5,  
   },  
-  field: {  
-    display: 'flex',  
-    flexDirection: 'column' as const,  
-    gap: 6,  
-  },  
   label: {  
     fontSize: 11,  
     letterSpacing: 2,  
@@ -285,7 +288,7 @@ const styles: Record<string, React.CSSProperties> = {
     color: '#8a867e',  
   },  
   input: {  
-    background: 'transparent',  
+    background: 'transparent !important' as any,  
     border: '1px solid #2a2a2a',  
     borderRadius: 0,  
     padding: '12px 14px',  
@@ -294,13 +297,14 @@ const styles: Record<string, React.CSSProperties> = {
     outline: 'none',  
     fontFamily: 'inherit',  
     transition: 'border-color 0.2s',  
+    WebkitAppearance: 'none',  
   },  
   textarea: {  
     minHeight: 100,  
     resize: 'vertical' as const,  
   },  
   select: {  
-    background: 'transparent',  
+    background: 'transparent !important' as any,  
     border: '1px solid #2a2a2a',  
     borderRadius: 0,  
     padding: '12px 14px',  
@@ -314,7 +318,7 @@ const styles: Record<string, React.CSSProperties> = {
   },  
   button: {  
     marginTop: 12,  
-    background: 'transparent',  
+    background: 'transparent !important' as any,  
     border: '1px solid #d4af37',  
     color: '#d4af37',  
     padding: '14px 28px',  
@@ -332,6 +336,7 @@ const styles: Record<string, React.CSSProperties> = {
   successWrap: {  
     textAlign: 'center' as const,  
     maxWidth: 480,  
+    background: 'transparent',  
   },  
   checkmark: {  
     fontSize: 64,  
