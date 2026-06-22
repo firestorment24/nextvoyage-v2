@@ -15,10 +15,10 @@ const OCCASIONS = [
 
 const AVIATION_CLASSES = [  
   'Select preference…',  
-  'Commercial First Class',  
-  'Commercial Business',  
+  'First Class',  
+  'Business',  
+  'Economy'
   'Private Charter',  
-  'NetJets / Fractional',  
   'Helicopter Transfer',  
 ]
 
@@ -63,7 +63,7 @@ export default function InvitationPage() {
       const r = await fetch('/api/lead', {  
         method: 'POST',  
         headers: { 'Content-Type': 'application/json' },  
-        body: JSON.stringify({ ...form, partySize: Number(form.partySize), source: 'Application for Entry' }),  
+        body: JSON.stringify({ ...form, partySize: Number(form.partySize), source: 'Travel Inquiry' }),  
       })  
       if (!r.ok) throw new Error('fail')  
       setSubmitted(true)  
@@ -79,15 +79,14 @@ export default function InvitationPage() {
       <main style={s.page}>  
         <div style={{ ...s.successWrap, background: 'transparent' }}>  
           <div style={s.check}>✓</div>  
-          <h1 style={{ ...s.h1, marginBottom: 8 }}>Application Received</h1>  
+          <h1 style={{ ...s.h1, marginBottom: 8 }}>Inquiry Received</h1>  
           <p style={s.brass}>Dialogue Initiated</p>  
           <p style={s.body}>  
             Your travel preferences are now being reviewed by our concierge team.  
             A member of the Collective will reach out within 48 hours.  
           </p>  
           <a href="/" style={s.link}>Return to Lobby</a>  
-        </div>  
-        <p style={s.footer}>Rachel — Reception & Orchestration • NexVoyage Collective</p>  
+        </div>   
         <style>{nukeCss}</style>  
       </main>  
     )  
@@ -102,7 +101,6 @@ export default function InvitationPage() {
 
           {/* 01 */}    
           <h2 style={s.secTitle}>Traveler Profile</h2>
-
           <div style={s.field}>  
             <label style={s.label}>Full Name *</label>  
             <input name="name" value={form.name} onChange={h} required style={s.inp} placeholder="e.g. James Whitfield" />  
@@ -120,7 +118,6 @@ export default function InvitationPage() {
 
           {/* 02 */}   
           <h2 style={s.secTitle}>Trip Parameters</h2>
-
           <div style={s.field}>  
             <label style={s.label}>Occasion / Intent</label>  
             <select name="occasion" value={form.occasion} onChange={h} style={s.inp}>  
@@ -150,8 +147,6 @@ export default function InvitationPage() {
 
           {/* 03 */}   
           <h2 style={s.secTitle}>Additional Information</h2>
-
-        
           <div style={s.field}>  
             <label style={s.label}>Additional Notes / Preferences</label>  
             <textarea name="notes" value={form.notes} onChange={h} style={{ ...s.inp, minHeight: 100, resize: 'vertical' }} placeholder="Anything else we should know…" />  
