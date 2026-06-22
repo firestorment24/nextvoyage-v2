@@ -1,268 +1,371 @@
-"use client";
+'use client'
 
-import React, { useState } from "react";
+import { useState, type FormEvent } from 'react'
 
-/* ─── Constants ─────────────────────────────────────────── */
-const OCCASIONS = [
-  "Anniversary", "Birthday", "Honeymoon", "Family Gathering",
-  "Business Retreat", "Celebration", "Personal Escape", "Other",
-];
+const OCCASIONS = [  
+  'Select occasion…',  
+  'Leisure & Discovery',  
+  'Milestone Celebration',  
+  'Corporate Retreat',  
+  'Family Odyssey',  
+  'Honeymoon',  
+  'Private Event',  
+  'Other',  
+]
 
-const AVIATION_CLASSES = [
-  "First Class", "Business", "Private Charter", "Premium Economy", "Flexible / Undecided",
-];
+const AVIATION_CLASSES = [  
+  'Select preference…',  
+  'Commercial First Class',  
+  'Commercial Business',  
+  'Private Charter',  
+  'NetJets / Fractional',  
+  'Helicopter Transfer',  
+]
 
-const HEAR_ABOUT = [
-  "Word of Mouth", "Instagram", "LinkedIn", "Architectural Digest",
-  "Travel + Leisure", "Referral", "Search Engine", "Other",
-];
+const HEAR_ABOUT = [  
+  'Select source…',  
+  'Personal Referral',  
+  'Social Media',  
+  'Press / Editorial',  
+  'Search Engine',  
+  'Event',  
+  'Travel Advisor',  
+  'Other',  
+]
 
-/* ─── Application for Entry ──────────────────────────────── */
-export default function InvitationPage() {
-  const [step, setStep] = useState<"form" | "submitted">("form");
+export default function InvitationPage() {  
+  const [submitted, setSubmitted] = useState(false)  
+  const [loading, setLoading] = useState(false)  
+  const [error, setError] = useState('')
 
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    occasion: "",
-    destinations: "",
-    travelWindow: "",
-    partySize: "",
-    aviationClass: "",
-    hearAbout: "",
-    notes: "",
-  });
+  const [form, setForm] = useState({  
+    name: '',  
+    email: '',  
+    phone: '',  
+    occasion: '',  
+    destinations: '',  
+    travelWindow: '',  
+    partySize: 1,  
+    aviationClass: '',  
+    hearAbout: '',  
+    notes: '',  
+  })
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      const res = await fetch("/api/lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-      if (!res.ok) throw new Error("Failed to submit");
-      setStep("submitted");
-    } catch (err) {
-      console.error("Submission error:", err);
-    }
-  };
-
-  if (step === "submitted") {
-    return (
-      <main className="min-h-screen bg-[#0A0A0A] flex items-center justify-center px-6">
-        <div className="text-center max-w-lg">
-          <p className="font-['Inter'] text-[#d4af37] tracking-[0.15em] text-xs uppercase mb-6">
-            Rachel — Reception & Orchestration
-          </p>
-          <h1 className="font-['Cormorant_Garamond'] text-white text-4xl sm:text-5xl font-light tracking-wide mb-4">
-            Application Received
-          </h1>
-          <div className="w-12 h-[1px] bg-[#d4af37]/40 mx-auto mb-6" />
-          <p className="font-['Inter'] text-[#c8c8c8]/60 text-sm leading-relaxed">
-            Your dossier is being reviewed. A member of our team will
-            contact you within 24–48 hours to begin the dialogue.
-          </p>
-          <p className="font-['Cormorant_Garamond'] text-[#d4af37] text-lg italic mt-8">
-            Dialogue Initiated
-          </p>
-        </div>
-      </main>
-    );
+  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) {  
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))  
   }
 
-  return (
-    <>
-      {/* ── Nuclear Kill: Forces ALL text to white ────────── */}
-      <style jsx global>{`
-        * {
-          color: #ffffff !important;
-        }
-        input, select, textarea {
-          color: #ffffff !important;
-          background-color: #141414 !important;
-          border-color: rgba(212, 175, 55, 0.2) !important;
-        }
-        input::placeholder, textarea::placeholder {
-          color: rgba(200, 200, 200, 0.35) !important;
-        }
-        label, .brass-label {
-          color: rgba(200, 200, 200, 0.5) !important;
-        }
-        h1, h2, h3, h4, h5, h6, p, span, a, li, div, section, article {
-          background-color: transparent !important;
-        }
-        body, html, main, #__next {
-          background-color: #0A0A0A !important;
-        }
-      `}</style>
+  async function handleSubmit(e: FormEvent) {  
+    e.preventDefault()  
+    setLoading(true)  
+    setError('')
 
-      <main className="min-h-screen bg-[#0A0A0A] text-white px-6 py-16 flex flex-col items-center">
-        {/* ── Letterhead ──────────────────────────────────── */}
-        <div className="w-full max-w-2xl mb-12 text-center">
-          <p className="font-['Inter'] text-[#d4af37] tracking-[0.15em] text-xs uppercase mb-2">
-            Rachel — Reception & Orchestration
-          </p>
-          <div className="w-16 h-[1px] bg-[#d4af37]/30 mx-auto mb-4" />
-          <h1 className="font-['Cormorant_Garamond'] text-white text-3xl sm:text-4xl font-light tracking-wide">
-            Application for Entry
-          </h1>
-        </div>
+    try {  
+      const res = await fetch('/api/lead', {  
+        method: 'POST',  
+        headers: { 'Content-Type': 'application/json' },  
+        body: JSON.stringify({  
+          ...form,  
+          partySize: Number(form.partySize),  
+          source: 'Application for Entry',  
+        }),  
+      })
 
-        {/* ── Form ────────────────────────────────────────── */}
-        <form onSubmit={handleSubmit} className="w-full max-w-2xl space-y-14">
-          {/* ─── SECTION 1: The Sovereign Profile ─────────── */}
-          <section>
-            <h2 className="font-['Cormorant_Garamond'] text-white text-xl sm:text-2xl font-light tracking-wide mb-1">
-              The Sovereign Profile
-            </h2>
-            <p className="font-['Inter'] text-[#c8c8c8]/40 text-xs tracking-[0.1em] uppercase mb-6">
-              Who is traveling
-            </p>
-            <div className="space-y-5">
-              <Field label="Full Name" name="name" value={form.name} onChange={handleChange} placeholder="Your name" />
-              <Field label="Email Address" name="email" type="email" value={form.email} onChange={handleChange} placeholder="you@example.com" />
-              <Field label="Phone Number" name="phone" type="tel" value={form.phone} onChange={handleChange} placeholder="+1 (555) 000-0000" />
-              <SelectField label="Occasion" name="occasion" value={form.occasion} onChange={handleChange} options={OCCASIONS} placeholder="Select an occasion" />
-            </div>
-          </section>
+      if (!res.ok) throw new Error('Submission failed')
 
-          {/* ─── SECTION 2: Mission Parameters ────────────── */}
-          <section>
-            <h2 className="font-['Cormorant_Garamond'] text-white text-xl sm:text-2xl font-light tracking-wide mb-1">
-              Mission Parameters
-            </h2>
-            <p className="font-['Inter'] text-[#c8c8c8]/40 text-xs tracking-[0.1em] uppercase mb-6">
-              The itinerary
-            </p>
-            <div className="space-y-5">
-              <Field label="Destinations of Interest" name="destinations" value={form.destinations} onChange={handleChange} placeholder="e.g. Amalfi Coast, Kyoto, Patagonia" />
-              <Field label="Preferred Travel Window" name="travelWindow" value={form.travelWindow} onChange={handleChange} placeholder="e.g. September 2026" />
-              <Field label="Party Size" name="partySize" value={form.partySize} onChange={handleChange} placeholder="e.g. 2 adults" />
-              <SelectField label="Aviation Class" name="aviationClass" value={form.aviationClass} onChange={handleChange} options={AVIATION_CLASSES} placeholder="Select aviation class" />
-            </div>
-          </section>
+      setSubmitted(true)  
+    } catch {  
+      setError('Something went wrong. Please try again.')  
+    } finally {  
+      setLoading(false)  
+    }  
+  }
 
-          {/* ─── SECTION 3: Cultural Fit ──────────────────── */}
-          <section>
-            <h2 className="font-['Cormorant_Garamond'] text-white text-xl sm:text-2xl font-light tracking-wide mb-1">
-              Cultural Fit
-            </h2>
-            <p className="font-['Inter'] text-[#c8c8c8]/40 text-xs tracking-[0.1em] uppercase mb-6">
-              How you found us
-            </p>
-            <div className="space-y-5">
-              <SelectField label="How Did You Hear About Us?" name="hearAbout" value={form.hearAbout} onChange={handleChange} options={HEAR_ABOUT} placeholder="Select one" />
-              <div>
-                <label className="font-['Inter'] text-[#c8c8c8]/40 text-xs tracking-[0.1em] uppercase block mb-2">
-                  Additional Notes
-                </label>
-                <textarea
-                  name="notes"
-                  value={form.notes}
-                  onChange={handleChange}
-                  placeholder="Anything else we should know..."
-                  rows={4}
-                  className="w-full bg-[#141414] border border-[#d4af37]/20 rounded-none px-4 py-3 font-['Inter'] text-sm text-white placeholder:text-[#c8c8c8]/30 focus:outline-none focus:border-[#d4af37]/60 transition-colors resize-none"
-                />
-              </div>
-            </div>
-          </section>
+  if (submitted) {  
+    return (  
+      <main style={styles.page}>  
+        <div style={styles.successWrap}>  
+          <div style={styles.checkmark}>✓</div>  
+          <h1 style={styles.heading}>Application Received</h1>  
+          <p style={styles.brassSub}>Dialogue Initiated</p>  
+          <p style={styles.bodyText}>  
+            Your travel preferences are now being reviewed by our concierge team.  
+            A member of the Collective will reach out within 48 hours.  
+          </p>  
+          <a href="/" style={styles.returnLink}>Return to Lobby</a>  
+        </div>  
+        <p style={styles.footer}>Rachel — Reception & Orchestration • NexVoyage Collective</p>
 
-          {/* ── Submit ────────────────────────────────────── */}
-          <div className="text-center pt-4">
-            <button
-              type="submit"
-              className="font-['Inter'] text-xs tracking-[0.2em] uppercase text-white bg-[#d4af37]/10 border border-[#d4af37]/30 px-10 py-4 hover:bg-[#d4af37]/20 hover:border-[#d4af37]/60 transition-all duration-500"
-            >
-              Submit Application
-            </button>
-          </div>
-        </form>
+        <style>{successKeyframes}</style>  
+      </main>  
+    )  
+  }
 
-        {/* ── Footer ──────────────────────────────────────── */}
-        <div className="w-full max-w-2xl mt-16 pt-8 border-t border-[#d4af37]/10 text-center">
-          <p className="font-['Cormorant_Garamond'] text-[#c8c8c8]/30 text-sm italic">
-            Rachel — Reception & Orchestration &ensp;•&ensp; NexVoyage Collective
-          </p>
-        </div>
-      </main>
-    </>
-  );
+  return (  
+    <main style={styles.page}>  
+      <div style={styles.container}>  
+        <p style={styles.badge}>RACHEL — RECEPTION & ORCHESTRATION</p>  
+        <h1 style={styles.heading}>Application for Entry</h1>  
+        <p style={styles.subtitle}>  
+          The Collective operates on invitation. Submit your profile below for consideration.  
+        </p>
+
+        <form onSubmit={handleSubmit} style={styles.form}>  
+          {/* Section 1 */}  
+          <SectionNumber number="01" />  
+          <SectionTitle text="The Sovereign Profile" />
+
+          <Field label="Full Name" required>  
+            <input name="name" value={form.name} onChange={handleChange} required style={styles.input} placeholder="e.g. James Whitfield" />  
+          </Field>
+
+          <Field label="Email Address" required>  
+            <input name="email" type="email" value={form.email} onChange={handleChange} required style={styles.input} placeholder="james@example.com" />  
+          </Field>
+
+          <Field label="Phone Number" required>  
+            <input name="phone" type="tel" value={form.phone} onChange={handleChange} required style={styles.input} placeholder="+1 212 555 0198" />  
+          </Field>
+
+          {/* Section 2 */}  
+          <div style={styles.sectionGap} />  
+          <SectionNumber number="02" />  
+          <SectionTitle text="Mission Parameters" />
+
+          <Field label="Occasion / Intent">  
+            <select name="occasion" value={form.occasion} onChange={handleChange} style={styles.select}>  
+              {OCCASIONS.map((o) => <option key={o} value={o === 'Select occasion…' ? '' : o}>{o}</option>)}  
+            </select>  
+          </Field>
+
+          <Field label="Desired Destinations">  
+            <input name="destinations" value={form.destinations} onChange={handleChange} style={styles.input} placeholder="e.g. Santorini, Kyoto, Patagonia" />  
+          </Field>
+
+          <Field label="Travel Window">  
+            <input name="travelWindow" value={form.travelWindow} onChange={handleChange} style={styles.input} placeholder="e.g. Q4 2026 or March 2027" />  
+          </Field>
+
+          <Field label="Party Size">  
+            <input name="partySize" type="number" min={1} value={form.partySize} onChange={handleChange} style={styles.input} />  
+          </Field>
+
+          <Field label="Aviation Class">  
+            <select name="aviationClass" value={form.aviationClass} onChange={handleChange} style={styles.select}>  
+              {AVIATION_CLASSES.map((a) => <option key={a} value={a === 'Select preference…' ? '' : a}>{a}</option>)}  
+            </select>  
+          </Field>
+
+          {/* Section 3 */}  
+          <div style={styles.sectionGap} />  
+          <SectionNumber number="03" />  
+          <SectionTitle text="Cultural Fit" />
+
+          <Field label="How did you hear about us?">  
+            <select name="hearAbout" value={form.hearAbout} onChange={handleChange} style={styles.select}>  
+              {HEAR_ABOUT.map((h) => <option key={h} value={h === 'Select source…' ? '' : h}>{h}</option>)}  
+            </select>  
+          </Field>
+
+          <Field label="Additional Notes / Preferences">  
+            <textarea name="notes" value={form.notes} onChange={handleChange} style={{ ...styles.input, ...styles.textarea }} placeholder="Anything else we should know…" />  
+          </Field>
+
+          {error && <p style={styles.error}>{error}</p>}
+
+          <button type="submit" disabled={loading} style={styles.button}>  
+            {loading ? 'Transmitting…' : 'Submit Application'}  
+          </button>  
+        </form>  
+      </div>
+
+      <p style={styles.footer}>Rachel — Reception & Orchestration • NexVoyage Collective</p>  
+    </main>  
+  )  
 }
 
-/* ─── Reusable input field ──────────────────────────────── */
-function Field({
-  label,
-  name,
-  type = "text",
-  value,
-  onChange,
-  placeholder,
-}: {
-  label: string;
-  name: string;
-  type?: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  placeholder: string;
-}) {
-  return (
-    <div>
-      <label htmlFor={name} className="font-['Inter'] text-[#c8c8c8]/40 text-xs tracking-[0.1em] uppercase block mb-2">
-        {label}
-      </label>
-      <input
-        id={name}
-        name={name}
-        type={type}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        className="w-full bg-[#141414] border border-[#d4af37]/20 rounded-none px-4 py-3 font-['Inter'] text-sm text-white placeholder:text-[#c8c8c8]/30 focus:outline-none focus:border-[#d4af37]/60 transition-colors"
-      />
-    </div>
-  );
+// --- Helpers ---
+
+function SectionNumber({ number }: { number: string }) {  
+  return <p style={styles.sectionNumber}>{number}</p>  
 }
 
-/* ─── Reusable select field ─────────────────────────────── */
-function SelectField({
-  label,
-  name,
-  value,
-  onChange,
-  options,
-  placeholder,
-}: {
-  label: string;
-  name: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  options: string[];
-  placeholder: string;
-}) {
-  return (
-    <div>
-      <label htmlFor={name} className="font-['Inter'] text-[#c8c8c8]/40 text-xs tracking-[0.1em] uppercase block mb-2">
-        {label}
-      </label>
-      <select
-        id={name}
-        name={name}
-        value={value}
-        onChange={onChange}
-        className="w-full bg-[#141414] border border-[#d4af37]/20 rounded-none px-4 py-3 font-['Inter'] text-sm text-white focus:outline-none focus:border-[#d4af37]/60 transition-colors appearance-none"
-      >
-        <option value="" className="bg-[#141414] text-[#c8c8c8]/30">{placeholder}</option>
-        {options.map((opt) => (
-          <option key={opt} value={opt} className="bg-[#141414] text-white">{opt}</option>
-        ))}
-      </select>
-    </div>
-  );
+function SectionTitle({ text }: { text: string }) {  
+  return <h2 style={styles.sectionTitle}>{text}</h2>  
 }
+
+function Field({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {  
+  return (  
+    <div style={styles.field}>  
+      <label style={styles.label}>{label}{required && ' *'}</label>  
+      {children}  
+    </div>  
+  )  
+}
+
+// --- Keyframes ---
+
+const successKeyframes = `  
+  @keyframes scaleIn {  
+    0% { transform: scale(0); opacity: 0; }  
+    60% { transform: scale(1.2); opacity: 1; }  
+    100% { transform: scale(1); opacity: 1; }  
+  }  
+`
+
+// --- Styles ---
+
+const styles: Record<string, React.CSSProperties> = {  
+  page: {  
+    minHeight: '100vh',  
+    backgroundColor: '#0a0a0a',  
+    color: '#f0ede6',  
+    fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",  
+    display: 'flex',  
+    flexDirection: 'column',  
+    alignItems: 'center',  
+    justifyContent: 'center',  
+    padding: '60px 24px',  
+  },  
+  container: {  
+    maxWidth: 560,  
+    width: '100%',  
+  },  
+  badge: {  
+    fontSize: 11,  
+    letterSpacing: 3,  
+    textTransform: 'uppercase' as const,  
+    color: '#d4af37',  
+    marginBottom: 8,  
+  },  
+  heading: {  
+    fontSize: 32,  
+    fontWeight: 300,  
+    letterSpacing: 1,  
+    margin: '0 0 8px 0',  
+  },  
+  subtitle: {  
+    fontSize: 14,  
+    color: '#a09c94',  
+    lineHeight: 1.6,  
+    marginBottom: 48,  
+  },  
+  form: {  
+    display: 'flex',  
+    flexDirection: 'column' as const,  
+    gap: 20,  
+  },  
+  sectionGap: {  
+    height: 32,  
+  },  
+  sectionNumber: {  
+    fontSize: 48,  
+    fontWeight: 100,  
+    color: '#2a2a2a',  
+    lineHeight: 1,  
+    margin: '0 0 4px 0',  
+  },  
+  sectionTitle: {  
+    fontSize: 20,  
+    fontWeight: 300,  
+    fontStyle: 'italic' as const,  
+    color: '#d4af37',  
+    margin: '0 0 20px 0',  
+    letterSpacing: 0.5,  
+  },  
+  field: {  
+    display: 'flex',  
+    flexDirection: 'column' as const,  
+    gap: 6,  
+  },  
+  label: {  
+    fontSize: 11,  
+    letterSpacing: 2,  
+    textTransform: 'uppercase' as const,  
+    color: '#8a867e',  
+  },  
+  input: {  
+    background: 'transparent',  
+    border: '1px solid #2a2a2a',  
+    borderRadius: 0,  
+    padding: '12px 14px',  
+    fontSize: 14,  
+    color: '#f0ede6',  
+    outline: 'none',  
+    fontFamily: 'inherit',  
+    transition: 'border-color 0.2s',  
+  },  
+  textarea: {  
+    minHeight: 100,  
+    resize: 'vertical' as const,  
+  },  
+  select: {  
+    background: 'transparent',  
+    border: '1px solid #2a2a2a',  
+    borderRadius: 0,  
+    padding: '12px 14px',  
+    fontSize: 14,  
+    color: '#f0ede6',  
+    outline: 'none',  
+    fontFamily: 'inherit',  
+    cursor: 'pointer',  
+    appearance: 'none' as const,  
+    WebkitAppearance: 'none',  
+  },  
+  button: {  
+    marginTop: 12,  
+    background: 'transparent',  
+    border: '1px solid #d4af37',  
+    color: '#d4af37',  
+    padding: '14px 28px',  
+    fontSize: 13,  
+    letterSpacing: 2,  
+    textTransform: 'uppercase' as const,  
+    cursor: 'pointer',  
+    transition: 'all 0.3s',  
+    fontFamily: 'inherit',  
+  },  
+  error: {  
+    color: '#c0392b',  
+    fontSize: 13,  
+  },  
+  successWrap: {  
+    textAlign: 'center' as const,  
+    maxWidth: 480,  
+  },  
+  checkmark: {  
+    fontSize: 64,  
+    color: '#d4af37',  
+    animation: 'scaleIn 0.5s ease-out',  
+    marginBottom: 16,  
+  },  
+  brassSub: {  
+    color: '#d4af37',  
+    fontSize: 14,  
+    letterSpacing: 2,  
+    textTransform: 'uppercase' as const,  
+    marginBottom: 24,  
+  },  
+  bodyText: {  
+    fontSize: 14,  
+    color: '#a09c94',  
+    lineHeight: 1.7,  
+    marginBottom: 32,  
+  },  
+  returnLink: {  
+    color: '#d4af37',  
+    textDecoration: 'none',  
+    fontSize: 13,  
+    letterSpacing: 2,  
+    textTransform: 'uppercase' as const,  
+    borderBottom: '1px solid #d4af37',  
+    paddingBottom: 2,  
+  },  
+  footer: {  
+    marginTop: 80,  
+    fontSize: 11,  
+    color: '#4a4a4a',  
+    letterSpacing: 1.5,  
+    textTransform: 'uppercase' as const,  
+  },  
+}  
