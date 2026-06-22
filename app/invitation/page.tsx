@@ -17,7 +17,7 @@ const AVIATION_CLASSES = [
   'Select preference…',  
   'First Class',  
   'Business',  
-  'Economy'
+  'Economy',
   'Private Charter',  
   'Helicopter Transfer',  
 ]
