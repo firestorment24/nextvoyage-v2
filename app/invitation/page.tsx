@@ -1,444 +1,284 @@
-// app/invitation/page.tsx  
 "use client";
 
-import { useState } from "react";  
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import React, { useState } from "react";
 
-const cormorant = Cormorant_Garamond({  
-  subsets: ["latin"],  
-  weight: ["300", "400", "500", "600", "700"],  
-  variable: "--font-cormorant",  
-});
-
-const inter = Inter({  
-  subsets: ["latin"],  
-  weight: ["300", "400", "500"],  
-  variable: "--font-inter",  
-});
-
+/* ─── Constants ─────────────────────────────────────────── */  
 const OCCASIONS = [  
   "Anniversary",  
   "Birthday",  
   "Honeymoon",  
-  "Business & Leisure",  
   "Family Gathering",  
-  "Personal Retreat",  
-  "Exploration",  
+  "Business Retreat",  
+  "Celebration",  
+  "Personal Escape",  
   "Other",  
 ];
 
 const AVIATION_CLASSES = [  
-  "Commercial First Class",  
-  "Commercial Business",  
+  "First Class",  
+  "Business",  
   "Private Charter",  
+  "Premium Economy",  
   "Flexible / Undecided",  
 ];
 
 const HEAR_ABOUT = [  
-  "Personal Referral",  
-  "Instagram",  
   "Word of Mouth",  
-  "Article / Feature",  
-  "Event",  
+  "Instagram",  
+  "LinkedIn",  
+  "Architectural Digest",  
+  "Travel + Leisure",  
+  "Referral",  
+  "Search Engine",  
   "Other",  
 ];
 
-type FormData = {  
-  name: string;  
-  email: string;  
-  phone: string;  
-  occasion: string;  
-  destinations: string;  
-  travelWindow: string;  
-  partySize: string;  
-  aviationClass: string;  
-  hearAbout: string;  
-  notes: string;  
-};
-
-const initialForm: FormData = {  
-  name: "",  
-  email: "",  
-  phone: "",  
-  occasion: "",  
-  destinations: "",  
-  travelWindow: "",  
-  partySize: "",  
-  aviationClass: "",  
-  hearAbout: "",  
-  notes: "",  
-};
-
+/* ─── Application for Entry ──────────────────────────────── */  
 export default function InvitationPage() {  
-  const [form, setForm] = useState<FormData>(initialForm);  
-  const [submitting, setSubmitting] = useState(false);  
-  const [submitted, setSubmitted] = useState(false);  
-  const [manifestId, setManifestId] = useState<string | null>(null);
+  const [step, setStep] = useState<"form" | "submitted">("form");
 
-  const handleChange = (  
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>  
-  ) => {  
+  const [form, setForm] = useState({  
+    name: "",  
+    email: "",  
+    phone: "",  
+    occasion: "",  
+    destinations: "",  
+    travelWindow: "",  
+    partySize: "",  
+    aviationClass: "",  
+    hearAbout: "",  
+    notes: "",  
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {  
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));  
   };
 
   const handleSubmit = async (e: React.FormEvent) => {  
     e.preventDefault();  
-    setSubmitting(true);
-
     try {  
       const res = await fetch("/api/lead", {  
         method: "POST",  
         headers: { "Content-Type": "application/json" },  
         body: JSON.stringify(form),  
-      });
-
-      const data = await res.json();
-
-      if (data.success) {  
-        setManifestId(data.manifestId);  
-        setSubmitted(true);  
-      }  
-    } catch {  
-      // silent fail — form remains interactive  
-    } finally {  
-      setSubmitting(false);  
+      });  
+      if (!res.ok) throw new Error("Failed to submit");  
+      setStep("submitted");  
+    } catch (err) {  
+      console.error("Submission error:", err);  
     }  
   };
 
-  // ── Success Screen ──────────────────────────────────────────────  
-  if (submitted) {  
+  if (step === "submitted") {  
     return (  
-      <main  
-        className={`${cormorant.variable} ${inter.variable} min-h-screen bg-[#0a0a0a] text-white font-[family-name:var(--font-inter)] flex flex-col items-center justify-center px-6`}  
-      >  
-        <div className="max-w-lg text-center space-y-8">  
-          <div className="space-y-2">  
-            <p className="text-[10px] tracking-[0.25em] uppercase text-[#d4af37]/60 font-[family-name:var(--font-inter)]">  
-              Rachel — Reception & Orchestration  
-            </p>  
-            <h1  
-              className={`text-4xl sm:text-5xl font-light text-[#d4af37] font-[family-name:var(--font-cormorant)] tracking-wide`}  
-            >  
-              Application Received  
-            </h1>  
-            <p className="text-lg text-white/70 font-light italic">  
-              Dialogue Initiated  
-            </p>  
-          </div>
-
-          <div className="h-px w-16 bg-[#d4af37]/40 mx-auto" />
-
-          <p className="text-sm text-w/60 leading-relaxed max-w-sm mx-auto">  
-            Your travel preferences are now being reviewed by our  
-            concierge team. A member of the Collective will reach out  
-            within <span className="text-[#d4af37]">48 hours</span>.  
-          </p>
-
-          {manifestId && (  
-            <p className="text-[10px] tracking-[0.2em] uppercase text-[#d4af37]/40 font-[family-name:var(--font-inter)]">  
-              Manifest {manifestId}  
-            </p>  
-          )}
-
-          <div className="pt-8">  
-            <a  
-              href="/"  
-              className="inline-block border border-[#d4af37]/30 text-[#d4af37] text-xs tracking-[0.2em] uppercase px-8 py-3 hover:bg-[#d4af37]/5 transition-colors duration-500"  
-            >  
-              Return  
-            </a>  
-          </div>
-
-          <p className="text-[9px] tracking-[0.3em] uppercase text-[#d4af37]/30 pt-12 font-[family-name:var(--font-inter)]">  
-            Rachel — Reception & Orchestration &bull; NexVoyage Collective  
+      <main className="min-h-screen bg-[#0A0A0A] flex items-center justify-center px-6">  
+        <div className="text-center max-w-lg">  
+          <p className="font-['Inter'] text-[#d4af37] tracking-[0.15em] text-xs uppercase mb-6">  
+            Rachel — Reception & Orchestration  
+          </p>  
+          <h1 className="font-['Cormorant_Garamond'] text-white text-4xl sm:text-5xl font-light tracking-wide mb-4">  
+            Application Received  
+          </h1>  
+          <div className="w-12 h-[1px] bg-[#d4af37]/40 mx-auto mb-6" />  
+          <p className="font-['Inter'] text-[#c8c8c8]/60 text-sm leading-relaxed">  
+            Your dossier is being reviewed. A member of our team will  
+            contact you within 24–48 hours to begin the dialogue.  
+          </p>  
+          <p className="font-['Cormorant_Garamond'] text-[#d4af37] text-lg italic mt-8">  
+            Dialogue Initiated  
           </p>  
         </div>  
       </main>  
     );  
   }
 
-  // ── Form Screen ─────────────────────────────────────────────────  
   return (  
     <>  
+      {/* ── Nuclear Kill: Forces ALL text to white ────────── */}  
       <style jsx global>{`  
-        h1, h2, h3, h4, h5, h6, p, span, label, div, section, form {  
-          background: transparent !important;  
+        * {  
+          color: #ffffff !important;  
+        }  
+        input, select, textarea {  
+          color: #ffffff !important;  
+          background-color: #141414 !important;  
+          border-color: rgba(212, 175, 55, 0.2) !important;  
+        }  
+        input::placeholder, textarea::placeholder {  
+          color: rgba(200, 200, 200, 0.35) !important;  
+        }  
+        label, .brass-label {  
+          color: rgba(200, 200, 200, 0.5) !important;  
+        }  
+        h1, h2, h3, h4, h5, h6, p, span, a, li, div, section, article {  
           background-color: transparent !important;  
         }  
-        [class*="bg-white"],  
-        [class*="bg-parchment"],  
-        [class*="bg-card"],  
-        [class*="bg-gray"],  
-        [class*="bg-neutral"] {  
-          background: transparent !important;  
-          background-color: transparent !important;  
-        }  
-        body, #__next, main {  
-          background: #0a0a0a !important;  
+        body, html, main, #__next {  
+          background-color: #0A0A0A !important;  
         }  
       `}</style>
 
-      <main  
-        className={`${cormorant.variable} ${inter.variable} min-h-screen bg-[#0a0a0a] text-white font-[family-name:var(--font-inter)] flex flex-col items-center px-4 py-16 sm:py-24`}  
-      >  
-        <div className="w-full max-w-2xl">  
-          {/* ── Header ────────────────────────────────────────── */}  
-          <div className="text-center space-y-3 mb-16">  
-            <p className="text-[10px] tracking-[0.25em] uppercase text-[#d4af37]/50 font-[family-name:var(--font-inter)]">  
-              Rachel — Reception & Orchestration  
+      <main className="min-h-screen bg-[#0A0A0A] text-white px-6 py-16 flex flex-col items-center">  
+        {/* ── Letterhead ──────────────────────────────────── */}  
+        <div className="w-full max-w-2xl mb-12 text-center">  
+          <p className="font-['Inter'] text-[#d4af37] tracking-[0.15em] text-xs uppercase mb-2">  
+            Rachel — Reception & Orchestration  
+          </p>  
+          <div className="w-16 h-[1px] bg-[#d4af37]/30 mx-auto mb-4" />  
+          <h1 className="font-['Cormorant_Garamond'] text-white text-3xl sm:text-4xl font-light tracking-wide">  
+            Application for Entry  
+          </h1>  
+        </div>
+
+        {/* ── Form ────────────────────────────────────────── */}  
+        <form onSubmit={handleSubmit} className="w-full max-w-2xl space-y-14">  
+          {/* ─── SECTION 1: The Sovereign Profile ─────────── */}  
+          <section>  
+            <h2 className="font-['Cormorant_Garamond'] text-white text-xl sm:text-2xl font-light tracking-wide mb-1">  
+              The Sovereign Profile  
+            </h2>  
+            <p className="font-['Inter'] text-[#c8c8c8]/40 text-xs tracking-[0.1em] uppercase mb-6">  
+              Who is traveling  
             </p>  
-            <h1  
-              className={`text-3xl sm:text-4xl font-light text-[#d4af37] font-[family-name:var(--font-cormorant)] tracking-wide`}  
-            >  
-              Application for Entry  
-            </h1>  
-            <div className="h-px w-12 bg-[#d4af37]/30 mx-auto mt-4" />  
-            <p className="text-sm text-[#c8c8c8]/50 max-w-md mx-auto font-light leading-relaxed">  
-              Discretion begins here. Share the details that matter,  
-              and let the Collective shape your passage.  
-            </p>  
-          </div>
-
-          {/* ── Form ──────────────────────────────────────────── */}  
-          <form onSubmit={handleSubmit} className="space-y-14">  
-            {/* ─── Section: Sovereign Profile ─────────────────── */}  
-            <section className="space-y-6">  
-              <div className="space-y-1">  
-                <span className="text-[9px] tracking-[0.3em] uppercase text-[#c8c8c8]/40 font-[family-name:var(--font-inter)]">  
-                  Section I  
-                </span>  
-                <h2  
-                  className={`text-xl text-white font-[family-name:var(--font-cormorant)] font-light tracking-wide`}  
-                >  
-                  The Sovereign Profile  
-                </h2>  
-                <div className="h-px w-full bg-[#d4af37]/10 mt-2" />  
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">  
-                <div className="sm:col-span-2 space-y-1.5">  
-                  <label className="text-[10px] tracking-[0.2em] uppercase text-[#c8c8c8]/40 font-[family-name:var(--font-inter)]">  
-                    Full Name  
-                  </label>  
-                  <input  
-                    type="text"  
-                    name="name"  
-                    value={form.name}  
-                    onChange={handleChange}  
-                    required  
-                    className="w-full bg-transparent border border-[#d4af37]/20 px-4 py-3 text-sm text-white placeholder:text-[#c8c8c8]/30 focus:outline-none focus:border-[#d4af37]/60 transition-colors duration-300 font-light"  
-                    placeholder="Your name"  
-                  />  
-                </div>
-
-                <div className="space-y-1.5">  
-                  <label className="text-[10px] tracking-[0.2em] uppercase text-[#c8c8c8]/40 font-[family-name:var(--font-inter)]">  
-                    Email  
-                  </label>  
-                  <input  
-                    type="email"  
-                    name="email"  
-                    value={form.email}  
-                    onChange={handleChange}  
-                    required  
-                    className="w-full bg-transparent border border-[#d4af37]/20 px-4 py-3 text-sm text-white placeholder:text-[#c8c8c8]/30 focus:outline-none focus:border-[#d4af37]/60 transition-colors duration-300 font-light"  
-                    placeholder="you@example.com"  
-                  />  
-                </div>
-
-                <div className="space-y-1.5">  
-                  <label className="text-[10px] tracking-[0.2em] uppercase text-[#c8c8c8]/40 font-[family-name:var(--font-inter)]">  
-                    Phone  
-                  </label>  
-                  <input  
-                    type="tel"  
-                    name="phone"  
-                    value={form.phone}  
-                    onChange={handleChange}  
-                    required  
-                    className="w-full bg-transparent border border-[#d4af37]/20 px-4 py-3 text-sm text-white placeholder:text-[#c8c8c8]/30 focus:outline-none focus:border-[#d4af37]/60 transition-colors duration-300 font-light"  
-                    placeholder="+1 (555) 000-0000"  
-                  />  
-                </div>  
-              </div>  
-            </section>
-
-            {/* ─── Section: Mission Parameters ────────────────── */}  
-            <section className="space-y-6">  
-              <div className="space-y-1">  
-                <span className="text-[9px] tracking-[0.3em] uppercase text-[#c8c8c8]/40 font-[family-name:var(--font-inter)]">  
-                  Section II  
-                </span>  
-                <h2  
-                  className={`text-xl text-white font-[family-name:var(--font-cormorant)] font-light tracking-wide`}  
-                >  
-                  Mission Parameters  
-                </h2>  
-                <div className="h-px w-full bg-[#d4af37]/10 mt-2" />  
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">  
-                <div className="space-y-1.5">  
-                  <label className="text-[10px] tracking-[0.2em] uppercase text-[#c8c8c8]/40 font-[family-name:var(--font-inter)]">  
-                    Occasion  
-                  </label>  
-                  <select  
-                    name="occasion"  
-                    value={form.occasion}  
-                    onChange={handleChange}  
-                    required  
-                    className="w-full bg-[#0a0a0a] border border-[#d4af37]/20 px-4 py-3 text-sm text-white focus:outline-none focus:border-[#d4af37]/60 transition-colors duration-300 font-light appearance-none"  
-                  >  
-                    <option value="" disabled className="bg-[#0a0a0a]">  
-                      Select occasion  
-                    </option>  
-                    {OCCASIONS.map((o) => (  
-                      <option key={o} value={o} className="bg-[#0a0a0a]">  
-                        {o}  
-                      </option>  
-                    ))}  
-                  </select>  
-                </div>
-
-                <div className="space-y-1.5">  
-                  <label className="text-[10px] tracking-[0.2em] uppercase text-[#c8c8c8]/40 font-[family-name:var(--font-inter)]">  
-                    Travel Window  
-                  </label>  
-                  <input  
-                    type="text"  
-                    name="travelWindow"  
-                    value={form.travelWindow}  
-                    onChange={handleChange}  
-                    required  
-                    className="w-full bg-transparent border border-[#d4af37]/20 px-4 py-3 text-sm text-white placeholder:text-[#c8c8c8]/30 focus:outline-none focus:border-[#d4af37]/60 transition-colors duration-300 font-light"  
-                    placeholder="e.g. September 2026"  
-                  />  
-                </div>
-
-                <div className="sm:col-span-2 space-y-1.5">  
-                  <label className="text-[10px] tracking-[0.2em] uppercase text-[#c8c8c8]/40 font-[family-name:var(--font-inter)]">  
-                    Destinations / Regions of Interest  
-                  </label>  
-                  <input  
-                    type="text"  
-                    name="destinations"  
-                    value={form.destinations}  
-                    onChange={handleChange}  
-                    required  
-                    className="w-full bg-transparent border border-[#d4af37]/20 px-4 py-3 text-sm text-white placeholder:text-[#c8c8c8]/30 focus:outline-none focus:border-[#d4af37]/60 transition-colors duration-300 font-light"  
-                    placeholder="e.g. French Riviera, Kyoto, Patagonia"  
-                  />  
-                </div>
-
-                <div className="space-y-1.5">  
-                  <label className="text-[10px] tracking-[0.2em] uppercase text-[#c8c8c8]/40 font-[family-name:var(--font-inter)]">  
-                    Party Size  
-                  </label>  
-                  <input  
-                    type="text"  
-                    name="partySize"  
-                    value={form.partySize}  
-                    onChange={handleChange}  
-                    required  
-                    className="w-full bg-transparent border border-[#d4af37]/20 px-4 py-3 text-sm text-white placeholder:text-[#c8c8c8]/30 focus:outline-none focus:border-[#d4af37]/60 transition-colors duration-300 font-light"  
-                    placeholder="e.g. 2 Adults"  
-                  />  
-                </div>
-
-                <div className="space-y-1.5">  
-                  <label className="text-[10px] tracking-[0.2em] uppercase text-[#c8c8c8]/40 font-[family-name:var(--font-inter)]">  
-                    Aviation Preference  
-                  </label>  
-                  <select  
-                    name="aviationClass"  
-                    value={form.aviationClass}  
-                    onChange={handleChange}  
-                    required  
-                    className="w-full bg-[#0a0a0a] border border-[#d4af37]/20 px-4 py-3 text-sm text-white focus:outline-none focus:border-[#d4af37]/60 transition-colors duration-300 font-light appearance-none"  
-                  >  
-                    <option value="" disabled className="bg-[#0a0a0a]">  
-                      Select class  
-                    </option>  
-                    {AVIATION_CLASSES.map((c) => (  
-                      <option key={c} value={c} className="bg-[#0a0a0a]">  
-                        {c}  
-                      </option>  
-                    ))}  
-                  </select>  
-                </div>  
-              </div>  
-            </section>
-
-            {/* ─── Section: Cultural Fit ──────────────────────── */}  
-            <section className="space-y-6">  
-              <div className="space-y-1">  
-                <span className="text-[9px] tracking-[0.3em] uppercase text-[#c8c8c8]/40 font-[family-name:var(--font-inter)]">  
-                  Section III  
-                </span>  
-                <h2  
-                  className={`text-xl text-white font-[family-name:var(--font-cormorant)] font-light tracking-wide`}  
-                >  
-                  Cultural Fit  
-                </h2>  
-                <div className="h-px w-full bg-[#d4af37]/10 mt-2" />  
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">  
-                <div className="space-y-1.5">  
-                  <label className="text-[10px] tracking-[0.2em] uppercase text-[#c8c8c8]/40 font-[family-name:var(--font-inter)]">  
-                    How did you hear about us?  
-                  </label>  
-                  <select  
-                    name="hearAbout"  
-                    value={form.hearAbout}  
-                    onChange={handleChange}  
-                    required  
-                    className="w-full bg-[#0a0a0a] border border-[#d4af37]/20 px-4 py-3 text-sm text-white focus:outline-none focus:border-[#d4af37]/60 transition-colors duration-300 font-light appearance-none"  
-                  >  
-                    <option value="" disabled className="bg-[#0a0a0a]">  
-                      Select source  
-                    </option>  
-                    {HEAR_ABOUT.map((s) => (  
-                      <option key={s} value={s} className="bg-[#0a0a0a]">  
-                        {s}  
-                      </option>  
-                    ))}  
-                  </select>  
-                </div>
-
-                <div className="sm:col-span-2 space-y-1.5">  
-                  <label className="text-[10px] tracking-[0.2em] uppercase text-[#c8c8c8]/40 font-[family-name:var(--font-inter)]">  
-                    Discretion Notes &mdash; Vision, Aesthetic, Unspoken Wishes  
-                  </label>  
-                  <textarea  
-                    name="notes"  
-                    value={form.notes}  
-                    onChange={handleChange}  
-                    rows={4}  
-                    className="w-full bg-transparent border border-[#d4af37]/20 px-4 py-3 text-sm text-white placeholder:text-[#c8c8c8]/30 focus:outline-none focus:border-[#d4af37]/60 transition-colors duration-300 font-light resize-none"  
-                    placeholder="Describe the feeling, the imagery, the unspoken details that matter most..."  
-                  />  
-                </div>  
-              </div>  
-            </section>
-
-            {/* ─── Submit ─────────────────────────────────────── */}  
-            <div className="text-center pt-4 space-y-6">  
-              <button  
-                type="submit"  
-                disabled={submitting}  
-                className="border border-[#d4af37]/40 text-[#d4af37] text-xs tracking-[0.25em] uppercase px-10 py-4 bg-transparent hover:bg-[#d4af37]/5 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-500"  
-              >  
-                {submitting ? "Transmitting..." : "Submit Application"}  
-              </button>
-
-              <p className="text-[9px] tracking-[0.3em] uppercase text-[#d4af37]/25 font-[family-name:var(--font-inter)]">  
-                Rachel — Reception & Orchestration &bull; NexVoyage Collective  
-              </p>  
+            <div className="space-y-5">  
+              <Field label="Full Name" name="name" value={form.name} onChange={handleChange} placeholder="Your name" />  
+              <Field label="Email Address" name="email" type="email" value={form.email} onChange={handleChange} placeholder="you@example.com" />  
+              <Field label="Phone Number" name="phone" type="tel" value={form.phone} onChange={handleChange} placeholder="+1 (555) 000-0000" />  
+              <SelectField label="Occasion" name="occasion" value={form.occasion} onChange={handleChange} options={OCCASIONS} placeholder="Select an occasion" />  
             </div>  
-          </form>  
+          </section>
+
+          {/* ─── SECTION 2: Mission Parameters ────────────── */}  
+          <section>  
+            <h2 className="font-['Cormorant_Garamond'] text-white text-xl sm:text-2xl font-light tracking-wide mb-1">  
+              Mission Parameters  
+            </h2>  
+            <p className="font-['Inter'] text-[#c8c8c8]/40 text-xs tracking-[0.1em] uppercase mb-6">  
+              The itinerary  
+            </p>  
+            <div className="space-y-5">  
+              <Field label="Destinations of Interest" name="destinations" value={form.destinations} onChange={handleChange} placeholder="e.g. Amalfi Coast, Kyoto, Patagonia" />  
+              <Field label="Preferred Travel Window" name="travelWindow" value={form.travelWindow} onChange={handleChange} placeholder="e.g. September 2026" />  
+              <Field label="Party Size" name="partySize" value={form.partySize} onChange={handleChange} placeholder="e.g. 2 adults" />  
+              <SelectField label="Aviation Class" name="aviationClass" value={form.aviationClass} onChange={handleChange} options={AVIATION_CLASSES} placeholder="Select aviation class" />  
+            </div>  
+          </section>
+
+          {/* ─── SECTION 3: Cultural Fit ──────────────────── */}  
+          <section>  
+            <h2 className="font-['Cormorant_Garamond'] text-white text-xl sm:text-2xl font-light tracking-wide mb-1">  
+              Cultural Fit  
+            </h2>  
+            <p className="font-['Inter'] text-[#c8c8c8]/40 text-xs tracking-[0.1em] uppercase mb-6">  
+              How you found us  
+            </p>  
+            <div className="space-y-5">  
+              <SelectField label="How Did You Hear About Us?" name="hearAbout" value={form.hearAbout} onChange={handleChange} options={HEAR_ABOUT} placeholder="Select one" />  
+              <div>  
+                <label className="font-['Inter'] text-[#c8c8c8]/40 text-xs tracking-[0.1em] uppercase block mb-2">  
+                  Additional Notes  
+                </label>  
+                <textarea  
+                  name="notes"  
+                  value={form.notes}  
+                  onChange={handleChange}  
+                  placeholder="Anything else we should know..."  
+                  rows={4}  
+                  className="w-full bg-[#141414] border border-[#d4af37]/20 rounded-none px-4 py-3 font-['Inter'] text-sm text-white placeholder:text-[#c8c8c8]/30 focus:outline-none focus:border-[#d4af37]/60 transition-colors resize-none"  
+                />  
+              </div>  
+            </div>  
+          </section>
+
+          {/* ── Submit ────────────────────────────────────── */}  
+          <div className="text-center pt-4">  
+            <button  
+              type="submit"  
+              className="font-['Inter'] text-xs tracking-[0.2em] uppercase text-white bg-[#d4af37]/10 border border-[#d4af37]/30 px-10 py-4 hover:bg-[#d4af37]/20 hover:border-[#d4af37]/60 transition-all duration-500"  
+            >  
+              Submit Application  
+            </button>  
+          </div>  
+        </form>
+
+        {/* ── Footer ──────────────────────────────────────── */}  
+        <div className="w-full max-w-2xl mt-16 pt-8 border-t border-[#d4af37]/10 text-center">  
+          <p className="font-['Cormorant_Garamond'] text-[#c8c8c8]/30 text-sm italic">  
+            Rachel — Reception & Orchestration &ensp;•&ensp; NexVoyage Collective  
+          </p>  
         </div>  
       </main>  
     </>  
+  );  
+}
+
+/* ─── Reusable input field ──────────────────────────────── */  
+function Field({  
+  label,  
+  name,  
+  type = "text",  
+  value,  
+  onChange,  
+  placeholder,  
+}: {  
+  label: string;  
+  name: string;  
+  type?: string;  
+  value: string;  
+  onChange: React.ChangeEvent<HTMLInputElement>["handleChange"];  
+  placeholder: string;  
+}) {  
+  return (  
+    <div>  
+      <label htmlFor={name} className="font-['Inter'] text-[#c8c8c8]/40 text-xs tracking-[0.1em] uppercase block mb-2">  
+        {label}  
+      </label>  
+      <input  
+        id={name}  
+        name={name}  
+        type={type}  
+        value={value}  
+        onChange={onChange}  
+        placeholder={placeholder}  
+        className="w-full bg-[#141414] border border-[#d4af37]/20 rounded-none px-4 py-3 font-['Inter'] text-sm text-white placeholder:text-[#c8c8c8]/30 focus:outline-none focus:border-[#d4af37]/60 transition-colors"  
+      />  
+    </div>  
+  );  
+}
+
+/* ─── Reusable select field ─────────────────────────────── */  
+function SelectField({  
+  label,  
+  name,  
+  value,  
+  onChange,  
+  options,  
+  placeholder,  
+}: {  
+  label: string;  
+  name: string;  
+  value: string;  
+  onChange: React.ChangeEvent<HTMLSelectElement>["handleChange"];  
+  options: string[];  
+  placeholder: string;  
+}) {  
+  return (  
+    <div>  
+      <label htmlFor={name} className="font-['Inter'] text-[#c8c8c8]/40 text-xs tracking-[0.1em] uppercase block mb-2">  
+        {label}  
+      </label>  
+      <select  
+        id={name}  
+        name={name}  
+        value={value}  
+        onChange={onChange}  
+        className="w-full bg-[#141414] border border-[#d4af37]/20 rounded-none px-4 py-3 font-['Inter'] text-sm text-white focus:outline-none focus:border-[#d4af37]/60 transition-colors appearance-none"  
+      >  
+        <option value="" className="bg-[#141414] text-[#c8c8c8]/30">{placeholder}</option>  
+        {options.map((opt) => (  
+          <option key={opt} value={opt} className="bg-[#141414] text-white">{opt}</option>  
+        ))}  
+      </select>  
+    </div>  
   );  
 }  
