@@ -16,7 +16,7 @@ export default function Navigation() {
 
   return (  
     <>  
-      {/* Top fixed bar — fully transparent */}  
+      {/* Top fixed bar — fully transparent, brass text */}  
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 py-4 bg-transparent">  
         <Link  
           href="/"  
@@ -33,7 +33,7 @@ export default function Navigation() {
         </button>  
       </nav>
 
-      {/* Full-screen overlay menu — 75% smoky gray */}  
+      {/* Full-screen overlay — 75% smoky gray */}  
       {menuOpen && (  
         <div className="fixed inset-0 z-40 bg-[#2A2A2A]/75 flex flex-col items-center justify-center">  
           <div className="flex flex-col items-center gap-8">  
@@ -51,7 +51,7 @@ export default function Navigation() {
         </div>  
       )}
 
-      {/* Spacer to prevent content from hiding under fixed nav */}  
+      {/* Spacer */}  
       <div className="h-16" />  
     </>  
   );  
