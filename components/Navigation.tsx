@@ -16,17 +16,17 @@ export default function Navigation() {
 
   return (  
     <>  
-      {/* Top fixed bar */}  
+      {/* Top fixed bar — fully transparent */}  
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 py-4 bg-transparent">  
         <Link  
           href="/"  
-          className="text-[1.25rem] font-serif tracking-[0.15em] text-white"  
+          className="text-[1.25rem] font-serif tracking-[0.15em] text-[#D4AF37]"  
         >  
           NEXVOYAGE COLLECTIVE  
         </Link>  
         <button  
           onClick={() => setMenuOpen(!menuOpen)}  
-          className="text-white hover:text-[#D4AF37] transition-colors"  
+          className="text-[#D4AF37] hover:text-white transition-colors"  
           aria-label="Toggle menu"  
         >  
           {menuOpen ? <X size={24} /> : <Menu size={24} />}  
