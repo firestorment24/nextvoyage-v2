@@ -3,7 +3,7 @@ import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);  
 const SLACK_WEBHOOK_URL = process.env.SLACK_WEBHOOK_URL;
-
+ 
 const OCCASION_TAGS: Record<string, string> = {  
   anniversary: 'Milestone Celebration',  
   birthday: 'Milestone Celebration',  
