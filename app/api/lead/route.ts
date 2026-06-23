@@ -12,7 +12,7 @@ export async function POST(req: Request) {
       name, email, phone, occasion, destinations,  
       travelWindow, partySize, aviationClass, hearAbout, notes  
     } = body;
-
+ 
     // --- 1. Validate email via ZeroBounce ---  
     if (process.env.ZEROBOUNCE_API_KEY) {  
       const zbRes = await fetch(  
