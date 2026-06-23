@@ -1,61 +1,58 @@
 "use client";
 
 import { useState } from "react";  
-import Link from "next/link";
+import Link from "next/link";  
+import { Menu, X } from "lucide-react";
 
 const navLinks = [  
-{ label: "LOBBY", href: "http://www.nexvoyagecollective.com" },
-{ label: "ARCHIVE", href: "/archive" },  
-{ label: "JOURNAL", href: "/journal" },  
-{ label: "INQUIRY", href: "/inquiry" },  
+  { href: "/", label: "LOBBY" },  
+  { href: "/archive", label: "ARCHIVE" },  
+  { href: "/journal", label: "JOURNAL" },  
+  { href: "/inquiry", label: "INQUIRY" },  
 ];
 
 export default function Navigation() {  
-const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-return (  
-<>  
-{/* TOP BAR */}  
-<nav className="fixed top-0 left-0 w-full z-50 bg-transparent">  
-  <div className="w-full flex items-center justify-between px-5 h-16">  
-    {/* LEFT: Brand */}  
-    <Link href="/" className="text-[#C9A96E] no-underline">  
-      <span  
-        className="text-[1.25rem] tracking-[0.15em]"  
-        style={{ fontFamily: "'Cormorant Garamond', serif" }}  
-      >  
-        NEXVOYAGE COLLECTIVE  
-      </span>  
-    </Link>
-
-    {/* RIGHT: Menu toggle */}  
-    <button  
-      onClick={() => setMenuOpen(!menuOpen)}  
-      className="text-white bg-transparent border-none cursor-pointer text-sm tracking-[0.2em] uppercase"  
-    >  
-      {menuOpen ? "CLOSE" : "MENU"}  
-    </button>  
-  </div>  
-</nav>
-
-{/* OVERLAY MENU */}  
-{menuOpen && (  
-  <div className="fixed inset-0 z-40 flex flex-col items-center justify-center bg-[#2A2A2A]/75">  
-    <nav className="flex flex-col items-center gap-8">  
-      {navLinks.map((link) => (  
+  return (  
+    <>  
+      {/* Top fixed bar */}  
+      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 py-4 bg-transparent">  
         <Link  
-          key={link.href}  
-          href={link.href}  
-          onClick={() => setMenuOpen(false)}  
-          className="text-white text-[2rem] tracking-[0.1em] no-underline transition-opacity duration-300 hover:opacity-60"  
-          style={{ fontFamily: "'Cormorant Garamond', serif" }}  
+          href="/"  
+          className="text-[1.25rem] font-serif tracking-[0.15em] text-white"  
         >  
-          {link.label}  
+          NEXVOYAGE COLLECTIVE  
         </Link>  
-      ))}  
-    </nav>  
-  </div>  
-)}  
-</>  
-);  
+        <button  
+          onClick={() => setMenuOpen(!menuOpen)}  
+          className="text-white hover:text-[#D4AF37] transition-colors"  
+          aria-label="Toggle menu"  
+        >  
+          {menuOpen ? <X size={24} /> : <Menu size={24} />}  
+        </button>  
+      </nav>
+
+      {/* Full-screen overlay menu — 75% smoky gray */}  
+      {menuOpen && (  
+        <div className="fixed inset-0 z-40 bg-[#2A2A2A]/75 flex flex-col items-center justify-center">  
+          <div className="flex flex-col items-center gap-8">  
+            {navLinks.map((link) => (  
+              <Link  
+                key={link.href}  
+                href={link.href}  
+                onClick={() => setMenuOpen(false)}  
+                className="text-white text-2xl font-serif tracking-[0.2em] hover:text-[#D4AF37] transition-colors"  
+              >  
+                {link.label}  
+              </Link>  
+            ))}  
+          </div>  
+        </div>  
+      )}
+
+      {/* Spacer to prevent content from hiding under fixed nav */}  
+      <div className="h-16" />  
+    </>  
+  );  
 }  
