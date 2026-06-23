@@ -1,18 +1,24 @@
-@import "tailwindcss";
-
-@theme {  
-  --font-serif: var(--font-serif);  
-  --font-sans: var(--font-sans);  
+/* FORCE TRANSPARENT NAV */  
+html, body, header, nav, div, section, main {  
+  background-color: transparent !important;  
 }
 
-html, body {  
-  background-color: #FCFAF7;  
-  color: #1C1C1C;  
+/* Kill any white blocks the framework sneaks in */  
+* {  
+  background-color: transparent !important;  
 }
 
-h1, h2, h3, h4 {  
-  font-family: var(--font-serif);  
-  font-weight: 500;  
-  background-color: #FCFAF7; /* Warm Parchment */  
-  color: #1C1C1C; /* Ink Black */  
+/* Re-apply ONLY the page-level background */  
+body {  
+  background-color: #0A0A0A !important;  
+}
+
+/* Re-apply for containers that need it */  
+main, section, .page-wrapper {  
+  background-color: #0A0A0A !important;  
+}
+
+/* Brass-colored text if not set in Tailwind already */  
+h1, h2, h3, h4, p, span, a {  
+  background-color: transparent !important;  
 }  
