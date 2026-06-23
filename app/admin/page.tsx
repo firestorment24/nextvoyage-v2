@@ -18,7 +18,7 @@ interface Dossier {
   source: string;  
   created_at: string;  
 }
-
+ 
 const statusColors: Record<string, string> = {  
   'New': 'border-l-4 border-l-[#D4AF37]',  
   'Contacted': 'border-l-4 border-l-blue-400',  
