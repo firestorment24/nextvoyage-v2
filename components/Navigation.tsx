@@ -30,29 +30,31 @@ const Navigation = () => {
     <>  
       {/* Top Bar — fully transparent */}  
       {/* Top Bar — fully transparent, flush to edges */}  
+{/* Top Bar — fully transparent, natural spacing */}  
 <nav  
-  className="fixed top-0 left-0 right-0 z-50"  
-  style={{ background: 'transparent' }}  
+className="fixed top-0 left-0 right-0 z-50"  
+style={{ background: 'transparent' }}  
 >  
-  <div className="flex items-center justify-between w-full px-2 py-6">  
-    <Link  
-      href="/"  
-      className="tracking-[0.15em] text-sm"  
-      style={{  
-        fontFamily: "'Cormorant Garamond', serif",  
-        color: '#C5A059',  
-      }}  
-    >  
-      NEXVOYAGE COLLECTIVE  
-    </Link>  
-    <button  
-      onClick={() => setIsOpen(!isOpen)}  
-      className="text-white hover:text-[#C5A059] transition-colors duration-300"  
-    >  
-      {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}  
-    </button>  
-  </div>  
-</nav> 
+<div className="flex items-center justify-between w-full px-6 py-6">  
+  <Link  
+    href="/"  
+    className="tracking-[0.15em]"  
+    style={{  
+      fontFamily: "'Cormorant Garamond', serif",  
+      color: '#C5A059',  
+      fontSize: '1.25rem', // 20px  
+    }}  
+  >  
+    NEXVOYAGE COLLECTIVE  
+  </Link>  
+  <button  
+    onClick={() => setIsOpen(!isOpen)}  
+    className="text-white hover:text-[#C5A059] transition-colors duration-300"  
+  >  
+    {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}  
+  </button>  
+</div>  
+</nav>  
       
       {/* Fullscreen Overlay — solid black */}  
       <div  
