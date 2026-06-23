@@ -5,6 +5,14 @@ import { Resend } from "resend";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const OCCASION_TAGS: Record<string, string> = {  
+  "Anniversary": "Milestone Celebration",  
+  "Birthday": "Milestone Celebration",  
+  "Honeymoon": "Romantic Getaway",  
+  "Business & Leisure": "Executive Business",  
+  "Family Gathering": "Family Voyage",  
+  "Personal Retreat": "Wellness & Recharge",  
+  "Exploration": "Exploration & Discovery",  
+  "Other": "General Inquiry",  
   celebrate: "Milestone Celebration",  
   explore: "Exploration & Discovery",  
   romance: "Romantic Getaway",  
@@ -38,7 +46,7 @@ export async function POST(request: Request) {
     } = body;
 
     const manifestId = generateManifestId();  
-    const leadTag = OCCASION_TAGS[occasion] || "General Inquiry";
+    const leadTag = OCCASION_TAGS[occasion] || occasion || "General Inquiry";
 
     const manifest = {  
       manifestId,  
@@ -72,7 +80,7 @@ export async function POST(request: Request) {
               <tr><td style="padding:8px 0;border-bottom:1px solid #1A1A1A;color:#8A8070;font-size:13px;">Name</td><td style="padding:8px 0;border-bottom:1px solid #1A1A1A;font-size:13px;">${name}</td></tr>  
               <tr><td style="padding:8px 0;border-bottom:1px solid #1A1A1A;color:#8A8070;font-size:13px;">Email</td><td style="padding:8px 0;border-bottom:1px solid #1A1A1A;font-size:13px;">${email}</td></tr>  
               <tr><td style="padding:8px 0;border-bottom:1px solid #1A1A1A;color:#8A8070;font-size:13px;">Phone</td><td style="padding:8px 0;border-bottom:1px solid #1A1A1A;font-size:13px;">${phone || "—"}</td></tr>  
-              <tr><td style="padding:8px 0;border-bottom:1px solid #1A1A1A;color:#8A8070;font-size:13px;">Occasion</td><td style="padding:8px 0;border-bottom:1px solid #1A1A1A;font-size:13px;"><span style="color:#D4AF37;">${leadTag}</span></td></tr>  
+              <tr><td style="padding:8px 0;border-bottom:1px solid #1A1A1A;color:#8A8070;font-size:13px;">Occasion</td><td style="padding:8px 0;border-bottom:1px solid #1A1A1A;font-size:13px;"><span style="color:#D4AF37;">${leadTag}</span> <span style="color:#8A8070;font-size:12px;">(${occasion})</span></td></tr>  
               <tr><td style="padding:8px 0;border-bottom:1px solid #1A1A1A;color:#8A8070;font-size:13px;">Destinations</td><td style="padding:8px 0;border-bottom:1px solid #1A1A1A;font-size:13px;">${manifest.destinations}</td></tr>  
               <tr><td style="padding:8px 0;border-bottom:1px solid #1A1A1A;color:#8A8070;font-size:13px;">Travel Window</td><td style="padding:8px 0;border-bottom:1px solid #1A1A1A;font-size:13px;">${manifest.travelWindow}</td></tr>  
               <tr><td style="padding:8px 0;border-bottom:1px solid #1A1A1A;color:#8A8070;font-size:13px;">Party Size</td><td style="padding:8px 0;border-bottom:1px solid #1A1A1A;font-size:13px;">${manifest.partySize}</td></tr>  
