@@ -5,13 +5,13 @@ import { Resend } from "resend";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const OCCASION_TAGS: Record<string, string> = {  
-  "celebrate": "Milestone Celebration",  
-  "explore": "Exploration & Discovery",  
-  "romance": "Romantic Getaway",  
-  "recharge": "Wellness & Recharge",  
-  "business": "Executive Business",  
-  "family": "Family Voyage",  
-  "adventure": "Adventure Expedition",  
+  celebrate: "Milestone Celebration",  
+  explore: "Exploration & Discovery",  
+  romance: "Romantic Getaway",  
+  recharge: "Wellness & Recharge",  
+  business: "Executive Business",  
+  family: "Family Voyage",  
+  adventure: "Adventure Expedition",  
 };
 
 function generateManifestId(): string {  
@@ -86,14 +86,19 @@ export async function POST(request: Request) {
       `,  
     });
 
-    console.log(`[${manifestId}] Manifest created — ${leadTag}`);  
-    console.log(`[${manifestId}] Email sent:`, emailResponse.id);
+    console.log(`[${manifestId}] Manifest created — ${leadTag}`);
+
+    if (emailResponse.error) {  
+      console.error(`[${manifestId}] Email send failed:`, emailResponse.error);  
+    } else {  
+      console.log(`[${manifestId}] Email sent:`, emailResponse.data?.id);  
+    }
 
     return NextResponse.json({  
       success: true,  
       manifestId,  
       analysisStatus: "COMPLETED",  
-      emailSent: true,  
+      emailSent: !emailResponse.error,  
     });  
   } catch (error) {  
     console.error("Lead API error:", error);  
