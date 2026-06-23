@@ -20,7 +20,7 @@ const Navigation = () => {
     { name: 'LOBBY', href: '/', sub: 'The Beginning' },  
     { name: 'ARCHIVE', href: '/archive', sub: 'Curated Collection' },  
     { name: 'JOURNAL', href: '/journal', sub: 'Travel Stories' },  
-    { name: 'INVITATION', href: '/invitation', sub: 'Direct Inquiry' },  
+    { name: 'INQUIRY', href: '/inquiry', sub: 'Direct Inquiry' },  
   ];
 
   const brass = '#C5A059';  
@@ -29,66 +29,130 @@ const Navigation = () => {
   return (  
     <>  
       {/* Top Bar */}  
-      <nav className="fixed top-0 left-0 w-full z-[1001] h-24 flex items-center justify-between px-8 md:px-12 pointer-events-none">  
-        {/* Logo - Stays visible or hides depending on vibe */}  
-        <Link   
-          href="/"   
-          className="text-[#C5A059] text-2xl font-serif tracking-[0.3em] hover:opacity-80 transition-opacity pointer-events-auto"  
+      <nav  
+        style={{  
+          position: 'fixed',  
+          top: 0,  
+          left: 0,  
+          right: 0,  
+          zIndex: 1000,  
+          display: 'flex',  
+          justifyContent: 'space-between',  
+          alignItems: 'center',  
+          padding: '1rem 2rem',  
+          background: '#050505',  
+          borderBottom: `1px solid rgba(197, 160, 89, 0.15)`,  
+        }}  
+      >  
+        <Link  
+          href="/"  
+          style={{  
+            fontSize: '1.25rem',  
+            fontWeight: 700,  
+            letterSpacing: '0.15em',  
+            color: brass,  
+            textDecoration: 'none',  
+            textTransform: 'uppercase',  
+          }}  
         >  
-          NEXVOYAGE COLLECTIVE  
+          NEXVOYAGE  
         </Link>
 
-        {/* The Toggle Button */}  
-        <button   
+        <button  
           onClick={() => setIsOpen(!isOpen)}  
-          className="pointer-events-auto flex items-center justify-center w-12 h-12 rounded-full bg-[#0A0A0A]/40 backdrop-blur-sm border border-[#C5A059]/20 hover:border-[#C5A059]/50 transition-all group"  
-          aria-label="Toggle Menu"  
+          style={{  
+            background: 'transparent',  
+            border: 'none',  
+            color: brass,  
+            cursor: 'pointer',  
+            zIndex: 1001,  
+            padding: '0.5rem',  
+          }}  
+          aria-label="Toggle menu"  
         >  
-          {isOpen ? (  
-            <X size={24} color={brass} strokeWidth={1.5} />  
-          ) : (  
-            <Menu size={24} color={brass} strokeWidth={1.5} className="group-hover:scale-110 transition-transform" />  
-          )}  
+          {isOpen ? <X size={24} /> : <Menu size={24} />}  
         </button>  
       </nav>
 
+      {/* Spacer to prevent content from hiding under fixed nav */}  
+      <div style={{ height: '4rem' }} />
+
       {/* Fullscreen Overlay */}  
-      <div   
-        className={`fixed inset-0 z-[1000] bg-[#0A0A0A] transition-all duration-700 ease-in-out ${  
-          isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'  
-        }`}  
+      <div  
+        style={{  
+          position: 'fixed',  
+          top: 0,  
+          left: 0,  
+          width: '100vw',  
+          height: '100vh',  
+          backgroundColor: shadow,  
+          zIndex: 999,  
+          display: 'flex',  
+          flexDirection: 'column',  
+          justifyContent: 'center',  
+          alignItems: 'center',  
+          gap: '2rem',  
+          transition: 'opacity 0.7s ease, visibility 0.7s ease',  
+          opacity: isOpen ? 1 : 0,  
+          visibility: isOpen ? 'visible' : 'hidden',  
+        }}  
       >  
-        
+        {navLinks.map((link, i) => (  
+          <Link  
+            key={link.name}  
+            href={link.href}  
+            onClick={() => setIsOpen(false)}  
+            style={{  
+              display: 'flex',  
+              flexDirection: 'column',  
+              alignItems: 'center',  
+              textDecoration: 'none',  
+              transition: 'all 0.7s ease',  
+              transitionDelay: `${i * 100}ms`,  
+              transform: isOpen ? 'translateY(0)' : 'translateY(40px)',  
+              opacity: isOpen ? 1 : 0,  
+            }}  
+          >  
+            <span  
+              style={{  
+                fontSize: '0.75rem',  
+                letterSpacing: '0.3em',  
+                color: 'rgba(197, 160, 89, 0.6)',  
+                textTransform: 'uppercase',  
+                marginBottom: '0.25rem',  
+              }}  
+            >  
+              {link.sub}  
+            </span>  
+            <span  
+              style={{  
+                fontSize: '3rem',  
+                letterSpacing: '0.15em',  
+                color: brass,  
+                fontWeight: 300,  
+                textTransform: 'uppercase',  
+              }}  
+            >  
+              {link.name}  
+            </span>  
+          </Link>  
+        ))}
 
-        <div className="relative h-full flex flex-col items-center justify-center px-6">  
-          <div className="flex flex-col space-y-10 md:space-y-12 text-center">  
-            {navLinks.map((link, i) => (  
-              <Link  
-                key={link.name}  
-                href={link.href}  
-                onClick={() => setIsOpen(false)}  
-                className={`group flex flex-col items-center transform transition-all duration-700 delay-[${i * 100}ms] ${  
-                  isOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'  
-                }`}  
-              >  
-                <span className="text-[#C5A059] text-xs tracking-[0.4em] mb-2 font-mono opacity-60 group-hover:opacity-100 transition-opacity">  
-                  {link.sub}  
-                </span>  
-                <span className="text-white text-4xl md:text-6xl font-serif tracking-widest group-hover:text-[#C5A059] transition-colors duration-500">  
-                  {link.name}  
-                </span>  
-              </Link>  
-            ))}  
-          </div>
-
-          {/* Bottom Menu Info */}  
-          <div className={`absolute bottom-12 text-center transition-all duration-1000 delay-500 ${  
-            isOpen ? 'opacity-100' : 'opacity-0'  
-          }`}>  
-            <p className="text-[#C5A059]/40 text-xs tracking-[0.3em] uppercase">  
-              Member Services | Private Collection  
-            </p>  
-          </div>  
+        {/* Bottom Menu Info */}  
+        <div  
+          style={{  
+            position: 'absolute',  
+            bottom: '3rem',  
+            fontSize: '0.7rem',  
+            letterSpacing: '0.2em',  
+            color: 'rgba(197, 160, 89, 0.4)',  
+            textTransform: 'uppercase',  
+            transition: 'opacity 1s ease',  
+            transitionDelay: '0.6s',  
+            opacity: isOpen ? 1 : 0,  
+          }}  
+        >  
+          Member Services | Private Collection  
         </div>  
       </div>  
     </>  
