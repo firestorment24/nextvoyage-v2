@@ -104,9 +104,9 @@ export async function POST(request: NextRequest) {
     try {  
       const { sql } = await import('@vercel/postgres');  
       await sql`  
-        INSERT INTO dossiers (name, email, phone, destination, travel_window, party_size, occasion, aviation_class, hear_about, notes, status, source)  
-        VALUES (${name}, ${email}, ${phone || null}, ${destinations || null}, ${travelWindow || null}, ${partySize ? parseInt(partySize) : null}, ${occasionTag}, ${aviationClass || null}, ${hearAbout || null}, ${notes || null}, 'pending', ${source})  
-      `;  
+  INSERT INTO dossiers (name, email, phone, destination, travel_dates, party_size, occasion, aviation_class, hear_about, notes, status, source)  
+  VALUES (${name}, ${email}, ${phone || null}, ${destinations || null}, ${travelWindow || null}, ${partySize ? parseInt(partySize) : null}, ${occasionTag}, ${aviationClass || null}, ${hearAbout || null}, ${notes || null}, 'pending', ${source})  
+`;  
       console.log('[LEAD] Dossier written to DB');  
     } catch (dbError) {  
       console.log('[LEAD] DB write skipped (table or package not ready):', dbError);  
