@@ -5,156 +5,109 @@ import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 
 const Navigation = () => {  
-const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-useEffect(() => {  
-if (isOpen) {  
-  document.body.style.overflow = 'hidden';  
-} else {  
-  document.body.style.overflow = 'unset';  
-}  
-}, [isOpen]);
+  // Prevent scrolling when menu is open  
+  useEffect(() => {  
+    if (isOpen) {  
+      document.body.style.overflow = 'hidden';  
+    } else {  
+      document.body.style.overflow = 'unset';  
+    }  
+  }, [isOpen]);
 
-const navLinks = [  
-{ name: 'LOBBY', href: '/', sub: 'The Beginning' },  
-{ name: 'ARCHIVE', href: '/archive', sub: 'Curated Collection' },  
-{ name: 'JOURNAL', href: '/journal', sub: 'Travel Stories' },  
-{ name: 'INQUIRY', href: '/inquiry', sub: 'Direct Inquiry' },  
-];
+  const navLinks = [  
+    { name: 'LOBBY', href: '/', sub: 'The Beginning' },  
+    { name: 'ARCHIVE', href: '/archive', sub: 'Curated Collection' },  
+    { name: 'JOURNAL', href: '/journal', sub: 'Travel Stories' },  
+    { name: 'INQUIRY', href: '/inquiry', sub: 'Direct Inquiry' },  
+  ];
 
-const brass = '#C5A059';
+  const brass = '#C5A059';  
+  const shadow = '#0A0A0A';
 
-return (  
-<>  
-  {/* Top Bar — Fully Transparent */}  
-  <nav  
-    style={{  
-      position: 'fixed',  
-      top: 0,  
-      left: 0,  
-      right: 0,  
-      zIndex: 1000,  
-      display: 'flex',  
-      justifyContent: 'space-between',  
-      alignItems: 'center',  
-      padding: '1rem 2rem',  
-      background: 'transparent',  
-      borderBottom: `1px solid rgba(197, 160, 89, 0.15)`,  
-    }}  
-  >  
-    <Link  
-      href="/"  
-      style={{  
-        fontSize: '1.25rem',  
-        fontWeight: 500,  
-        letterSpacing: '0.15em',  
-        color: brass,  
-        textDecoration: 'none',  
-        textTransform: 'uppercase',  
-        fontFamily: 'var(--font-serif)',  
-      }}  
-    >  
-      NEXVOYAGE  
-    </Link>
+  return (  
+    <>  
+      {/* Top Bar — fully transparent */}  
+      <nav  
+        className="fixed top-0 left-0 right-0 z-50"  
+        style={{ background: 'transparent' }}  
+      >  
+        <div className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto">  
+          <Link  
+            href="/"  
+            className="tracking-[0.15em] text-sm"  
+            style={{  
+              fontFamily: "'Cormorant Garamond', serif",  
+              color: '#C5A059', // brass  
+            }}  
+          >  
+            NEXVOYAGE COLLECTIVE  
+          </Link>  
+          <button  
+            onClick={() => setIsOpen(!isOpen)}  
+            className="text-white hover:text-[#C5A059] transition-colors duration-300"  
+          >  
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}  
+          </button>  
+        </div>  
+      </nav>
 
-    <button  
-      onClick={() => setIsOpen(!isOpen)}  
-      style={{  
-        background: 'transparent',  
-        border: 'none',  
-        color: brass,  
-        cursor: 'pointer',  
-        zIndex: 1001,  
-        padding: '0.5rem',  
-      }}  
-      aria-label="Toggle menu"  
-    >  
-      {isOpen ? <X size={24} /> : <Menu size={24} />}  
-    </button>  
-  </nav>
+      {/* Fullscreen Overlay — solid black */}  
+      <div  
+        className={`fixed inset-0 z-40 flex flex-col items-center justify-center transition-opacity duration-500 ${  
+          isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'  
+        }`}  
+        style={{ backgroundColor: shadow }}  
+      >  
+        <div className="flex flex-col items-center gap-12">  
+          {navLinks.map((link, i) => (  
+            <Link  
+              key={link.name}  
+              href={link.href}  
+              onClick={() => setIsOpen(false)}  
+              className="group flex flex-col items-center transform transition-all duration-700"  
+              style={{  
+                transitionDelay: `${i * 100}ms`,  
+                opacity: isOpen ? 1 : 0,  
+                transform: isOpen ? 'translateY(0)' : 'translateY(2.5rem)',  
+              }}  
+            >  
+              <span  
+                className="text-xs tracking-[0.3em] uppercase mb-2"  
+                style={{ color: brass, fontFamily: "'Cormorant Garamond', serif" }}  
+              >  
+                {link.sub}  
+              </span>  
+              <span  
+                className="text-4xl tracking-[0.2em] font-light"  
+                style={{  
+                  color: '#ffffff',  
+                  fontFamily: "'Cormorant Garamond', serif",  
+                }}  
+              >  
+                {link.name}  
+              </span>  
+            </Link>  
+          ))}  
+        </div>  
+      </div>
 
-  {/* Spacer */}  
-  <div style={{ height: '4rem' }} />
-
-  {/* Fullscreen Overlay — Pure Black */}  
-  <div  
-    style={{  
-      position: 'fixed',  
-      top: 0,  
-      left: 0,  
-      width: '100vw',  
-      height: '100vh',  
-      backgroundColor: '#000000',  
-      zIndex: 999,  
-      display: 'flex',  
-      flexDirection: 'column',  
-      justifyContent: 'center',  
-      alignItems: 'center',  
-      gap: '2rem',  
-      transition: 'opacity 0.7s ease, visibility 0.7s ease',  
-      opacity: isOpen ? 1 : 0,  
-      visibility: isOpen ? 'visible' : 'hidden',  
-    }}  
-  >  
-    {navLinks.map((link, i) => (  
-      <Link  
-        key={link.name}  
-        href={link.href}  
-        onClick={() => setIsOpen(false)}  
-        style={{  
-          display: 'flex',  
-          flexDirection: 'column',  
-          alignItems: 'center',  
-          textDecoration: 'none',  
-          transition: 'all 0.7s ease',  
-          transitionDelay: `${i * 100}ms`,  
-          transform: isOpen ? 'translateY(0)' : 'translateY(40px)',  
-          opacity: isOpen ? 1 : 0,  
-        }}  
+      {/* Bottom Menu Info — visible only when overlay is open */}  
+      <div  
+        className={`fixed bottom-8 left-0 right-0 z-50 text-center transition-opacity duration-700 delay-500 ${  
+          isOpen ? 'opacity-100' : 'opacity-0'  
+        }`}  
       >  
         <span  
-          style={{  
-            fontSize: '0.75rem',  
-            letterSpacing: '0.3em',  
-            color: 'rgba(197, 160, 89, 0.6)',  
-            textTransform: 'uppercase',  
-            marginBottom: '0.25rem',  
-          }}  
+          className="text-xs tracking-[0.2em] uppercase"  
+          style={{ color: brass, fontFamily: "'Cormorant Garamond', serif" }}  
         >  
-          {link.sub}  
+          Member Services | Private Collection  
         </span>  
-        <span  
-          style={{  
-            fontSize: '3rem',  
-            letterSpacing: '0.15em',  
-            color: brass,  
-            fontWeight: 300,  
-            textTransform: 'uppercase',  
-          }}  
-        >  
-          {link.name}  
-        </span>  
-      </Link>  
-    ))}
-
-    <div  
-      style={{  
-        position: 'absolute',  
-        bottom: '3rem',  
-        fontSize: '0.7rem',  
-        letterSpacing: '0.2em',  
-        color: 'rgba(197, 160, 89, 0.4)',  
-        textTransform: 'uppercase',  
-        transition: 'opacity 1s ease',  
-        transitionDelay: '0.6s',  
-        opacity: isOpen ? 1 : 0,  
-      }}  
-    >  
-      Member Services | Private Collection  
-    </div>  
-  </div>  
-</>  
-);  
+      </div>  
+    </>  
+  );  
 };
 
 export default Navigation;  
