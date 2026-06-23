@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';  
-import { Resend } from 'resend';  
-import { sql } from '@vercel/postgres';
+import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -42,10 +41,9 @@ export async function POST(request: NextRequest) {
     const occasionTag = OCCASION_TAGS[occasion?.toLowerCase()] || occasion || 'Bespoke Inquiry';
 
     console.log(`[LEAD] Manifest ${manifestId} received from ${name} (${email})`);  
-    console.log(`[LEAD] Occasion: ${occasion} → Tagged as: ${occasionTag}`);  
-    console.log(`[LEAD] Destination: ${destination} | Travel Window: ${travelWindow} | Party: ${partySize}`);
+    console.log(`[LEAD] Occasion: ${occasion} → Tagged as: ${occasionTag}`);
 
-    // ✉️ Send email notification via Resend  
+    // ✉️ Send email notification  
     const emailResponse = await resend.emails.send({  
       from: 'NexVoyage <onboarding@resend.dev>',  
       to: 'daryl.clark@fora.travel',  
@@ -55,8 +53,7 @@ export async function POST(request: NextRequest) {
           <div style="max-width: 600px; margin: 0 auto; background: #111; border: 1px solid #D4AF37; border-radius: 8px; padding: 32px;">  
             <h1 style="color: #D4AF37; font-family: 'Cormorant Garamond', serif; font-size: 28px; margin: 0 0 8px 0;">New Sojourn Dossier</h1>  
             <p style="color: #888; font-size: 14px; margin: 0 0 24px 0;">Manifest: ${manifestId} · ${new Date().toLocaleString()}</p>  
-            <hr style="border: none; border-top: 1px solid #222; margin: 0 0 24px 0;">
-
+            <hr style="border: none; border-top: 1px solid #222; margin: 0 0 24px 0;">  
             <table style="width: 100%; border-collapse: collapse; color: #ccc; font-size: 14px;">  
               <tr><td style="padding: 8px 0; color: #666;">Name</td><td style="padding: 8px 0; text-align: right;">${name}</td></tr>  
               <tr><td style="padding: 8px 0; color: #666;">Email</td><td style="padding: 8px 0; text-align: right;">${email}</td></tr>  
@@ -67,8 +64,7 @@ export async function POST(request: NextRequest) {
               <tr><td style="padding: 8px 0; color: #666;">Occasion</td><td style="padding: 8px 0; text-align: right;">${occasionTag}</td></tr>  
               <tr><td style="padding: 8px 0; color: #666;">Aviation Class</td><td style="padding: 8px 0; text-align: right;">${aviationClass || '—'}</td></tr>  
               <tr><td style="padding: 8px 0; color: #666;">Heard From</td><td style="padding: 8px 0; text-align: right;">${hearAbout || '—'}</td></tr>  
-            </table>
-
+            </table>  
             <hr style="border: none; border-top: 1px solid #222; margin: 24px 0;">  
             <p style="color: #666; font-size: 13px; margin: 0 0 8px 0;">Discretion Notes</p>  
             <p style="color: #ccc; font-size: 14px; margin: 0; font-style: italic;">${notes || 'None provided'}</p>  
@@ -79,20 +75,22 @@ export async function POST(request: NextRequest) {
 
     console.log(`[LEAD] Email sent: ${emailResponse.data?.id}`);
 
-    // 💾 Write to Neon database  
-    const result = await sql`  
-      INSERT INTO dossiers (name, email, phone, destination, travel_window, party_size, occasion, aviation_class, hear_about, notes, status, source)  
-      VALUES (${name}, ${email}, ${phone || null}, ${destination || null}, ${travelWindow || null}, ${partySize ? parseInt(partySize) : null}, ${occasionTag}, ${aviationClass || null}, ${hearAbout || null}, ${notes || null}, 'pending', 'Application for Entry')  
-      RETURNING id;  
-    `;
-
-    const dossierId = result.rows[0]?.id;  
-    console.log(`[LEAD] Dossier written to DB: ${dossierId}`);
+    // 💾 Try writing to database — non-blocking  
+    try {  
+      const { sql } = await import('@vercel/postgres');  
+      await sql`  
+        INSERT INTO dossiers (name, email, phone, destination, travel_window, party_size, occasion, aviation_class, hear_about, notes, status, source)  
+        VALUES (${name}, ${email}, ${phone || null}, ${destination || null}, ${travelWindow || null}, ${partySize ? parseInt(partySize) : null}, ${occasionTag}, ${aviationClass || null}, ${hearAbout || null}, ${notes || null}, 'pending', 'Application for Entry')  
+      `;  
+      console.log('[LEAD] Dossier written to DB');  
+    } catch (dbError) {  
+      // DB not ready yet — log and move on, email already sent  
+      console.log('[LEAD] DB write skipped (table or package not ready):', dbError);  
+    }
 
     return NextResponse.json({  
       success: true,  
       manifestId,  
-      dossierId,  
       analysisStatus: 'COMPLETED',  
       emailSent: true,  
     });  
