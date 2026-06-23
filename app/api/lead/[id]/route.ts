@@ -3,11 +3,12 @@ import { neon } from '@neondatabase/serverless';
 
 export async function PATCH(  
   request: NextRequest,  
-  { params }: { params: { id: string } }  
+  { params }: { params: Promise<{ id: string }> }  
 ) {  
   try {  
     const sql = neon(process.env.DATABASE_URL!);  
-    const { status } = await request.json();
+    const { status } = await request.json();  
+    const { id } = await params;
 
     const validStatuses = ['New', 'Contacted', 'In Discussion', 'Accepted', 'Declined'];  
     if (!validStatuses.includes(status)) {  
@@ -17,7 +18,7 @@ export async function PATCH(
     const result = await sql`  
       UPDATE dossiers  
       SET status = ${status}, updated_at = NOW()  
-      WHERE id = ${params.id}  
+      WHERE id = ${id}  
       RETURNING id, status  
     `;
 
