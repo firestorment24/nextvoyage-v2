@@ -1,328 +1,445 @@
-'use client'
+"use client"
 
-import { useState, type FormEvent } from 'react'
+import { useState, useRef, useEffect } from "react"
 
 const OCCASIONS = [  
-  'Select occasion…',  
-  'Leisure & Discovery',  
-  'Milestone Celebration',  
-  'Corporate Retreat',  
-  'Family Odyssey',  
-  'Honeymoon',  
-  'Private Event',  
-  'Other',  
+"Leisure & Discovery",  
+"Corporate & Executive",  
+"Celebration & Milestone",  
+"Event & Elite Access",  
+"Wellness & Retreat",  
+"Adventure & Expedition",  
+"Romance & Honeymoon",  
+"Private Aviation",  
+"Yacht & Maritime",  
+"Other (Discretion)",  
 ]
 
 const AVIATION_CLASSES = [  
-  'Select preference…',  
-  'First Class',  
-  'Business',  
-  'Economy',
-  'Private Charter',  
-  'Helicopter Transfer',  
+"First Class",  
+"Business Class",  
+"Premium Economy",  
+"Private Charter",  
+"Flexible / Advisor Recommend",  
 ]
 
 const HEAR_ABOUT = [  
-  'Select source…',  
-  'Personal Referral',  
-  'Social Media',  
-  'Press / Editorial',  
-  'Search Engine',  
-  'Event',  
-  'Travel Advisor',  
-  'Other',  
+"Personal Referral",  
+"Social Media",  
+"Search Engine",  
+"Event / Conference",  
+"Advertisement",  
+"Partner Agency",  
+"Existing Client",  
+"Other",  
 ]
 
-export default function InvitationPage() {  
-  const [submitted, setSubmitted] = useState(false)  
-  const [loading, setLoading] = useState(false)  
-  const [error, setError] = useState('')
+export default function InquiryPage() {  
+// --- Form state ---  
+const [name, setName] = useState("")  
+const [email, setEmail] = useState("")  
+const [phone, setPhone] = useState("")  
+const [occasion, setOccasion] = useState("")  
+const [destinations, setDestinations] = useState("")  
+const [travelWindow, setTravelWindow] = useState("")  
+const [partySize, setPartySize] = useState("")  
+const [aviationClass, setAviationClass] = useState("")  
+const [hearAbout, setHearAbout] = useState("")  
+const [notes, setNotes] = useState("")  
+const [submitted, setSubmitted] = useState(false)
 
-  const [form, setForm] = useState({  
-    name: '',  
-    email: '',  
-    phone: '',  
-    occasion: '',  
-    destinations: '',  
-    travelWindow: '',  
-    partySize: 1,  
-    aviationClass: '',  
-    hearAbout: '',  
-    notes: '',  
-  })
+// --- Verification state ---  
+const [emailStatus, setEmailStatus] = useState<"idle" | "valid" | "invalid" | "checking">("idle")  
+const [smsSent, setSmsSent] = useState(false)  
+const [smsCode, setSmsCode] = useState("")  
+const [smsVerified, setSmsVerified] = useState(false)  
+const [smsError, setSmsError] = useState("")
 
-  function h(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) {  
-    setForm(p => ({ ...p, [e.target.name]: e.target.value }))  
-  }
+// --- Honeypot ---  
+const honeypotRef = useRef<HTMLInputElement>(null)
 
-  async function onSubmit(e: FormEvent) {  
-    e.preventDefault()  
-    setLoading(true)  
-    setError('')  
-    try {  
-      const r = await fetch('/api/lead', {  
-        method: 'POST',  
-        headers: { 'Content-Type': 'application/json' },  
-        body: JSON.stringify({ ...form, partySize: Number(form.partySize), source: 'Travel Inquiry' }),  
-      })  
-      if (!r.ok) throw new Error('fail')  
-      setSubmitted(true)  
-    } catch {  
-      setError('Something went wrong. Please try again.')  
-    } finally {  
-      setLoading(false)  
-    }  
-  }
+// --- Turnstile ---  
+const turnstileRef = useRef<HTMLDivElement>(null)  
+const [turnstileToken, setTurnstileToken] = useState<string | null>(null)  
+const turnstileWidgetId = useRef<string | null>(null)
 
-  if (submitted) {  
-    return (  
-      <main style={s.page}>  
-        <div style={{ ...s.successWrap, background: 'transparent' }}>  
-          <div style={s.check}>✓</div>  
-          <h1 style={{ ...s.h1, marginBottom: 8 }}>Inquiry Received</h1>  
-          <p style={s.brass}>Dialogue Initiated</p>  
-          <p style={s.body}>  
-            Your travel preferences are now being reviewed by our concierge team.  
-            A member of the Collective will reach out within 48 hours.  
-          </p>  
-          <a href="/" style={s.link}>Return to Lobby</a>  
-        </div>   
-        <style>{nukeCss}</style>  
-      </main>  
-    )  
-  }
+useEffect(() => {  
+const script = document.createElement("script")  
+script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"  
+script.async = true  
+script.defer = true  
+script.onload = () => {  
+if (window.turnstile && turnstileRef.current) {  
+turnstileWidgetId.current = window.turnstile.render(turnstileRef.current, {  
+sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!,  
+callback: (token: string) => setTurnstileToken(token),  
+"expired-callback": () => setTurnstileToken(null),  
+theme: "dark",  
+})  
+}  
+}  
+document.head.appendChild(script)  
+return () => {  
+if (window.turnstile && turnstileWidgetId.current) {  
+window.turnstile.remove(turnstileWidgetId.current)  
+}  
+}  
+}, [])
 
-  return (  
-    <main style={s.page}>  
-      <div style={{ maxWidth: 560, width: '100%', margin: '0 auto', background: 'transparent' }}>   
-        <h1 style={s.h1}>Inquiry</h1>  
-
-        <form onSubmit={onSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 20, background: 'transparent' }}>
-
-          {/* 01 */}    
-          <h2 style={s.secTitle}>Traveler Profile</h2>
-          <div style={s.field}>  
-            <label style={s.label}>Full Name *</label>  
-            <input name="name" value={form.name} onChange={h} required style={s.inp} placeholder="e.g. James Whitfield" />  
-          </div>  
-          <div style={s.field}>  
-            <label style={s.label}>Email Address *</label>  
-            <input name="email" type="email" value={form.email} onChange={h} required style={s.inp} placeholder="james@example.com" />  
-          </div>  
-          <div style={s.field}>  
-            <label style={s.label}>Phone Number *</label>  
-            <input name="phone" type="tel" value={form.phone} onChange={h} required style={s.inp} placeholder="+1 212 555 0198" />  
-          </div>
-
-          <div style={{ height: 32, background: 'transparent' }} />
-
-          {/* 02 */}   
-          <h2 style={s.secTitle}>Trip Parameters</h2>
-          <div style={s.field}>  
-            <label style={s.label}>Occasion / Intent</label>  
-            <select name="occasion" value={form.occasion} onChange={h} style={s.inp}>  
-              {OCCASIONS.map(o => <option key={o} value={o === 'Select occasion…' ? '' : o}>{o}</option>)}  
-            </select>  
-          </div>  
-          <div style={s.field}>  
-            <label style={s.label}>Desired Destinations</label>  
-            <input name="destinations" value={form.destinations} onChange={h} style={s.inp} placeholder="e.g. Santorini, Kyoto, Patagonia" />  
-          </div>  
-          <div style={s.field}>  
-            <label style={s.label}>Travel Window</label>  
-            <input name="travelWindow" value={form.travelWindow} onChange={h} style={s.inp} placeholder="e.g. Q4 2026 or March 2027" />  
-          </div>  
-          <div style={s.field}>  
-            <label style={s.label}>Party Size</label>  
-            <input name="partySize" type="number" min={1} value={form.partySize} onChange={h} style={s.inp} />  
-          </div>  
-          <div style={s.field}>  
-            <label style={s.label}>Aviation Class</label>  
-            <select name="aviationClass" value={form.aviationClass} onChange={h} style={s.inp}>  
-              {AVIATION_CLASSES.map(a => <option key={a} value={a === 'Select preference…' ? '' : a}>{a}</option>)}  
-            </select>  
-          </div>
-
-          <div style={{ height: 32, background: 'transparent' }} />
-
-          {/* 03 */}   
-          <h2 style={s.secTitle}>Additional Information</h2>
-          <div style={s.field}>  
-            <label style={s.label}>Additional Notes / Preferences</label>  
-            <textarea name="notes" value={form.notes} onChange={h} style={{ ...s.inp, minHeight: 100, resize: 'vertical' }} placeholder="Anything else we should know…" />  
-          </div>
-
-  <div style={s.field}>  
-            <label style={s.label}>How did you hear about us?</label>  
-            <select name="hearAbout" value={form.hearAbout} onChange={h} style={s.inp}>  
-              {HEAR_ABOUT.map(h => <option key={h} value={h === 'Select source…' ? '' : h}>{h}</option>)}  
-            </select>  
-          </div>  
-          
-          {error && <p style={{ color: '#c0392b', fontSize: 13 }}>{error}</p>}
-
-          <button type="submit" disabled={loading} style={s.btn}>  
-            {loading ? 'Transmitting…' : 'Start the Conversation'}  
-          </button>  
-        </form>  
-      </div> 
-      <style>{nukeCss}</style>  
-    </main>  
-  )  
+const verifyEmail = async () => {  
+if (!email.includes("@")) return  
+setEmailStatus("checking")  
+const res = await fetch("/api/verify-email", {  
+method: "POST",  
+headers: { "Content-Type": "application/json" },  
+body: JSON.stringify({ email }),  
+})  
+const data = await res.json()  
+setEmailStatus(data.valid ? "valid" : "invalid")  
 }
 
-// --- Styles ---
-
-const s: Record<string, React.CSSProperties> = {  
-  page: {  
-    backgroundColor: '#0a0a0a',  
-    minHeight: '100vh',  
-    color: '#f0ede6',  
-    fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",  
-    padding: '60px 24px',  
-    display: 'flex',  
-    flexDirection: 'column',  
-    alignItems: 'center',  
-    justifyContent: 'center',  
-  },  
-  badge: {  
-    fontSize: 11,  
-    letterSpacing: 3,  
-    textTransform: 'uppercase',  
-    color: '#d4af37',  
-    marginBottom: 8,  
-  },  
-  h1: {  
-    fontSize: 32,  
-    fontWeight: 300,  
-    letterSpacing: 1,  
-    margin: '0 0 8px 0',  
-    color: '#f0ede6',  
-  },  
-  sub: {  
-    fontSize: 14,  
-    color: '#a09c94',  
-    lineHeight: 1.6,  
-    marginBottom: 48,  
-  },  
-  num: {  
-    fontSize: 48,  
-    fontWeight: 100,  
-    color: '#2a2a2a',  
-    lineHeight: 1,  
-    margin: '0 0 4px 0',  
-  },  
-  secTitle: {  
-    fontSize: 20,  
-    fontWeight: 300,  
-    fontStyle: 'italic',  
-    color: '#d4af37',  
-    margin: '0 0 20px 0',  
-    letterSpacing: 0.5,  
-  },  
-  field: {  
-    display: 'flex',  
-    flexDirection: 'column',  
-    gap: 6,  
-    background: 'transparent',  
-  },  
-  label: {  
-    fontSize: 11,  
-    letterSpacing: 2,  
-    textTransform: 'uppercase',  
-    color: '#8a867e',  
-  },  
-  inp: {  
-    background: 'transparent',  
-    border: '1px solid #2a2a2a',  
-    borderRadius: 0,  
-    padding: '12px 14px',  
-    fontSize: 14,  
-    color: '#f0ede6',  
-    outline: 'none',  
-    fontFamily: 'inherit',  
-    WebkitAppearance: 'none',  
-  },  
-  btn: {  
-    marginTop: 12,  
-    background: 'transparent',  
-    border: '1px solid #d4af37',  
-    color: '#d4af37',  
-    padding: '14px 28px',  
-    fontSize: 13,  
-    letterSpacing: 2,  
-    textTransform: 'uppercase',  
-    cursor: 'pointer',  
-    fontFamily: 'inherit',  
-  },  
-  successWrap: {  
-    textAlign: 'center' as const,  
-    maxWidth: 480,  
-  },  
-  check: {  
-    fontSize: 64,  
-    color: '#d4af37',  
-    animation: 'scaleIn 0.5s ease-out',  
-    marginBottom: 16,  
-  },  
-  brass: {  
-    color: '#d4af37',  
-    fontSize: 14,  
-    letterSpacing: 2,  
-    textTransform: 'uppercase',  
-    marginBottom: 24,  
-  },  
-  body: {  
-    fontSize: 14,  
-    color: '#a09c94',  
-    lineHeight: 1.7,  
-    marginBottom: 32,  
-  },  
-  link: {  
-    color: '#d4af37',  
-    textDecoration: 'none',  
-    fontSize: 13,  
-    letterSpacing: 2,  
-    textTransform: 'uppercase',  
-    borderBottom: '1px solid #d4af37',  
-    paddingBottom: 2,  
-  },  
-  footer: {  
-    marginTop: 80,  
-    fontSize: 11,  
-    color: '#4a4a4a',  
-    letterSpacing: 1.5,  
-    textTransform: 'uppercase',  
-  },  
+const sendSmsCode = async () => {  
+if (!phone || phone.length < 10) return  
+setSmsError("")  
+const res = await fetch("/api/verify-sms", {  
+method: "POST",  
+headers: { "Content-Type": "application/json" },  
+body: JSON.stringify({ phone }),  
+})  
+const data = await res.json()  
+if (data.success) {  
+setSmsSent(true)  
+} else {  
+setSmsError(data.error || "Failed to send code")  
+}  
 }
 
-// --- Nuclear ghost killer ---
+const confirmSmsCode = async () => {  
+setSmsError("")  
+const res = await fetch("/api/verify-sms/confirm", {  
+method: "POST",  
+headers: { "Content-Type": "application/json" },  
+body: JSON.stringify({ phone, code: smsCode }),  
+})  
+const data = await res.json()  
+if (data.success) {  
+setSmsVerified(true)  
+} else {  
+setSmsError(data.error || "Invalid code")  
+}  
+}
 
-const nukeCss = `  
-@keyframes scaleIn {  
-  0% { transform: scale(0); opacity: 0; }  
-  60% { transform: scale(1.2); opacity: 1; }  
-  100% { transform: scale(1); opacity: 1; }  
+const handleSubmit = async (e: React.FormEvent) => {  
+e.preventDefault()
+
+// Honeypot check  
+if (honeypotRef.current?.value) return
+
+if (!turnstileToken) return alert("Please complete the verification check.")  
+if (emailStatus !== "valid") return alert("Please verify your email address.")  
+if (!smsVerified) return alert("Please verify your phone number via SMS.")
+
+const payload = {  
+name,  
+email,  
+phone,  
+occasion,  
+destinations,  
+travelWindow,  
+partySize: Number(partySize) || 0,  
+aviationClass,  
+hearAbout,  
+notes,  
+turnstileToken,  
+}
+
+const res = await fetch("/api/lead", {  
+method: "POST",  
+headers: { "Content-Type": "application/json" },  
+body: JSON.stringify(payload),  
+})
+
+if (res.ok) {  
+setSubmitted(true)  
+window.scrollTo({ top: 0, behavior: "smooth" })  
 }  
-html, body, main, div, section, form, p, h1, h2, span, a {  
-  background-color: #0a0a0a !important;  
+}
+
+if (submitted) {  
+return (  
+<main className="min-h-screen bg-[#0A0A0A] flex flex-col items-center justify-center px-4">  
+<div className="max-w-lg text-center space-y-6">  
+<div className="w-16 h-16 border-2 border-[#D4AF37] rounded-full flex items-center justify-center mx-auto">  
+<span className="text-[#D4AF37] text-3xl">✓</span>  
+</div>  
+<h1 className="font-['Cormorant_Garamond'] text-4xl text-[#D4AF37] tracking-wide">  
+Application Received  
+</h1>  
+<p className="font-['Inter'] text-gray-400 text-lg">  
+Dialogue Initiated.  
+</p>  
+<p className="font-['Inter'] text-gray-500 text-sm">  
+A member of our concierge team will review your dossier and reach out within 24 hours.  
+</p>  
+</div>  
+<footer className="mt-16 text-center font-['Inter'] text-xs text-gray-600 tracking-widest uppercase">  
+Rachel — Reception & Orchestration • NexVoyage Collective  
+</footer>  
+</main>  
+)  
+}
+
+return (  
+<main className="min-h-screen bg-[#0A0A0A] flex flex-col items-center px-4 py-16">  
+<div className="max-w-2xl w-full">  
+<div className="text-center mb-12">  
+<h1 className="font-['Cormorant_Garamond'] text-5xl text-[#D4AF37] tracking-wider">  
+Rachel  
+<span className="block text-2xl text-gray-400 font-['Inter'] font-light tracking-widest mt-2">  
+Reception & Orchestration  
+</span>  
+</h1>  
+<div className="mt-6 border-t border-[#D4AF37]/20 pt-6">  
+<h2 className="font-['Cormorant_Garamond'] text-3xl text-white tracking-wide">  
+Application for Entry  
+</h2>  
+</div>  
+</div>
+
+<form onSubmit={handleSubmit} className="space-y-10">  
+<div className="absolute -left-[9999px]" aria-hidden="true">  
+<label htmlFor="website">Website</label>  
+<input  
+ref={honeypotRef}  
+id="website"  
+name="website"  
+type="text"  
+tabIndex={-1}  
+autoComplete="off"  
+/>  
+</div>
+
+<fieldset className="space-y-5">  
+<legend className="font-['Cormorant_Garamond'] text-xl text-[#D4AF37] tracking-wider mb-4">  
+The Sovereign Profile  
+</legend>  
+<div>  
+<label className="block font-['Inter'] text-xs text-gray-400 uppercase tracking-widest mb-2">  
+Full Name  
+</label>  
+<input  
+type="text"  
+required  
+value={name}  
+onChange={(e) => setName(e.target.value)}  
+className="w-full bg-transparent border border-gray-700 text-white px-4 py-3 font-['Inter'] text-sm focus:border-[#D4AF37] focus:outline-none transition-colors"  
+/>  
+</div>  
+<div>  
+<label className="block font-['Inter'] text-xs text-gray-400 uppercase tracking-widest mb-2">  
+Email  
+</label>  
+<div className="flex gap-3">  
+<input  
+type="email"  
+required  
+value={email}  
+onChange={(e) => setEmail(e.target.value)}  
+onBlur={verifyEmail}  
+className="flex-1 bg-transparent border border-gray-700 text-white px-4 py-3 font-['Inter'] text-sm focus:border-[#D4AF37] focus:outline-none transition-colors"  
+/>  
+<button  
+type="button"  
+onClick={verifyEmail}  
+disabled={emailStatus === "checking" || !email}  
+className="px-4 py-3 border border-[#D4AF37]/40 text-[#D4AF37] font-['Inter'] text-xs uppercase tracking-widest hover:bg-[#D4AF37]/10 disabled:opacity-40 transition-all"  
+>  
+{emailStatus === "checking" ? "..." : "Verify"}  
+</button>  
+</div>  
+{emailStatus === "valid" && (  
+<p className="mt-1 text-xs text-green-500 font-['Inter']">✓ Verified</p>  
+)}  
+{emailStatus === "invalid" && (  
+<p className="mt-1 text-xs text-red-400 font-['Inter']">Invalid email address</p>  
+)}  
+</div>  
+<div>  
+<label className="block font-['Inter'] text-xs text-gray-400 uppercase tracking-widest mb-2">  
+Phone  
+</label>  
+<div className="flex gap-3">  
+<input  
+type="tel"  
+required  
+value={phone}  
+onChange={(e) => setPhone(e.target.value)}  
+placeholder="+1 (555) 000-0000"  
+className="flex-1 bg-transparent border border-gray-700 text-white px-4 py-3 font-['Inter'] text-sm focus:border-[#D4AF37] focus:outline-none transition-colors"  
+/>  
+{!smsVerified && (  
+<button  
+type="button"  
+onClick={smsSent ? confirmSmsCode : sendSmsCode}  
+disabled={!phone}  
+className="px-4 py-3 border border-[#D4AF37]/40 text-[#D4AF37] font-['Inter'] text-xs uppercase tracking-widest hover:bg-[#D4AF37]/10 disabled:opacity-40 transition-all whitespace-nowrap"  
+>  
+{smsSent ? "Confirm" : "Send Code"}  
+</button>  
+)}  
+</div>  
+{smsSent && !smsVerified && (  
+<div className="mt-3 flex gap-3">  
+<input  
+type="text"  
+value={smsCode}  
+onChange={(e) => setSmsCode(e.target.value)}  
+placeholder="Enter 6-digit code"  
+maxLength={6}  
+className="flex-1 bg-transparent border border-gray-700 text-white px-4 py-3 font-['Inter'] text-sm focus:border-[#D4AF37] focus:outline-none transition-colors"  
+/>  
+</div>  
+)}  
+{smsVerified && (  
+<p className="mt-1 text-xs text-green-500 font-['Inter']">✓ Phone verified</p>  
+)}  
+{smsError && (  
+<p className="mt-1 text-xs text-red-400 font-['Inter']">{smsError}</p>  
+)}  
+</div>  
+</fieldset>
+
+<fieldset className="space-y-5">  
+<legend className="font-['Cormorant_Garamond'] text-xl text-[#D4AF37] tracking-wider mb-4">  
+Mission Parameters  
+</legend>  
+<div>  
+<label className="block font-['Inter'] text-xs text-gray-400 uppercase tracking-widest mb-2">  
+Occasion / Intent  
+</label>  
+<select  
+required  
+value={occasion}  
+onChange={(e) => setOccasion(e.target.value)}  
+className="w-full bg-[#0A0A0A] border border-gray-700 text-white px-4 py-3 font-['Inter'] text-sm focus:border-[#D4AF37] focus:outline-none transition-colors"  
+>  
+<option value="" disabled>Select occasion</option>  
+{OCCASIONS.map((o) => (  
+<option key={o} value={o}>{o}</option>  
+))}  
+</select>  
+</div>  
+<div>  
+<label className="block font-['Inter'] text-xs text-gray-400 uppercase tracking-widest mb-2">  
+Destinations of Interest  
+</label>  
+<input  
+type="text"  
+required  
+value={destinations}  
+onChange={(e) => setDestinations(e.target.value)}  
+placeholder="e.g. Sardinia, Monaco, St. Barths"  
+className="w-full bg-transparent border border-gray-700 text-white px-4 py-3 font-['Inter'] text-sm focus:border-[#D4AF37] focus:outline-none transition-colors"  
+/>  
+</div>  
+<div className="grid grid-cols-1 md:grid-cols-2 gap-5">  
+<div>  
+<label className="block font-['Inter'] text-xs text-gray-400 uppercase tracking-widest mb-2">  
+Preferred Timeline  
+</label>  
+<input  
+type="text"  
+required  
+value={travelWindow}  
+onChange={(e) => setTravelWindow(e.target.value)}  
+placeholder="e.g. July 2026"  
+className="w-full bg-transparent border border-gray-700 text-white px-4 py-3 font-['Inter'] text-sm focus:border-[#D4AF37] focus:outline-none transition-colors"  
+/>  
+</div>  
+<div>  
+<label className="block font-['Inter'] text-xs text-gray-400 uppercase tracking-widest mb-2">  
+Party Size  
+</label>  
+<input  
+type="number"  
+min="1"  
+required  
+value={partySize}  
+onChange={(e) => setPartySize(e.target.value)}  
+placeholder="2"  
+className="w-full bg-transparent border border-gray-700 text-white px-4 py-3 font-['Inter'] text-sm focus:border-[#D4AF37] focus:outline-none transition-colors"  
+/>  
+</div>  
+</div>  
+<div>  
+<label className="block font-['Inter'] text-xs text-gray-400 uppercase tracking-widest mb-2">  
+Aviation Class  
+</label>  
+<select  
+value={aviationClass}  
+onChange={(e) => setAviationClass(e.target.value)}  
+className="w-full bg-[#0A0A0A] border border-gray-700 text-white px-4 py-3 font-['Inter'] text-sm focus:border-[#D4AF37] focus:outline-none transition-colors"  
+>  
+<option value="" disabled>Select preference</option>  
+{AVIATION_CLASSES.map((c) => (  
+<option key={c} value={c}>{c}</option>  
+))}  
+</select>  
+</div>  
+</fieldset>
+
+<fieldset className="space-y-5">  
+<legend className="font-['Cormorant_Garamond'] text-xl text-[#D4AF37] tracking-wider mb-4">  
+Cultural Fit  
+</legend>  
+<div>  
+<label className="block font-['Inter'] text-xs text-gray-400 uppercase tracking-widest mb-2">  
+How did you hear about us?  
+</label>  
+<select  
+value={hearAbout}  
+onChange={(e) => setHearAbout(e.target.value)}  
+className="w-full bg-[#0A0A0A] border border-gray-700 text-white px-4 py-3 font-['Inter'] text-sm focus:border-[#D4AF37] focus:outline-none transition-colors"  
+>  
+<option value="" disabled>Select source</option>  
+{HEAR_ABOUT.map((h) => (  
+<option key={h} value={h}>{h}</option>  
+))}  
+</select>  
+</div>  
+<div>  
+<label className="block font-['Inter'] text-xs text-gray-400 uppercase tracking-widest mb-2">  
+Discretion Notes  
+</label>  
+<textarea  
+rows={3}  
+value={notes}  
+onChange={(e) => setNotes(e.target.value)}  
+placeholder="Any special considerations, privacy requests, or context..."  
+className="w-full bg-transparent border border-gray-700 text-white px-4 py-3 font-['Inter'] text-sm focus:border-[#D4AF37] focus:outline-none transition-colors resize-none"  
+/>  
+</div>  
+</fieldset>
+
+<div className="flex justify-center">  
+<div ref={turnstileRef} />  
+</div>
+
+<div className="text-center pt-4">  
+<button  
+type="submit"  
+disabled={!turnstileToken || emailStatus !== "valid" || !smsVerified}  
+className="px-12 py-4 border border-[#D4AF37] text-[#D4AF37] font-['Inter'] text-sm uppercase tracking-[0.2em] hover:bg-[#D4AF37] hover:text-[#0A0A0A] disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300"  
+>  
+Submit Application  
+</button>  
+</div>  
+</form>
+
+<footer className="mt-16 text-center font-['Inter'] text-xs text-gray-600 tracking-widest uppercase">  
+Rachel — Reception & Orchestration • NexVoyage Collective  
+</footer>  
+</div>  
+</main>  
+)  
 }  
-input, select, textarea, button {  
-  background-color: #0a0a0a !important;  
-  border-color: #2a2a2a !important;  
-  color: #f0ede6 !important;  
-}  
-input:-webkit-autofill,  
-input:-webkit-autofill:hover,  
-input:-webkit-autofill:focus,  
-input:-webkit-autofill:active,  
-select:-webkit-autofill,  
-textarea:-webkit-autofill {  
-  -webkit-box-shadow: 0 0 0 1000px #0a0a0a inset !important;  
-  -webkit-text-fill-color: #f0ede6 !important;  
-}  
-option {  
-  background-color: #0a0a0a !important;  
-  color: #f0ede6 !important;  
-}  
-`  
