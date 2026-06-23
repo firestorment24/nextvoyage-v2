@@ -17,7 +17,7 @@ try {
           response: turnstileToken,  
         }),  
       }  
-    )  
+    )   
     const verifData = await verifRes.json()  
     if (!verifData.success) {  
       return NextResponse.json(  
