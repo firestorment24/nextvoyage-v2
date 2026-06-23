@@ -1,110 +1,59 @@
-import { NextResponse } from "next/server"
+// app/api/lead/route.ts  
+import { Resend } from 'resend';  
+import { NextResponse } from 'next/server';  
+import { sql } from '@vercel/postgres';
 
-export async function POST(request: Request) {  
-try {  
-  const body = await request.json()  
-  const { name, email, phone, occasion, destinations, travelWindow, partySize, aviationClass, hearAbout, notes, turnstileToken } = body
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-  // --- Turnstile server-side verification ---  
-  if (turnstileToken) {  
-    const verifRes = await fetch(  
-      "https://challenges.cloudflare.com/turnstile/v0/siteverify",  
-      {  
-        method: "POST",  
-        headers: { "Content-Type": "application/json" },  
-        body: JSON.stringify({  
-          secret: process.env.TURNSTILE_SECRET_KEY,  
-          response: turnstileToken,  
-        }),  
+export async function POST(req: Request) {  
+  try {  
+    const body = await req.json();  
+    const {  
+      name, email, phone, occasion, destinations,  
+      travelWindow, partySize, aviationClass, hearAbout, notes  
+    } = body;
+
+    // --- 1. Validate email via ZeroBounce ---  
+    if (process.env.ZEROBOUNCE_API_KEY) {  
+      const zbRes = await fetch(  
+        `https://api.zerobounce.net/v2/validate?api_key=${process.env.ZEROBOUNCE_API_KEY}&email=${encodeURIComponent(email)}`  
+      );  
+      const zbData = await zbRes.json();  
+      if (zbData.status === 'invalid' || zbData.status === 'do_not_mail') {  
+        return NextResponse.json(  
+          { error: 'Email address is not valid. Please check and try again.' },  
+          { status: 400 }  
+        );  
       }  
-    )   
-    const verifData = await verifRes.json()  
-    if (!verifData.success) {  
-      return NextResponse.json(  
-        { success: false, error: "Verification failed. Please try again." },  
-        { status: 403 }  
-      )  
-    }  
-  } else {  
-    return NextResponse.json(  
-      { success: false, error: "Verification required." },  
-      { status: 403 }  
-    )  
-  }
+    }
 
-  // --- Non-blocking DB insert (won't block the response) ---  
-  let dossierId: string | null = null
-
-  ;(async () => {  
-    try {  
-      const { sql } = await import("@vercel/postgres")  
-      const result = await sql`  
-        INSERT INTO dossiers (name, email, phone, occasion, destinations, travel_dates, party_size, aviation_class, hear_about, notes, source, status)  
-        VALUES (${name}, ${email}, ${phone}, ${occasion}, ${destinations}, ${travelWindow}, ${partySize || 0}, ${aviationClass || null}, ${hearAbout || null}, ${notes || null}, 'Application for Entry', 'New')  
-        RETURNING id  
-      `  
-      dossierId = result.rows[0]?.id || null  
-    } catch (dbError) {  
-      console.error("DB insert error (non-blocking):", dbError)  
-    }  
-  })()
-
-  // --- Send alert email to Daryl ---  
-  const { Resend } = await import("resend")  
-  const resend = new Resend(process.env.RESEND_API_KEY)
-
-  await resend.emails.send({  
-    from: "NexVoyage Collective <onboarding@resend.dev>",  
-    to: "daryl.clark@fora.travel",  
-    subject: `New Dossier: ${name} — ${occasion}`,  
-    html: `  
-      <h2>New Sojourn Dossier</h2>  
-      <p><strong>Name:</strong> ${name}</p>  
-      <p><strong>Email:</strong> ${email}</p>  
-      <p><strong>Phone:</strong> ${phone}</p>  
-      <p><strong>Intent:</strong> ${occasion}</p>  
-      <p><strong>Destinations:</strong> ${destinations}</p>  
-      <p><strong>Timeline:</strong> ${travelWindow}</p>  
-      <p><strong>Party Size:</strong> ${partySize}</p>  
-      <p><strong>Dossier ID:</strong> ${dossierId || 'pending'}</p>  
-      <hr />  
-      <p><em>Rachel — Reception & Orchestration • NexVoyage Collective</em></p>  
-    `,  
-  })
-
-  // --- Auto-reply to guest ---  
-  await resend.emails.send({  
-    from: "NexVoyage Collective <onboarding@resend.dev>",  
-    to: email,  
-    subject: "Your Application for Entry — NexVoyage Collective",  
-    html: `  
-      <h1>Application Received</h1>  
-      <p><em>Dialogue Initiated.</em></p>  
-      <p>Thank you, ${name}. Your Sojourn Dossier has been received and is being reviewed by our concierge team.</p>  
-      <p>A member of our team will reach out within 24 hours to begin crafting your itinerary.</p>  
-      <hr />  
-      <p><em>Rachel — Reception & Orchestration • NexVoyage Collective</em></p>  
-    `,  
-  })
-
-  // --- Slack notification ---  
-  if (process.env.SLACK_WEBHOOK_URL) {  
-    await fetch(process.env.SLACK_WEBHOOK_URL, {  
-      method: "POST",  
-      headers: { "Content-Type": "application/json" },  
+    // --- 2. Notify (auto-reply email + Slack) — non-blocking ---  
+    const notifyPromise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'https://your-domain.vercel.app'}/api/notify`, {  
+      method: 'POST',  
+      headers: { 'Content-Type': 'application/json' },  
       body: JSON.stringify({  
-        text: `*New Dossier: ${name}*\n• Intent: ${occasion}\n• Email: ${email}\n• Phone: ${phone}\n• Destinations: ${destinations}\n• Source: Application for Entry`,  
+        guestName: name,  
+        email,  
+        phone,  
+        intent: occasion,  
+        source: 'Application for Entry',  
+        destinations,  
       }),  
-    })  
-  }
+    }).catch(err => console.error('Notify failed (non-blocking):', err));
 
-  return NextResponse.json({  
-    success: true,  
-    dossierId,  
-    status: "New",  
-  })  
-} catch (error: any) {  
-  console.error("Lead API error:", error)  
-  return NextResponse.json({ success: false, error: error.message }, { status: 500 })  
-}  
+    // --- 3. Store in Vercel Postgres — non-blocking ---  
+    const dbPromise = sql`  
+      INSERT INTO dossiers (name, email, phone, occasion, destinations, travel_window, party_size, aviation_class, hear_about, notes, status)  
+      VALUES (${name}, ${email}, ${phone}, ${occasion}, ${destinations}, ${travelWindow}, ${partySize}, ${aviationClass}, ${hearAbout}, ${notes}, 'New')  
+      ON CONFLICT (email) DO NOTHING;  
+    `.catch(err => console.error('DB insert failed (non-blocking):', err));
+
+    // Wait for both (they'll resolve even if one fails)  
+    await Promise.all([notifyPromise, dbPromise]);
+
+    return NextResponse.json({ success: true });  
+  } catch (err) {  
+    console.error('Lead API error:', err);  
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });  
+  }  
 }  
