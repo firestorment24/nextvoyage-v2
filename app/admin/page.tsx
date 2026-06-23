@@ -3,17 +3,21 @@
 import { useState, useEffect } from 'react'
 
 interface Dossier {  
-id: number  
-name: string  
-email: string  
-phone: string | null  
-destination: string | null  
-travel_dates: string | null  
-budget_range: string | null  
-notes: string | null  
-status: string  
-created_at: string  
-}
+  id: number  
+  name: string  
+  email: string  
+  phone: string | null  
+  destination: string | null  
+  travel_window: string | null  
+  party_size: number | null  
+  occasion: string | null  
+  aviation_class: string | null  
+  hear_about: string | null  
+  notes: string | null  
+  status: string  
+  source: string | null  
+  created_at: string  
+}  
 
 export default function AdminPage() {  
 const [isAuthenticated, setIsAuthenticated] = useState(false)  
