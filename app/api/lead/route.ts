@@ -1,128 +1,130 @@
-import { NextRequest, NextResponse } from 'next/server';  
-import { Resend } from 'resend';
+import { NextResponse } from "next/server"
 
-const resend = new Resend(process.env.RESEND_API_KEY);  
-const SLACK_WEBHOOK_URL = process.env.SLACK_WEBHOOK_URL;
- 
-const OCCASION_TAGS: Record<string, string> = {  
-  anniversary: 'Milestone Celebration',  
-  birthday: 'Milestone Celebration',  
-  honeymoon: 'Romantic Getaway',  
-  business_leisure: 'Executive Retreat',  
-  family_gathering: 'Family & Heritage',  
-  personal_retreat: 'Personal Retreat',  
-  exploration: 'The Grand Journey',  
-  other: 'Bespoke Inquiry',  
-};
+export async function POST(request: Request) {  
+try {  
+const body = await request.json()  
+const { name, email, phone, occasion, destinations, travelWindow, partySize, aviationClass, hearAbout, notes, turnstileToken } = body
 
-function generateManifestId(): string {  
-  const timestamp = Date.now().toString(36).toUpperCase();  
-  const random = Math.random().toString(36).substring(2, 6).toUpperCase();  
-  return `NVC-${timestamp}-${random}`;  
+// --- Turnstile server-side verification ---  
+if (turnstileToken) {  
+const verifRes = await fetch(  
+"https://challenges.cloudflare.com/turnstile/v0/siteverify",  
+{  
+method: "POST",  
+headers: { "Content-Type": "application/json" },  
+body: JSON.stringify({  
+secret: process.env.TURNSTILE_SECRET_KEY,  
+response: turnstileToken,  
+}),  
+}  
+)  
+const verifData = await verifRes.json()  
+if (!verifData.success) {  
+return NextResponse.json(  
+{ success: false, error: "Verification failed. Please try again." },  
+{ status: 403 }  
+)  
+}  
+} else {  
+return NextResponse.json(  
+{ success: false, error: "Verification required." },  
+{ status: 403 }  
+)  
 }
 
-export async function POST(request: NextRequest) {  
-  try {  
-    const body = await request.json();
+// --- Insert into DB ---  
+const { createClient } = await import("@supabase/supabase-js")  
+const supabase = createClient(  
+process.env.NEXT_PUBLIC_SUPABASE_URL!,  
+process.env.SUPABASE_SERVICE_ROLE_KEY!  
+)
 
-    const {  
-      name,  
-      email,  
-      phone,  
-      destinations,   // ✅ THIS WAS THE BUG — was 'destination' (singular)  
-      travelWindow,  
-      partySize,  
-      occasion,  
-      aviationClass,  
-      hearAbout,  
-      notes,  
-      source = 'Application for Entry',  
-    } = body;
+const { data, error } = await supabase  
+.from("dossiers")  
+.insert({  
+name,  
+email,  
+phone,  
+occasion,  
+destinations,  
+travel_dates: travelWindow,  
+party_size: partySize || 0,  
+aviation_class: aviationClass || null,  
+hear_about: hearAbout || null,  
+notes: notes || null,  
+source: "Application for Entry",  
+status: "New",  
+})  
+.select()
 
-    const manifestId = generateManifestId();  
-    const occasionTag =  
-      OCCASION_TAGS[occasion?.toLowerCase()] || occasion || 'Bespoke Inquiry';
+if (error) {  
+console.error("DB insert error:", error)  
+return NextResponse.json({ success: false, error: error.message }, { status: 500 })  
+}
 
-    console.log(`[LEAD] Manifest ${manifestId} received from ${name} (${email})`);  
-    console.log(`[LEAD] Destinations: ${destinations}`);
+const dossierId = data?.[0]?.id
 
-    // ✉️ Send email notification  
-    let emailResult;  
-    try {  
-      const emailResponse = await resend.emails.send({  
-        from: 'NexVoyage <onboarding@resend.dev>',  
-        to: 'daryl.clark@fora.travel',  
-        subject: `New Sojourn Dossier — ${name} (${occasionTag})`,  
-        html: `  
-          <div style="font-family: 'Inter', sans-serif; background: #0A0A0A; padding: 40px;">  
-            <div style="max-width: 600px; margin: 0 auto; background: #111; border: 1px solid #D4AF37; border-radius: 8px; padding: 32px;">  
-              <h1 style="color: #D4AF37; font-family: 'Cormorant Garamond', serif; font-size: 28px; margin: 0 0 8px 0;">New Sojourn Dossier</h1>  
-              <p style="color: #888; font-size: 14px; margin: 0 0 24px 0;">Manifest: ${manifestId} · ${new Date().toLocaleString()}</p>  
-              <hr style="border: none; border-top: 1px solid #222; margin: 0 0 24px 0;">  
-              <table style="width: 100%; border-collapse: collapse; color: #ccc; font-size: 14px;">  
-                <tr><td style="padding: 8px 0; color: #666;">Name</td><td style="padding: 8px 0; text-align: right;">${name}</td></tr>  
-                <tr><td style="padding: 8px 0; color: #666;">Email</td><td style="padding: 8px 0; text-align: right;">${email}</td></tr>  
-                <tr><td style="padding: 8px 0; color: #666;">Phone</td><td style="padding: 8px 0; text-align: right;">${phone || '—'}</td></tr>  
-                <tr><td style="padding: 8px 0; color: #666;">Destinations</td><td style="padding: 8px 0; text-align: right;">${destinations || '—'}</td></tr>  
-                <tr><td style="padding: 8px 0; color: #666;">Travel Window</td><td style="padding: 8px 0; text-align: right;">${travelWindow || '—'}</td></tr>  
-                <tr><td style="padding: 8px 0; color: #666;">Party Size</td><td style="padding: 8px 0; text-align: right;">${partySize || '—'}</td></tr>  
-                <tr><td style="padding: 8px 0; color: #666;">Occasion</td><td style="padding: 8px 0; text-align: right;">${occasionTag}</td></tr>  
-                <tr><td style="padding: 8px 0; color: #666;">Aviation Class</td><td style="padding: 8px 0; text-align: right;">${aviationClass || '—'}</td></tr>  
-                <tr><td style="padding: 8px 0; color: #666;">Heard From</td><td style="padding: 8px 0; text-align: right;">${hearAbout || '—'}</td></tr>  
-              </table>  
-              <hr style="border: none; border-top: 1px solid #222; margin: 24px 0;">  
-              <p style="color: #666; font-size: 13px; margin: 0 0 8px 0;">Discretion Notes</p>  
-              <p style="color: #ccc; font-size: 14px; margin: 0; font-style: italic;">${notes || 'None provided'}</p>  
-            </div>  
-          </div>  
-        `,  
-      });  
-      emailResult = emailResponse;  
-      console.log(`[LEAD] Email sent: ${emailResponse.data?.id}`);  
-    } catch (emailError) {  
-      console.error('[LEAD] Email send failed:', emailError);  
-      emailResult = null;  
-    }
+// --- Notify ---  
+const { Resend } = await import("resend")  
+const resend = new Resend(process.env.RESEND_API_KEY)
 
-    // 🚀 Slack notification (merged from /api/notify)  
-    if (SLACK_WEBHOOK_URL) {  
-      try {  
-        await fetch(SLACK_WEBHOOK_URL, {  
-          method: 'POST',  
-          headers: { 'Content-Type': 'application/json' },  
-          body: JSON.stringify({  
-            text: `🔔 *New Sojourn Dossier*\n*Manifest:* ${manifestId}\n*Guest:* ${name}\n*Destinations:* ${destinations || 'N/A'}\n*Occasion:* ${occasionTag}\n*Source:* ${source}`,  
-          }),  
-        });  
-        console.log('[LEAD] Slack notification sent');  
-      } catch (slackError) {  
-        console.error('[LEAD] Slack notification failed:', slackError);  
-      }  
-    }
+// Alert email to Daryl  
+await resend.emails.send({  
+from: "NexVoyage Collective <onboarding@resend.dev>",  
+to: "daryl.clark@fora.travel",  
+subject: `New Dossier: ${name} — ${occasion}`,  
+html: `  
+<h2>New Sojourn Dossier</h2>  
+<p><strong>Name:</strong> ${name}</p>  
+<p><strong>Email:</strong> ${email}</p>  
+<p><strong>Phone:</strong> ${phone}</p>  
+<p><strong>Intent:</strong> ${occasion}</p>  
+<p><strong>Destinations:</strong> ${destinations}</p>  
+<p><strong>Timeline:</strong> ${travelWindow}</p>  
+<p><strong>Party Size:</strong> ${partySize}</p>  
+<p><strong>Dossier ID:</strong> ${dossierId}</p>  
+<hr />  
+<p style="color:#888;">Rachel — Reception & Orchestration • NexVoyage Collective</p>  
+`,  
+})
 
-    // 💾 Database write (non-blocking)  
-    try {  
-      const { sql } = await import('@vercel/postgres');  
-      await sql`  
-  INSERT INTO dossiers (name, email, phone, destination, travel_dates, party_size, occasion, aviation_class, hear_about, notes, status, source)  
-  VALUES (${name}, ${email}, ${phone || null}, ${destinations || null}, ${travelWindow || null}, ${partySize ? parseInt(partySize) : null}, ${occasionTag}, ${aviationClass || null}, ${hearAbout || null}, ${notes || null}, 'pending', ${source})  
-`;  
-      console.log('[LEAD] Dossier written to DB');  
-    } catch (dbError) {  
-      console.log('[LEAD] DB write skipped (table or package not ready):', dbError);  
-    }
+// Auto-reply to guest  
+await resend.emails.send({  
+from: "NexVoyage Collective <onboarding@resend.dev>",  
+to: email,  
+subject: "Your Application for Entry — NexVoyage Collective",  
+html: `  
+<div style="font-family:'Inter',sans-serif;background:#0A0A0A;padding:40px 20px;">  
+<div style="max-width:480px;margin:0 auto;border:1px solid #D4AF37;padding:40px;">  
+<h1 style="font-family:'Cormorant Garamond',serif;color:#D4AF37;font-size:28px;margin:0 0 8px;">Application Received</h1>  
+<p style="color:#888;font-size:14px;margin:0 0 24px;">Dialogue Initiated.</p>  
+<p style="color:#ccc;font-size:14px;line-height:1.6;">Thank you, ${name}. Your Sojourn Dossier has been received and is being reviewed by our concierge team.</p>  
+<p style="color:#ccc;font-size:14px;line-height:1.6;">A member of our team will reach out within 24 hours to begin crafting your itinerary.</p>  
+<hr style="border:none;border-top:1px solid #D4AF37/20;margin:24px 0;" />  
+<p style="color:#666;font-size:11px;text-transform:uppercase;letter-spacing:0.2em;">Rachel — Reception & Orchestration • NexVoyage Collective</p>  
+</div>  
+</div>  
+`,  
+})
 
-    return NextResponse.json({  
-      success: true,  
-      manifestId,  
-      analysisStatus: 'COMPLETED',  
-      emailSent: !!emailResult,  
-    });  
-  } catch (error) {  
-    console.error('[LEAD] Error processing inquiry:', error);  
-    return NextResponse.json(  
-      { success: false, error: 'Failed to process inquiry' },  
-      { status: 500 }  
-    );  
-  }  
+// Slack notification  
+if (process.env.SLACK_WEBHOOK_URL) {  
+await fetch(process.env.SLACK_WEBHOOK_URL, {  
+method: "POST",  
+headers: { "Content-Type": "application/json" },  
+body: JSON.stringify({  
+text: `*New Dossier: ${name}*\n• Intent: ${occasion}\n• Email: ${email}\n• Phone: ${phone}\n• Destinations: ${destinations}\n• Source: Application for Entry`,  
+}),  
+})  
+}
+
+return NextResponse.json({  
+success: true,  
+dossierId,  
+status: "New",  
+})  
+} catch (error: any) {  
+console.error("Lead API error:", error)  
+return NextResponse.json({ success: false, error: error.message }, { status: 500 })  
+}  
 }  
