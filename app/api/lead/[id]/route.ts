@@ -7,19 +7,40 @@ export async function PATCH(
 ) {  
   try {  
     const sql = neon(process.env.DATABASE_URL!);  
-    const { status } = await request.json();  
-    const { id } = await params;
+    const { id } = await params;  
+    const body = await request.json();
 
-    const validStatuses = ['New', 'Contacted', 'In Discussion', 'Accepted', 'Declined'];  
-    if (!validStatuses.includes(status)) {  
-      return NextResponse.json({ error: 'Invalid status' }, { status: 400 });  
+    // Build SET clauses dynamically based on what's provided  
+    const updates: string[] = [];  
+    const values: any[] = [];  
+    let paramIndex = 1;
+
+    if (body.status !== undefined) {  
+      const validStatuses = ['New', 'Contacted', 'In Discussion', 'Accepted', 'Declined'];  
+      if (!validStatuses.includes(body.status)) {  
+        return NextResponse.json({ error: 'Invalid status' }, { status: 400 });  
+      }  
+      updates.push(`status = $${paramIndex++}`);  
+      values.push(body.status);  
     }
+
+    if (body.notes !== undefined) {  
+      updates.push(`notes = $${paramIndex++}`);  
+      values.push(body.notes);  
+    }
+
+    if (updates.length === 0) {  
+      return NextResponse.json({ error: 'No fields to update' }, { status: 400 });  
+    }
+
+    updates.push(`updated_at = NOW()`);  
+    values.push(id);
 
     const result = await sql`  
       UPDATE dossiers  
-      SET status = ${status}, updated_at = NOW()  
+      SET ${sql(updates.join(', '))}  
       WHERE id = ${id}  
-      RETURNING id, status  
+      RETURNING id, status, notes  
     `;
 
     if (result.length === 0) {  
@@ -28,7 +49,7 @@ export async function PATCH(
 
     return NextResponse.json({ dossier: result[0] });  
   } catch (error) {  
-    console.error('Error updating dossier status:', error);  
+    console.error('Error updating dossier:', error);  
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });  
   }  
 }  
