@@ -31,6 +31,10 @@ export async function POST(request: Request) {
       `,  
     });
 
+    if (emailRes.error) {  
+      console.error('Resend error:', emailRes.error);  
+    }
+
     // 2. Send Slack notification (Rachel's channel)  
     if (process.env.SLACK_WEBHOOK_URL) {  
       await fetch(process.env.SLACK_WEBHOOK_URL, {  
@@ -42,7 +46,7 @@ export async function POST(request: Request) {
       });  
     }
 
-    return Response.json({ success: true, emailId: emailRes.id });  
+    return Response.json({ success: true, emailId: emailRes.data?.id || null });  
   } catch (error) {  
     console.error('Notification error:', error);  
     return Response.json({ success: false, error: 'Notification failed' }, { status: 500 });  
