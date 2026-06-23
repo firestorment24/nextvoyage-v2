@@ -10,38 +10,38 @@ export async function PATCH(
     const { id } = await params;  
     const body = await request.json();
 
-    // Build SET clauses dynamically based on what's provided  
-    const updates: string[] = [];  
-    const values: any[] = [];  
-    let paramIndex = 1;
+    const setClauses: string[] = [];  
+    const values: any[] = [];
 
     if (body.status !== undefined) {  
       const validStatuses = ['New', 'Contacted', 'In Discussion', 'Accepted', 'Declined'];  
       if (!validStatuses.includes(body.status)) {  
         return NextResponse.json({ error: 'Invalid status' }, { status: 400 });  
       }  
-      updates.push(`status = $${paramIndex++}`);  
+      setClauses.push(`status = $${values.length + 1}`);  
       values.push(body.status);  
     }
 
     if (body.notes !== undefined) {  
-      updates.push(`notes = $${paramIndex++}`);  
+      setClauses.push(`notes = $${values.length + 1}`);  
       values.push(body.notes);  
     }
 
-    if (updates.length === 0) {  
+    if (setClauses.length === 0) {  
       return NextResponse.json({ error: 'No fields to update' }, { status: 400 });  
     }
 
-    updates.push(`updated_at = NOW()`);  
+    setClauses.push(`updated_at = NOW()`);  
     values.push(id);
 
-    const result = await sql`  
+    const query = `  
       UPDATE dossiers  
-      SET ${sql(updates.join(', '))}  
-      WHERE id = ${id}  
+      SET ${setClauses.join(', ')}  
+      WHERE id = $${values.length}  
       RETURNING id, status, notes  
     `;
+
+    const result = await sql(query, values);
 
     if (result.length === 0) {  
       return NextResponse.json({ error: 'Dossier not found' }, { status: 404 });  
