@@ -1,24 +1,34 @@
-/* FORCE TRANSPARENT NAV */  
-html, body, header, nav, div, section, main {  
-  background-color: transparent !important;  
+/* NexVoyage Sanctuary - Brass & Shadow Logic */  
+.sanctuary-card img {  
+  /* Default: Full Color (Warm) */  
+  filter: sepia(0%) contrast(100%) brightness(100%);  
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);  
+@import "tailwindcss";
+
+@theme {  
+  --font-serif: var(--font-serif);  
+  --font-sans: var(--font-sans);  
 }
 
-/* Kill any white blocks the framework sneaks in */  
-* {  
-  background-color: transparent !important;  
+/* Desktop Only: Muted Brass/Shadow state */  
+@media (hover: hover) {  
+  .sanctuary-card img {  
+    /* This creates a muted, golden-shadow look */  
+    filter: sepia(40%) contrast(90%) brightness(70%);  
+  }
+html, body {  
+  background-color: #FCFAF7;  
+  color: #1C1C1C;  
 }
 
-/* Re-apply ONLY the page-level background */  
-body {  
-  background-color: #0A0A0A !important;  
-}
-
-/* Re-apply for containers that need it */  
-main, section, .page-wrapper {  
-  background-color: #0A0A0A !important;  
-}
-
-/* Brass-colored text if not set in Tailwind already */  
-h1, h2, h3, h4, p, span, a {  
-  background-color: transparent !important;  
+  .sanctuary-card:hover img {  
+    /* Full vibrant color on hover */  
+    filter: sepia(0%) contrast(100%) brightness(100%);  
+    transform: scale(1.03);  
+  }  
+h1, h2, h3, h4 {  
+  font-family: var(--font-serif);  
+  font-weight: 500;  
+  background-color: #FCFAF7; /* Warm Parchment */  
+  color: #1C1C1C; /* Ink Black */  
 }  
