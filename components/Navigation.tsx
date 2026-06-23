@@ -1,116 +1,60 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';  
-import Link from 'next/link';  
-import { Menu, X } from 'lucide-react';
+import { useState } from "react";  
+import Link from "next/link";
 
-const Navigation = () => {  
-  const [isOpen, setIsOpen] = useState(false);
+const navLinks = [  
+  { label: "ARCHIVE", href: "/archive" },  
+  { label: "JOURNAL", href: "/journal" },  
+  { label: "INQUIRY", href: "/inquiry" },  
+];
 
-  // Prevent scrolling when menu is open  
-  useEffect(() => {  
-    if (isOpen) {  
-      document.body.style.overflow = 'hidden';  
-    } else {  
-      document.body.style.overflow = 'unset';  
-    }  
-  }, [isOpen]);
-
-  const navLinks = [  
-    { name: 'LOBBY', href: '/', sub: 'The Beginning' },  
-    { name: 'ARCHIVE', href: '/archive', sub: 'Curated Collection' },  
-    { name: 'JOURNAL', href: '/journal', sub: 'Travel Stories' },  
-    { name: 'INQUIRY', href: '/inquiry', sub: 'Direct Inquiry' },  
-  ];
-
-  const brass = '#C5A059';  
-  const shadow = '#0A0A0A';
+export default function Navigation() {  
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (  
     <>  
-      {/* Top Bar — fully transparent */}  
-      {/* Top Bar — fully transparent, flush to edges */}  
-{/* Top Bar — fully transparent, natural spacing */}  
-<nav  
-className="fixed top-0 left-0 right-0 z-50"  
-style={{ background: 'transparent' }}  
->  
-<div className="flex items-center justify-between w-full px-6 py-6">  
-  <Link  
-    href="/"  
-    className="tracking-[0.15em]"  
-    style={{  
-      fontFamily: "'Cormorant Garamond', serif",  
-      color: '#C5A059',  
-      fontSize: '1.25rem', // 20px  
-    }}  
-  >  
-    NEXVOYAGE COLLECTIVE  
-  </Link>  
-  <button  
-    onClick={() => setIsOpen(!isOpen)}  
-    className="text-white hover:text-[#C5A059] transition-colors duration-300"  
-  >  
-    {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}  
-  </button>  
-</div>  
-</nav>  
-      
-      {/* Fullscreen Overlay — solid black */}  
-      <div  
-        className={`fixed inset-0 z-40 flex flex-col items-center justify-center transition-opacity duration-500 ${  
-          isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'  
-        }`}  
-        style={{ backgroundColor: shadow }}  
-      >  
-        <div className="flex flex-col items-center gap-12">  
-          {navLinks.map((link, i) => (  
-            <Link  
-              key={link.name}  
-              href={link.href}  
-              onClick={() => setIsOpen(false)}  
-              className="group flex flex-col items-center transform transition-all duration-700"  
-              style={{  
-                transitionDelay: `${i * 100}ms`,  
-                opacity: isOpen ? 1 : 0,  
-                transform: isOpen ? 'translateY(0)' : 'translateY(2.5rem)',  
-              }}  
+      {/* TOP BAR */}  
+      <nav className="fixed top-0 left-0 w-full z-50 bg-transparent">  
+        <div className="w-full flex items-center justify-between px-4 h-16">  
+          {/* LEFT: Brand */}  
+          <Link href="/" className="text-[#C9A96E] no-underline">  
+            <span  
+              className="text-[1.25rem] tracking-[0.15em]"  
+              style={{ fontFamily: "'Cormorant Garamond', serif" }}  
             >  
-              <span  
-                className="text-xs tracking-[0.3em] uppercase mb-2"  
-                style={{ color: brass, fontFamily: "'Cormorant Garamond', serif" }}  
-              >  
-                {link.sub}  
-              </span>  
-              <span  
-                className="text-4xl tracking-[0.2em] font-light"  
-                style={{  
-                  color: '#ffffff',  
-                  fontFamily: "'Cormorant Garamond', serif",  
-                }}  
-              >  
-                {link.name}  
-              </span>  
-            </Link>  
-          ))}  
-        </div>  
-      </div>
+              NEXVOYAGE COLLECTIVE  
+            </span>  
+          </Link>
 
-      {/* Bottom Menu Info — visible only when overlay is open */}  
-      <div  
-        className={`fixed bottom-8 left-0 right-0 z-50 text-center transition-opacity duration-700 delay-500 ${  
-          isOpen ? 'opacity-100' : 'opacity-0'  
-        }`}  
-      >  
-        <span  
-          className="text-xs tracking-[0.2em] uppercase"  
-          style={{ color: brass, fontFamily: "'Cormorant Garamond', serif" }}  
-        >  
-          Member Services | Private Collection  
-        </span>  
-      </div>  
+          {/* RIGHT: Menu toggle */}  
+          <button  
+            onClick={() => setMenuOpen(!menuOpen)}  
+            className="text-white bg-transparent border-none cursor-pointer text-sm tracking-[0.2em] uppercase"  
+          >  
+            {menuOpen ? "CLOSE" : "MENU"}  
+          </button>  
+        </div>  
+      </nav>
+
+      {/* OVERLAY MENU */}  
+      {menuOpen && (  
+        <div className="fixed inset-0 z-40 flex flex-col items-center justify-center bg-[#0A0A0A]">  
+          <nav className="flex flex-col items-center gap-8">  
+            {navLinks.map((link) => (  
+              <Link  
+                key={link.href}  
+                href={link.href}  
+                onClick={() => setMenuOpen(false)}  
+                className="text-white text-[2rem] tracking-[0.1em] no-underline transition-opacity duration-300 hover:opacity-60"  
+                style={{ fontFamily: "'Cormorant Garamond', serif" }}  
+              >  
+                {link.label}  
+              </Link>  
+            ))}  
+          </nav>  
+        </div>  
+      )}  
     </>  
   );  
-};
-
-export default Navigation;  
+}  
