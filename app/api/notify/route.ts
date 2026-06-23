@@ -1,61 +1,74 @@
-import { Resend } from 'resend';  
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 
-// Initialize Resend with your API Key from environment variables  
-const resend = new Resend(process.env.RESEND_API_KEY);  
-const SLACK_WEBHOOK_URL = process.env.SLACK_WEBHOOK_URL;
-
-export async function POST(req: Request) {  
+export async function POST(request: Request) {  
   try {  
-    const body = await req.json();  
-    const { guestName, phone, intent, source, email } = body;
+    const { guestName, email, phone, intent, destinations, source } = await request.json();
 
-    // 1. Send Email Notification via Resend  
-    // NOTE: Ensure 'concierge@nexvoyage.com' (or your domain) is verified in your Resend dashboard.  
-    // If not verified yet, you can use 'onboarding@resend.dev' for testing to your own email.  
+    // Format destinations for display  
+    const destinationsDisplay = destinations && destinations.length > 0  
+      ? destinations.join(", ")  
+      : "Not specified";
+
+    // Send email via Resend  
+    const Resend = (await import("resend")).Resend;  
+    const resend = new Resend(process.env.RESEND_API_KEY);
+
     const emailResponse = await resend.emails.send({  
-      from: 'NexVoyage Collective <concierge@nexvoyage.com>',  
-      to: ['daryl.clark@fora.travel'],  
-      subject: `[Lead Intelligence] ${guestName} via ${source}`,  
+      from: "NexVoyage <onboarding@resend.dev>",  
+      to: "daryl.clark@fora.travel",  
+      subject: `New Lead: ${guestName} — ${intent || "Inquiry"}`,  
       html: `  
-        <div style="font-family: 'Courier New', Courier, monospace; background-color: #0a0a0a; color: #d4af37; padding: 40px; border: 1px solid #d4af37;">  
-          <h2 style="text-transform: uppercase; letter-spacing: 0.2em; border-bottom: 1px solid #d4af37; padding-bottom: 10px;">New Guest Manifest</h2>  
-          <p style="margin-top: 20px;"><strong>GUEST IDENTIFIED:</strong> ${guestName}</p>  
-          <p><strong>SECURE LINE:</strong> ${phone}</p>  
-          ${email ? `<p><strong>EMAIL:</strong> ${email}</p>` : ''}  
-          <p><strong>SOURCE:</strong> ${source}</p>  
-          <div style="margin-top: 30px; padding: 20px; border: 1px solid rgba(212, 175, 55, 0.3);">  
-            <p style="font-size: 10px; text-transform: uppercase; opacity: 0.6;">Orchestration Intent:</p>  
-            <p style="font-style: italic;">"${intent}"</p>  
-          </div>  
-          <p style="font-size: 9px; margin-top: 40px; opacity: 0.4; text-transform: uppercase; letter-spacing: 0.1em;">  
-            Processed by Rachel AI // NexVoyage Collective  
+        <div style="font-family: 'Inter', sans-serif; background: #0A0A0A; color: #E5E5E5; padding: 40px; max-width: 600px;">  
+          <h1 style="font-family: 'Cormorant Garamond', serif; color: #D4AF37; font-size: 28px; margin-bottom: 24px;">  
+            New Lead · Application for Entry  
+          </h1>  
+          <table style="width: 100%; border-collapse: collapse;">  
+            <tr>  
+              <td style="padding: 12px 0; border-bottom: 1px solid #2A2A2A; color: #888; width: 120px;">Guest</td>  
+              <td style="padding: 12px 0; border-bottom: 1px solid #2A2A2A; color: #E5E5E5;">${guestName}</td>  
+            </tr>  
+            <tr>  
+              <td style="padding: 12px 0; border-bottom: 1px solid #2A2A2A; color: #888;">Email</td>  
+              <td style="padding: 12px 0; border-bottom: 1px solid #2A2A2A; color: #E5E5E5;">${email || "—"}</td>  
+            </tr>  
+            <tr>  
+              <td style="padding: 12px 0; border-bottom: 1px solid #2A2A2A; color: #888;">Phone</td>  
+              <td style="padding: 12px 0; border-bottom: 1px solid #2A2A2A; color: #E5E5E5;">${phone || "—"}</td>  
+            </tr>  
+            <tr>  
+              <td style="padding: 12px 0; border-bottom: 1px solid #2A2A2A; color: #888;">Intent</td>  
+              <td style="padding: 12px 0; border-bottom: 1px solid #2A2A2A; color: #E5E5E5;">${intent || "General Inquiry"}</td>  
+            </tr>  
+            <tr>  
+              <td style="padding: 12px 0; border-bottom: 1px solid #2A2A2A; color: #888;">Destinations</td>  
+              <td style="padding: 12px 0; border-bottom: 1px solid #2A2A2A; color: #E5E5E5;">${destinationsDisplay}</td>  
+            </tr>  
+          </table>  
+          <p style="margin-top: 24px; color: #555; font-size: 12px;">  
+            Source: ${source || "Application for Entry"} · NexVoyage Collective  
           </p>  
         </div>  
       `,  
     });
 
-    // 2. Send Slack Notification (if Webhook URL is provided)  
-    if (SLACK_WEBHOOK_URL) {  
-      await fetch(SLACK_WEBHOOK_URL, {  
-        method: 'POST',  
-        headers: { 'Content-Type': 'application/json' },  
-        body: JSON.stringify({  
-          text: `🔔 *New Lead Captured*\n*Guest:* ${guestName}\n*Intent:* ${intent}\n*Source:* ${source}\n*Phone:* ${phone}`  
-        }),  
-      });  
+    // Optional Slack notification  
+    if (process.env.SLACK_WEBHOOK_URL) {  
+      const slackMessage = {  
+        text: `*New Lead: ${guestName}*\nEmail: ${email || "—"}\nPhone: ${phone || "—"}\nIntent: ${intent || "General Inquiry"}\nDestinations: ${destinationsDisplay}\nSource: ${source || "Application for Entry"}`,  
+      };  
+      await fetch(process.env.SLACK_WEBHOOK_URL, {  
+        method: "POST",  
+        headers: { "Content-Type": "application/json" },  
+        body: JSON.stringify(slackMessage),  
+      }).catch(() => {}); // fire-and-forget  
     }
 
-    return NextResponse.json({   
-      success: true,   
-      id: emailResponse.data?.id   
-    }, { status: 200 });
-
-  } catch (error: any) {  
-    console.error('Notification Error:', error);  
-    return NextResponse.json({   
-      success: false,   
-      error: error.message   
-    }, { status: 500 });  
+    return NextResponse.json({ success: true, emailId: emailResponse.id });  
+  } catch (error) {  
+    console.error("Notify API error:", error);  
+    return NextResponse.json(  
+      { success: false, error: "Failed to send notification" },  
+      { status: 500 }  
+    );  
   }  
 }  
