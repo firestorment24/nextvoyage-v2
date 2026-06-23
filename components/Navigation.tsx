@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 
 const navLinks = [  
+{ label: "LOBBY", href: "http://www.nexvoyagecollective.com" },
 { label: "ARCHIVE", href: "/archive" },  
 { label: "JOURNAL", href: "/journal" },  
 { label: "INQUIRY", href: "/inquiry" },  
@@ -54,7 +55,7 @@ return (
         ))}  
       </nav>  
     </div>  
-  </>  
+  )}  
 </>  
 );  
 }  
