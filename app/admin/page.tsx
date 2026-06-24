@@ -15,6 +15,8 @@ interface Dossier {
   created_at: string  
 }
 
+const STATUS_OPTIONS = ['Pending', 'Accepted', 'Declined', 'In Discussion', 'On Hold']
+
 export default function AdminPage() {  
   const [isAuthenticated, setIsAuthenticated] = useState(false)  
   const [password, setPassword] = useState('')  
@@ -24,6 +26,12 @@ export default function AdminPage() {
   const [fetching, setFetching] = useState(true)  
   const [searchQuery, setSearchQuery] = useState('')  
   const [statusFilter, setStatusFilter] = useState('All')
+
+  // View modal state  
+  const [selectedDossier, setSelectedDossier] = useState<Dossier | null>(null)  
+  const [editStatus, setEditStatus] = useState('')  
+  const [editNotes, setEditNotes] = useState('')  
+  const [saving, setSaving] = useState(false)
 
   useEffect(() => {  
     if (!isAuthenticated) return  
@@ -58,11 +66,44 @@ export default function AdminPage() {
     }  
   }
 
+  const openViewModal = (dossier: Dossier) => {  
+    setSelectedDossier(dossier)  
+    setEditStatus(dossier.status)  
+    setEditNotes(dossier.notes || '')  
+  }
+
+  const closeViewModal = () => {  
+    setSelectedDossier(null)  
+    setEditStatus('')  
+    setEditNotes('')  
+  }
+
+  const handleSave = async () => {  
+    if (!selectedDossier) return  
+    setSaving(true)
+
+    const res = await fetch(`/api/admin/dossiers/${selectedDossier.id}`, {  
+      method: 'PATCH',  
+      headers: { 'Content-Type': 'application/json' },  
+      body: JSON.stringify({ status: editStatus, notes: editNotes }),  
+    })
+
+    const data = await res.json()  
+    setSaving(false)
+
+    if (data.dossier) {  
+      // Update the dossier in the local list  
+      setDossiers(dossiers.map((d) => (d.id === selectedDossier.id ? data.dossier : d)))  
+      setSelectedDossier(data.dossier)  
+    }  
+  }
+
   const handleDelete = async (id: number) => {  
     if (!confirm('Delete this dossier? This cannot be undone.')) return  
     const res = await fetch(`/api/admin/dossiers/${id}`, { method: 'DELETE' })  
     if (res.ok) {  
       setDossiers(dossiers.filter((d) => d.id !== id))  
+      if (selectedDossier?.id === id) closeViewModal()  
     }  
   }
 
@@ -81,6 +122,7 @@ export default function AdminPage() {
     declined: dossiers.filter((d) => d.status === 'Declined').length,  
   }
 
+  // ---- LOGIN VIEW ----  
   if (!isAuthenticated) {  
     return (  
       <div style={{  
@@ -155,6 +197,7 @@ export default function AdminPage() {
     )  
   }
 
+  // ---- DASHBOARD VIEW ----  
   return (  
     <div style={{  
       minHeight: '100vh',  
@@ -163,6 +206,7 @@ export default function AdminPage() {
       fontFamily: 'Inter, sans-serif',  
       padding: '2rem',  
     }}>  
+      {/* Header */}  
       <div style={{  
         display: 'flex',  
         justifyContent: 'space-between',  
@@ -270,7 +314,7 @@ export default function AdminPage() {
             outline: 'none',  
           }}  
         >  
-          {['All', 'Pending', 'Accepted', 'Declined'].map((s) => (  
+          {['All', ...STATUS_OPTIONS].map((s) => (  
             <option key={s} value={s}>{s}</option>  
           ))}  
         </select>  
@@ -332,31 +376,230 @@ export default function AdminPage() {
                     })}  
                   </td>  
                   <td style={{ padding: '0.75rem 1rem', textAlign: 'center' }}>  
-                    <button  
-                      onClick={() => handleDelete(dossier.id)}  
-                      style={{  
-                        background: 'transparent',  
-                        border: '1px solid #5C1A1A',  
-                        borderRadius: '4px',  
-                        color: '#8B3A3A',  
-                        padding: '0.3rem 0.8rem',  
-                        fontFamily: 'Inter, sans-serif',  
-                        fontSize: '0.75rem',  
-                        cursor: 'pointer',  
-                        transition: 'all 0.15s',  
-                      }}  
-                      onMouseEnter={(e) => { e.currentTarget.style.background = '#5C1A1A'; e.currentTarget.style.color = '#F5F5F0' }}  
-                      onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#8B3A3A' }}  
-                    >  
-                      Delete  
-                    </button>  
+                    <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>  
+                      <button  
+                        onClick={() => openViewModal(dossier)}  
+                        style={{  
+                          background: 'transparent',  
+                          border: '1px solid #D4AF37',  
+                          borderRadius: '4px',  
+                          color: '#D4AF37',  
+                          padding: '0.3rem 0.8rem',  
+                          fontFamily: 'Inter, sans-serif',  
+                          fontSize: '0.75rem',  
+                          cursor: 'pointer',  
+                        }}  
+                        onMouseEnter={(e) => { e.currentTarget.style.background = '#D4AF37'; e.currentTarget.style.color = '#0A0A0A' }}  
+                        onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#D4AF37' }}  
+                      >  
+                        View  
+                      </button>  
+                      <button  
+                        onClick={() => handleDelete(dossier.id)}  
+                        style={{  
+                          background: 'transparent',  
+                          border: '1px solid #5C1A1A',  
+                          borderRadius: '4px',  
+                          color: '#8B3A3A',  
+                          padding: '0.3rem 0.8rem',  
+                          fontFamily: 'Inter, sans-serif',  
+                          fontSize: '0.75rem',  
+                          cursor: 'pointer',  
+                        }}  
+                        onMouseEnter={(e) => { e.currentTarget.style.background = '#5C1A1A'; e.currentTarget.style.color = '#F5F5F0' }}  
+                        onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#8B3A3A' }}  
+                      >  
+                        Delete  
+                      </button>  
+                    </div>  
                   </td>  
                 </tr>  
               ))  
             )}  
           </tbody>  
         </table>  
-      </div>  
+      </div>
+
+      {/* ---- VIEW MODAL ---- */}  
+      {selectedDossier && (  
+        <div  
+          onClick={closeViewModal}  
+          style={{  
+            position: 'fixed',  
+            top: 0, left: 0, right: 0, bottom: 0,  
+            background: 'rgba(0,0,0,0.7)',  
+            display: 'flex',  
+            alignItems: 'center',  
+            justifyContent: 'center',  
+            zIndex: 1000,  
+          }}  
+        >  
+          <div  
+            onClick={(e) => e.stopPropagation()}  
+            style={{  
+              background: '#111',  
+              border: '1px solid #2A2A2A',  
+              borderRadius: '8px',  
+              width: '90%',  
+              maxWidth: '600px',  
+              maxHeight: '85vh',  
+              overflowY: 'auto',  
+              padding: '2rem',  
+            }}  
+          >  
+            {/* Modal header */}  
+            <div style={{  
+              display: 'flex',  
+              justifyContent: 'space-between',  
+              alignItems: 'center',  
+              marginBottom: '1.5rem',  
+            }}>  
+              <h2 style={{  
+                fontFamily: 'Cormorant Garamond, serif',  
+                fontSize: '1.3rem',  
+                color: '#D4AF37',  
+                margin: 0,  
+              }}>  
+                {selectedDossier.name}  
+              </h2>  
+              <button  
+                onClick={closeViewModal}  
+                style={{  
+                  background: 'transparent',  
+                  border: 'none',  
+                  color: '#666',  
+                  fontSize: '1.2rem',  
+                  cursor: 'pointer',  
+                }}  
+              >  
+                ✕  
+              </button>  
+            </div>
+
+            {/* Dossier details */}  
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>  
+              <div>  
+                <label style={{ fontSize: '0.7rem', color: '#888', letterSpacing: '0.05em', display: 'block', marginBottom: '0.25rem' }}>EMAIL</label>  
+                <p style={{ margin: 0, fontSize: '0.85rem' }}>{selectedDossier.email}</p>  
+              </div>  
+              <div>  
+                <label style={{ fontSize: '0.7rem', color: '#888', letterSpacing: '0.05em', display: 'block', marginBottom: '0.25rem' }}>PHONE</label>  
+                <p style={{ margin: 0, fontSize: '0.85rem' }}>{selectedDossier.phone || '—'}</p>  
+              </div>  
+              <div>  
+                <label style={{ fontSize: '0.7rem', color: '#888', letterSpacing: '0.05em', display: 'block', marginBottom: '0.25rem' }}>DESTINATION</label>  
+                <p style={{ margin: 0, fontSize: '0.85rem' }}>{selectedDossier.destination || '—'}</p>  
+              </div>  
+              <div>  
+                <label style={{ fontSize: '0.7rem', color: '#888', letterSpacing: '0.05em', display: 'block', marginBottom: '0.25rem' }}>TRAVEL DATES</label>  
+                <p style={{ margin: 0, fontSize: '0.85rem' }}>{selectedDossier.travel_dates || '—'}</p>  
+              </div>  
+              <div>  
+                <label style={{ fontSize: '0.7rem', color: '#888', letterSpacing: '0.05em', display: 'block', marginBottom: '0.25rem' }}>BUDGET</label>  
+                <p style={{ margin: 0, fontSize: '0.85rem' }}>{selectedDossier.budget_range || '—'}</p>  
+              </div>  
+              <div>  
+                <label style={{ fontSize: '0.7rem', color: '#888', letterSpacing: '0.05em', display: 'block', marginBottom: '0.25rem' }}>SUBMITTED</label>  
+                <p style={{ margin: 0, fontSize: '0.85rem' }}>  
+                  {new Date(selectedDossier.created_at).toLocaleDateString('en-US', {  
+                    month: 'long', day: 'numeric', year: 'numeric',  
+                  })}  
+                </p>  
+              </div>  
+            </div>
+
+            {/* Status control */}  
+            <div style={{ marginBottom: '1.5rem' }}>  
+              <label style={{ fontSize: '0.7rem', color: '#888', letterSpacing: '0.05em', display: 'block', marginBottom: '0.5rem' }}>  
+                FUNNEL STATUS  
+              </label>  
+              <select  
+                value={editStatus}  
+                onChange={(e) => setEditStatus(e.target.value)}  
+                style={{  
+                  width: '100%',  
+                  boxSizing: 'border-box',  
+                  background: '#1A1A1A',  
+                  border: '1px solid #2A2A2A',  
+                  borderRadius: '4px',  
+                  padding: '0.6rem 1rem',  
+                  color: '#F5F5F0',  
+                  fontFamily: 'Inter, sans-serif',  
+                  fontSize: '0.85rem',  
+                  outline: 'none',  
+                }}  
+              >  
+                {STATUS_OPTIONS.map((s) => (  
+                  <option key={s} value={s}>{s}</option>  
+                ))}  
+              </select>  
+            </div>
+
+            {/* Notes editor */}  
+            <div style={{ marginBottom: '1.5rem' }}>  
+              <label style={{ fontSize: '0.7rem', color: '#888', letterSpacing: '0.05em', display: 'block', marginBottom: '0.5rem' }}>  
+                INTERNAL NOTES  
+              </label>  
+              <textarea  
+                value={editNotes}  
+                onChange={(e) => setEditNotes(e.target.value)}  
+                placeholder="Add internal notes about this client..."  
+                rows={5}  
+                style={{  
+                  width: '100%',  
+                  boxSizing: 'border-box',  
+                  background: '#1A1A1A',  
+                  border: '1px solid #2A2A2A',  
+                  borderRadius: '4px',  
+                  padding: '0.6rem 1rem',  
+                  color: '#F5F5F0',  
+                  fontFamily: 'Inter, sans-serif',  
+                  fontSize: '0.85rem',  
+                  outline: 'none',  
+                  resize: 'vertical',  
+                }}  
+              />  
+            </div>
+
+            {/* Save button */}  
+            <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'flex-end' }}>  
+              <button  
+                onClick={closeViewModal}  
+                style={{  
+                  background: 'transparent',  
+                  border: '1px solid #2A2A2A',  
+                  borderRadius: '4px',  
+                  color: '#999',  
+                  padding: '0.6rem 1.5rem',  
+                  fontFamily: 'Inter, sans-serif',  
+                  fontSize: '0.85rem',  
+                  cursor: 'pointer',  
+                }}  
+              >  
+                Cancel  
+              </button>  
+              <button  
+                onClick={handleSave}  
+                disabled={saving}  
+                style={{  
+                  background: '#D4AF37',  
+                  border: 'none',  
+                  borderRadius: '4px',  
+                  color: '#0A0A0A',  
+                  padding: '0.6rem 1.5rem',  
+                  fontFamily: 'Inter, sans-serif',  
+                  fontSize: '0.85rem',  
+                  fontWeight: 600,  
+                  cursor: 'pointer',  
+                  opacity: saving ? 0.6 : 1,  
+                }}  
+              >  
+                {saving ? 'Saving...' : 'Save Changes'}  
+              </button>  
+            </div>  
+          </div>  
+        </div>  
+      )}  
     </div>  
   )  
 }  
