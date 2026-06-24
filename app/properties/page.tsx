@@ -15,7 +15,7 @@ export default function PropertiesPage() {
   const filteredProperties = filter === 'All'  
     ? properties  
     : properties.filter(p => p.collection === filter);
-
+ 
   return (  
     <main className="min-h-screen bg-black text-white">  
       <Navigation />  
