@@ -1,17 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';  
 import { sql } from '@vercel/postgres';
 
- export async function PATCH(  
+export async function PATCH(  
   req: NextRequest,  
   { params }: { params: Promise<{ id: string }> }  
 ) {  
-  const { id: idStr } = await params;  
-  const id = parseInt(idStr);    try {  
-    const id = parseInt(params.id);  
+  try {  
+    const { id: idStr } = await params;  
+    const id = parseInt(idStr);  
     const body = await req.json();  
     const { status, notes } = body;
 
-    // Build dynamic SET clause — only update fields that are provided  
     const setClauses: string[] = [];  
     const values: any[] = [];  
     let paramIndex = 1;
@@ -29,10 +28,9 @@ import { sql } from '@vercel/postgres';
       return NextResponse.json({ error: 'No fields to update' }, { status: 400 });  
     }
 
-    // Always update the updated_at timestamp  
-    setClauses.push(`updated_at = NOW()`);
+    setClauses.push(`updated_at = NOW()`);  
+    values.push(id);
 
-    values.push(id);  
     const query = `  
       UPDATE dossiers  
       SET ${setClauses.join(', ')}  
