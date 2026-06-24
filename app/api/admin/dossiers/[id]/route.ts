@@ -49,4 +49,25 @@ export async function PATCH(
     console.error('[ADMIN] Error updating dossier:', error);  
     return NextResponse.json({ error: 'Failed to update dossier' }, { status: 500 });  
   }  
+}
+
+export async function DELETE(  
+  req: NextRequest,  
+  { params }: { params: Promise<{ id: string }> }  
+) {  
+  try {  
+    const { id: idStr } = await params;  
+    const id = parseInt(idStr);
+
+    const { rowCount } = await sql.query('DELETE FROM dossiers WHERE id = $1', [id]);
+
+    if (rowCount === 0) {  
+      return NextResponse.json({ error: 'Dossier not found' }, { status: 404 });  
+    }
+
+    return NextResponse.json({ success: true }, { status: 200 });  
+  } catch (error) {  
+    console.error('[ADMIN] Error deleting dossier:', error);  
+    return NextResponse.json({ error: 'Failed to delete dossier' }, { status: 500 });  
+  }  
 }  
