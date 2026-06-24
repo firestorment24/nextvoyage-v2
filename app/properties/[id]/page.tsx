@@ -1,96 +1,73 @@
 import { notFound } from 'next/navigation';  
 import Image from 'next/image';  
 import Link from 'next/link';  
-import { PROPERTY_DATA, Property } from '../../../data/properties';  
+import { properties } from '../../../data/properties';  
 import { EliteAmenities } from '../../../components/EliteAmenities';  
 import Navigation from '../../../components/Navigation';  
 import Footer from '../../../components/Footer';
 
-interface PropertyDetail extends Property {  
-  // Ensuring consistency with the PROPERTY_DATA manifest  
-}
- 
 export async function generateStaticParams() {  
-  return PROPERTY_DATA.map((property) => ({  
+  return properties.map((property) => ({  
     id: property.id,  
   }));  
 }
 
 export default async function PropertyPage({ params }: { params: { id: string } }) {  
   const { id } = params;  
-  const property = PROPERTY_DATA.find((p) => p.id === id);
+  const property = properties.find((p) => p.id === id);
 
   if (!property) {  
     notFound();  
   }
 
   return (  
-    <main className="min-h-screen bg-black text-white selection:bg-[#d4af37]/30">  
+    <main className="min-h-screen bg-black text-white">  
       <Navigation />  
-        
       {/* Cinematic Hero Section */}  
-      <section className="relative h-[70vh] w-full overflow-hidden">  
-        <Image  
-          src={property.image}  
-          alt={property.name}  
-          fill  
-          priority  
-          className="object-cover brightness-75"  
-        />  
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />  
-        <div className="absolute bottom-12 left-8 md:left-16 max-w-4xl">  
-          <p className="text-[#d4af37] font-mono tracking-[0.2em] uppercase text-sm mb-4">  
-            {property.id} // {property.intel.category}  
+      <div className="relative h-[60vh] w-full">  
+        <Image src={property.image} alt={property.name} fill className="object-cover" />  
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />  
+        <div className="absolute bottom-0 left-0 right-0 p-8 md:p-16">  
+          <p className="text-[#d4af37]/70 font-mono text-xs tracking-[0.2em] uppercase mb-2">  
+            {property.id} // {property.collection}  
           </p>  
-          <h1 className="text-5xl md:text-7xl font-light tracking-tight mb-2">  
+          <h1 className="font-cormorant text-5xl md:text-7xl text-[#d4af37] mb-2">  
             {property.name}  
           </h1>  
-          <p className="text-xl md:text-2xl text-zinc-400 font-light italic">  
-            {property.location}  
-          </p>  
+          <p className="font-inter text-lg text-white/60">{property.location}</p>  
         </div>  
-      </section>
+      </div>
 
       {/* Intel / Dossier Section */}  
-      <section className="py-24 px-8 md:px-16 grid grid-cols-1 lg:grid-cols-12 gap-16 border-t border-zinc-900">  
-        <div className="lg:col-span-8">  
-          <h2 className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-8">  
-            Strategic Positioning  
-          </h2>  
-          <p className="text-2xl md:text-3xl leading-relaxed font-light text-zinc-200">  
-            {property.intel.positioning}  
-          </p>  
-        </div>  
-          
-        <div className="lg:col-span-4 space-y-12">  
-          <div>  
-            <h2 className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-6">  
-              Exclusive Member Benefits  
-            </h2>  
-            <ul className="space-y-4">  
-              {property.intel.memberBenefits.map((benefit, index) => (  
-                <li key={index} className="flex items-start gap-3 text-zinc-400">  
-                  <span className="text-[#d4af37] mt-1">✦</span>  
-                  {benefit}  
-                </li>  
-              ))}  
-            </ul>  
-          </div>  
-            
-          <Link   
-            href={`/reserve?property=${property.id}`}  
-            className="inline-block w-full text-center py-5 px-8 bg-[#d4af37] text-black font-bold tracking-widest uppercase text-sm hover:bg-white transition-colors"  
+      <div className="max-w-4xl mx-auto px-6 py-16 space-y-16">  
+        <section>  
+          <h2 className="font-cormorant text-3xl text-[#d4af37] mb-4">Strategic Positioning</h2>  
+          <p className="font-inter text-white/70 leading-relaxed">{property.description}</p>  
+        </section>
+
+        <section className="border-l-2 border-[#d4af37] pl-6">  
+          <h2 className="font-cormorant text-3xl text-[#d4af37] mb-4">The Highlight</h2>  
+          <p className="font-inter text-white/70 leading-relaxed">{property.highlight}</p>  
+        </section>
+
+        <section className="bg-[#0A0A0A] border border-[#d4af37]/20 p-8">  
+          <h2 className="font-cormorant text-3xl text-[#d4af37] mb-4">Exclusive Offer</h2>  
+          <p className="font-inter text-white/70 leading-relaxed">{property.exclusiveOffer}</p>  
+        </section>
+
+        <div className="pt-8 border-t border-white/10 flex justify-between items-center">  
+          <Link href="/properties" className="font-inter text-sm text-[#d4af37] hover:underline">  
+            ← Back to Properties  
+          </Link>  
+          <Link  
+            href="/contact"  
+            className="px-8 py-3 bg-[#d4af37] text-black font-inter text-sm tracking-widest uppercase hover:bg-[#c5a059] transition-colors"  
           >  
             Initiate Booking Request  
           </Link>  
         </div>  
-      </section>
-
-      {/* The Global Standard Anchor */}  
-      <section className="bg-zinc-950">  
-        <EliteAmenities />  
-      </section>
-
+      </div>  
+      <EliteAmenities />  
       <Footer />  
     </main>  
   );  
