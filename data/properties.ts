@@ -6,7 +6,8 @@ export interface Property {
   image: string;  
   description: string;  
   collection: string;  
-  highlight: string;  
+  highlight: string; 
+  exclusiveOffer: string;
 }
 
 export const properties: Property[] = [  
