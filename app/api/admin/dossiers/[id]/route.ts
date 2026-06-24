@@ -1,8 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';  
 import { sql } from '@vercel/postgres';
 
-export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {  
-  try {  
+ export async function PATCH(  
+  req: NextRequest,  
+  { params }: { params: Promise<{ id: string }> }  
+) {  
+  const { id: idStr } = await params;  
+  const id = parseInt(idStr);    try {  
     const id = parseInt(params.id);  
     const body = await req.json();  
     const { status, notes } = body;
