@@ -64,10 +64,10 @@ setError('Invalid password')
 }
 
 // Collect unique statuses from actual data (case-insensitive, normalized)  
-const uniqueStatuses = [...new Set(dossiers.map((d) => {  
+const uniqueStatuses = Array.from(new Set(dossiers.map((d) => {  
 const s = d.status.toLowerCase()  
 return s.charAt(0).toUpperCase() + s.slice(1)  
-}))].sort()
+}))).sort()
 
 const filteredDossiers = dossiers.filter((d) => {  
 const q = searchQuery.toLowerCase()  
