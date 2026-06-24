@@ -28,7 +28,7 @@ export default async function PropertyPage({ params }: { params: Promise<{ id: s
     <main className="min-h-screen bg-black text-white">  
       {/* Hero */}  
       <div className="relative h-[50vh] md:h-[70vh] w-full">  
-        <Image src={property.image} alt={property.name} fill className="object-cover" />  
+        <Image src={property.image} alt={property.name} fill className="object-cover" priority />  
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />  
         <div className="absolute bottom-0 left-0 right-0 p-8 md:p-16">  
           <p className="text-[#C5A059]/70 font-inter text-xs tracking-[0.2em] uppercase mb-2">  
@@ -43,9 +43,9 @@ export default async function PropertyPage({ params }: { params: Promise<{ id: s
 
       {/* Content */}  
       <div className="max-w-4xl mx-auto px-6 py-16 space-y-16">  
-        {/* Description */}  
+        {/* About */}  
         <section>  
-          <h2 className="font-cormorant text-3xl text-[#C5A059] mb-4">About</h2>  
+          <h2 className="font-cormorant text-3xl text-[#C5A059] mb-4">Positioning</h2>  
           <p className="font-inter text-white/70 leading-relaxed">{property.description}</p>  
         </section>
 
@@ -63,8 +63,8 @@ export default async function PropertyPage({ params }: { params: Promise<{ id: s
 
         {/* Back link */}  
         <div className="pt-8 border-t border-white/10">  
-          <Link href="/archive" className="font-inter text-sm text-[#C5A059] hover:underline">  
-            ← Back to Archive  
+          <Link href="/archive" className="font-inter text-sm text-[#C5A059] hover:underline group">  
+            <span className="inline-block transition-transform group-hover:-translate-x-1">←</span> Back to Archive  
           </Link>  
         </div>  
       </div>  
