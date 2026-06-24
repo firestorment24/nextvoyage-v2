@@ -20,7 +20,7 @@ export default function ArchivePage() {
             The Archive  
           </h1>  
           <p className="mt-4 font-sans text-sm md:text-base text-white/80 max-w-xl tracking-wider uppercase">  
-            Elite Ledger &mdash; 18 Sanctuaries  
+            Elite Ledger &mdash; {PROPERTY_DATA.length} Sanctuaries  
           </p>  
         </div>  
       </section>
@@ -37,7 +37,7 @@ export default function ArchivePage() {
               {/* Image */}  
               <div className="relative w-full aspect-[4/5] overflow-hidden">  
                 <Image  
-                  src={property.image || property.images?.[0] || "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800&q=80"}  
+                  src={property.images[0] || "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800&q=80"}  
                   alt={property.name}  
                   fill  
                   className="object-cover transition-all duration-700 group-hover:scale-105 group-hover:grayscale group-hover:opacity-60"  
@@ -48,7 +48,7 @@ export default function ArchivePage() {
               {/* Text overlay */}  
               <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">  
                 <span className="font-sans text-xs tracking-[0.2em] uppercase text-[#C5A059]">  
-                  {property.intel?.category || property.collection || "Sanctuary"}  
+                  {property.intel?.category || "Sanctuary"}  
                 </span>  
                 <h2 className="font-serif text-xl md:text-2xl text-white mt-1 leading-tight">  
                   {property.name}  
