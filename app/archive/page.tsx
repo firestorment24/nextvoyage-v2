@@ -1,4 +1,4 @@
-import { PROPERTY_DATA as properties } from '@/data/properties'  
+import { properties } from '@/data/properties'  
 import Image from 'next/image'  
 import Link from 'next/link'
 
