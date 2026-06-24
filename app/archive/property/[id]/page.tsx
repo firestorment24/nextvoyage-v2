@@ -11,11 +11,10 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
   const property = PROPERTY_DATA.find((p) => String(p.id) === params.id);  
   if (!property) notFound();
 
-  const heroImage =  
-    property.image || property.images?.[0] || "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=1920&q=80";  
-  const category = property.intel?.category || property.collection || "Sanctuary";  
+  const heroImage = property.images[0] || "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=1920&q=80";  
   const positioning = property.intel?.positioning || property.description || "";  
-  const benefits = property.intel?.memberBenefits || property.highlight || property.exclusiveOffer || "";
+  const benefits = property.intel?.memberBenefits || [];  
+  const category = property.intel?.category || "Sanctuary";
 
   return (  
     <main className="min-h-screen bg-black">  
@@ -54,67 +53,29 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
 
       {/* ─── DOSSIER BODY ─── */}  
       <section className="max-w-5xl mx-auto px-6 py-12 space-y-16">  
-        {/* Positioning */}  
-        {positioning && (  
-          <div>  
-            <h2 className="font-serif text-2xl md:text-3xl text-white mb-4">  
-              Field Report  
-            </h2>  
-            <p className="font-sans text-base md:text-lg text-white/80 leading-relaxed">  
-              {positioning}  
-            </p>  
-          </div>  
-        )}
+        {/* Description / Positioning */}  
+        <div>  
+          <h2 className="font-serif text-2xl md:text-3xl text-white mb-4">  
+            Field Report  
+          </h2>  
+          <p className="font-sans text-base md:text-lg text-white/80 leading-relaxed">  
+            {positioning}  
+          </p>  
+        </div>
 
-        {/* Member Benefits / Highlight */}  
-        {benefits && (  
+        {/* Member Benefits */}  
+        {benefits.length > 0 && (  
           <div>  
             <h2 className="font-serif text-2xl md:text-3xl text-white mb-4">  
               Member Benefits  
             </h2>  
-            <p className="font-sans text-base md:text-lg text-white/70 leading-relaxed">  
-              {benefits}  
-            </p>  
-          </div>  
-        )}
-
-        {/* Technical Specs */}  
-        {property.specs && property.specs.length > 0 && (  
-          <div>  
-            <h2 className="font-serif text-2xl md:text-3xl text-white mb-6">  
-              Technical Specifications  
-            </h2>  
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">  
-              {property.specs.map((spec, idx) => (  
-                <div  
-                  key={idx}  
-                  className="border border-neutral-800 bg-neutral-900/50 px-5 py-4"  
-                >  
-                  <span className="font-sans text-xs tracking-widest uppercase text-[#C5A059]">  
-                    {spec.label || spec.category || "Spec"}  
-                  </span>  
-                  <p className="font-sans text-base text-white/80 mt-1">  
-                    {spec.value}  
-                  </p>  
-                </div>  
-              ))}  
-            </div>  
-          </div>  
-        )}
-
-        {/* Amenities */}  
-        {property.amenities && property.amenities.length > 0 && (  
-          <div>  
-            <h2 className="font-serif text-2xl md:text-3xl text-white mb-4">  
-              Amenities  
-            </h2>  
-            <ul className="grid grid-cols-2 sm:grid-cols-3 gap-3">  
-              {property.amenities.map((item, idx) => (  
+            <ul className="space-y-3">  
+              {benefits.map((benefit, idx) => (  
                 <li  
                   key={idx}  
-                  className="font-sans text-sm text-white/70 border border-neutral-800 px-4 py-3"  
+                  className="font-sans text-base md:text-lg text-white/70 border-l-2 border-[#C5A059] pl-4"  
                 >  
-                  {item}  
+                  {benefit}  
                 </li>  
               ))}  
             </ul>  
