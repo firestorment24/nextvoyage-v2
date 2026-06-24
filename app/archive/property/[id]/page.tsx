@@ -1,14 +1,14 @@
-import { PROPERTY_DATA } from '@/data/properties'  
+import { properties } from '@/data/properties'  
 import Image from 'next/image'  
 import Link from 'next/link'
 
 export async function generateStaticParams() {  
-  return PROPERTY_DATA.map((p) => ({ id: p.id }))  
+  return properties.map((p) => ({ id: p.id }))  
 }
 
 export default async function PropertyPage({ params }: { params: Promise<{ id: string }> }) {  
   const { id } = await params  
-  const property = PROPERTY_DATA.find((p) => p.id === id)
+  const property = properties.find((p) => p.id === id)
 
   if (!property) {  
     return (  
@@ -37,7 +37,7 @@ export default async function PropertyPage({ params }: { params: Promise<{ id: s
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />  
         <div className="absolute bottom-0 left-0 right-0 p-8 md:p-16">  
           <p className="text-[#C5A059]/70 font-inter text-xs tracking-[0.2em] uppercase mb-2">  
-            {property.intel.category}  
+            {property.collection}  
           </p>  
           <h1 className="font-cormorant text-5xl md:text-7xl text-[#C5A059] mb-2">  
             {property.name}  
@@ -51,23 +51,19 @@ export default async function PropertyPage({ params }: { params: Promise<{ id: s
         {/* Description */}  
         <section>  
           <h2 className="font-cormorant text-3xl text-[#C5A059] mb-4">About</h2>  
-          <p className="font-inter text-white/70 leading-relaxed">{property.intel.positioning}</p>  
+          <p className="font-inter text-white/70 leading-relaxed">{property.description}</p>  
         </section>
 
         {/* Highlight */}  
         <section className="border-l-2 border-[#C5A059] pl-6">  
           <h2 className="font-cormorant text-3xl text-[#C5A059] mb-4">The Highlight</h2>  
-          <p className="font-inter text-white/70 leading-relaxed">  
-            {property.intel.memberBenefits.join(' · ')}  
-          </p>  
+          <p className="font-inter text-white/70 leading-relaxed">{property.highlight}</p>  
         </section>
 
         {/* Exclusive Offer */}  
         <section className="bg-[#0A0A0A] border border-[#C5A059]/20 p-8">  
           <h2 className="font-cormorant text-3xl text-[#C5A059] mb-4">Exclusive Offer</h2>  
-          <p className="font-inter text-white/70 leading-relaxed">  
-            {property.intel.memberBenefits.join(' · ')}  
-          </p>  
+          <p className="font-inter text-white/70 leading-relaxed">{property.exclusiveOffer}</p>  
         </section>
 
         {/* Back link */}  
