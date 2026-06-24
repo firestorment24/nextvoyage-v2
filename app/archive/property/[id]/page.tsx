@@ -27,13 +27,12 @@ export default async function PropertyPage({ params }: { params: Promise<{ id: s
 
   return (  
     <main className="min-h-screen bg-black text-white">  
-      {/* Hero */}  
-      <div className="relative h-[50vh] md:h-[70vh] w-full">  
-        <Image  
+   {/* Hero */}  
+      <div className="relative h-[50vh] md:h-[70vh] w-full overflow-hidden">  
+        <img  
           src={property.image}  
           alt={property.name}  
-          fill  
-          className="object-cover"  
+          className="absolute inset-0 w-full h-full object-cover"  
         />  
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />  
         <div className="absolute bottom-0 left-0 right-0 p-8 md:p-16">  
@@ -45,7 +44,7 @@ export default async function PropertyPage({ params }: { params: Promise<{ id: s
           </h1>  
           <p className="font-inter text-lg text-white/60">{property.location}</p>  
         </div>  
-      </div>
+      </div>  
 
       {/* Content */}  
       <div className="max-w-4xl mx-auto px-6 py-16 space-y-16">  
