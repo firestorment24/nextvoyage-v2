@@ -1,12 +1,23 @@
+'use client'
+
+import { useState } from 'react'  
 import { properties } from '@/data/properties'  
 import Image from 'next/image'  
 import Link from 'next/link'
 
+const collections = ['All', ...Array.from(new Set(properties.map((p) => p.collection)))]
+
 export default function ArchivePage() {  
+  const [activeCollection, setActiveCollection] = useState('All')
+
+  const filtered = activeCollection === 'All'  
+    ? properties  
+    : properties.filter((p) => p.collection === activeCollection)
+
   return (  
     <main className="min-h-screen bg-black text-white">  
       <div className="max-w-7xl mx-auto px-6 py-20">  
-        <div className="border-b border-[#C5A059]/30 pb-8 mb-16">  
+        <div className="border-b border-[#C5A059]/30 pb-8 mb-12">  
           <p className="text-[#C5A059]/60 font-inter text-sm tracking-[0.2em] uppercase mb-2">  
             Registry of Significance  
           </p>  
@@ -14,9 +25,27 @@ export default function ArchivePage() {
             The Archive  
           </h1>  
         </div>
- 
+
+        {/* Collection Filter */}  
+        <div className="flex flex-wrap gap-3 mb-12">  
+          {collections.map((collection) => (  
+            <button  
+              key={collection}  
+              onClick={() => setActiveCollection(collection)}  
+              className={`font-inter text-xs tracking-[0.15em] uppercase px-5 py-2 rounded-sm border transition-all duration-300 ${  
+                activeCollection === collection  
+                  ? 'border-[#C5A059] text-[#C5A059] bg-[#C5A059]/10'  
+                  : 'border-white/10 text-white/50 hover:border-white/30 hover:text-white/70'  
+              }`}  
+            >  
+              {collection}  
+            </button>  
+          ))}  
+        </div>
+
+        {/* Property Grid */}  
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">  
-          {properties.map((property) => (  
+          {filtered.map((property) => (  
             <Link  
               key={property.id}  
               href={`/archive/property/${property.id}`}  
