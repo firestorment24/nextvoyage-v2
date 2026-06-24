@@ -13,7 +13,7 @@ export default function ArchivePage() {
           fill  
           className="object-cover opacity-50 grayscale"  
           priority  
-        />  
+        />   
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black" />  
         <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">  
           <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl text-white tracking-wide">  
