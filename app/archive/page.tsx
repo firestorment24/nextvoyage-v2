@@ -13,6 +13,9 @@ export default function ArchivePage() {
           <h1 className="font-cormorant text-5xl md:text-7xl text-[#C5A059]">  
             The Archive  
           </h1>  
+          <p className="font-inter text-white/40 text-sm mt-4 max-w-xl">  
+            Eighteen elite sanctuaries. Each one vetted, verified, and vaulted into our private ledger.  
+          </p>  
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">  
@@ -33,7 +36,7 @@ export default function ArchivePage() {
                 <p className="text-[#C5A059]/70 font-inter text-xs tracking-[0.2em] uppercase mb-1">  
                   {property.collection}  
                 </p>  
-                <h2 className="font-cormorant text-2xl text-white mb-1">  
+                <h2 className="font-cormorant text-2xl text-white mb-1 group-hover:text-[#C5A059] transition-colors duration-300">  
                   {property.name}  
                 </h2>  
                 <p className="font-inter text-sm text-white/60">  
