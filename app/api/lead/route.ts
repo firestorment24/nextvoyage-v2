@@ -7,10 +7,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(req: Request) {  
   try {  
     const body = await req.json();  
-    const {  
-      name, email, phone, occasion, destinations,  
-      travelWindow, partySize, aviationClass, hearAbout, notes, source  
-    } = body;
+    const { name, email, phone, occasion, destinations, travelWindow, partySize, aviationClass, hearAbout, notes, source } = body;
 
     // 1️⃣ Send email notification  
     const { error: emailError } = await resend.emails.send({  
@@ -36,10 +33,7 @@ export async function POST(req: Request) {
       `,  
     });
 
-    if (emailError) {  
-      console.error('[LEAD] Email error:', emailError);  
-      // Still continue to save the dossier even if email fails  
-    }
+    if (emailError) console.error('[LEAD] Email error:', emailError);
 
     // 2️⃣ Save to database  
     const { rows } = await sql`  
@@ -57,8 +51,7 @@ export async function POST(req: Request) {
       RETURNING *  
     `;
 
-    console.log('[LEAD] Dossier created:', rows[0].id);
-
+    console.log('[LEAD] Dossier created:', rows[0].id);  
     return NextResponse.json({ success: true, dossier: rows[0] }, { status: 201 });  
   } catch (err) {  
     console.error('[LEAD] Error:', err);  
