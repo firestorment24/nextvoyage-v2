@@ -1,49 +1,13 @@
-export interface Property {  
-  id: string;  
-  name: string;  
-  location: string;  
-  image: string;  
-  intel: {  
-    positioning: string;  
-    category: string;  
-    memberBenefits: string[];  
-  };  
-}
-
-export const PROPERTY_DATA: Property[] = [  
+export const properties = [  
   {  
-    id: "NV-LDR-001",  
-    name: "Kilchoan Estate",  
-    location: "Knoydart, Scotland",  
-    image: "https://images.unsplash.com/photo-1505832018823-50331d70d237?q=80&w=2000",  
-    intel: {  
-      positioning: "The Last Wilderness of the Highlands. Off-grid industrial luxury.",  
-      category: "Frontier Estate",  
-      memberBenefits: ["Private ghillie service", "Chartered rib transfers", "Helipad access"]  
-    }  
+    id: 'amen-gaia',  
+    name: 'Aman Gaia',  
+    location: 'Bequia, St. Vincent & Grenadines',  
+    description: '...',  
+    image: 'https://images.unsplash.com/...',  
+    collection: 'The Vanguard Ten',  
+    highlight: '...',  
+    exclusiveOffer: '...',  
   },  
-  {  
-    id: "NV-LDR-002",  
-    name: "Pongwe Island",  
-    location: "Zanzibar, Tanzania",  
-    image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=2000",  
-    intel: {  
-      positioning: "Private island isolation. Low-tide reef walks and raw coral aesthetics.",  
-      category: "Island Outpost",  
-      memberBenefits: ["Private dhow sunset cruise", "In-villa reef spa", "Sandbank picnic"]  
-    }  
-  },  
-  // ... (Insert properties 003 through 012 here)  
-  {  
-    id: "NV-LDR-013",  
-    name: "Setouchi Retreat Aonagi",  
-    location: "Matsuyama, Japan",  
-    image: "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?q=80&w=2000",  
-    intel: {  
-      positioning: "Tadao Ando minimalism. High-altitude concrete and water silence.",  
-      category: "Architectural Vault",  
-      memberBenefits: ["Private gallery tour", "OMAKASE in-suite", "Zen garden access"]  
-    }  
-  },  
-  // ... (Continue through to NV-LDR-029)  
-];  
+  // ... 17 more  
+]  
