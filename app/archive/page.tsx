@@ -9,8 +9,6 @@ const COLLECTION_ORDER = [
 'Wild Frontiers',  
 'Urban Sovereigns',  
 'Heritage & Estate',  
-'Nole Sanctuary',  
-'Industrial & Frontier',  
 ];
 
 const proxyUrl = (url: string) => `/api/image?url=${encodeURIComponent(url)}`;
