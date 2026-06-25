@@ -20,7 +20,7 @@ interface ArchiveProperty {
   highlight?: string;  
   exclusiveOffer?: string;  
 }
-
+ 
 const properties = PROPERTY_DATA as ArchiveProperty[];
 
 export default function ArchivePage() {  
