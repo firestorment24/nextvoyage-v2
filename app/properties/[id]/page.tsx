@@ -1,28 +1,29 @@
-import { notFound } from 'next/navigation';  
-import Image from 'next/image';  
-import Link from 'next/link';  
-import { properties } from '../../../data/properties';  
-import { EliteAmenities } from '../../../components/EliteAmenities';  
-import Navigation from '../../../components/Navigation';  
-import Footer from '../../../components/Footer';
+import { notFound } from 'next/navigation'  
+import Image from 'next/image'  
+import Link from 'next/link'  
+import { properties } from '../../../data/properties'  
+import { EliteAmenities } from '../../../components/EliteAmenities'  
+import Navigation from '../../../components/Navigation'  
+import Footer from '../../../components/Footer'
 
 export async function generateStaticParams() {  
   return properties.map((property) => ({  
     id: property.id,  
-  }));  
+  }))  
 }
 
 export default async function PropertyPage({ params }: { params: { id: string } }) {  
-  const { id } = params;  
-  const property = properties.find((p) => p.id === id);
+  const { id } = params  
+  const property = properties.find((p) => p.id === id)
 
   if (!property) {  
-    notFound();  
+    notFound()  
   }
 
   return (  
     <main className="min-h-screen bg-black text-white">  
-      <Navigation />  
+      <Navigation />
+
       {/* Cinematic Hero Section */}  
       <div className="relative h-[60vh] w-full">  
         <Image src={property.image} alt={property.name} fill className="object-cover" />  
@@ -47,16 +48,26 @@ export default async function PropertyPage({ params }: { params: { id: string } 
 
         <section className="border-l-2 border-[#d4af37] pl-6">  
           <h2 className="font-cormorant text-3xl text-[#d4af37] mb-4">The Highlight</h2>  
-          <p className="font-inter text-white/70 leading-relaxed">{property.highlight}</p>  
+          <p className="font-inter text-white/70 leading-relaxed">{property.intel.positioning}</p>  
         </section>
 
         <section className="bg-[#0A0A0A] border border-[#d4af37]/20 p-8">  
           <h2 className="font-cormorant text-3xl text-[#d4af37] mb-4">Exclusive Offer</h2>  
-          <p className="font-inter text-white/70 leading-relaxed">{property.exclusiveOffer}</p>  
+          <ul className="font-inter text-white/70 space-y-3">  
+            {property.intel.memberBenefits.map((benefit, i) => (  
+              <li key={i} className="flex items-start gap-3">  
+                <span className="text-[#d4af37] mt-1">—</span>  
+                <span>{benefit}</span>  
+              </li>  
+            ))}  
+          </ul>  
         </section>
 
         <div className="pt-8 border-t border-white/10 flex justify-between items-center">  
-          <Link href="/properties" className="font-inter text-sm text-[#d4af37] hover:underline">  
+          <Link  
+            href="/properties"  
+            className="font-inter text-sm text-[#d4af37] hover:underline"  
+          >  
             ← Back to Properties  
           </Link>  
           <Link  
@@ -66,9 +77,10 @@ export default async function PropertyPage({ params }: { params: { id: string } 
             Initiate Booking Request  
           </Link>  
         </div>  
-      </div>  
+      </div>
+
       <EliteAmenities />  
       <Footer />  
     </main>  
-  );  
+  )  
 }  
