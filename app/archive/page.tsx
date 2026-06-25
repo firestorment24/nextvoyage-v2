@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';  
+import { useState, useMemo } from 'react';  
 import Image from 'next/image';  
 import Link from 'next/link';  
 import { PROPERTY_DATA } from '@/data/properties';
@@ -32,18 +32,18 @@ export default function ArchivePage() {
     const ordered: { name: string; properties: typeof PROPERTY_DATA }[] = [];  
     const added = new Set<string>();  
     for (const name of COLLECTION_ORDER) {  
-      if (map[name]) {  
-        ordered.push({ name, properties: [...map[name]].sort(() => Math.random() - 0.5) });  
+      if (grouped[name]) {  
+        ordered.push({ name, properties: [...grouped[name]].sort(() => Math.random() - 0.5) });  
         added.add(name);  
       }  
     }  
-    for (const name of Object.keys(map)) {  
+    for (const name of Object.keys(grouped)) {  
       if (!added.has(name)) {  
-        ordered.push({ name, properties: [...map[name]].sort(() => Math.random() - 0.5) });  
+        ordered.push({ name, properties: [...grouped[name]].sort(() => Math.random() - 0.5) });  
       }  
     }  
     return ordered;  
-  }, []);
+  }, [grouped]);
 
   const filtered = useMemo(() => {  
     if (!selectedCollection) return collections;  
