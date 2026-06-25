@@ -1,5 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'  
-import { get } from '@vercel/blob'
+import { NextRequest, NextResponse } from 'next/server'
 
 export const dynamic = 'force-dynamic'
 
@@ -12,31 +11,30 @@ export async function GET(request: NextRequest) {
   }
 
   try {  
-    // If it's a Vercel Blob URL, use the SDK's get() method  
-    if (imageUrl.includes('.blob.vercel-storage.com')) {  
-      const blob = await get(imageUrl, { access: 'private' })  
-        
-      if (!blob) {  
-        return new NextResponse('Image not found', { status: 404 })  
-      }
+    const headers: HeadersInit = {}  
+      
+    // Explicitly add the token for private blob storage URLs  
+    if (imageUrl.includes('.private.blob.vercel-storage.com')) {  
+      if (process.env.BLOB_READ_WRITE_TOKEN) {  
+        headers['Authorization'] = `Bearer ${process.env.BLOB_READ_WRITE_TOKEN}`  
+      } else {  
+        console.error('BLOB_READ_WRITE_TOKEN is missing in environment variables')  
+      }  
+    }
 
-      // Convert the blob stream to a buffer  
-      const buffer = Buffer.from(await new Response(blob).arrayBuffer())
+    const response = await fetch(imageUrl, { headers })
 
-      return new NextResponse(buffer, {  
-        status: 200,  
-        headers: {  
-          'Content-Type': blob.contentType || 'image/jpeg',  
-          'Cache-Control': 'public, max-age=31536000, immutable',  
-        },  
+    if (!response.ok) {  
+      // Log the full response for debugging if it fails  
+      const errorText = await response.text()  
+      console.error(`Blob fetch failed: ${response.status} - ${errorText}`)  
+      return new NextResponse(`Failed to fetch image: ${response.statusText}`, {  
+        status: response.status,  
       })  
     }
 
-    // For non-blob URLs (like Unsplash), keep the existing fetch logic  
-    const response = await fetch(imageUrl)  
-    if (!response.ok) throw new Error('Failed to fetch image')  
-      
-    const buffer = Buffer.from(await response.arrayBuffer())  
+    const buffer = Buffer.from(await response.arrayBuffer())
+
     return new NextResponse(buffer, {  
       status: 200,  
       headers: {  
