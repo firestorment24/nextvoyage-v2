@@ -19,7 +19,7 @@ export default async function PropertyPage({ params }: { params: { id: string } 
   if (!property) {  
     notFound()  
   }
-
+ 
   return (  
     <main className="min-h-screen bg-black text-white">  
       <Navigation />
