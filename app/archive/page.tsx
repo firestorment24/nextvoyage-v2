@@ -78,10 +78,10 @@ return (
   <main className="min-h-screen bg-black text-white">  
     {/* ─── Header ─────────────────────────────────────────── */}  
     <section className="px-6 pt-24 pb-10 md:px-12 lg:px-24">  
-      <p className="text-xs tracking-[0.25em] uppercase text-white mb-4 font-sans">  
+      <p className="text-xs tracking-[0.25em] uppercase text-[#C5A059] mb-4 font-sans">  
         Registry of Significance  
       </p>  
-      <h1 className="font-serif text-5xl md:text-7xl text-[#C5A059]">  
+      <h1 className="font-serif text-5xl md:text-7xl text-white">  
         The Archive  
       </h1>
 
@@ -96,7 +96,7 @@ return (
               className={`px-5 py-2 text-xs tracking-[0.15em] uppercase font-sans border transition-all duration-300 ${  
                 active  
                   ? 'border-[#C5A059] text-[#C5A059] bg-[#C5A059]/10'  
-                  : 'border-white/20 text-white/50 hover:border-white/70'  
+                  : 'border-[#C5A059]/30 text-[#C5A059]/60 hover:border-[#C5A059] hover:text-[#C5A059]'  
               }`}  
             >  
               {name}  
@@ -110,11 +110,11 @@ return (
     {Object.entries(grouped).map(([collectionName, properties]) => (  
       <section key={collectionName} className="px-6 md:px-12 lg:px-24 mb-20">  
         {/* Collection header */}  
-        <div className="mb-8 border-t border-white/10 pt-6">  
+        <div className="mb-8 border-t border-[#C5A059]/20 pt-6">  
           <h2 className="font-serif text-2xl md:text-3xl text-[#C5A059] font-bold">  
             {collectionName}  
           </h2>  
-          <p className="mt-1 text-sm text-white/60 font-sans max-w-xl">  
+          <p className="mt-1 text-sm text-white/70 font-sans max-w-xl">  
             {COLLECTION_DESCRIPTIONS[collectionName] ?? ''}  
           </p>  
         </div>
@@ -127,8 +127,8 @@ return (
               href={`/archive/property/${property.id}`}  
               className="group block"  
             >  
-              {/* Image */}  
-              <div className="aspect-[4/3] overflow-hidden bg-white/5 mb-4">  
+              {/* Image — no bg-white box */}  
+              <div className="aspect-[4/3] overflow-hidden mb-4">  
                 {property.image ? (  
                   <img  
                     src={proxyImage(property.image)}  
@@ -137,7 +137,7 @@ return (
                     loading="lazy"  
                   />  
                 ) : (  
-                  <div className="w-full h-full flex items-center justify-center text-white/40 text-sm font-sans">  
+                  <div className="w-full h-full flex items-center justify-center bg-black text-[#C5A059]/40 text-sm font-sans">  
                     No image  
                   </div>  
                 )}  
@@ -169,8 +169,8 @@ return (
     ))}
 
     {/* ─── Footer ──────────────────────────────────────────── */}  
-    <footer className="px-6 md:px-12 lg:px-24 py-12 border-t border-white/10">  
-      <p className="text-xs tracking-[0.2em] uppercase text-white font-sans text-center">  
+    <footer className="px-6 md:px-12 lg:px-24 py-12 border-t border-[#C5A059]/20">  
+      <p className="text-xs tracking-[0.2em] uppercase text-[#C5A059] font-sans text-center">  
         NexVoyage Collective · The Archive  
       </p>  
     </footer>  
