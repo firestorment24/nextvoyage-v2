@@ -23,7 +23,6 @@ const COLLECTION_DESCRIPTIONS: Record<string, string> = {
 // ── Image proxy helper ───────────────────────────────────────────────────  
 function proxyImage(url: string): string {  
   if (!url) return ''  
-  // If already using the proxy or a relative path, leave it  
   if (url.startsWith('/api/image') || url.startsWith('/')) return url  
   return `/api/image?url=${encodeURIComponent(url)}`  
 }
@@ -69,8 +68,8 @@ export default function ArchivePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">  
             {properties.map((property) => (  
               <Link  
-                key={property.slug}  
-                href={`/archive/property/${property.slug}`}  
+                key={property.id}  
+                href={`/archive/property/${property.id}`}  
                 className="group block"  
               >  
                 {/* Image */}  
