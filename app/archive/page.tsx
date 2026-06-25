@@ -123,16 +123,17 @@ return (
             href={`/archive/property/${property.id}`}  
             className="group block"  
           >  
-            <div className="relative mb-4 aspect-[4/3] overflow-hidden bg-[#111]">  
-              {property.image ? (  
-                <Image  
-                  src={proxyUrl(property.image)}  
-                  alt={property.name}  
-                  fill  
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"  
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"  
-                />  
-              ) : (  
+            {property.image ? (  
+  <Image  
+    src={proxyUrl(property.image)}  
+    alt={property.name}  
+    fill  
+    className="object-cover transition-transform duration-700 group-hover:scale-105"  
+    unoptimized  
+    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"  
+  />  
+) : (  
+              
                 <div className="flex h-full items-center justify-center !text-[#C5A059]">  
                   No image  
                 </div>  
