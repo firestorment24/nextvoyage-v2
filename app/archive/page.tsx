@@ -1,5 +1,7 @@
-// app/archive/page.tsx  
+'use client'
+
 import Link from 'next/link'  
+import { useMemo, useState } from 'react'  
 import { PROPERTY_DATA } from '@/data/properties'
 
 // ── Collection ordering ──────────────────────────────────────────────────  
@@ -10,7 +12,7 @@ const COLLECTION_ORDER = [
   'Nole Sanctuary',  
   'Industrial & Frontier',  
 ]
- 
+
 // ── Collection descriptions ──────────────────────────────────────────────  
 const COLLECTION_DESCRIPTIONS: Record<string, string> = {  
   'Wild Frontiers': 'Remote landscapes, raw nature, uncompromising solitude.',  
@@ -18,6 +20,16 @@ const COLLECTION_DESCRIPTIONS: Record<string, string> = {
   'Heritage & Estate': 'Historic estates with generational soul and provenance.',  
   'Nole Sanctuary': 'Reserved for future revelation.',  
   'Industrial & Frontier': 'Reserved for future revelation.',  
+}
+
+// ── Fisher-Yates shuffle ─────────────────────────────────────────────────  
+function shuffle<T>(array: T[]): T[] {  
+  const shuffled = [...array]  
+  for (let i = shuffled.length - 1; i > 0; i--) {  
+    const j = Math.floor(Math.random() * (i + 1))  
+    ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]  
+  }  
+  return shuffled  
 }
 
 // ── Image proxy helper ───────────────────────────────────────────────────  
@@ -29,29 +41,74 @@ function proxyImage(url: string): string {
 
 // ── Page ─────────────────────────────────────────────────────────────────  
 export default function ArchivePage() {  
-  // Group properties by their collection  
-  const grouped = COLLECTION_ORDER.reduce<Record<string, typeof PROPERTY_DATA>>(  
-    (acc, name) => {  
-      const items = PROPERTY_DATA.filter((p) => p.collection === name)  
-      if (items.length > 0) acc[name] = items  
-      return acc  
-    },  
-    {}  
+  const [selectedCollections, setSelectedCollections] = useState<Set<string>>(  
+    new Set(COLLECTION_ORDER)  
   )
+
+  const toggleCollection = (name: string) => {  
+    setSelectedCollections((prev) => {  
+      const next = new Set(prev)  
+      if (next.has(name)) {  
+        if (next.size === 1) return prev // keep at least one active  
+        next.delete(name)  
+      } else {  
+        next.add(name)  
+      }  
+      return next  
+    })  
+  }
+
+  // Shuffle once on page load  
+  const shuffledData = useMemo(() => shuffle(PROPERTY_DATA), [])
+
+  // Group filtered + shuffled properties by collection  
+  const grouped = useMemo(() => {  
+    const filtered = shuffledData.filter((p) =>  
+      selectedCollections.has(p.collection)  
+    )  
+    return COLLECTION_ORDER.reduce<Record<string, typeof PROPERTY_DATA>>(  
+      (acc, name) => {  
+        const items = filtered.filter((p) => p.collection === name)  
+        if (items.length > 0) acc[name] = items  
+        return acc  
+      },  
+      {}  
+    )  
+  }, [selectedCollections, shuffledData])
 
   return (  
     <main className="min-h-screen bg-black text-white">  
-      {/* ─── Header ─────────────────────────────────────────────── */}  
-      <section className="px-6 pt-24 pb-16 md:px-12 lg:px-24">  
-        <p className="text-xs tracking-[0.25em] uppercase text-white/40 mb-4 font-sans">  
+      {/* ─── Header ─────────────────────────────────────────── */}  
+      <section className="px-6 pt-24 pb-10 md:px-12 lg:px-24">  
+        <p className="text-xs tracking-[0.25em] uppercase text-white mb-4 font-sans">  
           Registry of Significance  
         </p>  
         <h1 className="font-serif text-5xl md:text-7xl text-[#C5A059]">  
           The Archive  
-        </h1>  
+        </h1>
+
+        {/* ─── Filter chips ─────────────────────────────────── */}  
+        <div className="mt-10 flex flex-wrap gap-3">  
+          {COLLECTION_ORDER.map((name) => {  
+            const active = selectedCollections.has(name)  
+            return (  
+              <button  
+                key={name}  
+                onClick={() => toggleCollection(name)}  
+                className={`px-5 py-2 text-xs tracking-[0.15em] uppercase font-sans border transition-all duration-300 ${  
+                  active  
+                    ? 'border-[#C5A059] text-[#C5A059] bg-[#C5A059]/10'  
+                    : 'border-white/20 text-white/50 hover:border-white/70'  
+                }`}  
+              >  
+                {name}  
+              </button>  
+            )  
+          })}  
+        </div>  
       </section>
 
-      {/* ─── Collections ─────────────────────────────────────────── */}  
+      {/* ─── Collections ────────────────────────────────────── */}  
       {Object.entries(grouped).map(([collectionName, properties]) => (  
         <section key={collectionName} className="px-6 md:px-12 lg:px-24 mb-20">  
           {/* Collection header */}  
@@ -59,7 +116,7 @@ export default function ArchivePage() {
             <h2 className="font-serif text-2xl md:text-3xl text-[#C5A059]">  
               {collectionName}  
             </h2>  
-            <p className="mt-1 text-sm text-white/50 font-sans max-w-xl">  
+            <p className="mt-1 text-sm text-white font-sans max-w-xl">  
               {COLLECTION_DESCRIPTIONS[collectionName] ?? ''}  
             </p>  
           </div>
@@ -82,14 +139,14 @@ export default function ArchivePage() {
                       loading="lazy"  
                     />  
                   ) : (  
-                    <div className="w-full h-full flex items-center justify-center text-white/20 text-sm font-sans">  
+                    <div className="w-full h-full flex items-center justify-center text-white/40 text-sm font-sans">  
                       No image  
                     </div>  
                   )}  
                 </div>
 
                 {/* Label */}  
-                <p className="text-xs tracking-[0.15em] uppercase text-white/40 font-sans mb-1">  
+                <p className="text-xs tracking-[0.15em] uppercase text-white font-sans mb-1">  
                   {collectionName}  
                 </p>
 
@@ -99,12 +156,12 @@ export default function ArchivePage() {
                 </h3>
 
                 {/* Location */}  
-                <p className="text-sm text-white/50 font-sans mt-0.5">  
+                <p className="text-sm text-white font-sans mt-0.5">  
                   {property.location}  
                 </p>
 
                 {/* Description */}  
-                <p className="text-sm text-white/40 font-sans mt-2 leading-relaxed line-clamp-2">  
+                <p className="text-sm text-white font-sans mt-2 leading-relaxed line-clamp-2">  
                   {property.description}  
                 </p>  
               </Link>  
@@ -113,9 +170,9 @@ export default function ArchivePage() {
         </section>  
       ))}
 
-      {/* ─── Footer ──────────────────────────────────────────────── */}  
+      {/* ─── Footer ──────────────────────────────────────────── */}  
       <footer className="px-6 md:px-12 lg:px-24 py-12 border-t border-white/10">  
-        <p className="text-xs tracking-[0.2em] uppercase text-white/30 font-sans text-center">  
+        <p className="text-xs tracking-[0.2em] uppercase text-white font-sans text-center">  
           NexVoyage Collective · The Archive  
         </p>  
       </footer>  
