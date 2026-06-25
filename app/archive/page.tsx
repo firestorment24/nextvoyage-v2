@@ -1,95 +1,108 @@
-import Link from "next/link"  
-import Image from "next/image"  
-import { getPropertyImages, getAllPropertyImageSlugs } from "@/lib/data/property-images"
+// app/archive/page.tsx  
+import React from 'react';  
+import Link from 'next/link';  
+import { PROPERTY_DATA } from '@/lib/data/sanctuaries';  
+import { getPropertyImages } from '@/lib/data/property-images';
 
-// If you have property data with names, import it. Otherwise hardcode a quick map.  
-const PROPERTY_NAMES: Record<string, { name: string; location: string }> = {  
-  "capella-ubud": { name: "Capella Ubud", location: "Bali, Indonesia" },  
-  "chable-yucatan": { name: "Chable Yucatan", location: "Yucatán, Mexico" },  
-  "dunton-hot-springs": { name: "Dunton Hot Springs", location: "Colorado, USA" },  
-  "fawn-bluff-lodge-ontario": { name: "Fawn Bluff Lodge", location: "Ontario, Canada" },  
-  "flockhill-lodge-canterbury": { name: "Flockhill Lodge", location: "Canterbury, New Zealand" },  
-  "four-seasons-madrid": { name: "Four Seasons Madrid", location: "Madrid, Spain" },  
-  "habitas-alula": { name: "Habitas AlUla", location: "AlUla, Saudi Arabia" },  
-  "here-baa-atoll-maldives": { name: "Here Baa Atoll", location: "Baa Atoll, Maldives" },  
-  "kilchoan-estate-scotland": { name: "Kilchoan Estate", location: "Scotland, UK" },  
-  "la-valise-mazunte": { name: "La Valise Mazunte", location: "Oaxaca, Mexico" },  
-  "one-only-aesthesis": { name: "One&Only Aesthesis", location: "Athens Riviera, Greece" },  
-  "passalacqua-lake-como": { name: "Passalacqua", location: "Lake Como, Italy" },  
-  "sentouchi-retreat-japan": { name: "Sentouchi Retreat", location: "Japan" }  
+interface ArchiveProperty {  
+  id: string;  
+  name: string;  
+  location: string;  
+  image: string;  
+  images?: string[];  
+  intel?: {  
+    category?: string;  
+    positioning?: string;  
+    memberBenefits?: string;  
+  };  
+  collection?: string;  
+  description?: string;  
+  highlight?: string;  
+  exclusiveOffer?: string;  
 }
 
-export default function ArchivePage() {  
-  const slugs = getAllPropertyImageSlugs()
+const properties = PROPERTY_DATA as ArchiveProperty[];
 
+export default function ArchivePage() {  
   return (  
-    <main className="min-h-screen bg-[#0A0A0A] text-white">  
+    <main className="min-h-screen bg-[#0A0A0A]">  
       {/* Hero */}  
-      <section className="relative h-[50vh] md:h-[60vh] flex items-center justify-center">  
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[#0A0A0A]" />  
-        <div className="relative z-10 text-center px-6">  
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif tracking-wide text-[#D4AF37] mb-4">  
+      <section className="relative px-6 pt-28 pb-16 md:pt-40 md:pb-24">  
+        <div className="max-w-7xl mx-auto">  
+          <h1 className="font-['Cormorant_Garamond'] text-5xl md:text-7xl lg:text-8xl text-white tracking-wide leading-tight">  
             The Archive  
           </h1>  
-          <p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto font-light">  
-            A curated collection of the world&apos;s most extraordinary sanctuaries.  
+          <p className="mt-4 text-white/50 font-['Inter'] text-base md:text-lg max-w-xl leading-relaxed">  
+            A curated ledger of sanctuaries — each vetted for discretion,  
+            access, and atmosphere.  
           </p>  
+          <div className="mt-6 text-[#D4AF37]/60 text-xs font-['Inter'] tracking-[0.15em] uppercase">  
+            {properties.length} Records &middot; Active  
+          </div>  
         </div>  
       </section>
 
-      {/* Grid */}  
-      <section className="max-w-7xl mx-auto px-6 pb-24">  
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">  
-          {slugs.map((slug) => {  
-            const images = getPropertyImages(slug)  
-            const info = PROPERTY_NAMES[slug]  
-            if (!images || !info) return null
+      {/* Property Grid */}  
+      <section className="px-6 pb-32">  
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[#1A1A1A]">  
+          {properties.map((property) => {  
+            const images = getPropertyImages(property.id);  
+            const heroSrc = images?.hero ?? property.images?.[0] ?? property.image;
 
             return (  
               <Link  
-                key={slug}  
-                href={`/archive/${slug}`}  
-                className="group block relative overflow-hidden rounded-sm"  
+                key={property.id}  
+                href={`/archive/property/${property.id}`}  
+                className="group relative block bg-[#0A0A0A] overflow-hidden"  
               >  
+                {/* Image */}  
                 <div className="aspect-[4/5] relative overflow-hidden">  
-                  <Image  
-                    src={images.hero}  
-                    alt={info.name}  
-                    fill  
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"  
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"  
+                  <img  
+                    src={heroSrc}  
+                    alt={property.name}  
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"  
                   />  
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-500" />  
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/20 to-transparent" />  
                 </div>
 
-                {/* Brass frame border on hover */}  
-                <div className="absolute inset-0 border-0 group-hover:border border-[#D4AF37]/40 transition-all duration-500 pointer-events-none" />
-
-                {/* Overlay text */}  
-                <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent">  
-                  <h2 className="text-xl font-serif text-white group-hover:text-[#D4AF37] transition-colors duration-300">  
-                    {info.name}  
+                {/* Overlay Content */}  
+                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">  
+                  <span className="text-[#D4AF37]/70 text-[10px] md:text-xs font-['Inter'] tracking-[0.2em] uppercase">  
+                    {property.intel?.category || property.collection || 'Property'}  
+                  </span>  
+                  <h2 className="mt-1.5 text-white text-xl md:text-2xl font-['Cormorant_Garamond'] leading-tight">  
+                    {property.name}  
                   </h2>  
-                  <p className="text-sm text-white/60 mt-1 tracking-wide uppercase text-xs">  
-                    {info.location}  
+                  <p className="text-white/40 text-sm font-['Inter'] mt-1">  
+                    {property.location}  
                   </p>  
-                </div>  
+                  <p className="mt-2 text-white/60 text-xs md:text-sm font-['Inter'] leading-relaxed line-clamp-2">  
+                    {property.intel?.positioning || property.description}  
+                  </p>  
+                </div>
+
+                {/* Hover Brass Border */}  
+                <div className="absolute inset-0 border border-transparent group-hover:border-[#D4AF37]/30 transition-colors duration-500 pointer-events-none" />  
               </Link>  
-            )  
+            );  
           })}  
         </div>  
       </section>
 
-      {/* CTA */}  
-      <section className="text-center py-16 border-t border-white/10">  
-        <p className="text-white/50 text-sm mb-4">Not what you&apos;re looking for?</p>  
-        <Link  
-          href="/invitation"  
-          className="inline-block px-8 py-3 border border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#0A0A0A] transition-all duration-300 text-sm tracking-widest uppercase"  
-        >  
-          Inquire with Rachel  
-        </Link>  
-      </section>  
+      {/* Footer */}  
+      <footer className="border-t border-[#1A1A1A] px-6 py-8">  
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">  
+          <span className="text-white/20 text-xs font-['Inter'] tracking-widest uppercase">  
+            NexVoyage Collective  
+          </span>  
+          <span className="text-[#D4AF37]/40 text-[10px] font-['Inter'] tracking-[0.15em] uppercase">  
+            Global Concierge Active  
+          </span>  
+          <span className="text-white/20 text-xs font-['Inter']">  
+            &copy; {new Date().getFullYear()} &mdash; All Rights Reserved  
+          </span>  
+        </div>  
+      </footer>  
     </main>  
-  )  
+  );  
 }  
