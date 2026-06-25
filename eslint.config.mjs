@@ -1,18 +1,13 @@
-import { defineConfig, globalIgnores } from "eslint/config";
-import nextVitals from "eslint-config-next/core-web-vitals";
-import nextTs from "eslint-config-next/typescript";
+cat > list-blobs.mjs << 'EOF'  
+import { list } from '@vercel/blob';  
+import dotenv from 'dotenv';  
+dotenv.config({ path: '.env.local' });
 
-const eslintConfig = defineConfig([
-  ...nextVitals,
-  ...nextTs,
-  // Override default ignores of eslint-config-next.
-  globalIgnores([
-    // Default ignores of eslint-config-next:
-    ".next/**",
-    "out/**",
-    "build/**",
-    "next-env.d.ts",
-  ]),
-]);
+const { blobs } = await list({ prefix: 'properties/' });
 
-export default eslintConfig;
+for (const blob of blobs) {  
+  console.log(blob.pathname, '→', blob.url);  
+}
+
+console.log(`\nTotal: ${blobs.length} blobs`);  
+EOF  
