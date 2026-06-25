@@ -10,7 +10,7 @@ const COLLECTION_ORDER = [
   'Nole Sanctuary',  
   'Industrial & Frontier',  
 ]
-
+ 
 // ── Collection descriptions ──────────────────────────────────────────────  
 const COLLECTION_DESCRIPTIONS: Record<string, string> = {  
   'Wild Frontiers': 'Remote landscapes, raw nature, uncompromising solitude.',  
