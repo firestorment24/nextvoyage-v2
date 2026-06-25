@@ -6,102 +6,116 @@ import GalleryLightbox from './GalleryLightbox'
 const proxyUrl = (url: string) => `/api/image?url=${encodeURIComponent(url)}`
 
 export default async function PropertyDetailPage({  
-params  
+  params,  
 }: {  
-params: Promise<{ slug: string }>  
+  params: Promise<{ slug: string }>  
 }) {  
-const { slug } = await params  
-const property = PROPERTY_DATA.find(p => p.id === slug)  
-if (!property) return notFound()
+  const { slug } = await params  
+  const property = PROPERTY_DATA.find((p) => p.id === slug)  
+  if (!property) return notFound()
 
-return (  
-  <main className="min-h-screen bg-black property-detail-page">  
-    <style>{`  
-      .property-detail-page * {  
-        color: #FCFAF7 !important;  
-      }  
-      .property-detail-page .brass-text {  
-        color: #C5A059 !important;  
-      }  
-      .property-detail-page .muted-text {  
-        color: rgba(252,250,247,0.6) !important;  
-      }  
-      .property-detail-page .label-text {  
-        color: rgba(252,250,247,0.4) !important;  
-      }  
-    `}</style>
+  return (  
+    <div style={{ backgroundColor: '#0a0a0a', minHeight: '100vh', color: '#ffffff' }}>  
+      {/* Hero Section */}  
+      <div style={{ position: 'relative', width: '100%', height: '65vh', overflow: 'hidden' }}>  
+        <img  
+          src={proxyUrl(property.image)}  
+          alt={property.name}  
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}  
+        />  
+        <div  
+          style={{  
+            position: 'absolute',  
+            inset: 0,  
+            background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%)',  
+          }}  
+        />  
+      </div>
 
-    {/* Hero Section */}  
-    <div className="relative h-[70vh] w-full">  
-      <img  
-        src={proxyUrl(property.image)}  
-        alt={property.name}  
-        className="absolute inset-0 w-full h-full object-cover opacity-70"  
-      />  
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />  
-      <Link  
-        href="/archive"  
-        className="absolute top-8 left-8 font-inter text-sm brass-text/60 hover:brass-text transition-colors tracking-wider uppercase"  
-      >  
-        ← Back to Archive  
-      </Link>  
-      <div className="absolute bottom-0 left-0 right-0 p-8 md:p-16">  
-        <p className="font-inter text-xs tracking-[0.2em] uppercase brass-text/70 mb-2">  
+      {/* Content */}  
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem 1.5rem' }}>  
+        {/* Back Link */}  
+        <Link  
+          href="/archive"  
+          style={{ color: '#ffffff', textDecoration: 'none', fontSize: '0.875rem', letterSpacing: '0.1em' }}  
+        >  
+          ← Back to Archive  
+        </Link>
+
+        {/* Breadcrumb */}  
+        <p style={{ color: '#ffffff', fontSize: '0.75rem', letterSpacing: '0.15em', marginTop: '1rem', opacity: 0.7 }}>  
           {property.collection} — {property.intel.positioning}  
-        </p>  
-        <h1 className="font-cormorant text-5xl md:text-7xl font-light mb-2">  
+        </p>
+
+        {/* Title */}  
+        <h1 style={{ color: '#ffffff', fontSize: 'clamp(1.75rem, 4vw, 2.75rem)', fontWeight: 300, letterSpacing: '0.05em', marginTop: '0.5rem' }}>  
           {property.name}  
-        </h1>  
-        <p className="font-inter text-lg muted-text">  
+        </h1>
+
+        {/* Location */}  
+        <p style={{ color: '#ffffff', fontSize: '0.875rem', letterSpacing: '0.15em', marginTop: '0.5rem', opacity: 0.7 }}>  
           {property.location}  
-        </p>  
-      </div>  
-    </div>
+        </p>
 
-    <div className="max-w-5xl mx-auto px-6 py-16">  
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">  
-        <div className="lg:col-span-2">  
-          <p className="font-inter text-lg leading-relaxed mb-8">  
-            {property.description}  
-          </p>
+        {/* Description */}  
+        <p style={{ color: '#ffffff', fontSize: '1rem', lineHeight: 1.8, marginTop: '2rem', maxWidth: '720px', opacity: 0.85 }}>  
+          {property.description}  
+        </p>
 
-          {property.gallery?.length > 1 && (  
-            <GalleryLightbox  
-              images={property.gallery}  
-              propertyName={property.name}  
-              proxyUrl={proxyUrl}  
-            />  
-          )}  
-        </div>
+        {/* Photo Gallery */}  
+        {property.gallery && property.gallery.length > 1 && (  
+          <section style={{ marginTop: '3rem' }}>  
+            <h2 style={{ color: '#ffffff', fontSize: '1.25rem', fontWeight: 300, letterSpacing: '0.15em', marginBottom: '1rem' }}>  
+              Gallery  
+            </h2>  
+            <GalleryLightbox images={property.gallery} propertyName={property.name} proxyUrl={proxyUrl} />  
+          </section>  
+        )}
 
-        <div className="border border-[#C5A059]/20 p-6 rounded-sm bg-[#0A0A0A]">  
-          <p className="font-inter text-xs tracking-[0.2em] uppercase brass-text/60 mb-4">  
+        {/* Intelligence Dossier */}  
+        <section style={{ marginTop: '4rem', borderTop: '1px solid rgba(255,255,255,0.15)', paddingTop: '2rem' }}>  
+          <h2 style={{ color: '#ffffff', fontSize: '0.75rem', letterSpacing: '0.2em', marginBottom: '1.5rem', opacity: 0.6 }}>  
             Intelligence Dossier  
-          </p>  
-          <div className="space-y-4">  
+          </h2>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', maxWidth: '600px' }}>  
             <div>  
-              <p className="font-inter text-xs label-text uppercase tracking-wider">Positioning</p>  
-              <p className="font-cormorant text-lg mt-1">{property.intel.positioning}</p>  
+              <p style={{ color: '#ffffff', fontSize: '0.7rem', letterSpacing: '0.15em', opacity: 0.5, marginBottom: '0.25rem' }}>  
+                Positioning  
+              </p>  
+              <p style={{ color: '#ffffff', fontSize: '0.875rem' }}>{property.intel.positioning}</p>  
             </div>  
             <div>  
-              <p className="font-inter text-xs label-text uppercase tracking-wider">Category</p>  
-              <p className="font-cormorant text-lg mt-1">{property.intel.category}</p>  
+              <p style={{ color: '#ffffff', fontSize: '0.7rem', letterSpacing: '0.15em', opacity: 0.5, marginBottom: '0.25rem' }}>  
+                Category  
+              </p>  
+              <p style={{ color: '#ffffff', fontSize: '0.875rem' }}>{property.intel.category}</p>  
             </div>  
-            <div>  
-              <p className="font-inter text-xs label-text uppercase tracking-wider mb-2">Member Benefits</p>  
-              <ul className="space-y-2">  
-                {property.intel.memberBenefits.map((benefit, i) => (  
-                  <li key={i} className="font-inter text-sm flex items-start gap-2">  
-                    <span className="brass-text mt-0.5">—</span>  
-                    {benefit}  
-                  </li>  
-                ))}  
-              </ul>  
-            </div>  
+          </div>
+
+          <div style={{ marginTop: '2rem' }}>  
+            <p style={{ color: '#ffffff', fontSize: '0.7rem', letterSpacing: '0.15em', opacity: 0.5, marginBottom: '0.75rem' }}>  
+              Member Benefits  
+            </p>  
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>  
+              {property.intel.memberBenefits.map((benefit, i) => (  
+                <li  
+                  key={i}  
+                  style={{  
+                    color: '#ffffff',  
+                    fontSize: '0.875rem',  
+                    padding: '0.4rem 0',  
+                    borderBottom: '1px solid rgba(255,255,255,0.08)',  
+                    opacity: 0.85,  
+                  }}  
+                >  
+                  — {benefit}  
+                </li>  
+              ))}  
+            </ul>  
           </div>  
-        </div>  
+        </section>  
       </div>  
     </div>  
-  </main>  
-)  
+  )  
 }  
