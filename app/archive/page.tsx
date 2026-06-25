@@ -63,9 +63,9 @@ export default function ArchivePage() {
               >  
                 {/* Image via proxy */}  
                 <div className="relative aspect-[4/3] overflow-hidden bg-[#1C1C1C]">  
-                  {property.images?.[0] ? (  
+                  {property.image ? (  
                     <img  
-                      src={`/api/image?url=${encodeURIComponent(property.images[0])}`}  
+                      src={`/api/image?url=${encodeURIComponent(property.image)}`}  
                       alt={property.name}  
                       className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:grayscale group-hover:opacity-60"  
                       loading="lazy"  
@@ -80,16 +80,16 @@ export default function ArchivePage() {
                 {/* Card Body */}  
                 <div className="p-5">  
                   <span className="text-[10px] tracking-[0.25em] uppercase text-[#C5A059]/70 font-sans">  
-                    {property.intel?.category || 'Uncategorized'}  
+                    {p.intel?.category || 'Uncategorized'}  
                   </span>  
                   <h3 className="text-lg font-serif text-white mt-1 group-hover:text-[#C5A059] transition-colors duration-300">  
-                    {property.name}  
+                    {p.name}  
                   </h3>  
                   <p className="text-xs text-white/50 mt-1 font-sans">  
-                    {property.location}  
+                    {p.location}  
                   </p>  
                   <p className="text-sm text-white/60 mt-3 leading-relaxed font-sans line-clamp-2">  
-                    {property.intel?.positioning}  
+                    {p.intel?.positioning}  
                   </p>  
                 </div>  
               </Link>  
