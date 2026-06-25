@@ -2,108 +2,124 @@
 import Link from 'next/link'  
 import { PROPERTY_DATA } from '@/data/properties'
 
+// ── Collection ordering ──────────────────────────────────────────────────  
 const COLLECTION_ORDER = [  
-'Wild Frontiers',  
-'Urban Sovereigns',  
-'Heritage & Estate',  
-'Nole Sanctuary',  
-'Industrial & Frontier',  
+  'Wild Frontiers',  
+  'Urban Sovereigns',  
+  'Heritage & Estate',  
+  'Nole Sanctuary',  
+  'Industrial & Frontier',  
 ]
 
-function groupByCollection() {  
-const groups: Record<string, typeof PROPERTY_DATA> = {}  
-for (const p of PROPERTY_DATA) {  
-  const cat = p.intel?.category || 'Uncategorized'  
-  if (!groups[cat]) groups[cat] = []  
-  groups[cat].push(p)  
-}  
-const ordered: { category: string; items: typeof PROPERTY_DATA }[] = []  
-const used = new Set<string>()  
-for (const cat of COLLECTION_ORDER) {  
-  if (groups[cat]) {  
-    ordered.push({ category: cat, items: groups[cat] })  
-    used.add(cat)  
-  }  
-}  
-for (const cat of Object.keys(groups).sort()) {  
-  if (!used.has(cat)) {  
-    ordered.push({ category: cat, items: groups[cat] })  
-  }  
-}  
-return ordered  
+// ── Collection descriptions ──────────────────────────────────────────────  
+const COLLECTION_DESCRIPTIONS: Record<string, string> = {  
+  'Wild Frontiers': 'Remote landscapes, raw nature, uncompromising solitude.',  
+  'Urban Sovereigns': 'Commanding city stays for those who move through capitals.',  
+  'Heritage & Estate': 'Historic estates with generational soul and provenance.',  
+  'Nole Sanctuary': 'Reserved for future revelation.',  
+  'Industrial & Frontier': 'Reserved for future revelation.',  
 }
 
+// ── Image proxy helper ───────────────────────────────────────────────────  
+function proxyImage(url: string): string {  
+  if (!url) return ''  
+  // If already using the proxy or a relative path, leave it  
+  if (url.startsWith('/api/image') || url.startsWith('/')) return url  
+  return `/api/image?url=${encodeURIComponent(url)}`  
+}
+
+// ── Page ─────────────────────────────────────────────────────────────────  
 export default function ArchivePage() {  
-const grouped = groupByCollection()
+  // Group properties by their collection  
+  const grouped = COLLECTION_ORDER.reduce<Record<string, typeof PROPERTY_DATA>>(  
+    (acc, name) => {  
+      const items = PROPERTY_DATA.filter((p) => p.collection === name)  
+      if (items.length > 0) acc[name] = items  
+      return acc  
+    },  
+    {}  
+  )
 
-return (  
-  <main className="min-h-screen bg-[#0A0A0A] text-white">  
-    {/* Header */}  
-    <section className="relative pt-32 pb-16 px-6 text-center">  
-      <h1 className="text-4xl md:text-6xl font-light tracking-[0.15em] uppercase text-[#C5A059] font-serif mb-4">  
-        Registry of Significance  
-      </h1>  
-      <p className="text-sm md:text-base tracking-[0.2em] uppercase text-white/40 font-sans">  
-        The Archive  
-      </p>  
-    </section>
+  return (  
+    <main className="min-h-screen bg-black text-white">  
+      {/* ─── Header ─────────────────────────────────────────────── */}  
+      <section className="px-6 pt-24 pb-16 md:px-12 lg:px-24">  
+        <p className="text-xs tracking-[0.25em] uppercase text-white/40 mb-4 font-sans">  
+          Registry of Significance  
+        </p>  
+        <h1 className="font-serif text-5xl md:text-7xl text-[#C5A059]">  
+          The Archive  
+        </h1>  
+      </section>
 
-    {/* Grouped Grid */}  
-    {grouped.map((group) => (  
-      <section key={group.category} className="px-6 pb-16 max-w-7xl mx-auto">  
-        <h2 className="text-xs tracking-[0.3em] uppercase text-[#C5A059]/60 mb-8 font-sans border-b border-white/10 pb-3">  
-          {group.category}  
-        </h2>  
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">  
-          {group.items.map((property) => (  
-            <Link  
-              key={property.id}  
-              href={`/archive/property/${property.id}`}  
-              className="group block bg-white/[0.03] border border-white/10 rounded-sm overflow-hidden hover:border-[#C5A059]/40 transition-all duration-500"  
-            >  
-              {/* Image via proxy */}  
-              <div className="relative aspect-[4/3] overflow-hidden bg-[#1C1C1C]">  
-                {property.image ? (  
-                  <img  
-                    src={`/api/image?url=${encodeURIComponent(property.image)}`}  
-                    alt={property.name}  
-                    className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:grayscale group-hover:opacity-60"  
-                    loading="lazy"  
-                  />  
-                ) : (  
-                  <div className="w-full h-full flex items-center justify-center text-white/20 text-xs tracking-widest uppercase">  
-                    No Image  
-                  </div>  
-                )}  
-              </div>
+      {/* ─── Collections ─────────────────────────────────────────── */}  
+      {Object.entries(grouped).map(([collectionName, properties]) => (  
+        <section key={collectionName} className="px-6 md:px-12 lg:px-24 mb-20">  
+          {/* Collection header */}  
+          <div className="mb-8 border-t border-white/10 pt-6">  
+            <h2 className="font-serif text-2xl md:text-3xl text-[#C5A059]">  
+              {collectionName}  
+            </h2>  
+            <p className="mt-1 text-sm text-white/50 font-sans max-w-xl">  
+              {COLLECTION_DESCRIPTIONS[collectionName] ?? ''}  
+            </p>  
+          </div>
 
-              {/* Card Body */}  
-              <div className="p-5">  
-                <span className="text-[10px] tracking-[0.25em] uppercase text-[#C5A059]/70 font-sans">  
-                  {property.intel?.category || 'Uncategorized'}  
-                </span>  
-                <h3 className="text-lg font-serif text-white mt-1 group-hover:text-[#C5A059] transition-colors duration-300">  
+          {/* Property cards grid */}  
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">  
+            {properties.map((property) => (  
+              <Link  
+                key={property.slug}  
+                href={`/archive/property/${property.slug}`}  
+                className="group block"  
+              >  
+                {/* Image */}  
+                <div className="aspect-[4/3] overflow-hidden bg-white/5 mb-4">  
+                  {property.image ? (  
+                    <img  
+                      src={proxyImage(property.image)}  
+                      alt={property.name}  
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"  
+                      loading="lazy"  
+                    />  
+                  ) : (  
+                    <div className="w-full h-full flex items-center justify-center text-white/20 text-sm font-sans">  
+                      No image  
+                    </div>  
+                  )}  
+                </div>
+
+                {/* Label */}  
+                <p className="text-xs tracking-[0.15em] uppercase text-white/40 font-sans mb-1">  
+                  {collectionName}  
+                </p>
+
+                {/* Title */}  
+                <h3 className="font-serif text-xl text-white group-hover:text-[#C5A059] transition-colors">  
                   {property.name}  
-                </h3>  
-                <p className="text-xs text-white/50 mt-1 font-sans">  
-                  {property.location}  
-                </p>  
-                <p className="text-sm text-white/60 mt-3 leading-relaxed font-sans line-clamp-2">  
-                  {property.intel?.positioning}  
-                </p>  
-              </div>  
-            </Link>  
-          ))}  
-        </div>  
-      </section>  
-    ))}
+                </h3>
 
-    {/* Footer */}  
-    <footer className="border-t border-white/10 py-8 text-center">  
-      <p className="text-[10px] tracking-[0.3em] uppercase text-white/30 font-sans">  
-        NexVoyage Collective &copy; {new Date().getFullYear()}  
-      </p>  
-    </footer>  
-  </main>  
-)  
+                {/* Location */}  
+                <p className="text-sm text-white/50 font-sans mt-0.5">  
+                  {property.location}  
+                </p>
+
+                {/* Description */}  
+                <p className="text-sm text-white/40 font-sans mt-2 leading-relaxed line-clamp-2">  
+                  {property.description}  
+                </p>  
+              </Link>  
+            ))}  
+          </div>  
+        </section>  
+      ))}
+
+      {/* ─── Footer ──────────────────────────────────────────────── */}  
+      <footer className="px-6 md:px-12 lg:px-24 py-12 border-t border-white/10">  
+        <p className="text-xs tracking-[0.2em] uppercase text-white/30 font-sans text-center">  
+          NexVoyage Collective · The Archive  
+        </p>  
+      </footer>  
+    </main>  
+  )  
 }  
