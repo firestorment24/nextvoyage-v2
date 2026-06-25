@@ -32,13 +32,8 @@ const nextConfig = {
         hostname: 'cdn.marblism.com',  
         pathname: '/**',  
       },  
-      {  
-        protocol: 'https',  
-        hostname: '*.private.blob.vercel-storage.com',  
-        pathname: '/**',  
-      },  
     ],  
   },  
 }
 
-export default nextConfig;  
+export default nextConfig; 
