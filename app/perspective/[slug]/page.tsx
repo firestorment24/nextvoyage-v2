@@ -3,7 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";  
 import Navigation from "@/components/Navigation";  
 import Footer from "@/components/Footer";
-
+ 
 const articles = [  
   {  
     slug: "the-perspective-framework",  
