@@ -25,7 +25,7 @@ const Navigation = () => {
     { name: 'Perspective', path: '/perspective', subtitle: 'The Intelligence' },  
     { name: 'Archive', path: '/archive', subtitle: 'Registry of Significance' },  
     { name: 'Journal', path: '/journal', subtitle: 'Seasonal Intelligence' },  
-    { name: 'Inquiry', path: '/reserve', subtitle: 'Begin Consultation' },  
+    { name: 'Inquiry', path: '/inquiry', subtitle: 'Begin Consultation' },  
   ]
 
   return (  
@@ -36,7 +36,7 @@ const Navigation = () => {
           href="/"   
           className="text-2xl font-serif tracking-[0.2em] text-[#C5A059] hover:opacity-80 transition-opacity pointer-events-auto"  
         >  
-          NEXVOYAGE  
+          NEXVOYAGE COLLECTVE  
         </Link>
 
         <button  
