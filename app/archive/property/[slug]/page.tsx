@@ -1,97 +1,91 @@
+import { properties } from '@/data/properties'  
 import { notFound } from 'next/navigation'  
-import Navigation from '../../../../components/Navigation'  
-import Footer from '../../../../components/Footer'  
-import { properties } from '../../../../data/properties'  
-import GalleryLightbox from './GalleryLightbox'
+import Image from 'next/image'  
+import Link from 'next/link'  
+import Navigation from '@/components/Navigation'  
+import Footer from '@/components/Footer'
+
+// this ensures next.js pre-renders every property at build time  
+export async function generateStaticParams() {  
+  return properties.map((property) => ({  
+    slug: property.id, // using property.id as the slug  
+  }))  
+}
 
 export default async function PropertyPage({ params }: { params: { slug: string } }) {  
-  const property = properties.find(  
-    (p) => p.id === params.slug  
-  )
+  const { slug } = params  
+  const property = properties.find((p) => p.id === slug)
 
   if (!property) {  
     notFound()  
   }
 
   return (  
-    <main className="min-h-screen bg-black">  
-      <Navigation />
-
-      {/* Hero Section */}  
-      <section className="relative h-[60vh] md:h-[80vh] overflow-hidden">  
-        <img  
+    <main className="min-h-screen bg-[#0A0A0A] text-white selection:bg-[#D4AF37]/30">  
+      <Navigation />  
+        
+      {/* hero section */}  
+      <section className="relative h-[70vh] w-full overflow-hidden">  
+        <Image  
           src={property.image}  
           alt={property.name}  
-          className="w-full h-full object-cover"  
+          fill  
+          className="object-cover"  
+          priority  
         />  
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />  
-        <div className="absolute bottom-0 left-0 right-0 p-8 md:p-16">  
-          <p className="text-[#D4AF37] font-medium tracking-widest text-sm uppercase mb-2">  
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent" />  
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 text-center w-full max-w-4xl px-6">  
+          <span className="text-[#D4AF37] uppercase tracking-[0.3em] text-sm mb-4 block">  
             {property.collection}  
-          </p>  
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-2">  
+          </span>  
+          <h1 className="text-5xl md:text-7xl font-light tracking-tight mb-4 uppercase italic">  
             {property.name}  
           </h1>  
-          <p className="text-lg md:text-xl text-white/70">  
+          <p className="text-xl text-white/70 font-light tracking-wide italic">  
             {property.location}  
           </p>  
         </div>  
       </section>
 
-      {/* Content Grid */}  
-      <section className="max-w-7xl mx-auto px-6 py-12 md:py-20">  
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">  
-          {/* Main Content */}  
-          <div className="lg:col-span-2">  
-            <div className="prose prose-lg prose-invert max-w-none">  
-              <p className="text-white/80 text-lg leading-relaxed">  
-                {property.description}  
-              </p>  
-            </div>
-
-            {/* Gallery */}  
-            {property.gallery && property.gallery.length > 0 && (  
-              <div className="mt-16">  
-                <h2 className="text-2xl font-bold text-white mb-8">Gallery</h2>  
-                <GalleryLightbox images={property.gallery} propertyName={property.name} />  
+      {/* content */}  
+      <section className="max-w-4xl mx-auto px-6 py-24 leading-relaxed">  
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-16">  
+          <div className="md:col-span-2">  
+            <h2 className="text-[#D4AF37] text-xs uppercase tracking-[0.4em] mb-8">The Intel</h2>  
+            <p className="text-2xl font-light text-white/90 mb-12">  
+              {property.description}  
+            </p>  
+            {property.highlight && (  
+              <div className="border-l border-[#D4AF37]/30 pl-8 py-2 mb-12">  
+                <p className="text-lg italic text-white/70 font-light">  
+                  "{property.highlight}"  
+                </p>  
               </div>  
             )}  
           </div>
 
-          {/* Sidebar */}  
-          <aside className="lg:col-span-1">  
-            <div className="sticky top-24 space-y-6">  
-              {property.intel && (  
-                <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">  
-                  <h3 className="text-[#D4AF37] font-semibold text-sm uppercase tracking-widest mb-4">  
-                    Property Details  
-                  </h3>  
-                  <dl className="space-y-4">  
-                    <div>  
-                      <dt className="text-white/50 text-xs uppercase tracking-wider">Positioning</dt>  
-                      <dd className="text-white font-medium mt-1">{property.intel.positioning}</dd>  
-                    </div>  
-                    <div>  
-                      <dt className="text-white/50 text-xs uppercase tracking-wider">Category</dt>  
-                      <dd className="text-white font-medium mt-1">{property.intel.category}</dd>  
-                    </div>  
-                    {property.intel.memberBenefits && property.intel.memberBenefits.length > 0 && (  
-                      <div>  
-                        <dt className="text-white/50 text-xs uppercase tracking-wider">Member Benefits</dt>  
-                        <dd className="text-white/70 mt-1">  
-                          <ul className="space-y-1">  
-                            {property.intel.memberBenefits.map((b: string, i: number) => (  
-                              <li key={i} className="text-sm">{b}</li>  
-                            ))}  
-                          </ul>  
-                        </dd>  
-                      </div>  
-                    )}  
-                  </dl>  
-                </div>  
-              )}  
+          <div className="space-y-12">  
+            <div>  
+              <h3 className="text-[#D4AF37] text-xs uppercase tracking-[0.4em] mb-4">Registry Notes</h3>  
+              <p className="text-sm font-light text-white/50 leading-loose uppercase tracking-wider">  
+                {property.intel?.positioning || "Private Portfolio Entry"}  
+              </p>  
             </div>  
-          </aside>  
+            {property.exclusiveOffer && (  
+              <div className="bg-[#1A1A1A] p-8 border border-[#D4AF37]/10">  
+                <h3 className="text-[#D4AF37] text-xs uppercase tracking-[0.4em] mb-4">Elite Benefit</h3>  
+                <p className="text-sm font-light text-white/80 italic">  
+                  {property.exclusiveOffer}  
+                </p>  
+              </div>  
+            )}  
+            <Link   
+              href="/archive"  
+              className="inline-block text-[#D4AF37] text-xs uppercase tracking-[0.4em] hover:text-white transition-colors pt-8"  
+            >  
+              ← Back to Archive  
+            </Link>  
+          </div>  
         </div>  
       </section>
 
