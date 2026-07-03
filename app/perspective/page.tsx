@@ -11,7 +11,7 @@ export default async function PerspectivePage() {
     SELECT id, slug, title, excerpt, category, image_url, author, published_at, created_at   
     FROM perspective_articles   
     ORDER BY published_at DESC, created_at DESC  
-  `
+  ` 
 
   return (  
     <div className="min-h-screen bg-[#0A0A0A] text-white font-serif selection:bg-[#D4AF37] selection:text-black">  
