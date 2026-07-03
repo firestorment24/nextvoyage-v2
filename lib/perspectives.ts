@@ -14,7 +14,7 @@ export interface PerspectiveArticle {
   published_at: string | null  
   tags: string | null  
 }
-
+ 
 export async function getArticles(): Promise<PerspectiveArticle[]> {  
   const { rows } = await sql`  
     SELECT id, slug, title, excerpt, category, image_url, author,   
