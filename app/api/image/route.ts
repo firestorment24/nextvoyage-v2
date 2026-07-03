@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'  
+import { get } from '@vercel/blob'
 
 export async function GET(request: NextRequest) {  
   const url = request.nextUrl.searchParams.get('url')  
@@ -6,21 +7,18 @@ export async function GET(request: NextRequest) {
     return new NextResponse('Missing url parameter', { status: 400 })  
   }
 
+  // searchParams already decodes the URL — no extra decodeURIComponent  
   try {  
-    const res = await fetch(decodeURIComponent(url), {  
-      headers: process.env.BLOB_READ_WRITE_TOKEN  
-        ? { Authorization: `Bearer ${process.env.BLOB_READ_WRITE_TOKEN}` }  
-        : {},  
-    })
+    const result = await get(url, { access: 'private' })
 
-    if (!res.ok) {  
-      return new NextResponse('Image fetch failed', { status: res.status })  
+    if (!result || result.statusCode !== 200) {  
+      return new NextResponse('Not found', { status: 404 })  
     }
 
-    const blob = await res.blob()  
-    return new NextResponse(blob, {  
+    return new NextResponse(result.stream, {  
       headers: {  
-        'Content-Type': blob.type || 'image/jpeg',  
+        'Content-Type': result.blob.contentType,  
+        'X-Content-Type-Options': 'nosniff',  
         'Cache-Control': 'public, max-age=31536000, immutable',  
       },  
     })  
