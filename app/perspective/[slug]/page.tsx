@@ -29,8 +29,7 @@ export default async function ArticlePage({
 
     return (  
       <div className="min-h-screen bg-[#0A0A0A] text-[#FCFAF7] font-serif selection:bg-[#D4AF37] selection:text-black">  
-        <Navigation />
-
+        <Navigation />  
         <main className="pt-32 pb-20 px-6 max-w-7xl mx-auto">  
           <div className="mb-12">  
             <Link  
@@ -92,8 +91,7 @@ export default async function ArticlePage({
               )}  
             </div>  
           </div>  
-        </main>
-
+        </main>  
         <Footer />  
       </div>  
     )  
