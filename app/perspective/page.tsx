@@ -1,5 +1,5 @@
-import Link from "next/link";  
-import { sql } from "@vercel/postgres";
+import Link from 'next/link';  
+import { sql } from '@vercel/postgres';
 
 export const revalidate = 0;
 
@@ -13,56 +13,76 @@ export default async function PerspectivePage() {
       ORDER BY published_at DESC, created_at DESC  
     `;  
     articles = rows;  
-  } catch (e) {  
-    console.error("Failed to fetch perspective articles:", e);  
+  } catch (err) {  
+    console.error('Perspective fetch error:', err);  
+  }
+
+  if (articles.length === 0) {  
+    return (  
+      <main className="min-h-screen bg-[#0A0A0A] text-white flex items-center justify-center">  
+        <p className="text-zinc-500 tracking-[0.2em] uppercase text-sm">No perspective pieces yet</p>  
+      </main>  
+    );  
   }
 
   return (  
-    <main className="min-h-screen bg-black text-white px-6 py-20 md:px-20">  
-      <h1 className="text-4xl md:text-6xl font-light tracking-tight mb-2">Perspective</h1>  
-      <p className="text-zinc-400 text-lg mb-12 max-w-xl">  
-        A journal of quiet intelligence for the discerning traveler.  
-      </p>
+    <main className="min-h-screen bg-[#0A0A0A] text-white">  
+      <div className="max-w-7xl mx-auto px-6 py-24">  
+        <header className="mb-20">  
+          <h1 className="text-4xl md:text-6xl font-light tracking-tight text-white">  
+            The Perspective  
+          </h1>  
+          <p className="mt-4 text-zinc-400 text-sm tracking-[0.3em] uppercase">  
+            Quiet Luxury · Invisible Service · Brass &amp; Shadow  
+          </p>  
+        </header>
 
-      {articles.length === 0 ? (  
-        <p className="text-zinc-600 italic">No articles yet. The first edition is being composed.</p>  
-      ) : (  
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">  
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">  
           {articles.map((article) => (  
             <Link  
               key={article.id}  
               href={`/perspective/${article.slug || article.id}`}  
-              className="group block border border-zinc-800 rounded-xl p-6 hover:border-zinc-600 transition-colors"  
+              className="group block"  
             >  
-              {article.image_url && (  
-                <div  
-                  className="w-full h-48 rounded-lg mb-4 bg-cover bg-center"  
-                  style={{ backgroundImage: `url(${article.image_url})` }}  
-                />  
-              )}  
-              <span className="text-xs uppercase tracking-widest text-amber-500">  
-                {article.category || "Uncategorized"}  
-              </span>  
-              <h2 className="text-xl font-medium mt-1 group-hover:text-amber-400 transition-colors">  
-                {article.title}  
-              </h2>  
-              <p className="text-zinc-400 text-sm mt-2 line-clamp-2">{article.excerpt}</p>  
-              <div className="flex items-center justify-between mt-4 text-xs text-zinc-600">  
-                <span>{article.author}</span>  
-                <span>  
-                  {article.published_at  
-                    ? new Date(article.published_at).toLocaleDateString("en-US", {  
-                        year: "numeric",  
-                        month: "short",  
-                        day: "numeric",  
-                      })  
-                    : ""}  
-                </span>  
-              </div>  
+              <article className="border border-zinc-800 hover:border-amber-900/50 transition-colors duration-500 bg-[#0D0D0D]">  
+                {article.image_url && (  
+                  <div className="relative h-48 overflow-hidden">  
+                    <img  
+                      src={article.image_url}  
+                      alt={article.title}  
+                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"  
+                    />  
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D0D] to-transparent" />  
+                  </div>  
+                )}  
+                <div className="p-6">  
+                  {article.category && (  
+                    <span className="text-[#D4AF37] text-[10px] tracking-[0.3em] uppercase font-mono">  
+                      {article.category}  
+                    </span>  
+                  )}  
+                  <h2 className="mt-3 text-lg font-light text-white group-hover:text-amber-100 transition-colors">  
+                    {article.title}  
+                  </h2>  
+                  <p className="mt-2 text-sm text-zinc-400 line-clamp-2 leading-relaxed">  
+                    {article.excerpt}  
+                  </p>  
+                  <div className="mt-4 flex items-center gap-3 text-[10px] text-zinc-600 tracking-[0.2em] uppercase">  
+                    {article.author && <span>{article.author}</span>}  
+                    {article.published_at && (  
+                      <time>  
+                        {new Date(article.published_at).toLocaleDateString('en-US', {  
+                          year: 'numeric', month: 'short', day: 'numeric'  
+                        })}  
+                      </time>  
+                    )}  
+                  </div>  
+                </div>  
+              </article>  
             </Link>  
           ))}  
         </div>  
-      )}  
+      </div>  
     </main>  
   );  
 }  
