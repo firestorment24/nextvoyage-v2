@@ -1,121 +1,116 @@
-import { PROPERTY_DATA } from '@/data/properties'  
 import { notFound } from 'next/navigation'  
-import Link from 'next/link'  
+import Navigation from '../../../components/Navigation'  
+import Footer from '../../../components/Footer'  
+import { properties } from '../../../data/properties'  
 import GalleryLightbox from './GalleryLightbox'
 
-const proxyUrl = (url: string) => `/api/image?url=${encodeURIComponent(url)}`
+export default async function PropertyPage({ params }: { params: { slug: string } }) {  
+  const property = properties.find(  
+    (p) => p.slug === params.slug  
+  )
 
-export default async function PropertyDetailPage({  
-  params,  
-}: {  
-  params: Promise<{ slug: string }>  
-}) {  
-  const { slug } = await params  
-  const property = PROPERTY_DATA.find((p) => p.id === slug)  
-  if (!property) return notFound()
+  if (!property) {  
+    notFound()  
+  }
 
   return (  
-    <div style={{ backgroundColor: '#0a0a0a', minHeight: '100vh', color: '#ffffff' }}>  
+    <main className="min-h-screen bg-black">  
+      <Navigation />
+
       {/* Hero Section */}  
-      <div style={{ position: 'relative', width: '100%', height: '65vh', overflow: 'hidden' }}>  
+      <section className="relative h-[60vh] md:h-[80vh] overflow-hidden">  
         <img  
-          src={proxyUrl(property.image)}  
+          src={property.heroImage || property.images?.[0]}  
           alt={property.name}  
-          style={{ width: '100%', height: '100%', objectFit: 'cover' }}  
+          className="w-full h-full object-cover"  
         />  
-        <div  
-          style={{  
-            position: 'absolute',  
-            inset: 0,  
-            background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%)',  
-          }}  
-        />  
-      </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />  
+        <div className="absolute bottom-0 left-0 right-0 p-8 md:p-16">  
+          <p className="text-[#D4AF37] font-medium tracking-widest text-sm uppercase mb-2">  
+            {property.category}  
+          </p>  
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-2">  
+            {property.name}  
+          </h1>  
+          <p className="text-lg md:text-xl text-white/70">  
+            {property.location}  
+          </p>  
+        </div>  
+      </section>
 
-      {/* Content */}  
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem 1.5rem' }}>  
-        {/* Back Link */}  
-        <Link  
-          href="/archive"  
-          style={{ color: '#ffffff', textDecoration: 'none', fontSize: '0.875rem', letterSpacing: '0.1em' }}  
-        >  
-          ← Back to Archive  
-        </Link>
-
-        {/* Breadcrumb */}  
-        <p style={{ color: '#ffffff', fontSize: '0.75rem', letterSpacing: '0.15em', marginTop: '1rem', opacity: 0.7 }}>  
-          {property.collection} — {property.intel.positioning}  
-        </p>
-
-        {/* Title */}  
-        <h1 style={{ color: '#ffffff', fontSize: 'clamp(1.75rem, 4vw, 2.75rem)', fontWeight: 300, letterSpacing: '0.05em', marginTop: '0.5rem' }}>  
-          {property.name}  
-        </h1>
-
-        {/* Location */}  
-        <p style={{ color: '#ffffff', fontSize: '0.875rem', letterSpacing: '0.15em', marginTop: '0.5rem', opacity: 0.7 }}>  
-          {property.location}  
-        </p>
-
-        {/* Description */}  
-        <p style={{ color: '#ffffff', fontSize: '1rem', lineHeight: 1.8, marginTop: '2rem', maxWidth: '720px', opacity: 0.85 }}>  
-          {property.description}  
-        </p>
-
-        {/* Photo Gallery */}  
-        {property.gallery && property.gallery.length > 1 && (  
-          <section style={{ marginTop: '3rem' }}>  
-            <h2 style={{ color: '#ffffff', fontSize: '1.25rem', fontWeight: 300, letterSpacing: '0.15em', marginBottom: '1rem' }}>  
-              Gallery  
-            </h2>  
-            <GalleryLightbox images={property.gallery} propertyName={property.name} proxyUrl={proxyUrl} />  
-          </section>  
-        )}
-
-        {/* Intelligence Dossier */}  
-        <section style={{ marginTop: '4rem', borderTop: '1px solid rgba(255,255,255,0.15)', paddingTop: '2rem' }}>  
-          <h2 style={{ color: '#ffffff', fontSize: '0.75rem', letterSpacing: '0.2em', marginBottom: '1.5rem', opacity: 0.6 }}>  
-            Intelligence Dossier  
-          </h2>
-
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', maxWidth: '600px' }}>  
-            <div>  
-              <p style={{ color: '#ffffff', fontSize: '0.7rem', letterSpacing: '0.15em', opacity: 0.5, marginBottom: '0.25rem' }}>  
-                Positioning  
+      {/* Content Grid */}  
+      <section className="max-w-7xl mx-auto px-6 py-12 md:py-20">  
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">  
+          {/* Main Content */}  
+          <div className="lg:col-span-2">  
+            <div className="prose prose-lg prose-invert max-w-none">  
+              <p className="text-white/80 text-lg leading-relaxed">  
+                {property.description}  
               </p>  
-              <p style={{ color: '#ffffff', fontSize: '0.875rem' }}>{property.intel.positioning}</p>  
-            </div>  
-            <div>  
-              <p style={{ color: '#ffffff', fontSize: '0.7rem', letterSpacing: '0.15em', opacity: 0.5, marginBottom: '0.25rem' }}>  
-                Category  
-              </p>  
-              <p style={{ color: '#ffffff', fontSize: '0.875rem' }}>{property.intel.category}</p>  
-            </div>  
+              {property.longDescription && (  
+                <div className="mt-8 text-white/70 leading-relaxed space-y-4">  
+                  {property.longDescription.split('\n').map((paragraph: string, i: number) => (  
+                    <p key={i}>{paragraph}</p>  
+                  ))}  
+                </div>  
+              )}  
+            </div>
+
+            {/* Gallery */}  
+            {property.images && property.images.length > 0 && (  
+              <div className="mt-16">  
+                <h2 className="text-2xl font-bold text-white mb-8">Gallery</h2>  
+                <GalleryLightbox images={property.images} propertyName={property.name} />  
+              </div>  
+            )}  
           </div>
 
-          <div style={{ marginTop: '2rem' }}>  
-            <p style={{ color: '#ffffff', fontSize: '0.7rem', letterSpacing: '0.15em', opacity: 0.5, marginBottom: '0.75rem' }}>  
-              Member Benefits  
-            </p>  
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>  
-              {property.intel.memberBenefits.map((benefit, i) => (  
-                <li  
-                  key={i}  
-                  style={{  
-                    color: '#ffffff',  
-                    fontSize: '0.875rem',  
-                    padding: '0.4rem 0',  
-                    borderBottom: '1px solid rgba(255,255,255,0.08)',  
-                    opacity: 0.85,  
-                  }}  
-                >  
-                  — {benefit}  
-                </li>  
-              ))}  
-            </ul>  
-          </div>  
-        </section>  
-      </div>  
-    </div>  
+          {/* Sidebar */}  
+          <aside className="lg:col-span-1">  
+            <div className="sticky top-24 space-y-6">  
+              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">  
+                <h3 className="text-[#D4AF37] font-semibold text-sm uppercase tracking-widest mb-4">  
+                  Property Details  
+                </h3>  
+                <dl className="space-y-4">  
+                  {property.category && (  
+                    <div>  
+                      <dt className="text-white/50 text-xs uppercase tracking-wider">Category</dt>  
+                      <dd className="text-white font-medium mt-1">{property.category}</dd>  
+                    </div>  
+                  )}  
+                  {property.location && (  
+                    <div>  
+                      <dt className="text-white/50 text-xs uppercase tracking-wider">Location</dt>  
+                      <dd className="text-white font-medium mt-1">{property.location}</dd>  
+                    </div>  
+                  )}  
+                  {property.bedrooms && (  
+                    <div>  
+                      <dt className="text-white/50 text-xs uppercase tracking-wider">Bedrooms</dt>  
+                      <dd className="text-white font-medium mt-1">{property.bedrooms}</dd>  
+                    </div>  
+                  )}  
+                  {property.amenities && property.amenities.length > 0 && (  
+                    <div>  
+                      <dt className="text-white/50 text-xs uppercase tracking-wider">Amenities</dt>  
+                      <dd className="text-white/70 mt-1">  
+                        <ul className="space-y-1">  
+                          {property.amenities.map((a: string, i: number) => (  
+                            <li key={i} className="text-sm">{a}</li>  
+                          ))}  
+                        </ul>  
+                      </dd>  
+                    </div>  
+                  )}  
+                </dl>  
+              </div>  
+            </div>  
+          </aside>  
+        </div>  
+      </section>
+
+      <Footer />  
+    </main>  
   )  
 }  
