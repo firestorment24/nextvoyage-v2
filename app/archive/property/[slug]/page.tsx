@@ -5,20 +5,21 @@ import Link from 'next/link'
 import Navigation from '@/components/Navigation'  
 import Footer from '@/components/Footer'
 
-// this ensures next.js pre-renders every property at build time  
 export async function generateStaticParams() {  
   return properties.map((property) => ({  
-    slug: property.id, // using property.id as the slug  
+    slug: property.id,  
   }))  
 }
 
 export default async function PropertyPage({ params }: { params: { slug: string } }) {  
-  const { slug } = params  
+  const { slug } = await params  
   const property = properties.find((p) => p.id === slug)
 
   if (!property) {  
     notFound()  
   }
+
+  const benefits = property.intel?.memberBenefits
 
   return (  
     <main className="min-h-screen bg-[#0A0A0A] text-white selection:bg-[#D4AF37]/30">  
@@ -55,10 +56,10 @@ export default async function PropertyPage({ params }: { params: { slug: string 
             <p className="text-2xl font-light text-white/90 mb-12">  
               {property.description}  
             </p>  
-            {property.highlight && (  
+            {benefits && (  
               <div className="border-l border-[#D4AF37]/30 pl-8 py-2 mb-12">  
-                <p className="text-lg italic text-white/70 font-light">  
-                  "{property.highlight}"  
+                <p className="text-lg italic text-white/70 font-light leading-relaxed">  
+                  &ldquo;{Array.isArray(benefits) ? benefits[0] : benefits}&rdquo;  
                 </p>  
               </div>  
             )}  
@@ -79,7 +80,7 @@ export default async function PropertyPage({ params }: { params: { slug: string 
                 </p>  
               </div>  
             )}  
-            <Link   
+            <Link  
               href="/archive"  
               className="inline-block text-[#D4AF37] text-xs uppercase tracking-[0.4em] hover:text-white transition-colors pt-8"  
             >  
