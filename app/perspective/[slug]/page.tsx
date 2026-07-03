@@ -16,7 +16,7 @@ export default async function ArticlePage({
 
   try {  
     const { rows } = await sql`  
-      SELECT * FROM perspective_articles   
+      SELECT * FROM perspective_articles  
       WHERE slug = ${slug} OR id::text = ${slug}  
       LIMIT 1  
     `
@@ -26,6 +26,21 @@ export default async function ArticlePage({
     }
 
     const article = rows[0]
+
+    // Normalise tags — handles PG arrays, JSON strings, or null  
+    const tags: string[] = (() => {  
+      if (!article.tags) return []  
+      if (Array.isArray(article.tags)) return article.tags.filter(Boolean)  
+      if (typeof article.tags === 'string') {  
+        try {  
+          const parsed = JSON.parse(article.tags)  
+          return Array.isArray(parsed) ? parsed.filter(Boolean) : []  
+        } catch {  
+          return article.tags.split(',').map((t: string) => t.trim()).filter(Boolean)  
+        }  
+      }  
+      return []  
+    })()
 
     return (  
       <div className="min-h-screen bg-[#0A0A0A] text-[#FCFAF7] font-serif selection:bg-[#D4AF37] selection:text-black">  
@@ -47,8 +62,8 @@ export default async function ArticlePage({
               </span>  
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[1.1] mb-8">  
                 {article.title}  
-              </h1>  
-                
+              </h1>
+
               <div className="flex flex-wrap items-center gap-8 text-[10px] uppercase tracking-widest text-white/40 border-y border-white/10 py-6">  
                 <div>Written by <span className="text-white ml-1">{article.author || 'NexVoyage Editorial'}</span></div>  
                 <div>Published <span className="text-white ml-1">{new Date(article.published_at || article.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span></div>  
@@ -67,21 +82,21 @@ export default async function ArticlePage({
             )}
 
             <div className="lg:col-span-8 lg:col-start-3">  
-              <div   
-                className="prose prose-invert prose-lg max-w-none   
+              <div  
+                className="prose prose-invert prose-lg max-w-none  
                   prose-p:text-white/80 prose-p:leading-relaxed prose-p:mb-8  
                   prose-headings:font-light prose-headings:tracking-tight prose-headings:text-white  
                   prose-strong:text-[#D4AF37] prose-strong:font-normal  
                   prose-blockquote:border-[#D4AF37] prose-blockquote:text-[#D4AF37] prose-blockquote:italic  
                   prose-img:rounded-none"  
-                dangerouslySetInnerHTML={{ __html: article.content_html || article.body }}  
+                dangerouslySetInnerHTML={{ __html: article.content_html || article.body || '' }}  
               />
 
-              {article.tags && article.tags.length > 0 && (  
+              {tags.length > 0 && (  
                 <div className="mt-20 pt-10 border-t border-white/10 flex flex-wrap gap-3">  
-                  {article.tags.map((tag: string) => (  
-                    <span   
-                      key={tag}   
+                  {tags.map((tag: string) => (  
+                    <span  
+                      key={tag}  
                       className="px-4 py-1.5 border border-white/20 text-[9px] uppercase tracking-[0.2em] text-white/60 hover:border-[#D4AF37] hover:text-[#D4AF37] transition-colors duration-300"  
                     >  
                       {tag}  
