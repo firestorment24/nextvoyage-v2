@@ -1,13 +1,8 @@
-import { createClient } from "@supabase/supabase-js";  
+import { sql } from "@vercel/postgres";  
 import { notFound } from "next/navigation";  
 import Link from "next/link";  
 import Navigation from "@/components/Navigation";  
 import Footer from "@/components/Footer";
-
-const supabase = createClient(  
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,  
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!  
-);
 
 export const revalidate = 0;
 
@@ -18,13 +13,15 @@ export default async function PerspectiveArticle({
 }) {  
   const { slug } = await params;
 
-  const { data: article, error } = await supabase  
-    .from("perspectives")  
-    .select("*")  
-    .or(`slug.eq.${slug},id.eq.${slug}`)  
-    .single();
+  const { rows } = await sql`  
+    SELECT * FROM perspectives  
+    WHERE slug = ${slug} OR id::text = ${slug}  
+    LIMIT 1  
+  `;
 
-  if (!article || error) {  
+  const article = rows[0];
+
+  if (!article) {  
     notFound();  
   }
 
