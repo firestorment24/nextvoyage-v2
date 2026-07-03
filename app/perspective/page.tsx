@@ -1,153 +1,231 @@
-import {   
-ShieldCheck,   
-MapPin,   
-Plane,   
-CreditCard,   
-UserCheck,  
-Infinity  
-} from 'lucide-react';
+import Image from "next/image";  
+import Link from "next/link";  
+import Navigation from "../../components/Navigation";  
+import Footer from "../../components/Footer";
 
-export default function PerspectivePage() {  
-const luxuryPartners = [  
-  'Aman', 'Belmond', 'Singita', 'Regent Seven Seas', 'Explora Journeys',   
-  'Silversea', 'Six Senses', 'Rosewood', 'One&Only', 'Four Seasons',   
-  'St. Regis', 'Abercrombie & Kent', 'Orient Express', 'Scott Dunn', 'Mandarin Oriental'  
+const FEATURED = {  
+  slug: "the-silent-roi",  
+  title: "The Silent ROI",  
+  subtitle: "Why disconnection is the ultimate asset",  
+  category: "Editorial",  
+  date: "May 2026",  
+  readTime: "8 min read",  
+  image:  
+    "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2070&auto=format&fit=crop",  
+  alt: "Minimalist infinity pool overlooking ocean at dusk",  
+  excerpt:  
+    "The most profitable investment an executive can make is a week of absolute nothing. In an economy that rewards perpetual motion, stillness has become the rarest commodity — and the highest-yielding.",  
+};
+
+const ARTICLES = [  
+  {  
+    slug: "architecture-of-calm",  
+    title: "Architecture of Calm",  
+    subtitle: "The minimalist alpinist",  
+    category: "Sanctuary Study",  
+    date: "April 2026",  
+    readTime: "6 min read",  
+    image:  
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop",  
+    alt: "Modern alpine retreat with floor-to-ceiling windows",  
+    excerpt:  
+      "Space is the first luxury. Volume, proportion, and the deliberate absence of clutter — these are the true markers of arrival.",  
+    wide: false,  
+  },  
+  {  
+    slug: "the-curated-horizon",  
+    title: "The Curated Horizon",  
+    subtitle: "Intellectual travel in the age of algorithms",  
+    category: "Intellectual Travel",  
+    date: "March 2026",  
+    readTime: "5 min read",  
+    image:  
+      "https://images.unsplash.com/photo-1506929562872-bb421503ef21?q=80&w=2068&auto=format&fit=crop",  
+    alt: "Aerial view of turquoise coastline",  
+    excerpt:  
+      "When every destination is a search result away, true curation becomes the differentiator. We don't recommend places — we prescribe them.",  
+    wide: false,  
+  },  
+  {  
+    slug: "the-art-of-discretion",  
+    title: "The Art of Discretion",  
+    subtitle: "Unmarked sanctuary",  
+    category: "Discretion",  
+    date: "June 2026",  
+    readTime: "7 min read",  
+    image:  
+      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=2080&auto=format&fit=crop",  
+    alt: "Private villa entrance hidden by tropical foliage",  
+    excerpt:  
+      "In an era of total visibility, the ultimate luxury is being completely unaccounted for. The unmarked entrance. The unlisted reservation. The unreachable hour.",  
+    wide: false,  
+  },  
+  {  
+    slug: "silence-as-luxury",  
+    title: "Silence as Luxury",  
+    subtitle: "The sound of nothing",  
+    category: "Philosophy",  
+    date: "July 2026",  
+    readTime: "9 min read",  
+    image:  
+      "https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=2032&auto=format&fit=crop",  
+    alt: "Misty mountain landscape at sunrise",  
+    excerpt:  
+      "Noise is the cost of modern life. Silence — true, uninterrupted silence — has become the most exclusive amenity on earth. And it cannot be booked online.",  
+    wide: false,  
+  },  
+  {  
+    slug: "beyond-the-gate",  
+    title: "Beyond the Gate",  
+    subtitle: "Private aviation protocols",  
+    category: "Aviation",  
+    date: "June 2026",  
+    readTime: "6 min read",  
+    image:  
+      "https://images.unsplash.com/photo-1540962351504-03099e0a754b?q=80&w=2070&auto=format&fit=crop",  
+    alt: "Private jet on tarmac at sunset",  
+    excerpt:  
+      "The journey should arrive before the plane does. From seamless FBO transfers to catering that anticipates, every second before takeoff is engineered for calm.",  
+    wide: false,  
+  },  
+  {  
+    slug: "wealth-preservation",  
+    title: "Wealth Preservation: The Soul",  
+    subtitle: "Why the truly wealthy travel differently",  
+    category: "Theory",  
+    date: "February 2026",  
+    readTime: "10 min read",  
+    image:  
+      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=2070&auto=format&fit=crop",  
+    alt: "Empty luxury hotel corridor with warm lighting",  
+    excerpt:  
+      "Capital follows peace of mind. The truly wealthy don't collect destinations — they collect sanctuaries where their energy is protected, not drained.",  
+    wide: false,  
+  },  
+  {  
+    slug: "the-yacht-orchestration",  
+    title: "The Yacht Orchestration",  
+    subtitle: "Moving horizons",  
+    category: "Yachting",  
+    date: "May 2026",  
+    readTime: "7 min read",  
+    image:  
+      "https://images.unsplash.com/photo-1567899378494-1b9c1a9e0c6d?q=80&w=2070&auto=format&fit=crop",  
+    alt: "Luxury yacht anchored in crystal clear water",  
+    excerpt:  
+      "A yacht is not a vessel — it's a mobile sanctuary. The art lies not in the navigation, but in the orchestration of every invisible detail.",  
+    wide: false,  
+  },  
+  {  
+    slug: "in-search-of-the-unplugged-horizon",  
+    title: "In Search of the Unplugged Horizon",  
+    subtitle: "Where the signal ends and you begin",  
+    category: "Editorial",  
+    date: "January 2026",  
+    readTime: "8 min read",  
+    image:  
+      "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?q=80&w=2070&auto=format&fit=crop",  
+    alt: "Remote beach with no footprints",  
+    excerpt:  
+      "The map is not the territory. The places worth going don't appear on Google Maps. They exist in the gaps — where the satellite imagery blurs and the reviews stop.",  
+    wide: false,  
+  },  
 ];
 
-return (  
-<div className="bg-black text-white min-h-screen selection:bg-[#d4af37] selection:text-black">  
-{/* NUCLEAR CSS FIX: Force transparency and white text globally */}  
-<style dangerouslySetInnerHTML={{ __html: `  
-  * { background-color: transparent !important; }  
-  html, body, #__next, main, .bg-black { background-color: #000000 !important; }  
-  h1, h2, h3, p, span, li, div { color: #ffffff !important; }  
-  .text-brass { color: #d4af37 !important; }  
-  .border-brass { border-color: #d4af37 !important; }  
-  .opacity-partner { opacity: 0.5; transition: all 0.4s; }  
-  .opacity-partner:hover { opacity: 1; color: #d4af37 !important; transform: translateY(-2px); }  
-`}} />
+export default function PerspectivePage() {  
+  return (  
+    <>  
+      <Navigation />  
+      <main className="min-h-screen bg-[#FCFAF7]">  
+        {/* Hero */}  
+        <section className="px-6 pt-32 pb-16 md:px-12 lg:px-24">  
+          <div className="mx-auto max-w-6xl">  
+            <p className="font-sans text-xs tracking-[0.2em] uppercase text-[#8B7355] mb-6">  
+              NexVoyage Collective  
+            </p>  
+            <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-medium text-[#1C1C1C] leading-tight">  
+              The Perspective  
+            </h1>  
+            <p className="font-sans text-lg md:text-xl text-[#6B6B6B] mt-6 max-w-2xl leading-relaxed">  
+              Essays, observations, and manifestos from the edge of luxury  
+              travel. No algorithms. No noise. Just signal.  
+            </p>  
+          </div>  
+        </section>
 
-{/* HERO SECTION - MAXIMUM IMPACT */}  
-<section className="relative h-[90vh] flex items-center justify-center overflow-hidden">  
-  <img   
-    src="https://cdn.marblism.com/mPwPaCBHn3r.webp"   
-    alt="Luxury Villa Arrival"  
-    className="absolute inset-0 w-full h-full object-cover opacity-60 scale-105"  
-  />  
-  <div className="relative z-10 text-center px-4 max-w-5xl">  
-    <div className="flex items-center justify-center gap-4 mb-10">  
-      <span className="h-[1px] w-16 bg-brass opacity-50"></span>  
-      <p className="text-brass uppercase tracking-[0.6em] text-[11px] font-bold">NexVoyage Collective</p>  
-      <span className="h-[1px] w-16 bg-brass opacity-50"></span>  
-    </div>  
-      
-    <h1 className="text-7xl md:text-9xl font-medium tracking-tighter mb-10 leading-[0.85]">  
-      Travel, <br/>  
-      <span className="italic text-brass font-serif font-light">Perfected.</span>  
-    </h1>  
-      
-    <p className="text-2xl md:text-3xl font-light tracking-wide max-w-4xl mx-auto opacity-100 leading-relaxed mb-12">  
-      Expertise over mystery. We remove the friction of movement <br className="hidden md:block"/> to maximize the impact of your arrival.  
-    </p>
+        {/* Featured Article */}  
+        <section className="px-6 md:px-12 lg:px-24 pb-16">  
+          <div className="mx-auto max-w-6xl">  
+            <Link href={`/perspective/${FEATURED.slug}`} className="group block">  
+              <div className="relative aspect-[21/9] overflow-hidden mb-8">  
+                <Image  
+                  src={FEATURED.image}  
+                  alt={FEATURED.alt}  
+                  fill  
+                  className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"  
+                />  
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />  
+                <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">  
+                  <span className="inline-block font-sans text-xs tracking-[0.15em] uppercase text-[#C9A96E] mb-3">  
+                    {FEATURED.category} · {FEATURED.date} · {FEATURED.readTime}  
+                  </span>  
+                  <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-medium text-white leading-tight">  
+                    {FEATURED.title}  
+                  </h2>  
+                  <p className="font-sans text-base md:text-lg text-white/80 mt-3 max-w-2xl">  
+                    {FEATURED.subtitle}  
+                  </p>  
+                </div>  
+              </div>  
+              <p className="font-sans text-base md:text-lg text-[#4B4B4B] max-w-3xl leading-relaxed">  
+                {FEATURED.excerpt}  
+              </p>  
+            </Link>  
+          </div>  
+        </section>
 
-    <div className="flex flex-wrap justify-center items-center gap-12 py-8 border-t border-white/10 max-w-2xl mx-auto">  
-      <div className="flex flex-col items-center">  
-        <span className="text-[10px] tracking-[0.3em] uppercase opacity-40 mb-2">Network Partner</span>  
-        <span className="text-lg font-serif tracking-widest uppercase text-white">Fora Travel</span>  
-      </div>  
-      <div className="h-8 w-[1px] bg-white/20"></div>  
-      <div className="flex flex-col items-center">  
-        <span className="text-[10px] tracking-[0.3em] uppercase opacity-40 mb-2">Preferred Status</span>  
-        <span className="text-lg font-serif tracking-widest uppercase text-white">Virtuoso</span>  
-      </div>  
-    </div>  
-  </div>  
-  <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-black via-black/60 to-transparent"></div>  
-</section>
-
-{/* EXPANDED PARTNERSHIP NETWORK */}  
-<section className="py-24 border-b border-white/10 relative overflow-hidden">  
-  <div className="max-w-7xl mx-auto px-6 text-center">  
-    <h2 className="text-brass uppercase tracking-[0.5em] text-[10px] font-bold mb-16">  
-      UNMATCHED ACCESS. PREFERRED STATUS. GLOBAL LEVERAGE.  
-    </h2>  
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-8 gap-y-12 items-center">  
-      {luxuryPartners.map((partner) => (  
-        <span key={partner} className="text-base font-serif opacity-partner cursor-default tracking-wider">  
-          {partner}  
-        </span>  
-      ))}  
-    </div>  
-  </div>  
-</section>
-
-{/* THE GUARDIAN LAYER */}  
-<section className="py-32 px-6 max-w-7xl mx-auto">  
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-24 items-center">  
-    <div>  
-      <h2 className="text-brass uppercase tracking-[0.3em] text-sm font-bold mb-8">The Guardian Layer</h2>  
-      <h3 className="text-6xl font-light mb-12 leading-[1.05] tracking-tight">Your Grounded <br/>Value Promise.</h3>  
-      <div className="space-y-12">  
-        <div className="flex gap-8 group">  
-          <div className="p-4 border border-brass/20 rounded-full group-hover:border-brass/100 transition-colors">  
-            <ShieldCheck className="text-brass w-8 h-8 shrink-0" />  
+        {/* Article Grid */}  
+        <section className="px-6 md:px-12 lg:px-24 pb-32">  
+          <div className="mx-auto max-w-6xl">  
+            <div className="border-t border-[#E5DDD3] pt-12 mb-12">  
+              <p className="font-sans text-xs tracking-[0.2em] uppercase text-[#8B7355]">  
+                Latest Issues  
+              </p>  
+            </div>  
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">  
+              {ARTICLES.map((article) => (  
+                <Link  
+                  key={article.slug}  
+                  href={`/perspective/${article.slug}`}  
+                  className="group"  
+                >  
+                  <div className="relative aspect-[4/3] overflow-hidden mb-5">  
+                    <Image  
+                      src={article.image}  
+                      alt={article.alt}  
+                      fill  
+                      className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"  
+                    />  
+                  </div>  
+                  <span className="font-sans text-xs tracking-[0.15em] uppercase text-[#8B7355]">  
+                    {article.category} · {article.date}  
+                  </span>  
+                  <h3 className="font-serif text-xl md:text-2xl font-medium text-[#1C1C1C] mt-2 leading-snug group-hover:text-[#8B7355] transition-colors">  
+                    {article.title}  
+                  </h3>  
+                  <p className="font-sans text-sm text-[#6B6B6B] mt-2 leading-relaxed line-clamp-2">  
+                    {article.excerpt}  
+                  </p>  
+                  <p className="font-sans text-xs text-[#8B7355] mt-3 tracking-wide">  
+                    {article.readTime}  
+                  </p>  
+                </Link>  
+              ))}  
+            </div>  
           </div>  
-          <div>  
-            <h4 className="text-2xl font-medium mb-3 text-white">24/7 Global Flight Support</h4>  
-            <p className="opacity-60 font-light text-lg leading-relaxed">Proactive monitoring and instant re-routing. We move before you even know there's a delay.</p>  
-          </div>  
-        </div>  
-        <div className="flex gap-8 group">  
-          <div className="p-4 border border-brass/20 rounded-full group-hover:border-brass/100 transition-colors">  
-            <CreditCard className="text-brass w-8 h-8 shrink-0" />  
-          </div>  
-          <div>  
-            <h4 className="text-2xl font-medium mb-3 text-white">Preferred Perks</h4>  
-            <p className="opacity-60 font-light text-lg leading-relaxed">Automatic upgrades, resort credits, and complimentary breakfast at the world's finest properties.</p>  
-          </div>  
-        </div>  
-        <div className="flex gap-8 group">  
-          <div className="p-4 border border-brass/20 rounded-full group-hover:border-brass/100 transition-colors">  
-            <UserCheck className="text-brass w-8 h-8 shrink-0" />  
-          </div>  
-          <div>  
-            <h4 className="text-2xl font-medium mb-3 text-white">Private Logistics</h4>  
-            <p className="opacity-60 font-light text-lg leading-relaxed">Vetted chauffeurs waiting at every arrival. No queues, no friction, just seamless transition.</p>  
-          </div>  
-        </div>  
-      </div>  
-    </div>  
-    <div className="relative">  
-      <div className="overflow-hidden rounded-sm border border-white/10 shadow-2xl">  
-        <img   
-          src="https://cdn.marblism.com/DgdRhZ2LIeX.webp"   
-          alt="Private Jet Interior"  
-          className="w-full grayscale hover:grayscale-0 transition-all duration-1000 scale-100 hover:scale-105"  
-        />  
-      </div>  
-      <div className="absolute inset-0 border border-brass/30 translate-x-8 translate-y-8 -z-10"></div>  
-    </div>  
-  </div>  
-</section>
-
-{/* THE ROI OF RESET */}  
-<section className="py-40 px-6 text-center max-w-5xl mx-auto border-t border-white/5 relative">  
-  <div className="mb-16 flex justify-center">  
-    <div className="relative">  
-      <Infinity className="text-brass w-16 h-16 opacity-30 animate-pulse" />  
-      <div className="absolute inset-0 blur-2xl bg-brass/10"></div>  
-    </div>  
-  </div>  
-  <h2 className="text-6xl font-light mb-12 italic font-serif tracking-tight">The ROI of Reset</h2>  
-  <p className="text-3xl font-light leading-relaxed opacity-90 mb-20 max-w-4xl mx-auto">  
-    We don’t just book travel; we engineer the space required for your next big breakthrough.   
-    <span className="block mt-4 text-brass/80 italic">The quiet before the storm. The reset before the rise.</span>  
-  </p>  
-  <button className="group relative px-16 py-6 bg-transparent border border-brass text-brass overflow-hidden transition-all duration-500 hover:shadow-[0_0_30px_rgba(212,175,55,0.2)]">  
-    <span className="relative z-10 tracking-[0.4em] uppercase text-sm font-bold group-hover:text-black">Begin the Onboarding</span>  
-    <div className="absolute inset-0 bg-brass translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>  
-  </button>  
-</section>  
-</div>  
-);  
+        </section>  
+      </main>  
+      <Footer />  
+    </>  
+  );  
 }  
