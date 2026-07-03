@@ -1,117 +1,97 @@
-"use client";
+'use client'
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import React, { useState, useEffect } from 'react'  
+import Link from 'next/link'  
+import { Menu, X } from 'lucide-react'
 
-interface NavLink {
-  title: string;
-  href: string;
-  subtitle: string;
-}
+const Navigation = () => {  
+  const [isOpen, setIsOpen] = useState(false)
 
-const navLinks: NavLink[] = [
-  { title: "LOBBY", href: "/", subtitle: "The Beginning" },
-  { title: "MANDATE", href: "/mandate", subtitle: "Our Philosophy" },
-  { title: "PERSPECTIVE", href: "/perspective", subtitle: "The Editorial" },
-  { title: "ARCHIVE", href: "/archive", subtitle: "Curated Collection" },
-  { title: "JOURNAL", href: "/journal", subtitle: "Travel Stories" },
-  { title: "INQUIRY", href: "/inquiry", subtitle: "Direct Inquiry" },
-];
+  // Prevent scrolling when menu is open  
+  useEffect(() => {  
+    if (isOpen) {  
+      document.body.style.overflow = 'hidden'  
+    } else {  
+      document.body.style.overflow = 'unset'  
+    }  
+    return () => {  
+      document.body.style.overflow = 'unset'  
+    }  
+  }, [isOpen])
 
-export default function Navigation() {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const navLinks = [  
+    { name: 'Lobby', path: '/', subtitle: 'Arrival Protocol' },  
+    { name: 'Mandate', path: '/mandate', subtitle: 'The Philosophy' },  
+    { name: 'Perspective', path: '/perspective', subtitle: 'The Intelligence' },  
+    { name: 'Archive', path: '/archive', subtitle: 'Registry of Significance' },  
+    { name: 'Journal', path: '/journal', subtitle: 'Seasonal Intelligence' },  
+    { name: 'Inquiry', path: '/reserve', subtitle: 'Begin Consultation' },  
+  ]
 
-  useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isOpen]);
+  return (  
+    <>  
+      {/* Header Bar - High Z-Index to stay above Hero */}  
+      <header className="fixed top-0 left-0 w-full z-[10000] flex justify-between items-center px-6 py-8 md:px-12 bg-transparent pointer-events-none">  
+        <Link   
+          href="/"   
+          className="text-2xl font-serif tracking-[0.2em] text-[#C5A059] hover:opacity-80 transition-opacity pointer-events-auto"  
+        >  
+          NEXVOYAGE  
+        </Link>
 
-  return (
-    <>
-      {/* Fixed top bar — fully transparent background */}
-      <nav className="fixed top-0 left-0 w-full z-[9999] bg-transparent">
-        <div className="flex items-center justify-between px-6 md:px-10 py-5">
-          {/* Brand — left side, links to home */}
-          <Link
-            href="/"
-            aria-label="NexVoyage Collective — Home"
-            className="text-[1.25rem] tracking-[0.25em] text-[#C5A059] hover:text-[#D4AF37] transition-colors duration-300"
-            style={{ fontFamily: "'Cormorant Garamond', serif" }}
-          >
-            NEXVOYAGE COLLECTIVE
-          </Link>
+        <button  
+          onClick={() => setIsOpen(!isOpen)}  
+          className="p-3 bg-[#0A0A0A]/60 rounded-full border border-[#C5A059]/30 text-[#C5A059] hover:bg-[#C5A059] hover:text-[#0A0A0A] transition-all pointer-events-auto"  
+          aria-label="Toggle Menu"  
+        >  
+          {isOpen ? <X size={28} /> : <Menu size={28} />}  
+        </button>  
+      </header>
 
-          {/* Hamburger toggle — visible on all screen sizes */}
-          <button
-            type="button"
-            onClick={() => setIsOpen(true)}
-            aria-label="Open menu"
-            className="z-[10000] text-[#C5A059] hover:text-[#D4AF37] transition-colors duration-300"
-          >
-            <Menu size={26} strokeWidth={1.5} />
-          </button>
+      {/* Full-Screen Overlay Menu */}  
+      <div  
+        className={`fixed inset-0 z-[9999] bg-[#0A0A0A] transition-all duration-700 ease-in-out ${  
+          isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'  
+        }`}  
+      >  
+        {/* Background Watermark */}  
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">  
+          <span className="text-[20vw] font-serif text-[#C5A059]/[0.02] uppercase tracking-[0.1em] select-none">  
+            Voyage  
+          </span>  
         </div>
-      </nav>
 
-      {/* Full-screen overlay menu — pure black */}
-      <div
-        className={`fixed inset-0 z-[9998] flex flex-col items-center justify-center transition-all duration-700 ease-in-out ${
-          isOpen
-            ? "opacity-100 visible pointer-events-auto"
-            : "opacity-0 invisible pointer-events-none"
-        }`}
-        style={{ backgroundColor: "#050505" }}
-      >
-        {/* Subtle watermark */}
-        <span
-          aria-hidden="true"
-          className="pointer-events-none select-none absolute"
-          style={{
-            fontFamily: "'Cormorant Garamond', serif",
-            fontSize: "22vw",
-            lineHeight: 1,
-            color: "#ffffff",
-            opacity: 0.04,
-            bottom: "4%",
-            right: "5%",
-          }}
-        >
-          Voyage
-        </span>
-
-        {/* Close button */}
-        <button
-          type="button"
-          onClick={() => setIsOpen(false)}
-          aria-label="Close menu"
-          className="z-[10000] absolute top-6 right-6 md:right-10 text-[#C5A059] hover:text-[#D4AF37] transition-colors duration-300"
-        >
-          <X size={28} strokeWidth={1.5} />
-        </button>
-
-        {/* Nav links — stacked vertically, brass gold titles + muted subtitles */}
-        <ul className="relative z-10 flex flex-col items-center gap-7 md:gap-9">
-          {navLinks.map((link) => (
-            <li key={link.title}>
-              <Link
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="group flex flex-col items-center text-center"
-              >
-                <span className="text-2xl md:text-3xl font-semibold tracking-[0.25em] text-[#C5A059] group-hover:text-[#D4AF37] transition-colors duration-300">
-                  {link.title}
-                </span>
-                <span className="mt-1.5 text-[0.7rem] md:text-xs tracking-[0.2em] uppercase text-white/40">
-                  {link.subtitle}
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <nav className="relative h-full flex flex-col justify-center items-center text-center px-6">  
+          <ul className="space-y-8 md:space-y-12">  
+            {navLinks.map((link) => (  
+              <li key={link.name} className="group">  
+                <Link  
+                  href={link.path}  
+                  onClick={() => setIsOpen(false)}  
+                  className="block"  
+                >  
+                  <span className="block text-xs md:text-sm font-mono uppercase tracking-[0.3em] text-[#C5A059]/60 group-hover:text-[#C5A059] transition-colors mb-2">  
+                    {link.subtitle}  
+                  </span>  
+                  <span className="block text-3xl md:text-6xl font-serif text-[#C5A059] group-hover:scale-110 transition-transform duration-500">  
+                    {link.name}  
+                  </span>  
+                </Link>  
+              </li>  
+            ))}  
+          </ul>  
+        </nav>  
       </div>
-    </>
-  );
+
+      {/* Background Dimmer - Lower Z than Nav, Higher than Page */}  
+      <div   
+        className={`fixed inset-0 z-[9998] bg-black/60 backdrop-blur-sm transition-opacity duration-500 ${  
+          isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'  
+        }`}  
+        onClick={() => setIsOpen(false)}  
+      />  
+    </>  
+  )  
 }
+
+export default Navigation  
