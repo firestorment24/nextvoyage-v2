@@ -102,7 +102,7 @@ export default async function PropertyPage({ params }: { params: { slug: string 
           </div>  
           <GalleryLightbox  
             images={property.gallery.map((img: string) => proxyUrl(img))}  
-            name={property.name}  
+            propertyName={property.name}  
           />  
         </section>  
       )}
