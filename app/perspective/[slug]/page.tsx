@@ -16,7 +16,7 @@ export default async function PerspectiveDetail({ params }: { params: Promise<{ 
       WHERE slug = ${slug} OR id::text = ${slug}   
       LIMIT 1  
     `
-
+ 
     if (rows.length === 0) {  
       notFound()  
     }
