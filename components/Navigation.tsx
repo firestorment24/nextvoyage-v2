@@ -32,7 +32,7 @@ export default function Navigation() {
   return (
     <>
       {/* Fixed top bar — fully transparent background */}
-      <nav className="fixed top-0 left-0 w-full z-[1000] bg-transparent">
+      <nav className="fixed top-0 left-0 w-full z-[9999] bg-transparent">
         <div className="flex items-center justify-between px-6 md:px-10 py-5">
           {/* Brand — left side, links to home */}
           <Link
@@ -49,7 +49,7 @@ export default function Navigation() {
             type="button"
             onClick={() => setIsOpen(true)}
             aria-label="Open menu"
-            className="z-[1001] text-[#C5A059] hover:text-[#D4AF37] transition-colors duration-300"
+            className="z-[10000] text-[#C5A059] hover:text-[#D4AF37] transition-colors duration-300"
           >
             <Menu size={26} strokeWidth={1.5} />
           </button>
@@ -58,7 +58,7 @@ export default function Navigation() {
 
       {/* Full-screen overlay menu — pure black */}
       <div
-        className={`fixed inset-0 z-[999] flex flex-col items-center justify-center transition-all duration-700 ease-in-out ${
+        className={`fixed inset-0 z-[9998] flex flex-col items-center justify-center transition-all duration-700 ease-in-out ${
           isOpen
             ? "opacity-100 visible pointer-events-auto"
             : "opacity-0 invisible pointer-events-none"
@@ -87,7 +87,7 @@ export default function Navigation() {
           type="button"
           onClick={() => setIsOpen(false)}
           aria-label="Close menu"
-          className="z-[1001] absolute top-6 right-6 md:right-10 text-[#C5A059] hover:text-[#D4AF37] transition-colors duration-300"
+          className="z-[10000] absolute top-6 right-6 md:right-10 text-[#C5A059] hover:text-[#D4AF37] transition-colors duration-300"
         >
           <X size={28} strokeWidth={1.5} />
         </button>
