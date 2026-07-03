@@ -19,10 +19,10 @@ export default async function PerspectiveDetailPage({
 
   if (!article) notFound()
 
-  const imageUrl = article.image?.startsWith("http")  
-    ? article.image  
-    : article.image  
-      ? `https://nextvoyage-website.s3.us-east-1.amazonaws.com/${article.image}`  
+  const imageUrl = article.image_url?.startsWith("http")  
+    ? article.image_url  
+    : article.image_url  
+      ? `https://nextvoyage-website.s3.us-east-1.amazonaws.com/${article.image_url}`  
       : null
 
   return (  
@@ -80,7 +80,6 @@ export default async function PerspectiveDetailPage({
                 day: "numeric",  
               })}</span>  
             )}  
-            {article.readTime && <span>· {article.readTime} min read</span>}  
           </div>  
         </div>  
       </div>
