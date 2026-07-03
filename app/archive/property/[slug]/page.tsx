@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'  
-import Navigation from '../../../components/Navigation'  
-import Footer from '../../../components/Footer'  
-import { properties } from '../../../data/properties'  
+import Navigation from '../../../../components/Navigation'  
+import Footer from '../../../../components/Footer'  
+import { properties } from '../../../../data/properties'  
 import GalleryLightbox from './GalleryLightbox'
 
 export default async function PropertyPage({ params }: { params: { slug: string } }) {  
