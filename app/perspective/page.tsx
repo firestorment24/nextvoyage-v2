@@ -3,7 +3,8 @@ import Link from 'next/link'
 import Navigation from '@/components/Navigation'  
 import Footer from '@/components/Footer'
 
-export const revalidate = 0
+export const revalidate = 0  
+export const dynamic = 'force-dynamic'
 
 export default async function PerspectivePage() {  
   const { rows: articles } = await sql`  
@@ -14,8 +15,7 @@ export default async function PerspectivePage() {
 
   return (  
     <div className="min-h-screen bg-[#0A0A0A] text-white font-serif selection:bg-[#D4AF37] selection:text-black">  
-      <Navigation />
-
+      <Navigation />  
       <main className="pt-32 pb-20 px-6">  
         <div className="max-w-7xl mx-auto">  
           <header className="mb-20 text-center">  
@@ -66,8 +66,7 @@ export default async function PerspectivePage() {
             </div>  
           )}  
         </div>  
-      </main>
-
+      </main>  
       <Footer />  
     </div>  
   )  
