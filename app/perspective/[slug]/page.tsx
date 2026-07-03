@@ -4,7 +4,8 @@ import { notFound } from 'next/navigation'
 import Navigation from '@/components/Navigation'  
 import Footer from '@/components/Footer'
 
-export const revalidate = 0
+export const revalidate = 0  
+export const dynamic = 'force-dynamic'
 
 export default async function ArticlePage({  
   params,  
@@ -31,7 +32,6 @@ export default async function ArticlePage({
         <Navigation />
 
         <main className="pt-32 pb-20 px-6 max-w-7xl mx-auto">  
-          {/* Back link */}  
           <div className="mb-12">  
             <Link  
               href="/perspective"  
@@ -42,7 +42,6 @@ export default async function ArticlePage({
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">  
-            {/* Header / Meta */}  
             <div className="lg:col-span-12 mb-8">  
               <span className="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] block mb-4">  
                 {article.category}  
@@ -57,7 +56,6 @@ export default async function ArticlePage({
               </div>  
             </div>
 
-            {/* Hero Image - Color by default, Grayscale on hover */}  
             {article.image_url && (  
               <div className="lg:col-span-12 mb-16 overflow-hidden aspect-[21/9] group relative">  
                 <img  
@@ -69,19 +67,17 @@ export default async function ArticlePage({
               </div>  
             )}
 
-            {/* Main Content */}  
             <div className="lg:col-span-8 lg:col-start-3">  
               <div   
                 className="prose prose-invert prose-lg max-w-none   
-                prose-p:text-white/80 prose-p:leading-relaxed prose-p:mb-8  
-                prose-headings:font-light prose-headings:tracking-tight prose-headings:text-white  
-                prose-strong:text-[#D4AF37] prose-strong:font-normal  
-                prose-blockquote:border-[#D4AF37] prose-blockquote:text-[#D4AF37] prose-blockquote:italic  
-                prose-img:rounded-none"  
+                  prose-p:text-white/80 prose-p:leading-relaxed prose-p:mb-8  
+                  prose-headings:font-light prose-headings:tracking-tight prose-headings:text-white  
+                  prose-strong:text-[#D4AF37] prose-strong:font-normal  
+                  prose-blockquote:border-[#D4AF37] prose-blockquote:text-[#D4AF37] prose-blockquote:italic  
+                  prose-img:rounded-none"  
                 dangerouslySetInnerHTML={{ __html: article.content_html || article.body }}  
               />
 
-              {/* Tags */}  
               {article.tags && article.tags.length > 0 && (  
                 <div className="mt-20 pt-10 border-t border-white/10 flex flex-wrap gap-3">  
                   {article.tags.map((tag: string) => (  
@@ -99,13 +95,6 @@ export default async function ArticlePage({
         </main>
 
         <Footer />  
-          
-        {/* Global override to ensure the dark aesthetic is forced */}  
-        <style dangerouslySetInnerHTML={{ __html: `  
-          body { background-color: #0A0A0A ! from: !important; }  
-          .prose p { margin-bottom: 2rem; font-size: 1.125rem; line-height: 1.8; }  
-          .prose h2 { font-size: 2rem; margin-top: 3rem; margin-bottom: 1.5rem; color: #D4AF37; }  
-        `}} />  
       </div>  
     )  
   } catch (error) {  
