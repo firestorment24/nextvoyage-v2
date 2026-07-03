@@ -1,5 +1,8 @@
 // app/mandate/page.tsx
 
+import Image from "next/image";  
+import Link from "next/link";
+
 export default function MandatePage() {  
   return (  
     <main className="relative w-full">  
@@ -62,9 +65,9 @@ export default function MandatePage() {
             Founder&apos;s Note  
           </span>  
           <p className="text-xl md:text-2xl text-[#e8e0d0]/90 font-light leading-relaxed italic">  
-            "I built NexVoyage because I wanted a world that didn't exist — one where ambition meets  
+            &ldquo;I built NexVoyage because I wanted a world that didn&apos;t exist — one where ambition meets  
             absolute privacy, where every detail is intentional, and where travel becomes the  
-            foundation of a legacy. This isn't a business. It's a standard."  
+            foundation of a legacy. This isn&apos;t a business. It&apos;s a standard.&rdquo;  
           </p>  
           <p className="mt-8 text-[#d4af37] font-serif text-lg">— Daryl Clark</p>  
         </div>  
