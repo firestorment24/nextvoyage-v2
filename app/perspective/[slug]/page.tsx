@@ -1,70 +1,123 @@
-import { sql } from "@vercel/postgres";  
-import { notFound } from "next/navigation";
+import { sql } from '@vercel/postgres'  
+import Link from 'next/link'  
+import { notFound } from 'next/navigation'  
+import Navigation from '@/components/Navigation'  
+import Footer from '@/components/Footer'
 
-export const revalidate = 0;
+export const revalidate = 0
 
 export default async function ArticlePage({  
   params,  
 }: {  
-  params: Promise<{ slug: string }>;  
+  params: Promise<{ slug: string }>  
 }) {  
-  const resolvedParams = await params;  
-  const slug = resolvedParams?.slug;
-
-  if (!slug) notFound();
-
-  let article: any = null;
+  const { slug } = await params
 
   try {  
     const { rows } = await sql`  
-      SELECT * FROM perspective_articles  
-      WHERE slug = ${slug}  
+      SELECT * FROM perspective_articles   
+      WHERE slug = ${slug} OR id::text = ${slug}  
       LIMIT 1  
-    `;  
-    article = rows[0] || null;  
-  } catch (e) {  
-    console.error("Failed to fetch article:", e);  
-  }
+    `
 
-  if (!article) notFound();
+    if (rows.length === 0) {  
+      notFound()  
+    }
 
-  return (  
-    <article className="min-h-screen bg-black text-white px-6 py-20 md:px-20 max-w-3xl mx-auto">  
-      <a href="/perspective" className="text-zinc-500 hover:text-amber-400 text-sm mb-8 inline-block">  
-        ← Back to Perspective  
-      </a>
+    const article = rows[0]
 
-      <span className="text-xs uppercase tracking-widest text-amber-500">  
-        {article.category || "Uncategorized"}  
-      </span>
+    return (  
+      <div className="min-h-screen bg-[#0A0A0A] text-[#FCFAF7] font-serif selection:bg-[#D4AF37] selection:text-black">  
+        <Navigation />
 
-      <h1 className="text-4xl md:text-5xl font-light mt-2 mb-4">{article.title}</h1>
+        <main className="pt-32 pb-20 px-6 max-w-7xl mx-auto">  
+          {/* Back link */}  
+          <div className="mb-12">  
+            <Link  
+              href="/perspective"  
+              className="text-[#D4AF37] hover:text-white transition-colors duration-300 flex items-center gap-2 group tracking-widest text-xs uppercase"  
+            >  
+              <span className="group-hover:-translate-x-1 transition-transform">←</span> Back to Perspective  
+            </Link>  
+          </div>
 
-      <div className="flex items-center gap-4 text-sm text-zinc-500 mb-10">  
-        <span>{article.author}</span>  
-        <span>·</span>  
-        <span>  
-          {article.published_at  
-            ? new Date(article.published_at).toLocaleDateString("en-US", {  
-                year: "numeric",  
-                month: "long",  
-                day: "numeric",  
-              })  
-            : ""}  
-        </span>  
-      </div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">  
+            {/* Header / Meta */}  
+            <div className="lg:col-span-12 mb-8">  
+              <span className="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] block mb-4">  
+                {article.category}  
+              </span>  
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[1.1] mb-8">  
+                {article.title}  
+              </h1>  
+                
+              <div className="flex flex-wrap items-center gap-8 text-[10px] uppercase tracking-widest text-white/40 border-y border-white/10 py-6">  
+                <div>Written by <span className="text-white ml-1">{article.author || 'NexVoyage Editorial'}</span></div>  
+                <div>Published <span className="text-white ml-1">{new Date(article.published_at || article.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span></div>  
+              </div>  
+            </div>
 
-      {article.image_url && (  
-        <div  
-          className="w-full h-72 md:h-96 rounded-xl mb-10 bg-cover bg-center"  
-          style={{ backgroundImage: `url(${article.image_url})` }}  
-        />  
-      )}
+            {/* Hero Image - Color by default, Grayscale on hover */}  
+            {article.image_url && (  
+              <div className="lg:col-span-12 mb-16 overflow-hidden aspect-[21/9] group relative">  
+                <img  
+                  src={article.image_url}  
+                  alt={article.title}  
+                  className="w-full h-full object-cover transition-all duration-700 ease-in-out filter grayscale-0 group-hover:grayscale group-hover:scale-105"  
+                />  
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent opacity-60" />  
+              </div>  
+            )}
 
-      <div  
-        className="prose prose-invert prose-amber max-w-none leading-relaxed"  
-        dangerouslySetInnerHTML={{ __html: article.content }}  
-      />  
-    </article>  
-  );  
+            {/* Main Content */}  
+            <div className="lg:col-span-8 lg:col-start-3">  
+              <div   
+                className="prose prose-invert prose-lg max-w-none   
+                prose-p:text-white/80 prose-p:leading-relaxed prose-p:mb-8  
+                prose-headings:font-light prose-headings:tracking-tight prose-headings:text-white  
+                prose-strong:text-[#D4AF37] prose-strong:font-normal  
+                prose-blockquote:border-[#D4AF37] prose-blockquote:text-[#D4AF37] prose-blockquote:italic  
+                prose-img:rounded-none"  
+                dangerouslySetInnerHTML={{ __html: article.content_html || article.body }}  
+              />
+
+              {/* Tags */}  
+              {article.tags && article.tags.length > 0 && (  
+                <div className="mt-20 pt-10 border-t border-white/10 flex flex-wrap gap-3">  
+                  {article.tags.map((tag: string) => (  
+                    <span   
+                      key={tag}   
+                      className="px-4 py-1.5 border border-white/20 text-[9px] uppercase tracking-[0.2em] text-white/60 hover:border-[#D4AF37] hover:text-[#D4AF37] transition-colors duration-300"  
+                    >  
+                      {tag}  
+                    </span>  
+                  ))}  
+                </div>  
+              )}  
+            </div>  
+          </div>  
+        </main>
+
+        <Footer />  
+          
+        {/* Global override to ensure the dark aesthetic is forced */}  
+        <style dangerouslySetInnerHTML={{ __html: `  
+          body { background-color: #0A0A0A ! from: !important; }  
+          .prose p { margin-bottom: 2rem; font-size: 1.125rem; line-height: 1.8; }  
+          .prose h2 { font-size: 2rem; margin-top: 3rem; margin-bottom: 1.5rem; color: #D4AF37; }  
+        `}} />  
+      </div>  
+    )  
+  } catch (error) {  
+    console.error('Error fetching article:', error)  
+    return (  
+      <div className="min-h-screen bg-black text-white flex items-center justify-center p-10">  
+        <div className="text-center">  
+          <h2 className="text-2xl font-light mb-4 text-[#D4AF37]">SYSTEM_CRASH</h2>  
+          <p className="text-xs tracking-widest text-white/40 uppercase">Connection to perspective_ledger lost.</p>  
+          <Link href="/perspective" className="mt-8 inline-block text-[10px] uppercase tracking-widest border-b border-[#D4AF37] pb-1">Return to Archive</Link>  
+        </div>  
+      </div>  
+    )  
+  }  
 }  
