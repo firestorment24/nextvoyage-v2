@@ -1,52 +1,68 @@
-import { sql } from '@vercel/postgres';  
-import Link from 'next/link';  
-import Image from 'next/image';
+import Link from "next/link";  
+import { sql } from "@vercel/postgres";
+
+export const revalidate = 0;
 
 export default async function PerspectivePage() {  
-  const { rows: articles } = await sql`  
-    SELECT * FROM perspective_articles   
-    ORDER BY publish_date DESC  
-  `;
+  let articles: any[] = [];
+
+  try {  
+    const { rows } = await sql`  
+      SELECT id, slug, title, excerpt, category, image_url, author, published_at  
+      FROM perspective_articles  
+      ORDER BY published_at DESC, created_at DESC  
+    `;  
+    articles = rows;  
+  } catch (e) {  
+    console.error("Failed to fetch perspective articles:", e);  
+  }
 
   return (  
-    <div className="min-h-screen bg-black text-[#d4af37] font-serif p-8 pt-24">  
-      <header className="max-w-7xl mx-auto mb-16 text-center">  
-        <h1 className="text-5xl md:text-7xl font-light tracking-widest uppercase mb-4">Perspective</h1>  
-        <p className="text-sm tracking-[0.3em] uppercase opacity-60 italic">The NexVoyage Collective Editorial</p>  
-      </header>
+    <main className="min-h-screen bg-black text-white px-6 py-20 md:px-20">  
+      <h1 className="text-4xl md:text-6xl font-light tracking-tight mb-2">Perspective</h1>  
+      <p className="text-zinc-400 text-lg mb-12 max-w-xl">  
+        A journal of quiet intelligence for the discerning traveler.  
+      </p>
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">  
-        {articles.map((article) => (  
-          <Link   
-            key={article.slug}   
-            href={`/perspective/${article.slug}`}  
-            className="group block space-y-6 border border-[#d4af37]/10 p-6 hover:border-[#d4af37]/40 transition-all duration-500"  
-          >  
-            <div className="relative aspect-[4/5] overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">  
-              <Image  
-                src={article.image_url}  
-                alt={article.title}  
-                fill  
-                className="object-cover transform group-hover:scale-105 transition-transform duration-1000"  
-              />  
-              <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />  
-            </div>  
-              
-            <div className="space-y-3">  
-              <div className="flex justify-between items-center text-[10px] tracking-[0.2em] uppercase opacity-50">  
-                <span>{article.category}</span>  
-                <span>{new Date(article.publish_date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</span>  
-              </div>  
-              <h2 className="text-2xl font-light leading-tight group-hover:text-white transition-colors">  
+      {articles.length === 0 ? (  
+        <p className="text-zinc-600 italic">No articles yet. The first edition is being composed.</p>  
+      ) : (  
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">  
+          {articles.map((article) => (  
+            <Link  
+              key={article.id}  
+              href={`/perspective/${article.slug || article.id}`}  
+              className="group block border border-zinc-800 rounded-xl p-6 hover:border-zinc-600 transition-colors"  
+            >  
+              {article.image_url && (  
+                <div  
+                  className="w-full h-48 rounded-lg mb-4 bg-cover bg-center"  
+                  style={{ backgroundImage: `url(${article.image_url})` }}  
+                />  
+              )}  
+              <span className="text-xs uppercase tracking-widest text-amber-500">  
+                {article.category || "Uncategorized"}  
+              </span>  
+              <h2 className="text-xl font-medium mt-1 group-hover:text-amber-400 transition-colors">  
                 {article.title}  
               </h2>  
-              <p className="text-sm leading-relaxed opacity-70 line-clamp-3 font-sans font-light text-gray-300">  
-                {article.excerpt}  
-              </p>  
-            </div>  
-          </Link>  
-        ))}  
-      </div>  
-    </div>  
+              <p className="text-zinc-400 text-sm mt-2 line-clamp-2">{article.excerpt}</p>  
+              <div className="flex items-center justify-between mt-4 text-xs text-zinc-600">  
+                <span>{article.author}</span>  
+                <span>  
+                  {article.published_at  
+                    ? new Date(article.published_at).toLocaleDateString("en-US", {  
+                        year: "numeric",  
+                        month: "short",  
+                        day: "numeric",  
+                      })  
+                    : ""}  
+                </span>  
+              </div>  
+            </Link>  
+          ))}  
+        </div>  
+      )}  
+    </main>  
   );  
 }  
