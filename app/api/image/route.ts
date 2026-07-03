@@ -1,68 +1,30 @@
-import { NextRequest, NextResponse } from 'next/server'  
-import { get } from '@vercel/blob'
-
-export const dynamic = 'force-dynamic'
+import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(request: NextRequest) {  
-const { searchParams } = new URL(request.url)  
-const imageUrl = searchParams.get('url')
+  const url = request.nextUrl.searchParams.get('url')  
+  if (!url) {  
+    return new NextResponse('Missing url parameter', { status: 400 })  
+  }
 
-if (!imageUrl) {  
-  return new NextResponse('Missing url parameter', { status: 400 })  
-}
+  try {  
+    const res = await fetch(decodeURIComponent(url), {  
+      headers: process.env.BLOB_READ_WRITE_TOKEN  
+        ? { Authorization: `Bearer ${process.env.BLOB_READ_WRITE_TOKEN}` }  
+        : {},  
+    })
 
-try {  
-  // Use SDK for private blobs, raw fetch for everything else  
-  if (imageUrl.includes('.private.blob.vercel-storage.com')) {  
-    const result = await get(imageUrl, { access: 'private' })
-
-    if (!result) {  
-      return new NextResponse('Blob not found', { status: 404 })  
+    if (!res.ok) {  
+      return new NextResponse('Image fetch failed', { status: res.status })  
     }
 
-    const { stream, blob: metadata } = result
-
-    if (!stream) {  
-      return new NextResponse('Not modified', { status: 304 })  
-    }
-
-    // Convert stream to buffer  
-    const reader = stream.getReader()  
-    const chunks: Uint8Array[] = []  
-    while (true) {  
-      const { done, value } = await reader.read()  
-      if (done) break  
-      chunks.push(value)  
-    }  
-    const buffer = Buffer.concat(chunks)
-
-    return new NextResponse(buffer, {  
-      status: 200,  
+    const blob = await res.blob()  
+    return new NextResponse(blob, {  
       headers: {  
-        'Content-Type': metadata.contentType || 'image/jpeg',  
+        'Content-Type': blob.type || 'image/jpeg',  
         'Cache-Control': 'public, max-age=31536000, immutable',  
       },  
     })  
-  }
-
-  // Non-blob URLs: regular fetch  
-  const response = await fetch(imageUrl)  
-  if (!response.ok) {  
-    return new NextResponse(`Failed to fetch image: ${response.statusText}`, {  
-      status: response.status,  
-    })  
-  }
-
-  const buffer = Buffer.from(await response.arrayBuffer())  
-  return new NextResponse(buffer, {  
-    status: 200,  
-    headers: {  
-      'Content-Type': response.headers.get('content-type') || 'image/jpeg',  
-      'Cache-Control': 'public, max-age=31536000, immutable',  
-    },  
-  })  
-} catch (error) {  
-  console.error('Image proxy error:', error)  
-  return new NextResponse('Internal server error', { status: 500 })  
-}  
+  } catch {  
+    return new NextResponse('Internal server error', { status: 500 })  
+  }  
 }  
