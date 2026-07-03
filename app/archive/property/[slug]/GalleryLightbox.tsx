@@ -6,7 +6,7 @@ interface GalleryLightboxProps {
   images: string[]  
   propertyName: string  
 }
- 
+  
 export default function GalleryLightbox({ images, propertyName }: GalleryLightboxProps) {  
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
 
