@@ -8,7 +8,7 @@ export async function generateStaticParams() {
   const articles = await getArticles()  
   return articles.map((a: { slug: string }) => ({ slug: a.slug }))  
 }
-
+ 
 export default async function PerspectiveDetailPage({  
   params,  
 }: {  
