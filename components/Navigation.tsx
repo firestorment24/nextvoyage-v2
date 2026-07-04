@@ -36,7 +36,7 @@ const Navigation = () => {
           href="/"   
           className="text-2xl font-serif tracking-[0.2em] text-[#C5A059] hover:opacity-80 transition-opacity pointer-events-auto"  
         >  
-          NEXVOYAGE COLLECTVE  
+          NEXVOYAGE COLLECTIVE  
         </Link>
 
         <button  
