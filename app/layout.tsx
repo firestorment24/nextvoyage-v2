@@ -1,5 +1,6 @@
 import './globals.css';  
-import Navigation from '@/components/Navigation';
+import Navigation from '@/components/Navigation';  
+import DiscoveryCallCTA from '@/components/DiscoveryCallCTA';
 
 export const metadata = {  
   title: 'NexVoyage Collective',  
@@ -14,11 +15,9 @@ export default function RootLayout({
   return (  
     <html lang="en">  
       <body className="bg-[#0A0A0A] font-sans antialiased">  
-        {/* This ensures the Nav is at the top of EVERY page */}  
         <Navigation />  
-          
-        {/* This is where all your page content renders */}  
         {children}  
+        <DiscoveryCallCTA />  
       </body>  
     </html>  
   );  
