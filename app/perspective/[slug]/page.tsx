@@ -2,7 +2,7 @@ import { sql } from '@vercel/postgres'
 import { notFound } from 'next/navigation'  
 import Link from 'next/link'  
 import Navigation from '@/components/Navigation'  
-
+ 
 
 export const revalidate = 0  
 export const dynamic = 'force-dynamic'
