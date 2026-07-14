@@ -67,7 +67,7 @@ export default async function PerspectivePage() {
           )}  
         </div>  
       </main>  
-      <Footer />  
+    
     </div>  
   )  
 }  
