@@ -1,24 +1,26 @@
 import './globals.css';  
 import Navigation from '@/components/Navigation';  
+import Footer from '@/components/Footer';  
 import DiscoveryCallCTA from '@/components/DiscoveryCallCTA';
 
 export const metadata = {  
-  title: 'NexVoyage Collective',  
-  description: 'Luxury Travel Redefined',  
+title: 'NexVoyage Collective',  
+description: 'Luxury Travel Redefined',  
 };
 
 export default function RootLayout({  
-  children,  
+children,  
 }: {  
-  children: React.ReactNode;  
+children: React.ReactNode;  
 }) {  
-  return (  
-    <html lang="en">  
-      <body className="bg-[#0A0A0A] font-sans antialiased">  
-        <Navigation />  
-        {children}  
-        <DiscoveryCallCTA />  
-      </body>  
-    </html>  
-  );  
+return (  
+  <html lang="en">  
+    <body className="bg-[#0A0A0A] font-sans antialiased">  
+      <Navigation />  
+      {children}  
+      <Footer />  
+      <DiscoveryCallCTA />  
+    </body>  
+  </html>  
+);  
 }  
