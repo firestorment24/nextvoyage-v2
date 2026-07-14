@@ -28,6 +28,11 @@ Home
 </Link>  
 </li>  
 <li>  
+<Link href="/mandate" className="text-white/40 text-sm font-sans font-light hover:text-white transition-colors">  
+The Mandate  
+</Link>  
+</li>  
+<li>  
 <Link href="/archive" className="text-white/40 text-sm font-sans font-light hover:text-white transition-colors">  
 Archive  
 </Link>  
@@ -35,6 +40,16 @@ Archive
 <li>  
 <Link href="/perspective" className="text-white/40 text-sm font-sans font-light hover:text-white transition-colors">  
 Perspective  
+</Link>  
+</li>  
+<li>  
+<Link href="/inquiry" className="text-white/40 text-sm font-sans font-light hover:text-white transition-colors">  
+Application for Entry  
+</Link>  
+</li>  
+<li>  
+<Link href="/legal" className="text-white/40 text-sm font-sans font-light hover:text-white transition-colors">  
+Legal  
 </Link>  
 </li>  
 </ul>  
@@ -60,7 +75,7 @@ Discovery Call
 href="mailto:hello@nexvoyagecollective.com"   
 className="text-white/40 text-sm font-sans font-light hover:text-white transition-colors"  
 >  
-info@nexvoyagecollective.com  
+hello@nexvoyagecollective.com  
 </a>  
 </li>  
 </ul>  
