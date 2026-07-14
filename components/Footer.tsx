@@ -72,7 +72,7 @@ Discovery Call
 </li>  
 <li>  
 <a   
-href="mailto:hello@nexvoyagecollective.com"   
+href="mailto:info@nexvoyagecollective.com"   
 className="text-white/40 text-sm font-sans font-light hover:text-white transition-colors"  
 >  
 info@nexvoyagecollective.com  
