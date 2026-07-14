@@ -18,10 +18,10 @@ const partners = [
 ]
 
 const featured = [  
-{ name: "Amangiri", location: "Canyon Point, Utah, USA", category: "Wild Frontiers", slug: "amangiri", img: "https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Amangiri_Utah/amangiri-aerial-views.webp" },  
-{ name: "Passalacqua", location: "Lake Como, Italy", category: "Heritage & Estate", slug: "passalacqua-lake-como", img: "https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Passalacqua_Lake%20Como_Italy/01-grand-room-al-lago-with-lake-view-ricky-monti.webp" },  
-{ name: "Aman Tokyo", location: "Tokyo, Japan", category: "Urban Sovereigns", slug: "aman-tokyo", img: "https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Aman%20Tokyo/Aman_Tokyo_Suite.webp" },  
-]
+{ name: "Amangiri", location: "Canyon Point, Utah, USA", category: "Wild Frontiers", slug: "amangiri", img: "/api/image?url=https%3A%2F%2Fw0ijk7zmvlb7mxph.private.blob.vercel-storage.com%2FProperty%2520Images%2FAmangiri_Utah%2Famangiri-aerial-views.webp" },  
+{ name: "Passalacqua", location: "Lake Como, Italy", category: "Heritage & Estate", slug: "passalacqua-lake-como", img: "/api/image?url=https%3A%2F%2Fw0ijk7zmvlb7mxph.private.blob.vercel-storage.com%2FProperty%2520Images%2FPassalacqua_Lake%2520Como_Italy%2F01-grand-room-al-lago-with-lake-view-ricky-monti.webp" },  
+{ name: "Aman Tokyo", location: "Tokyo, Japan", category: "Urban Sovereigns", slug: "aman-tokyo", img: "/api/image?url=https%3A%2F%2Fw0ijk7zmvlb7mxph.private.blob.vercel-storage.com%2FProperty%2520Images%2FAman%2520Tokyo%2FAman_Tokyo_Suite.webp" },  
+]  
 
 const testimonials = [  
 { quote: "The level of discretion and curation provided by NexVoyage is unparalleled. They don't just find properties; they find sanctuaries.", author: "Andrew H.", location: "London / NYC" },  
