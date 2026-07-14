@@ -2,7 +2,7 @@ import { sql } from '@vercel/postgres'
 import Link from 'next/link'  
 import Navigation from '@/components/Navigation'  
 import Footer from '@/components/Footer'
-
+ 
 export const revalidate = 0  
 export const dynamic = 'force-dynamic'
 
