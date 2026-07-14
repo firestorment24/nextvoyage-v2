@@ -6,7 +6,7 @@ export default function DiscoveryCallCTA() {
   return (  
     <div className="fixed bottom-8 right-8 z-50">  
       <Link  
-        href="/intake"  
+        href="https://cal.com/nexvoyagecollective/discovery-call?fbclid=IwY2xjawTCb-RleHRuA2FlbQIxMABzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEe8XYAxibxaNnn6SAXQPSGuzjJwM75IolGglB2dj8kK-uoZjle5tjgDzJiZXU_aem_sOkaZM0Nk8_ZA8bEkpGRnQ&user=nexvoyagecollective"  
         className="group relative flex items-center gap-3 bg-[#C8A96E] text-[#0A0A0A]   
                    pl-5 pr-7 py-3.5 rounded-full font-medium text-sm tracking-[0.15em] uppercase  
                    shadow-[0_4px_20px_rgba(200,169,110,0.3)]   
