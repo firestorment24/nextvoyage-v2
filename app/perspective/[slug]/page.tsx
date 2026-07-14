@@ -7,8 +7,8 @@ import Footer from '@/components/Footer'
 export const revalidate = 0  
 export const dynamic = 'force-dynamic'
 
-export default async function ArticlePage({ params }: { params: { slug: string } }) {  
-const { slug } = params
+export default async function ArticlePage(props: { params: Promise<{ slug: string }> }) {  
+const { slug } = await props.params
 
 try {  
 const { rows } = await sql`  
