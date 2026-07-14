@@ -85,7 +85,7 @@ className="text-[9px] uppercase tracking-widest text-white/30 border border-whit
 </div>  
 </main>
 
-<Footer />  
+
 </div>  
 )  
 } catch (error) {  
