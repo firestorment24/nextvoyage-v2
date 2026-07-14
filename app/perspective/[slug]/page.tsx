@@ -60,7 +60,7 @@ className="w-full h-full object-cover"
 )}
 
 {article.content ? (  
-<div className="text-white/70 text-lg font-light font-sans leading-[1.8] space-y-8">  
+<div className="text-white/70 text-lg font-light font-sans leading-[1.8] [&>p]:mb-8 [&>p:last-child]:mb-0">  
 <div dangerouslySetInnerHTML={{ __html: article.content }} />  
 </div>  
 ) : (  
