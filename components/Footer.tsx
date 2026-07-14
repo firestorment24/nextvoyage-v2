@@ -60,7 +60,7 @@ Discovery Call
 href="mailto:hello@nexvoyagecollective.com"   
 className="text-white/40 text-sm font-sans font-light hover:text-white transition-colors"  
 >  
-hello@nexvoyagecollective.com  
+info@nexvoyagecollective.com  
 </a>  
 </li>  
 </ul>  
