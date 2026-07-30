@@ -6,10 +6,11 @@ import Link from 'next/link';
 import { PROPERTY_DATA } from '@/data/properties';
 
 const COLLECTION_ORDER = [  
-'Wild Frontiers',  
-'Urban Sovereigns',  
-'Heritage & Estate',  
-];
+  "Wild Frontiers",  
+  "Urban Sovereigns",  
+  "Heritage & Estate",  
+  "Island & Coast"  
+] as const;  
 
 const proxyUrl = (url: string) => `/api/image?url=${encodeURIComponent(url)}`;
 
