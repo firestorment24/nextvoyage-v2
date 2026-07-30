@@ -707,7 +707,7 @@ export const PROPERTY_DATA: Property[] = [
     intel: {  
       positioning: 'Sleek Caribbean Beach House',  
       category: 'Heritage & Estate',  
-      memberBenefits: ['Private snorkel tour', 'Rum tasting', 'Beachfront spa treatment'] 
+      memberBenefits: ['Private snorkel tour', 'Rum tasting', 'Beachfront spa treatment'] ,
 // --- USA SANCTUARY TIER ---  
   {  
     id: "trinchera-reserve",  
