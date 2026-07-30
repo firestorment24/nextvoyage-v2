@@ -1043,9 +1043,3 @@ export const PROPERTY_DATA: Property[] = [
 
 export const properties = PROPERTY_DATA;  
       
-    }  
-  }  
-]
-
-// Also export as `properties` for backward compatibility  
-export const properties = PROPERTY_DATA  
