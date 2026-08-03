@@ -18,57 +18,77 @@ export default function Navigation() {
 const [isOpen, setIsOpen] = useState(false);
 
 return (  
-  <>  
-    {/* Top Header Bar */}  
-    <header className="fixed top-0 left-0 w-full z-50 bg-transparent px-2 py-4">  
-      <div className="w-full flex items-center justify-between">  
-        <Link   
-          href="/"   
-          className="font-serif text-[#D4AF37] text-xl md:text-2xl tracking-[0.15em] uppercase hover:opacity-80 transition-opacity"  
+<>  
+  {/* Top Header Bar */}  
+  <header className="fixed top-0 left-0 w-full z-50 bg-transparent px-4 py-4">  
+    <div className="w-full flex items-center justify-between">  
+      <Link   
+        href="/"   
+        className="font-serif text-[#D4AF37] text-xl md:text-2xl tracking-[0.15em] uppercase hover:opacity-80 transition-opacity"  
+      >  
+        NEXVOYAGE COLLECTIVE  
+      </Link>  
+      <button  
+        onClick={() => setIsOpen(!isOpen)}  
+        className="text-[#D4AF37] text-xs uppercase tracking-[0.2em] font-medium px-4 py-2 hover:opacity-80 transition-opacity flex items-center gap-2 bg-black/40 border border-[#D4AF37]/30 backdrop-blur-sm"  
+      >  
+        <span>{isOpen ? 'Close' : 'Menu'}</span>  
+        <span className="text-base">{isOpen ? '✕' : '☰'}</span>  
+      </button>  
+    </div>  
+  </header>
+
+  {/* Backdrop */}  
+  {isOpen && (  
+    <div   
+      onClick={() => setIsOpen(false)}  
+      className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm transition-opacity"  
+    />  
+  )}
+
+  {/* Right-Side Slide-Out Drawer */}  
+  <div className={`fixed top-0 right-0 h-full w-full max-w-md z-50 bg-[#2A2A2A] border-l border-[#D4AF37]/20 shadow-2xl transform transition-transform duration-300 ease-in-out flex flex-col justify-between p-8 md:p-12 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>  
+      
+    {/* Drawer Header */}  
+    <div className="flex items-center justify-between border-b border-white/10 pb-6">  
+      <div>  
+        <p className="text-[#D4AF37] text-[10px] uppercase tracking-[0.3em]">Navigation Directory</p>  
+        <h2 className="text-white font-serif text-lg tracking-wider mt-1">NexVoyage Collective</h2>  
+      </div>  
+      <button  
+        onClick={() => setIsOpen(false)}  
+        className="text-[#D4AF37] text-sm uppercase tracking-widest px-3 py-1 border border-[#D4AF37]/30 hover:bg-[#D4AF37]/10 transition-colors"  
+      >  
+        ✕ Close  
+      </button>  
+    </div>
+
+    {/* Navigation Links */}  
+    <nav className="flex flex-col space-y-3 my-auto py-6 overflow-y-auto">  
+      {navLinks.map((link) => (  
+        <Link  
+          key={link.name}  
+          href={link.path}  
+          onClick={() => setIsOpen(false)}  
+          className="group flex items-baseline justify-between py-2 border-b border-white/5 hover:border-[#D4AF37]/40 transition-colors"  
         >  
-          NEXVOYAGE COLLECTIVE  
+          <span className="text-xl md:text-2xl font-light text-white group-hover:text-[#D4AF37] transition-colors">  
+            {link.name}  
+          </span>  
+          <span className="text-[10px] uppercase tracking-[0.2em] text-white/40 group-hover:text-[#D4AF37]/80 transition-colors">  
+            {link.subtitle}  
+          </span>  
         </Link>  
-        <button  
-          onClick={() => setIsOpen(!isOpen)}  
-          className="text-[#D4AF37] text-xs uppercase tracking-[0.2em] font-medium px-4 py-2 hover:opacity-80 transition-opacity flex items-center gap-2"  
-        >  
-          <span>{isOpen ? 'Close' : 'Menu'}</span>  
-          <span className="text-base">{isOpen ? '✕' : '☰'}</span>  
-        </button>  
-      </div>  
-    </header>
+      ))}  
+    </nav>
 
-    {/* Full-Screen Overlay Menu */}  
-    {isOpen && (  
-      <div className="fixed inset-0 z-40 bg-[#2A2A2A]/90 backdrop-blur-md flex flex-col justify-between px-8 md:px-16 pt-32 pb-16 animate-fadeIn">  
-        <div className="max-w-3xl w-full mx-auto space-y-8">  
-          <p className="text-[#D4AF37] text-[10px] uppercase tracking-[0.3em]">Navigation Directory</p>  
-            
-          <nav className="flex flex-col space-y-3 md:space-y-4">  
-            {navLinks.map((link) => (  
-              <Link  
-                key={link.name}  
-                href={link.path}  
-                onClick={() => setIsOpen(false)}  
-                className="group flex items-baseline justify-between py-1 border-b border-white/5 hover:border-[#D4AF37]/40 transition-colors"  
-              >  
-                <span className="text-xl md:text-2xl font-light text-white group-hover:text-[#D4AF37] transition-colors">  
-                  {link.name}  
-                </span>  
-                <span className="text-[10px] uppercase tracking-[0.2em] text-white/40 group-hover:text-[#D4AF37]/80 transition-colors">  
-                  {link.subtitle}  
-                </span>  
-              </Link>  
-            ))}  
-          </nav>  
-        </div>
+    {/* Drawer Footer */}  
+    <div className="pt-6 border-t border-white/10 flex items-center justify-between text-[11px] text-white/40">  
+      <span>Private • Discreet • Curated</span>  
+      <span>© 2026</span>  
+    </div>
 
-        <div className="max-w-3xl w-full mx-auto pt-6 border-t border-white/10 flex items-center justify-between text-xs text-white/40">  
-          <span>Private • Discreet • Curated</span>  
-          <span>NexVoyage Collective © 2026</span>  
-        </div>  
-      </div>  
-    )}  
-  </>  
+  </div>  
+</>  
 );  
 }  
