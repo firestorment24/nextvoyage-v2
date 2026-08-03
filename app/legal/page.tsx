@@ -1,74 +1,58 @@
-import React from 'react'  
-import Link from 'next/link'
+import Link from 'next/link';
 
-export default function LegalIndex() {  
-  const protocols = [  
-    {  
-      id: '01',  
-      title: 'Privacy Architecture & Data Sovereignty',  
-      slug: 'privacy',  
-      description: 'Our protocols for the protection of your digital and physical footprint.'  
-    },  
-    {  
-      id: '02',  
-      title: 'Terms of Engagement',  
-      slug: 'terms',  
-      description: 'The governing agreement for service execution and liability architecture.'  
-    },  
-    {  
-      id: '03',  
-      title: 'The Sanctuary Protocol',  
-      slug: 'vetting',  
-      description: 'Our criteria for membership and the vetting of high-net-worth travelers.'  
-    },  
-    {  
-      id: '04',  
-      title: 'The NexVoyage Standard',  
-      slug: 'security',  
-      description: 'Our dual commitment to absolute security and cultural stewardship.'  
-    }  
-  ]
-
+export default function LegalPage() {  
   return (  
-    <div className="min-h-screen bg-[#0a0a0a] text-[#d4d4d4] font-serif">  
-      <nav className="p-8 border-b border-[#1a1a1a]">  
-        <Link href="/" className="text-sm uppercase tracking-[0.3em] opacity-40 hover:opacity-100 transition-opacity">  
-          ← Back to Collective  
-        </Link>  
-      </nav>
+    <main className="min-h-screen bg-[#0A0A0A] text-white selection:bg-[#C5A059]/30 pt-32 pb-24 px-6 md:px-12">  
+      <div className="max-w-4xl mx-auto space-y-12">  
+        {/* Header */}  
+        <div className="border-b border-white/10 pb-8">  
+          <p className="text-[#C5A059] text-xs uppercase tracking-[0.3em] font-medium mb-3">Governance & Stewardship</p>  
+          <h1 className="text-4xl md:text-5xl font-light tracking-tight text-white mb-4">Legal & Discretion Protocols</h1>  
+          <p className="text-white/60 text-sm md:text-base leading-relaxed">  
+            The standards governing privacy, advisory mandates, and confidentiality across the NexVoyage Collective ecosystem.  
+          </p>  
+        </div>
 
-      <main className="max-w-4xl mx-auto px-8 py-24">  
-        <header className="mb-24">  
-          <h1 className="text-6xl font-light tracking-tight mb-6">The Protocols</h1>  
-          <p className="text-xl opacity-50 italic">Legal Framework & Architecture of the Collective.</p>  
-          <div className="h-[1px] w-24 bg-[#d4d4d4] mt-12 opacity-20"></div>  
-        </header>
+        {/* Section 1: Confidentiality & Privacy */}  
+        <section className="space-y-4">  
+          <h2 className="text-xl font-medium text-[#C5A059] tracking-wide">01. Absolute Discretion & Privacy</h2>  
+          <p className="text-white/70 text-sm md:text-base leading-relaxed">  
+            We operate on the foundational principle that true luxury is unlisted and unseen. All client communications, itinerary details, private collection inquiries, and asset access arrangements are held under strict non-disclosure standards. We do not monetize, distribute, or broker client data.  
+          </p>  
+        </section>
 
-        <div className="grid gap-16">  
-          {protocols.map((protocol) => (  
-            <Link   
-              key={protocol.id}   
-              href={`/legal/${protocol.slug}`}  
-              className="group block border-b border-[#1a1a1a] pb-12 hover:border-[#d4d4d4] transition-colors"  
-            >  
-              <div className="flex justify-between items-start">  
-                <div className="space-y-4">  
-                  <span className="text-xs font-sans tracking-[0.3em] uppercase opacity-30">Protocol {protocol.id}</span>  
-                  <h2 className="text-3xl font-light group-hover:translate-x-2 transition-transform duration-500">  
-                    {protocol.title}  
-                  </h2>  
-                  <p className="text-lg opacity-50 font-sans max-w-xl">{protocol.description}</p>  
-                </div>  
-                <span className="text-2xl font-light opacity-0 group-hover:opacity-100 transition-opacity">→</span>  
-              </div>  
-            </Link>  
-          ))}  
+        {/* Section 2: Advisory & Itinerary Mandates */}  
+        <section className="space-y-4">  
+          <h2 className="text-xl font-medium text-[#C5A059] tracking-wide">02. Advisory Engagements</h2>  
+          <p className="text-white/70 text-sm md:text-base leading-relaxed">  
+            Engagement with NexVoyage Collective for private collection curation, estate acquisitions, or bespoke event access is governed by individual advisory mandates. All proposals, private aviation routings, and unlisted property allocations are provisional until confirmed through direct concierge stewardship.  
+          </p>  
+        </section>
+
+        {/* Section 3: Intellectual Property */}  
+        <section className="space-y-4">  
+          <h2 className="text-xl font-medium text-[#C5A059] tracking-wide">03. Intellectual Property & Editorial</h2>  
+          <p className="text-white/70 text-sm md:text-base leading-relaxed">  
+            All proprietary frameworks, dossiers, journals, perspective essays, and visual assets published under NexVoyage Collective are protected by copyright. Reproduction or redistribution without explicit written authorization is strictly prohibited.  
+          </p>  
+        </section>
+
+        {/* Section 4: Limitation of Liability */}  
+        <section className="space-y-4">  
+          <h2 className="text-xl font-medium text-[#C5A059] tracking-wide">04. Stewardship & Liability</h2>  
+          <p className="text-white/70 text-sm md:text-base leading-relaxed">  
+            While our stewardship guarantees rigorous vetting of every sanctuary, estate, and partner in our collection, travel within remote wilderness, high alpine, and private maritime corridors involves inherent conditions managed by respective independent operators.  
+          </p>  
+        </section>
+
+        {/* Footer / Return */}  
+        <div className="pt-12 border-t border-white/10 flex items-center justify-between">  
+          <Link href="/" className="text-xs uppercase tracking-[0.2em] text-[#C5A059] hover:text-white transition-colors">  
+            ← Return to Sanctuary  
+          </Link>  
+          <span className="text-white/40 text-xs">NexVoyage Collective © 2026</span>  
         </div>  
-      </main>
-
-      <footer className="p-24 text-center opacity-20 text-xs tracking-widest uppercase">  
-        NexVoyage Collective — Discretion by Design  
-      </footer>  
-    </div>  
-  )  
+      </div>  
+    </main>  
+  );  
 }  
