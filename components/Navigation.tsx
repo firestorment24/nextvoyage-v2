@@ -19,15 +19,16 @@ const Navigation = () => {
     }    
   }, [isOpen])
 
-  const navLinks = [    
-    { name: 'Lobby', path: '/', subtitle: 'Arrival Protocol' },    
-    { name: 'Mandate', path: '/mandate', subtitle: 'The Philosophy' },    
-    { name: 'Perspective', path: '/perspective', subtitle: 'The Intelligence' },    
-    { name: 'Archive', path: '/archive', subtitle: 'Registry of Significance' },    
-    { name: 'Journal', path: '/journal', subtitle: 'Seasonal Intelligence' },    
-    { name: 'Events', path: '/events', subtitle: 'Global Gatherings' },    
-    { name: 'Inquiry', path: '/inquiry', subtitle: 'Begin Consultation' },    
-  ]
+ const navLinks = [  
+  { name: 'Lobby', path: '/', subtitle: 'Arrival Protocol' },  
+  { name: 'Mandate', path: '/mandate', subtitle: 'The Philosophy' },  
+  { name: 'Services', path: '/services', subtitle: 'Private Advisory' },  
+  { name: 'Perspective', path: '/perspective', subtitle: 'The Intelligence' },  
+  { name: 'Archive', path: '/archive', subtitle: 'Registry of Significance' },  
+  { name: 'Journal', path: '/journal', subtitle: 'Seasonal Intelligence' },  
+  { name: 'Events', path: '/events', subtitle: 'Global Gatherings' },  
+  { name: 'Inquiry', path: '/inquiry', subtitle: 'Begin Consultation' },  
+];  
 
   return (    
     <>    
