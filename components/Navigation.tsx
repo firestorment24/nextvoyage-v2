@@ -1,99 +1,74 @@
-'use client'
+'use client';
 
-import React, { useState, useEffect } from 'react'    
-import Link from 'next/link'    
-import { Menu, X } from 'lucide-react'
+import { useState } from 'react';  
+import Link from 'next/link';
 
-const Navigation = () => {    
-  const [isOpen, setIsOpen] = useState(false)
+const navLinks = [  
+{ name: 'Lobby', path: '/', subtitle: 'Arrival Protocol' },  
+{ name: 'Mandate', path: '/mandate', subtitle: 'The Philosophy' },  
+{ name: 'Services', path: '/services', subtitle: 'Private Advisory' },  
+{ name: 'Perspective', path: '/perspective', subtitle: 'The Intelligence' },  
+{ name: 'Archive', path: '/archive', subtitle: 'Registry of Significance' },  
+{ name: 'Journal', path: '/journal', subtitle: 'Seasonal Intelligence' },  
+{ name: 'Events', path: '/events', subtitle: 'Global Gatherings' },  
+{ name: 'Inquiry', path: '/inquiry', subtitle: 'Begin Consultation' },  
+];
 
-  // Prevent scrolling when menu is open    
-  useEffect(() => {    
-    if (isOpen) {    
-      document.body.style.overflow = 'hidden'    
-    } else {    
-      document.body.style.overflow = 'unset'    
-    }    
-    return () => {    
-      document.body.style.overflow = 'unset'    
-    }    
-  }, [isOpen])
+export default function Navigation() {  
+const [isOpen, setIsOpen] = useState(false);
 
- const navLinks = [  
-  { name: 'Lobby', path: '/', subtitle: 'Arrival Protocol' },  
-  { name: 'Mandate', path: '/mandate', subtitle: 'The Philosophy' },  
-  { name: 'Services', path: '/services', subtitle: 'Private Advisory' },  
-  { name: 'Perspective', path: '/perspective', subtitle: 'The Intelligence' },  
-  { name: 'Archive', path: '/archive', subtitle: 'Registry of Significance' },  
-  { name: 'Journal', path: '/journal', subtitle: 'Seasonal Intelligence' },  
-  { name: 'Events', path: '/events', subtitle: 'Global Gatherings' },  
-  { name: 'Inquiry', path: '/inquiry', subtitle: 'Begin Consultation' },  
-];  
+return (  
+  <>  
+    {/* Top Header Bar */}  
+    <header className="fixed top-0 left-0 w-full z-50 bg-transparent px-2 py-4">  
+      <div className="w-full flex items-center justify-between">  
+        <Link   
+          href="/"   
+          className="font-serif text-[#D4AF37] text-xl md:text-2xl tracking-[0.15em] uppercase hover:opacity-80 transition-opacity"  
+        >  
+          NEXVOYAGE COLLECTIVE  
+        </Link>  
+        <button  
+          onClick={() => setIsOpen(!isOpen)}  
+          className="text-[#D4AF37] text-xs uppercase tracking-[0.2em] font-medium px-4 py-2 hover:opacity-80 transition-opacity flex items-center gap-2"  
+        >  
+          <span>{isOpen ? 'Close' : 'Menu'}</span>  
+          <span className="text-base">{isOpen ? '✕' : '☰'}</span>  
+        </button>  
+      </div>  
+    </header>
 
-  return (    
-    <>    
-      {/* Header Bar - High Z-Index to stay above Hero */}    
-      <header className="fixed top-0 left-0 w-full z-[10000] flex justify-between items-center px-6 py-8 md:px-12 bg-transparent pointer-events-none">    
-        <Link     
-          href="/"     
-          className="text-2xl font-serif tracking-[0.2em] text-[#C5A059] hover:opacity-80 transition-opacity pointer-events-auto"    
-        >    
-          NEXVOYAGE COLLECTIVE    
-        </Link>
-
-        <button    
-          onClick={() => setIsOpen(!isOpen)}    
-          className="p-3 bg-[#0A0A0A]/60 rounded-full border border-[#C5A059]/30 text-[#C5A059] hover:bg-[#C5A059] hover:text-[#0A0A0A] transition-all pointer-events-auto"    
-          aria-label="Toggle Menu"    
-        >    
-          {isOpen ? <X size={28} /> : <Menu size={28} />}    
-        </button>    
-      </header>
-
-      {/* Full-Screen Overlay Menu */}    
-      <div    
-        className={`fixed inset-0 z-[9999] bg-[#0A0A0A] transition-all duration-700 ease-in-out ${    
-          isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'    
-        }`}    
-      >    
-        {/* Background Watermark */}    
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">    
-          <span className="text-[20vw] font-serif text-[#C5A059]/[0.02] uppercase tracking-[0.1em] select-none">    
-            Voyage    
-          </span>    
+    {/* Full-Screen Overlay Menu */}  
+    {isOpen && (  
+      <div className="fixed inset-0 z-40 bg-[#2A2A2A]/90 backdrop-blur-md flex flex-col justify-between px-8 md:px-16 pt-32 pb-16 animate-fadeIn">  
+        <div className="max-w-3xl w-full mx-auto space-y-8">  
+          <p className="text-[#D4AF37] text-[10px] uppercase tracking-[0.3em]">Navigation Directory</p>  
+            
+          <nav className="flex flex-col space-y-3 md:space-y-4">  
+            {navLinks.map((link) => (  
+              <Link  
+                key={link.name}  
+                href={link.path}  
+                onClick={() => setIsOpen(false)}  
+                className="group flex items-baseline justify-between py-1 border-b border-white/5 hover:border-[#D4AF37]/40 transition-colors"  
+              >  
+                <span className="text-xl md:text-2xl font-light text-white group-hover:text-[#D4AF37] transition-colors">  
+                  {link.name}  
+                </span>  
+                <span className="text-[10px] uppercase tracking-[0.2em] text-white/40 group-hover:text-[#D4AF37]/80 transition-colors">  
+                  {link.subtitle}  
+                </span>  
+              </Link>  
+            ))}  
+          </nav>  
         </div>
 
-        <nav className="relative h-full flex flex-col justify-center items-center text-center px-6">    
-          <ul className="space-y-6 md:space-y-10">    
-            {navLinks.map((link) => (    
-              <li key={link.name} className="group">    
-                <Link    
-                  href={link.path}    
-                  onClick={() => setIsOpen(false)}    
-                  className="block"    
-                >    
-                  <span className="block text-xs md:text-sm font-mono uppercase tracking-[0.3em] text-[#C5A059]/60 group-hover:text-[#C5A059] transition-colors mb-1">    
-                    {link.subtitle}    
-                  </span>    
-                  <span className="block text-2xl md:text-5xl font-serif text-[#C5A059] group-hover:scale-110 transition-transform duration-500">    
-                    {link.name}    
-                  </span>    
-                </Link>    
-              </li>    
-            ))}    
-          </ul>    
-        </nav>    
-      </div>
-
-      {/* Background Dimmer - Lower Z than Nav, Higher than Page */}    
-      <div     
-        className={`fixed inset-0 z-[9998] bg-black/60 backdrop-blur-sm transition-opacity duration-500 ${    
-          isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'    
-        }`}    
-        onClick={() => setIsOpen(false)}    
-      />    
-    </>    
-  )    
-}
-
-export default Navigation  
+        <div className="max-w-3xl w-full mx-auto pt-6 border-t border-white/10 flex items-center justify-between text-xs text-white/40">  
+          <span>Private • Discreet • Curated</span>  
+          <span>NexVoyage Collective © 2026</span>  
+        </div>  
+      </div>  
+    )}  
+  </>  
+);  
+}  
