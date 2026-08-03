@@ -41,7 +41,7 @@ return (
     <section className="space-y-4">  
       <h2 className="text-xl font-medium text-[#C5A059] tracking-wide">04. Secure Inquiries & DPO Contact</h2>  
       <p className="text-white/70 text-sm md:text-base leading-relaxed">  
-        For inquiries regarding personal data sovereignty or secure profile management, contact our Data Protection Officer directly at <span className="text-[#C5A059]">privacy@nexvoyagecollective.com</span>.  
+        For inquiries regarding personal data sovereignty or secure profile management, contact our Data Protection Officer directly at <span className="text-[#C5A059]">info@nexvoyagecollective.com</span>.  
       </p>  
     </section>
 
