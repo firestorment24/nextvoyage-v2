@@ -171,12 +171,13 @@ const ALL_EVENTS: EventItem[] = [
     description: '19-date arena and amphitheater tour from the pioneer of Chicago drill.'  
   },  
   {  
-    category: 'concerts',  
-    date: '2026 East Coast Run',  
-    location: 'Atlantic City, Brooklyn, Charlotte, Virginia Beach',  
-    subtitle: 'Fetty Wap Nostalgia Tour',  
-    description: 'High-intent 2010s hip-hop nostalgia tour featuring VIP meet-and-greet packages.'  
-  },  
+  category: 'concerts',  
+  date: '2026 East Coast Run',  
+  title: 'Fetty Wap Nostalgia Tour',  
+  location: 'Atlantic City, Brooklyn, Charlotte, Virginia Beach',  
+  subtitle: 'Nostalgia Tour',  
+  description: 'High-intent 2010s hip-hop nostalgia tour featuring VIP meet-and-greet packages.'  
+}, 
   {  
     category: 'concerts',  
     date: 'December 1–15, 2026',  
