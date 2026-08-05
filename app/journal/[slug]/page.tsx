@@ -10,7 +10,7 @@ interface PageProps {
 
 export async function generateStaticParams() {  
   return DESTINATIONS_DATA.map((item) => ({  
-    slug: item.id,  
+    slug: item.slug,  
   }));  
 }
 
