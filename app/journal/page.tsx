@@ -51,9 +51,8 @@ export default function JournalPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16 md:gap-y-24">  
           {(DESTINATIONS_DATA as Destination[]).map((item) => (  
             <Link   
-              key={item.id}   
-              href={`/journal/${getSlug(item.location)}`}  
-              className="group block space-y-6"  
+             key={item.slug}  
+href={`/journal/${item.slug}`}               className="group block space-y-6"  
             >  
               {/* Image Container - Animation Flipped to Color -> Grayscale */}  
               <div className="relative aspect-[4/5] overflow-hidden bg-zinc-900 grayscale-0 group-hover:grayscale transition-all duration-700 ease-in-out">  
