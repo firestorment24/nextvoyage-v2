@@ -1,4 +1,4 @@
-xport interface Destination {  
+export interface Destination {  
 slug: string;  
 title: string;  
 region: string;  
