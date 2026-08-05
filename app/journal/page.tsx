@@ -18,7 +18,7 @@ return (
       }    
       [class*="parchment"], .bg-white, .bg-parchment {     
         background: #050505 !important;     
-        background-image: none !important;    
+        background-image: none !important;     
       }    
       h1, h2, h3 { color: #E5E5E5 !important; }    
     ` }} />
@@ -36,7 +36,7 @@ return (
         </div>    
         <div className="max-w-xs">    
           <p className="text-xs md:text-sm text-zinc-400 leading-relaxed font-light italic">    
-            "Tactical intelligence and seasonal reports from the NexVoyage Collective."    
+            &quot;Tactical intelligence and seasonal reports from the NexVoyage Collective.&quot;    
           </p>    
         </div>    
       </div>    
@@ -47,8 +47,8 @@ return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16 md:gap-y-24">    
         {(DESTINATIONS_DATA as Destination[]).map((item) => (    
           <Link     
-            key={item.slug}    
-            href={`/journal/${item.slug}`}    
+            key={item.id}     
+            href={`/journal/${item.id}`}    
             className="group block space-y-6"    
           >    
             {/* Image Container - Animation Flipped to Color -> Grayscale */}    
@@ -63,7 +63,7 @@ return (
               {/* Meta Overlay */}    
               <div className="absolute top-4 right-4 mix-blend-difference">    
                 <p className="font-mono text-[9px] tracking-widest uppercase text-white/70">    
-                  {item.region}    
+                  {item.coordinates}    
                 </p>    
               </div>    
             </div>
@@ -75,12 +75,12 @@ return (
                   {item.title}    
                 </h2>    
                 <p className="font-mono text-[9px] tracking-[0.2em] text-zinc-500 uppercase">    
-                  Field Report // {item.region}    
+                  Field Report No. {item.id}    
                 </p>    
               </div>    
                   
               <p className="text-xs md:text-sm text-zinc-400 leading-relaxed font-light line-clamp-3">    
-                {item.excerpt}    
+                {item.summary}    
               </p>
 
               {/* Footer Meta */}    
@@ -96,9 +96,9 @@ return (
 
     {/* Footer Navigation */}    
     <footer className="relative py-16 md:py-20 px-6 md:px-12 max-w-7xl mx-auto border-t border-zinc-900/50 flex flex-col md:flex-row justify-between items-center gap-6 text-[9px] md:text-[10px] font-mono tracking-[0.3em] text-zinc-500 uppercase z-10">    
-      <div>End of Ledger // Page 01 of 30</div>    
-      <Link href="/invitation" className="hover:text-white transition-colors underline decoration-zinc-800 underline-offset-8">    
-        Request Access    
+      <div>End of Ledger // Page 01 of 27</div>    
+      <Link href="/inquiry" className="hover:text-white transition-colors underline decoration-zinc-800 underline-offset-8">    
+        Begin Consultation    
       </Link>    
     </footer>    
   </main>    
