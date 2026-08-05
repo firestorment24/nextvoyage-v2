@@ -1,94 +1,147 @@
-// app/mandate/page.tsx
-
-import Image from "next/image";  
-import Link from "next/link";
+import React from 'react';  
+import Link from 'next/link';  
+import Image from 'next/image';
 
 export default function MandatePage() {  
   return (  
-    <main className="relative w-full">  
-      {/* ── Hero Section ── */}  
-      <section className="relative h-screen w-full overflow-hidden">  
-        <Image  
-          src="https://cdn.marblism.com/6bITE0mM6q2.webp"  
-          alt="Private jet arrival at golden hour — exclusive travel begins"  
-          fill  
-          className="object-cover"  
-          style={{ filter: 'brightness(0.45)', transform: 'scale(1.02)', transition: 'transform 1.5s ease' }}  
-          priority  
-        />  
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1a1a1a]/70 via-transparent to-[#0d0d0d]/90" />
+    <main className="min-h-screen bg-[#0A0A0A] text-white font-serif selection:bg-[#D4AF37] selection:text-black">
 
-        <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-6">  
-          <h1 className="text-5xl md:text-7xl font-serif text-[#d4af37] tracking-wide mb-4">  
+      {/* Hero Section */}  
+      <section className="relative h-[70vh] md:h-[80vh] w-full flex items-center justify-center overflow-hidden">  
+        <Image  
+          src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1600&q=80"  
+          alt="NexVoyage Mandate"  
+          fill  
+          className="object-cover opacity-45"  
+          priority  
+          quality={100}  
+        />  
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-[#0A0A0A]" />  
+        <div className="relative z-10 text-center px-6 max-w-4xl mt-12">  
+          <span className="text-[#D4AF37] text-[10px] uppercase tracking-[0.4em] font-sans">  
+            The Philosophy  
+          </span>  
+          <h1 className="text-[#D4AF37] text-4xl md:text-7xl font-light tracking-tight mt-4 mb-6">  
             The Mandate  
           </h1>  
-          <p className="max-w-2xl text-lg md:text-xl text-[#e8e0d0]/80 font-light leading-relaxed">  
-            Curation. Discretion. Legacy. — Three pillars that define every journey we craft.  
+          <p className="text-white/70 text-base md:text-lg font-light tracking-wide max-w-2xl mx-auto font-sans">  
+            We do not sell travel. We curate sovereign enclaves for those who demand absolute discretion and uncompromising access.  
           </p>  
+        </div>  
+      </section>
+
+      {/* Opening Statement */}  
+      <section className="py-24 px-6 max-w-4xl mx-auto text-center border-b border-white/10">  
+        <span className="text-white/30 text-5xl font-serif leading-none block mb-6">“</span>  
+        <blockquote className="text-white/80 text-xl md:text-2xl font-light leading-relaxed italic mb-8">  
+          True luxury is the absence of friction. It is knowing that every detail has been accounted for before you even thought to ask, and that your privacy remains absolute across every global coordinate.  
+        </blockquote>  
+        <div className="h-px w-12 bg-[#D4AF37]/50 mx-auto mb-4" />  
+        <span className="text-[#D4AF37] uppercase tracking-[0.25em] text-xs font-sans font-semibold">  
+          Daryl Clark  
+        </span>  
+        <span className="block text-white/30 text-[10px] uppercase tracking-widest mt-1 font-sans">  
+          Founder &amp; Principal  
+        </span>  
+      </section>
+
+      {/* Four Core Tenets / Architectural Manifesto */}  
+      <section className="py-28 px-6 max-w-6xl mx-auto space-y-32">  
+          
+        {/* Tenet 01 */}  
+        <div className="grid md:grid-cols-2 gap-12 items-center">  
+          <div className="space-y-6">  
+            <span className="text-white/30 text-xs font-mono uppercase tracking-[0.3em]">  
+              01 / Doctrine  
+            </span>  
+            <h2 className="text-3xl md:text-4xl font-light tracking-tight text-white">  
+              Absolute Discretion &amp; Zero-Knowledge Routing  
+            </h2>  
+            <p className="text-white/60 text-sm md:text-base leading-relaxed font-sans font-light">  
+              In an age of hyper-exposure, privacy is the ultimate currency. We operate behind strict non-disclosure frameworks, coordinating private aviation, secure ground transport, and unlisted arrivals without leaving a digital footprint. Your itinerary remains your own.  
+            </p>  
+          </div>  
+          <div className="relative aspect-[4/3] overflow-hidden border border-white/10">  
+            <Image  
+              src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1200&q=80"  
+              alt="Absolute Discretion"  
+              fill  
+              className="object-cover opacity-70 hover:scale-105 transition-transform duration-700"  
+            />  
+          </div>  
         </div>
 
-        {/* scroll indicator */}  
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">  
-          <span className="text-[#d4af37]/60 text-sm tracking-widest uppercase">↓ Scroll</span>  
-        </div>  
+        {/* Tenet 02 */}  
+        <div className="grid md:grid-cols-2 gap-12 items-center">  
+          <div className="relative aspect-[4/3] overflow-hidden border border-white/10 order-2 md:order-1">  
+            <Image  
+              src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1200&q=80"  
+              alt="Unlisted Estates"  
+              fill  
+              className="object-cover opacity-70 hover:scale-105 transition-transform duration-700"  
+            />  
+          </div>  
+          <div className="space-y-6 order-1 md:order-2">  
+            <span className="text-white/30 text-xs font-mono uppercase tracking-[0.3em]">  
+              02 / Doctrine  
+            </span>  
+            <h2 className="text-3xl md:text-4xl font-light tracking-tight text-white">  
+              Unlisted Estates &amp; Off-Market Access  
+            </h2>  
+            <p className="text-white/60 text-sm md:text-base leading-relaxed font-sans font-light">  
+              The world&apos;s finest properties do not have booking engines. Through two decades of direct relationships with property owners, private family offices, and estate curators, we unlock doors that remain entirely closed to public ledgers and standard agencies.  
+            </p>  
+          </div>  
+        </div>
+
+        {/* Tenet 03 */}  
+        <div className="grid md:grid-cols-2 gap-12 items-center">  
+          <div className="space-y-6">  
+            <span className="text-white/30 text-xs font-mono uppercase tracking-[0.3em]">  
+              03 / Doctrine  
+            </span>  
+            <h2 className="text-3xl md:text-4xl font-light tracking-tight text-white">  
+              Strict Roster Caps &amp; Dedicated Bandwidth  
+            </h2>  
+            <p className="text-white/60 text-sm md:text-base leading-relaxed font-sans font-light">  
+              We reject the volume-driven model of modern travel agencies. By intentionally capping our active client roster, we guarantee that every journey is executed with undivided attention, immediate response times, and uncompromising oversight by senior advisors.  
+            </p>  
+          </div>  
+          <div className="relative aspect-[4/3] overflow-hidden border border-white/10">  
+            <Image  
+              src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1200&q=80"  
+              alt="Strict Roster Caps"  
+              fill  
+              className="object-cover opacity-70 hover:scale-105 transition-transform duration-700"  
+            />  
+          </div>  
+        </div>
+
       </section>
 
-      {/* ── Pillars Section ── */}  
-      <section className="bg-[#0d0d0d] px-6 py-24 md:py-32">  
-        <div className="max-w-6xl mx-auto grid gap-16 md:grid-cols-3">  
-          {[  
-            {  
-              title: 'Curation',  
-              body: 'Every destination, every detail, every moment is hand-selected. We don\'t book trips — we compose experiences that feel impossible anywhere else.',  
-            },  
-            {  
-              title: 'Discretion',  
-              body: 'Our network exists in the spaces that don\'t advertise. Private entries, unlisted residences, and relationships built on trust rather than transactions.',  
-            },  
-            {  
-              title: 'Legacy',  
-              body: 'A NexVoyage journey isn\'t a checkbox — it\'s a story your family tells for generations. We build travel that outlives the itinerary.',  
-            },  
-          ].map((pillar) => (  
-            <div key={pillar.title} className="text-center">  
-              <h2 className="text-3xl font-serif text-[#d4af37] mb-4">{pillar.title}</h2>  
-              <p className="text-[#a09880] leading-relaxed">{pillar.body}</p>  
-            </div>  
-          ))}  
-        </div>  
-      </section>
-
-      {/* ── Founder Story ── */}  
-      <section className="bg-[#111111] px-6 py-24 md:py-32">  
-        <div className="max-w-4xl mx-auto text-center">  
-          <span className="text-[#d4af37]/60 text-sm tracking-[0.3em] uppercase mb-6 block">  
-            Founder&apos;s Note  
+      {/* Bottom CTA Banner */}  
+      <section className="py-24 border-t border-white/10 text-center px-6 bg-[#0E0E0E]">  
+        <div className="max-w-xl mx-auto space-y-6">  
+          <span className="text-[#D4AF37] text-[10px] uppercase tracking-[0.3em] font-sans">  
+            Begin Consultation  
           </span>  
-          <p className="text-xl md:text-2xl text-[#e8e0d0]/90 font-light leading-relaxed italic">  
-            &ldquo;I built NexVoyage because I wanted a world that didn&apos;t exist — one where ambition meets  
-            absolute privacy, where every detail is intentional, and where travel becomes the  
-            foundation of a legacy. This isn&apos;t a business. It&apos;s a standard.&rdquo;  
+          <h2 className="text-3xl md:text-4xl font-light text-white">  
+            Establish Your Advisory Mandate  
+          </h2>  
+          <p className="text-white/50 text-sm leading-relaxed font-sans font-light">  
+            We invite discerning travelers and family offices to discuss their upcoming global footprint with our principals.  
           </p>  
-          <p className="mt-8 text-[#d4af37] font-serif text-lg">— Daryl Clark</p>  
+          <div className="pt-4">  
+            <Link  
+              href="https://cal.com/nexvoyagecollective/discovery-call"  
+              className="inline-block border border-[#D4AF37] text-[#D4AF37] text-xs uppercase tracking-[0.3em] px-8 py-4 hover:bg-[#D4AF37] hover:text-black transition-all duration-500 font-sans"  
+            >  
+              Schedule a Discovery Call  
+            </Link>  
+          </div>  
         </div>  
       </section>
 
-      {/* ── Call to Action ── */}  
-      <section className="bg-[#0d0d0d] px-6 py-24 md:py-32 text-center">  
-        <h2 className="text-3xl md:text-4xl font-serif text-[#d4af37] mb-4">  
-          Begin Your Mandate  
-        </h2>  
-        <p className="max-w-xl mx-auto text-[#a09880] mb-10 leading-relaxed">  
-          Not everyone belongs here. If you understand the difference between a trip and a legacy,  
-          we should talk.  
-        </p>  
-        <Link  
-          href="/inquiry"  
-          className="inline-block border border-[#d4af37] text-[#d4af37] px-10 py-4 tracking-[0.2em] uppercase text-sm hover:bg-[#d4af37] hover:text-[#0d0d0d] transition-all duration-500"  
-        >  
-          Submit an Inquiry  
-        </Link>  
-      </section>  
     </main>  
   );  
 }  
