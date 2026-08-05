@@ -1,215 +1,256 @@
-import Link from 'next/link';
+import React from 'react';  
+import Link from 'next/link';  
+import Image from 'next/image';
 
-export const metadata = {  
-title: 'Advisory Services & Private Portfolio — NexVoyage Collective',  
-description: 'Bespoke travel advisory, private aviation, luxury rail, and unlisted sanctuary curation.',  
-};
-
-interface ServiceItem {  
-title: string;  
-subtitle: string;  
-description: string;  
-}
-
-const SERVICES: ServiceItem[] = [  
-{  
-title: "Hotels & Private Sanctuaries",  
-subtitle: "Unlisted Estates & Flagship Properties",  
-description: "Curated access to the world’s most private villas, historic châteaux, and five-star luxury hotels with preferential rates and VIP status."  
-},  
-{  
-title: "Private Aviation",  
-subtitle: "Seamless Global Air Mobility",  
-description: "Bespoke jet charters, helicopter transfers, and tarmac-side coordination managed with absolute discretion."  
-},  
-{  
-title: "Yacht Charters & Cruises",  
-subtitle: "Floating Sanctuaries & Expedition Vessels",  
-description: "Superyacht charters across polar, galapagos, and Mediterranean waters, alongside ultra-luxury ocean and river itineraries."  
-},  
-{  
-title: "Safaris & Wilderness Expeditions",  
-subtitle: "Untouched Frontiers",  
-description: "Private-guide safaris across Sabi Sand, Serengeti, and high-alpine mountain retreats with expert wildlife trackers."  
-},  
-{  
-title: "Corporate Travel & Executive Offsites",  
-subtitle: "Discreet Leadership Logistics",  
-description: "Full-spectrum travel architecture for executive teams, private boards, and high-profile delegations."  
-},  
-{  
-title: "Destination Weddings & Celebrations",  
-subtitle: "Milestone Estates & Buyouts",  
-description: "Exclusive-use castle, island, and vineyard buyouts orchestrated for private celebrations of distinction."  
-},  
-{  
-title: "Luxury Rail Journeys",  
-subtitle: "Timeless Continental Transit",  
-description: "Reserved suites aboard iconic heritage trains crossing Europe, Asia, and the Americas."  
-},  
-{  
-title: "Polar & Remote Expeditions",  
-subtitle: "Edge-of-the-World Exploration",  
-description: "Ice-class luxury voyages and remote wilderness heli-skiing backed by elite safety and rescue protocols."  
-}  
-];
-
-const PERKS = [  
-{  
-title: "Preferred Partner Upgrades",  
-description: "Complimentary room upgrades, daily breakfast, and priority status across elite hotel portfolios."  
-},  
-{  
-title: "Exclusive Resort Credits",  
-description: "Substantial property, spa, and dining credits applied directly to every booking."  
-},  
-{  
-title: "24/7 Dedicated Stewardship",  
-description: "A single point of contact providing round-the-clock advisory, routing adjustments, and emergency support."  
-},  
-{  
-title: "VIP Recognition & Access",  
-description: "Direct relationship management with general managers, owners, and unlisted property curators."  
-}  
+const curations = [  
+  {  
+    num: "01",  
+    title: "Hotels & Private Sanctuaries",  
+    subtitle: "Unlisted Estates & Flagship Properties",  
+    desc: "Curated access to the world’s most private villas, historic châteaux, and five-star luxury hotels with preferential rates and VIP status."  
+  },  
+  {  
+    num: "02",  
+    title: "Private Aviation",  
+    subtitle: "Seamless Global Air Mobility",  
+    desc: "Bespoke jet charters, helicopter transfers, and tarmac-side coordination managed with absolute discretion."  
+  },  
+  {  
+    num: "03",  
+    title: "Yacht Charters & Cruises",  
+    subtitle: "Floating Sanctuaries & Expedition Vessels",  
+    desc: "Superyacht charters across polar, galapagos, and Mediterranean waters, alongside ultra-luxury ocean and river itineraries."  
+  },  
+  {  
+    num: "04",  
+    title: "Safaris & Wilderness Expeditions",  
+    subtitle: "Untouched Frontiers",  
+    desc: "Private-guide safaris across Sabi Sand, Serengeti, and high-alpine mountain retreats with expert wildlife trackers."  
+  },  
+  {  
+    num: "05",  
+    title: "Corporate Travel & Executive Offsites",  
+    subtitle: "Discreet Leadership Logistics",  
+    desc: "Full-spectrum travel architecture for executive teams, private boards, and high-profile delegations."  
+  },  
+  {  
+    num: "06",  
+    title: "Destination Weddings & Celebrations",  
+    subtitle: "Milestone Estates & Buyouts",  
+    desc: "Exclusive-use castle, island, and vineyard buyouts orchestrated for private celebrations of distinction."  
+  },  
+  {  
+    num: "07",  
+    title: "Luxury Rail Journeys",  
+    subtitle: "Timeless Continental Transit",  
+    desc: "Reserved suites aboard iconic heritage trains crossing Europe, Asia, and the Americas."  
+  },  
+  {  
+    num: "08",  
+    title: "Polar & Remote Expeditions",  
+    subtitle: "Edge-of-the-World Exploration",  
+    desc: "Ice-class luxury voyages and remote wilderness heli-skiing backed by elite safety and rescue protocols."  
+  }  
 ];
 
 export default function ServicesPage() {  
-return (  
-<main className="min-h-screen bg-[#0A0A0A] text-white selection:bg-[#D4AF37] selection:text-black pt-32 pb-24 px-6 md:px-12 font-serif">  
-<div className="max-w-6xl mx-auto space-y-24">  
-        
-  {/* Header */}  
-  <div className="text-center space-y-4 max-w-3xl mx-auto border-b border-white/10 pb-12">  
-    <p className="text-[#D4AF37] text-xs uppercase tracking-[0.3em] font-medium font-sans">Private Travel Office</p>  
-    <h1 className="text-4xl md:text-6xl font-light tracking-tight text-white font-serif">Advisory Services</h1>  
-    <p className="text-white/60 text-sm md:text-base leading-relaxed font-sans font-light">  
-      Comprehensive travel architecture and elite curation tailored for high-net-worth individuals and private family offices.  
-    </p>  
-  </div>
+  return (  
+    <main className="min-h-screen bg-[#0A0A0A] text-white font-serif selection:bg-[#D4AF37] selection:text-black">
 
-  {/* Why NexVoyage vs Open Networks (Audit Item #7 Differentiator) */}  
-  <div className="bg-[#111111] border border-[#D4AF37]/20 p-8 md:p-14 space-y-12">  
-    <div className="max-w-2xl space-y-3">  
-      <span className="text-[#D4AF37] text-xs uppercase tracking-[0.3em] font-sans">The Retained Advantage</span>  
-      <h2 className="text-2xl md:text-4xl font-light text-white tracking-tight">Open Networks vs. Boutique Advisory</h2>  
-      <p className="text-white/60 text-sm font-sans font-light leading-relaxed">  
-        Why discerning travelers choose a boutique travel advisory with capped rosters over a standard open-network agency.  
-      </p>  
-    </div>
-
-    <div className="grid md:grid-cols-2 gap-8 pt-4">  
-      {/* Traditional Advisor / Open Network */}  
-      <div className="bg-black/40 border border-white/10 p-8 space-y-6">  
-        <div className="border-b border-white/10 pb-4">  
-          <span className="text-white/40 text-[10px] uppercase tracking-[0.3em] font-sans">Open Consortium Model</span>  
-          <h3 className="text-white text-lg font-light mt-1">Standard Open-Roster Agency</h3>  
+      {/* Hero Section */}  
+      <section className="relative h-[60vh] md:h-[70vh] w-full flex items-center justify-center overflow-hidden">  
+        <Image  
+          src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1600&q=80"  
+          alt="Advisory Services"  
+          fill  
+          className="object-cover opacity-45"  
+          priority  
+          quality={100}  
+        />  
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-[#0A0A0A]" />  
+        <div className="relative z-10 text-center px-6 max-w-4xl mt-12">  
+          <span className="text-[#D4AF37] text-[10px] uppercase tracking-[0.4em] font-sans">  
+            Private Travel Office  
+          </span>  
+          <h1 className="text-[#D4AF37] text-4xl md:text-6xl font-light tracking-tight mt-4 mb-6">  
+            Advisory Services  
+          </h1>  
+          <p className="text-white/70 text-base md:text-lg font-light tracking-wide max-w-2xl mx-auto font-sans">  
+            Comprehensive travel architecture and elite curation tailored for high-net-worth individuals and private family offices.  
+          </p>  
         </div>  
-        <ul className="space-y-4 text-sm text-white/60 font-sans font-light">  
-          <li className="flex items-start gap-3">  
-            <span className="text-white/30">✕</span>  
-            <span><strong>High Client Volume:</strong> Advisors handle hundreds of travelers simultaneously, resulting in slower response times and standard booking support.</span>  
-          </li>  
-          <li className="flex items-start gap-3">  
-            <span className="text-white/30">✕</span>  
-            <span><strong>Standard Consortium Rates:</strong> Reliance on public consortium rates and standard booking portals without private inventory access.</span>  
-          </li>  
-          <li className="flex items-start gap-3">  
-            <span className="text-white/30">✕</span>  
-            <span><strong>Transactional Focus:</strong> Primarily acts as a hotel booking desk rather than managing your complete global travel portfolio.</span>  
-          </li>  
-          <li className="flex items-start gap-3">  
-            <span className="text-white/30">✕</span>  
-            <span><strong>Standard Protocols:</strong> General travel agency booking procedures with standard privacy measures.</span>  
-          </li>  
-        </ul>  
-      </div>
+      </section>
 
-      {/* NexVoyage Private Office */}  
-      <div className="bg-[#191712] border border-[#D4AF37]/40 p-8 space-y-6 relative">  
-        <div className="absolute top-0 right-0 bg-[#D4AF37] text-black text-[9px] uppercase tracking-widest px-3 py-1 font-sans font-medium">  
-          The NexVoyage Standard  
-        </div>  
-        <div className="border-b border-[#D4AF37]/20 pb-4">  
-          <span className="text-[#D4AF37] text-[10px] uppercase tracking-[0.3em] font-sans">Boutique Travel Advisory</span>  
-          <h3 className="text-white text-lg font-light mt-1">NexVoyage Collective</h3>  
-        </div>  
-        <ul className="space-y-4 text-sm text-white/80 font-sans font-light">  
-          <li className="flex items-start gap-3">  
-            <span className="text-[#D4AF37]">✓</span>  
-            <span><strong>Capped Client Roster:</strong> We intentionally limit our active clientele to ensure dedicated advisor bandwidth and personal attention for every trip.</span>  
-          </li>  
-          <li className="flex items-start gap-3">  
-            <span className="text-[#D4AF37]">✓</span>  
-            <span><strong>Unlisted Estate Access:</strong> Direct relationships with property owners allowing access to private villas and off-market sanctuaries.</span>  
-          </li>  
-          <li className="flex items-start gap-3">  
-            <span className="text-[#D4AF37]">✓</span>  
-            <span><strong>Holistic Itinerary Design:</strong> Complete travel architecture—coordinating private aviation, ground logistics, and exclusive stays seamlessly.</span>  
-          </li>  
-          <li className="flex items-start gap-3">  
-            <span className="text-[#D4AF37]">✓</span>  
-            <span><strong>Discretion & Privacy:</strong> Absolute confidentiality and white-glove stewardship tailored to your personal preferences.</span>  
-          </li>  
-        </ul>  
-      </div>  
-    </div>  
-  </div>
+      {/* The Retained Advantage Comparison */}  
+      <section className="py-24 px-6 max-w-7xl mx-auto border-b border-white/10">  
+        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">  
+          <span className="text-[#D4AF37] text-[10px] uppercase tracking-[0.3em] font-sans">  
+            The Retained Advantage  
+          </span>  
+          <h2 className="text-3xl md:text-4xl font-light tracking-tight">  
+            Open Networks vs. Boutique Advisory  
+          </h2>  
+          <p className="text-white/50 text-sm md:text-base font-sans font-light">  
+            Why discerning travelers choose a boutique travel advisory with capped rosters over a standard open-network agency.  
+          </p>  
+        </div>
 
-  {/* Services Grid */}  
-  <div className="space-y-12">  
-    <div className="border-b border-white/10 pb-4">  
-      <h2 className="text-2xl font-light tracking-wide text-white">What We Curate</h2>  
-    </div>  
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 font-sans">  
-      {SERVICES.map((service, idx) => (  
-        <div key={idx} className="bg-[#111111] border border-white/10 p-6 flex flex-col justify-between hover:border-[#D4AF37]/40 transition-colors">  
-          <div className="space-y-3">  
-            <span className="text-xs text-[#D4AF37] tracking-widest uppercase block">0{idx + 1}</span>  
-            <h3 className="text-xl font-normal text-white font-serif">{service.title}</h3>  
-            <p className="text-white/40 text-xs">{service.subtitle}</p>  
-            <p className="text-white/70 text-sm leading-relaxed pt-3 border-t border-white/5 font-light">{service.description}</p>  
+        <div className="grid md:grid-cols-2 gap-12">  
+          {/* Open Consortium Model */}  
+          <div className="border border-white/10 p-8 md:p-10 space-y-6 bg-white/[0.01]">  
+            <div>  
+              <span className="text-white/30 text-[10px] uppercase tracking-[0.3em] font-sans">  
+                Standard Open-Roster Agency  
+              </span>  
+              <h3 className="text-xl md:text-2xl font-light text-white/70 mt-2">  
+                Open Consortium Model  
+              </h3>  
+            </div>  
+            <ul className="space-y-4 font-sans font-light text-sm text-white/50">  
+              <li className="flex items-start gap-3">  
+                <span className="text-red-400/80 mt-0.5">✕</span>  
+                <span><strong>High Client Volume:</strong> Advisors handle hundreds of travelers simultaneously, resulting in slower response times and standard booking support.</span>  
+              </li>  
+              <li className="flex items-start gap-3">  
+                <span className="text-red-400/80 mt-0.5">✕</span>  
+                <span><strong>Standard Consortium Rates:</strong> Reliance on public consortium rates and standard booking portals without private inventory access.</span>  
+              </li>  
+              <li className="flex items-start gap-3">  
+                <span className="text-red-400/80 mt-0.5">✕</span>  
+                <span><strong>Transactional Focus:</strong> Primarily acts as a hotel booking desk rather than managing your complete global travel portfolio.</span>  
+              </li>  
+              <li className="flex items-start gap-3">  
+                <span className="text-red-400/80 mt-0.5">✕</span>  
+                <span><strong>Standard Protocols:</strong> General travel agency booking procedures with standard privacy measures.</span>  
+              </li>  
+            </ul>  
+          </div>
+
+          {/* The NexVoyage Standard */}  
+          <div className="border border-[#D4AF37]/30 p-8 md:p-10 space-y-6 bg-white/[0.03] relative">  
+            <div className="absolute top-0 right-0 bg-[#D4AF37] text-black text-[9px] uppercase tracking-[0.3em] px-4 py-1 font-sans font-semibold">  
+              The Standard  
+            </div>  
+            <div>  
+              <span className="text-[#D4AF37] text-[10px] uppercase tracking-[0.3em] font-sans">  
+                Boutique Travel Advisory  
+              </span>  
+              <h3 className="text-xl md:text-2xl font-light text-white mt-2">  
+                NexVoyage Collective  
+              </h3>  
+            </div>  
+            <ul className="space-y-4 font-sans font-light text-sm text-white/80">  
+              <li className="flex items-start gap-3">  
+                <span className="text-[#D4AF37] mt-0.5">✓</span>  
+                <span><strong>Capped Client Roster:</strong> We intentionally limit our active clientele to ensure dedicated advisor bandwidth and personal attention for every trip.</span>  
+              </li>  
+              <li className="flex items-start gap-3">  
+                <span className="text-[#D4AF37] mt-0.5">✓</span>  
+                <span><strong>Unlisted Estate Access:</strong> Direct relationships with property owners allowing access to private villas and off-market sanctuaries.</span>  
+              </li>  
+              <li className="flex items-start gap-3">  
+                <span className="text-[#D4AF37] mt-0.5">✓</span>  
+                <span><strong>Holistic Itinerary Design:</strong> Complete travel architecture—coordinating private aviation, ground logistics, and exclusive stays seamlessly.</span>  
+              </li>  
+              <li className="flex items-start gap-3">  
+                <span className="text-[#D4AF37] mt-0.5">✓</span>  
+                <span><strong>Discretion &amp; Privacy:</strong> Absolute confidentiality and white-glove stewardship tailored to your personal preferences.</span>  
+              </li>  
+            </ul>  
           </div>  
         </div>  
-      ))}  
-    </div>  
-  </div>
+      </section>
 
-  {/* Why Us / Value Proposition */}  
-  <div className="space-y-12 pt-12 border-t border-white/10">  
-    <div className="max-w-2xl space-y-3">  
-      <p className="text-[#D4AF37] text-xs uppercase tracking-[0.3em] font-medium font-sans">The Sanctuary Standard</p>  
-      <h2 className="text-3xl font-light text-white">Why Our Clients Rely On Us</h2>  
-      <p className="text-white/60 text-sm font-sans font-light">Beyond booking — unlocking institutional access and bespoke privileges worldwide.</p>  
-    </div>  
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 font-sans">  
-      {PERKS.map((perk, idx) => (  
-        <div key={idx} className="bg-[#111111]/60 border border-white/5 p-6 space-y-3">  
-          <h3 className="text-lg font-medium text-white font-serif">{perk.title}</h3>  
-          <p className="text-white/60 text-sm leading-relaxed font-light">{perk.description}</p>  
+      {/* Engagement & Pricing Model Section */}  
+      <section className="py-24 px-6 max-w-6xl mx-auto border-b border-white/10">  
+        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">  
+          <span className="text-[#D4AF37] text-[10px] uppercase tracking-[0.3em] font-sans">  
+            Economics &amp; Engagement  
+          </span>  
+          <h2 className="text-3xl md:text-4xl font-light tracking-tight">  
+            The Advisory Model  
+          </h2>  
+          <p className="text-white/50 text-sm md:text-base font-sans font-light">  
+            Tailored for high-net-worth clients who value time-saving precision and uncompromised execution over transactional booking.  
+          </p>  
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-8">  
+          {/* Card 1 */}  
+          <div className="border border-white/10 p-8 space-y-4 bg-white/[0.01]">  
+            <span className="text-white/20 text-xs font-mono">01 / MODEL</span>  
+            <h3 className="text-xl font-light text-white">Gross-Rate Structure</h3>  
+            <p className="text-white/60 text-sm font-sans font-light leading-relaxed">  
+              We utilize gross-rate pricing with a 12% commission markup built into curated itineraries, private estate buyouts, and partner property bookings—complementing standard preferred-partner overrides like Rosewood Elite (15%) and Virtuoso/LHW properties (10%).  
+            </p>  
+          </div>
+
+          {/* Card 2 */}  
+          <div className="border border-white/10 p-8 space-y-4 bg-white/[0.01]">  
+            <span className="text-white/20 text-xs font-mono">02 / MODEL</span>  
+            <h3 className="text-xl font-light text-white">The Sanctuary Tier</h3>  
+            <p className="text-white/60 text-sm font-sans font-light leading-relaxed">  
+              Rather than charging traditional monthly retainers, our pricing is absorbed into zero-friction execution. Clients invest in premium logistics, private transport, and curated access where the margin is baked into the curated tier.  
+            </p>  
+          </div>
+
+          {/* Card 3 */}  
+          <div className="border border-white/10 p-8 space-y-4 bg-white/[0.01]">  
+            <span className="text-white/20 text-xs font-mono">03 / MODEL</span>  
+            <h3 className="text-xl font-light text-white">Corporate Retainers</h3>  
+            <p className="text-white/60 text-sm font-sans font-light leading-relaxed">  
+              For corporate clients, event manifests, executive team retreats, and recurring summit support, we structure custom project-based pricing or flat-rate execution fees to manage room blocks, driver manifests, and zero-friction travel policies.  
+            </p>  
+          </div>  
         </div>  
-      ))}  
-    </div>  
-  </div>
+      </section>
 
-  {/* Conversion CTA */}  
-  <div className="text-center pt-16 border-t border-white/10 space-y-6 max-w-2xl mx-auto font-sans">  
-    <h3 className="text-3xl font-light text-white font-serif">Begin Your Advisory Mandate</h3>  
-    <p className="text-white/60 text-sm leading-relaxed font-light">  
-      Engage with our private advisory team to establish your travel portfolio or discuss an upcoming itinerary.  
-    </p>  
-    <div className="pt-4">  
-      <Link   
-        href="https://cal.com/nexvoyagecollective/discovery-call"   
-        target="_blank"   
-        rel="noopener noreferrer"  
-        className="inline-block bg-[#D4AF37] text-black font-medium text-xs uppercase tracking-[0.2em] px-8 py-4 hover:bg-[#d4af37]/90 transition-colors"  
-      >  
-        Schedule a Discovery Call  
-      </Link>  
-    </div>  
-  </div>
+      {/* What We Curate */}  
+      <section className="py-24 px-6 max-w-7xl mx-auto">  
+        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">  
+          <span className="text-[#D4AF37] text-[10px] uppercase tracking-[0.3em] font-sans">  
+            Scope of Curation  
+          </span>  
+          <h2 className="text-3xl md:text-4xl font-light tracking-tight">  
+            What We Curate  
+          </h2>  
+        </div>
 
-</div>  
-</main>  
-);  
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">  
+          {curations.map((c, i) => (  
+            <div key={i} className="border-t border-white/10 pt-6 space-y-3">  
+              <span className="text-[#D4AF37] text-xs font-mono">{c.num}</span>  
+              <h3 className="text-white text-lg font-light tracking-tight">{c.title}</h3>  
+              <p className="text-[#D4AF37] text-[10px] uppercase tracking-widest opacity-70 font-sans">{c.subtitle}</p>  
+              <p className="text-white/50 text-xs leading-relaxed font-sans font-light">{c.desc}</p>  
+            </div>  
+          ))}  
+        </div>  
+      </section>
+
+      {/* CTA */}  
+      <section className="py-24 border-t border-white/10 text-center px-6 bg-[#0E0E0E]">  
+        <div className="max-w-xl mx-auto space-y-6">  
+          <span className="text-[#D4AF37] text-[10px] uppercase tracking-[0.3em] font-sans">  
+            Begin Consultation  
+          </span>  
+          <h2 className="text-3xl md:text-4xl font-light text-white">  
+            Establish Your Advisory Mandate  
+          </h2>  
+          <p className="text-white/50 text-sm leading-relaxed font-sans font-light">  
+            Engage with our private advisory team to establish your travel portfolio or discuss an upcoming itinerary.  
+          </p>  
+          <div className="pt-4">  
+            <Link  
+              href="https://cal.com/nexvoyagecollective/discovery-call"  
+              className="inline-block border border-[#D4AF37] text-[#D4AF37] text-xs uppercase tracking-[0.3em] px-8 py-4 hover:bg-[#D4AF37] hover:text-black transition-all duration-500 font-sans"  
+            >  
+              Schedule a Discovery Call  
+            </Link>  
+          </div>  
+        </div>  
+      </section>
+
+    </main>  
+  );  
 }  
