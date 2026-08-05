@@ -7,7 +7,7 @@ import { DESTINATIONS_DATA } from '@/lib/journal-data';
 interface PageProps {    
   params: Promise<{ slug: string }>;    
 }
-
+ 
 export async function generateStaticParams() {    
   return DESTINATIONS_DATA.map((item) => ({    
     slug: item.slug,    
