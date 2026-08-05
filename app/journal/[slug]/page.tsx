@@ -36,9 +36,9 @@ const destination = DESTINATIONS_DATA.find((item) => item.slug === resolvedParam
         <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-black/40 to-black/60" />  
         <div className="absolute bottom-12 left-0 w-full px-6 md:px-16 max-w-5xl mx-auto space-y-4">  
           <div className="flex items-center gap-3 text-[#D4AF37] text-xs font-sans tracking-[0.2em] uppercase">  
-            <span>{destination.coordinates}</span>  
-            <span>//</span>  
-            <span>Field Report No. {destination.id}</span>  
+            <span>{destination.region}</span>    
+<span>//</span>    
+<span>Field Report No. {destination.slug}</span>  
           </div>  
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-light tracking-tight text-white font-serif">  
             {destination.title}  
