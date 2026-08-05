@@ -16,7 +16,7 @@ export async function generateStaticParams() {
 
 export default async function JournalDetailPage({ params }: PageProps) {  
   const resolvedParams = await params;  
-  const destination = DESTINATIONS_DATA.find((item) => item.id === resolvedParams.slug);
+const destination = DESTINATIONS_DATA.find((item) => item.slug === resolvedParams.slug);  
 
   if (!destination) {  
     notFound();  
