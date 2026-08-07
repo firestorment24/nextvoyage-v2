@@ -16,7 +16,7 @@ orchestration: string;
 quote?: { text: string; attribution: string; };  
 editorialHtml?: string;  
 }
-
+ 
 export const DESTINATIONS_DATA: Destination[] = [  
 {  
 slug: "amalfi",  
