@@ -10,7 +10,7 @@ export default async function ArticlePage(props: { params: Promise<{ slug: strin
 const { slug } = await props.params
 
 let rows  
-try {  
+try {   
   const result = await sql`  
     SELECT * FROM perspective_articles   
     WHERE slug = ${slug} OR id::text = ${slug}   
