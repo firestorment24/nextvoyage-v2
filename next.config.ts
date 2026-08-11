@@ -1,44 +1,24 @@
-/** @type {import('next').NextConfig} */  
-const nextConfig = {  
-images: {  
-  remotePatterns: [  
-    {  
-      protocol: 'https',  
-      hostname: 'dynamic-media-cdn.tripadvisor.com',  
-      pathname: '/**',  
-    },  
-    {  
-      protocol: 'https',  
-      hostname: 'www.aman.com',  
-      pathname: '/**',  
-    },  
-    {  
-      protocol: 'https',  
-      hostname: 'images.luxuryhotelsmag.com',  
-      pathname: '/**',  
-    },  
-    {  
-      protocol: 'https',  
-      hostname: 'www.ourhabitas.com',  
-      pathname: '/**',  
-    },  
-    {  
-      protocol: 'https',  
-      hostname: 'images.unsplash.com',  
-      pathname: '/**',  
-    },  
-    {  
-      protocol: 'https',  
-      hostname: 'cdn.marblism.com',  
-      pathname: '/**',  
-    },  
-    {  
-      protocol: 'https',  
-      hostname: '*.private.blob.vercel-storage.com',  
-      pathname: '/**',  
-    },  
-  ],  
-},  
-}
+import type { NextConfig } from 'next';
 
-export default nextConfig  
+const nextConfig: NextConfig = {  
+  images: {  
+    remotePatterns: [  
+      {  
+        protocol: 'https',  
+        hostname: '*.private.blob.vercel-storage.com',  
+      },  
+      {  
+        protocol: 'https',  
+        hostname: '*.public.blob.vercel-storage.com',  
+      },  
+    ],  
+  },  
+};
+
+export default function(phase: string) {  
+  return function() {  
+    return (  
+      nextConfig  
+    )  
+  }  
+}  
