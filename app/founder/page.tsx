@@ -1,145 +1,232 @@
-import Image from 'next/image'  
 import Link from 'next/link'  
 import Navigation from '@/components/Navigation'
 
 export const metadata = {  
   title: 'Meet Daryl Clark | NexVoyage Collective',  
-  description: 'Founder & Principal of NexVoyage Collective. Two decades of navigating the world’s most demanding itineraries with absolute discretion.',  
+  description:  
+    'Meet Daryl Clark, Founder & Principal of NexVoyage Collective—a private travel office for clients who demand discretion, depth, and uncommon access.',  
 }
 
+const headshotUrl = 'https://cdn.marblism.com/_XUs99xWdak.jpeg'
+
+const disciplines = [  
+  {  
+    number: '01',  
+    title: 'Private Security Routing',  
+    description:  
+      'Tactical logistics and discreet threat mitigation for high-profile journeys across sensitive or remote geographies.',  
+  },  
+  {  
+    number: '02',  
+    title: 'Off-Market Estate Sourcing',  
+    description:  
+      'Direct access to sequestered private islands, unlisted historic palazzos, and wilderness reserves beyond public inventory.',  
+  },  
+  {  
+    number: '03',  
+    title: 'Family Office Stewardship',  
+    description:  
+      'Holistic, multi-generational travel infrastructure designed to align seamlessly with existing family office governance.',  
+  },  
+]
+
+const affiliations = [  
+  { name: 'FORA TRAVEL', role: 'Flagship Partner' },  
+  { name: 'VIRTUOSO', role: 'Preferred Network' },  
+  { name: 'AMAN', role: 'Preferred Partner' },  
+  { name: 'FOUR SEASONS', role: 'Preferred Partner' },  
+  { name: 'BELMOND', role: 'Preferred Partner' },  
+  { name: 'ROSEWOOD', role: 'Preferred Partner' },  
+  { name: 'MANDARIN ORIENTAL', role: 'Preferred Partner' },  
+  { name: 'PENINSULA', role: 'Preferred Partner' },  
+]
+
 export default function FounderPage() {  
- const headshotUrl = 'https://cdn.marblism.com/_XUs99xWdak.jpeg'  
-
-
-  const affiliations = [  
-    { name: 'FORA TRAVEL', role: 'Flagship Partner' },  
-    { name: 'VIRTUOSO', role: 'Preferred Network' },  
-    { name: 'AMAN', role: 'Preferred Partner' },  
-    { name: 'FOUR SEASONS', role: 'Preferred Partner' },  
-    { name: 'BELMOND', role: 'Bellini Club' },  
-    { name: 'ROSEWOOD', role: 'Elite Member' },  
-    { name: 'MANDARIN ORIENTAL', role: 'Fan Club' },  
-    { name: 'PENINSULA', role: 'PenClub' },  
-  ]
-
-  const disciplines = [  
-    {  
-      title: 'Private Security Routing',  
-      desc: 'Tactical logistics and discreet threat mitigation for high-profile journeys across sensitive or remote geographies.',  
-    },  
-    {  
-      title: 'Off-Market Estate Sourcing',  
-      desc: 'Direct access to sequestered private islands, unlisted historic palazzos, and wilderness reserves beyond public inventory.',  
-    },  
-    {  
-      title: 'Family Office Stewardship',  
-      desc: 'Holistic multi-generational travel infrastructure designed to align seamlessly with existing family office governance.',  
-    },  
-  ]
-
   return (  
-    <div className="min-h-screen bg-[#0A0A0A] text-white font-serif selection:bg-[#C5A059] selection:text-black">  
+    <div className="min-h-screen bg-[#0A0A0A] text-white selection:bg-[#C5A059] selection:text-black">  
       <Navigation />
 
-      <main className="pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto">  
-        {/* Breadcrumb */}  
+      <main className="mx-auto max-w-7xl px-6 pb-24 pt-32 md:px-12">  
         <Link  
           href="/"  
-          className="text-[#C5A059] uppercase tracking-[0.3em] text-[10px] hover:opacity-70 transition-opacity mb-16 inline-block"  
+          className="mb-16 inline-block text-[10px] uppercase tracking-[0.3em] text-[#C5A059] transition-opacity hover:opacity-70"  
         >  
           ← Return to Sanctuary  
         </Link>
 
-        {/* Hero Split Section */}  
-        <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center mb-28">  
-          {/* Left: Portrait */}  
-          <div className="lg:col-span-5 relative">  
-            <div className="relative aspect-[4/5] overflow-hidden bg-white/5 border border-[#C5A059]/20 shadow-2xl">  
+        {/* Hero */}  
+        <section className="mb-32 grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">  
+          <div className="relative lg:col-span-5">  
+            <div className="relative aspect-[4/5] overflow-hidden border border-[#C5A059]/20 bg-white/5 shadow-2xl">  
               <img  
                 src={headshotUrl}  
-                alt="Daryl Clark, Founder & Principal"  
-                className="w-full h-full object-cover grayscale contrast-125 hover:grayscale-0 transition-all duration-700"  
-              />  
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent opacity-60" />  
+                alt="Daryl Clark, Founder and Principal of NexVoyage Collective"  
+                className="h-full w-full object-cover"  
+                decoding="async"  
+              />
+
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/70 via-transparent to-transparent" />  
+            </div>
+
+            <div className="absolute -bottom-6 -right-6 -z-10 hidden h-32 w-32 border border-[#C5A059]/25 sm:block" />
+
+            <div className="mt-6 flex items-center justify-between border-t border-white/10 pt-4 text-[9px] uppercase tracking-[0.25em] text-white/35">  
+              <span>NexVoyage Collective</span>  
+              <span>New York · Global</span>  
             </div>  
-            <div className="absolute -bottom-6 -right-6 w-32 h-32 border border-[#C5A059]/20 -z-10 hidden sm:block" />  
           </div>
 
-          {/* Right: Bio & Narrative */}  
           <div className="lg:col-span-7">  
-            <span className="text-[#C5A059] uppercase tracking-[0.4em] text-[10px] block mb-4">  
-              Founder & Principal  
-            </span>  
-            <h1 className="text-4xl md:text-6xl font-light tracking-tighter leading-tight mb-8">  
-              Daryl Clark  
+            <span className="mb-4 block text-[10px] uppercase tracking-[0.4em] text-[#C5A059]">  
+              Founder &amp; Principal  
+            </span>
+
+            <h1 className="mb-10 text-5xl font-light leading-[0.95] tracking-[-0.06em] md:text-7xl">  
+              Daryl  
+              <br />  
+              Clark  
             </h1>
 
-            <div className="space-y-6 text-white/70 text-lg font-light font-sans leading-[1.8]">  
+            <div className="space-y-6 font-sans text-lg font-light leading-[1.85] text-white/70">  
               <p>  
-                For over two decades, I have navigated the world’s most demanding itineraries—from sub-polar archipelagos to private wildlife concessions in the Okavango. NexVoyage Collective was founded on a singular, uncompromising thesis: <span className="text-white italic">true luxury isn't about where you go, but how you arrive.</span>  
-              </p>  
+                For over two decades, I have navigated the world&apos;s most  
+                demanding itineraries—from sub-polar archipelagos to private  
+                wildlife concessions in the Okavango. NexVoyage Collective was  
+                founded on a singular, uncompromising thesis:{' '}  
+                <span className="italic text-white">  
+                  true luxury isn&apos;t about where you go, but how you arrive.  
+                </span>  
+              </p>
+
               <p>  
-                Our work transcends traditional concierge service. We operate at the intersection of high-stakes logistics, unlisted estate access, and family office travel stewardship, transforming complex global movements into an effortless, invisible choreography.  
+                Our work transcends traditional concierge service. We operate  
+                at the intersection of high-stakes logistics, unlisted estate  
+                access, and family office travel stewardship, transforming  
+                complex global movements into an effortless, invisible  
+                choreography. Whether orchestrating multi-generational journeys  
+                across continents, securing access to properties beyond public  
+                reach, or managing the precise sequencing of overlapping  
+                schedules and unspoken expectations, we solve problems that most  
+                concierge services don&apos;t know exist.  
+              </p>
+
+              <p>  
+                Arrival, for us, means stepping into an experience that has  
+                already begun—one where every detail has been anticipated, every  
+                complexity dissolved, and every transition engineered to feel  
+                natural. It means your family office runs seamlessly across  
+                time zones. It means your private retreat is waiting exactly as  
+                envisioned. It means the machinery of travel becomes entirely  
+                invisible, and you simply belong wherever you are.  
+              </p>
+
+              <p>  
+                We work with a limited number of clients who demand the  
+                uncommon, who understand that discretion and depth of knowledge  
+                matter more than volume, and who recognize that the best travel  
+                experiences are built on relationships, not transactions.  
               </p>  
             </div>
 
-            {/* Philosophy Pull-Quote */}  
-            <blockquote className="my-10 border-l border-[#C5A059] pl-6 py-2 text-white/90 italic font-serif text-xl">  
-              &ldquo;Discretion is not merely the absence of exposure; it is the presence of absolute sovereign control over your environment.&rdquo;  
+            <blockquote className="my-12 border-l border-[#C5A059] py-2 pl-6 font-serif text-xl italic leading-relaxed text-white/90 md:text-2xl">  
+              &ldquo;Discretion is not merely the absence of exposure; it is the  
+              presence of absolute sovereign control over your environment.&rdquo;  
             </blockquote>  
           </div>  
         </section>
 
-        {/* Disciplines Section */}  
-        <section className="mb-28 border-t border-white/10 pt-20">  
-          <div className="max-w-2xl mb-16">  
-            <span className="text-[#C5A059] uppercase tracking-[0.3em] text-[10px] block mb-3">  
+        {/* Philosophy */}  
+        <section className="mb-32 border-y border-white/10 py-20">  
+          <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-16">  
+            <div className="md:col-span-4">  
+              <span className="text-[10px] uppercase tracking-[0.3em] text-[#C5A059]">  
+                The Operating Principle  
+              </span>  
+            </div>
+
+            <div className="md:col-span-8">  
+              <p className="max-w-4xl text-3xl font-light leading-tight tracking-tight text-white/90 md:text-5xl">  
+                The finest journeys are not assembled from options. They are  
+                constructed from understanding.  
+              </p>  
+            </div>  
+          </div>  
+        </section>
+
+        {/* Disciplines */}  
+        <section className="mb-32">  
+          <div className="mb-16 max-w-2xl">  
+            <span className="mb-3 block text-[10px] uppercase tracking-[0.3em] text-[#C5A059]">  
               Core Competencies  
-            </span>  
-            <h2 className="text-3xl md:text-4xl font-light tracking-tight">  
+            </span>
+
+            <h2 className="text-3xl font-light tracking-tight md:text-5xl">  
               The Architecture of Sovereign Travel  
-            </h2>  
+            </h2>
+
+            <p className="mt-6 font-sans text-base font-light leading-relaxed text-white/55">  
+              The visible itinerary is only one layer of the work. The real  
+              value lies in the infrastructure beneath it.  
+            </p>  
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">  
-            {disciplines.map((item, idx) => (  
-              <div  
-                key={idx}  
-                className="p-8 bg-white/[0.02] border border-white/10 hover:border-[#C5A059]/40 transition-colors"  
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">  
+            {disciplines.map((discipline) => (  
+              <article  
+                key={discipline.number}  
+                className="group border border-white/10 bg-white/[0.02] p-8 transition-colors duration-500 hover:border-[#C5A059]/50"  
               >  
-                <span className="text-[#C5A059] text-[10px] uppercase tracking-[0.3em] block mb-4">  
-                  0{idx + 1} / Discipline  
-                </span>  
-                <h3 className="text-xl font-light mb-4">{item.title}</h3>  
-                <p className="text-white/60 text-sm font-sans leading-relaxed">  
-                  {item.desc}  
+                <div className="mb-16 flex items-start justify-between">  
+                  <span className="text-[10px] uppercase tracking-[0.3em] text-[#C5A059]">  
+                    {discipline.number}  
+                  </span>
+
+                  <span className="text-xs text-white/20 transition-colors group-hover:text-[#C5A059]">  
+                    ↗  
+                  </span>  
+                </div>
+
+                <h3 className="mb-5 text-2xl font-light tracking-tight">  
+                  {discipline.title}  
+                </h3>
+
+                <p className="font-sans text-sm font-light leading-relaxed text-white/55">  
+                  {discipline.description}  
                 </p>  
-              </div>  
+              </article>  
             ))}  
           </div>  
         </section>
 
-        {/* Affiliations / Global Network */}  
-        <section className="mb-28 border-t border-white/10 pt-20">  
-          <div className="max-w-2xl mb-16">  
-            <span className="text-[#C5A059] uppercase tracking-[0.3em] text-[10px] block mb-3">  
+        {/* Network */}  
+        <section className="mb-32 border-t border-white/10 pt-20">  
+          <div className="mb-16 max-w-2xl">  
+            <span className="mb-3 block text-[10px] uppercase tracking-[0.3em] text-[#C5A059]">  
               Strategic Alliances  
-            </span>  
-            <h2 className="text-3xl md:text-4xl font-light tracking-tight">  
-              Preferred Global Partnerships  
-            </h2>  
+            </span>
+
+            <h2 className="text-3xl font-light tracking-tight md:text-5xl">  
+              A Network Built on Trust  
+            </h2>
+
+            <p className="mt-6 font-sans text-base font-light leading-relaxed text-white/55">  
+              Our relationships are carefully maintained over time. They are  
+              not simply booking channels; they are the foundation for access,  
+              recognition, and precise execution.  
+            </p>  
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">  
-            {affiliations.map((partner, idx) => (  
+          <div className="grid grid-cols-2 gap-px border border-white/10 bg-white/10 md:grid-cols-4">  
+            {affiliations.map((partner) => (  
               <div  
-                key={idx}  
-                className="p-6 border border-white/10 bg-white/[0.01] flex flex-col justify-between"  
+                key={partner.name}  
+                className="flex min-h-32 flex-col justify-between bg-[#0A0A0A] p-6 transition-colors hover:bg-white/[0.04]"  
               >  
-                <span className="text-white/90 font-light tracking-wider text-sm mb-2">  
+                <span className="text-sm font-light tracking-[0.08em] text-white/90">  
                   {partner.name}  
-                </span>  
-                <span className="text-[#C5A059] text-[10px] uppercase tracking-[0.2em]">  
+                </span>
+
+                <span className="text-[9px] uppercase tracking-[0.2em] text-[#C5A059]">  
                   {partner.role}  
                 </span>  
               </div>  
@@ -147,22 +234,26 @@ export default function FounderPage() {
           </div>  
         </section>
 
-        {/* Call to Action */}  
+        {/* CTA */}  
         <section className="border-t border-white/10 pt-24 text-center">  
-          <span className="text-[#C5A059] uppercase tracking-[0.3em] text-[10px] block mb-4">  
+          <span className="mb-4 block text-[10px] uppercase tracking-[0.3em] text-[#C5A059]">  
             Begin a Conversation  
-          </span>  
-          <h2 className="text-3xl md:text-5xl font-light tracking-tight mb-8">  
-            Engage the Principal  
-          </h2>  
-          <p className="text-white/60 font-sans max-w-xl mx-auto mb-10 text-base leading-relaxed">  
-            Inquiries regarding private office representation and itinerary orchestration are reviewed personally.  
-          </p>  
+          </span>
+
+          <h2 className="mb-8 text-4xl font-light tracking-tight md:text-6xl">  
+            Travel requires a point of view.  
+          </h2>
+
+          <p className="mx-auto mb-10 max-w-xl font-sans text-base font-light leading-relaxed text-white/60">  
+            Inquiries regarding private office representation and itinerary  
+            orchestration are reviewed personally.  
+          </p>
+
           <a  
             href="https://cal.com/nexvoyagecollective"  
             target="_blank"  
             rel="noopener noreferrer"  
-            className="inline-block px-10 py-4 bg-[#C5A059] text-black font-sans uppercase tracking-[0.2em] text-xs font-medium hover:bg-white transition-colors"  
+            className="inline-block bg-[#C5A059] px-10 py-4 font-sans text-xs font-medium uppercase tracking-[0.2em] text-black transition-colors hover:bg-white"  
           >  
             Schedule Discovery Call  
           </a>  
@@ -171,3 +262,8 @@ export default function FounderPage() {
     </div>  
   )  
 }  
+Then commit it:
+
+git add app/founder/page.tsx  
+git commit -m "refine Meet Daryl biography and layout"  
+git push origin main  
