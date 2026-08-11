@@ -316,6 +316,105 @@ export const CURATED_JOURNEYS: CuratedJourney[] = [
     { day: "Day 3", title: "Terraced Lemon Groves", narrative: "Private walking tour of historic lemon terraces above Amalfi with a master limoncello maker and chef-led lunch." }    
   ],    
   dining: ["La Sponda at Le Sirenuse", "Zass at Il San Pietro", "Ristorante Da Gemma"]    
+}  {    
+slug: "greece",    
+title: "Greece: Cycladic Islands & Aegean Sovereignty",    
+category: "Island & Coast",    
+subtitle: "Private Coves, Mykonos Nights, and Santorini Caldera Sunsets",    
+location: "Mykonos, Santorini & Kéa, Greece",    
+duration: "7 Days / 6 Nights",    
+startingPrice: "From $8,995 per person",    
+heroImage: "https://images.unsplash.com/photo-1533105079780-92b9be482077?w=1600&q=80",    
+summary: "A yacht-backed voyage across the Cyclades—from the chic energy of Mykonos to the quiet caldera at Santorini and the untouched shores of Kéa.",    
+bestTime: "May to September",    
+idealLength: "7 Days",    
+targetAudience: "Couples, Island Hoppers, and Design Enthusiasts",    
+hotels: [    
+  { name: "One&Only Kéa Island", description: "Uncrowded ultra-luxury waterfront sanctuary on an untouched Cycladic isle." },    
+  { name: "Andronis Arcadia", description: "Cliffside minimal suites carved into the Santorini caldera." },    
+  { name: "Eleftheria Mykonos", description: "Modern hilltop hideaway steps from the iconic windmills and buzzing harbor." }    
+],    
+highlights: [    
+  { day: "Day 1", title: "Arrival in the Cyclades", narrative: "Arrive at Mykonos and settle into your hilltop sanctuary. Begin with a private sunset dinner overlooking Little Venice." },    
+  { day: "Day 2", title: "Santorini by Private Vessel", narrative: "Charter a private vessel for a caldera crossing to Santorini, anchoring beneath the red cliffs of Akrotiri for an afternoon swim." },    
+  { day: "Day 3", title: "The Sanctuary of Kéa", narrative: "Transfer by yacht to One&Only Kéa, spending the day across private coves and the island's untouched hiking trails." }    
+],    
+dining: ["Makris (Mykonos)", "Salto Wine Bar (Mykonos)", "Selene (Santorini)"]    
+},  
+{    
+slug: "patagonia",    
+title: "Patagonia: Glaciers, Peaks & Remote Wilderness",    
+category: "Wild Frontiers",    
+subtitle: "Torres del Paine and the Southern Ice Fields",    
+location: "Patagonia, Argentina & Chile",    
+duration: "8 Days / 7 Nights",    
+startingPrice: "From $13,495 per person",    
+heroImage: "https://images.unsplash.com/photo-1507494924047-60b8ee826ca9?w=1600&q=80",    
+summary: "An expedition into the raw grandeur of Patagonia—granite towers, glacial lagoons, and private estancias at the end of the world.",    
+bestTime: "November to March (Austral Summer)",    
+idealLength: "8 Days",    
+targetAudience: "Adventurers, Photographers, and Connoisseurs of Wild Landscapes",    
+hotels: [    
+  { name: "Awasi Patagonia", description: "Twelve architecturally striking villas scattered across a private 15,000-acre reserve." },    
+  { name: "Explora Patagonia", description: "Contemporary lodge commanding front-row views of the Torres del Paine massif." },    
+  { name: "Casa Philippi", description: "Historic 1910 bohemian mansion in Puerto Varas, gateway to the lake district." }    
+],    
+highlights: [    
+  { day: "Day 1", title: "Arrival at the End of the World", narrative: "Fly into Punta Arenas and transfer to your private Patagonian lodge, greeted by panoramic views of the Paine massif." },    
+  { day: "Day 2", title: "The Towers of Dawn", narrative: "Private guided trek toward the base of the granite towers before a restorative thermal bath at the lodge." },    
+  { day: "Day 3", title: "Grey Glacier by Boat", narrative: "Cross the milky-blue waters of Lago Grey to witness the towering ice wall of Grey Glacier up close." }    
+],    
+dining: ["Estancia Fireplace Dinners", "Patagonian Lamb Asado", "Lodge Chef's Tasting Menu"]    
+},  
+{    
+slug: "french-polynesia",    
+title: "French Polynesia: Overwater Sovereignty",    
+category: "Island & Coast",    
+subtitle: "Bora Bora, Moorea & Private Motu Escapes",    
+location: "Bora Bora & Moorea, French Polynesia",    
+duration: "7 Days / 6 Nights",    
+startingPrice: "From $11,995 per person",    
+heroImage: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=1600&q=80",    
+summary: "An overwater sanctuary across the untouched lagoons of Bora Bora and Moorea, with private motus, coral-garden reefs, and absolute calm.",    
+bestTime: "May to October",    
+idealLength: "7 Days",    
+targetAudience: "Honeymooners, Divers, and Connoisseurs of Seclusion",    
+hotels: [    
+  { name: "The Brando", description: "The ultimate eco-luxury private atoll escape once owned by Marlon Brando." },    
+  { name: "Four Seasons Bora Bora", description: "Overwater bungalows with glass floors and Mount Otemanu views." },    
+  { name: "St. Regis Bora Bora", description: "South Pacific grandeur with the largest overwater villas in Polynesia." }    
+],    
+highlights: [    
+  { day: "Day 1", title: "Lagoon Arrival", narrative: "Arrive by private flight to Tahiti, settling into your overwater bungalow on the aquamarine lagoon." },    
+  { day: "Day 2", title: "Coral Gardens & Stingrays", narrative: "Private lagoon cruise to feed stingrays, swim over shark-spotted coral heads, and snorkel in protected marine sanctuaries." },    
+  { day: "Day 3", title: "Private Motu Picnic", narrative: "Set off to a secluded private motu for a champagne picnro and an afternoon of total island solitude." }    
+],    
+dining: ["Lagoon Restaurant (St. Regis)", "The Brando Organic Garden Dining", "Te Mahana Sunset Dining"]    
+},  
+{    
+slug: "luxury-rail",    
+title: "The Grand Luxury Rail: Alpine Peaks & Heritage Routes",    
+category: "Cultural",    
+subtitle: "Venice Simplon-Orient-Express and Legendary Sleeper Trains",    
+location: "Venice, Paris & the Swiss Alps",    
+duration: "6 Days / 5 Nights",    
+startingPrice: "From $16,995 per person",    
+heroImage: "https://images.unsplash.com/photo-1474487548417-781cb71495f3?w=1600&q=80",    
+summary: "A timeless heritage journey aboard the world's most storied trains—gilded carriages, private cabins, and alpine crossings at a poet's pace.",    
+bestTime: "March to October",    
+idealLength: "6 Days",    
+targetAudience: "Romantics, Historians, and Lovers of Slow Luxury",    
+hotels: [    
+  { name: "The Gritti Palace (Venice)", description: "Peggy Guggenheim's favored Grand Canal palace, resting on La Serenissima's calm waters." },    
+  { name: "Ritz Paris", description: "The legendary Place Vendôme landmark of timeless French grandeur." },    
+  { name: "Beau-Rivage Palace (Lausanne)", description: "Commanding Belle Époque palace on the shores of Lake Geneva." }    
+],    
+highlights: [    
+  { day: "Day 1", title: "Grand Canal Departure", narrative: "Begin in Venice with an evening at the Gritti Palace before boarding the Venice Simplon-Orient-Express at Santa Lucia station." },    
+  { day: "Day 2", title: "Aboard the Orient Express", narrative: "Settle into your private cabin as the gilded train winds through the Dolomites and the Swiss Alps toward Paris." },    
+  { day: "Day 3", title: "The Alpine Crossing", narrative: "Disembark in the Swiss lakeside for a scenic rail journey through the GoldenPass route and a mountainous heritage dinner." }    
+],    
+dining: ["Orient-Express Champagne Car", "Le Grand Véfour (Paris)", "Alpine Pullman Dining"]    
 }    
 ];
 
