@@ -67,7 +67,7 @@ description: "An exploration of ultra-luxury remote work retreats and the 'Offic
 ]
 
 const pillars = [  
-{ number: "01", title: "Access", subtitle: "The Private Collection", body: "Beyond the reach of public listings lies a sequestered ledger of unlisted estates and off-market retreats, secured through two decades of global leverage." },   
+{ number: "01", title: "Access", subtitle: "The Private Collection", body: "Beyond the reach of public listings lies a curated collection of unlisted estates and off-market retreats, built on relationships developed over decades." },     
 { number: "02", title: "Intelligence", subtitle: "The Sentinel Standard", body: "We vet for what cannot be seen. From technical security to behavioral vetting, every property and partner is audited to ensure your absolute sanctuary." },  
 { number: "03", title: "The Constant", subtitle: "Seamless Stewardship", body: "A singular, unwavering point of contact for your entire global footprint. We manage the friction of travel so you never have to encounter it." },  
 ]
