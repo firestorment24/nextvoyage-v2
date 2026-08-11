@@ -43,7 +43,7 @@ const affiliations = [
 
 export default function FounderPage() {  
   return (  
-    <div className="min-h-screen bg-[#0A0A0A] text-white selection:bg-[#C5A059] selection:text-black">  
+    <div className="min-h-screen bg-[#0A0A0A] font-serif text-white selection:bg-[#C5A059] selection:text-black">  
       <Navigation />
 
       <main className="mx-auto max-w-7xl px-6 pb-24 pt-32 md:px-12">  
@@ -86,7 +86,7 @@ export default function FounderPage() {
               Clark  
             </h1>
 
-            <div className="space-y-6 font-sans text-lg font-light leading-[1.85] text-white/70">  
+            <div className="space-y-6 text-lg font-light leading-[1.85] text-white/70">  
               <p>  
                 For over two decades, I have navigated the world&apos;s most  
                 demanding itineraries—from sub-polar archipelagos to private  
@@ -127,7 +127,7 @@ export default function FounderPage() {
               </p>  
             </div>
 
-            <blockquote className="my-12 border-l border-[#C5A059] py-2 pl-6 font-serif text-xl italic leading-relaxed text-white/90 md:text-2xl">  
+            <blockquote className="my-12 border-l border-[#C5A059] py-2 pl-6 text-xl italic leading-relaxed text-white/90 md:text-2xl">  
               &ldquo;Discretion is not merely the absence of exposure; it is the  
               presence of absolute sovereign control over your environment.&rdquo;  
             </blockquote>  
@@ -161,7 +161,7 @@ export default function FounderPage() {
               The Architecture of Sovereign Travel  
             </h2>
 
-            <p className="mt-6 font-sans text-base font-light leading-relaxed text-white/55">  
+            <p className="mt-6 text-base font-light leading-relaxed text-white/55">  
               The visible itinerary is only one layer of the work. The real  
               value lies in the infrastructure beneath it.  
             </p>  
@@ -187,7 +187,7 @@ export default function FounderPage() {
                   {discipline.title}  
                 </h3>
 
-                <p className="font-sans text-sm font-light leading-relaxed text-white/55">  
+                <p className="text-sm font-light leading-relaxed text-white/55">  
                   {discipline.description}  
                 </p>  
               </article>  
@@ -205,7 +205,7 @@ export default function FounderPage() {
               A Network Built on Trust  
             </h2>
 
-            <p className="mt-6 font-sans text-base font-light leading-relaxed text-white/55">  
+            <p className="mt-6 text-base font-light leading-relaxed text-white/55">  
               Our relationships are carefully maintained over time. They are  
               not simply booking channels; they are the foundation for access,  
               recognition, and precise execution.  
@@ -239,7 +239,7 @@ export default function FounderPage() {
             Travel requires a point of view.  
           </h2>
 
-          <p className="mx-auto mb-10 max-w-xl font-sans text-base font-light leading-relaxed text-white/60">  
+          <p className="mx-auto mb-10 max-w-xl text-base font-light leading-relaxed text-white/60">  
             Inquiries regarding private office representation and itinerary  
             orchestration are reviewed personally.  
           </p>
