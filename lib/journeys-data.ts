@@ -367,19 +367,19 @@ highlights: [
 ],    
 dining: ["Estancia Fireplace Dinners", "Patagonian Lamb Asado", "Lodge Chef's Tasting Menu"]    
 },  
-{    
-slug: "french-polynesia",    
-title: "French Polynesia: Overwater Sovereignty",    
-category: "Island & Coast",    
-subtitle: "Bora Bora, Moorea & Private Motu Escapes",    
-location: "Bora Bora & Moorea, French Polynesia",    
-duration: "7 Days / 6 Nights",    
-startingPrice: "From $11,995 per person",    
-heroImage: "https://unsplash.com/photos/the-water-is-crystal-blue-and-clear-and-there-are-huts-in-the-water-oSIoto5nhqU"     
-summary: "An overwater sanctuary across the untouched lagoons of Bora Bora and Moorea, with private motus, coral-garden reefs, and absolute calm.",    
-bestTime: "May to October",    
-idealLength: "7 Days",    
-targetAudience: "Honeymooners, Divers, and Connoisseurs of Seclusion",    
+ {  
+  slug: "french-polynesia",  
+  title: "French Polynesia: Overwater Sovereignty",  
+  category: "Island & Coast",  
+  subtitle: "Bora Bora, Moorea & Private Motu Escapes",  
+  location: "Bora Bora & Moorea, French Polynesia",  
+  duration: "7 Days / 6 Nights",  
+  startingPrice: "From $11,995 per person",  
+  heroImage: "https://images.unsplash.com/photo-1540202404-a2f29016b523?w=1600&q=80",  
+  summary: "An overwater sanctuary across the untouched lagoons of Bora Bora and Moorea, with private motus, coral-garden reefs, and absolute calm.",  
+  bestTime: "May to October",  
+  idealLength: "7 Days",  
+  targetAudience: "Honeymooners, Divers, and Connoisseurs of Seclusion",  
 hotels: [    
   { name: "The Brando", description: "The ultimate eco-luxury private atoll escape once owned by Marlon Brando." },    
   { name: "Four Seasons Bora Bora", description: "Overwater bungalows with glass floors and Mount Otemanu views." },    
