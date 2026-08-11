@@ -5,7 +5,8 @@ import Link from 'next/link';
 
 const navLinks = [      
 { name: 'Lobby', path: '/', subtitle: 'Arrival Protocol' },      
-{ name: 'Mandate', path: '/mandate', subtitle: 'The Philosophy' },      
+{ name: 'Mandate', path: '/mandate', subtitle: 'The Philosophy' },   
+  { name: 'Meet Daryl', path: '/founder', subtitle: 'Founder & Principal' },  
 { name: 'Services', path: '/services', subtitle: 'Private Advisory' },      
 { name: 'Perspective', path: '/perspective', subtitle: 'The Intelligence' },      
 { name: 'Journeys', path: '/journeys', subtitle: 'Signature Itineraries' },  
