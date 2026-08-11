@@ -375,7 +375,7 @@ subtitle: "Bora Bora, Moorea & Private Motu Escapes",
 location: "Bora Bora & Moorea, French Polynesia",    
 duration: "7 Days / 6 Nights",    
 startingPrice: "From $11,995 per person",    
-heroImage: "https://images.unsplash.com/photo-1503408160189-22770f5df9d4?w=1600&q=80",     
+heroimage: "https://unsplash.com/photos/the-water-is-crystal-blue-and-clear-and-there-are-huts-in-the-water-oSIoto5nhqU"     
 summary: "An overwater sanctuary across the untouched lagoons of Bora Bora and Moorea, with private motus, coral-garden reefs, and absolute calm.",    
 bestTime: "May to October",    
 idealLength: "7 Days",    
