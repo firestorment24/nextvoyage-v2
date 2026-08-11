@@ -253,5 +253,3 @@ return (
   </div>  
 )  
 }  
-The "built on decades of executive leadership and complex logistics" phrasing now leads the founder bio and keeps the thesis line intact.
-
