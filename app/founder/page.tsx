@@ -20,7 +20,7 @@ const disciplines = [
   number: '02',  
   title: 'Off-Market Estate Sourcing',  
   description:  
-    'Direct access to sequestered private islands, unlisted historic palazzos, and wilderness reserves beyond public inventory.',  
+    'Direct access to private islands, unlisted historic palazzos, and wilderness reserves that never appear on public booking sites.',  
 },  
 {  
   number: '03',  
@@ -125,7 +125,7 @@ return (
 
           <blockquote className="my-12 border-l border-[#C5A059] py-2 pl-6 text-xl italic leading-relaxed text-white/90 md:text-2xl">  
             &ldquo;Discretion is not merely the absence of exposure; it is the  
-            presence of absolute sovereign control over your environment.&rdquo;  
+            presence of complete control over your environment.&rdquo;  
           </blockquote>  
         </div>  
       </section>
@@ -154,7 +154,7 @@ return (
           </span>
 
           <h2 className="text-3xl font-light tracking-tight md:text-5xl">  
-            The Architecture of Sovereign Travel  
+            The Craft of Sovereign Travel  
           </h2>
 
           <p className="mt-6 text-base font-light leading-relaxed text-white/55">  
