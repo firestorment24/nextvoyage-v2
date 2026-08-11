@@ -54,7 +54,6 @@ export default function FounderPage() {
           ← Return to Sanctuary  
         </Link>
 
-        {/* Hero */}  
         <section className="mb-32 grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">  
           <div className="relative lg:col-span-5">  
             <div className="relative aspect-[4/5] overflow-hidden border border-[#C5A059]/20 bg-white/5 shadow-2xl">  
@@ -121,9 +120,9 @@ export default function FounderPage() {
               </p>
 
               <p>  
-                We work with a limited number of clients who demand the  
-                uncommon, who understand that discretion and depth of knowledge  
-                matter more than volume, and who recognize that the best travel  
+                We work with a limited number of clients who demand the uncommon,  
+                who understand that discretion and depth of knowledge matter  
+                more than volume, and who recognize that the best travel  
                 experiences are built on relationships, not transactions.  
               </p>  
             </div>
@@ -135,7 +134,6 @@ export default function FounderPage() {
           </div>  
         </section>
 
-        {/* Philosophy */}  
         <section className="mb-32 border-y border-white/10 py-20">  
           <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-16">  
             <div className="md:col-span-4">  
@@ -153,7 +151,6 @@ export default function FounderPage() {
           </div>  
         </section>
 
-        {/* Disciplines */}  
         <section className="mb-32">  
           <div className="mb-16 max-w-2xl">  
             <span className="mb-3 block text-[10px] uppercase tracking-[0.3em] text-[#C5A059]">  
@@ -198,7 +195,6 @@ export default function FounderPage() {
           </div>  
         </section>
 
-        {/* Network */}  
         <section className="mb-32 border-t border-white/10 pt-20">  
           <div className="mb-16 max-w-2xl">  
             <span className="mb-3 block text-[10px] uppercase tracking-[0.3em] text-[#C5A059]">  
@@ -234,7 +230,6 @@ export default function FounderPage() {
           </div>  
         </section>
 
-        {/* CTA */}  
         <section className="border-t border-white/10 pt-24 text-center">  
           <span className="mb-4 block text-[10px] uppercase tracking-[0.3em] text-[#C5A059]">  
             Begin a Conversation  
@@ -262,8 +257,3 @@ export default function FounderPage() {
     </div>  
   )  
 }  
-Then commit it:
-
-git add app/founder/page.tsx  
-git commit -m "refine Meet Daryl biography and layout"  
-git push origin main  
