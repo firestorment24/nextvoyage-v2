@@ -54,8 +54,8 @@ export default function FounderPage() {
           ← Return to Sanctuary  
         </Link>
 
-        <section className="mb-32 grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">  
-          <div className="relative lg:col-span-5">  
+        <section className="mb-32 grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-16">  
+          <div className="relative lg:col-span-5 lg:mt-[8.5rem]">  
             <div className="relative aspect-[4/5] overflow-hidden border border-[#C5A059]/20 bg-white/5 shadow-2xl">  
               <img  
                 src={headshotUrl}  
@@ -80,10 +80,8 @@ export default function FounderPage() {
               Founder &amp; Principal  
             </span>
 
-            <h1 className="mb-10 text-5xl font-light leading-[0.95] tracking-[-0.06em] md:text-7xl">  
-              Daryl  
-              <br />  
-              Clark  
+            <h1 className="mb-10 whitespace-nowrap text-4xl font-light leading-[0.95] tracking-[-0.06em] md:text-7xl">  
+              Daryl Clark  
             </h1>
 
             <div className="space-y-6 text-lg font-light leading-[1.85] text-white/70">  
@@ -102,27 +100,27 @@ export default function FounderPage() {
                 at the intersection of high-stakes logistics, unlisted estate  
                 access, and family office travel stewardship, transforming  
                 complex global movements into an effortless, invisible  
-                choreography. Whether orchestrating multi-generational journeys  
-                across continents, securing access to properties beyond public  
-                reach, or managing the precise sequencing of overlapping  
-                schedules and unspoken expectations, we solve problems that most  
-                concierge services don&apos;t know exist.  
+                choreography. Whether orchestrating multi-generational  
+                journeys across continents, securing access to properties  
+                beyond public reach, or managing the precise sequencing of  
+                overlapping schedules and unspoken expectations, we solve  
+                problems that most concierge services don&apos;t know exist.  
               </p>
 
               <p>  
                 Arrival, for us, means stepping into an experience that has  
-                already begun—one where every detail has been anticipated, every  
-                complexity dissolved, and every transition engineered to feel  
-                natural. It means your family office runs seamlessly across  
-                time zones. It means your private retreat is waiting exactly as  
-                envisioned. It means the machinery of travel becomes entirely  
-                invisible, and you simply belong wherever you are.  
+                already begun—one where every detail has been anticipated,  
+                every complexity dissolved, and every transition engineered to  
+                feel natural. It means your family office runs seamlessly  
+                across time zones. It means your private retreat is waiting  
+                exactly as envisioned. It means the machinery of travel becomes  
+                entirely invisible, and you simply belong wherever you are.  
               </p>
 
               <p>  
-                We work with a limited number of clients who demand the uncommon,  
-                who understand that discretion and depth of knowledge matter  
-                more than volume, and who recognize that the best travel  
+                We work with a limited number of clients who demand the  
+                uncommon, who understand that discretion and depth of knowledge  
+                matter more than volume, and who recognize that the best travel  
                 experiences are built on relationships, not transactions.  
               </p>  
             </div>
