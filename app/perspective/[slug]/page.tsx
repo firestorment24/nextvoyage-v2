@@ -1,109 +1,110 @@
-import { sql } from '@vercel/postgres'
-import { notFound } from 'next/navigation'
-import Link from 'next/link'
+import { sql } from '@vercel/postgres'  
+import { notFound } from 'next/navigation'  
+import Link from 'next/link'  
 import Navigation from '@/components/Navigation'
 
-export const revalidate = 0
+export const revalidate = 0  
 export const dynamic = 'force-dynamic'
 
-export default async function ArticlePage(props: { params: Promise<{ slug: string }> }) {
-const { slug } = await props.params
+export default async function ArticlePage(props: { params: Promise<{ slug: string }> }) {  
+  const { slug } = await props.params
 
-let rows
-try {
-  const result = await sql`
-    SELECT * FROM perspective_articles
-    WHERE slug = ${slug} OR id::text = ${slug}
-    LIMIT 1
-  `
-  rows = result.rows
-} catch (error) {
-  console.error('Error querying perspective article:', error)
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0A0A0A] text-white">
-      System offline. Please recalibrate.
-    </div>
-  )
-}
+  let rows  
+  try {  
+    const result = await sql`  
+      SELECT * FROM perspective_articles  
+      WHERE slug = ${slug} OR id::text = ${slug}  
+      LIMIT 1  
+    `  
+    rows = result.rows  
+  } catch (error) {  
+    console.error('Error querying perspective article:', error)  
+    return (  
+      <div className="min-h-screen flex items-center justify-center bg-[#0A0A0A] text-white">  
+        System offline. Please recalibrate.  
+      </div>  
+    )  
+  }
 
-const article = rows[0]
+  const article = rows[0]
 
-if (!article) {
-  notFound()
-}
+  if (!article) {  
+    notFound()  
+  }
 
-return (
-  <div className="min-h-screen bg-[#0A0A0A] text-white font-serif selection:bg-[#D4AF37] selection:text-black">
-    <Navigation />
+  return (  
+    <div className="min-h-screen bg-[#0A0A0A] text-white font-serif selection:bg-[#D4AF37] selection:text-black">  
+      <Navigation />
 
-    <main className="pt-32 pb-20 px-6">
-      <div className="max-w-3xl mx-auto">
-        <Link
-          href="/perspective"
-          className="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] hover:opacity-70 transition-opacity mb-12 inline-block"
-        >
-          ← Back to Perspective
-        </Link>
+      <main className="pt-32 pb-20 px-6">  
+        <div className="max-w-3xl mx-auto">  
+          <Link  
+            href="/perspective"  
+            className="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] hover:opacity-70 transition-opacity mb-12 inline-block"  
+          >  
+            ← Back to Perspective  
+          </Link>
 
-        <header className="mb-16">
-          <span className="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] block mb-4">
-            {article.category}
-          </span>
-          <h1 className="text-4xl md:text-6xl font-light tracking-tighter leading-tight mb-8">
-            {article.title}
-          </h1>
-          <div className="flex items-center gap-4 text-[10px] uppercase tracking-[0.2em] text-white/40 border-b border-white/10 pb-8">
-            <span>{article.author || 'NexVoyage Collective'}</span>
-            <span className="w-1 h-1 bg-white/20 rounded-full" />
-            <span>
-              {new Date(
-                article.published_at || article.created_at
-              ).toLocaleDateString('en-US', {
-                month: 'long',
-                day: 'numeric',
-                year: 'numeric',
-              })}
-            </span>
-          </div>
-        </header>
+          <header className="mb-16">  
+            <span className="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] block mb-4">  
+              {article.category}  
+            </span>  
+            <h1 className="text-4xl md:text-6xl font-light tracking-tighter leading-tight mb-8">  
+              {article.title}  
+            </h1>  
+            <div className="flex items-center gap-4 text-[10px] uppercase tracking-[0.2em] text-white/40 border-b border-white/10 pb-8">  
+              <span>{article.author || 'NexVoyage Collective'}</span>  
+              <span className="w-1 h-1 bg-white/20 rounded-full" />  
+              <span>  
+                {new Date(  
+                  article.published_at || article.created_at  
+                ).toLocaleDateString('en-US', {  
+                  month: 'long',  
+                  day: 'numeric',  
+                  year: 'numeric',  
+                })}  
+              </span>  
+            </div>  
+          </header>
 
-        {article.image_url && (
-          <div className="aspect-[16/9] mb-16 overflow-hidden bg-white/5">
-            <img
-              src={article.image_url}
-              alt={article.title}
-              className="w-full h-full object-cover"
-            />
-          </div>
-        )}
+          {article.image_url && (  
+            <div className="aspect-[16/9] mb-16 overflow-hidden bg-white/5">  
+              <img  
+                src={article.image_url}  
+                alt={article.title}  
+                className="w-full h-full object-cover"  
+              />  
+            </div>  
+          )}
 
-        {article.content ? (
-          <>
-            <style>{`.article-body p{margin-bottom:2rem}.article-body p:last-child{margin-bottom:0}`}</style>
-            <div className="article-body text-white/70 text-lg font-light font-sans leading-[1.8]">
-              <div dangerouslySetInnerHTML={{ __html: article.content }} />
-            </div>
-          </>
-        ) : (
-          <p className="text-white/40 text-lg font-light">
-            Full article content coming soon.
-          </p>
-        )}
+          {article.content ? (  
+            <>  
+              <style>{`.article-body p{margin-bottom:2rem}.article-body p:last-child{margin-bottom:0}`}</style>  
+              <div className="article-body text-white/70 text-lg font-light font-sans leading-[1.8]">  
+                <div dangerouslySetInnerHTML={{ __html: article.content }} />  
+              </div>  
+            </>  
+          ) : (  
+            <p className="text-white/40 text-lg font-light">  
+              Full article content coming soon.  
+            </p>  
+          )}
 
-        {article.tags && (
-          <div className="mt-20 pt-8 border-t border-white/10 flex flex-wrap gap-3">
-            {article.tags.split(',').map((tag: string) => (
-              <span
-                key={tag}
-                className="text-[9px] uppercase tracking-widest text-white/30 border border-white/10 px-3 py-1 rounded-full"
-              >
-                {tag.trim()}
-              </span>
-            ))}
-          </div>
-        )}
-      </div>
-    </main>
-  </div>
-)
-}
+          {article.tags && (  
+            <div className="mt-20 pt-8 border-t border-white/10 flex flex-wrap gap-3">  
+              {article.tags.split(',').map((tag: string) => (  
+                <span  
+                  key={tag}  
+                  className="text-[9px] uppercase tracking-widest text-white/30 border border-white/10 px-3 py-1 rounded-full"  
+                >  
+                  {tag.trim()}  
+                </span>  
+              ))}  
+            </div>  
+          )}  
+        </div>  
+      </main>  
+    </div>  
+  )  
+}  
+
