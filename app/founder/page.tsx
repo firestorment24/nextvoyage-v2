@@ -8,7 +8,8 @@ export const metadata = {
 }
 
 export default function FounderPage() {  
-  const headshotUrl = "https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Headshot/Daryl%20Clark_Headshot.jpeg"
+ const headshotUrl = 'https://cdn.marblism.com/_XUs99xWdak.jpeg'  
+
 
   const affiliations = [  
     { name: 'FORA TRAVEL', role: 'Flagship Partner' },  
