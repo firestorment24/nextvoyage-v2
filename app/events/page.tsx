@@ -1,4 +1,5 @@
-mport Link from 'next/link';
+import Link from 'next/link';  
+
 
 export const metadata = {  
   title: 'The Event Ledger — NexVoyage Collective',  
