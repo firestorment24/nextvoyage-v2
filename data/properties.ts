@@ -209,14 +209,14 @@ export const PROPERTY_DATA: Property[] = [
     collection: 'Urban Sovereigns',  
     sanctuaryId: 'urban-sovereigns',  
     description:  
-      "A soaring seven-building complex in the heart of the capital, seamlessly connecting the city's Golden Triangle of Art.",  
+      'A soaring seven-building complex in the heart of the capital, seamlessly connecting the city’s Golden Triangle of Art.',  
     intel: {  
       positioning: 'City Within a City',  
       category: 'Urban Sovereigns',  
       memberBenefits: [  
         'Private art curator tour of Prado',  
         'Rooftop pool cabana reservation',  
-        "Dani Brasserie chef's table access",  
+        'Dani Brasserie chef’s table access',  
       ],  
     },  
   },  
@@ -237,7 +237,7 @@ export const PROPERTY_DATA: Property[] = [
     collection: 'Urban Sovereigns',  
     sanctuaryId: 'urban-sovereigns',  
     description:  
-      "One&Only's first Greek escape, set on a pristine stretch of the Athens Riviera with private beach access.",  
+      'One&Only’s first Greek escape, set on a pristine stretch of the Athens Riviera with private beach access.',  
     intel: {  
       positioning: 'Athens Riviera Icon',  
       category: 'Urban Sovereigns',  
@@ -276,7 +276,7 @@ export const PROPERTY_DATA: Property[] = [
       category: 'Heritage & Estate',  
       memberBenefits: [  
         'Private boat to Bellagio and Varenna',  
-        "Chef's garden-to-table dinner",  
+        'Chef’s garden-to-table dinner',  
         'Opera night in the Grand Salon',  
       ],  
     },  
@@ -341,7 +341,7 @@ export const PROPERTY_DATA: Property[] = [
     collection: 'Island & Coast',  
     sanctuaryId: 'island-coast',  
     description:  
-      'A serene coastal sanctuary on the edge of a marine national park, where sleek pavilions blend into the turquoise waters.',  
+      'A serene coastal sanctuary on the edge of a marine national park, where sleek pavilions blend into turquoise waters.',  
     intel: {  
       positioning: 'Coastal Serenity',  
       category: 'Island & Coast',  
@@ -349,33 +349,6 @@ export const PROPERTY_DATA: Property[] = [
         'Private guided snorkeling in the national park',  
         'In-villa chef experience',  
         'Beachside wellness session',  
-      ],  
-    },  
-  },  
-  {  
-    id: 'singita-kwitonda-lodge',  
-    name: 'Singita Kwitonda Lodge',  
-    location: 'Volcanoes National Park, Rwanda',  
-    image:  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Singrita%20Kwitonda%20Lodge/Kwitonda_Main_Lounge_Area_with_Bar_Deli__white_sofa_and_large_windows_Adriaan_Louw.webp',  
-    gallery: [  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Singrita%20Kwitonda%20Lodge/Kwitonda_Main_Lounge_Area_with_Bar_Deli__white_sofa_and_large_windows_Adriaan_Louw.webp',  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Singrita%20Kwitonda%20Lodge/Kwitonda_slider_1.webp',  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Singrita%20Kwitonda%20Lodge/Kwitonda_slider_2.webp',  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Singrita%20Kwitonda%20Lodge/SVNP_LODGE_Kwitonda_Lodge_Conservation_Room_Ross_Couper_2.webp',  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Singrita%20Kwitonda%20Lodge/SVNP_ROOM_Kwitonda_Lodge_Bedroom_Ross_Couper_1.webp',  
-    ],  
-    collection: 'Wild Frontiers',  
-    sanctuaryId: 'wild-frontiers',  
-    description:  
-      'An eco-sensitive lodge nestled on the edge of the Volcanoes National Park, offering intimate gorilla trekking experiences.',  
-    intel: {  
-      positioning: 'Gorilla Trekking Haven',  
-      category: 'Wild Frontiers',  
-      memberBenefits: [  
-        'Private guided gorilla trekking',  
-        'On-site conservation talk',  
-        'Locally inspired farm-to-table dining',  
       ],  
     },  
   },  
@@ -403,6 +376,165 @@ export const PROPERTY_DATA: Property[] = [
         'Private island castaway lunch',  
         'Dhow sailing trip',  
         'Guided coastal reef walk',  
+      ],  
+    },  
+  },  
+  {  
+    id: 'the-brando',  
+    name: 'The Brando',  
+    location: 'Tetiaroa, French Polynesia',  
+    image:  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/The%20Brando/the-brando.jpg',  
+    gallery: [  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/The%20Brando/the-brando.jpg',  
+    ],  
+    collection: 'Island & Coast',  
+    sanctuaryId: 'island-coast',  
+    description:  
+      'Forbes 5-Star private atoll sanctuary dedicated to pristine luxury and sustainability.',  
+    intel: {  
+      positioning: 'Pristine Atoll Sanctuary',  
+      category: 'Island & Coast',  
+      memberBenefits: [  
+        'Private plunge pool villas',  
+        'Ecostation research tours',  
+        'Polynesian wellness rituals',  
+      ],  
+    },  
+  },  
+  {  
+    id: 'islas-secas',  
+    name: 'Islas Secas',  
+    location: 'Panama',  
+    image:  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Islas%20Secas/islas-secas.jpg',  
+    gallery: [  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Islas%20Secas/islas-secas.jpg',  
+    ],  
+    collection: 'Island & Coast',  
+    sanctuaryId: 'island-coast',  
+    description:  
+      'A 14-island private archipelago sanctuary ranked among Central America’s leading retreats.',  
+    intel: {  
+      positioning: 'Private Archipelago Sanctuary',  
+      category: 'Island & Coast',  
+      memberBenefits: [  
+        'Exclusive 14-island access',  
+        'Whale-watching expeditions',  
+        'Solar-powered luxury casitas',  
+      ],  
+    },  
+  },  
+  {  
+    id: 'southern-ocean-lodge',  
+    name: 'Southern Ocean Lodge',  
+    location: 'Kangaroo Island, Australia',  
+    image:  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Southern%20Ocean%20Lodge/southern-ocean-lodge.jpg',  
+    gallery: [  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Southern%20Ocean%20Lodge/southern-ocean-lodge.jpg',  
+    ],  
+    collection: 'Island & Coast',  
+    sanctuaryId: 'island-coast',  
+    description:  
+      'Reborn cliffside luxury sanctuary overlooking the dramatic southern ocean wilderness.',  
+    intel: {  
+      positioning: 'Cliffside Ocean Sanctuary',  
+      category: 'Island & Coast',  
+      memberBenefits: [  
+        'Guided Kangaroo Island excursions',  
+        'Clifftop spa sanctuary',  
+        'Cellar master wine tastings',  
+      ],  
+    },  
+  },  
+  {  
+    id: 'pier-sixty-six-resort',  
+    name: 'Pier Sixty-Six Resort',  
+    location: 'Fort Lauderdale, Florida',  
+    image:  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Pier%20Sixty-Six%20Resort/harbour-villa-suite-corner.jpg',  
+    gallery: [  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Pier%20Sixty-Six%20Resort/harbour-villa-suite-corner.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Pier%20Sixty-Six%20Resort/one-bedroom-two-queen.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Pier%20Sixty-Six%20Resort/presidential-suite-living.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Pier%20Sixty-Six%20Resort/resort-residence-villa%20(1).jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Pier%20Sixty-Six%20Resort/resort-residence-villa.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Pier%20Sixty-Six%20Resort/resort-residences-302.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Pier%20Sixty-Six%20Resort/sotogrande-bar-patio.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Pier%20Sixty-Six%20Resort/standard-guest-room.jpg',  
+    ],  
+    collection: 'Island & Coast',  
+    sanctuaryId: 'island-coast',  
+    description:  
+      'A waterfront Fort Lauderdale resort centered on marina culture, private residences, and South Florida access.',  
+    intel: {  
+      positioning: 'South Florida Marina Sanctuary',  
+      category: 'Island & Coast',  
+      memberBenefits: [  
+        'Private yacht charter coordination',  
+        'Waterfront dining access',  
+        'Dedicated arrival and departure planning',  
+      ],  
+    },  
+  },  
+  {  
+    id: 'the-lodge-at-kukuiula',  
+    name: 'The Lodge at Kukuiula',  
+    location: 'Kauai, Hawaii',  
+    image:  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/The%20Lodge%20at%20Kukuiula/club-cottage-backyard.jpg',  
+    gallery: [  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/The%20Lodge%20at%20Kukuiula/club-cottage-backyard.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/The%20Lodge%20at%20Kukuiula/club-villa-master-suite.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/The%20Lodge%20at%20Kukuiula/club-villa-patio.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/The%20Lodge%20at%20Kukuiula/club-villa-with-private.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/The%20Lodge%20at%20Kukuiula/golf-club-house.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/The%20Lodge%20at%20Kukuiula/hi-ilani-spa.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/The%20Lodge%20at%20Kukuiula/spa-inspired-bathrooms.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/The%20Lodge%20at%20Kukuiula/the-lodge-at-kukui-ula%20(1).jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/The%20Lodge%20at%20Kukuiula/the-lodge-at-kukui-ula.jpg',  
+    ],  
+    collection: 'Island & Coast',  
+    sanctuaryId: 'island-coast',  
+    description:  
+      'A private-residence retreat on Kauai’s south shore, combining island privacy, golf, wellness, and ocean access.',  
+    intel: {  
+      positioning: 'Private Kauai Residence Retreat',  
+      category: 'Island & Coast',  
+      memberBenefits: [  
+        'Private villa and cottage access',  
+        'Golf and ocean activity coordination',  
+        'Hi’ilani spa programming',  
+      ],  
+    },  
+  },
+
+  // --- Wild Frontiers ---  
+  {  
+    id: 'singita-kwitonda-lodge',  
+    name: 'Singita Kwitonda Lodge',  
+    location: 'Volcanoes National Park, Rwanda',  
+    image:  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Singrita%20Kwitonda%20Lodge/Kwitonda_Main_Lounge_Area_with_Bar_Deli__white_sofa_and_large_windows_Adriaan_Louw.webp',  
+    gallery: [  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Singrita%20Kwitonda%20Lodge/Kwitonda_Main_Lounge_Area_with_Bar_Deli__white_sofa_and_large_windows_Adriaan_Louw.webp',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Singrita%20Kwitonda%20Lodge/Kwitonda_slider_1.webp',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Singrita%20Kwitonda%20Lodge/Kwitonda_slider_2.webp',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Singrita%20Kwitonda%20Lodge/SVNP_LODGE_Kwitonda_Lodge_Conservation_Room_Ross_Couper_2.webp',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Singrita%20Kwitonda%20Lodge/SVNP_ROOM_Kwitonda_Lodge_Bedroom_Ross_Couper_1.webp',  
+    ],  
+    collection: 'Wild Frontiers',  
+    sanctuaryId: 'wild-frontiers',  
+    description:  
+      'An eco-sensitive lodge nestled on the edge of Volcanoes National Park, offering intimate gorilla trekking experiences.',  
+    intel: {  
+      positioning: 'Gorilla Trekking Haven',  
+      category: 'Wild Frontiers',  
+      memberBenefits: [  
+        'Private guided gorilla trekking',  
+        'On-site conservation talk',  
+        'Locally inspired farm-to-table dining',  
       ],  
     },  
   },  
@@ -436,38 +568,6 @@ export const PROPERTY_DATA: Property[] = [
       ],  
     },  
   },  
-  {  
-    id: 'chable-yucatan',  
-    name: 'Chablé Yucatán',  
-    location: 'Yucatán, Mexico',  
-    image:  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Chable%20Yucatan/Chable-Yucatan-hero-2930x2198-c-center.webp',  
-    gallery: [  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Chable%20Yucatan/Chable-Yucatan-hero-2930x2198-c-center.webp',  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Chable%20Yucatan/chable-yucatan-bathroom-1280x0-c-default.webp',  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Chable%20Yucatan/chable-yucatan-casita-1024x1400-c-default.webp',  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Chable%20Yucatan/chable-yucatan-casita-2-1280x0-c-default.webp',  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Chable%20Yucatan/chable-yucatan-exterior-2-1024x1400-c-default.webp',  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Chable%20Yucatan/chable-yucatan-ixiim-2-1024x1400-c-default.webp',  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Chable%20Yucatan/chable-yucatan-kiol-2432x0-c-default.webp',  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Chable%20Yucatan/chable-yucatan-main-house-1280x0-c-default.webp',  
-    ],  
-    collection: 'Heritage & Estate',  
-    sanctuaryId: 'heritage-estate',  
-    description:  
-      'A restored 17th-century hacienda in the heart of the Yucatán jungle.',  
-    intel: {  
-      positioning: '17th-Century Hacienda Reborn',  
-      category: 'Heritage & Estate',  
-      memberBenefits: [  
-        'Maya temazcal ceremony',  
-        'Private cenote plunge',  
-        'Hacienda-to-table cooking class',  
-      ],  
-    },  
-  },
-
-  // --- Wild Frontiers ---  
   {  
     id: 'amangiri',  
     name: 'Amangiri',  
@@ -542,7 +642,7 @@ export const PROPERTY_DATA: Property[] = [
       'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Habitas%20AlUla/Habitas_Al-Ula_2021_01_000201.jpg',  
       'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Habitas%20AlUla/Habitas_Al-Ula_2021_01_000225-1.jpg',  
       'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Habitas%20AlUla/Habitas_Al-Ula_2021_01_000237.jpg',  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Habitas%20AlUla/Habitas_Alula_Low-Res_0210.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Habitas%20Alula_Low-Res_0210.jpg',  
     ],  
     collection: 'Wild Frontiers',  
     sanctuaryId: 'wild-frontiers',  
@@ -552,7 +652,7 @@ export const PROPERTY_DATA: Property[] = [
       positioning: 'Sustainable Desert Sanctuary',  
       category: 'Wild Frontiers',  
       memberBenefits: [  
-        'Private guided tour of Hegra (UNESCO)',  
+        'Private guided tour of Hegra',  
         'Sunset camel trek through the canyon',  
         'Sound healing ceremony in the desert',  
       ],  
@@ -563,17 +663,17 @@ export const PROPERTY_DATA: Property[] = [
     name: 'Dunton Hot Springs',  
     location: 'Colorado, USA',  
     image:  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Dunton_Hot%20Springs/DHS%201.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Dunton_Hot_Springs/DHS%201.jpg',  
     gallery: [  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Dunton_Hot%20Springs/DHS%201.jpg',  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Dunton_Hot%20Springs/DHS%202.jpg',  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Dunton_Hot%20Springs/DHS%203.jpg',  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Dunton_Hot%20Springs/DHS%204.jpg',  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Dunton_Hot%20Springs/DHS%205.jpg',  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Dunton_Hot%20Springs/DHS%207.jpg',  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Dunton_Hot%20Springs/DHS%208.jpg',  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Dunton_Hot%20Springs/DHS%209.jpg',  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Dunton_Hot%20Springs/DHS%2010.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Dunton_Hot_Springs/DHS%201.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Dunton_Hot_Springs/DHS%202.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Dunton_Hot_Springs/DHS%203.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Dunton_Hot_Springs/DHS%204.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Dunton_Hot_Springs/DHS%205.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Dunton_Hot_Springs/DHS%207.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Dunton_Hot_Springs/DHS%208.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Dunton_Hot_Springs/DHS%209.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Dunton_Hot_Springs/DHS%2010.jpg',  
     ],  
     collection: 'Wild Frontiers',  
     sanctuaryId: 'wild-frontiers',  
@@ -694,7 +794,7 @@ export const PROPERTY_DATA: Property[] = [
     collection: 'Wild Frontiers',  
     sanctuaryId: 'wild-frontiers',  
     description:  
-      "A minimalist wellness retreat on a remote island in Japan's Seto Inland Sea.",  
+      'A minimalist wellness retreat on a remote island in Japan’s Seto Inland Sea.',  
     intel: {  
       positioning: 'Minimalist Island Wellness',  
       category: 'Wild Frontiers',  
@@ -798,6 +898,269 @@ export const PROPERTY_DATA: Property[] = [
     },  
   },  
   {  
+    id: 'trinchera-reserve',  
+    name: 'Trinchera Reserve',  
+    location: 'Colorado, USA',  
+    image:  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Trinchera%20Reserve/C88A0342.jpg',  
+    gallery: [  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Trinchera%20Reserve/C88A0342.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Trinchera%20Reserve/C88A2219.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Trinchera%20Reserve/C88A9075-HDR.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Trinchera%20Reserve/JX6A3004.jpg',  
+    ],  
+    collection: 'Wild Frontiers',  
+    sanctuaryId: 'wild-frontiers',  
+    description:  
+      'Private high alpine sanctuary spanning pristine Colorado wilderness.',  
+    intel: {  
+      positioning: 'High Alpine Wilderness',  
+      category: 'Wild Frontiers',  
+      memberBenefits: [  
+        'Private wilderness access',  
+        'Guided wildlife tracking',  
+        'Custom alpine dining',  
+      ],  
+    },  
+  },  
+  {  
+    id: 'brush-creek-luxury-ranch',  
+    name: 'Brush Creek Luxury Ranch Collection',  
+    location: 'Saratoga, Wyoming',  
+    image:  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Brush%20Creek%20Luxury%20Ranch/2019_Shot_29_Blacksmith_Deck_Room1_56366_rt.jpg',  
+    gallery: [  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Brush%20Creek%20Luxury%20Ranch/2019_Shot_29_Blacksmith_Deck_Room1_56366_rt.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Brush%20Creek%20Luxury%20Ranch/2019_Shot_38_Blacksmith_Deck_56617_rt-2.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Brush%20Creek%20Luxury%20Ranch/BCR_Outfitters_LodgeBarView-2-e1680894143582.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Brush%20Creek%20Luxury%20Ranch/Peryam_Living_room_1_Canon.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Brush%20Creek%20Luxury%20Ranch/Spa-Treatment-Room_web.jpg',  
+    ],  
+    collection: 'Wild Frontiers',  
+    sanctuaryId: 'wild-frontiers',  
+    description:  
+      'A 30,000-acre luxury ranch experience in the American West.',  
+    intel: {  
+      positioning: 'Private American Ranch',  
+      category: 'Wild Frontiers',  
+      memberBenefits: [  
+        'All-inclusive ranch activities',  
+        'Private fly-fishing beats',  
+        'Farm-to-table culinary experiences',  
+      ],  
+    },  
+  },  
+  {  
+    id: 'alpine-falls-ranch',  
+    name: 'Alpine Falls Ranch',  
+    location: 'Montana, USA',  
+    image:  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Alpine%20Falls%20Ranch/Villa_Bed_5de3e5eb22.webp',  
+    gallery: [  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Alpine%20Falls%20Ranch/Villa_Bed_5de3e5eb22.webp',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Alpine%20Falls%20Ranch/Villa_Pink_ac88bc3eea.webp',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Alpine%20Falls%20Ranch/large_stage_coach_sauna_fc9da55c7a.webp',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Alpine%20Falls%20Ranch/medium_Alpine_Falls_Ranch_11_01_2024_1292_2304da90a9.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Alpine%20Falls%20Ranch/medium_Alpine_Falls_Ranch_11_01_2024_841_9f4b06c8e5.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Alpine%20Falls%20Ranch/medium_Stable_View_3_copy_84cf6e346a.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Alpine%20Falls%20Ranch/medium_WEB_Alpine_Falls_Bunk_House_Bedroom1_e50a1327d1.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Alpine%20Falls%20Ranch/missoula2_b997eea676.jpg',  
+    ],  
+    collection: 'Wild Frontiers',  
+    sanctuaryId: 'wild-frontiers',  
+    description:  
+      'An intimate mountain retreat offering private-ranch seclusion and tailored outdoor access.',  
+    intel: {  
+      positioning: 'Private Mountain Ranch',  
+      category: 'Wild Frontiers',  
+      memberBenefits: [  
+        'Private estate seclusion',  
+        'Tailored outdoor excursions',  
+        'Dedicated host service',  
+      ],  
+    },  
+  },  
+  {  
+    id: 'the-meadows-on-rock-creek',  
+    name: 'The Meadows on Rock Creek',  
+    location: 'Montana, USA',  
+    image:  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/The%20Meadows%20on%20Rock%20Creek/TMORC-two-bedroom-gallery-3-min.png',  
+    gallery: [  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/The%20Meadows%20on%20Rock%20Creek/TMORC-two-bedroom-gallery-3-min.png',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/The%20Meadows%20on%20Rock%20Creek/cabin-featured-1-min.png',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/The%20Meadows%20on%20Rock%20Creek/cabin-featured-3-min.png',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/The%20Meadows%20on%20Rock%20Creek/central-lodge-exterior.png',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/The%20Meadows%20on%20Rock%20Creek/montana-lodging-1.png',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/The%20Meadows%20on%20Rock%20Creek/montana-lodging.png',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/The%20Meadows%20on%20Rock%20Creek/rock-creek-lodge.png',  
+    ],  
+    collection: 'Wild Frontiers',  
+    sanctuaryId: 'wild-frontiers',  
+    description:  
+      'A classic all-inclusive Montana sanctuary designed around private cabins, river access, and deep wilderness quiet.',  
+    intel: {  
+      positioning: 'Private Montana Wilderness',  
+      category: 'Wild Frontiers',  
+      memberBenefits: [  
+        'Complete estate buyouts available',  
+        'Expert equestrian guides',  
+        'Riverfront serenity',  
+      ],  
+    },  
+  },  
+  {  
+    id: 'cataloochee-ranch',  
+    name: 'Cataloochee Ranch',  
+    location: 'North Carolina, USA',  
+    image:  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Cataloochee%20Ranch/alexander.jpg',  
+    gallery: [  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Cataloochee%20Ranch/alexander.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Cataloochee%20Ranch/delano.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Cataloochee%20Ranch/exterior.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Cataloochee%20Ranch/image2-1.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Cataloochee%20Ranch/kephart.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Cataloochee%20Ranch/palmer.jpg',  
+    ],  
+    collection: 'Wild Frontiers',  
+    sanctuaryId: 'wild-frontiers',  
+    description:  
+      'A historic high-elevation mountain sanctuary in the Smokies.',  
+    intel: {  
+      positioning: 'Smoky Mountain Heritage',  
+      category: 'Wild Frontiers',  
+      memberBenefits: [  
+        'Ridge horseback riding',  
+        'Historic cabin luxury',  
+        'Private campfire gatherings',  
+      ],  
+    },  
+  },  
+  {  
+    id: 'black-desert-resort',  
+    name: 'Black Desert Resort',  
+    location: 'Ivins, Utah, USA',  
+    image:  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Black%20Desert%20Resort/caption%20(1).jpg',  
+    gallery: [  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Black%20Desert%20Resort/caption%20(1).jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Black%20Desert%20Resort/caption%20(2).jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Black%20Desert%20Resort/caption.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Black%20Desert%20Resort/deluxe-double-queen-in.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Black%20Desert%20Resort/deluxe-king-in-resort.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Black%20Desert%20Resort/deluxe-king.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Black%20Desert%20Resort/latitude-patio.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Black%20Desert%20Resort/two-bedroom-suite%20(1).jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Black%20Desert%20Resort/two-bedroom-suite.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Black%20Desert%20Resort/wellness-room-entry.jpg',  
+    ],  
+    collection: 'Wild Frontiers',  
+    sanctuaryId: 'wild-frontiers',  
+    description:  
+      'A desert resort set among the red-rock landscapes of southern Utah.',  
+    intel: {  
+      positioning: 'Red-Rock Desert Retreat',  
+      category: 'Wild Frontiers',  
+      memberBenefits: [  
+        'Private desert landscape excursions',  
+        'Golf and outdoor activity planning',  
+        'Wellness and recovery programming',  
+      ],  
+    },  
+  },  
+  {  
+    id: 'everline-resort-and-spa',  
+    name: 'Everline Resort and Spa',  
+    location: 'Olympic Valley, California, USA',  
+    image:  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Everline%20Resort%20and%20Spa/508789280_10238572654798570_3800800846905694025_n.jpg',  
+    gallery: [  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Everline%20Resort%20and%20Spa/508789280_10238572654798570_3800800846905694025_n.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Everline%20Resort%20and%20Spa/family-friendly_hotel_in_olympic_valley.2000x0.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Everline%20Resort%20and%20Spa/guest-room.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Everline%20Resort%20and%20Spa/hotel_near_squaw_valley.2000x0.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Everline%20Resort%20and%20Spa/hotel_near_squaw_valley_ski_resort.2000x0.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Everline%20Resort%20and%20Spa/ice_rink.2000x0.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Everline%20Resort%20and%20Spa/lodging_in_olympic_valley.2000x0.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Everline%20Resort%20and%20Spa/ski_resort_hotel_in_olympic_valley.2000x0.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Everline%20Resort%20and%20Spa/suite%20(1).jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Everline%20Resort%20and%20Spa/suite%20(2).jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Everline%20Resort%20and%20Spa/suite.jpg',  
+    ],  
+    collection: 'Wild Frontiers',  
+    sanctuaryId: 'wild-frontiers',  
+    description:  
+      'A mountain resort in Olympic Valley offering four-season access to Lake Tahoe’s alpine landscape.',  
+    intel: {  
+      positioning: 'Sierra Mountain Base',  
+      category: 'Wild Frontiers',  
+      memberBenefits: [  
+        'Private ski and mountain planning',  
+        'Lake Tahoe outdoor access',  
+        'Dedicated spa and recovery time',  
+      ],  
+    },  
+  },  
+  {  
+    id: 'sunriver-resort',  
+    name: 'Sunriver Resort',  
+    location: 'Sunriver, Oregon, USA',  
+    image:  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Sunriver%20Resort/PSI%20Logo.jpg',  
+    gallery: [  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Sunriver%20Resort/PSI%20Logo.jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Sunriver%20Resort/sunriver-resort%20(1).jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Sunriver%20Resort/sunriver-resort%20(2).jpg',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Sunriver%20Resort/sunriver-resort.jpg',  
+    ],  
+    collection: 'Wild Frontiers',  
+    sanctuaryId: 'wild-frontiers',  
+    description:  
+      'A Central Oregon resort base surrounded by high-desert landscapes, rivers, forests, and outdoor pursuits.',  
+    intel: {  
+      positioning: 'High-Desert Outdoor Retreat',  
+      category: 'Wild Frontiers',  
+      memberBenefits: [  
+        'Private outdoor itinerary planning',  
+        'Golf and river access',  
+        'High-desert recovery time',  
+      ],  
+    },  
+  },
+
+  // --- Heritage & Estate ---  
+  {  
+    id: 'chable-yucatan',  
+    name: 'Chablé Yucatán',  
+    location: 'Yucatán, Mexico',  
+    image:  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Chable%20Yucatan/Chable-Yucatan-hero-2930x2198-c-center.webp',  
+    gallery: [  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Chable%20Yucatan/Chable-Yucatan-hero-2930x2198-c-center.webp',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Chable%20Yucatan/chable-yucatan-bathroom-1280x0-c-default.webp',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Chable%20Yucatan/chable-yucatan-casita-1024x1400-c-default.webp',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Chable%20Yucatan/chable-yucatan-casita-2-1280x0-c-default.webp',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Chable%20Yucatan/chable-yucatan-exterior-2-1024x1400-c-default.webp',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Chable%20Yucatan/chable-yucatan-ixiim-2-1024x1400-c-default.webp',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Chable%20Yucatan/chable-yucatan-kiol-2432x0-c-default.webp',  
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Chable%20Yucatan/chable-yucatan-main-house-1280x0-c-default.webp',  
+    ],  
+    collection: 'Heritage & Estate',  
+    sanctuaryId: 'heritage-estate',  
+    description:  
+      'A restored 17th-century hacienda in the heart of the Yucatán jungle.',  
+    intel: {  
+      positioning: '17th-Century Hacienda Reborn',  
+      category: 'Heritage & Estate',  
+      memberBenefits: [  
+        'Maya temazcal ceremony',  
+        'Private cenote plunge',  
+        'Hacienda-to-table cooking class',  
+      ],  
+    },  
+  },  
+  {  
     id: 'la-valise-mazunte',  
     name: 'La Valise Mazunte',  
     location: 'Oaxaca, Mexico',  
@@ -887,101 +1250,9 @@ export const PROPERTY_DATA: Property[] = [
     },  
   },  
   {  
-    id: 'trinchera-reserve',  
-    name: 'Trinchera Reserve',  
-    location: 'Colorado (High Alpine)',  
-    image:  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Trinchera%20Reserve/trinchera-exterior.jpg',  
-    gallery: [  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Trinchera%20Reserve/trinchera-exterior.jpg',  
-    ],  
-    collection: 'Wild Frontiers',  
-    sanctuaryId: 'wild-frontiers',  
-    description:  
-      'Private high alpine sanctuary spanning pristine Colorado wilderness.',  
-    intel: {  
-      positioning: 'High Alpine Wilderness',  
-      category: 'Wild Frontiers',  
-      memberBenefits: [  
-        'Private wilderness access',  
-        'Guided wildlife tracking',  
-        'Custom alpine dining',  
-      ],  
-    },  
-  },  
-  {  
-    id: 'brush-creek-luxury-ranch',  
-    name: 'Brush Creek Luxury Ranch Collection',  
-    location: 'Saratoga, WY',  
-    image:  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Brush%20Creek%20Luxury%20Ranch%20Collection/brush-creek-ranch.jpg',  
-    gallery: [  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Brush%20Creek%20Luxury%20Ranch%20Collection/brush-creek-ranch.jpg',  
-    ],  
-    collection: 'Wild Frontiers',  
-    sanctuaryId: 'wild-frontiers',  
-    description:  
-      '30,000-acre luxury ranch experience ranked #1 by Condé Nast.',  
-    intel: {  
-      positioning: 'Condé Nast #1 Ranch',  
-      category: 'Wild Frontiers',  
-      memberBenefits: [  
-        'All-inclusive ranch activities',  
-        'Private fly-fishing beats',  
-        'Farm-to-table culinary experiences',  
-      ],  
-    },  
-  },  
-  {  
-    id: 'alpine-falls-ranch',  
-    name: 'Alpine Falls Ranch',  
-    location: 'Montana',  
-    image:  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Alpine%20Falls%20Ranch/alpine-falls-ranch.jpg',  
-    gallery: [  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Alpine%20Falls%20Ranch/alpine-falls-ranch.jpg',  
-    ],  
-    collection: 'Wild Frontiers',  
-    sanctuaryId: 'wild-frontiers',  
-    description:  
-      'Intimate Michelin Two Keys mountain retreat in pristine Montana.',  
-    intel: {  
-      positioning: 'Michelin Two Keys Intimate Retreat',  
-      category: 'Wild Frontiers',  
-      memberBenefits: [  
-        'Private estate seclusion',  
-        'Tailored outdoor excursions',  
-        'Dedicated host service',  
-      ],  
-    },  
-  },  
-  {  
-    id: 'the-meadows-on-rock-creek',  
-    name: 'The Meadows on Rock Creek',  
-    location: 'Montana',  
-    image:  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/The%20Meadows%20on%20Rock%20Creek/meadows-rock-creek.jpg',  
-    gallery: [  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/The%20Meadows%20on%20Rock%20Creek/meadows-rock-creek.jpg',  
-    ],  
-    collection: 'Wild Frontiers',  
-    sanctuaryId: 'wild-frontiers',  
-    description:  
-      'Classic all-inclusive Montana sanctuary capped at 40 guests.',  
-    intel: {  
-      positioning: 'Capped at 40 Guests',  
-      category: 'Wild Frontiers',  
-      memberBenefits: [  
-        'Complete estate buyouts available',  
-        'Expert equestrian guides',  
-        'Riverfront serenity',  
-      ],  
-    },  
-  },  
-  {  
     id: 'blackberry-mountain',  
     name: 'Blackberry Mountain',  
-    location: 'Walland, TN',  
+    location: 'Walland, Tennessee, USA',  
     image:  
       'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Blackberry%20Mountain/blackberry-mountain.jpg',  
     gallery: [  
@@ -990,7 +1261,7 @@ export const PROPERTY_DATA: Property[] = [
     collection: 'Heritage & Estate',  
     sanctuaryId: 'heritage-estate',  
     description:  
-      'Relais & Châteaux wellness sanctuary featuring 42 exclusive keys.',  
+      'A Relais & Châteaux wellness sanctuary set in the foothills of the Smokies.',  
     intel: {  
       positioning: 'Relais & Châteaux Wellness',  
       category: 'Heritage & Estate',  
@@ -1004,7 +1275,7 @@ export const PROPERTY_DATA: Property[] = [
   {  
     id: 'blackberry-farm',  
     name: 'Blackberry Farm',  
-    location: 'Walland, TN',  
+    location: 'Walland, Tennessee, USA',  
     image:  
       'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Blackberry%20Farm/blackberry-farm.jpg',  
     gallery: [  
@@ -1013,7 +1284,7 @@ export const PROPERTY_DATA: Property[] = [
     collection: 'Heritage & Estate',  
     sanctuaryId: 'heritage-estate',  
     description:  
-      'Renowned sister property celebrated for world-class culinary mastery.',  
+      'A renowned sister property celebrated for world-class culinary mastery and pastoral setting.',  
     intel: {  
       positioning: 'Culinary Sanctuary',  
       category: 'Heritage & Estate',  
@@ -1024,31 +1295,6 @@ export const PROPERTY_DATA: Property[] = [
       ],  
     },  
   },  
-  {  
-    id: 'cataloochee-ranch',  
-    name: 'Cataloochee Ranch',  
-    location: 'North Carolina',  
-    image:  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Cataloochee%20Ranch/cataloochee-ranch.jpg',  
-    gallery: [  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Cataloochee%20Ranch/cataloochee-ranch.jpg',  
-    ],  
-    collection: 'Wild Frontiers',  
-    sanctuaryId: 'wild-frontiers',  
-    description:  
-      'Historic high-elevation mountain sanctuary in the Smokies.',  
-    intel: {  
-      positioning: 'Smoky Mountain Heritage',  
-      category: 'Wild Frontiers',  
-      memberBenefits: [  
-        'Ridge horseback riding',  
-        'Historic cabin luxury',  
-        'Private campfire gatherings',  
-      ],  
-    },  
-  },
-
-  // --- Europe ---  
   {  
     id: 'castello-di-reschio',  
     name: 'Castello di Reschio',  
@@ -1061,7 +1307,7 @@ export const PROPERTY_DATA: Property[] = [
     collection: 'Heritage & Estate',  
     sanctuaryId: 'heritage-estate',  
     description:  
-      '1,000-year-old castle estate transformed into an exquisite private Umbrian sanctuary.',  
+      'A thousand-year-old castle estate transformed into an exquisite private Umbrian sanctuary.',  
     intel: {  
       positioning: 'Millennial Castle Estate',  
       category: 'Heritage & Estate',  
@@ -1084,7 +1330,7 @@ export const PROPERTY_DATA: Property[] = [
     collection: 'Heritage & Estate',  
     sanctuaryId: 'heritage-estate',  
     description:  
-      '5-star Tuscan estate with rolling vineyards, championship golf, and private villas.',  
+      'A Tuscan estate with rolling vineyards, championship golf, and private villas.',  
     intel: {  
       positioning: 'Tuscan Vineyard Estate',  
       category: 'Heritage & Estate',  
@@ -1107,7 +1353,7 @@ export const PROPERTY_DATA: Property[] = [
     collection: 'Heritage & Estate',  
     sanctuaryId: 'heritage-estate',  
     description:  
-      'Historic resort and spa set in the picturesque hills of Emilia-Romagna.',  
+      'A historic resort and spa set in the picturesque hills of Emilia-Romagna.',  
     intel: {  
       positioning: 'Hillside Wellness Resort',  
       category: 'Heritage & Estate',  
@@ -1130,7 +1376,7 @@ export const PROPERTY_DATA: Property[] = [
     collection: 'Urban Sovereigns',  
     sanctuaryId: 'urban-sovereigns',  
     description:  
-      'Historic urban sanctuary overlooking Piazza Navona in the heart of Rome.',  
+      'A historic urban sanctuary overlooking Piazza Navona in the heart of Rome.',  
     intel: {  
       positioning: 'Piazza Navona Urban Sanctuary',  
       category: 'Urban Sovereigns',  
@@ -1153,13 +1399,13 @@ export const PROPERTY_DATA: Property[] = [
     collection: 'Urban Sovereigns',  
     sanctuaryId: 'urban-sovereigns',  
     description:  
-      'Grand hilltop sanctuary featuring museum-quality art collections and 3-star Michelin dining.',  
+      'A grand hilltop sanctuary featuring museum-quality art collections and destination dining.',  
     intel: {  
       positioning: 'Grand Hilltop Sanctuary',  
       category: 'Urban Sovereigns',  
       memberBenefits: [  
         'Private art museum collection',  
-        'La Pergola Michelin dining',  
+        'La Pergola dining coordination',  
         'Private parkland in Rome',  
       ],  
     },  
@@ -1178,7 +1424,7 @@ export const PROPERTY_DATA: Property[] = [
     collection: 'Island & Coast',  
     sanctuaryId: 'island-coast',  
     description:  
-      'Floating ryokan cruising the serene waters of the Seto Inland Sea.',  
+      'A floating ryokan cruising the serene waters of the Seto Inland Sea.',  
     intel: {  
       positioning: 'Floating Ryokan Sanctuary',  
       category: 'Island & Coast',  
@@ -1201,62 +1447,14 @@ export const PROPERTY_DATA: Property[] = [
     collection: 'Wild Frontiers',  
     sanctuaryId: 'wild-frontiers',  
     description:  
-      'Legendary edge-of-the-world adventure resort with world-class surf and untouched nature.',  
+      'An edge-of-the-world adventure resort with world-class surf and untouched nature.',  
     intel: {  
       positioning: 'Edge of the World Adventure',  
       category: 'Wild Frontiers',  
       memberBenefits: [  
-        "Private wave (Occy's Left)",  
+        'Private wave access',  
         'Spa safari experience',  
-        'Sumbanese cultural immersion',  
-      ],  
-    },  
-  },
-
-  // --- Caribbean & Central America ---  
-  {  
-    id: 'the-brando',  
-    name: 'The Brando',  
-    location: 'Tetiaroa, French Polynesia',  
-    image:  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/The%20Brando/the-brando.jpg',  
-    gallery: [  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/The%20Brando/the-brando.jpg',  
-    ],  
-    collection: 'Island & Coast',  
-    sanctuaryId: 'island-coast',  
-    description:  
-      'Forbes 5-Star private atoll sanctuary dedicated to pristine luxury and sustainability.',  
-    intel: {  
-      positioning: 'Pristine Atoll Sanctuary',  
-      category: 'Island & Coast',  
-      memberBenefits: [  
-        'Private plunge pool villas',  
-        'Ecostation research tours',  
-        'Polynesian wellness rituals',  
-      ],  
-    },  
-  },  
-  {  
-    id: 'islas-secas',  
-    name: 'Islas Secas',  
-    location: 'Panama',  
-    image:  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Islas%20Secas/islas-secas.jpg',  
-    gallery: [  
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Islas%20Secas/islas-secas.jpg',  
-    ],  
-    collection: 'Island & Coast',  
-    sanctuaryId: 'island-coast',  
-    description:  
-      '14-island private archipelago sanctuary ranked #1 in Central America.',  
-    intel: {  
-      positioning: 'Private Archipelago Sanctuary',  
-      category: 'Island & Coast',  
-      memberBenefits: [  
-        'Exclusive 14-island access',  
-        'Whale watching expeditions',  
-        'Solar-powered luxury casitas',  
+        'Sumba cultural immersion',  
       ],  
     },  
   },
@@ -1274,7 +1472,7 @@ export const PROPERTY_DATA: Property[] = [
     collection: 'Wild Frontiers',  
     sanctuaryId: 'wild-frontiers',  
     description:  
-      'Relais & Châteaux lodge with 14 private villas, each with a dedicated private guide and 4x4.',  
+      'A Relais & Châteaux lodge with private villas, dedicated guides, and tailored 4x4 exploration.',  
     intel: {  
       positioning: 'Private Guide & 4x4 Villas',  
       category: 'Wild Frontiers',  
@@ -1299,9 +1497,9 @@ export const PROPERTY_DATA: Property[] = [
     collection: 'Wild Frontiers',  
     sanctuaryId: 'wild-frontiers',  
     description:  
-      '#1 Africa Safari Lodge offering supreme Big Five viewing and iconic treehouse sleepouts.',  
+      'A private safari sanctuary offering exceptional Big Five viewing and iconic treehouse sleepouts.',  
     intel: {  
-      positioning: '#1 Africa Safari Lodge',  
+      positioning: 'Private Big Five Safari',  
       category: 'Wild Frontiers',  
       memberBenefits: [  
         'Big Five game drives',  
@@ -1324,7 +1522,7 @@ export const PROPERTY_DATA: Property[] = [
     collection: 'Island & Coast',  
     sanctuaryId: 'island-coast',  
     description:  
-      'Reborn cliffside luxury sanctuary overlooking the dramatic southern ocean wilderness.',  
+      'A cliffside luxury sanctuary overlooking the dramatic southern ocean wilderness.',  
     intel: {  
       positioning: 'Cliffside Ocean Sanctuary',  
       category: 'Island & Coast',  
