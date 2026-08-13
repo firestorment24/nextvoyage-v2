@@ -1,4 +1,5 @@
-import { NextResponse } from 'next'
+import { NextResponse } from 'next/server'  
+
 
 const BASE_URL = 'https://nexvoyagecollective.com'
 
