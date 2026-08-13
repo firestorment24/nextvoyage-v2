@@ -38,12 +38,12 @@ export default async function ArticlePage(props: { params: Promise<{ slug: strin
 
       <main className="pt-32 pb-20 px-6">    
         <div className="max-w-3xl mx-auto">    
-          <Link    
-            href=\"/perspective\"    
-            className=\"text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] hover:opacity-70 transition-opacity mb-12 inline-block\"    
-          >    
-            ← Back to Perspective    
-          </Link>
+          <Link  
+  href={"/perspective"}  
+  className="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] hover:opacity-70 transition-opacity mb-12 inline-block"  
+>  
+  ← Back to Perspective  
+</Link>
 
           <header className=\"mb-16\">    
             <span className=\"text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] block mb-4\">    
