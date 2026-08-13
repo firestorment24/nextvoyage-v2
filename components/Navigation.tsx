@@ -3,19 +3,20 @@
 import { useState } from 'react';      
 import Link from 'next/link';
 
-const navLinks = [      
-{ name: 'Lobby', path: '/', subtitle: 'Arrival Protocol' },      
-{ name: 'Mandate', path: '/mandate', subtitle: 'The Philosophy' },   
-  { name: 'Meet Daryl', path: '/founder', subtitle: 'Founder & Principal' },  
-{ name: 'Services', path: '/services', subtitle: 'Private Advisory' },      
-{ name: 'Perspective', path: '/perspective', subtitle: 'The Intelligence' },      
+const navLinks = [  
+{ name: 'Lobby', path: '/', subtitle: 'Arrival Protocol' },  
+{ name: 'Mandate', path: '/mandate', subtitle: 'The Philosophy' },  
+{ name: 'Meet Daryl', path: '/founder', subtitle: 'Founder & Principal' },  
+{ name: 'Services', path: '/services', subtitle: 'Private Advisory' },  
+{ name: 'Perspective', path: '/perspective', subtitle: 'The Intelligence' },  
 { name: 'Journeys', path: '/journeys', subtitle: 'Signature Itineraries' },  
-{ name: 'Archive', path: '/archive', subtitle: 'Registry of Significance' },      
-{ name: 'Journal', path: '/journal', subtitle: 'Seasonal Intelligence' },      
-{ name: 'Selected Engagements', path: '/selected-engagements', subtitle: 'The Record' },    
-{ name: 'Events', path: '/events', subtitle: 'Global Gatherings' },      
-{ name: 'Inquiry', path: '/inquiry', subtitle: 'Begin Consultation' },      
-];
+{ name: 'Archive', path: '/archive', subtitle: 'Registry of Significance' },  
+{ name: 'Journal', path: '/journal', subtitle: 'Seasonal Intelligence' },  
+{ name: 'Selected Engagements', path: '/selected-engagements', subtitle: 'The Record' },  
+{ name: 'Private Client Partners', path: '/private-client-partners', subtitle: 'Referral Partnerships' },  
+{ name: 'Events', path: '/events', subtitle: 'Global Gatherings' },  
+{ name: 'Inquiry', path: '/inquiry', subtitle: 'Begin Consultation' },  
+];  
 
 export default function Navigation() {      
 const [isOpen, setIsOpen] = useState(false);
