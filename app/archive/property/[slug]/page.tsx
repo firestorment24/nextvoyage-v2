@@ -13,7 +13,7 @@ return properties.map((property) => ({
   slug: property.id,  
 }))  
 }
-
+ 
 export default async function PropertyPage({  
 params,  
 }: {  
