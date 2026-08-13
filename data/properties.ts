@@ -725,7 +725,7 @@ const RAW_PROPERTY_DATA = [
       memberBenefits: ['Private snorkel tour', 'Rum tasting', 'Beachfront spa treatment']    
     }    
   }    
- ]
+ ];
 
 export const PROPERTY_DATA: Property[] = RAW_PROPERTY_DATA.map((property) => {  
   const canArrange = property.intel.memberBenefits
