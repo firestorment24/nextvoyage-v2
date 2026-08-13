@@ -12,7 +12,7 @@ export default function MandatePage() {
           className="absolute inset-0 w-full h-full object-cover opacity-45"  
           fetchPriority="high"  
         />
-
+ 
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-[#0A0A0A]" />
 
         <div className="relative z-10 text-center px-6 max-w-4xl mt-12">  
