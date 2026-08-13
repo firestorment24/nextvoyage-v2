@@ -20,7 +20,7 @@ export interface Property {
     memberBenefits?: string[]  
   }  
 }
-
+ 
 interface RawProperty {
   id: string
   name: string
