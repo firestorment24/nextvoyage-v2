@@ -13,6 +13,7 @@ const staticRoutes = [
 '/mandate',  
 '/perspective',  
 '/selected-engagements',  
+'/private-client-partners',  
 '/events',  
 '/how-it-works',  
 '/collective',  
@@ -23,7 +24,7 @@ const staticRoutes = [
 '/privacy-policy',  
 '/terms',  
 '/terms-and-conditions',  
-]
+]  
 
 export async function GET() {  
 const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>  
