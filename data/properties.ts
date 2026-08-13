@@ -665,25 +665,51 @@ export const PROPERTY_DATA: Property[] = [
       memberBenefits: ['Rolling bed stargazing experience', 'Private surf lesson', 'Mezcal tasting']    
     }    
   },    
-  {  
-  id: 'stamna-sifnos',  
-  name: 'Stamna Sifnos',  
-  location: 'Sifnos, Greece',  
-  image: 'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Stamna%20Sifnos_Greece/Stamna%201.jpg',  
-  gallery: [  
-    'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Stamna%20Sifnos_Greece/Stamna%201.jpg',  
-    'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Stamna%20Sifnos_Greece/Stamna%202.jpg',  
-    'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Stamna%20Sifnos_Greece/Stamna%203.jpg',  
-    'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Stamna%20Sifnos_Greece/Stamna%204.jpg',  
-    'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Stamna%20Sifnos_Greece/Stamna%205.jpg',  
-    'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Stamna%20Sifnos_Greece/Stamna%207.jpg'  
-  ],  
-  collection: 'Island & Coast',  
-  sanctuaryId: 'island-coast',  
-  description: 'A classic Cycladic retreat, perfectly capturing the slow, serene rhythm of island life.',  
-  intel: {  
-    positioning: 'Cycladic Slow Living',  
-    category: 'Island & Coast',  
-    memberBenefits: ['Private boat trip around Sifnos', 'Local pottery workshop', 'Authentic Sifnian tasting menu']  
-  }  
-}  
+  {    
+    id: 'stamna-sifnos',    
+    name: 'Stamna Sifnos',    
+    location: 'Sifnos, Greece',    
+    image: 'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Stamna%20Sifnos_Greece/Stamna%201.jpg',    
+    gallery: [    
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Stamna%20Sifnos_Greece/Stamna%201.jpg',    
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Stamna%20Sifnos_Greece/Stamna%202.jpg',    
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Stamna%20Sifnos_Greece/Stamna%203.jpg',    
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Stamna%20Sifnos_Greece/Stamna%204.jpg',    
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Stamna%20Sifnos_Greece/Stamna%205.jpg',    
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Stamna%20Sifnos_Greece/Stamna%207.jpg'    
+    ],    
+    collection: 'Island & Coast',    
+    sanctuaryId: 'island-coast',    
+    description: 'A classic Cycladic retreat, perfectly capturing the slow, serene rhythm of island life.',    
+    intel: {    
+      positioning: 'Cycladic Slow Living',    
+      category: 'Island & Coast',    
+      memberBenefits: ['Private boat trip around Sifnos', 'Local pottery workshop', 'Authentic Sifnian tasting menu']    
+    }    
+  },    
+  {    
+    id: 'silver-sands-beach-house',    
+    name: 'Silver Sands Beach House',    
+    location: 'Grenada',    
+    image: 'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Silver%20Sands%20Beach%20House_Grenada/SSBH1.jpg',    
+    gallery: [    
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Silver%20Sands%20Beach%20House_Grenada/SSBH1.jpg',    
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Silver%20Sands%20Beach%20House_Grenada/SSBH2.jpg',    
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Silver%20Sands%20Beach%20House_Grenada/SSBH3.jpg',    
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Silver%20Sands%20Beach%20House_Grenada/SSBH6.jpg',    
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Silver%20Sands%20Beach%20House_Grenada/SSBH7.jpg',    
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Silver%20Sands%20Beach%20House_Grenada/SSBH8.jpg',    
+      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Silver%20Sands%20Beach%20House_Grenada/SSBH9.jpg'    
+    ],    
+    collection: 'Island & Coast',    
+    sanctuaryId: 'island-coast',    
+    description: 'A sleek, beach-focused escape on the beautiful island of Grenada.',    
+    intel: {    
+      positioning: 'Sleek Caribbean Beach House',    
+      category: 'Island & Coast',    
+      memberBenefits: ['Private snorkel tour', 'Rum tasting', 'Beachfront spa treatment']    
+    }    
+  }    
+];  
+
+export const properties = PROPERTY_DATA;  
