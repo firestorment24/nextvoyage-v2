@@ -18,7 +18,7 @@ const partners = [
 { name: "OETKER COLLECTION", label: "Pearl Partner", font: "font-serif tracking-tighter" },        
 { name: "HYATT", label: "Privé", font: "font-sans tracking-widest" },        
 ]
-
+ 
 const featured = [        
 {     
 name: "Capella Ubud",     
