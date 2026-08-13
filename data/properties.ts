@@ -665,12 +665,25 @@ export const PROPERTY_DATA: Property[] = [
       memberBenefits: ['Rolling bed stargazing experience', 'Private surf lesson', 'Mezcal tasting']    
     }    
   },    
-  {    
-    id: 'stamna-sifnos',    
-    name: 'Stamna Sifnos',    
-    location: 'Sifnos, Greece',    
-    image: 'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Stamna%20Sifnos_Greece/Stamna%201.jpg',    
-    gallery: [    
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Stamna%20Sifnos_Greece/Stamna%201.jpg',    
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Stamna%20Sifnos_Greece/Stamna%202.jpg',    
-      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Stamna%20Sifnos_Greece/Stamna%203.jpg',  \n      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Stamna%20Sifnos_Greece/Stamna%204.jpg',  \n      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Stamna%20Sifnos_Greece/Stamna%205.jpg',  \n      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Stamna%20Sifnos_Greece/Stamna%207.jpg'  \n    ],  \n    collection: 'Island & Coast',  \n    sanctuaryId: 'island-coast',  \n    description: 'A classic Cycladic retreat, perfectly capturing the slow, serene rhythm of island life.',  \n    intel: {  \n      positioning: 'Cycladic Slow Living',  \n      category: 'Island & Coast',  \n      memberBenefits: ['Private boat trip around Sifnos', 'Local pottery workshop', 'Authentic Sifnian tasting menu']  \n    }  \n  },  \n  {  \n    id: 'silver-sands-beach-house',  \n    name: 'Silver Sands Beach House',  \n    location: 'Grenada',  \n    image: 'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Silver%20Sands%20Beach%20House_Grenada/SSBH1.jpg',  \n    gallery: [  \n      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Silver%20Sands%20Beach%20House_Grenada/SSBH1.jpg',  \n      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Silver%20Sands%20Beach%20House_Grenada/SSBH2.jpg',  \n      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Silver%20Sands%20Beach%20House_Grenada/SSBH3.jpg',  \n      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Silver%20Sands%20Beach%20House_Grenada/SSBH6.jpg',  \n      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Silver%20Sands%20Beach%20House_Grenada/SSBH7.jpg',  \n      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Silver%20Sands%20Beach%20House_Grenada/SSBH8.jpg',  \n      'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Silver%20Sands%20Beach%20House_Grenada/SSBH9.jpg'  \n    ],  \n    collection: 'Island & Coast',  \n    sanctuaryId: 'island-coast',  \n    description: 'A sleek, beach-focused escape on the beautiful island of Grenada.',  \n    intel: {  \n      positioning: 'Sleek Caribbean Beach House',  \n      category: 'Island & Coast',  \n      memberBenefits: ['Private snorkel tour', 'Rum tasting', 'Beachfront spa treatment']  \n    }  \n  }  \n];  \n\nexport const properties = PROPERTY_DATA;  
+  {  
+  id: 'stamna-sifnos',  
+  name: 'Stamna Sifnos',  
+  location: 'Sifnos, Greece',  
+  image: 'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Stamna%20Sifnos_Greece/Stamna%201.jpg',  
+  gallery: [  
+    'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Stamna%20Sifnos_Greece/Stamna%201.jpg',  
+    'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Stamna%20Sifnos_Greece/Stamna%202.jpg',  
+    'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Stamna%20Sifnos_Greece/Stamna%203.jpg',  
+    'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Stamna%20Sifnos_Greece/Stamna%204.jpg',  
+    'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Stamna%20Sifnos_Greece/Stamna%205.jpg',  
+    'https://w0ijk7zmvlb7mxph.private.blob.vercel-storage.com/Property%20Images/Stamna%20Sifnos_Greece/Stamna%207.jpg'  
+  ],  
+  collection: 'Island & Coast',  
+  sanctuaryId: 'island-coast',  
+  description: 'A classic Cycladic retreat, perfectly capturing the slow, serene rhythm of island life.',  
+  intel: {  
+    positioning: 'Cycladic Slow Living',  
+    category: 'Island & Coast',  
+    memberBenefits: ['Private boat trip around Sifnos', 'Local pottery workshop', 'Authentic Sifnian tasting menu']  
+  }  
+}  
