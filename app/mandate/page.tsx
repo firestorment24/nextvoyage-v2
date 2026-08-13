@@ -1,19 +1,16 @@
 import React from 'react';  
-import Link from 'next/link';  
-import Image from 'next/image';
+import Link from 'next/link';
 
 export default function MandatePage() {  
   return (  
     <main className="min-h-screen bg-[#0A0A0A] text-white font-serif selection:bg-[#D4AF37] selection:text-black">  
       {/* Hero Section */}  
       <section className="relative h-[70vh] md:h-[80vh] w-full flex items-center justify-center overflow-hidden">  
-        <Image  
+        <img  
           src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1600&q=80"  
           alt="NexVoyage Mandate"  
-          fill  
-          className="object-cover opacity-45"  
-          priority  
-          quality={100}  
+          className="absolute inset-0 w-full h-full object-cover opacity-45"  
+          fetchPriority="high"  
         />
 
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-[#0A0A0A]" />
@@ -28,8 +25,8 @@ export default function MandatePage() {
           </h1>
 
           <p className="text-white/70 text-base md:text-lg font-light tracking-wide max-w-2xl mx-auto font-sans">  
-            We do not sell travel. We curate sovereign enclaves for those who  
-            demand absolute discretion and uncompromising access.  
+            We curate distinctive places and journeys for travelers who value  
+            discretion, thoughtful access, and seamless execution.  
           </p>  
         </div>  
       </section>
@@ -43,7 +40,8 @@ export default function MandatePage() {
         <blockquote className="text-white/80 text-xl md:text-2xl font-light leading-relaxed italic mb-8">  
           True luxury is the absence of friction. It is knowing that every  
           detail has been accounted for before you even thought to ask, and  
-          that your privacy remains absolute across every global coordinate.  
+          that your privacy should remain a central consideration at every  
+          stage of the journey.  
         </blockquote>
 
         <div className="h-px w-12 bg-[#D4AF37]/50 mx-auto mb-4" />
@@ -67,24 +65,25 @@ export default function MandatePage() {
             </span>
 
             <h2 className="text-3xl md:text-4xl font-light tracking-tight text-white">  
-              Absolute Discretion &amp; Zero-Knowledge Routing  
+              Discretion &amp; Privacy-Conscious Routing  
             </h2>
 
             <p className="text-white/60 text-sm md:text-base leading-relaxed font-sans font-light">  
-              In an age of hyper-exposure, privacy is the ultimate currency. We  
-              operate behind strict non-disclosure frameworks, coordinating  
-              private aviation, secure ground transport, and unlisted arrivals  
-              while minimizing unnecessary exposure of client information  
-              across the travel ecosystem. Your itinerary remains your own.  
+              In an age of hyper-exposure, privacy is a central consideration.  
+              We work within appropriate confidentiality frameworks,  
+              coordinating private aviation, ground transport, and specialized  
+              arrivals while minimizing unnecessary exposure of client  
+              information across the travel ecosystem. Your itinerary remains  
+              your own.  
             </p>  
           </div>
 
           <div className="relative aspect-[4/3] overflow-hidden border border-white/10">  
-            <Image  
+            <img  
               src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80"  
-              alt="Absolute Discretion"  
-              fill  
-              className="object-cover opacity-70 hover:scale-105 transition-transform duration-700"  
+              alt="Discretion and privacy-conscious routing"  
+              className="absolute inset-0 w-full h-full object-cover opacity-70 hover:scale-105 transition-transform duration-700"  
+              loading="lazy"  
             />  
           </div>  
         </div>
@@ -92,11 +91,11 @@ export default function MandatePage() {
         {/* Tenet 02 */}  
         <div className="grid md:grid-cols-2 gap-12 items-center">  
           <div className="relative aspect-[4/3] overflow-hidden border border-white/10 order-2 md:order-1">  
-            <Image  
+            <img  
               src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200&q=80"  
-              alt="Unlisted Estates"  
-              fill  
-              className="object-cover opacity-70 hover:scale-105 transition-transform duration-700"  
+              alt="Unlisted estates"  
+              className="absolute inset-0 w-full h-full object-cover opacity-70 hover:scale-105 transition-transform duration-700"  
+              loading="lazy"  
             />  
           </div>
 
@@ -110,10 +109,12 @@ export default function MandatePage() {
             </h2>
 
             <p className="text-white/60 text-sm md:text-base leading-relaxed font-sans font-light">  
-              The world&apos;s finest properties do not have booking engines.  
-              Through two decades of direct relationships with property owners,  
-              private family offices, and estate curators, we unlock doors that  
-              remain entirely closed to public ledgers and standard agencies.  
+              Built on decades of executive leadership and complex logistics,  
+              our work draws on relationships with property owners, private  
+              offices, and estate representatives to identify opportunities  
+              beyond standard public inventory. We identify properties and  
+              arrangements that may not be available through standard booking  
+              channels.  
             </p>  
           </div>  
         </div>
@@ -131,18 +132,18 @@ export default function MandatePage() {
 
             <p className="text-white/60 text-sm md:text-base leading-relaxed font-sans font-light">  
               We reject the volume-driven model of modern travel agencies. By  
-              intentionally capping our active client roster, we guarantee that  
-              every journey is executed with undivided attention, immediate  
-              response times, and uncompromising oversight by senior advisors.  
+              intentionally capping our active client roster, we design the  
+              client experience around focused attention, responsive  
+              communication, and close oversight throughout the journey.  
             </p>  
           </div>
 
           <div className="relative aspect-[4/3] overflow-hidden border border-white/10">  
-            <Image  
+            <img  
               src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80"  
-              alt="Strict Roster Caps"  
-              fill  
-              className="object-cover opacity-70 hover:scale-105 transition-transform duration-700"  
+              alt="Strict roster caps and dedicated bandwidth"  
+              className="absolute inset-0 w-full h-full object-cover opacity-70 hover:scale-105 transition-transform duration-700"  
+              loading="lazy"  
             />  
           </div>  
         </div>  
