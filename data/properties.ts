@@ -1,20 +1,35 @@
-export interface Property {    
-  id: string    
-  name: string    
-  location: string    
-  image: string    
-  gallery: string[]    
-  collection: string    
-  sanctuaryId: string    
-  description: string    
-  intel: {    
-    positioning: string    
-    category: string    
-    memberBenefits: string[]    
-  }    
+export interface Property {  
+  id: string  
+  name: string  
+  location: string  
+  image: string  
+  gallery: string[]  
+  collection: string  
+  sanctuaryId: string  
+  description: string  
+  intel: {  
+    positioning: string  
+    category: string  
+    preferredBenefits: string[]  
+    canArrange: string[]
+
+    /**  
+     * Legacy compatibility for the older /properties/[id] route.  
+     * New Archive code should use preferredBenefits and canArrange.  
+     */  
+    memberBenefits?: string[]  
+  }  
 }
 
-export const PROPERTY_DATA: Property[] = [    
+const STANDARD_VIRTUOSO_BENEFITS = [  
+  'Daily breakfast for up to two guests per room, subject to availability and applicable program terms',  
+  'Hotel or resort credit per stay, subject to availability and applicable program terms',  
+  'Upgrade on arrival, subject to availability and applicable program terms',  
+  'Early check-in and late check-out, subject to availability and applicable program terms',  
+  'Wi-Fi access, subject to applicable program terms',  
+]
+
+const RAW_PROPERTY_DATA = [  
   // --- Urban Sovereigns ---    
   {    
     id: 'aman-new-york',    
@@ -710,6 +725,23 @@ export const PROPERTY_DATA: Property[] = [
       memberBenefits: ['Private snorkel tour', 'Rum tasting', 'Beachfront spa treatment']    
     }    
   }    
-];  
+ ]
 
-export const properties = PROPERTY_DATA;  
+export const PROPERTY_DATA: Property[] = RAW_PROPERTY_DATA.map((property) => {  
+  const canArrange = property.intel.memberBenefits
+
+  return {  
+    ...property,  
+    intel: {  
+      positioning: property.intel.positioning,  
+      category: property.intel.category,  
+      preferredBenefits: [...STANDARD_VIRTUOSO_BENEFITS],  
+      canArrange: [...canArrange],
+
+      // Keeps the older /properties/[id] route working during migration.  
+      memberBenefits: [...canArrange],  
+    },  
+  }  
+})
+
+export const properties = PROPERTY_DATA  
