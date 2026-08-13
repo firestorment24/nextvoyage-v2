@@ -1,7 +1,8 @@
 import React from 'react'  
 import Link from 'next/link'  
 import Image from 'next/image'  
-import TestimonialCarousel from '@/components/TestimonialCarousel'
+import TestimonialCarousel from '@/components/TestimonialCarousel'  
+import FirstConversationBlock from '@/components/FirstConversationBlock'
 
 const partners = [  
   { name: 'FORA TRAVEL', label: 'Flagship Partner', font: 'font-serif tracking-tighter' },  
@@ -203,9 +204,14 @@ export default function HomePage() {
         </div>  
       </section>
 
-      {/* Client Perspectives */}  
-      <TestimonialCarousel />
+{/* Client Perspectives */}  
+<TestimonialCarousel />
 
+{/* First Conversation */}  
+<FirstConversationBlock />
+
+{/* The Three Pillars */}  
+<section className="py-24 px-6 max-w-7xl mx-auto"> 
       {/* The Three Pillars */}  
       <section className="py-24 px-6 max-w-7xl mx-auto">  
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16">  
