@@ -44,7 +44,7 @@ Perspective
 </li>  
 <li>  
 <Link href="/inquiry" className="text-white/40 text-sm font-sans font-light hover:text-white transition-colors">  
-Application for Entry  
+Begin Your Journey  
 </Link>  
 </li>  
 <li>  
@@ -72,10 +72,10 @@ Discovery Call
 </li>  
 <li>  
 <a   
-href="mailto:info@nexvoyagecollective.com"   
+href="mailto:daryl.clark@fora.travel"   
 className="text-white/40 text-sm font-sans font-light hover:text-white transition-colors"  
 >  
-info@nexvoyagecollective.com  
+Email 
 </a>  
 </li>  
 </ul>  
