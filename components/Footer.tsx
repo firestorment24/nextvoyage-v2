@@ -32,6 +32,11 @@ Home
 The Mandate  
 </Link>  
 </li>  
+  <li>    
+<Link href="/private-client-partners" className="text-white/40 text-sm font-sans font-light hover:text-white transition-colors">    
+Private Client Partners    
+</Link>    
+</li>   
 <li>  
 <Link href="/archive" className="text-white/40 text-sm font-sans font-light hover:text-white transition-colors">  
 Archive  
