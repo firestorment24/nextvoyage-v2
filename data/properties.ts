@@ -21,6 +21,22 @@ export interface Property {
   }  
 }
 
+interface RawProperty {
+  id: string
+  name: string
+  location: string
+  image: string
+  gallery: string[]
+  collection: string
+  sanctuaryId: string
+  description: string
+  intel: {
+    positioning: string
+    category: string
+    memberBenefits: string[]
+  }
+}
+
 const STANDARD_VIRTUOSO_BENEFITS = [  
   'Daily breakfast for up to two guests per room, subject to availability and applicable program terms',  
   'Hotel or resort credit per stay, subject to availability and applicable program terms',  
@@ -29,7 +45,7 @@ const STANDARD_VIRTUOSO_BENEFITS = [
   'Wi-Fi access, subject to applicable program terms',  
 ]
 
-const RAW_PROPERTY_DATA = [  
+const RAW_PROPERTY_DATA: RawProperty[] = [  
   // --- Urban Sovereigns ---    
   {    
     id: 'aman-new-york',    
