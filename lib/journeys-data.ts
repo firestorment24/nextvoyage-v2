@@ -20,7 +20,6 @@ export interface CuratedJourney {
     location: string;  
   };  
 }  
-And inside CURATED_JOURNEYS:
 
   {  
     slug: "anguilla",  
