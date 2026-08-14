@@ -243,15 +243,11 @@ export default function ServicesPage() {
             </span>
 
             <h3 className="text-xl font-light text-white">  
-              Gross-Rate Structure  
+              Transparent Advisory Relationship  
             </h3>
 
             <p className="text-white/60 text-sm font-sans font-light leading-relaxed">  
-              We utilize gross-rate pricing with a 12% commission markup built  
-              into curated itineraries, private estate buyouts, and partner  
-              property bookings—complementing standard preferred-partner  
-              overrides like Rosewood Elite (15%) and Virtuoso/LHW properties  
-              (10%).  
+              We operate on a transparent, preferred-access framework that connects our clientele directly to premier global properties, private aviation networks, and bespoke estate buyouts with optimal partner privileges.  
             </p>  
           </div>
 
