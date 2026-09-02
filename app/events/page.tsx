@@ -5,7 +5,7 @@ export const metadata = {
   description:  
     "Curated access to the season's most significant gatherings — from the gridiron to the stage.",  
 };
- 
+  
 type EventCategory =  
   | 'automotive'  
   | 'maritime'  
