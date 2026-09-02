@@ -13,13 +13,14 @@ type EventCategory =
   | 'music'  
   | 'sporting'  
   | 'leadership'  
-  | 'expedition'  
-  | 'lifestyle'  
   | 'hbcus'  
+  | 'expedition'  
   | 'wellness'  
   | 'fashion'  
   | 'film'  
-  | 'golf';
+  | 'lifestyle'  
+  | 'religious'  
+  | 'seasonal';
 
 interface ScheduleItem {  
   date: string;  
@@ -37,19 +38,10 @@ interface EventItem {
   schedule?: ScheduleItem[];  
 }
 
+const CTA_URL = 'https://cal.com/nexvoyagecollective/discovery-call';
+
 const ALL_EVENTS: EventItem[] = [  
-  // -------------------------------------------------------------------------  
   // AUTOMOTIVE & PRESTIGE MOTORING  
-  // -------------------------------------------------------------------------  
-  {  
-    category: 'automotive',  
-    date: 'Aug 7–16, 2026',  
-    title: 'Monterey Car Week',  
-    location: 'Monterey Peninsula, California',  
-    subtitle: 'Automotive Heritage & Concours Week',  
-    description:  
-      "Including The Quail, Pebble Beach Tour d'Elegance, Rolex Monterey Motorsports Reunion, and the 75th Pebble Beach Concours d'Elegance. Sanctuary pairing: Post Ranch Inn or The Lodge at Pebble Beach.",  
-  },  
   {  
     category: 'automotive',  
     date: 'August 15, 2027',  
@@ -57,7 +49,7 @@ const ALL_EVENTS: EventItem[] = [
     location: 'Pebble Beach, California',  
     subtitle: 'Premier Vintage Automotive Showcase',  
     description:  
-      "A landmark collector event paired with Post Ranch Inn or The Lodge at Pebble Beach, private movement, concours access, and a Big Sur extension.",  
+      'A landmark collector event paired with Post Ranch Inn or The Lodge at Pebble Beach, private movement, concours access, and a Big Sur extension.',  
   },  
   {  
     category: 'automotive',  
@@ -96,9 +88,7 @@ const ALL_EVENTS: EventItem[] = [
       'A refined concours setting for collectors, luxury-watch clients, art patrons, founders, and design-led families.',  
   },
 
-  // -------------------------------------------------------------------------  
-  // MARITIME & SAILING MILESTONES  
-  // -------------------------------------------------------------------------  
+  // MARITIME & SAILING  
   {  
     category: 'maritime',  
     date: 'July 10–18, 2027',  
@@ -106,12 +96,12 @@ const ALL_EVENTS: EventItem[] = [
     location: 'Naples, Italy',  
     subtitle: 'Superyacht Program & VIP Race Viewing',  
     description:  
-      "Official superyacht programming and VIP viewing in the Bay of Naples. Sanctuary pairing: Villa La Massa or Capri Palace.",  
+      'Official superyacht programming and VIP viewing in the Bay of Naples. Sanctuary pairing: Villa La Massa or Capri Palace.',  
   },  
   {  
     category: 'maritime',  
     date: 'March 17–21, 2027',  
-    title: "St. Barths Bucket Regatta 2027",  
+    title: 'St. Barths Bucket Regatta 2027',  
     location: 'St. Barthélemy',  
     subtitle: 'Superyacht Sailing Showcase',  
     description:  
@@ -127,9 +117,7 @@ const ALL_EVENTS: EventItem[] = [
       'A bicentenary sailing week with race viewing, villa hospitality, regatta-side dining, and a London or Scottish extension.',  
   },
 
-  // -------------------------------------------------------------------------  
   // CULINARY, ART & DESIGN  
-  // -------------------------------------------------------------------------  
   {  
     category: 'culinary',  
     date: 'October 15–18, 2026',  
@@ -173,7 +161,7 @@ const ALL_EVENTS: EventItem[] = [
     location: 'Park Avenue Armory, New York',  
     subtitle: 'Fine Art & Antiques Fair',  
     description:  
-      "A collector-focused New York itinerary with private gallery access, discreet transfers, and The Whitby Hotel or a refined Goring NYC corridor.",  
+      'A collector-focused New York itinerary with private gallery access, discreet transfers, and The Whitby Hotel or a refined Goring NYC corridor.',  
   },  
   {  
     category: 'culinary',  
@@ -185,9 +173,34 @@ const ALL_EVENTS: EventItem[] = [
       "The premier European contemporary art gathering, paired with Hôtel de Crillon, private gallery access, and a considered Paris cultural route.",  
   },
 
-  // -------------------------------------------------------------------------  
   // MUSIC, FESTIVALS & CULTURAL RESIDENCIES  
-  // -------------------------------------------------------------------------  
+  {  
+    category: 'music',  
+    date: 'September 18–20, 2026',  
+    title: 'Caribbean Music Awards: Elite Weekend Experience',  
+    location: 'Port of Spain, Trinidad & Tobago',  
+    subtitle: 'Caribbean Music & Culture',  
+    description:  
+      "The Caribbean's biggest night, held for the first time in the islands. A three-day Elite Weekend built around the NAPA ceremony — 250+ nominees across 40+ categories — with a welcome reception, steelpan concert, and official after-party. Sanctuary pairing: Hyatt Regency Trinidad or Magdalena Grand Tobago, with island recovery to follow.",  
+  },  
+  {  
+    category: 'music',  
+    date: 'September 3 / 6 / 11, 2026',  
+    title: 'Tamar Braxton: City Winery Circuit',  
+    location: 'Nashville, Pittsburgh, Boston',  
+    subtitle: 'Intimate R&B & Soul',  
+    description:  
+      "An intimate three-city run of R&B and soul in the signature City Winery room, paired with the cities' best tables and a considered stay. Dates and venue availability are confirmed on request.",  
+  },  
+  {  
+    category: 'music',  
+    date: 'Fall 2026 — Date TBC',  
+    title: 'Global Citizen Festival',  
+    location: 'Central Park, New York',  
+    subtitle: 'Cause-Driven Cultural Weekend',  
+    description:  
+      'A cause-driven festival weekend in Central Park featuring Ms. Lauryn Hill, Wyclef Jean, and Lenny Kravitz — paired with a refined Manhattan base and private movement. Date and lineup remain subject to confirmation.',  
+  },  
   {  
     category: 'music',  
     date: 'Fall: Nov 13–15, 2026 | Spring: May 15–17, 2027',  
@@ -196,15 +209,6 @@ const ALL_EVENTS: EventItem[] = [
     subtitle: '12th Annual Destination Smooth-Jazz',  
     description:  
       'Featuring Spyro Gyra, Eric Darius, Michael Lington, Paul Taylor, Regina Belle, and Peter White.',  
-  },  
-  {  
-    category: 'music',  
-    date: 'Aug 14, 15, 21, 22 & 23, 2026',  
-    title: 'Timucua International Guitar Festival',  
-    location: 'The White House, Orlando, Florida',  
-    subtitle: 'Intimate Guitar Showcase',  
-    description:  
-      'Classical, flamenco, and guitar masters from six countries in an intimate Orlando salon setting.',  
   },  
   {  
     category: 'music',  
@@ -253,41 +257,6 @@ const ALL_EVENTS: EventItem[] = [
   },  
   {  
     category: 'music',  
-    date: 'August 22, 2026',  
-    title: 'Kaya Fest Toronto',  
-    location: 'Toronto, Canada',  
-    subtitle: 'The Marley Family Legacy',  
-    description: 'Celebrating unity, reggae, and social consciousness.',  
-  },  
-  {  
-    category: 'music',  
-    date: 'August 22, 2026',  
-    title: 'Vermont Reggae Fest',  
-    location: 'Vermont',  
-    subtitle: 'Mountain Air & Roots Rhythm',  
-    description:  
-      'An open-air celebration of reggae and arts in the Green Mountains.',  
-  },  
-  {  
-    category: 'music',  
-    date: 'August 2026',  
-    title: 'Coltrane Jazz Fest',  
-    location: 'High Point, North Carolina',  
-    subtitle: 'Legacy of John Coltrane',  
-    description:  
-      'World-class jazz performances honoring a legendary American icon.',  
-  },  
-  {  
-    category: 'music',  
-    date: 'August 22–23, 2026',  
-    title: 'Freedom 250 Grand Prix',  
-    location: 'Washington, D.C.',  
-    subtitle: 'Motorsports & Capital Elegance',  
-    description:  
-      'A high-octane racing celebration in the heart of the capital.',  
-  },  
-  {  
-    category: 'music',  
     date: 'September 24–27, 2026',  
     title: 'C3LLAR Jackson Hole',  
     location: 'Jackson Hole, Wyoming',  
@@ -309,8 +278,7 @@ const ALL_EVENTS: EventItem[] = [
     title: 'Montgomery Comedy Festival',  
     location: 'Montgomery, Alabama',  
     subtitle: 'Sheryl Underwood & Lavell Crawford',  
-    description:  
-      'An evening of premier stand-up comedy and entertainment.',  
+    description: 'An evening of premier stand-up comedy and entertainment.',  
   },  
   {  
     category: 'music',  
@@ -340,21 +308,21 @@ const ALL_EVENTS: EventItem[] = [
   },  
   {  
     category: 'music',  
-    date: 'September 13, 2026',  
-    title: 'AfroFuture Presents Champion Sound',  
-    location: 'The Rooftop at Pier 17, New York',  
-    subtitle: 'Afrobeats & Global Sound',  
-    description:  
-      'Featuring DBN Gogo, DJ Obi, Victony, Bnxn, and more.',  
-  },  
-  {  
-    category: 'music',  
     date: 'September 5–6, 2026',  
     title: 'Pacific Soul Jazz Festival',  
     location: 'UCSD Epstein Family Amphitheater, La Jolla, California',  
     subtitle: 'West Coast Jazz & Soul Weekend',  
     description:  
       'Featuring Robert Glasper, Kenny Lattimore, Mindi Abair, Karen Briggs, and others.',  
+  },  
+  {  
+    category: 'music',  
+    date: 'September 13, 2026',  
+    title: 'AfroFuture Presents Champion Sound',  
+    location: 'The Rooftop at Pier 17, New York',  
+    subtitle: 'Afrobeats & Global Sound',  
+    description:  
+      'Featuring DBN Gogo, DJ Obi, Victony, Bnxn, and more.',  
   },  
   {  
     category: 'music',  
@@ -384,9 +352,7 @@ const ALL_EVENTS: EventItem[] = [
       'A private desert festival file with estate buyouts, premium access, protected movement, and Two Bunch Palms or Parker Palm Springs as recovery bases.',  
   },
 
-  // -------------------------------------------------------------------------  
   // CONCERT TOURS  
-  // -------------------------------------------------------------------------  
   {  
     category: 'music',  
     date: 'Sept 12–Oct 28, 2026',  
@@ -413,14 +379,6 @@ const ALL_EVENTS: EventItem[] = [
     subtitle: '100th Anniversary Tribute',  
     description:  
       "Starring Jules Grison in a 90-minute journey through Charles Aznavour's legendary songbook.",  
-  },  
-  {  
-    category: 'music',  
-    date: 'July–August 2026',  
-    title: 'NE-YO & AKON: Nights Like This',  
-    location: 'Atlanta, Austin, and Las Vegas',  
-    subtitle: 'R&B Royalty Arena Run',  
-    description: 'Timeless vocal anthems paired with VIP hospitality.',  
   },  
   {  
     category: 'music',  
@@ -559,9 +517,25 @@ const ALL_EVENTS: EventItem[] = [
       'Four January 2027 performances paired with high-end weekend suites and Four Seasons Las Vegas.',  
   },
 
-  // -------------------------------------------------------------------------  
-  // SPORTING & EQUESTRIAN TRADITIONS  
-  // -------------------------------------------------------------------------  
+  // SPORTING & EQUESTRIAN  
+  {  
+    category: 'sporting',  
+    date: 'March 8–14, 2027',  
+    title: 'The Players Championship',  
+    location: 'TPC Sawgrass, Ponte Vedra Beach, Florida',  
+    subtitle: 'Golf’s Fifth Major',  
+    description:  
+      "Golf's fifth major on the Stadium Course. A home-state Florida play with practice-round access, hospitality curation, and recovery at Ponte Vedra Inn & Club, One Ocean Resort & Spa, or Sawgrass Marriott.",  
+  },  
+  {  
+    category: 'sporting',  
+    date: '2027 — Dates TBC',  
+    title: 'International Tennis Hall of Fame',  
+    location: 'Newport, Rhode Island',  
+    subtitle: 'Grass-Court Tennis & Induction Celebration',  
+    description:  
+      "The Cerity Partners Hall of Fame Open grass-court stop and the Induction Celebration on the historic Horseshoe Court. Sanctuary pairing: Hammetts Hotel, with Newport's Gilded Age mansions and harbor cruising around it.",  
+  },  
   {  
     category: 'sporting',  
     date: 'April 8–11, 2027',  
@@ -633,13 +607,9 @@ const ALL_EVENTS: EventItem[] = [
     subtitle: 'British Equestrian Social Calendar',  
     description:  
       'A full Ascot week with private transport, hospitality, wardrobe planning, race-day hosting, and a country-house extension.',  
-  },
-
-  // -------------------------------------------------------------------------  
-  // GOLF & LUXURY RACQUET  
-  // -------------------------------------------------------------------------  
+  },  
   {  
-    category: 'golf',  
+    category: 'sporting',  
     date: 'Late June / Early July 2027',  
     title: 'Wimbledon Championships 2027',  
     location: 'All England Club, London',  
@@ -648,35 +618,51 @@ const ALL_EVENTS: EventItem[] = [
       'A London tennis itinerary with private hospitality curation, The Goring or Ham Yard Hotel, and a tailored city extension.',  
   },
 
-  // -------------------------------------------------------------------------  
   // GLOBAL LEADERSHIP & SUMMITS  
-  // -------------------------------------------------------------------------  
   {  
     category: 'leadership',  
-    date: 'December 16–17, 2026',  
-    title: 'America Business Forum Miami',  
-    location: 'Kaseya Center, Miami, Florida',  
-    subtitle: 'The Biggest Stage on Earth',  
+    date: 'September 22–24, 2026',  
+    title: 'ProcureCon Europe',  
+    location: 'Cologne, Germany',  
+    subtitle: 'European Procurement Leadership',  
     description:  
-      'A gathering of global icons, heads of state, and business leaders. Premium tiers and hospitality structures require confirmation.',  
+      "WBR's procurement summit for CPOs and sourcing leaders, paired with Excelsior Hotel Ernst and a refined Rhine-city stay.",  
   },  
   {  
     category: 'leadership',  
-    date: 'October 12–13, 2026',  
-    title: 'Startup Mountain Summit',  
-    location: 'Johnson City, Tennessee',  
-    subtitle: 'Appalachian Founder Retreat',  
+    date: 'September 28–30, 2026',  
+    title: 'ProcureCon East',  
+    location: 'Boston, Massachusetts',  
+    subtitle: 'Sourcing & Procurement Leadership',  
     description:  
-      'Early-stage founders, a pitch competition, and high-adventure networking in the Blue Ridge foothills.',  
+      'A Boston sourcing-and-procurement program with recovery at Four Seasons Boston, The Newbury, or Raffles Boston.',  
   },  
   {  
     category: 'leadership',  
-    date: 'Sept 29–Oct 1, 2026',  
-    title: 'AppDirect Thrive',  
-    location: 'JW Marriott L.A. LIVE, Los Angeles, California',  
-    subtitle: 'Digital Marketplace & AI Summit',  
+    date: 'September 30–October 2, 2026',  
+    title: 'Yardstick Innovation Institute',  
+    location: 'Ojai Valley Inn, California',  
+    subtitle: 'Executive Performance Retreat',  
     description:  
-      'Executive technology leadership focused on digital marketplaces and artificial intelligence.',  
+      'An immersive executive retreat on human and tech-driven performance — for senior executives, founders, and creators. On-site luxury at Ojai Valley Inn, with a Santa Barbara extension.',  
+  },  
+  {  
+    category: 'leadership',  
+    date: 'October 2–4, 2026',  
+    title: 'AASCP Fall Scientific Session',  
+    location: 'Hyatt Regency Miami, Florida',  
+    subtitle: 'Regenerative Medicine Summit',  
+    description:  
+      'Practitioners and longevity researchers exploring stem cell therapies and healthspan optimization.',  
+  },  
+  {  
+    category: 'leadership',  
+    date: 'October 5–6, 2026',  
+    title: 'ProcureCon MRO',  
+    location: 'Atlanta, Georgia',  
+    subtitle: 'Maintenance, Repair & Operations Procurement',  
+    description:  
+      'The maintenance, repair, and operations procurement conference, paired with The Whitley, St. Regis Atlanta, or Waldorf Astoria Buckhead.',  
   },  
   {  
     category: 'leadership',  
@@ -698,21 +684,21 @@ const ALL_EVENTS: EventItem[] = [
   },  
   {  
     category: 'leadership',  
-    date: 'October 2–4, 2026',  
-    title: 'AASCP Fall Scientific Session',  
-    location: 'Hyatt Regency Miami, Florida',  
-    subtitle: 'Regenerative Medicine Summit',  
+    date: 'October 9–10, 2026',  
+    title: 'Caribbean AI Summit',  
+    location: 'San Juan, Puerto Rico',  
+    subtitle: 'Artificial Intelligence & Innovation',  
     description:  
-      'Practitioners and longevity researchers exploring stem cell therapies and healthspan optimization.',  
+      "The Caribbean's largest AI conference — three tracks, 32 speakers, and an Inner Circle VIP tier. A San Juan business-and-recovery program.",  
   },  
   {  
     category: 'leadership',  
-    date: 'Sept 28–Oct 4, 2026',  
-    title: 'CultureCon Week NYC & West Vegas',  
-    location: 'New York, New York & Las Vegas, Nevada',  
-    subtitle: 'Creators & Innovators Summit',  
+    date: 'October 12–13, 2026',  
+    title: 'Startup Mountain Summit',  
+    location: 'Johnson City, Tennessee',  
+    subtitle: 'Appalachian Founder Retreat',  
     description:  
-      'Celebrating Black creatives, entrepreneurs, and digital visionaries.',  
+      'Early-stage founders, a pitch competition, and high-adventure networking in the Blue Ridge foothills.',  
   },  
   {  
     category: 'leadership',  
@@ -725,12 +711,111 @@ const ALL_EVENTS: EventItem[] = [
   },  
   {  
     category: 'leadership',  
+    date: 'October 12–15, 2026',  
+    title: 'The Battery Show North America',  
+    location: 'Huntington Place, Detroit, Michigan',  
+    subtitle: 'Advanced Battery & EV Technology',  
+    description:  
+      'The advanced battery and EV technology show at Huntington Place. Detroit recovery: The Godfrey, Detroit Foundation Hotel, or Shinola Hotel.',  
+  },  
+  {  
+    category: 'leadership',  
+    date: 'October 13, 2026',  
+    title: 'CX Circle NYC',  
+    location: 'The Glasshouse, New York',  
+    subtitle: 'Digital Experience Leadership',  
+    description:  
+      "Contentsquare's flagship digital-experience summit for product and customer-experience leaders, paired with Baccarat, The Mark, or Crosby Street Hotel.",  
+  },  
+  {  
+    category: 'leadership',  
+    date: 'October 15–18, 2026',  
+    title: 'Black Travel Summit',  
+    location: 'Milwaukee, Wisconsin',  
+    subtitle: 'Travel Industry & Diaspora Culture',  
+    description:  
+      'The global platform fusing Afro-diasporic culture, industry innovation, and community impact. Milwaukee recovery: The Pfister, Saint Kate, or Kimpton Journeyman.',  
+  },  
+  {  
+    category: 'leadership',  
+    date: 'October 20, 2026',  
+    title: 'CX Circle Stockholm',  
+    location: 'Fotografiska Museum, Stockholm',  
+    subtitle: 'Nordic Digital Experience Leadership',  
+    description:  
+      'Nordic digital-experience leadership at Fotografiska, paired with Ett Hem or Grand Hôtel Stockholm.',  
+  },  
+  {  
+    category: 'leadership',  
+    date: 'November 2–5, 2026',  
+    title: 'AIBC World Rome',  
+    location: 'Fiera Roma, Rome',  
+    subtitle: 'AI, Blockchain & Fintech Summit',  
+    description:  
+      "SiGMA's AI, blockchain, and fintech summit for founders, VCs, and policy leaders. Rome recovery: Hotel de Russie, Rome Cavalieri, or Bulgari Hotel Roma.",  
+  },  
+  {  
+    category: 'leadership',  
+    date: 'November 9–11, 2026',  
+    title: 'ProcureCon Marketing',  
+    location: 'Phoenix, Arizona',  
+    subtitle: 'Marketing Procurement Leadership',  
+    description:  
+      'Marketing procurement leadership at Wildhorse Pass, paired with Four Seasons Scottsdale, The Phoenician, or Sanctuary Camelback Mountain.',  
+  },  
+  {  
+    category: 'leadership',  
+    date: 'November 9–12, 2026',  
+    title: 'Web Summit',  
+    location: 'Parque das Nações, Lisbon, Portugal',  
+    subtitle: 'Global Technology Summit',  
+    description:  
+      'The global tech summit with Centre Stage, Policy, Venture, and Energy summits under one roof. Lisbon’s design-led hotels and riverside dining as the base.',  
+  },  
+  {  
+    category: 'leadership',  
+    date: 'November 19, 2026',  
+    title: 'CX Circle South Europe',  
+    location: 'Le Cavallerizze, Milan',  
+    subtitle: 'Southern European Digital Experience',  
+    description:  
+      'Southern Europe’s digital-experience leaders, paired with Four Seasons Milano or Armani Hotel Milano.',  
+  },  
+  {  
+    category: 'leadership',  
+    date: 'December 16–17, 2026',  
+    title: 'America Business Forum Miami',  
+    location: 'Kaseya Center, Miami, Florida',  
+    subtitle: 'The Biggest Stage on Earth',  
+    description:  
+      'A gathering of global icons, heads of state, and business leaders. Premium tiers and hospitality structures require confirmation.',  
+  },  
+  {  
+    category: 'leadership',  
     date: 'January 18–22, 2027',  
     title: 'World Economic Forum — Davos',  
     location: 'Davos, Switzerland',  
     subtitle: 'Global Leadership & Strategic Dialogue',  
     description:  
       'C-suite and family-office bilateral networking paired with The Omnia Zermatt or private Davos chalets.',  
+  },  
+  {  
+    category: 'leadership',  
+    date: 'February 21–24, 2027',  
+    title: 'RILA LINK',  
+    location: 'Gaylord Palms, Kissimmee, Florida',  
+    subtitle: 'Retail Supply-Chain Leadership',  
+    description:  
+      "The retail supply-chain conference for retail operations and supply-chain leadership, paired with Orlando's luxury corridor.",  
+  },  
+  {  
+    category: 'leadership',  
+    date: 'March 2027 — Dates TBC',  
+    title: 'AIBC Eurasia',  
+    location: 'Dubai, UAE',  
+    subtitle: 'AI, Blockchain & Fintech',  
+    description:  
+      "SiGMA's expanded Middle East commitment with a Ras Al Khaimah day. Dubai recovery: Burj Al Arab, Four Seasons Dubai, or Atlantis The Royal.",  
   },  
   {  
     category: 'leadership',  
@@ -743,6 +828,15 @@ const ALL_EVENTS: EventItem[] = [
   },  
   {  
     category: 'leadership',  
+    date: 'September 20–22, 2027',  
+    title: 'GSX 2027',  
+    location: 'Orlando, Florida',  
+    subtitle: 'Global Security Exchange',  
+    description:  
+      'The Global Security Exchange for CISOs and enterprise security leadership, paired with Four Seasons Orlando, Ritz-Carlton Grande Lakes, or Waldorf Astoria Orlando.',  
+  },  
+  {  
+    category: 'leadership',  
     date: 'September 22–24, 2027',  
     title: 'Groceryshop 2027',  
     location: 'Mandalay Bay, Las Vegas, Nevada',  
@@ -751,26 +845,21 @@ const ALL_EVENTS: EventItem[] = [
       'A high-performance work file built around a quiet base, meeting-ready movement, hospitality, and protected recovery time.',  
   },
 
-  // -------------------------------------------------------------------------  
   // HBCU CLASSICS & HOMECOMINGS  
-  // -------------------------------------------------------------------------  
   {  
     category: 'hbcus',  
-    date: 'August 29–November 28, 2026',  
+    date: 'September 6–November 28, 2026',  
     title: '2026 HBCU Classics Series',  
-    location: 'Eight-event national schedule',  
+    location: 'Nine-event national schedule',  
     subtitle: 'Football, Culture & Homecoming Tradition',  
     description:  
       'A curated season connecting storied rivalries, alumni communities, and destination weekends across the United States.',  
     featured: true,  
     schedule: [  
       {  
-        date: 'Aug 29, 2026',  
-        location: 'MEAC/SWAC Challenge — Atlanta, Georgia',  
-      },  
-      {  
         date: 'Sept 6, 2026',  
-        location: 'Orange Blossom Classic — Hard Rock Stadium, Miami Gardens, Florida',  
+        location:  
+          'Orange Blossom Classic — Hard Rock Stadium, Miami Gardens, Florida',  
       },  
       {  
         date: 'Sept 12, 2026',  
@@ -798,14 +887,13 @@ const ALL_EVENTS: EventItem[] = [
       },  
       {  
         date: 'Nov 28, 2026',  
-        location: 'Bayou Classic — Caesars Superdome, New Orleans, Louisiana',  
+        location:  
+          'Bayou Classic — Caesars Superdome, New Orleans, Louisiana',  
       },  
     ],  
   },
 
-  // -------------------------------------------------------------------------  
   // EXPEDITION & PINNACLE TRAVEL  
-  // -------------------------------------------------------------------------  
   {  
     category: 'expedition',  
     date: 'December 2026–January 2027 Season',  
@@ -843,9 +931,7 @@ const ALL_EVENTS: EventItem[] = [
       'A scientific and restorative expedition combining eclipse positioning, private photography support, Greenland immersion, and Iceland recovery.',  
   },
 
-  // -------------------------------------------------------------------------  
-  // WELLNESS & RESTORATIVE RETREATS  
-  // -------------------------------------------------------------------------  
+  // WELLNESS  
   {  
     category: 'wellness',  
     date: 'Ongoing / 2027 Seasons',  
@@ -865,9 +951,16 @@ const ALL_EVENTS: EventItem[] = [
       'A limited wellness collaboration pairing Kamalaya’s holistic approach with the alpine mineral setting of Grand Resort Bad Ragaz.',  
   },
 
-  // -------------------------------------------------------------------------  
   // FASHION & DESIGN  
-  // -------------------------------------------------------------------------  
+  {  
+    category: 'fashion',  
+    date: 'November 10–12, 2026',  
+    title: 'Adobe MAX',  
+    location: 'Miami Beach Convention Center, Florida',  
+    subtitle: 'Creative Technology & Design',  
+    description:  
+      "Adobe's flagship creativity conference, leading into Art Basel Miami Beach season. Miami Beach recovery: Faena, EDITION, or the Design District corridor.",  
+  },  
   {  
     category: 'fashion',  
     date: 'September 28–October 6, 2027',  
@@ -887,9 +980,7 @@ const ALL_EVENTS: EventItem[] = [
       'A New York fashion and culture file surrounding the Met Gala, with private styling, dining, discreet city movement, and The Whitby or Warren Street Hotel.',  
   },
 
-  // -------------------------------------------------------------------------  
   // FILM & ENTERTAINMENT  
-  // -------------------------------------------------------------------------  
   {  
     category: 'film',  
     date: 'January 10, 2027',  
@@ -909,9 +1000,7 @@ const ALL_EVENTS: EventItem[] = [
       'An independent cinema program paired with Mountain West luxury boutique lodges, private movement, and a restorative winter extension.',  
   },
 
-  // -------------------------------------------------------------------------  
   // LIFESTYLE & HOLIDAY  
-  // -------------------------------------------------------------------------  
   {  
     category: 'lifestyle',  
     date: 'February 23–26, 2027',  
@@ -934,8 +1023,7 @@ const ALL_EVENTS: EventItem[] = [
     category: 'lifestyle',  
     date: 'Nov 11–December 30, 2026',  
     title: 'Mannheim Steamroller Christmas',  
-    location:  
-      '80+ US cities including Atlanta, West Palm Beach, Detroit, and Denver',  
+    location: '80+ US cities including Atlanta, West Palm Beach, Detroit, and Denver',  
     subtitle: 'Longest-Running Holiday Tour in History',  
     description:  
       'Iconic classical-rock holiday arrangements celebrating more than 35 years of seasonal magic.',  
@@ -966,6 +1054,28 @@ const ALL_EVENTS: EventItem[] = [
     subtitle: 'World Premiere Stage Event',  
     description:  
       'Celebrating the life and enduring legacy of an American soul legend.',  
+  },
+
+  // RELIGIOUS & FAMILY TRAVEL  
+  {  
+    category: 'religious',  
+    date: 'January 11–25, 2027',  
+    title: 'Royal Caribbean Yeshiva Week 2027',  
+    location: 'Nine sailings across the Caribbean',  
+    subtitle: 'Kosher Family Cruising',  
+    description:  
+      'Kosher cruising for Yeshiva Week with supervised Glatt Kosher dining at Solarium Bistro across nine sailings aboard Wonder, Odyssey, Oasis, Ovation, and Symphony of the Seas. Booking and sailing-specific details verified on request.',  
+  },
+
+  // SEASONAL & CULTURAL  
+  {  
+    category: 'seasonal',  
+    date: 'Late March–Early April 2027',  
+    title: 'Japan Cherry Blossom Season (Sakura)',  
+    location: 'Tokyo–Kyoto corridor',  
+    subtitle: 'Seasonal Cultural Journey',  
+    description:  
+      'The Golden Route at peak bloom, with Six Senses Kyoto, Capella Kyoto, or Park Hyatt Tokyo as sanctuary bases, private guides, and a Kanazawa “little Kyoto” extension.',  
   },  
 ];
 
@@ -998,11 +1108,6 @@ const CATEGORY_SECTIONS: {
     category: 'sporting',  
     title: 'Sporting & Equestrian Traditions',  
     icon: '♞',  
-  },  
-  {  
-    category: 'golf',  
-    title: 'Golf & Luxury Racquet',  
-    icon: '◍',  
   },  
   {  
     category: 'leadership',  
@@ -1038,6 +1143,16 @@ const CATEGORY_SECTIONS: {
     category: 'lifestyle',  
     title: 'Lifestyle & Holiday',  
     icon: '❄',  
+  },  
+  {  
+    category: 'religious',  
+    title: 'Religious & Family Travel',  
+    icon: '✦',  
+  },  
+  {  
+    category: 'seasonal',  
+    title: 'Seasonal & Cultural',  
+    icon: '✿',  
   },  
 ];
 
@@ -1079,9 +1194,7 @@ export default function EventsPage() {
         </div>
 
         <section className="space-y-6 border-t border-white/10 pt-16 text-center">  
-          <h2 className="text-2xl font-light text-white">  
-            Secure Your Access  
-          </h2>
+          <h2 className="text-2xl font-light text-white">Secure Your Access</h2>
 
           <p className="mx-auto max-w-2xl text-sm leading-relaxed text-white/60">  
             Every event is paired with the right base, movement, access  
@@ -1089,7 +1202,7 @@ export default function EventsPage() {
           </p>
 
           <Link  
-            href="https://cal.com/nexvoyagecollective/discovery-call"  
+            href={CTA_URL}  
             target="_blank"  
             rel="noopener noreferrer"  
             className="inline-block bg-[#C5A059] px-8 py-4 text-xs font-medium uppercase tracking-[0.2em] text-black transition-colors hover:bg-[#d4af37]"  
@@ -1129,10 +1242,7 @@ function EventSection({
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">  
         {events.map((event, index) => (  
-          <EventCard  
-            key={`${event.title}-${index}`}  
-            event={event}  
-          />  
+          <EventCard key={`${event.title}-${index}`} event={event} />  
         ))}  
       </div>  
     </section>  
@@ -1197,7 +1307,7 @@ function EventCard({ event }: { event: EventItem }) {
 
       <div className="mt-6 border-t border-white/10 pt-6">  
         <Link  
-          href="https://cal.com/nexvoyagecollective/discovery-call"  
+          href={CTA_URL}  
           target="_blank"  
           rel="noopener noreferrer"  
           className="flex items-center gap-2 text-xs uppercase tracking-[0.15em] text-[#C5A059] transition-colors hover:text-white"  
