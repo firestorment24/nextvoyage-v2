@@ -1,43 +1,62 @@
-import Link from 'next/link';
+import LegalDocument, {  
+  LegalDocumentData,  
+} from '@/components/LegalDocument';
 
 export const metadata = {  
-title: 'Impact & Security Architecture — NexVoyage Collective',  
-description: 'Vetted security partnerships and remote wilderness risk mitigation.',  
+  title: 'Impact & Security Architecture — NexVoyage Collective',  
+  description:  
+    'Security coordination, risk mitigation, private transport oversight, and environmental stewardship.',  
+};
+
+const document: LegalDocumentData = {  
+  protocol: 'Protocol 04',  
+  title: 'The NexVoyage Standard: Impact & Security Architecture',  
+  description:  
+    'Risk mitigation, private transport oversight, responsible stewardship, and destination integrity.',  
+  effectiveDate: 'June 10, 2026',  
+  lastUpdated: 'June 10, 2026',  
+  introduction: [  
+    'At NexVoyage Collective, we believe that global access carries a responsibility to preserve the world’s most exclusive and fragile environments. Our approach to security and stewardship is designed to be quiet, proportionate, and integrated into the journey.',  
+  ],  
+  sections: [  
+    {  
+      heading: '1. Security Architecture',  
+      paragraphs: [  
+        'Security recommendations and coordination are developed in response to the destination, itinerary, client requirements, and advice from appropriately qualified providers.',  
+      ],  
+      bullets: [  
+        'Vetted partnerships: We seek to work with security professionals and transport providers who understand the requirements of high-net-worth clients and confidential travel.',  
+        'Risk-aware itineraries: Journey planning considers current conditions, local guidance, transport reliability, medical access, communications, and emergency procedures.',  
+        'Confidential, need-to-know data sharing: Client information is provided only to the partners who require it to deliver an agreed service.',  
+      ],  
+    },  
+    {  
+      heading: '2. Impact Stewardship',  
+      paragraphs: [  
+        'We prioritize partnerships with artisans, boutique estates, local leaders, conservation organizations, and suppliers who contribute to the preservation of cultural and natural environments.',  
+      ],  
+      bullets: [  
+        'Legacy preservation: We favor experiences and suppliers that respect heritage, local communities, and cultural custodianship.',  
+        'Responsible logistics: Where practical, we facilitate efficient, low-disruption transport and operational planning while maintaining the client’s comfort and safety requirements.',  
+      ],  
+    },  
+    {  
+      heading: '3. Wilderness & Expedition Risk',  
+      paragraphs: [  
+        'High alpine, remote maritime, wildlife, polar, and other expedition environments carry inherent risks. Where available and appropriate, itineraries may include local emergency procedures, satellite communications, evacuation planning, insurance requirements, and qualified expedition leadership.',  
+        'These arrangements reduce risk but cannot eliminate it. The underlying operator’s terms, safety procedures, and limitations remain applicable.',  
+      ],  
+    },  
+    {  
+      heading: '4. Mutual Respect',  
+      paragraphs: [  
+        'The NexVoyage Standard requires a mutual commitment between the Collective and the traveler. We seek to leave destinations better than we found them, ensuring that the relationships and environments supporting today’s journeys remain available for the future.',  
+      ],  
+    },  
+  ],  
+  closing: 'NexVoyage Collective — Protect the Traveler. Preserve the World.',  
 };
 
 export default function ImpactSafetyPage() {  
-return (  
-<main className="min-h-screen bg-[#0A0A0A] text-white selection:bg-[#C5A059]/30 pt-32 pb-24 px-6 md:px-12">  
-  <div className="max-w-4xl mx-auto space-y-12">  
-    <div className="border-b border-white/10 pb-8">  
-      <p className="text-[#C5A059] text-xs uppercase tracking-[0.3em] font-medium mb-3">Protocol 04</p>  
-      <h1 className="text-4xl md:text-5xl font-light tracking-tight text-white mb-4">Impact & Security Architecture</h1>  
-      <p className="text-white/60 text-sm md:text-base leading-relaxed">  
-        Rigorous risk mitigation, private transport oversight, and environmental stewardship.  
-      </p>  
-    </div>
-
-    <section className="space-y-4">  
-      <h2 className="text-xl font-medium text-[#C5A059] tracking-wide">01. Vetted Security Partnerships</h2>  
-      <p className="text-white/70 text-sm md:text-base leading-relaxed">  
-        All security details, executive protection logistics, and private transport providers undergo rigorous auditing to ensure compliance with international safety and discretion standards.  
-      </p>  
-    </section>
-
-    <section className="space-y-4">  
-      <h2 className="text-xl font-medium text-[#C5A059] tracking-wide">02. Wilderness & Expedition Risk Mitigation</h2>  
-      <p className="text-white/70 text-sm md:text-base leading-relaxed">  
-        High alpine, remote maritime, and wildlife sanctuary expeditions are supported by localized emergency evacuation protocols, satellite tracking, and expert expedition leaders.  
-      </p>  
-    </section>
-
-    <div className="pt-12 border-t border-white/10 flex items-center justify-between">  
-      <Link href="/legal" className="text-xs uppercase tracking-[0.2em] text-[#C5A059] hover:text-white transition-colors">  
-        ← Back to Legal Directory  
-      </Link>  
-      <span className="text-white/40 text-xs">NexVoyage Collective © 2026</span>  
-    </div>  
-  </div>  
-</main>  
-);  
+  return <LegalDocument document={document} />;  
 }  
