@@ -14,8 +14,7 @@ export const metadata: Metadata = {
 
 const BOOKING_URL = 'https://form.jotform.com/262506988663068';
 
-const HERO_IMAGE =  
-  'https://images.unsplash.com/photo-1719007129627-780ab16f588c?auto=format&fit=crop&w=2400&q=85';
+const HERO_IMAGE = 'https://cdn.marblism.com/yJcuwEBEy7m.jpg';
 
 const ports = [  
   {  
@@ -79,7 +78,7 @@ export default function FamilyCruisePage() {
       <section className="relative min-h-[78vh] overflow-hidden border-b border-white/10">  
         <img  
           src={HERO_IMAGE}  
-          alt="Cruise ship sailing across a blue Caribbean sea"  
+          alt="Royal Caribbean's Allure of the Seas sailing at sunset"  
           className="absolute inset-0 h-full w-full object-cover"  
         />
 
