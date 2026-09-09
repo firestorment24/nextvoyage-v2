@@ -23,9 +23,8 @@ const ports = [
     location: 'Bahamas',  
     description:  
       'A private-island day with bright waters, beach time, and family adventure.',  
-    image:  
-      'https://images.unsplash.com/photo-1559956144-5790f225fbab?auto=format&fit=crop&w=1400&q=85',  
-    alt: 'Turquoise waters and tropical shoreline at CocoCay in the Bahamas',  
+    image: 'https://cdn.marblism.com/gwJ_Y7mFotI.jpg',  
+    alt: 'Perfect Day at CocoCay water park, pier, and turquoise Caribbean waters',  
   },  
   {  
     number: '02',  
@@ -33,9 +32,8 @@ const ports = [
     location: 'Jamaica',  
     description:  
       'A vibrant Jamaican port with opportunities for culture, coastline, and connection.',  
-    image:  
-      'https://images.unsplash.com/photo-1700807307349-3b0e4c171a4d?auto=format&fit=crop&w=1400&q=85',  
-    alt: 'Palm-lined Jamaican coastline near Falmouth',  
+    image: 'https://cdn.marblism.com/PJKlPnnj5Im.jpg',  
+    alt: 'Tropical beach and turquoise waters in Falmouth, Jamaica',  
   },  
   {  
     number: '03',  
@@ -43,9 +41,8 @@ const ports = [
     location: 'Bahamas',  
     description:  
       'A final island stop combining turquoise water, local color, and easygoing discovery.',  
-    image:  
-      'https://images.unsplash.com/photo-1728988751323-ac4c53544eda?auto=format&fit=crop&w=1400&q=85',  
-    alt: 'Clear blue water and white sand on a Nassau beach',  
+    image: 'https://cdn.marblism.com/VrVYxeQbqB0.jpg',  
+    alt: 'Atlantis Paradise Island resort and waterfront in Nassau, Bahamas',  
   },  
 ];
 
