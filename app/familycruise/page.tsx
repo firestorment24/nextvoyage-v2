@@ -14,6 +14,9 @@ export const metadata: Metadata = {
 
 const BOOKING_URL = 'https://form.jotform.com/262506988663068';
 
+const HERO_IMAGE =  
+  'https://images.unsplash.com/photo-1719007129627-780ab16f588c?auto=format&fit=crop&w=2400&q=85';
+
 const ports = [  
   {  
     number: '01',  
@@ -21,6 +24,9 @@ const ports = [
     location: 'Bahamas',  
     description:  
       'A private-island day with bright waters, beach time, and family adventure.',  
+    image:  
+      'https://images.unsplash.com/photo-1559956144-5790f225fbab?auto=format&fit=crop&w=1400&q=85',  
+    alt: 'Turquoise waters and tropical shoreline at CocoCay in the Bahamas',  
   },  
   {  
     number: '02',  
@@ -28,6 +34,9 @@ const ports = [
     location: 'Jamaica',  
     description:  
       'A vibrant Jamaican port with opportunities for culture, coastline, and connection.',  
+    image:  
+      'https://images.unsplash.com/photo-1700807307349-3b0e4c171a4d?auto=format&fit=crop&w=1400&q=85',  
+    alt: 'Palm-lined Jamaican coastline near Falmouth',  
   },  
   {  
     number: '03',  
@@ -35,6 +44,9 @@ const ports = [
     location: 'Bahamas',  
     description:  
       'A final island stop combining turquoise water, local color, and easygoing discovery.',  
+    image:  
+      'https://images.unsplash.com/photo-1728988751323-ac4c53544eda?auto=format&fit=crop&w=1400&q=85',  
+    alt: 'Clear blue water and white sand on a Nassau beach',  
   },  
 ];
 
@@ -64,10 +76,18 @@ const staterooms = [
 export default function FamilyCruisePage() {  
   return (  
     <main className="min-h-screen bg-[#0A0A0A] text-white selection:bg-[#C5A059]/30 selection:text-white">  
-      <section className="relative overflow-hidden border-b border-white/10">  
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(197,160,89,0.18),_transparent_38%),radial-gradient(circle_at_bottom_left,_rgba(18,126,153,0.2),_transparent_42%)]" />
+      <section className="relative min-h-[78vh] overflow-hidden border-b border-white/10">  
+        <img  
+          src={HERO_IMAGE}  
+          alt="Cruise ship sailing across a blue Caribbean sea"  
+          className="absolute inset-0 h-full w-full object-cover"  
+        />
 
-        <div className="relative mx-auto max-w-6xl px-6 pb-20 pt-32 md:px-12 md:pb-28">  
+        <div className="absolute inset-0 bg-black/55" />  
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-black/25" />  
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-black/20" />
+
+        <div className="relative mx-auto flex min-h-[78vh] max-w-6xl items-end px-6 pb-20 pt-32 md:px-12 md:pb-28">  
           <div className="max-w-4xl">  
             <p className="mb-6 text-xs font-medium uppercase tracking-[0.35em] text-[#C5A059]">  
               A Family Gathering at Sea  
@@ -79,11 +99,11 @@ export default function FamilyCruisePage() {
               <span className="block">Family Cruise</span>  
             </h1>
 
-            <p className="mt-8 max-w-xl text-lg font-light leading-relaxed text-white/65 md:text-xl">  
+            <p className="mt-8 max-w-xl text-lg font-light leading-relaxed text-white/75 md:text-xl">  
               Same roots. New destinations. Forever family.  
             </p>
 
-            <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-xs uppercase tracking-[0.2em] text-white/55">  
+            <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-xs uppercase tracking-[0.2em] text-white/70">  
               <span>Family</span>  
               <span className="text-[#C5A059]">•</span>  
               <span>Memories</span>  
@@ -99,22 +119,20 @@ export default function FamilyCruisePage() {
           <div>  
             <p className="text-[10px] uppercase tracking-[0.25em] text-[#C5A059]">  
               Ship  
-            </p>  
-            <h2 className="mt-3 text-2xl font-light">  
-              Allure of the Seas  
-            </h2>  
-            <p className="mt-2 text-sm text-white/55">  
-              Royal Caribbean  
-            </p>  
+            </p>
+
+            <h2 className="mt-3 text-2xl font-light">Allure of the Seas</h2>
+
+            <p className="mt-2 text-sm text-white/55">Royal Caribbean</p>  
           </div>
 
           <div>  
             <p className="text-[10px] uppercase tracking-[0.25em] text-[#C5A059]">  
               Dates  
-            </p>  
-            <h2 className="mt-3 text-2xl font-light">  
-              June 6–12, 2027  
-            </h2>  
+            </p>
+
+            <h2 className="mt-3 text-2xl font-light">June 6–12, 2027</h2>
+
             <p className="mt-2 text-sm text-white/55">  
               Six-night Western Caribbean  
             </p>  
@@ -123,10 +141,12 @@ export default function FamilyCruisePage() {
           <div>  
             <p className="text-[10px] uppercase tracking-[0.25em] text-[#C5A059]">  
               Invitation  
-            </p>  
+            </p>
+
             <h2 className="mt-3 text-2xl font-light">  
               Let&apos;s cruise together  
-            </h2>  
+            </h2>
+
             <p className="mt-2 text-sm text-white/55">  
               Three destinations. One unforgettable journey.  
             </p>  
@@ -151,25 +171,37 @@ export default function FamilyCruisePage() {
           </p>  
         </div>
 
-        <div className="grid gap-6 md:grid-cols-3">  
+        <div className="grid gap-8 md:grid-cols-3">  
           {ports.map((port) => (  
             <article  
               key={port.number}  
-              className="border border-white/10 bg-[#111111] p-7 transition-colors hover:border-[#C5A059]/50"  
+              className="group overflow-hidden border border-white/10 bg-[#111111] transition-colors hover:border-[#C5A059]/50"  
             >  
-              <p className="text-xs tracking-[0.25em] text-[#C5A059]">  
-                {port.number}  
-              </p>
+              <div className="relative aspect-[16/10] overflow-hidden">  
+                <img  
+                  src={port.image}  
+                  alt={port.alt}  
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"  
+                />
 
-              <h3 className="mt-8 text-2xl font-light">{port.title}</h3>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
-              <p className="mt-2 text-xs uppercase tracking-[0.2em] text-white/45">  
-                {port.location}  
-              </p>
+                <span className="absolute bottom-5 left-6 text-xs tracking-[0.25em] text-white">  
+                  {port.number}  
+                </span>  
+              </div>
 
-              <p className="mt-6 text-sm leading-relaxed text-white/60">  
-                {port.description}  
-              </p>  
+              <div className="p-7">  
+                <h3 className="text-2xl font-light">{port.title}</h3>
+
+                <p className="mt-2 text-xs uppercase tracking-[0.2em] text-[#C5A059]">  
+                  {port.location}  
+                </p>
+
+                <p className="mt-6 text-sm leading-relaxed text-white/60">  
+                  {port.description}  
+                </p>  
+              </div>  
             </article>  
           ))}  
         </div>  
