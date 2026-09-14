@@ -5,7 +5,7 @@ export const metadata = {
   description:  
     "Curated access to the season's most significant gatherings — from the gridiron to the stage.",  
 };
-  
+
 type EventCategory =  
   | 'automotive'  
   | 'maritime'  
@@ -41,10 +41,29 @@ interface EventItem {
 const CTA_URL = 'https://cal.com/nexvoyagecollective/discovery-call';
 
 const ALL_EVENTS: EventItem[] = [  
-  // AUTOMOTIVE & PRESTIGE MOTORING  
+  // AUTOMOTIVE & PRESTIGE MOTORING
+
   {  
     category: 'automotive',  
-    date: 'August 15, 2027',  
+    date: 'October 12–18, 2026',  
+    title: 'Paris Motor Show / Mondial de l’Auto',  
+    location: 'Paris Expo Porte de Versailles, Paris, France',  
+    subtitle: 'Automotive Design & Luxury Retail',  
+    description:  
+      'Press and industry access on October 12, followed by public dates from October 13–18. A natural Paris double-play with the Céline residency, private automotive movement, design programming, and a considered luxury retail corridor.',  
+  },  
+  {  
+    category: 'automotive',  
+    date: 'May 21–23, 2027',  
+    title: "Concorso d'Eleganza Villa d'Este",  
+    location: 'Lake Como, Italy',  
+    subtitle: 'Collector Automotive & Design Event',  
+    description:  
+      'A collector-focused automotive gathering paired with Grand Hotel Villa d’Este or Mandarin Oriental, Lake Como, private movement, lakeside dining, and a refined Como design corridor.',  
+  },  
+  {  
+    category: 'automotive',  
+    date: "August 15, 2027",  
     title: "Pebble Beach Concours d'Elegance 2027",  
     location: 'Pebble Beach, California',  
     subtitle: 'Premier Vintage Automotive Showcase',  
@@ -88,7 +107,17 @@ const ALL_EVENTS: EventItem[] = [
       'A refined concours setting for collectors, luxury-watch clients, art patrons, founders, and design-led families.',  
   },
 
-  // MARITIME & SAILING  
+  // MARITIME & SAILING
+
+  {  
+    category: 'maritime',  
+    date: 'September 23–26, 2026',  
+    title: 'Monaco Yacht Show',  
+    location: 'Port Hercule, Monaco',  
+    subtitle: '35th-Anniversary Superyacht Showcase',  
+    description:  
+      'The 35th-anniversary superyacht showcase featuring more than 120 superyachts and 43 new deliveries. Maritime pairing: Hôtel de Paris Monte-Carlo or a private Côte d’Azur base.',  
+  },  
   {  
     category: 'maritime',  
     date: 'July 10–18, 2027',  
@@ -117,7 +146,35 @@ const ALL_EVENTS: EventItem[] = [
       'A bicentenary sailing week with race viewing, villa hospitality, regatta-side dining, and a London or Scottish extension.',  
   },
 
-  // CULINARY, ART & DESIGN  
+  // CULINARY, ART & DESIGN
+
+  {  
+    category: 'culinary',  
+    date: 'September 24–29, 2026',  
+    title: 'Spectrum Experiences',  
+    location: 'Aruba',  
+    subtitle: 'Global Culinary & Culture Experience',  
+    description:  
+      'A global culinary-and-culture experience in Aruba, paired with private movement, considered dining, and a restorative Caribbean base.',  
+  },  
+  {  
+    category: 'culinary',  
+    date: 'December 2–6, 2026',  
+    title: 'Art Basel Miami Beach',  
+    location: 'Miami Beach Convention Center, Miami Beach, Florida',  
+    subtitle: 'Collectors, Art & South Florida Culture',  
+    description:  
+      'VIP preview days on December 2–3 followed by public dates from December 4–6. A South Florida collector itinerary with private gallery access, discreet transfers, and a considered Miami Beach or Design District corridor.',  
+  },  
+  {  
+    category: 'culinary',  
+    date: 'January 26–30, 2027',  
+    title: 'Art Basel Qatar 2027',  
+    location: 'Doha Design District / M7, Doha, Qatar',  
+    subtitle: 'Gulf Art & Design',  
+    description:  
+      'The second edition of Art Basel Qatar, shaped around the theme “between.” A Gulf art-and-design corridor with private movement, executive hospitality, and a considered Doha base.',  
+  },  
   {  
     category: 'culinary',  
     date: 'October 15–18, 2026',  
@@ -170,10 +227,29 @@ const ALL_EVENTS: EventItem[] = [
     location: 'Grand Palais, Paris, France',  
     subtitle: 'European Contemporary Art',  
     description:  
-      "The premier European contemporary art gathering, paired with Hôtel de Crillon, private gallery access, and a considered Paris cultural route.",  
+      'The premier European contemporary art gathering, paired with Hôtel de Crillon, private gallery access, and a considered Paris cultural route.',  
   },
 
-  // MUSIC, FESTIVALS & CULTURAL RESIDENCIES  
+  // MUSIC, FESTIVALS & CULTURAL RESIDENCIES
+
+  {  
+    category: 'music',  
+    date: 'September 16–October 17, 2026 + May 8–29, 2027',  
+    title: 'Celine, Paris, & the Art of the Encore',  
+    location: 'Plenitude Arena, Paris, France',  
+    subtitle: 'Céline Dion Residency',  
+    description:  
+      'A three-night itinerary around Céline Dion’s residency, paired with The Peninsula Paris, La Réserve Paris, or Madame Rêve. Private arrival, private car to the show, and a recovery day complete the file.',  
+  },  
+  {  
+    category: 'music',  
+    date: 'April–August 2027',  
+    title: 'Harry Styles — Together, Together 2027',  
+    location: '13 international markets, including Dallas, Los Angeles, and Atlanta',  
+    subtitle: 'Styles & Suites',  
+    description:  
+      'A verified concert brief built around stadium hospitality, VIP access, premium hotel pairings, and protected movement. Lead-market pairings include The Crescent Fort Worth, Villoura Los Angeles, and Thompson Atlanta.',  
+  },  
   {  
     category: 'music',  
     date: 'September 18–20, 2026',  
@@ -182,15 +258,6 @@ const ALL_EVENTS: EventItem[] = [
     subtitle: 'Caribbean Music & Culture',  
     description:  
       "The Caribbean's biggest night, held for the first time in the islands. A three-day Elite Weekend built around the NAPA ceremony — 250+ nominees across 40+ categories — with a welcome reception, steelpan concert, and official after-party. Sanctuary pairing: Hyatt Regency Trinidad or Magdalena Grand Tobago, with island recovery to follow.",  
-  },  
-  {  
-    category: 'music',  
-    date: 'September 3 / 6 / 11, 2026',  
-    title: 'Tamar Braxton: City Winery Circuit',  
-    location: 'Nashville, Pittsburgh, Boston',  
-    subtitle: 'Intimate R&B & Soul',  
-    description:  
-      "An intimate three-city run of R&B and soul in the signature City Winery room, paired with the cities' best tables and a considered stay. Dates and venue availability are confirmed on request.",  
   },  
   {  
     category: 'music',  
@@ -308,24 +375,6 @@ const ALL_EVENTS: EventItem[] = [
   },  
   {  
     category: 'music',  
-    date: 'September 5–6, 2026',  
-    title: 'Pacific Soul Jazz Festival',  
-    location: 'UCSD Epstein Family Amphitheater, La Jolla, California',  
-    subtitle: 'West Coast Jazz & Soul Weekend',  
-    description:  
-      'Featuring Robert Glasper, Kenny Lattimore, Mindi Abair, Karen Briggs, and others.',  
-  },  
-  {  
-    category: 'music',  
-    date: 'September 13, 2026',  
-    title: 'AfroFuture Presents Champion Sound',  
-    location: 'The Rooftop at Pier 17, New York',  
-    subtitle: 'Afrobeats & Global Sound',  
-    description:  
-      'Featuring DBN Gogo, DJ Obi, Victony, Bnxn, and more.',  
-  },  
-  {  
-    category: 'music',  
     date: 'October 29–November 9, 2026',  
     title: 'Foo Foo Festival',  
     location: 'Pensacola, Florida',  
@@ -352,12 +401,32 @@ const ALL_EVENTS: EventItem[] = [
       'A private desert festival file with estate buyouts, premium access, protected movement, and Two Bunch Palms or Parker Palm Springs as recovery bases.',  
   },
 
-  // CONCERT TOURS  
+  // CONCERT TOURS
+
+  {  
+    category: 'music',  
+    date: '2026–2027',  
+    title: 'BTS World Tour',  
+    location: 'North America, Europe, Latin America, and Asia-Pacific',  
+    subtitle: 'Global Stadium Hospitality',  
+    description:  
+      'A 79-show world tour file built around stadium hospitality, VIP access, premium hotel pairings, and protected movement across lead markets.',  
+  },  
+  {  
+    category: 'music',  
+    date: 'Through July 2027',  
+    title: 'Karol G — Viajando Por El Mundo',  
+    location: 'Global stadium markets, including London in 2027',  
+    subtitle: 'Global Latin Pop Tour',  
+    description:  
+      'A stadium-scale world tour with VIP hospitality, premium hotel pairings, private movement, and city-specific cultural extensions.',  
+  },  
   {  
     category: 'music',  
     date: 'Sept 12–Oct 28, 2026',  
     title: 'Chief Keef Live 2026',  
-    location: '19 major US cities including Chicago, New York, Los Angeles, and Austin',  
+    location:  
+      '19 major US cities including Chicago, New York, Los Angeles, and Austin',  
     subtitle: 'National Headlining Run',  
     description:  
       'A 19-date arena and amphitheater tour from the pioneer of Chicago drill.',  
@@ -453,15 +522,6 @@ const ALL_EVENTS: EventItem[] = [
   },  
   {  
     category: 'music',  
-    date: 'Aug 20–Sept 10, 2026',  
-    title: 'Lil Wayne',  
-    location: 'Jones Beach, Knoxville, and select dates',  
-    subtitle: 'Rap Monument Live',  
-    description:  
-      'A legendary catalog performed live in premium amphitheater settings.',  
-  },  
-  {  
-    category: 'music',  
     date: 'July 31–Nov 14, 2026',  
     title: "Sangin' Diva / Diva Life Tour",  
     location: 'New York, DMV, Philadelphia, Atlanta, and Las Vegas',  
@@ -517,7 +577,26 @@ const ALL_EVENTS: EventItem[] = [
       'Four January 2027 performances paired with high-end weekend suites and Four Seasons Las Vegas.',  
   },
 
-  // SPORTING & EQUESTRIAN  
+  // SPORTING & EQUESTRIAN
+
+  {  
+    category: 'sporting',  
+    date: 'November 19–21, 2026',  
+    title: 'F1 Las Vegas Grand Prix',  
+    location: 'Las Vegas, Nevada',  
+    subtitle: 'Formula 1 Race Weekend',  
+    description:  
+      'Premium hospitality and race-weekend access paired with a Desert Sanctuary corridor through Wynn, Encore, and Fontainebleau.',  
+  },  
+  {  
+    category: 'sporting',  
+    date: 'February 14, 2027',  
+    title: 'Super Bowl LXI',  
+    location: 'SoFi Stadium, Inglewood, California',  
+    subtitle: "Valentine's Day Weekend Hospitality",  
+    description:  
+      'A premium Los Angeles Super Bowl file shaped around hospitality, entertainment, corporate access, private movement, and a refined Valentine’s Day weekend.',  
+  },  
   {  
     category: 'sporting',  
     date: 'March 8–14, 2027',  
@@ -618,7 +697,17 @@ const ALL_EVENTS: EventItem[] = [
       'A London tennis itinerary with private hospitality curation, The Goring or Ham Yard Hotel, and a tailored city extension.',  
   },
 
-  // GLOBAL LEADERSHIP & SUMMITS  
+  // GLOBAL LEADERSHIP & SUMMITS
+
+  {  
+    category: 'leadership',  
+    date: 'October 8–10, 2026',  
+    title: 'Good Soil Forum 2026',  
+    location: 'Fort Worth, Texas',  
+    subtitle: "Founder's Sanctuary Forum",  
+    description:  
+      'A founder-focused forum anchored at The Crescent Fort Worth, with main-stage programming, breakout tracks, and the Capital Pitch Competition.',  
+  },  
   {  
     category: 'leadership',  
     date: 'September 22–24, 2026',  
@@ -663,15 +752,6 @@ const ALL_EVENTS: EventItem[] = [
     subtitle: 'Maintenance, Repair & Operations Procurement',  
     description:  
       'The maintenance, repair, and operations procurement conference, paired with The Whitley, St. Regis Atlanta, or Waldorf Astoria Buckhead.',  
-  },  
-  {  
-    category: 'leadership',  
-    date: 'October 8–10, 2026',  
-    title: 'Wisdom in the Age of AI',  
-    location: 'Calvin University, Grand Rapids, Michigan',  
-    subtitle: 'Cross-Disciplinary Ethics & Innovation',  
-    description:  
-      'Examining artificial intelligence across education, business, healthcare, and the arts.',  
   },  
   {  
     category: 'leadership',  
@@ -845,30 +925,18 @@ const ALL_EVENTS: EventItem[] = [
       'A high-performance work file built around a quiet base, meeting-ready movement, hospitality, and protected recovery time.',  
   },
 
-  // HBCU CLASSICS & HOMECOMINGS  
+  // HBCU CLASSICS & HOMECOMINGS
+
   {  
     category: 'hbcus',  
-    date: 'September 6–November 28, 2026',  
+    date: 'September 26–November 28, 2026',  
     title: '2026 HBCU Classics Series',  
-    location: 'Nine-event national schedule',  
+    location: 'Five-event national schedule',  
     subtitle: 'Football, Culture & Homecoming Tradition',  
     description:  
       'A curated season connecting storied rivalries, alumni communities, and destination weekends across the United States.',  
     featured: true,  
     schedule: [  
-      {  
-        date: 'Sept 6, 2026',  
-        location:  
-          'Orange Blossom Classic — Hard Rock Stadium, Miami Gardens, Florida',  
-      },  
-      {  
-        date: 'Sept 12, 2026',  
-        location: 'Aggie-Eagle Classic — Durham, North Carolina',  
-      },  
-      {  
-        date: 'Sept 12, 2026',  
-        location: 'Southern Heritage Classic — Memphis, Tennessee',  
-      },  
       {  
         date: 'Sept 26, 2026',  
         location: 'State Fair Classic — Dallas, Texas',  
@@ -893,7 +961,8 @@ const ALL_EVENTS: EventItem[] = [
     ],  
   },
 
-  // EXPEDITION & PINNACLE TRAVEL  
+  // EXPEDITION & PINNACLE TRAVEL
+
   {  
     category: 'expedition',  
     date: 'December 2026–January 2027 Season',  
@@ -931,7 +1000,8 @@ const ALL_EVENTS: EventItem[] = [
       'A scientific and restorative expedition combining eclipse positioning, private photography support, Greenland immersion, and Iceland recovery.',  
   },
 
-  // WELLNESS  
+  // WELLNESS
+
   {  
     category: 'wellness',  
     date: 'Ongoing / 2027 Seasons',  
@@ -951,7 +1021,8 @@ const ALL_EVENTS: EventItem[] = [
       'A limited wellness collaboration pairing Kamalaya’s holistic approach with the alpine mineral setting of Grand Resort Bad Ragaz.',  
   },
 
-  // FASHION & DESIGN  
+  // FASHION & DESIGN
+
   {  
     category: 'fashion',  
     date: 'November 10–12, 2026',  
@@ -980,7 +1051,17 @@ const ALL_EVENTS: EventItem[] = [
       'A New York fashion and culture file surrounding the Met Gala, with private styling, dining, discreet city movement, and The Whitby or Warren Street Hotel.',  
   },
 
-  // FILM & ENTERTAINMENT  
+  // FILM & ENTERTAINMENT
+
+  {  
+    category: 'film',  
+    date: 'October 10–11, 2026',  
+    title: 'ABFF Pop Up NYC',  
+    location: 'New York, New York',  
+    subtitle: 'The Black Film & Creator Weekend',  
+    description:  
+      'Culture-led programming paired with premium Midtown or Upper West Side stays, private logistics, considered dining, and a carefully managed New York weekend.',  
+  },  
   {  
     category: 'film',  
     date: 'January 10, 2027',  
@@ -1000,7 +1081,8 @@ const ALL_EVENTS: EventItem[] = [
       'An independent cinema program paired with Mountain West luxury boutique lodges, private movement, and a restorative winter extension.',  
   },
 
-  // LIFESTYLE & HOLIDAY  
+  // LIFESTYLE & HOLIDAY
+
   {  
     category: 'lifestyle',  
     date: 'February 23–26, 2027',  
@@ -1023,7 +1105,8 @@ const ALL_EVENTS: EventItem[] = [
     category: 'lifestyle',  
     date: 'Nov 11–December 30, 2026',  
     title: 'Mannheim Steamroller Christmas',  
-    location: '80+ US cities including Atlanta, West Palm Beach, Detroit, and Denver',  
+    location:  
+      '80+ US cities including Atlanta, West Palm Beach, Detroit, and Denver',  
     subtitle: 'Longest-Running Holiday Tour in History',  
     description:  
       'Iconic classical-rock holiday arrangements celebrating more than 35 years of seasonal magic.',  
@@ -1056,7 +1139,8 @@ const ALL_EVENTS: EventItem[] = [
       'Celebrating the life and enduring legacy of an American soul legend.',  
   },
 
-  // RELIGIOUS & FAMILY TRAVEL  
+  // RELIGIOUS & FAMILY TRAVEL
+
   {  
     category: 'religious',  
     date: 'January 11–25, 2027',  
@@ -1067,7 +1151,8 @@ const ALL_EVENTS: EventItem[] = [
       'Kosher cruising for Yeshiva Week with supervised Glatt Kosher dining at Solarium Bistro across nine sailings aboard Wonder, Odyssey, Oasis, Ovation, and Symphony of the Seas. Booking and sailing-specific details verified on request.',  
   },
 
-  // SEASONAL & CULTURAL  
+  // SEASONAL & CULTURAL
+
   {  
     category: 'seasonal',  
     date: 'Late March–Early April 2027',  
@@ -1291,9 +1376,7 @@ function EventCard({ event }: { event: EventItem }) {
                   key={`${item.date}-${index}`}  
                   className="border-b border-white/5 pb-3"  
                 >  
-                  <p className="text-xs font-medium text-white">  
-                    {item.date}  
-                  </p>
+                  <p className="text-xs font-medium text-white">{item.date}</p>
 
                   <p className="mt-1 text-xs leading-relaxed text-white/55">  
                     {item.location}  
