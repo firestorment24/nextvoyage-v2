@@ -1,6 +1,9 @@
-import Link from 'next/link';
+import type { Metadata } from 'next';  
+import Link from 'next/link';  
+import { Suspense } from 'react';  
+import EventLedger from '@/components/EventLedger';
 
-export const metadata = {  
+export const metadata: Metadata = {  
   title: 'The Event Ledger — NexVoyage Collective',  
   description:  
     "Curated access to the season's most significant gatherings — from the gridiron to the stage.",  
@@ -38,7 +41,8 @@ interface EventItem {
   schedule?: ScheduleItem[];  
 }
 
-const CTA_URL = 'https://cal.com/nexvoyagecollective/discovery-call';
+const CTA_URL =  
+  'https://cal.com/nexvoyagecollective/discovery-call';
 
 const ALL_EVENTS: EventItem[] = [  
   // AUTOMOTIVE & PRESTIGE MOTORING
@@ -63,7 +67,7 @@ const ALL_EVENTS: EventItem[] = [
   },  
   {  
     category: 'automotive',  
-    date: "August 15, 2027",  
+    date: 'August 15, 2027',  
     title: "Pebble Beach Concours d'Elegance 2027",  
     location: 'Pebble Beach, California',  
     subtitle: 'Premier Vintage Automotive Showcase',  
@@ -161,7 +165,8 @@ const ALL_EVENTS: EventItem[] = [
     category: 'culinary',  
     date: 'December 2–6, 2026',  
     title: 'Art Basel Miami Beach',  
-    location: 'Miami Beach Convention Center, Miami Beach, Florida',  
+    location:  
+      'Miami Beach Convention Center, Miami Beach, Florida',  
     subtitle: 'Collectors, Art & South Florida Culture',  
     description:  
       'VIP preview days on December 2–3 followed by public dates from December 4–6. A South Florida collector itinerary with private gallery access, discreet transfers, and a considered Miami Beach or Design District corridor.',  
@@ -245,7 +250,8 @@ const ALL_EVENTS: EventItem[] = [
     category: 'music',  
     date: 'April–August 2027',  
     title: 'Harry Styles — Together, Together 2027',  
-    location: '13 international markets, including Dallas, Los Angeles, and Atlanta',  
+    location:  
+      '13 international markets, including Dallas, Los Angeles, and Atlanta',  
     subtitle: 'Styles & Suites',  
     description:  
       'A verified concert brief built around stadium hospitality, VIP access, premium hotel pairings, and protected movement. Lead-market pairings include The Crescent Fort Worth, Villoura Los Angeles, and Thompson Atlanta.',  
@@ -337,7 +343,8 @@ const ALL_EVENTS: EventItem[] = [
     title: 'Reggae Fest Miami',  
     location: 'Miami, Florida',  
     subtitle: 'South Florida Sound & Sun',  
-    description: 'A vibrant coastal reggae celebration in tropical Miami.',  
+    description:  
+      'A vibrant coastal reggae celebration in tropical Miami.',  
   },  
   {  
     category: 'music',  
@@ -345,7 +352,8 @@ const ALL_EVENTS: EventItem[] = [
     title: 'Montgomery Comedy Festival',  
     location: 'Montgomery, Alabama',  
     subtitle: 'Sheryl Underwood & Lavell Crawford',  
-    description: 'An evening of premier stand-up comedy and entertainment.',  
+    description:  
+      'An evening of premier stand-up comedy and entertainment.',  
   },  
   {  
     category: 'music',  
@@ -353,7 +361,8 @@ const ALL_EVENTS: EventItem[] = [
     title: '30A Songwriters Festival',  
     location: 'Rosemary Beach, Florida',  
     subtitle: 'Coastal Acoustic Masterclass',  
-    description: 'Intimate performances across 30A luxury venues.',  
+    description:  
+      'Intimate performances across 30A luxury venues.',  
   },  
   {  
     category: 'music',  
@@ -407,7 +416,8 @@ const ALL_EVENTS: EventItem[] = [
     category: 'music',  
     date: '2026–2027',  
     title: 'BTS World Tour',  
-    location: 'North America, Europe, Latin America, and Asia-Pacific',  
+    location:  
+      'North America, Europe, Latin America, and Asia-Pacific',  
     subtitle: 'Global Stadium Hospitality',  
     description:  
       'A 79-show world tour file built around stadium hospitality, VIP access, premium hotel pairings, and protected movement across lead markets.',  
@@ -416,7 +426,8 @@ const ALL_EVENTS: EventItem[] = [
     category: 'music',  
     date: 'Through July 2027',  
     title: 'Karol G — Viajando Por El Mundo',  
-    location: 'Global stadium markets, including London in 2027',  
+    location:  
+      'Global stadium markets, including London in 2027',  
     subtitle: 'Global Latin Pop Tour',  
     description:  
       'A stadium-scale world tour with VIP hospitality, premium hotel pairings, private movement, and city-specific cultural extensions.',  
@@ -435,7 +446,8 @@ const ALL_EVENTS: EventItem[] = [
     category: 'music',  
     date: '2026 East Coast Run',  
     title: 'Fetty Wap Nostalgia Tour',  
-    location: 'Atlantic City, Brooklyn, Charlotte, and Virginia Beach',  
+    location:  
+      'Atlantic City, Brooklyn, Charlotte, and Virginia Beach',  
     subtitle: 'Nostalgia Tour',  
     description:  
       'A 2010s hip-hop nostalgia tour featuring VIP meet-and-greet packages.',  
@@ -489,7 +501,8 @@ const ALL_EVENTS: EventItem[] = [
     category: 'music',  
     date: 'Oct 24–Dec 19, 2026',  
     title: 'JODECI: Forever My Lady',  
-    location: 'Pittsburgh, Washington, D.C., New Orleans, and Miami',  
+    location:  
+      'Pittsburgh, Washington, D.C., New Orleans, and Miami',  
     subtitle: 'Ultimate R&B Slow Jam Tour',  
     description:  
       'VIP access and private box options for legendary R&B.',  
@@ -524,7 +537,8 @@ const ALL_EVENTS: EventItem[] = [
     category: 'music',  
     date: 'July 31–Nov 14, 2026',  
     title: "Sangin' Diva / Diva Life Tour",  
-    location: 'New York, DMV, Philadelphia, Atlanta, and Las Vegas',  
+    location:  
+      'New York, DMV, Philadelphia, Atlanta, and Las Vegas',  
     subtitle: 'Vocal Powerhouse Showcase',  
     description:  
       'Celebrating the greatest female voices in soul and R&B.',  
@@ -1164,78 +1178,74 @@ const ALL_EVENTS: EventItem[] = [
   },  
 ];
 
-const CATEGORY_SECTIONS: {  
-  category: EventCategory;  
-  title: string;  
-  icon: string;  
-}[] = [  
+const CATEGORY_SECTIONS = [  
   {  
-    category: 'automotive',  
+    category: 'automotive' as const,  
     title: 'Automotive & Prestige Motoring',  
     icon: '◈',  
   },  
   {  
-    category: 'maritime',  
+    category: 'maritime' as const,  
     title: 'Maritime & Sailing Milestones',  
     icon: '⌁',  
   },  
   {  
-    category: 'culinary',  
+    category: 'culinary' as const,  
     title: 'Culinary, Art & Design',  
     icon: '✧',  
   },  
   {  
-    category: 'music',  
+    category: 'music' as const,  
     title: 'Music, Festivals & Cultural Residencies',  
     icon: '♫',  
   },  
   {  
-    category: 'sporting',  
+    category: 'sporting' as const,  
     title: 'Sporting & Equestrian Traditions',  
     icon: '♞',  
   },  
   {  
-    category: 'leadership',  
+    category: 'leadership' as const,  
     title: 'Global Leadership & Summits',  
     icon: '❖',  
   },  
   {  
-    category: 'hbcus',  
+    category: 'hbcus' as const,  
     title: 'HBCU Classics & Homecomings',  
     icon: '✦',  
   },  
   {  
-    category: 'expedition',  
+    category: 'expedition' as const,  
     title: 'Expedition & Pinnacle Travel',  
     icon: '✧',  
   },  
   {  
-    category: 'wellness',  
+    category: 'wellness' as const,  
     title: 'Wellness & Restorative Retreats',  
     icon: '◌',  
   },  
   {  
-    category: 'fashion',  
+    category: 'fashion' as const,  
     title: 'Fashion & Design',  
     icon: '◇',  
   },  
   {  
-    category: 'film',  
+    category: 'film' as const,  
     title: 'Film & Entertainment',  
     icon: '◎',  
   },  
   {  
-    category: 'lifestyle',  
+    category: 'lifestyle' as const,  
     title: 'Lifestyle & Holiday',  
     icon: '❄',  
   },  
   {  
-    category: 'religious',  
+    category: 'religious' as const,  
     title: 'Religious & Family Travel',  
     icon: '✦',  
   },  
   {  
-    category: 'seasonal',  
+    category: 'seasonal' as const,  
     title: 'Seasonal & Cultural',  
     icon: '✿',  
   },  
@@ -1267,19 +1277,23 @@ export default function EventsPage() {
           </p>  
         </header>
 
-        <div className="space-y-20">  
-          {CATEGORY_SECTIONS.map((section) => (  
-            <EventSection  
-              key={section.category}  
-              title={section.title}  
-              icon={section.icon}  
-              category={section.category}  
-            />  
-          ))}  
-        </div>
+        <Suspense  
+          fallback={  
+            <div className="border border-white/10 bg-[#111111] px-6 py-12 text-center text-sm text-white/50">  
+              Loading the event ledger…  
+            </div>  
+          }  
+        >  
+          <EventLedger  
+            events={ALL_EVENTS}  
+            sections={CATEGORY_SECTIONS}  
+          />  
+        </Suspense>
 
         <section className="space-y-6 border-t border-white/10 pt-16 text-center">  
-          <h2 className="text-2xl font-light text-white">Secure Your Access</h2>
+          <h2 className="text-2xl font-light text-white">  
+            Secure Your Access  
+          </h2>
 
           <p className="mx-auto max-w-2xl text-sm leading-relaxed text-white/60">  
             Every event is paired with the right base, movement, access  
@@ -1297,107 +1311,5 @@ export default function EventsPage() {
         </section>  
       </div>  
     </main>  
-  );  
-}
-
-function EventSection({  
-  title,  
-  icon,  
-  category,  
-}: {  
-  title: string;  
-  icon: string;  
-  category: EventCategory;  
-}) {  
-  const events = ALL_EVENTS.filter((event) => event.category === category);
-
-  if (events.length === 0) {  
-    return null;  
-  }
-
-  return (  
-    <section className="space-y-8">  
-      <div className="flex items-center gap-4 border-b border-white/10 pb-4">  
-        <span className="text-2xl text-[#C5A059]">{icon}</span>
-
-        <h2 className="text-2xl font-light tracking-wide text-white">  
-          {title}  
-        </h2>  
-      </div>
-
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">  
-        {events.map((event, index) => (  
-          <EventCard key={`${event.title}-${index}`} event={event} />  
-        ))}  
-      </div>  
-    </section>  
-  );  
-}
-
-function EventCard({ event }: { event: EventItem }) {  
-  return (  
-    <article  
-      className={`flex flex-col justify-between border border-white/10 bg-[#111111] p-6 transition-colors hover:border-[#C5A059]/40 ${  
-        event.featured ? 'md:col-span-2' : ''  
-      }`}  
-    >  
-      <div className="space-y-3">  
-        <div className="flex flex-col justify-between gap-2 text-xs font-medium uppercase tracking-wider text-[#C5A059] md:flex-row md:gap-4">  
-          <span>{event.date}</span>
-
-          {event.subtitle && (  
-            <span className="text-white/40 md:text-right">  
-              {event.subtitle}  
-            </span>  
-          )}  
-        </div>
-
-        <h3 className="text-xl font-normal text-white">{event.title}</h3>
-
-        <p className="text-xs tracking-wide text-white/60">  
-          {event.location}  
-        </p>
-
-        {event.description && (  
-          <p className="border-t border-white/5 pt-2 text-sm leading-relaxed text-white/70">  
-            {event.description}  
-          </p>  
-        )}
-
-        {event.schedule && event.schedule.length > 0 && (  
-          <div className="mt-5 border-t border-white/10 pt-5">  
-            <p className="mb-3 text-[10px] font-medium uppercase tracking-[0.2em] text-[#C5A059]">  
-              Event Schedule  
-            </p>
-
-            <div className="grid grid-cols-1 gap-x-8 gap-y-3 md:grid-cols-2">  
-              {event.schedule.map((item, index) => (  
-                <div  
-                  key={`${item.date}-${index}`}  
-                  className="border-b border-white/5 pb-3"  
-                >  
-                  <p className="text-xs font-medium text-white">{item.date}</p>
-
-                  <p className="mt-1 text-xs leading-relaxed text-white/55">  
-                    {item.location}  
-                  </p>  
-                </div>  
-              ))}  
-            </div>  
-          </div>  
-        )}  
-      </div>
-
-      <div className="mt-6 border-t border-white/10 pt-6">  
-        <Link  
-          href={CTA_URL}  
-          target="_blank"  
-          rel="noopener noreferrer"  
-          className="flex items-center gap-2 text-xs uppercase tracking-[0.15em] text-[#C5A059] transition-colors hover:text-white"  
-        >  
-          Inquire About Curated Itinerary →  
-        </Link>  
-      </div>  
-    </article>  
   );  
 }  
