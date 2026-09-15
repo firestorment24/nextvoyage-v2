@@ -1,10 +1,15 @@
 'use client';
 
 import Link from 'next/link';  
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';  
+import {  
+  usePathname,  
+  useRouter,  
+  useSearchParams,  
+} from 'next/navigation';  
 import { useMemo } from 'react';
 
-const CTA_URL = 'https://cal.com/nexvoyagecollective/discovery-call';
+const CTA_URL =  
+  'https://cal.com/nexvoyagecollective/discovery-call';
 
 export interface ScheduleItem {  
   date: string;  
@@ -67,7 +72,8 @@ export default function EventLedger({
   );
 
   const activeCategory =  
-    requestedCategory === 'all' || validCategories.has(requestedCategory)  
+    requestedCategory === 'all' ||  
+    validCategories.has(requestedCategory)  
       ? requestedCategory  
       : 'all';
 
@@ -76,7 +82,8 @@ export default function EventLedger({
 
     return events.filter((event) => {  
       const matchesCategory =  
-        activeCategory === 'all' || event.category === activeCategory;
+        activeCategory === 'all' ||  
+        event.category === activeCategory;
 
       if (!matchesCategory) {  
         return false;  
@@ -101,11 +108,6 @@ export default function EventLedger({
     });  
   }, [activeCategory, events, query]);
 
-  const filteredEventIds = useMemo(  
-    () => new Set(filteredEvents.map((event) => event.title)),  
-    [filteredEvents],  
-  );
-
   const visibleSections = useMemo(() => {  
     return sections  
       .filter(  
@@ -118,15 +120,24 @@ export default function EventLedger({
         events: events.filter(  
           (event) =>  
             event.category === section.category &&  
-            filteredEventIds.has(event.title),  
+            filteredEvents.includes(event),  
         ),  
       }))  
       .filter((section) => section.events.length > 0);  
-  }, [activeCategory, events, filteredEventIds, sections]);
+  }, [  
+    activeCategory,  
+    events,  
+    filteredEvents,  
+    sections,  
+  ]);
 
-  const hasFilters = activeCategory !== 'all' || query.trim().length > 0;
+  const hasFilters =  
+    activeCategory !== 'all' || query.trim().length > 0;
 
-  function updateFilters(nextCategory: string, nextQuery: string) {  
+  function updateFilters(  
+    nextCategory: string,  
+    nextQuery: string,  
+  ) {  
     const params = new URLSearchParams(searchParams.toString());
 
     if (nextCategory === 'all') {  
@@ -187,7 +198,10 @@ export default function EventLedger({
                 type="search"  
                 value={query}  
                 onChange={(event) =>  
-                  updateFilters(activeCategory, event.target.value)  
+                  updateFilters(  
+                    activeCategory,  
+                    event.target.value,  
+                  )  
                 }  
                 placeholder="Search events, places, or themes"  
                 className="w-full border border-white/15 bg-black/30 px-4 py-3 pr-10 text-sm text-white outline-none placeholder:text-white/30 focus:border-[#C5A059]/70"  
@@ -214,9 +228,12 @@ export default function EventLedger({
                 <FilterButton  
                   key={section.category}  
                   label={  
-                    FILTER_LABELS[section.category] || section.title  
+                    FILTER_LABELS[section.category] ||  
+                    section.title  
                   }  
-                  active={activeCategory === section.category}  
+                  active={  
+                    activeCategory === section.category  
+                  }  
                   onClick={() =>  
                     updateFilters(section.category, query)  
                   }  
@@ -272,8 +289,8 @@ export default function EventLedger({
           </h2>
 
           <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-white/50">  
-            Try a broader search or clear the filters to view the full  
-            event collection.  
+            Try a broader search or clear the filters to view the  
+            full event collection.  
           </p>
 
           <button  
@@ -326,7 +343,9 @@ function EventSection({
   return (  
     <section className="space-y-8">  
       <div className="flex items-center gap-4 border-b border-white/10 pb-4">  
-        <span className="text-2xl text-[#C5A059]">{icon}</span>
+        <span className="text-2xl text-[#C5A059]">  
+          {icon}  
+        </span>
 
         <h2 className="text-2xl font-light tracking-wide text-white">  
           {title}  
