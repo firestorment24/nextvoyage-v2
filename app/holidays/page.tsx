@@ -34,6 +34,47 @@ interface HolidayCollection {
 
 const CTA_URL = 'https://cal.com/nexvoyagecollective/discovery-call';
 
+const images = {  
+  charleston:  
+    'https://images.unsplash.com/photo-1684277770294-5564b0ebe291?auto=format&fit=crop&w=1600&q=85',  
+  savannah:  
+    'https://images.unsplash.com/photo-1721370808855-ed8b99beea87?auto=format&fit=crop&w=1600&q=85',  
+  santaFe:  
+    'https://images.unsplash.com/photo-1752342646740-d10264e4ea07?auto=format&fit=crop&w=1600&q=85',  
+  sedona:  
+    'https://images.unsplash.com/photo-1745882094247-ef63654f99c7?auto=format&fit=crop&w=1600&q=85',  
+  middleburg:  
+    'https://images.unsplash.com/photo-1666908954730-ad4852009970?auto=format&fit=crop&w=1600&q=85',  
+  williamsburg:  
+    'https://images.unsplash.com/photo-1572466920113-5c75b857c4dd?auto=format&fit=crop&w=1600&q=85',  
+  newport:  
+    'https://images.unsplash.com/photo-1561723236-753ad66c3561?auto=format&fit=crop&w=1600&q=85',  
+  asheville:  
+    'https://images.unsplash.com/photo-1671500313906-e82e2e71246c?auto=format&fit=crop&w=1600&q=85',  
+  stAugustine:  
+    'https://images.unsplash.com/photo-1578364363146-d5745d65a36a?auto=format&fit=crop&w=1600&q=85',  
+  jacksonHole:  
+    'https://images.unsplash.com/photo-1579497145132-9cecee960a5e?auto=format&fit=crop&w=1600&q=85',  
+  nantucket:  
+    'https://images.unsplash.com/photo-1758201510495-0a9e28fb0632?auto=format&fit=crop&w=1600&q=85',  
+  leavenworth:  
+    'https://images.unsplash.com/photo-1664211912374-fe659166092b?auto=format&fit=crop&w=1600&q=85',  
+  newYork:  
+    'https://images.unsplash.com/photo-1751412153077-cdee4255c7d8?auto=format&fit=crop&w=1600&q=85',  
+  napa:  
+    'https://images.unsplash.com/photo-1701624019104-d37423bd30bc?auto=format&fit=crop&w=1600&q=85',  
+  palmSprings:  
+    'https://images.unsplash.com/photo-1623414936204-89e5d9702f48?auto=format&fit=crop&w=1600&q=85',  
+  scottsdale:  
+    'https://images.unsplash.com/photo-1594619018182-5f6fc29985af?auto=format&fit=crop&w=1600&q=85',  
+  sanDiego:  
+    'https://images.unsplash.com/photo-1758272470558-816d5e8a1cbf?auto=format&fit=crop&w=1600&q=85',  
+  maui:  
+    'https://images.unsplash.com/photo-1571955179352-956a4399b679?auto=format&fit=crop&w=1600&q=85',  
+  miami:  
+    'https://images.unsplash.com/photo-1748380606266-fc4bf7999f35?auto=format&fit=crop&w=1600&q=85',  
+};
+
 const holidayCollections: HolidayCollection[] = [  
   {  
     key: 'thanksgiving',  
@@ -42,9 +83,9 @@ const holidayCollections: HolidayCollection[] = [
     description:  
       'A long weekend shaped around family, generous tables, historic settings, and time that does not feel over-programmed.',  
     planningWindow: 'Three to four nights · November 25–29, 2026',  
-    image:  
-      'https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=2200&q=85',  
-    imageAlt: 'An intimate table prepared for an elegant holiday meal',  
+    image: images.charleston,  
+    imageAlt:  
+      'Tree-lined historic street in Charleston, South Carolina',  
     destinations: [  
       {  
         name: 'Charleston',  
@@ -52,9 +93,9 @@ const holidayCollections: HolidayCollection[] = [
         label: 'NexVoyage discovered',  
         description:  
           'Historic architecture, extraordinary dining, refined hotels, and a Thanksgiving table that feels rooted rather than staged.',  
-        image:  
-          'https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=1400&q=85',  
-        alt: 'Historic Southern architecture in Charleston',  
+        image: images.charleston,  
+        alt:  
+          'Historic tree-lined cobblestone street in Charleston, South Carolina',  
       },  
       {  
         name: 'Savannah',  
@@ -62,9 +103,9 @@ const holidayCollections: HolidayCollection[] = [
         label: 'NexVoyage discovered',  
         description:  
           'Walkable squares, private dining, historic inns, and a slower Southern rhythm for families who want room to breathe.',  
-        image:  
-          'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=1400&q=85',  
-        alt: 'Historic city street with mature trees and Southern character',  
+        image: images.savannah,  
+        alt:  
+          'Spanish moss hanging from live oak trees in Savannah, Georgia',  
       },  
       {  
         name: 'Santa Fe',  
@@ -72,9 +113,9 @@ const holidayCollections: HolidayCollection[] = [
         label: 'NexVoyage discovered',  
         description:  
           'Adobe architecture, fireside evenings, art, Southwestern cuisine, and high-desert light for a more distinctive family escape.',  
-        image:  
-          'https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&w=1400&q=85',  
-        alt: 'Warm desert landscape beneath an expansive sky',  
+        image: images.santaFe,  
+        alt:  
+          'Traditional adobe architecture in Santa Fe, New Mexico',  
       },  
       {  
         name: 'Sedona',  
@@ -82,9 +123,9 @@ const holidayCollections: HolidayCollection[] = [
         label: 'NexVoyage discovered',  
         description:  
           'A restorative Thanksgiving built around red-rock scenery, spa time, private guides, and a resort table already thoughtfully handled.',  
-        image:  
-          'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1400&q=85',  
-        alt: 'Red rock landscape and desert scenery',  
+        image: images.sedona,  
+        alt:  
+          'Red-rock formations and desert landscape in Sedona, Arizona',  
       },  
       {  
         name: 'Middleburg',  
@@ -92,9 +133,9 @@ const holidayCollections: HolidayCollection[] = [
         label: 'NexVoyage discovered',  
         description:  
           'Horse country, vineyard estates, private countryside dining, and a composed Thanksgiving for families who prefer quiet to spectacle.',  
-        image:  
-          'https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1400&q=85',  
-        alt: 'Rolling countryside beneath a soft evening sky',  
+        image: images.middleburg,  
+        alt:  
+          'Central Virginia countryside and rolling rural landscape near Middleburg',  
       },  
       {  
         name: 'Williamsburg',  
@@ -102,9 +143,9 @@ const holidayCollections: HolidayCollection[] = [
         label: 'Iconic',  
         description:  
           'History gives the holiday its natural setting, with heritage programming, fireside hospitality, and an easy family rhythm.',  
-        image:  
-          'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=85',  
-        alt: 'Historic colonial-style building surrounded by autumn trees',  
+        image: images.williamsburg,  
+        alt:  
+          'Historic brick architecture at Colonial Williamsburg in Virginia',  
       },  
     ],  
   },  
@@ -115,19 +156,29 @@ const holidayCollections: HolidayCollection[] = [
     description:  
       'A collection of glowing streets, decorated estates, mountain air, old-world traditions, and the kind of atmosphere that makes the season feel genuinely different.',  
     planningWindow: 'Four to seven nights · December 19–27, 2026',  
-    image:  
-      'https://images.unsplash.com/photo-1512389142860-9c449e58a543?auto=format&fit=crop&w=2200&q=85',  
-    imageAlt: 'Warm Christmas lights illuminating a seasonal interior',  
+    image: images.asheville,  
+    imageAlt:  
+      'Christmas tree and holiday decorations inside the Biltmore Estate library in Asheville',  
     destinations: [  
+      {  
+        name: 'New York City',  
+        location: 'New York',  
+        label: 'Iconic',  
+        description:  
+          'Rockefeller Center, Fifth Avenue, Broadway, private shopping appointments, and the unmistakable energy of the city at its most theatrical.',  
+        image: images.newYork,  
+        alt:  
+          'Christmas tree at Rockefeller Center in New York City',  
+      },  
       {  
         name: 'Newport',  
         location: 'Rhode Island',  
         label: 'NexVoyage discovered',  
         description:  
           'Gilded Age mansions, harbor air, decorated interiors, and an elegant coastal Christmas without the scale of a major city.',  
-        image:  
-          'https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1400&q=85',  
-        alt: 'Historic coastal estate surrounded by winter landscape',  
+        image: images.newport,  
+        alt:  
+          'Newport Harbor in Newport, Rhode Island',  
       },  
       {  
         name: 'Asheville',  
@@ -135,9 +186,9 @@ const holidayCollections: HolidayCollection[] = [
         label: 'NexVoyage discovered',  
         description:  
           'Christmas at Biltmore, Blue Ridge scenery, fireplaces, and a mountain setting with enough substance for a full seasonal journey.',  
-        image:  
-          'https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=1400&q=85',  
-        alt: 'Mountain forest with warm autumn and winter tones',  
+        image: images.asheville,  
+        alt:  
+          'Christmas decorations inside the Biltmore Estate library in Asheville, North Carolina',  
       },  
       {  
         name: 'Santa Fe',  
@@ -145,9 +196,9 @@ const holidayCollections: HolidayCollection[] = [
         label: 'NexVoyage discovered',  
         description:  
           'Farolitos, adobe walls, galleries, fireplaces, and Southwestern cuisine create a Christmas that feels intimate and entirely its own.',  
-        image:  
-          'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1400&q=85',  
-        alt: 'Warmly lit historic architecture at dusk',  
+        image: images.santaFe,  
+        alt:  
+          'Adobe architecture beneath a clear blue sky in Santa Fe, New Mexico',  
       },  
       {  
         name: 'St. Augustine',  
@@ -155,9 +206,9 @@ const holidayCollections: HolidayCollection[] = [
         label: 'NexVoyage discovered',  
         description:  
           'Nights of Lights, historic streets, ocean air, and a warmer Christmas for travelers who want atmosphere without the heavy coat.',  
-        image:  
-          'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=85',  
-        alt: 'Warm coastal beach with soft evening light',  
+        image: images.stAugustine,  
+        alt:  
+          'Historic Old City street in St. Augustine, Florida',  
       },  
       {  
         name: 'Jackson Hole',  
@@ -165,9 +216,9 @@ const holidayCollections: HolidayCollection[] = [
         label: 'NexVoyage discovered',  
         description:  
           'Luxury lodges, snow, wildlife, and a stronger sense of place for families seeking a mountain Christmas with real texture.',  
-        image:  
-          'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1400&q=85',  
-        alt: 'Snow-covered mountain range beneath a winter sky',  
+        image: images.jacksonHole,  
+        alt:  
+          'Snow-covered town and mountains in Jackson Hole, Wyoming',  
       },  
       {  
         name: 'Nantucket',  
@@ -175,9 +226,9 @@ const holidayCollections: HolidayCollection[] = [
         label: 'NexVoyage discovered',  
         description:  
           'An intimate island Christmas with coastal walks, decorated inns, excellent dining, and a quiet New England atmosphere.',  
-        image:  
-          'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1400&q=85',  
-        alt: 'Coastal shoreline and calm ocean waters',  
+        image: images.nantucket,  
+        alt:  
+          'Boat and harbor scene in Nantucket, Massachusetts',  
       },  
       {  
         name: 'Leavenworth',  
@@ -185,9 +236,9 @@ const holidayCollections: HolidayCollection[] = [
         label: 'Iconic',  
         description:  
           'A Bavarian-style Christmas village surrounded by mountain scenery, lights, seasonal programming, and family tradition.',  
-        image:  
-          'https://images.unsplash.com/photo-1483664852095-d6cc6870702d?auto=format&fit=crop&w=1400&q=85',  
-        alt: 'Snow-covered mountain village during winter',  
+        image: images.leavenworth,  
+        alt:  
+          'Christmas lights illuminating a building in Leavenworth, Washington',  
       },  
     ],  
   },  
@@ -198,9 +249,9 @@ const holidayCollections: HolidayCollection[] = [
     description:  
       'Not every New Year deserves a crowded square or a louder room. Some are better marked by a private dinner, a spa morning, champagne, and a destination with its own point of view.',  
     planningWindow: 'Four to seven nights · December 27, 2026–January 3, 2027',  
-    image:  
-      'https://images.unsplash.com/photo-1467810563316-b5476525c0f9?auto=format&fit=crop&w=2200&q=85',  
-    imageAlt: 'Celebratory lights over a city at night',  
+    image: images.miami,  
+    imageAlt:  
+      'Miami waterfront skyline viewed across Biscayne Bay',  
     destinations: [  
       {  
         name: 'Napa Valley',  
@@ -208,9 +259,9 @@ const holidayCollections: HolidayCollection[] = [
         label: 'NexVoyage discovered',  
         description:  
           'A counterpoint to the party circuit: vineyard estates, exceptional dining, spa time, and a quietly memorable midnight.',  
-        image:  
-          'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=1400&q=85',  
-        alt: 'Vineyard rows beneath golden evening light',  
+        image: images.napa,  
+        alt:  
+          'Napa Valley vineyard landscape with autumn fields and surrounding hills',  
       },  
       {  
         name: 'Charleston',  
@@ -218,9 +269,9 @@ const holidayCollections: HolidayCollection[] = [
         label: 'NexVoyage discovered',  
         description:  
           'A historic luxury hotel, tasting-menu dinner, champagne, and a celebration with energy without the crush of Times Square.',  
-        image:  
-          'https://images.unsplash.com/photo-1498307833015-e7b400441eb8?auto=format&fit=crop&w=1400&q=85',  
-        alt: 'Waterfront city architecture at dusk',  
+        image: images.charleston,  
+        alt:  
+          'Historic Charleston street shaded by mature trees',  
       },  
       {  
         name: 'Palm Springs',  
@@ -228,9 +279,9 @@ const holidayCollections: HolidayCollection[] = [
         label: 'NexVoyage discovered',  
         description:  
           'Resort pools, architecture, spa treatments, desert light, and sophisticated celebrations for couples or close friends.',  
-        image:  
-          'https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1400&q=85',  
-        alt: 'Desert landscape beneath a wide open sky',  
+        image: images.palmSprings,  
+        alt:  
+          'Mid-century modern home with palm trees in Palm Springs, California',  
       },  
       {  
         name: 'Scottsdale',  
@@ -238,9 +289,9 @@ const holidayCollections: HolidayCollection[] = [
         label: 'NexVoyage discovered',  
         description:  
           'A resort-led New Year with golf, wellness, desert excursions, strong dining, and no obligation to dress for snow.',  
-        image:  
-          'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1400&q=85',  
-        alt: 'Desert landscape with dramatic mountain surroundings',  
+        image: images.scottsdale,  
+        alt:  
+          'Camelback Mountain and the Sonoran Desert near Scottsdale, Arizona',  
       },  
       {  
         name: 'San Diego',  
@@ -248,9 +299,9 @@ const holidayCollections: HolidayCollection[] = [
         label: 'NexVoyage discovered',  
         description:  
           'Waterfront dining, yacht celebrations, polished hotels, and a mild coastal setting as an alternative to Miami.',  
-        image:  
-          'https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1400&q=85',  
-        alt: 'Coastal city and ocean viewed in warm evening light',  
+        image: images.sanDiego,  
+        alt:  
+          'San Diego skyline viewed across the harbor in California',  
       },  
       {  
         name: 'Santa Fe',  
@@ -258,9 +309,9 @@ const holidayCollections: HolidayCollection[] = [
         label: 'NexVoyage discovered',  
         description:  
           'Fireplaces, art, spa, Southwestern cuisine, and winter scenery for a four- or five-night New Year with a slower pulse.',  
-        image:  
-          'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=85',  
-        alt: 'Desert landscape glowing beneath a late-day sky',  
+        image: images.santaFe,  
+        alt:  
+          'Traditional adobe architecture in Santa Fe, New Mexico',  
       },  
       {  
         name: 'Savannah',  
@@ -268,9 +319,9 @@ const holidayCollections: HolidayCollection[] = [
         label: 'NexVoyage discovered',  
         description:  
           'Historic hotels, excellent restaurants, cocktails, riverfront energy, and a romantic celebration with a strong sense of place.',  
-        image:  
-          'https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=1400&q=85',  
-        alt: 'Historic city architecture framed by trees',  
+        image: images.savannah,  
+        alt:  
+          'Spanish moss and live oak trees in Savannah, Georgia',  
       },  
       {  
         name: 'Maui',  
@@ -278,9 +329,19 @@ const holidayCollections: HolidayCollection[] = [
         label: 'Iconic',  
         description:  
           'Turn the holiday into a true vacation: ocean time, resort recovery, private experiences, and a New Year that does not end after midnight.',  
-        image:  
-          'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=85',  
-        alt: 'Tropical beach and calm ocean at sunset',  
+        image: images.maui,  
+        alt:  
+          'Sunset over the Maui coastline in Hawaii',  
+      },  
+      {  
+        name: 'Miami',  
+        location: 'Florida',  
+        label: 'Iconic',  
+        description:  
+          'Waterfront hotels, yacht celebrations, private dining, and the energy of a destination that knows how to mark midnight.',  
+        image: images.miami,  
+        alt:  
+          'Miami skyline and Biscayne Bay waterfront in Florida',  
       },  
     ],  
   },  
@@ -321,8 +382,8 @@ export default function HolidaysPage() {
 
       <section className="relative flex min-h-[78vh] items-center justify-center overflow-hidden">  
         <img  
-          src="https://images.unsplash.com/photo-1482517967863-00e15c9b44be?auto=format&fit=crop&w=2400&q=90"  
-          alt="Warm holiday lights glowing against a dark winter evening"  
+          src={images.asheville}  
+          alt="Christmas tree and holiday decorations inside the Biltmore Estate library"  
           className="absolute inset-0 h-full w-full object-cover opacity-45"  
           fetchPriority="high"  
         />
@@ -340,7 +401,7 @@ export default function HolidaysPage() {
           </h1>
 
           <p className="mx-auto mt-8 max-w-2xl text-base font-light leading-relaxed text-white/70 md:text-lg">  
-            Three seasons. Eighteen distinct ways to gather, restore, and  
+            Three seasons. A considered set of ways to gather, restore, and  
             mark the turn of the year.  
           </p>
 
@@ -350,15 +411,19 @@ export default function HolidaysPage() {
               className="transition-colors hover:text-[#D4AF37]"  
             >  
               Thanksgiving  
-            </a>  
-            <span className="text-[#D4AF37]">•</span>  
+            </a>
+
+            <span className="text-[#D4AF37]">•</span>
+
             <a  
               href="#christmas"  
               className="transition-colors hover:text-[#D4AF37]"  
             >  
               Christmas  
-            </a>  
-            <span className="text-[#D4AF37]">•</span>  
+            </a>
+
+            <span className="text-[#D4AF37]">•</span>
+
             <a  
               href="#new-year"  
               className="transition-colors hover:text-[#D4AF37]"  
@@ -374,7 +439,8 @@ export default function HolidaysPage() {
           <div>  
             <p className="text-[10px] uppercase tracking-[0.25em] text-[#D4AF37]">  
               Thanksgiving  
-            </p>  
+            </p>
+
             <p className="mt-3 text-sm leading-relaxed text-white/60">  
               Family tables, historic settings, and long-weekend escapes.  
             </p>  
@@ -383,7 +449,8 @@ export default function HolidaysPage() {
           <div>  
             <p className="text-[10px] uppercase tracking-[0.25em] text-[#D4AF37]">  
               Christmas  
-            </p>  
+            </p>
+
             <p className="mt-3 text-sm leading-relaxed text-white/60">  
               Lights, snow, fireside traditions, and a little more atmosphere.  
             </p>  
@@ -392,7 +459,8 @@ export default function HolidaysPage() {
           <div>  
             <p className="text-[10px] uppercase tracking-[0.25em] text-[#D4AF37]">  
               New Year&apos;s  
-            </p>  
+            </p>
+
             <p className="mt-3 text-sm leading-relaxed text-white/60">  
               Midnight celebrations, quiet luxury, wellness, and warm weather.  
             </p>  
@@ -417,7 +485,10 @@ export default function HolidaysPage() {
 
       <div className="space-y-32 pb-24 md:space-y-40">  
         {holidayCollections.map((collection) => (  
-          <HolidaySection key={collection.key} collection={collection} />  
+          <HolidaySection  
+            key={collection.key}  
+            collection={collection}  
+          />  
         ))}  
       </div>
 
