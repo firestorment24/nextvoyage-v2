@@ -14,7 +14,7 @@ type EventCategory =
   | 'maritime'  
   | 'culinary'  
   | 'music'  
-  | 'sporting'  
+  | 'sporting'   
   | 'leadership'   
   | 'hbcus'  
   | 'expedition'  
