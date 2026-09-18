@@ -1,3 +1,4 @@
+import { Suspense } from 'react';  
 import type { Metadata } from 'next';  
 import Link from 'next/link';  
 import CelebrationInquiry from '@/components/CelebrationInquiry';
@@ -23,6 +24,23 @@ export const metadata: Metadata = {
       'Milestone journeys designed around the women, friendships, and moments worth traveling for.',  
     url: 'https://nexvoyagecollective.com/celebrating-her',  
     type: 'website',  
+    images: [  
+      {  
+        url: 'https://images.unsplash.com/photo-1536735382886-6b592aee0f2d?auto=format&fit=crop&w=2400&q=90',  
+        width: 2400,  
+        height: 1600,  
+        alt: 'Woman walking through a vineyard with a glass of wine',  
+      },  
+    ],  
+  },  
+  twitter: {  
+    card: 'summary_large_image',  
+    title: 'Celebrating Her | The Celebration Collection',  
+    description:  
+      'Milestone journeys designed around the women, friendships, and moments worth traveling for.',  
+    images: [  
+      'https://images.unsplash.com/photo-1536735382886-6b592aee0f2d?auto=format&fit=crop&w=2400&q=90',  
+    ],  
   },  
 };
 
@@ -454,7 +472,9 @@ export default function CelebratingHerPage() {
                   </p>
 
                   <Link  
-                    href="#inquiry"  
+                    href={`/celebrating-her?journey=${encodeURIComponent(  
+                      journey.title,  
+                    )}#inquiry`}  
                     className="mt-6 inline-flex border-b border-[#D7B56D]/60 pb-1 font-sans text-[10px] uppercase tracking-[0.18em] text-[#D7B56D] transition-colors hover:text-white"  
                   >  
                     See how this could work for your group →  
@@ -494,6 +514,15 @@ export default function CelebratingHerPage() {
               {capability}  
             </div>  
           ))}  
+        </div>
+
+        <div className="mt-12 border-t border-[#F4EFE6]/10 pt-8">  
+          <Link  
+            href="/selected-engagements"  
+            className="inline-flex border-b border-[#D7B56D]/60 pb-1 font-sans text-[10px] uppercase tracking-[0.18em] text-[#D7B56D] transition-colors hover:text-white"  
+          >  
+            See selected engagements →  
+          </Link>  
         </div>  
       </section>
 
@@ -518,7 +547,9 @@ export default function CelebratingHerPage() {
             </p>  
           </div>
 
-          <CelebrationInquiry />  
+          <Suspense fallback={null}>  
+            <CelebrationInquiry />  
+          </Suspense>  
         </div>  
       </section>
 
