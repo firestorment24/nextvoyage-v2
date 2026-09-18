@@ -162,11 +162,11 @@ number: '09',
 title: 'The Celebration Voyage',  
 location: 'Explora Journeys',  
 description:  
-  'A milestone sailing for approximately 8–30 women, with private dining, wellness, curated shore experiences, and one signature celebration evening.',  
-image:  
-  'https://images.unsplash.com/photo-1770929356171-bf7bc61a2c15?auto=format&fit=crop&w=1600&q=85',  
-alt: 'Luxury yachts moored in a whitewashed coastal harbor',  
-},  {  
+'A milestone sailing for approximately 8–30 women, with private dining, wellness, curated shore experiences, and one signature celebration evening.',  
+image: 'https://cdn.marblism.com/5OEF5lrLWhG.webp',  
+alt: 'Explora Journeys ships sailing together at sunset',  
+},  
+  {  
   number: '10',  
   title: 'The Desert Chapter',  
   location: 'Abu Dhabi & the UAE',  
