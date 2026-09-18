@@ -711,8 +711,5 @@ return (
   </form>  
 );  
 }  
-The page route will be:
 
-/celebrating-her  
-The inquiry form uses the existing /api/lead endpoint and maps the fields into the current dossier structure without introducing pricing, package language, or fixed availability.
 
