@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from 'next/link';
 
 export default function Footer() {  
 return (  
@@ -11,8 +11,8 @@ return (
 NexVoyage Collective  
 </h4>  
 <p className="text-white/40 text-sm font-sans font-light leading-relaxed max-w-md">  
-A private travel advisory curating quiet luxury, sanctuaries, and   
-bespoke journeys for the discerning few. Not a travel agency —   
+A private travel advisory curating quiet luxury, sanctuaries, and  
+bespoke journeys for the discerning few. Not a travel agency :  
 a guardian of time.  
 </p>  
 </div>
@@ -23,37 +23,82 @@ Navigate
 </h4>  
 <ul className="space-y-3">  
 <li>  
-<Link href="/" className="text-white/40 text-sm font-sans font-light hover:text-white transition-colors">  
+<Link  
+href="/"  
+className="text-white/40 text-sm font-sans font-light hover:text-white transition-colors"  
+>  
 Home  
 </Link>  
 </li>  
 <li>  
-<Link href="/mandate" className="text-white/40 text-sm font-sans font-light hover:text-white transition-colors">  
+<Link  
+href="/mandate"  
+className="text-white/40 text-sm font-sans font-light hover:text-white transition-colors"  
+>  
 The Mandate  
 </Link>  
 </li>  
-  <li>    
-<Link href="/private-client-partners" className="text-white/40 text-sm font-sans font-light hover:text-white transition-colors">    
-Private Client Partners    
-</Link>    
-</li>   
 <li>  
-<Link href="/archive" className="text-white/40 text-sm font-sans font-light hover:text-white transition-colors">  
+<Link  
+href="/celebrating-her"  
+className="text-white/40 text-sm font-sans font-light hover:text-white transition-colors"  
+>  
+Celebrating Her  
+</Link>  
+</li>  
+<li>  
+<Link  
+href="/holidays"  
+className="text-white/40 text-sm font-sans font-light hover:text-white transition-colors"  
+>  
+The Holiday Collection  
+</Link>  
+</li>  
+<li>  
+<Link  
+href="/events"  
+className="text-white/40 text-sm font-sans font-light hover:text-white transition-colors"  
+>  
+Events  
+</Link>  
+</li>  
+<li>  
+<Link  
+href="/private-client-partners"  
+className="text-white/40 text-sm font-sans font-light hover:text-white transition-colors"  
+>  
+Private Client Partners  
+</Link>  
+</li>  
+<li>  
+<Link  
+href="/archive"  
+className="text-white/40 text-sm font-sans font-light hover:text-white transition-colors"  
+>  
 Archive  
 </Link>  
 </li>  
 <li>  
-<Link href="/perspective" className="text-white/40 text-sm font-sans font-light hover:text-white transition-colors">  
+<Link  
+href="/perspective"  
+className="text-white/40 text-sm font-sans font-light hover:text-white transition-colors"  
+>  
 Perspective  
 </Link>  
 </li>  
 <li>  
-<Link href="/inquiry" className="text-white/40 text-sm font-sans font-light hover:text-white transition-colors">  
+<Link  
+href="/inquiry"  
+className="text-white/40 text-sm font-sans font-light hover:text-white transition-colors"  
+>  
 Begin Your Journey  
 </Link>  
 </li>  
 <li>  
-<Link href="/legal" className="text-white/40 text-sm font-sans font-light hover:text-white transition-colors">  
+<Link  
+href="/legal"  
+className="text-white/40 text-sm font-sans font-light hover:text-white transition-colors"  
+>  
 Legal  
 </Link>  
 </li>  
@@ -66,9 +111,9 @@ Connect
 </h4>  
 <ul className="space-y-3">  
 <li>  
-<a   
-href="https://cal.com/nexvoyagecollective/discovery-call"   
-target="_blank"   
+<a  
+href="https://cal.com/nexvoyagecollective/discovery-call"  
+target="_blank"  
 rel="noopener noreferrer"  
 className="text-white/40 text-sm font-sans font-light hover:text-white transition-colors"  
 >  
@@ -76,11 +121,11 @@ Discovery Call
 </a>  
 </li>  
 <li>  
-<a   
-href="mailto:daryl.clark@fora.travel"   
+<a  
+href="mailto:daryl.clark@fora.travel"  
 className="text-white/40 text-sm font-sans font-light hover:text-white transition-colors"  
 >  
-Email 
+Email  
 </a>  
 </li>  
 </ul>  
@@ -98,5 +143,23 @@ Private &middot; Discreet &middot; Curated
 </div>  
 </div>  
 </footer>  
-)  
+);  
 }  
+components/SeasonalSpotlight.tsx : third slide
+Add this entry to the slides array, after the Event Ledger entry:
+
+{  
+eyebrow: 'The Celebration Collection',  
+title: 'Celebrating Her',  
+description:  
+  'Milestone journeys designed around the women, friendships, and moments worth traveling for.',  
+href: '/celebrating-her',  
+cta: 'Explore Celebrating Her',  
+image:  
+  'https://images.unsplash.com/photo-1536735382886-6b592aee0f2d?auto=format&fit=crop&w=1800&q=85',  
+alt: 'Woman walking through a vineyard at golden hour',  
+},  
+No other change needed there : the indicators, arrows, and keyboard navigation already map over the array, so a third slide works automatically.
+
+One note: /holidays was previously reachable only through the carousel. It now has real nav and footer links, plus /celebrating-her : so those three entry points are consistent. The Sri Lanka, Ghana, and Explora image swaps on the Celebrating Her page are still outstanding separately.
+
