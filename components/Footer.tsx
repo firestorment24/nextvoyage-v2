@@ -5,7 +5,7 @@ return (
 <footer className="bg-[#0A0A0A] border-t border-white/10 mt-32">  
 <div className="max-w-7xl mx-auto px-6 py-20">  
 <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
- 
+
 <div className="md:col-span-2">  
 <h4 className="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] mb-6">  
 NexVoyage Collective  
@@ -145,21 +145,3 @@ Private &middot; Discreet &middot; Curated
 </footer>  
 );  
 }  
-components/SeasonalSpotlight.tsx : third slide
-Add this entry to the slides array, after the Event Ledger entry:
-
-{  
-eyebrow: 'The Celebration Collection',  
-title: 'Celebrating Her',  
-description:  
-  'Milestone journeys designed around the women, friendships, and moments worth traveling for.',  
-href: '/celebrating-her',  
-cta: 'Explore Celebrating Her',  
-image:  
-  'https://images.unsplash.com/photo-1536735382886-6b592aee0f2d?auto=format&fit=crop&w=1800&q=85',  
-alt: 'Woman walking through a vineyard at golden hour',  
-},  
-No other change needed there : the indicators, arrows, and keyboard navigation already map over the array, so a third slide works automatically.
-
-One note: /holidays was previously reachable only through the carousel. It now has real nav and footer links, plus /celebrating-her : so those three entry points are consistent. The Sri Lanka, Ghana, and Explora image swaps on the Celebrating Her page are still outstanding separately.
-
