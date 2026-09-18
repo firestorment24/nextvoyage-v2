@@ -118,14 +118,13 @@ const journeys = [
   alt: 'Mountain landscape in the Sacred Valley of Peru',  
 },  
 {  
-  number: '05',  
-  title: 'Sisterhood and Legacy',  
-  location: 'Accra & Cape Coast, Ghana',  
-  description:  
-    'History, culture, music, design, and connection across Ghana’s Atlantic coast.',  
-  image:  
-    'https://images.unsplash.com/photo-1635188271987-377c330444de?auto=format&fit=crop&w=1600&q=85',  
-  alt: 'Coastal scene near Cape Coast, Ghana',  
+number: '05',  
+title: 'Sisterhood and Legacy',  
+location: 'Accra & Cape Coast, Ghana',  
+description:  
+'History, culture, music, design, and connection across Ghana’s Atlantic coast.',  
+image: 'https://cdn.marblism.com/mzXMGVHhdtA.png',  
+alt: 'Women celebrating together at an outdoor festival in Ghana',  
 },  
 {  
   number: '06',  
