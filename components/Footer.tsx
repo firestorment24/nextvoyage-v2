@@ -5,7 +5,7 @@ return (
 <footer className="bg-[#0A0A0A] border-t border-white/10 mt-32">  
 <div className="max-w-7xl mx-auto px-6 py-20">  
 <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-
+ 
 <div className="md:col-span-2">  
 <h4 className="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] mb-6">  
 NexVoyage Collective  
