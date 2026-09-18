@@ -26,6 +26,17 @@ const slides = [
       'https://images.unsplash.com/photo-1542296332-2e4473faf563?auto=format&fit=crop&w=1800&q=85',  
     alt: 'Private aircraft wing above clouds at sunset',  
   },  
+  {  
+eyebrow: 'The Celebration Collection',  
+title: 'Celebrating Her',  
+description:  
+  'Milestone journeys designed around the women, friendships, and moments worth traveling for.',  
+href: '/celebrating-her',  
+cta: 'Explore Celebrating Her',  
+image:  
+  'https://images.unsplash.com/photo-1536735382886-6b592aee0f2d?auto=format&fit=crop&w=1800&q=85',  
+alt: 'Woman walking through a vineyard at golden hour',  
+},  
 ];
 
 export default function SeasonalSpotlight() {  
