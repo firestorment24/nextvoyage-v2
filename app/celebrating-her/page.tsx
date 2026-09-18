@@ -185,7 +185,7 @@ const journeys = [
     description:
       'Art, architecture, private desert dining, spa rituals, and a distinctive setting for a new chapter or executive retreat.',
     image:
-      'https://images.unsplash.com/photo-1518684079-3c830d090?auto=format&fit=crop&w=1600&q=85',
+      'https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=1600&q=85',
     alt: 'Desert landscape beneath a warm evening sky',
   },
 ];
