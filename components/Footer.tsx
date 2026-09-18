@@ -11,9 +11,9 @@ return (
 NexVoyage Collective  
 </h4>  
 <p className="text-white/40 text-sm font-sans font-light leading-relaxed max-w-md">  
-A private travel advisory curating quiet luxury, sanctuaries, and  
-bespoke journeys for the discerning few. Not a travel agency :  
-a guardian of time.  
+A private travel advisory curating quiet luxury, remarkable  
+sanctuaries, and bespoke journeys for the discerning few. A  
+guardian of time, access, and the moments that matter.  
 </p>  
 </div>
 
@@ -106,7 +106,7 @@ Legal
 </div>
 
 <div>  
-<h4 className="text-[#D4AF38] uppercase tracking-[0.3em] text-[10px] mb-6">  
+<h4 className="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] mb-6">  
 Connect  
 </h4>  
 <ul className="space-y-3">  
