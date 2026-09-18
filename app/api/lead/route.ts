@@ -7,7 +7,25 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(req: Request) {  
   try {  
     const body = await req.json();  
-    const { name, email, phone, occasion, destinations, travelWindow, partySize, aviationClass, hearAbout, notes, source } = body;
+    const {  
+      name,  
+      email,  
+      phone,  
+      occasion,  
+      destinations,  
+      travelWindow,  
+      partySize,  
+      aviationClass,  
+      hearAbout,  
+      notes,  
+      source,  
+      investmentRange,  
+      priorities,  
+    } = body;
+
+    const priorityList = Array.isArray(priorities)  
+      ? priorities.join(', ')  
+      : priorities || null;
 
     // 1️⃣ Send email notification  
     const { error: emailError } = await resend.emails.send({  
@@ -22,6 +40,8 @@ export async function POST(req: Request) {
             <tr><td style="padding: 0.5rem 0; color: #666;">Email</td><td style="padding: 0.5rem 0;">${email}</td></tr>  
             <tr><td style="padding: 0.5rem 0; color: #666;">Phone</td><td style="padding: 0.5rem 0;">${phone || 'Not provided'}</td></tr>  
             <tr><td style="padding: 0.5rem 0; color: #666;">Occasion</td><td style="padding: 0.5rem 0;">${occasion || 'Not specified'}</td></tr>  
+            <tr><td style="padding: 0.5rem 0; color: #666;">Investment Range</td><td style="padding: 0.5rem 0;">${investmentRange || 'Not specified'}</td></tr>  
+            <tr><td style="padding: 0.5rem 0; color: #666;">Priorities</td><td style="padding: 0.5rem 0;">${priorityList || 'Not specified'}</td></tr>  
             <tr><td style="padding: 0.5rem 0; color: #666;">Destinations</td><td style="padding: 0.5rem 0;">${destinations || 'Not specified'}</td></tr>  
             <tr><td style="padding: 0.5rem 0; color: #666;">Travel Window</td><td style="padding: 0.5rem 0;">${travelWindow || 'Not specified'}</td></tr>  
             <tr><td style="padding: 0.5rem 0; color: #666;">Party Size</td><td style="padding: 0.5rem 0;">${partySize || 'Not specified'}</td></tr>  
@@ -36,25 +56,38 @@ export async function POST(req: Request) {
     if (emailError) console.error('[LEAD] Email error:', emailError);
 
     // 2️⃣ Save to database  
-    const { rows } = await sql`  
-      INSERT INTO dossiers (  
-        name, email, phone,  
-        destination, travel_dates,  
-        occasion, party_size, aviation_class,  
-        hear_about, notes, source  
-      ) VALUES (  
-        ${name}, ${email}, ${phone || null},  
-        ${destinations || null}, ${travelWindow || null},  
-        ${occasion || null}, ${partySize ? Number(partySize) : null}, ${aviationClass || null},  
-        ${hearAbout || null}, ${notes || null}, ${source || 'Travel Inquiry'}  
-      )  
-      RETURNING *  
-    `;
+    let dossier = null;
 
-    console.log('[LEAD] Dossier created:', rows[0].id);  
-    return NextResponse.json({ success: true, dossier: rows[0] }, { status: 201 });  
+    try {  
+      const { rows } = await sql`  
+        INSERT INTO dossiers (  
+          name, email, phone,  
+          destination, travel_dates,  
+          occasion, party_size, aviation_class,  
+          hear_about, notes, source,  
+          investment_range, priorities  
+        ) VALUES (  
+          ${name}, ${email}, ${phone || null},  
+          ${destinations || null}, ${travelWindow || null},  
+          ${occasion || null}, ${partySize || null}, ${aviationClass || null},  
+          ${hearAbout || null}, ${notes || null}, ${source || 'Travel Inquiry'},  
+          ${investmentRange || null}, ${priorityList}  
+        )  
+        RETURNING *  
+      `;
+
+      dossier = rows[0];  
+      console.log('[LEAD] Dossier created:', rows[0].id);  
+    } catch (dbError) {  
+      console.error('[LEAD] Database error:', dbError);  
+    }
+
+    return NextResponse.json({ success: true, dossier }, { status: 201 });  
   } catch (err) {  
     console.error('[LEAD] Error:', err);  
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });  
+    return NextResponse.json(  
+      { error: 'Internal Server Error' },  
+      { status: 500 }  
+    );  
   }  
 }  
