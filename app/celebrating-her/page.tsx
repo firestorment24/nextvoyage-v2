@@ -26,8 +26,7 @@ openGraph: {
 },  
 };
 
-const CTA_URL =  
-'https://cal.com/nexvoyagecollective/discovery-call';
+const CTA_URL = 'https://cal.com/nexvoyagecollective/discovery-call';
 
 const heroImage =  
 'https://images.unsplash.com/photo-1536735382886-6b592aee0f2d?auto=format&fit=crop&w=2400&q=90';
@@ -194,7 +193,7 @@ const servicePoints = [
 const collectionSchema = {  
 '@context': 'https://schema.org',  
 '@type': 'CollectionPage',  
-name: 'Celebrating Her — The Celebration Collection',  
+name: 'Celebrating Her : The Celebration Collection',  
 url: 'https://nexvoyagecollective.com/celebrating-her',  
 description:  
   'Luxury milestone travel for women, friendships, families, sororities, and professional circles.',  
@@ -218,7 +217,7 @@ return (
     <section className="relative flex min-h-[88vh] items-end overflow-hidden">  
       <img  
         src={heroImage}  
-        alt="Woman walking through a vineyard with a wine glass"  
+        alt="Woman walking through a vineyard with a glass of wine"  
         className="absolute inset-0 h-full w-full object-cover"  
         fetchPriority="high"  
       />
@@ -274,15 +273,15 @@ return (
         <div className="mt-8 space-y-6 font-sans text-sm font-light leading-relaxed text-[#F4EFE6]/65 md:text-base">  
           <p>  
             A Celebration Collection journey is designed around the moment  
-            itself — the birthday that deserves more than dinner, the  
+            itself : the birthday that deserves more than dinner, the  
             retirement that opens a new chapter, the reunion years in the  
             making, or the gathering that becomes part of family history.  
           </p>
 
           <p>  
             NexVoyage manages the details with discretion and precision,  
-            creating travel that feels personal, seamless, and worthy of the  
-            occasion.  
+            creating travel that feels personal, seamless, and worthy of  
+            the occasion.  
           </p>  
         </div>  
       </div>  
@@ -310,9 +309,7 @@ return (
               {category.number}  
             </p>
 
-            <h3 className="mt-5 text-2xl font-light">  
-              {category.title}  
-            </h3>
+            <h3 className="mt-5 text-2xl font-light">{category.title}</h3>
 
             <p className="mt-3 font-sans text-[10px] uppercase tracking-[0.18em] text-[#D7B56D]/80">  
               {category.subtitle}  
@@ -336,12 +333,14 @@ return (
 
             <h2 className="mt-5 text-4xl font-light tracking-tight md:text-6xl">  
               The Signature  
-              <span className="block text-[#D7B56D]">Journey Portfolio</span>  
+              <span className="block text-[#D7B56D]">  
+                Journey Portfolio  
+              </span>  
             </h2>  
           </div>
 
           <p className="max-w-sm font-sans text-sm leading-relaxed text-[#F4EFE6]/50">  
-            These are starting points — not packages. The final journey is  
+            These are starting points : not packages. The final journey is  
             shaped around the people, the occasion, and the way the moment  
             should feel.  
           </p>  
@@ -403,7 +402,9 @@ return (
 
           <h2 className="mt-5 text-4xl font-light tracking-tight md:text-6xl">  
             The moment deserves  
-            <span className="block text-[#D7B56D]">a proper architecture.</span>  
+            <span className="block text-[#D7B56D]">  
+              a proper architecture.  
+            </span>  
           </h2>  
         </div>
 
@@ -471,245 +472,3 @@ return (
   </main>  
 );  
 }  
-components/CelebrationInquiry.tsx
-'use client';
-
-import { FormEvent, useState } from 'react';
-
-interface FormState {  
-name: string;  
-email: string;  
-occasion: string;  
-destination: string;  
-partySize: string;  
-travelPeriod: string;  
-notes: string;  
-}
-
-const initialState: FormState = {  
-name: '',  
-email: '',  
-occasion: '',  
-destination: '',  
-partySize: '',  
-travelPeriod: '',  
-notes: '',  
-};
-
-export default function CelebrationInquiry() {  
-const [form, setForm] = useState<FormState>(initialState);  
-const [status, setStatus] = useState<  
-  'idle' | 'submitting' | 'success' | 'error'  
->('idle');
-
-function updateField(  
-  field: keyof FormState,  
-  value: string,  
-) {  
-  setForm((current) => ({  
-    ...current,  
-    [field]: value,  
-  }));  
-}
-
-async function handleSubmit(event: FormEvent<HTMLFormElement>) {  
-  event.preventDefault();  
-  setStatus('submitting');
-
-  try {  
-    const response = await fetch('/api/lead', {  
-      method: 'POST',  
-      headers: {  
-        'Content-Type': 'application/json',  
-      },  
-      body: JSON.stringify({  
-        name: form.name,  
-        email: form.email,  
-        occasion: form.occasion,  
-        destinations: form.destination,  
-        partySize: form.partySize,  
-        travelWindow: form.travelPeriod,  
-        notes: form.notes,  
-        source: 'Celebrating Her — The Celebration Collection',  
-      }),  
-    });
-
-    if (!response.ok) {  
-      throw new Error('Inquiry submission failed');  
-    }
-
-    setForm(initialState);  
-    setStatus('success');  
-  } catch {  
-    setStatus('error');  
-  }  
-}
-
-const inputClassName =  
-  'w-full border-b border-[#071421]/25 bg-transparent px-0 py-3 font-sans text-sm text-[#071421] outline-none placeholder:text-[#071421]/40 focus:border-[#8A6A2D]';
-
-return (  
-  <form  
-    onSubmit={handleSubmit}  
-    className="space-y-8"  
-    aria-describedby="inquiry-status"  
-  >  
-    <div className="grid gap-8 md:grid-cols-2">  
-      <label className="block">  
-        <span className="font-sans text-[10px] uppercase tracking-[0.18em] text-[#071421]/60">  
-          Name  
-        </span>
-
-        <input  
-          required  
-          type="text"  
-          name="name"  
-          value={form.name}  
-          onChange={(event) =>  
-            updateField('name', event.target.value)  
-          }  
-          placeholder="Your name"  
-          className={inputClassName}  
-        />  
-      </label>
-
-      <label className="block">  
-        <span className="font-sans text-[10px] uppercase tracking-[0.18em] text-[#071421]/60">  
-          Email  
-        </span>
-
-        <input  
-          required  
-          type="email"  
-          name="email"  
-          value={form.email}  
-          onChange={(event) =>  
-            updateField('email', event.target.value)  
-          }  
-          placeholder="you@example.com"  
-          className={inputClassName}  
-        />  
-      </label>
-
-      <label className="block">  
-        <span className="font-sans text-[10px] uppercase tracking-[0.18em] text-[#071421]/60">  
-          Occasion  
-        </span>
-
-        <select  
-          required  
-          name="occasion"  
-          value={form.occasion}  
-          onChange={(event) =>  
-            updateField('occasion', event.target.value)  
-          }  
-          className={inputClassName}  
-        >  
-          <option value="">Select an occasion</option>  
-          <option value="Milestone">Milestone</option>  
-          <option value="The Next Chapter">The Next Chapter</option>  
-          <option value="Sisterhood">Sisterhood</option>  
-          <option value="Legacy">Legacy</option>  
-          <option value="The Divine Nine / Sorority Journey">  
-            The Divine Nine / Sorority Journey  
-          </option>  
-          <option value="Women Who Lead">Women Who Lead</option>  
-          <option value="Other">Something else</option>  
-        </select>  
-      </label>
-
-      <label className="block">  
-        <span className="font-sans text-[10px] uppercase tracking-[0.18em] text-[#071421]/60">  
-          Approximate travelers  
-        </span>
-
-        <input  
-          type="text"  
-          name="partySize"  
-          value={form.partySize}  
-          onChange={(event) =>  
-            updateField('partySize', event.target.value)  
-          }  
-          placeholder="For example, 8–12"  
-          className={inputClassName}  
-        />  
-      </label>
-
-      <label className="block">  
-        <span className="font-sans text-[10px] uppercase tracking-[0.18em] text-[#071421]/60">  
-          Preferred destination or region  
-        </span>
-
-        <input  
-          type="text"  
-          name="destination"  
-          value={form.destination}  
-          onChange={(event) =>  
-            updateField('destination', event.target.value)  
-          }  
-          placeholder="A destination, region, or open to ideas"  
-          className={inputClassName}  
-        />  
-      </label>
-
-      <label className="block">  
-        <span className="font-sans text-[10px] uppercase tracking-[0.18em] text-[#071421]/60">  
-          Desired travel period  
-        </span>
-
-        <input  
-          type="text"  
-          name="travelPeriod"  
-          value={form.travelPeriod}  
-          onChange={(event) =>  
-            updateField('travelPeriod', event.target.value)  
-          }  
-          placeholder="Month, season, or approximate dates"  
-          className={inputClassName}  
-        />  
-      </label>  
-    </div>
-
-    <label className="block">  
-      <span className="font-sans text-[10px] uppercase tracking-[0.18em] text-[#071421]/60">  
-        Notes about the celebration  
-      </span>
-
-      <textarea  
-        name="notes"  
-        value={form.notes}  
-        onChange={(event) =>  
-          updateField('notes', event.target.value)  
-        }  
-        placeholder="Tell us what would make the journey meaningful."  
-        rows={4}  
-        className={`${inputClassName} resize-y`}  
-      />  
-    </label>
-
-    <button  
-      type="submit"  
-      disabled={status === 'submitting'}  
-      className="border border-[#071421] px-7 py-4 font-sans text-[10px] uppercase tracking-[0.24em] text-[#071421] transition-colors hover:bg-[#071421] hover:text-[#F4EFE6] disabled:cursor-wait disabled:opacity-50"  
-    >  
-      {status === 'submitting'  
-        ? 'Sending…'  
-        : 'Design the Moment →'}  
-    </button>
-
-    <p  
-      id="inquiry-status"  
-      aria-live="polite"  
-      className="font-sans text-sm text-[#071421]/65"  
-    >  
-      {status === 'success' &&  
-        'Thank you. We received your celebration inquiry and will be in touch.'}
-
-      {status === 'error' &&  
-        'We could not submit the inquiry. Please try again or schedule a discovery call directly.'}  
-    </p>  
-  </form>  
-);  
-}  
-
-
