@@ -148,26 +148,25 @@ const journeys = [
   alt: 'Yachts anchored in the Bay of Kotor, Montenegro',  
 },  
 {  
-  number: '08',  
-  title: 'A Sixtieth Worth Crossing an Ocean For',  
-  location: 'Sri Lanka',  
-  description:  
-    'Tea country, wildlife, heritage hotels, a private celebration dinner, and restorative stays.',  
-  image:  
-    'https://images.unsplash.com/photo-1755099343413-78c15964f485?auto=format&fit=crop&w=1600&q=85',  
-  alt: 'Tea plantation workers in Sri Lanka',  
-},  
+number: '08',  
+title: 'A Sixtieth Worth Crossing an Ocean For',  
+location: 'Sri Lanka',  
+description:  
+  'Tea country, wildlife, heritage hotels, a private celebration dinner, and restorative stays.',  
+image:  
+  'https://images.unsplash.com/photo-1559038297-5b37efcd59d4?auto=format&fit=crop&w=1600&q=85',  
+alt: 'Woman walking a path through a tea plantation in Nuwara Eliya, Sri Lanka',  
+},   
 {  
-  number: '09',  
-  title: 'The Celebration Voyage',  
-  location: 'Explora Journeys',  
-  description:  
-    'A milestone sailing for approximately 8–30 women, with private dining, wellness, curated shore experiences, and one signature celebration evening.',  
-  image:  
-    'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1600&q=85',  
-  alt: 'Luxury cruise ship sailing across the sea',  
-},  
-{  
+number: '09',  
+title: 'The Celebration Voyage',  
+location: 'Explora Journeys',  
+description:  
+  'A milestone sailing for approximately 8–30 women, with private dining, wellness, curated shore experiences, and one signature celebration evening.',  
+image:  
+  'https://images.unsplash.com/photo-1770929356171-bf7bc61a2c15?auto=format&fit=crop&w=1600&q=85',  
+alt: 'Luxury yachts moored in a whitewashed coastal harbor',  
+},  {  
   number: '10',  
   title: 'The Desert Chapter',  
   location: 'Abu Dhabi & the UAE',  
