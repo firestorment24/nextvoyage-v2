@@ -1,24 +1,32 @@
 'use client';
 
-import Link from 'next/link';
+import Link from 'next/link';  
+import { usePathname } from 'next/navigation';
+
+const HIDDEN_ON = ['/celebrating-her'];
 
 export default function DiscoveryCallCTA() {  
-  return (  
-    <div className="fixed bottom-8 right-8 z-50">  
-      <Link  
-        href="https://cal.com/nexvoyagecollective/discovery-call?fbclid=IwY2xjawTCb-RleHRuA2FlbQIxMABzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEe8XYAxibxaNnn6SAXQPSGuzjJwM75IolGglB2dj8kK-uoZjle5tjgDzJiZXU_aem_sOkaZM0Nk8_ZA8bEkpGRnQ&user=nexvoyagecollective"  
-        className="group relative flex items-center gap-3 bg-[#C8A96E] text-[#0A0A0A]   
-                   pl-5 pr-7 py-3.5 rounded-full font-medium text-sm tracking-[0.15em] uppercase  
-                   shadow-[0_4px_20px_rgba(200,169,110,0.3)]   
-                   hover:shadow-[0_6px_30px_rgba(200,169,110,0.5)]  
-                   hover:bg-[#D4B87A] hover:scale-[1.02]  
-                   active:scale-[0.98]  
-                   transition-all duration-300 ease-out"  
-      >  
-        <span className="w-2 h-2 bg-[#0A0A0A] rounded-full   
-                       group-hover:animate-pulse" />  
-        Schedule a Discovery Call  
-      </Link>  
-    </div>  
-  );  
+const pathname = usePathname();
+
+if (pathname && HIDDEN_ON.includes(pathname)) return null;
+
+return (  
+<div className="fixed bottom-8 right-8 z-50">  
+<Link  
+href="https://cal.com/nexvoyagecollective/discovery-call"  
+target="_blank"  
+rel="noopener noreferrer"  
+className="group relative flex items-center gap-3 bg-[#C8A96E] text-[#0A0A0A]  
+pl-5 pr-7 py-3.5 rounded-full font-medium text-sm tracking-[0.15em] uppercase  
+shadow-[0_4px_20px_rgba(200,169,110,0.3)]  
+hover:shadow-[0_6px_30px_rgba(200,169,110,0.5)]  
+hover:bg-[#D4B87A] hover:scale-[1.02]  
+active:scale-[0.98]  
+transition-all duration-300 ease-out"  
+>  
+<span className="w-2 h-2 bg-[#0A0A0A] rounded-full group-hover:animate-pulse" />  
+Schedule a Discovery Call  
+</Link>  
+</div>  
+);  
 }  
