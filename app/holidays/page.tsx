@@ -4,7 +4,7 @@ import Link from 'next/link';
 export const metadata: Metadata = {  
   title: 'The Holiday Collection | NexVoyage Collective',  
   description:  
-    'A considered holiday travel collection for Thanksgiving, Christmas, and New Year’s — from quiet coastal escapes to mountain sanctuaries and destination celebrations.',  
+    'A curated holiday travel collection for Thanksgiving, Christmas, and New Year’s — from Tuscan estates and alpine retreats to private island escapes.',  
   alternates: {  
     canonical: 'https://nexvoyagecollective.com/holidays',  
   },  
@@ -34,7 +34,13 @@ interface HolidayCollection {
 
 const CTA_URL = 'https://cal.com/nexvoyagecollective/discovery-call';
 
-const images = {  
+const images = {
+  tuscany: 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1600&q=85',
+  banff: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=85',
+  stMoritz: 'https://images.unsplash.com/photo-1517299321609-52687d1bc55a?auto=format&fit=crop&w=1600&q=85',
+  stBarths: 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1600&q=85',
+  tetiaroa: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=85',
+  
   charleston:  
     'https://images.unsplash.com/photo-1684277770294-5564b0ebe291?auto=format&fit=crop&w=1600&q=85',  
   savannah:  
@@ -138,6 +144,14 @@ const holidayCollections: HolidayCollection[] = [
           'Central Virginia countryside and rolling rural landscape near Middleburg',  
       },  
       {  
+      {
+        name: 'Rosewood Castiglion del Bosco',
+        location: 'Montalcino, Tuscany, Italy',
+        label: 'Iconic',
+        description: 'A Tuscan estate holiday shaped by vineyard landscapes, thoughtful dining, and time together. Private villas and curated experiences make this a distinctive setting for gathering.',
+        image: images.tuscany,
+        alt: 'Scenic Tuscan landscape representing a countryside estate escape',
+      },
         name: 'Williamsburg',  
         location: 'Virginia',  
         label: 'Iconic',  
@@ -231,6 +245,22 @@ const holidayCollections: HolidayCollection[] = [
           'Boat and harbor scene in Nantucket, Massachusetts',  
       },  
       {  
+      {
+        name: 'Fairmont Banff Springs',
+        location: 'Banff, Alberta, Canada',
+        label: 'Iconic',
+        description: 'Christmas at the Castle brings alpine scenery, festive traditions, and grand hospitality together in the Canadian Rockies.',
+        image: images.banff,
+        alt: 'Mountain landscape evocative of Banff National Park',
+      },
+      {
+        name: 'Kulm Hotel St. Moritz',
+        location: 'St. Moritz, Switzerland',
+        label: 'Iconic',
+        description: 'A grand alpine Christmas with heritage hospitality, elegant dining, and the enduring winter glamour of St. Moritz.',
+        image: images.stMoritz,
+        alt: 'Snowy alpine landscape evoking winter in St. Moritz',
+      },
         name: 'Leavenworth',  
         location: 'Washington',  
         label: 'Iconic',  
@@ -248,7 +278,7 @@ const holidayCollections: HolidayCollection[] = [
     title: 'Midnight, Elevated',  
     description:  
       'Not every New Year deserves a crowded square or a louder room. Some are better marked by a private dinner, a spa morning, champagne, and a destination with its own point of view.',  
-    planningWindow: 'Four to seven nights · December 27, 2026–January 3, 2027',  
+    planningWindow: 'Festive stays · December 27, 2026–January 3, 2027 · Minimum stays vary',  
     image: images.miami,  
     imageAlt:  
       'Miami waterfront skyline viewed across Biscayne Bay',  
@@ -334,6 +364,22 @@ const holidayCollections: HolidayCollection[] = [
           'Sunset over the Maui coastline in Hawaii',  
       },  
       {  
+      {
+        name: 'Eden Rock – St Barths',
+        location: 'Saint Barthélemy, Caribbean',
+        label: 'Iconic',
+        description: 'Celebrate the new year with sophisticated island hospitality, extraordinary dining, and the possibility of a private villa stay. Festive minimum stays vary.',
+        image: images.stBarths,
+        alt: 'Turquoise Caribbean waters representing a St. Barths island escape',
+      },
+      {
+        name: 'The Brando',
+        location: 'Tetiaroa, French Polynesia',
+        label: 'Iconic',
+        description: 'Begin the year on a secluded private island, where villa privacy, pristine natural beauty, and a restorative pace take precedence over spectacle.',
+        image: images.tetiaroa,
+        alt: 'Tropical beach scenery representing a French Polynesian island escape',
+      },
         name: 'Miami',  
         location: 'Florida',  
         label: 'Iconic',  
@@ -522,7 +568,7 @@ export default function HolidaysPage() {
 
       <footer className="border-t border-white/10 px-6 py-8 text-center md:px-12">  
         <p className="text-[10px] uppercase tracking-[0.2em] text-white/30">  
-          Dates, properties, experiences, and availability are confirmed  
+          Images may be illustrative. Dates, properties, experiences, minimum stays, and availability are confirmed  
           before any client-facing proposal is released.  
         </p>  
       </footer>  
