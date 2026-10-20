@@ -143,7 +143,6 @@ const holidayCollections: HolidayCollection[] = [
         alt:  
           'Central Virginia countryside and rolling rural landscape near Middleburg',  
       },  
-      {  
       {
         name: 'Rosewood Castiglion del Bosco',
         location: 'Montalcino, Tuscany, Italy',
@@ -244,7 +243,6 @@ const holidayCollections: HolidayCollection[] = [
         alt:  
           'Boat and harbor scene in Nantucket, Massachusetts',  
       },  
-      {  
       {
         name: 'Fairmont Banff Springs',
         location: 'Banff, Alberta, Canada',
@@ -363,7 +361,6 @@ const holidayCollections: HolidayCollection[] = [
         alt:  
           'Sunset over the Maui coastline in Hawaii',  
       },  
-      {  
       {
         name: 'Eden Rock – St Barths',
         location: 'Saint Barthélemy, Caribbean',
