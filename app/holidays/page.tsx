@@ -151,6 +151,7 @@ const holidayCollections: HolidayCollection[] = [
         image: images.tuscany,
         alt: 'Scenic Tuscan landscape representing a countryside estate escape',
       },
+      {
         name: 'Williamsburg',  
         location: 'Virginia',  
         label: 'Iconic',  
@@ -259,6 +260,7 @@ const holidayCollections: HolidayCollection[] = [
         image: images.stMoritz,
         alt: 'Snowy alpine landscape evoking winter in St. Moritz',
       },
+      {
         name: 'Leavenworth',  
         location: 'Washington',  
         label: 'Iconic',  
@@ -377,6 +379,7 @@ const holidayCollections: HolidayCollection[] = [
         image: images.tetiaroa,
         alt: 'Tropical beach scenery representing a French Polynesian island escape',
       },
+      {
         name: 'Miami',  
         location: 'Florida',  
         label: 'Iconic',  
